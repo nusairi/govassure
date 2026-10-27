@@ -9,6 +9,10 @@
   },
   "routes": [
     {
+      "route": "/docs/*",
+      "statusCode": 404
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"
