@@ -138,6 +138,42 @@ a:hover {
   text-decoration: underline;
 }
 
+.linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.header-nav a.linkedin,
+.linkedin {
+  color: var(--gold);
+}
+
+.header-nav a.linkedin:hover,
+.linkedin:hover {
+  color: #f7e1b8;
+  background: rgba(240, 201, 135, 0.1);
+  text-decoration: none;
+}
+
+.linkedin svg,
+.linkedin-text svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: block;
+  fill: currentColor;
+}
+
+.linkedin-text {
+  gap: 0.55rem;
+}
+
 .hero {
   padding: 2.75rem 0 2.4rem;
   background:
@@ -506,8 +542,15 @@ h1 {
 }
 
 .footer-grid {
-  display: grid;
-  gap: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.footer-grid p + p {
+  margin-top: 0.35rem;
 }
 
 .site-footer p {

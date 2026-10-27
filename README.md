@@ -28,7 +28,7 @@ Fetching `data/apps.json` needs HTTP. Opening `index.html` directly from the fil
 python3 scripts/check_links.py
 ```
 
-The script fails if a page, stylesheet, script, or `data/apps.json` points outside `*.govassured.com`. `mailto:` links are allowed. It also fails if those files mention `jontever`, `github.com`, or `vercel.app`, or if an app still has a `source` field.
+The script fails if a page, stylesheet, script, or `data/apps.json` points outside `*.govassured.com`. `mailto:` links are allowed, and so is the company page `https://www.linkedin.com/company/102617034`. The JSON-LD context `https://schema.org` is allowed. It also fails if those files contain a personal name, `github.com`, or `vercel.app`, or if a tool still has a `source` field. The publisher named on the site is GOV Assured.
 
 ## Add a tool
 

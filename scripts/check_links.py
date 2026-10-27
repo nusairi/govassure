@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Fail if the site links outside *.govassured.com. mailto links are allowed."""
+"""Fail if the site links outside *.govassured.com.
+
+mailto links are allowed, as is the GOV Assured LinkedIn company page and the
+schema.org JSON-LD context.
+"""
 
 import json
 import re
@@ -22,7 +26,11 @@ SERVED = [
     "staticwebapp.config.json",
     "vercel.json",
 ]
-BANNED = ("jontever", "github.com", "vercel.app")
+BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
+ALLOWED_EXACT = {
+    "https://www.linkedin.com/company/102617034",
+    "https://schema.org",
+}
 
 
 class AttrParser(HTMLParser):
@@ -60,9 +68,16 @@ def problem(url):
     if raw.startswith("//"):
         return "protocol-relative URL"
     if lower.startswith(("http://", "https://")):
-        host = urlparse(raw).hostname or ""
+        parsed = urlparse(raw)
+        if parsed.query or parsed.fragment:
+            return "web links must not add a query or fragment"
+        host = (parsed.hostname or "").lower()
+        path = parsed.path.rstrip("/")
+        identity = f"{parsed.scheme.lower()}://{host}{path}"
         if lower.startswith("http://"):
             return "web links must use https"
+        if identity in ALLOWED_EXACT:
+            return None
         if host == "govassured.com" or host.endswith(".govassured.com"):
             return None
         return "host is outside *.govassured.com"
@@ -86,6 +101,12 @@ def self_test():
         "http://www.govassured.com": "web links must use https",
         "//cdn.example.com/app.js": "protocol-relative URL",
         "javascript:alert(1)": "disallowed URL scheme",
+        "https://www.linkedin.com/company/102617034": None,
+        "https://www.linkedin.com/company/102617034/": None,
+        "https://www.linkedin.com/in/example": "host is outside *.govassured.com",
+        "https://www.linkedin.com/company/102617034?trk=public": "web links must not add a query or fragment",
+        "https://schema.org": None,
+        "https://schema.org/Person": "host is outside *.govassured.com",
     }
     failed = False
     for url, expected in cases.items():
