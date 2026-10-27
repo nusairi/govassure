@@ -3,8 +3,8 @@
    Copy this file into a new app's static root and link it from every page:
      <link rel="stylesheet" href="/ga-theme.css">
    Copy docs/assets/ga-logo.png to the app's root as /ga-logo.png for the logo bar.
-   This is the generic part of the stylesheet used to restyle the 21 apps; each live app also
-   has app-specific remaps appended after these rules. */
+   This is the one canonical generic stylesheet for all 21 apps. Each app links this file unchanged;
+   app-specific remaps live in a separate /ga-app.css linked after it. */
 :root{
   --ga-field:#021c17; --ga-raised:#102e26; --ga-raised-2:#163a30; --ga-sunk:#011511;
   --ga-ink:#f6f0e4; --ga-ink-soft:#d2c8b4; --ga-ink-faint:#b3a993;
@@ -20,10 +20,10 @@
   color-scheme:dark;
 }
 html{background:#021c17}
-body{background:var(--ga-bg);background-color:#021c17;color:var(--ga-ink);font-family:var(--ga-sans)}
+body{background:var(--ga-bg);background-color:#021c17;color:var(--ga-ink);font-family:var(--ga-sans);font-size:1.0625rem;line-height:1.55}
 ::selection{background:var(--ga-gold);color:var(--ga-field)}
 :focus-visible{outline:3px solid var(--ga-gold);outline-offset:3px}
-h1,h2,h3{font-family:var(--ga-serif);letter-spacing:-.01em}
+h1,h2,h3,h4{font-family:var(--ga-serif);font-weight:500;letter-spacing:-.01em}
 a{color:var(--ga-gold)}
 a:hover{color:var(--ga-gold-hover)}
 code,kbd,samp,pre{font-family:var(--ga-mono)}
