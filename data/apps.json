@@ -17,7 +17,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "govassure-home",
-      "url": "https://govassure-home.vercel.app",
+      "url": "https://home.govassured.com",
       "source": "https://github.com/jontever/govassure-home"
     },
     {
@@ -57,7 +57,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "governance-app",
-      "url": "https://governance.govassure.uk",
+      "url": "https://governance.govassured.com",
       "source": "https://github.com/jontever/governance-app"
     },
     {
@@ -77,7 +77,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "scope-govassure",
-      "url": "https://scope.govassure.uk",
+      "url": "https://scope.govassured.com",
       "source": "https://github.com/jontever/scope-govassure"
     },
     {
@@ -97,7 +97,7 @@
       "category": "cyberassure",
       "language": "JavaScript",
       "repo": "osi",
-      "url": "https://osi.cyberassure.uk",
+      "url": "https://osi.govassured.com",
       "source": "https://github.com/jontever/osi"
     },
     {
@@ -117,7 +117,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "sase-cyberassure",
-      "url": "https://sase.cyberassure.uk",
+      "url": "https://sase.govassured.com",
       "source": "https://github.com/jontever/sase-cyberassure"
     },
     {
@@ -127,7 +127,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "splunk-cyberassure",
-      "url": "https://splunk.cyberassure.uk/",
+      "url": "https://splunk.govassured.com",
       "source": "https://github.com/jontever/splunk-cyberassure"
     },
     {
@@ -137,7 +137,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "human-cyber-impact-framework",
-      "url": "https://framework.cyberassure.uk",
+      "url": "https://framework.govassured.com",
       "source": "https://github.com/jontever/human-cyber-impact-framework"
     },
     {
@@ -187,7 +187,7 @@
       "category": "other",
       "language": "JavaScript",
       "repo": "crossword",
-      "url": "https://crossword-pink-eta.vercel.app",
+      "url": "https://crossword.govassured.com",
       "source": "https://github.com/jontever/crossword"
     },
     {
@@ -207,7 +207,7 @@
       "category": "other",
       "language": "HTML",
       "repo": "cyber-poem",
-      "url": "https://cseta.uk",
+      "url": "https://poem.govassured.com",
       "source": "https://github.com/jontever/cyber-poem"
     }
   ]

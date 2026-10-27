@@ -1,6 +1,6 @@
 # GOV Assured
 
-The directory at [govassured.com](https://govassured.com) for the apps published by [Jonathan Silvester](https://github.com/jontever). The page groups them into GovAssure, CyberAssure, and learning and other projects. Each card links to the live app and its GitHub repository.
+The directory at [www.govassured.com](https://www.govassured.com) for the apps published by [Jonathan Silvester](https://github.com/jontever). The bare `govassured.com` host forwards to `www`. The page groups them into GovAssure, CyberAssure, and learning and other projects. Each card links to the live app and its GitHub repository.
 
 The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. Favicon, Apple touch icon, and the Open Graph image are generated from the same file.
 
@@ -47,16 +47,18 @@ Edit `data/apps.json` and append an object to the `apps` array. Cards appear in 
 
 Write the description from the project's README, `index` page, or `package.json`. If those do not say what the app does, keep the description to the name and leave out guessed features.
 
-## Deploy on Vercel
+## Deploy on Azure Static Web Apps
 
-The site is plain HTML, CSS, and JavaScript. Vercel serves it with no build step.
+The site is plain HTML, CSS, and JavaScript. There is no build step.
 
-1. Push this repository to GitHub.
-2. In Vercel, choose **Add New → Project** and import the repository.
-3. Framework preset: **Other**. Leave the build command and output directory empty.
-4. Deploy.
+1. In Azure, create a Static Web App from this repository.
+2. App location: `/`. Leave the API location empty. Skip the build, and leave the output location empty.
+3. Add the custom domain `www.govassured.com`.
+4. Point the apex `govassured.com` at the same app with a 301 to `https://www.govassured.com`. That forward is a host setting, not a rule in this repo, so the `www` site does not redirect to itself.
 
-`vercel.json` only sets security headers. It does not change the build.
+`staticwebapp.config.json` sets security headers, short caching for HTML and the catalogue, longer caching for images, and a 404 response that serves `404.html` with status 404.
+
+`vercel.json` only sets the same style of security headers. Azure ignores it.
 
 ## Layout
 
@@ -70,5 +72,9 @@ public/wordmark.png        header crop of the logo
 public/favicon.ico         icon
 public/apple-touch-icon.png
 public/og.jpg              social preview
-vercel.json                response headers
+404.html                   not-found page
+sitemap.xml                https://www.govassured.com/
+robots.txt                 sitemap pointer
+staticwebapp.config.json   Azure Static Web Apps headers, cache, and 404
+vercel.json                unused on Azure; security headers only
 ```
