@@ -9,6 +9,10 @@
   },
   "routes": [
     {
+      "route": "/docs/*",
+      "statusCode": 404
+    },
+    {
       "route": "/apps",
       "rewrite": "/apps/index.html",
       "headers": {
