@@ -1,12 +1,14 @@
 # GOV Assured
 
-The directory at [www.govassured.com](https://www.govassured.com) for the apps published by [Jonathan Silvester](https://github.com/jontever). The bare `govassured.com` host forwards to `www`. The page groups them into GovAssure, CyberAssure, and learning and other projects. Each card links to the live app and its GitHub repository.
+Consultancy site for [www.govassured.com](https://www.govassured.com). The bare `govassured.com` host forwards to `www`. The page sets out services and the tools used for that work. Every tool opens on a `govassured.com` subdomain.
 
 The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. Favicon, Apple touch icon, and the Open Graph image are generated from the same file.
 
-This repository does not contain those apps. It only links to them.
+This repository is the website. The tools it lists are hosted on their own subdomains, and their code is not copied here.
 
-`gitops-certification-examples` is omitted on purpose: it is a fork of certification examples, not a published app.
+## Contact address
+
+`contact@govassured.com` in the contact section is a **placeholder**. Confirm the address before the site goes live.
 
 ## Run locally
 
@@ -18,22 +20,29 @@ python3 -m http.server 8000
 
 Open [http://localhost:8000](http://localhost:8000).
 
-Fetching `data/apps.json` needs HTTP. Opening `index.html` directly from the filesystem will not load the catalogue.
+Fetching `data/apps.json` needs HTTP. Opening `index.html` directly from the filesystem will not load the tool list.
 
-## Add an app
+## Check links
 
-Edit `data/apps.json` and append an object to the `apps` array. Cards appear in file order, inside their category.
+```bash
+python3 scripts/check_links.py
+```
+
+The script fails if a page, stylesheet, script, or `data/apps.json` points outside `*.govassured.com`. `mailto:` links are allowed. It also fails if those files mention `jontever`, `github.com`, or `vercel.app`, or if an app still has a `source` field.
+
+## Add a tool
+
+Edit `data/apps.json` and append an object to the `apps` array. Cards appear in file order, inside their category. Use a `govassured.com` address. Do not add a `source` field or any other external URL.
 
 ```json
 {
   "id": "short-id",
   "name": "Name shown on the card",
-  "description": "One or two sentences taken from the project's own README or page.",
+  "description": "One or two sentences taken from the tool’s own page.",
   "category": "govassure",
   "language": "TypeScript",
   "repo": "repository-name",
-  "url": "https://example.com",
-  "source": "https://github.com/jontever/repository-name"
+  "url": "https://tools.govassured.com"
 }
 ```
 
@@ -43,9 +52,9 @@ Edit `data/apps.json` and append an object to the `apps` array. Cards appear in 
 | --- | --- |
 | `govassure` | GovAssure |
 | `cyberassure` | CyberAssure |
-| `other` | Learning & other projects |
+| `other` | Practice and monitoring |
 
-Write the description from the project's README, `index` page, or `package.json`. If those do not say what the app does, keep the description to the name and leave out guessed features.
+Write the description from the tool’s own page. If that page does not say what it does, keep the description to the name and leave out guessed features.
 
 ## Deploy on Azure Static Web Apps
 
@@ -66,7 +75,8 @@ The site is plain HTML, CSS, and JavaScript. There is no build step.
 index.html                 page shell
 styles.css                 layout and theme
 app.js                     search, category filter, and card rendering
-data/apps.json             the catalogue
+data/apps.json             the tool catalogue
+scripts/check_links.py     rejects links off *.govassured.com
 public/logo.jpg            official logo
 public/wordmark.png        header crop of the logo
 public/favicon.ico         icon

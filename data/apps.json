@@ -7,8 +7,7 @@
       "category": "govassure",
       "language": "JavaScript",
       "repo": "cyber-assessment",
-      "url": "https://govassure.uk",
-      "source": "https://github.com/jontever/cyber-assessment"
+      "url": "https://assessment.govassured.com"
     },
     {
       "id": "govassure-home",
@@ -17,8 +16,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "govassure-home",
-      "url": "https://home.govassured.com",
-      "source": "https://github.com/jontever/govassure-home"
+      "url": "https://home.govassured.com"
     },
     {
       "id": "govassure-sbd",
@@ -27,8 +25,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "govassure-sbd",
-      "url": "https://govassure-sbd.vercel.app",
-      "source": "https://github.com/jontever/govassure-sbd"
+      "url": "https://sbd.govassured.com"
     },
     {
       "id": "ce-readiness",
@@ -37,8 +34,7 @@
       "category": "govassure",
       "language": "TypeScript",
       "repo": "ce-readiness",
-      "url": "https://ce.govassure.uk",
-      "source": "https://github.com/jontever/ce-readiness"
+      "url": "https://ce.govassured.com"
     },
     {
       "id": "bcp-generator",
@@ -47,8 +43,7 @@
       "category": "govassure",
       "language": "TypeScript",
       "repo": "bcp-generator",
-      "url": "https://bcp.govassure.uk",
-      "source": "https://github.com/jontever/bcp-generator"
+      "url": "https://bcp.govassured.com"
     },
     {
       "id": "governance-app",
@@ -57,8 +52,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "governance-app",
-      "url": "https://governance.govassured.com",
-      "source": "https://github.com/jontever/governance-app"
+      "url": "https://governance.govassured.com"
     },
     {
       "id": "api-govassure",
@@ -67,8 +61,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "api-govassure",
-      "url": "https://api-govassure.vercel.app",
-      "source": "https://github.com/jontever/api-govassure"
+      "url": "https://api.govassured.com"
     },
     {
       "id": "scope-govassure",
@@ -77,8 +70,7 @@
       "category": "govassure",
       "language": "HTML",
       "repo": "scope-govassure",
-      "url": "https://scope.govassured.com",
-      "source": "https://github.com/jontever/scope-govassure"
+      "url": "https://scope.govassured.com"
     },
     {
       "id": "cyberassure-wiki",
@@ -87,8 +79,7 @@
       "category": "cyberassure",
       "language": "JavaScript",
       "repo": "cyberassure-wiki",
-      "url": "https://cyberassure.uk",
-      "source": "https://github.com/jontever/cyberassure-wiki"
+      "url": "https://wiki.govassured.com"
     },
     {
       "id": "osi",
@@ -97,8 +88,7 @@
       "category": "cyberassure",
       "language": "JavaScript",
       "repo": "osi",
-      "url": "https://osi.govassured.com",
-      "source": "https://github.com/jontever/osi"
+      "url": "https://osi.govassured.com"
     },
     {
       "id": "devsecops",
@@ -107,8 +97,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "devsecops",
-      "url": "https://devsecops-rust.vercel.app",
-      "source": "https://github.com/jontever/devsecops"
+      "url": "https://devsecops.govassured.com"
     },
     {
       "id": "sase-cyberassure",
@@ -117,8 +106,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "sase-cyberassure",
-      "url": "https://sase.govassured.com",
-      "source": "https://github.com/jontever/sase-cyberassure"
+      "url": "https://sase.govassured.com"
     },
     {
       "id": "splunk-cyberassure",
@@ -127,8 +115,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "splunk-cyberassure",
-      "url": "https://splunk.govassured.com",
-      "source": "https://github.com/jontever/splunk-cyberassure"
+      "url": "https://splunk.govassured.com"
     },
     {
       "id": "human-cyber-impact-framework",
@@ -137,8 +124,7 @@
       "category": "cyberassure",
       "language": "HTML",
       "repo": "human-cyber-impact-framework",
-      "url": "https://framework.govassured.com",
-      "source": "https://github.com/jontever/human-cyber-impact-framework"
+      "url": "https://framework.govassured.com"
     },
     {
       "id": "theresilient",
@@ -147,8 +133,7 @@
       "category": "other",
       "language": "HTML",
       "repo": "theresilient",
-      "url": "https://theresilient.uk",
-      "source": "https://github.com/jontever/theresilient"
+      "url": "https://resilient.govassured.com"
     },
     {
       "id": "gdelt-cyber-dashboard",
@@ -157,8 +142,7 @@
       "category": "other",
       "language": "TypeScript",
       "repo": "gdelt-cyber-dashboard",
-      "url": "https://cyberteam.uk",
-      "source": "https://github.com/jontever/gdelt-cyber-dashboard"
+      "url": "https://cyberteam.govassured.com"
     },
     {
       "id": "threat-defence-planner",
@@ -167,8 +151,7 @@
       "category": "other",
       "language": "Python",
       "repo": "threat-defence-planner",
-      "url": "https://threat-defence-planner.vercel.app",
-      "source": "https://github.com/jontever/threat-defence-planner"
+      "url": "https://threat.govassured.com"
     },
     {
       "id": "ai-safety-quiz",
@@ -177,8 +160,7 @@
       "category": "other",
       "language": "TypeScript",
       "repo": "ai-safety-quiz",
-      "url": "https://insynthesis.online",
-      "source": "https://github.com/jontever/ai-safety-quiz"
+      "url": "https://quiz.govassured.com"
     },
     {
       "id": "crossword",
@@ -187,8 +169,7 @@
       "category": "other",
       "language": "JavaScript",
       "repo": "crossword",
-      "url": "https://crossword.govassured.com",
-      "source": "https://github.com/jontever/crossword"
+      "url": "https://crossword.govassured.com"
     },
     {
       "id": "tabletop-game",
@@ -197,8 +178,7 @@
       "category": "other",
       "language": "HTML",
       "repo": "tabletop-game",
-      "url": "https://tabletop-game-taupe.vercel.app",
-      "source": "https://github.com/jontever/tabletop-game"
+      "url": "https://tabletop.govassured.com"
     },
     {
       "id": "cyber-poem",
@@ -207,8 +187,7 @@
       "category": "other",
       "language": "HTML",
       "repo": "cyber-poem",
-      "url": "https://poem.govassured.com",
-      "source": "https://github.com/jontever/cyber-poem"
+      "url": "https://poem.govassured.com"
     }
   ]
 }

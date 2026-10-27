@@ -10,18 +10,18 @@
     {
       id: "govassure",
       label: "GovAssure",
-      blurb: "Assessment, governance, scoping, and continuity tools for UK organisations."
+      blurb: "Assessments, governance submissions, scoping, and continuity plans."
     },
     {
       id: "cyberassure",
       label: "CyberAssure",
-      blurb: "Architecture references and operating models on the CyberAssure sites."
+      blurb: "Architecture references and operating models."
     },
     {
       id: "other",
-      label: "Learning & other projects",
-      tag: "Other",
-      blurb: "Dashboards, practice, and games published alongside the assurance tools."
+      label: "Practice and monitoring",
+      tag: "Practice",
+      blurb: "Quizzes, exercises, and reporting views."
     }
   ];
 
@@ -30,7 +30,6 @@
   var filtersEl = document.getElementById("filters");
   var catalogEl = document.getElementById("catalog");
   var countEl = document.getElementById("result-count");
-  var statApps = document.getElementById("stat-apps");
   var form = document.getElementById("search-form");
 
   form.addEventListener("submit", function (event) {
@@ -46,7 +45,6 @@
     .then(function (data) {
       if (!data || !Array.isArray(data.apps)) throw new Error("The app list is not in the expected shape.");
       apps = data.apps.filter(isApp);
-      statApps.textContent = String(apps.length);
       renderFilters();
       applyFromUrl();
       searchInput.addEventListener("input", render);
@@ -62,7 +60,7 @@
     });
 
   function isApp(app) {
-    return app && app.name && app.description && app.url && app.source && categoryById(app.category);
+    return app && app.name && app.description && app.url && categoryById(app.category);
   }
 
   function categoryById(id) {
@@ -148,7 +146,7 @@
       return matches(app, query);
     });
 
-    var noun = visible.length === 1 ? "app" : "apps";
+    var noun = visible.length === 1 ? "tool" : "tools";
     var category = categoryById(categoryId);
     var message = visible.length + " " + noun;
     if (categoryId !== "all") message += " in " + category.label;
@@ -159,7 +157,7 @@
     if (!visible.length) {
       var empty = document.createElement("p");
       empty.className = "empty";
-      empty.textContent = "No apps match that search. Clear the search or choose another category.";
+      empty.textContent = "No tools match that search. Clear the search or choose another category.";
       catalogEl.appendChild(empty);
       return;
     }
@@ -197,7 +195,7 @@
 
     var count = document.createElement("p");
     count.className = "group-count";
-    count.textContent = items.length + (items.length === 1 ? " app" : " apps");
+    count.textContent = items.length + (items.length === 1 ? " tool" : " tools");
     head.appendChild(count);
     section.appendChild(head);
 
@@ -234,27 +232,25 @@
     description.textContent = app.description;
     article.appendChild(description);
 
-    var meta = document.createElement("p");
-    meta.className = "meta";
-    var language = document.createElement("span");
-    language.textContent = app.language || "—";
-    var repo = document.createElement("span");
-    repo.textContent = app.repo;
-    meta.appendChild(language);
-    meta.appendChild(repo);
-    article.appendChild(meta);
+    if (app.language) {
+      var meta = document.createElement("p");
+      meta.className = "meta";
+      var language = document.createElement("span");
+      language.textContent = app.language;
+      meta.appendChild(language);
+      article.appendChild(meta);
+    }
 
     var actions = document.createElement("div");
     actions.className = "actions";
-    actions.appendChild(link(app.url, "Open app", app.name, true));
-    actions.appendChild(link(app.source, "Source", app.name, false));
+    actions.appendChild(link(app.url, "Open tool", app.name));
     article.appendChild(actions);
     return article;
   }
 
-  function link(href, label, name, primary) {
+  function link(href, label, name) {
     var anchor = document.createElement("a");
-    anchor.className = primary ? "btn btn-primary" : "btn btn-quiet";
+    anchor.className = "btn btn-primary";
     anchor.href = href;
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
