@@ -1,0 +1,214 @@
+{
+  "apps": [
+    {
+      "id": "cyber-assessment",
+      "name": "NCSC CAF v4.0 Self-Assessment",
+      "description": "Self-assessment of an organisation’s cyber security posture against the NCSC Cyber Assessment Framework v4.0, covering all four objectives and 14 principles. Progress stays in the browser and can be exported or imported as JSON.",
+      "category": "govassure",
+      "language": "JavaScript",
+      "repo": "cyber-assessment",
+      "url": "https://govassure.uk",
+      "source": "https://github.com/jontever/cyber-assessment"
+    },
+    {
+      "id": "govassure-home",
+      "name": "GovAssure Community Tools",
+      "description": "Landing page for the GovAssure open-source suite: free tools that help UK organisations with cyber governance, risk, compliance, business continuity, and resilience.",
+      "category": "govassure",
+      "language": "HTML",
+      "repo": "govassure-home",
+      "url": "https://govassure-home.vercel.app",
+      "source": "https://github.com/jontever/govassure-home"
+    },
+    {
+      "id": "govassure-sbd",
+      "name": "Secure by Design Statement of Applicability",
+      "description": "Walks a delivery team through a Secure by Design Statement of Applicability, narrowing NIST SP 800-53 controls to the data, stakeholders, technologies, and laws in scope. Runs entirely in the browser and can export to Word and CSV.",
+      "category": "govassure",
+      "language": "HTML",
+      "repo": "govassure-sbd",
+      "url": "https://govassure-sbd.vercel.app",
+      "source": "https://github.com/jontever/govassure-sbd"
+    },
+    {
+      "id": "ce-readiness",
+      "name": "Cyber Essentials Readiness",
+      "description": "Plain-English questions across the five Cyber Essentials control areas, with inline guidance and a pass/fail summary plus remediation notes. It is a self-assessed readiness check, not an official certification.",
+      "category": "govassure",
+      "language": "TypeScript",
+      "repo": "ce-readiness",
+      "url": "https://ce.govassure.uk",
+      "source": "https://github.com/jontever/ce-readiness"
+    },
+    {
+      "id": "bcp-generator",
+      "name": "BCP Generator",
+      "description": "Guided business continuity plan generator for UK small and medium businesses. It drafts narrative with Claude, saves a return link, and downloads a Word document, aligned to the Cabinet Office BCP Toolkit, NCSC, and BS 65000.",
+      "category": "govassure",
+      "language": "TypeScript",
+      "repo": "bcp-generator",
+      "url": "https://bcp.govassure.uk",
+      "source": "https://github.com/jontever/bcp-generator"
+    },
+    {
+      "id": "governance-app",
+      "name": "Governance Review Tool",
+      "description": "Prepares board submissions for the Solution Architecture Board, Technical Design Authority, Architecture Review Board, and Change Advisory Board, with a RAG status and a document export. Answers stay in the browser.",
+      "category": "govassure",
+      "language": "HTML",
+      "repo": "governance-app",
+      "url": "https://governance.govassure.uk",
+      "source": "https://github.com/jontever/governance-app"
+    },
+    {
+      "id": "api-govassure",
+      "name": "API Security Controls Matrix",
+      "description": "Maps the NCSC’s seven HTTP API security pillars against UK Government Security Classification Policy tiers, from PUBLIC through TOP SECRET, including a Backend-for-Frontend overlay.",
+      "category": "govassure",
+      "language": "HTML",
+      "repo": "api-govassure",
+      "url": "https://api-govassure.vercel.app",
+      "source": "https://github.com/jontever/api-govassure"
+    },
+    {
+      "id": "scope-govassure",
+      "name": "Penetration Test Scoping Tool",
+      "description": "Captures engagement details, in-scope and out-of-scope targets, and rules of engagement for a penetration test, then exports the scoping document. Responses stay in the browser.",
+      "category": "govassure",
+      "language": "HTML",
+      "repo": "scope-govassure",
+      "url": "https://scope.govassure.uk",
+      "source": "https://github.com/jontever/scope-govassure"
+    },
+    {
+      "id": "cyberassure-wiki",
+      "name": "CyberAssure Wiki",
+      "description": "Open-source security architecture reference covering enterprise network security, zero trust, threat modelling, identity, data protection, logging, and UK risk and governance topics.",
+      "category": "cyberassure",
+      "language": "JavaScript",
+      "repo": "cyberassure-wiki",
+      "url": "https://cyberassure.uk",
+      "source": "https://github.com/jontever/cyberassure-wiki"
+    },
+    {
+      "id": "osi",
+      "name": "OSI Security Rings",
+      "description": "Interactive concentric view of the OSI model, extended with Layer 0 (hardware, firmware, and supply chain) and Layer 8 (people and governance). One ring set shows protocols; the other shows Prevent, Detect, and Respond controls.",
+      "category": "cyberassure",
+      "language": "JavaScript",
+      "repo": "osi",
+      "url": "https://osi.cyberassure.uk",
+      "source": "https://github.com/jontever/osi"
+    },
+    {
+      "id": "devsecops",
+      "name": "DevSecOps Operating Model",
+      "description": "Interactive reference for securing a software delivery pipeline: an operating model, a BPMN process view, and a dependency model, aligned to NCSC CAF, GOV.UK Secure by Design, and OWASP.",
+      "category": "cyberassure",
+      "language": "HTML",
+      "repo": "devsecops",
+      "url": "https://devsecops-rust.vercel.app",
+      "source": "https://github.com/jontever/devsecops"
+    },
+    {
+      "id": "sase-cyberassure",
+      "name": "SASE Architecture & Controls",
+      "description": "Vendor-neutral Secure Access Service Edge reference showing how zero trust network access, defence in depth, and privileged access management requirements are fulfilled.",
+      "category": "cyberassure",
+      "language": "HTML",
+      "repo": "sase-cyberassure",
+      "url": "https://sase.cyberassure.uk",
+      "source": "https://github.com/jontever/sase-cyberassure"
+    },
+    {
+      "id": "splunk-cyberassure",
+      "name": "Splunk Operating Model",
+      "description": "SABSA-aligned operating model for Splunk Core and Splunk Enterprise Security, with stakeholder lenses, a filterable use-case catalogue, and clickable data flows.",
+      "category": "cyberassure",
+      "language": "HTML",
+      "repo": "splunk-cyberassure",
+      "url": "https://splunk.cyberassure.uk/",
+      "source": "https://github.com/jontever/splunk-cyberassure"
+    },
+    {
+      "id": "human-cyber-impact-framework",
+      "name": "Personal Cyber Attack Taxonomy",
+      "description": "Reference taxonomy of cyber attacks that target people rather than enterprises: forty attack types across six threat domains, mapped by attacker goal, delivery vector, target asset, and primary harm.",
+      "category": "cyberassure",
+      "language": "HTML",
+      "repo": "human-cyber-impact-framework",
+      "url": "https://framework.cyberassure.uk",
+      "source": "https://github.com/jontever/human-cyber-impact-framework"
+    },
+    {
+      "id": "theresilient",
+      "name": "The Resilient",
+      "description": "Landing page for a curated hub of free resilience, cyber security, and assurance tools for UK businesses, with a UK cyber threat dashboard and a ransomware and breach tracker.",
+      "category": "other",
+      "language": "HTML",
+      "repo": "theresilient",
+      "url": "https://theresilient.uk",
+      "source": "https://github.com/jontever/theresilient"
+    },
+    {
+      "id": "gdelt-cyber-dashboard",
+      "name": "GDELT Cyber Dashboard",
+      "description": "Cybersecurity news dashboard powered by GDELT. It shows a seven-day trend of cyber coverage, the organisations mentioned most often, and a feed of recent articles.",
+      "category": "other",
+      "language": "TypeScript",
+      "repo": "gdelt-cyber-dashboard",
+      "url": "https://cyberteam.uk",
+      "source": "https://github.com/jontever/gdelt-cyber-dashboard"
+    },
+    {
+      "id": "threat-defence-planner",
+      "name": "Threat-Informed Defense Planner",
+      "description": "Maps a selected MITRE ATT&CK group’s techniques to D3FEND countermeasures and compares them with uploaded DeTT&CT detection coverage to produce a prioritised remediation list.",
+      "category": "other",
+      "language": "Python",
+      "repo": "threat-defence-planner",
+      "url": "https://threat-defence-planner.vercel.app",
+      "source": "https://github.com/jontever/threat-defence-planner"
+    },
+    {
+      "id": "ai-safety-quiz",
+      "name": "AI Safety Practice Quiz",
+      "description": "Practice quiz covering AI safety, security, governance, and ethics, using exam-style multiple-choice questions.",
+      "category": "other",
+      "language": "TypeScript",
+      "repo": "ai-safety-quiz",
+      "url": "https://insynthesis.online",
+      "source": "https://github.com/jontever/ai-safety-quiz"
+    },
+    {
+      "id": "crossword",
+      "name": "Crossword",
+      "description": "Static crossword app with 59 puzzles in nine categories, including cyber security and AI security, with expert and cryptic sets. Progress stays in the browser.",
+      "category": "other",
+      "language": "JavaScript",
+      "repo": "crossword",
+      "url": "https://crossword-pink-eta.vercel.app",
+      "source": "https://github.com/jontever/crossword"
+    },
+    {
+      "id": "tabletop-game",
+      "name": "Blast Radius",
+      "description": "Cooperative tabletop incident-response game for 3–7 players, built on MITRE ATT&CK, MITRE ATLAS, NIST SP 800-53, and the NCSC Cyber Assessment Framework. The team sets a control posture before the intrusion starts.",
+      "category": "other",
+      "language": "HTML",
+      "repo": "tabletop-game",
+      "url": "https://tabletop-game-taupe.vercel.app",
+      "source": "https://github.com/jontever/tabletop-game"
+    },
+    {
+      "id": "cyber-poem",
+      "name": "Social Engineering",
+      "description": "A short poem about phishing, the cyber kill chain, and the human element.",
+      "category": "other",
+      "language": "HTML",
+      "repo": "cyber-poem",
+      "url": "https://cseta.uk",
+      "source": "https://github.com/jontever/cyber-poem"
+    }
+  ]
+}

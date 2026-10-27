@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GOV Assured — published apps</title>
+  <meta name="description" content="GOV Assured is the directory of apps published by Jonathan Silvester: GovAssure assurance tools, CyberAssure architecture references, and other learning projects and games.">
+  <link rel="canonical" href="https://govassured.com/">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="GOV Assured — published apps">
+  <meta property="og:description" content="A directory of the apps published by Jonathan Silvester, with a link to each live app and its source.">
+  <meta property="og:url" content="https://govassured.com/">
+  <meta property="og:image" content="https://govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GOV Assured — published apps">
+  <meta name="twitter:description" content="A directory of the apps published by Jonathan Silvester, with a link to each live app and its source.">
+  <meta name="twitter:image" content="https://govassured.com/public/og.jpg">
+  <link rel="icon" href="public/favicon.ico" sizes="any">
+  <link rel="icon" href="public/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#directory">Skip to the directory</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="#top">
+        <img class="brand-mark" src="public/wordmark.png" width="782" height="694" alt="GOV Assured">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="#directory">Directory</a>
+        <a href="https://github.com/jontever" rel="noopener noreferrer">GitHub<span class="visually-hidden"> (jontever)</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Jonathan Silvester · govassured.com</p>
+          <h1 id="page-title">One home for every published app.</h1>
+          <p class="lede">
+            GOV Assured is the directory. Each card says what an app does and links to the live site and its source.
+            The GovAssure collection covers assessment and governance, CyberAssure covers architecture references, and learning projects and games stand in their own group.
+          </p>
+        </div>
+        <dl class="stats" id="stats">
+          <div>
+            <dt>Published apps</dt>
+            <dd id="stat-apps">—</dd>
+          </div>
+          <div>
+            <dt>Collections</dt>
+            <dd>3</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="directory" id="directory" aria-labelledby="directory-title">
+      <div class="wrap">
+        <h2 id="directory-title" class="section-title">Directory</h2>
+
+        <div class="controls">
+          <form class="search" role="search" id="search-form">
+            <label for="search">Search apps</label>
+            <input id="search" name="q" type="search" placeholder="Name, description, or repository" autocomplete="off" enterkeyhint="search">
+          </form>
+          <div class="filters" role="group" aria-label="Filter by category" id="filters"></div>
+        </div>
+
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div id="catalog"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <p>
+        <strong>GOV Assured</strong> lists apps published by
+        <a href="https://github.com/jontever">Jonathan Silvester</a>.
+        Descriptions are summarised from each project’s own page or README.
+        This site links to those apps and does not include their code.
+      </p>
+      <p class="footer-note">Static directory. Add an app by editing <code>data/apps.json</code>.</p>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript wrap">This directory needs JavaScript to load <code>data/apps.json</code> and render the cards.</p>
+  </noscript>
+
+  <script src="app.js"></script>
+</body>
+</html>
