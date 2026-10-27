@@ -138,7 +138,14 @@ a:hover {
   text-decoration: underline;
 }
 
-.linkedin {
+.social {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.linkedin,
+.icon-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -151,19 +158,22 @@ a:hover {
 }
 
 .header-nav a.linkedin,
-.linkedin {
+.linkedin,
+.icon-link {
   color: var(--gold);
 }
 
 .header-nav a.linkedin:hover,
-.linkedin:hover {
+.linkedin:hover,
+.icon-link:hover {
   color: #f7e1b8;
   background: rgba(240, 201, 135, 0.1);
   text-decoration: none;
 }
 
 .linkedin svg,
-.linkedin-text svg {
+.linkedin-text svg,
+.icon-link svg {
   width: 1.15rem;
   height: 1.15rem;
   display: block;

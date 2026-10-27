@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Fail if the site links outside *.govassured.com.
 
-mailto links are allowed, as is the GOV Assured LinkedIn company page and the
-schema.org JSON-LD context.
+mailto links are allowed. The only other web addresses allowed are the GOV
+Assured LinkedIn company page, the company repository
+https://github.com/nusairi/govassure, and the schema.org JSON-LD context.
 """
 
 import json
@@ -29,6 +30,7 @@ SERVED = [
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
     "https://www.linkedin.com/company/102617034",
+    "https://github.com/nusairi/govassure",
     "https://schema.org",
 }
 
@@ -107,6 +109,10 @@ def self_test():
         "https://www.linkedin.com/company/102617034?trk=public": "web links must not add a query or fragment",
         "https://schema.org": None,
         "https://schema.org/Person": "host is outside *.govassured.com",
+        "https://github.com/nusairi/govassure": None,
+        "https://github.com/nusairi/govassure/": None,
+        "https://github.com/nusairi/govassure/issues": "host is outside *.govassured.com",
+        "https://github.com/other/govassure": "host is outside *.govassured.com",
     }
     failed = False
     for url, expected in cases.items():
@@ -118,12 +124,19 @@ def self_test():
         sys.exit(1)
 
 
+def scrub(text):
+    cleaned = text
+    for url in sorted(ALLOWED_EXACT, key=len, reverse=True):
+        cleaned = re.sub(re.escape(url) + "/?", "", cleaned, flags=re.IGNORECASE)
+    return cleaned
+
+
 def collect():
     found = []
     for rel in SERVED:
         path = ROOT / rel
         text = path.read_text(encoding="utf-8")
-        lower = text.lower()
+        lower = scrub(text).lower()
         for banned in BANNED:
             if banned in lower:
                 found.append((rel, "text", banned, f"banned text {banned}"))
@@ -144,6 +157,14 @@ def collect():
                     found.append((rel, "source", app.get("id", ""), "source field is not allowed"))
                 url = app.get("url", "")
                 found.append((rel, "url", url, problem(url)))
+    readme = ROOT / "README.md"
+    readme_text = readme.read_text(encoding="utf-8")
+    for match in URL_RE.findall(readme_text):
+        if "github.com" in match.lower():
+            url = match.rstrip("`.,;:!?)]}\"'")
+            found.append(("README.md", "url", url, problem(url)))
+    if "github.com" in scrub(readme_text).lower():
+        found.append(("README.md", "text", "github.com", "GitHub URL other than the company repository"))
     return found
 
 
