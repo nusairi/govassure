@@ -6,6 +6,7 @@
 // cleaner UK-relevant signal. Each source degrades independently if briefly unavailable.
 
 const { fetchFeed } = require("./_rss");
+const safeUrl = require("./_url");
 
 const SOURCES = [
   { url: "https://www.infosecurity-magazine.com/rss/news/", source: "Infosecurity Magazine" },
@@ -28,7 +29,7 @@ module.exports = async (req, res) => {
     const items = results
       .flat()
       .filter((i) => i.title && i.link && !seen.has(i.link) && seen.add(i.link))
-      .map((i) => ({ title: i.title, date: i.date, source: i.source })) // no outbound links (GOV Assured policy)
+      .map((i) => ({ title: i.title, url: safeUrl(i.link), date: i.date, source: i.source }))
       .sort((a, b) => ts(b.date) - ts(a.date))
       .slice(0, 12);
 

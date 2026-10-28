@@ -1,4 +1,6 @@
 // CISA Known Exploited Vulnerabilities (KEV) — newest entries + "latest exploited vuln".
+const safeUrl = require("./_url");
+const CVE_RE = /^CVE-\d{4}-\d{4,}$/;
 const KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json";
 
 module.exports = async (req, res) => {
@@ -25,6 +27,7 @@ module.exports = async (req, res) => {
         action: v.requiredAction,
         description: (v.shortDescription || "").slice(0, 240),
         ransomware: v.knownRansomwareCampaignUse === "Known",
+        url: CVE_RE.test(v.cveID || "") ? safeUrl("https://nvd.nist.gov/vuln/detail/" + v.cveID) : null,
       }))
       .sort((a, b) => (a.dateAdded < b.dateAdded ? 1 : -1));
 
