@@ -37,7 +37,7 @@
     searchInput.focus();
   });
 
-  fetch("data/apps.json")
+  fetch("/data/apps.json")
     .then(function (response) {
       if (!response.ok) throw new Error("Could not load the app list (" + response.status + ").");
       return response.json();
