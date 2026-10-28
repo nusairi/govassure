@@ -1,0 +1,85 @@
+/* GOV Assured home: live threat dashboard and featured tools. Loaded after /styles.css. */
+.header-nav a[aria-current="page"]{color:var(--gold)}
+.header-nav a.nav-apps{color:var(--gold);font-weight:700}
+
+/* News ticker */
+.lv-ticker{position:sticky;top:0;z-index:15;display:flex;align-items:center;height:42px;overflow:hidden;background:#011511;border-bottom:1px solid var(--line);color:var(--ink)}
+.lv-ticker-label{flex:0 0 auto;height:100%;display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--gold);color:var(--field);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.lv-dot{width:7px;height:7px;border-radius:50%;background:var(--field);animation:lv-pulse-dot 2s infinite}
+@keyframes lv-pulse-dot{0%,100%{opacity:1}50%{opacity:.35}}
+.lv-ticker-viewport{flex:1;overflow:hidden;position:relative;height:100%}
+.lv-ticker-track{position:absolute;top:0;left:0;height:100%;display:flex;align-items:center;white-space:nowrap;will-change:transform;animation:lv-scroll 80s linear infinite}
+.lv-ticker:hover .lv-ticker-track{animation-play-state:paused}
+@keyframes lv-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lv-ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 22px;font-size:.88rem;color:var(--ink)}
+.lv-ticker-src{color:var(--gold);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+.lv-ticker-sep{color:var(--gold-deep)}
+@media (prefers-reduced-motion: reduce){.lv-ticker-track{animation:none;position:relative}.lv-ticker-viewport{overflow-x:auto}}
+@media (max-width:560px){.lv-txt{display:none}.lv-ticker-item{font-size:.82rem;padding:0 16px}}
+
+/* Hero */
+.lv-hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:center}
+.lv-accent{color:var(--gold)}
+.lv-cta{margin-top:1.5rem}
+.lv-btn-apps{border-color:var(--gold)}
+.lv-map{display:flex;justify-content:center}
+.lv-map svg{width:100%;max-width:300px;height:auto}
+.lv-map .uk{fill:rgba(240,201,135,.12);stroke:var(--gold);stroke-width:2;stroke-linejoin:round}
+.lv-map .uk-glow{fill:none;stroke:rgba(240,201,135,.28);stroke-width:7}
+.lv-map .lv-pt{fill:var(--gold)}
+@media (max-width:820px){.lv-hero-grid{grid-template-columns:1fr}.lv-map{display:none}}
+
+/* Tool cards */
+#tools,#threats,#ransomware,#services,#about,#contact{scroll-margin-top:54px}
+.lv-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.lv-card{height:100%;display:flex;flex-direction:column;gap:.45rem;padding:1.15rem;background:var(--raised);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink);text-decoration:none;transition:border-color .15s ease,transform .15s ease}
+.lv-card:hover{border-color:var(--gold);color:var(--ink);transform:translateY(-2px)}
+.lv-card-all{border-color:var(--gold);background:linear-gradient(150deg,#163a30,#102e26)}
+.lv-card-top{display:flex;align-items:center;gap:.75rem}
+.lv-icon{flex:0 0 auto;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--field);border:1px solid var(--line);color:var(--gold)}
+.lv-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.lv-card-title{font-family:var(--serif);font-size:1.25rem;line-height:1.2}
+.lv-desc{color:var(--ink-soft);font-size:.95rem}
+.lv-host{color:#b3a993;font-family:var(--mono);font-size:.76rem;word-break:break-all}
+.lv-go{margin-top:auto;padding-top:.4rem;color:var(--gold);font-weight:700;font-size:.9rem}
+@media (hover:none){.lv-card:hover{transform:none;border-color:var(--line)}.lv-card-all:hover{border-color:var(--gold)}}
+
+/* Dashboard */
+.lv-dash{background:#011511}
+.lv-dash.lv-alt{background:var(--field)}
+.lv-dash .section-title{display:flex;align-items:center;gap:.6rem}
+.lv-live{width:10px;height:10px;border-radius:50%;background:#ff9d8f;display:inline-block;animation:lv-pulse 2s infinite}
+@keyframes lv-pulse{0%{box-shadow:0 0 0 0 rgba(255,157,143,.55)}70%{box-shadow:0 0 0 8px rgba(255,157,143,0)}100%{box-shadow:0 0 0 0 rgba(255,157,143,0)}}
+.lv-dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;align-items:start}
+.lv-panel{background:var(--raised);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.lv-panel-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:#163a30}
+.lv-panel-head h3{margin:0;font-family:var(--serif);font-weight:500;font-size:1.12rem;display:flex;align-items:center;gap:.5rem}
+.lv-panel-head svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.8;flex:none}
+.lv-src{font-size:.74rem;color:#b3a993;text-align:right}
+.lv-panel-body{padding:.3rem 0;min-height:160px;max-height:430px;overflow-y:auto}
+.lv-panel-body.lv-tall{max-height:560px}
+.lv-row{padding:.75rem 1rem;border-bottom:1px solid rgba(240,201,135,.14)}
+.lv-row:last-child{border-bottom:0}
+.lv-r-top{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
+.lv-r-title{font-weight:600;font-size:.93rem;line-height:1.3}
+.lv-r-meta{font-size:.78rem;color:#b3a993;margin-top:.2rem}
+.lv-r-desc{font-size:.84rem;color:var(--ink-soft);margin-top:.3rem;line-height:1.4}
+.lv-pill{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.lv-pill-crit{background:#3d1c18;color:#ff9d8f}
+.lv-pill-ransom{background:#3a3214;color:#f3c969}
+.lv-pill-news{background:#113340;color:#9fd3e6}
+.lv-pill-grp{background:rgba(240,201,135,.16);color:var(--gold)}
+.lv-pill-date{background:#123d2c;color:#8fdcb0}
+.lv-featured{margin:0 0 1rem;padding:1rem 1.1rem;border-radius:var(--radius);background:#163a30;border:1px solid var(--gold)}
+.lv-flabel{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.lv-fcve{font-family:var(--serif);font-size:1.25rem;margin:.3rem 0 .1rem}
+.lv-fdesc{font-size:.9rem;color:var(--ink-soft);margin:.35rem 0}
+.lv-faction{font-size:.86rem}
+.lv-faction b{color:var(--gold)}
+.lv-note{padding:1.1rem;color:var(--ink-soft);font-size:.9rem;text-align:center}
+.lv-skel{padding:.9rem 1rem}
+.lv-bar{height:10px;border-radius:6px;margin:7px 0;background:linear-gradient(90deg,#163a30,#21483c,#163a30);background-size:200% 100%;animation:lv-sh 1.3s infinite}
+.lv-w50{width:50%}.lv-w55{width:55%}.lv-w60{width:60%}.lv-w65{width:65%}.lv-w70{width:70%}.lv-w75{width:75%}.lv-w80{width:80%}.lv-w85{width:85%}.lv-w90{width:90%}
+@keyframes lv-sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.lv-foot{text-align:center;color:#b3a993;font-size:.84rem;margin:1.25rem 0 0}
+.lv-apps-h1{font-size:clamp(2rem,4vw,2.6rem)}

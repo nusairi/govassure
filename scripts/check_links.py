@@ -18,6 +18,9 @@ URL_RE = re.compile(r"https?://[^\s\"'<>]+", re.I)
 ROOT = Path(__file__).resolve().parents[1]
 SERVED = [
     "index.html",
+    "apps/index.html",
+    "live.js",
+    "live.css",
     "404.html",
     "app.js",
     "styles.css",

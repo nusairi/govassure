@@ -3,29 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GOV Assured — government and cyber assurance</title>
-  <meta name="description" content="GOV Assured is a consultancy for government and cyber assurance: assessment, governance, resilience, security architecture, and practice. The tools on this site run on govassured.com.">
+  <title>GOV Assured — resilience, cyber assurance and live UK threat dashboard</title>
+  <meta name="description" content="GOV Assured: free cyber security, assurance and continuity tools for UK organisations, a live UK cyber threat dashboard, and government and cyber assurance consultancy.">
   <link rel="canonical" href="https://www.govassured.com/">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <meta name="author" content="GOV Assured">
   <meta name="theme-color" content="#021c17">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="GOV Assured">
-  <meta property="og:title" content="GOV Assured — government and cyber assurance">
-  <meta property="og:description" content="A consultancy for cyber assurance, governance, resilience, and security architecture. Tools on this site run on govassured.com.">
+  <meta property="og:title" content="GOV Assured — resilience, cyber assurance and live UK threat dashboard">
+  <meta property="og:description" content="GOV Assured: free cyber security, assurance and continuity tools for UK organisations, a live UK cyber threat dashboard, and government and cyber assurance consultancy.">
   <meta property="og:url" content="https://www.govassured.com/">
   <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GOV Assured — government and cyber assurance">
-  <meta name="twitter:description" content="A consultancy for cyber assurance, governance, resilience, and security architecture. Tools on this site run on govassured.com.">
+  <meta name="twitter:title" content="GOV Assured — resilience, cyber assurance and live UK threat dashboard">
+  <meta name="twitter:description" content="GOV Assured: free cyber security, assurance and continuity tools for UK organisations, a live UK cyber threat dashboard, and government and cyber assurance consultancy.">
   <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
-  <link rel="icon" href="public/favicon.ico" sizes="any">
-  <link rel="icon" href="public/favicon-32.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/public/favicon.ico" sizes="any">
+  <link rel="icon" href="/public/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,45 +35,177 @@
     "logo": "https://www.govassured.com/public/logo.jpg",
     "email": "contact@govassured.com",
     "sameAs": [
-      "https://www.linkedin.com/company/102617034",
+      "https://www.linkedin.com/company/102617034/",
       "https://github.com/nusairi/govassure"
     ]
   }
   </script>
+  <link rel="stylesheet" href="/live.css">
 </head>
 <body>
-  <a class="skip-link" href="#services">Skip to content</a>
+  <a class="skip-link" href="#tools">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap header-bar">
-      <a class="brand" href="#top">
-        <img class="brand-mark" src="public/wordmark.png" width="782" height="694" alt="GOV Assured">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
       </a>
       <nav class="header-nav" aria-label="Site">
-        <a href="#services">Services</a>
-        <a href="#tools">Tools</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="linkedin" href="https://www.linkedin.com/company/102617034" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
         </a>
       </nav>
     </div>
   </header>
 
+  <div class="lv-ticker" id="ticker" role="region" aria-label="Latest UK cyber news headlines">
+    <span class="lv-ticker-label"><span class="lv-dot" aria-hidden="true"></span><span class="lv-txt">Live</span></span>
+    <div class="lv-ticker-viewport">
+      <div class="lv-ticker-track" id="tickerTrack"><span class="lv-ticker-item">Loading latest UK cyber news…</span></div>
+    </div>
+  </div>
+
   <main id="top">
-    <section class="hero" aria-labelledby="page-title">
+    <section class="hero lv-hero" aria-labelledby="page-title">
+      <div class="wrap lv-hero-grid">
+        <div>
+          <p class="eyebrow">Resilience tools for UK organisations</p>
+          <h1 id="page-title">Build a <span class="lv-accent">resilient</span> organisation.</h1>
+          <p class="lede">Free cyber security, assurance and continuity tools from GOV Assured to help UK organisations prepare, protect and prove their resilience, with a live view of the UK threat picture.</p>
+          <div class="actions lv-cta">
+            <a class="btn btn-primary" href="#tools">Explore the tools</a>
+            <a class="btn btn-quiet" href="#threats">Live threat dashboard</a>
+            <a class="btn btn-quiet lv-btn-apps" href="/apps">All 21 apps →</a>
+          </div>
+        </div>
+        <div class="lv-map" aria-hidden="true">
+          <svg viewBox="0 0 240 320">
+          <defs>
+            <path id="gb" d="M118.8 12.0 L97.4 48.9 L117.8 44.2 L139.7 44.4 L134.5 72.2 L116.5 102.8 L137.2 105.0 L138.8 108.6 L156.6 148.8 L170.3 154.3 L182.7 193.2 L188.4 206.7 L212.6 213.2 L210.2 235.0 L200.0 245.0 L208.0 262.6 L190.0 280.5 L163.2 280.2 L129.1 289.6 L119.8 282.9 L106.5 298.8 L88.0 295.0 L74.0 308.0 L63.3 301.2 L92.7 265.3 L110.6 258.0 L110.4 257.9 L79.2 252.3 L73.5 238.7 L94.4 228.1 L83.5 209.7 L87.3 187.4 L117.0 190.5 L117.1 190.5 L120.0 170.7 L106.6 149.6 L106.3 149.2 L82.0 143.2 L77.2 133.9 L84.5 118.7 L77.9 109.3 L67.1 125.4 L66.0 92.5 L55.8 75.1 L63.1 39.8 L78.7 12.2 L94.7 14.9 L118.8 12.0 Z"/>
+            <path id="ni" d="M65.6 151.2 L54.9 174.7 L39.8 167.6 L27.4 168.1 L31.5 149.8 L27.4 131.5 L44.2 130.1 L65.6 151.2 Z"/>
+          </defs>
+          <use href="#gb" class="uk-glow"/>
+          <use href="#ni" class="uk-glow"/>
+          <use href="#gb" class="uk"/>
+          <use href="#ni" class="uk"/>
+          <!-- pulse points -->
+          <circle cx="105" cy="55" r="3.5" class="lv-pt"/>
+          <circle cx="150" cy="175" r="3.5" class="lv-pt"/>
+          <circle cx="150" cy="250" r="3.5" class="lv-pt"/>
+          <circle cx="45" cy="150" r="3.5" class="lv-pt"/>
+        </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="band lv-tools" id="tools" aria-labelledby="tools-title">
       <div class="wrap">
-        <p class="eyebrow">Government and cyber assurance</p>
-        <h1 id="page-title">Assurance for government and the organisations around it.</h1>
-        <p class="lede">
-          GOV Assured is a consultancy for cyber assurance, governance, resilience, and security architecture.
-          The tools on this site are the platforms used for that work.
-        </p>
-        <p class="hero-links">
-          <a href="#services">Services</a>
-          <a href="#tools">Tools and platforms</a>
-        </p>
+        <h2 id="tools-title" class="section-title">Resilience and cyber toolkit</h2>
+        <p class="section-intro">Practical, free-to-use tools for UK organisations, from Cyber Essentials readiness and Secure by Design to business continuity planning. Every GOV Assured tool is listed in the <a href="/apps">apps directory</a>.</p>
+        <ul class="lv-grid">
+        <li><a class="lv-card" href="https://ce.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span><span class="lv-card-title">CE Readiness</span></span>
+          <span class="lv-desc">Cyber Essentials preparation tool to check you're ready before you certify.</span>
+          <span class="lv-host">ce.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://sbd.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="lv-card-title">Secure by Design SoA Generator</span></span>
+          <span class="lv-desc">Generate a Secure by Design Statement of Applicability for your project.</span>
+          <span class="lv-host">sbd.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://bcp.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span><span class="lv-card-title">BCP Generator</span></span>
+          <span class="lv-desc">Build a Business Continuity Plan tailored for UK SMBs in minutes.</span>
+          <span class="lv-host">bcp.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://scope.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2"/></svg></span><span class="lv-card-title">Pen Test Scoping Tool</span></span>
+          <span class="lv-desc">Define targets, constraints and rules of engagement for a penetration test engagement.</span>
+          <span class="lv-host">scope.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://wiki.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.2L18 20l-6-3.2L6 20l1.5-6.9L3 8.9 9 8z"/></svg></span><span class="lv-card-title">GOV Assured Wiki</span></span>
+          <span class="lv-desc">An open-source security reference for architects, engineers and students.</span>
+          <span class="lv-host">wiki.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://governance.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span><span class="lv-card-title">Governance Review Tool</span></span>
+          <span class="lv-desc">Prepare TDA, ARB and SAB board submissions with RAG status tracking and document export.</span>
+          <span class="lv-host">governance.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card" href="https://quiz.govassured.com/" target="_blank" rel="noopener">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12c.8.7 1 1.3 1 2h6c0-.7.2-1.3 1-2a7 7 0 00-4-12z"/></svg></span><span class="lv-card-title">AI Safety Practice Quiz</span></span>
+          <span class="lv-desc">Test and sharpen your knowledge of safe, responsible AI practices.</span>
+          <span class="lv-host">quiz.govassured.com</span>
+          <span class="lv-go">Open tool →</span>
+        </a></li>
+        <li><a class="lv-card lv-card-all" href="/apps">
+          <span class="lv-card-top"><span class="lv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="lv-card-title">All 21 GOV Assured apps</span></span>
+          <span class="lv-desc">The full directory: assessments, governance, architecture references, practice and monitoring tools.</span>
+          <span class="lv-host">www.govassured.com/apps</span>
+          <span class="lv-go">Browse the directory →</span>
+        </a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band lv-dash" id="threats" aria-labelledby="threats-title">
+      <div class="wrap">
+        <h2 id="threats-title" class="section-title"><span class="lv-live" aria-hidden="true"></span> UK cyber threat dashboard</h2>
+        <p class="section-intro">A live view of the threat: actively exploited vulnerabilities, recent UK security news and the latest UK advisories. Updated automatically.</p>
+        <div id="featured-wrap"></div>
+        <div class="lv-dash-grid">
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg> Patch now: CISA KEV</h3>
+              <span class="lv-src">CISA</span>
+            </div>
+            <div class="lv-panel-body" id="kev-body"><div class="lv-skel"><div class="lv-bar lv-w70"></div><div class="lv-bar lv-w90"></div><div class="lv-bar lv-w55"></div></div></div>
+          </div>
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg> UK cyber threat news</h3>
+              <span class="lv-src">UK security press</span>
+            </div>
+            <div class="lv-panel-body" id="news-body"><div class="lv-skel"><div class="lv-bar lv-w60"></div><div class="lv-bar lv-w85"></div><div class="lv-bar lv-w50"></div></div></div>
+          </div>
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.5z"/><path d="M8 9h8M8 12h5"/></svg> NCSC and UK advisories</h3>
+              <span class="lv-src">NCSC · Action Fraud</span>
+            </div>
+            <div class="lv-panel-body" id="adv-body"><div class="lv-skel"><div class="lv-bar lv-w75"></div><div class="lv-bar lv-w65"></div><div class="lv-bar lv-w80"></div></div></div>
+          </div>
+        </div>
+        <p class="lv-foot" id="threats-foot">Loading live feeds…</p>
+      </div>
+    </section>
+
+    <section class="band lv-dash lv-alt" id="ransomware" aria-labelledby="ransom-title">
+      <div class="wrap">
+        <h2 id="ransom-title" class="section-title"><span class="lv-live" aria-hidden="true"></span> Ransomware and breach tracker</h2>
+        <p class="section-intro">Recent UK-linked victims appearing on ransomware leak sites: a reminder of who is being hit, and why backups and continuity planning matter.</p>
+        <div class="lv-panel">
+          <div class="lv-panel-head">
+            <h3><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> UK leak-site activity</h3>
+            <span class="lv-src">ransomware.live</span>
+          </div>
+          <div class="lv-panel-body lv-tall" id="ransom-body"><div class="lv-skel"><div class="lv-bar lv-w65"></div><div class="lv-bar lv-w80"></div><div class="lv-bar lv-w55"></div><div class="lv-bar lv-w70"></div></div></div>
+        </div>
+        <p class="lv-foot">Source: ransomware.live (UK-tagged victims, newest first).</p>
       </div>
     </section>
 
@@ -108,7 +240,7 @@
               <h3>Resilience and business continuity</h3>
               <p>
                 Guided business continuity plans for UK small and medium businesses, with narrative drafting, a return link, and a Word download, aligned to the Cabinet Office BCP Toolkit, NCSC, and BS 65000.
-                A separate hub reports UK cyber threats and ransomware.
+                The live dashboard above reports UK cyber threats and ransomware.
               </p>
             </article>
           </li>
@@ -135,33 +267,13 @@
       </div>
     </section>
 
-    <section class="directory" id="tools" aria-labelledby="tools-title">
-      <div class="wrap">
-        <h2 id="tools-title" class="section-title">Tools and platforms</h2>
-        <p class="section-intro">
-          Platforms used for the services above. Each one opens on a govassured.com address.
-        </p>
-
-        <div class="controls">
-          <form class="search" role="search" id="search-form">
-            <label for="search">Search tools</label>
-            <input id="search" name="q" type="search" placeholder="Name or description" autocomplete="off" enterkeyhint="search">
-          </form>
-          <div class="filters" role="group" aria-label="Filter by category" id="filters"></div>
-        </div>
-
-        <p class="result-count" id="result-count" aria-live="polite"></p>
-        <div id="catalog"></div>
-      </div>
-    </section>
-
     <section class="about" id="about" aria-labelledby="about-title">
       <div class="wrap">
         <h2 id="about-title" class="section-title">About</h2>
         <p class="section-intro">
           GOV Assured is a government and cyber assurance consultancy.
           This site sets out that work and the tools used to carry it out: assessments, governance packs, continuity plans, architecture references, and practice material.
-          Each tool runs on its own govassured.com address.
+          Each tool runs on its own govassured.com address; the full list is in the <a href="/apps">apps directory</a>.
         </p>
       </div>
     </section>
@@ -172,7 +284,7 @@
         <p class="section-intro">Write to the consultancy.</p>
         <div class="actions">
           <a class="btn btn-primary" href="mailto:contact@govassured.com">contact@govassured.com</a>
-          <a class="btn btn-quiet linkedin-text" href="https://www.linkedin.com/company/102617034" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <a class="btn btn-quiet linkedin-text" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
             <span>GOV Assured on LinkedIn</span>
           </a>
@@ -185,10 +297,10 @@
     <div class="wrap footer-grid">
       <div>
         <p><strong>GOV Assured</strong> — government and cyber assurance.</p>
-        <p class="footer-note">The tools listed here run on govassured.com.</p>
+        <p class="footer-note">The tools listed here run on govassured.com. Live feed items are shown as text with their source named.</p>
       </div>
       <div class="social">
-        <a class="linkedin" href="https://www.linkedin.com/company/102617034" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
         </a>
         <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
@@ -198,10 +310,6 @@
     </div>
   </footer>
 
-  <noscript>
-    <p class="noscript wrap">The tool list needs JavaScript to load <code>data/apps.json</code>.</p>
-  </noscript>
-
-  <script src="app.js"></script>
+  <script src="/live.js" defer></script>
 </body>
 </html>
