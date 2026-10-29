@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="govuk-template">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0c">
+  <title>API Security Controls Matrix — GOV Assured</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L29 7.5V17c0 7.5-5.5 13.5-13 14.5C4.5 30.5-1 24.5-1 17V7.5z' fill='%231d70b8'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-size='13' font-weight='bold' font-family='Arial'%3EGA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/govuk-frontend@5.4.1/dist/govuk/govuk-frontend.min.css">
+  <style>
+    /* Override GOV.UK font with system sans-serif */
+    *, *::before, *::after { font-family: Arial, sans-serif !important; }
+    /* ── Tier tag colours ─────────────────────────────────── */
+    .ga-tag--public    { background-color: #00703c; color: #fff; }
+    .ga-tag--official  { background-color: #1d70b8; color: #fff; }
+    .ga-tag--sensitive { background-color: #4c2c92; color: #fff; }
+    .ga-tag--secret    { background-color: #d4351c; color: #fff; }
+    .ga-tag--topsecret { background-color: #7d2105; color: #fff; }
+
+    /* Tier left-border accent colours */
+    .ga-tier-bar--public    { border-left: 5px solid #00703c; }
+    .ga-tier-bar--official  { border-left: 5px solid #1d70b8; }
+    .ga-tier-bar--sensitive { border-left: 5px solid #4c2c92; }
+    .ga-tier-bar--secret    { border-left: 5px solid #d4351c; }
+    .ga-tier-bar--topsecret { border-left: 5px solid #7d2105; }
+
+    /* Tier background tints */
+    .ga-tier-tint--public    { background-color: #e9f7f0; }
+    .ga-tier-tint--official  { background-color: #e8f0f9; }
+    .ga-tier-tint--sensitive { background-color: #ede9f6; }
+    .ga-tier-tint--secret    { background-color: #fde8e7; }
+    .ga-tier-tint--topsecret { background-color: #f5e5e2; }
+
+    /* ── GOV Assured header service name override ───────────── */
+    .ga-header-brand {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .ga-header-brand:hover { color: #fff; text-decoration: underline; }
+    .ga-header-brand span { color: #ffdd00; }
+
+    /* ── Custom tab navigation ────────────────────────────── */
+    .ga-nav {
+      margin-bottom: 30px;
+    }
+    .ga-nav__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid #0b0c0c;
+    }
+    .ga-nav__item { margin: 0; }
+    .ga-nav__link {
+      display: block;
+      padding: 8px 14px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #1d70b8;
+      text-decoration: none;
+      background: #f3f2f1;
+      border: 1px solid #b1b4b6;
+      white-space: nowrap;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 0;
+    }
+    .ga-nav__link:hover { background: #fff; text-decoration: underline; }
+    .ga-nav__link:focus { outline: 3px solid #ffdd00; outline-offset: 0; background: #ffdd00; color: #0b0c0c; text-decoration: none; }
+    .ga-nav__item--active .ga-nav__link {
+      background: #1d70b8;
+      color: #fff;
+      font-weight: 700;
+      border-color: #1d70b8;
+    }
+
+    /* ── Section heading strip ────────────────────────────── */
+    .ga-section-header {
+      border-top: 5px solid #1d70b8;
+      padding-top: 15px;
+      margin-bottom: 25px;
+    }
+
+    /* ── Tier accordion ───────────────────────────────────── */
+    .ga-accordion { margin-bottom: 0; }
+    .ga-accordion__section {
+      margin-bottom: 0;
+      border-bottom: 1px solid #b1b4b6;
+    }
+    .ga-accordion__section:first-child { border-top: 1px solid #b1b4b6; }
+    .ga-accordion__section--hidden { display: none; }
+
+    .ga-accordion__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      gap: 16px;
+    }
+    .ga-accordion__header:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      background: #ffdd00;
+    }
+    .ga-accordion__header:hover .ga-accordion__title { text-decoration: underline; }
+
+    .ga-accordion__header-left { display: flex; align-items: center; gap: 14px; flex: 1; }
+    .ga-accordion__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b0c0c;
+      margin: 0;
+      flex: 1;
+    }
+    .ga-accordion__count {
+      font-size: 14px;
+      color: #505a5f;
+    }
+    .ga-accordion__chevron {
+      font-size: 13px;
+      color: #505a5f;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .ga-accordion__section--open .ga-accordion__chevron { transform: rotate(180deg); }
+    .ga-accordion__body { display: none; padding: 5px 0 20px; }
+    .ga-accordion__section--open .ga-accordion__body { display: block; }
+
+    /* ── Control lists ────────────────────────────────────── */
+    .ga-controls {
+      list-style: none;
+      margin: 0 0 20px;
+      padding: 0;
+    }
+    .ga-controls li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f3f2f1;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .ga-controls li:last-child { border-bottom: none; }
+    .ga-controls li.ga-controls__header {
+      font-weight: 700;
+      font-style: italic;
+      color: #505a5f;
+      font-size: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed #b1b4b6;
+      border-bottom: none;
+    }
+    .ga-controls li.ga-controls__inherited { opacity: 0.6; }
+    .ga-bullet {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+    .ga-bullet--public    { background: #00703c; }
+    .ga-bullet--official  { background: #1d70b8; }
+    .ga-bullet--sensitive { background: #4c2c92; }
+    .ga-bullet--secret    { background: #d4351c; }
+    .ga-bullet--topsecret { background: #7d2105; }
+    .ga-bullet--bff       { background: #0284c7; }
+
+    .ga-inherited-badge {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #505a5f;
+      background: #f3f2f1;
+      border: 1px solid #b1b4b6;
+      padding: 1px 6px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-left: 6px;
+    }
+
+    /* ── Assurance inset ──────────────────────────────────── */
+    .ga-assurance {
+      border-left: 5px solid #b1b4b6;
+      padding: 10px 15px;
+      margin-top: 15px;
+      background: #f8f8f8;
+    }
+    .ga-assurance__label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 4px;
+      color: #505a5f;
+    }
+    .ga-assurance__text { font-size: 15px; margin: 0; color: #0b0c0c; }
+
+    /* ── BFF toggle bar ───────────────────────────────────── */
+    .ga-bff-bar {
+      background: #003078;
+      color: #fff;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .ga-bff-bar__info { flex: 1; min-width: 260px; }
+    .ga-bff-bar__label { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
+    .ga-bff-bar__desc { font-size: 14px; color: rgba(255,255,255,0.85); margin: 0; }
+    .ga-bff-btn {
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .ga-bff-btn:hover { background: rgba(255,255,255,0.25); }
+    .ga-bff-btn:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
+    .ga-bff-btn--active { background: #ffdd00; color: #0b0c0c; border-color: #ffdd00; }
+
+    .ga-bff-context {
+      background: #e8f0f9;
+      border-left: 5px solid #1d70b8;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #003078;
+    }
+    .ga-bff-context strong { color: #003078; }
+
+    .ga-bff-section {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px dashed #b1b4b6;
+    }
+    .ga-bff-section__label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #1d70b8;
+      margin: 0 0 10px;
+    }
+
+    /* ── NCSC source notice ───────────────────────────────── */
+    .ga-source-notice {
+      background: #e8f4fd;
+      border-left: 5px solid #1d70b8;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+    }
+    .ga-source-notice p { font-size: 14px; color: #003078; margin: 0 0 6px; line-height: 1.6; }
+    .ga-source-notice p:last-child { margin: 0; }
+    .ga-source-notice a { color: #003078; font-weight: 700; }
+
+    /* ── Tier filter chips ────────────────────────────────── */
+    .ga-filter {
+      background: #f3f2f1;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .ga-filter__label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #505a5f;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ga-filter__chip {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 2px solid #b1b4b6;
+      background: #fff;
+      color: #505a5f;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .ga-filter__chip:hover { border-color: #0b0c0c; color: #0b0c0c; }
+    .ga-filter__chip:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
+    .ga-filter__chip--active-public    { background: #00703c; border-color: #00703c; color: #fff; }
+    .ga-filter__chip--active-official  { background: #1d70b8; border-color: #1d70b8; color: #fff; }
+    .ga-filter__chip--active-sensitive { background: #4c2c92; border-color: #4c2c92; color: #fff; }
+    .ga-filter__chip--active-secret    { background: #d4351c; border-color: #d4351c; color: #fff; }
+    .ga-filter__chip--active-topsecret { background: #7d2105; border-color: #7d2105; color: #fff; }
+
+    /* ── Intro tier cards ─────────────────────────────────── */
+    .ga-intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0 30px;
+    }
+    .ga-intro-card {
+      padding: 15px;
+      border: 1px solid #b1b4b6;
+    }
+    .ga-intro-card__name {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+    .ga-intro-card__row {
+      font-size: 13px;
+      color: #0b0c0c;
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+    .ga-intro-card__row strong { font-weight: 700; }
+
+    /* ── By-classification view ───────────────────────────── */
+    .ga-by-class-nav {
+      background: #f3f2f1;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .ga-by-class-nav__label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #505a5f;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ga-by-class-btns { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+    .ga-by-class-btn {
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid #b1b4b6;
+      background: #fff;
+      color: #505a5f;
+      font-family: inherit;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ga-by-class-btn:hover { border-color: #0b0c0c; color: #0b0c0c; }
+    .ga-by-class-btn:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
+    .ga-by-class-btn--active-public    { background: #00703c; border-color: #00703c; color: #fff; }
+    .ga-by-class-btn--active-official  { background: #1d70b8; border-color: #1d70b8; color: #fff; }
+    .ga-by-class-btn--active-sensitive { background: #4c2c92; border-color: #4c2c92; color: #fff; }
+    .ga-by-class-btn--active-secret    { background: #d4351c; border-color: #d4351c; color: #fff; }
+    .ga-by-class-btn--active-topsecret { background: #7d2105; border-color: #7d2105; color: #fff; }
+
+    .ga-inherited-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #0b0c0c;
+      cursor: pointer;
+    }
+    .ga-inherited-toggle input { cursor: pointer; width: 18px; height: 18px; }
+
+    .ga-summary-banner {
+      border-left: 5px solid #b1b4b6;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+      background: #f3f2f1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+    .ga-summary-stat { display: flex; flex-direction: column; gap: 3px; }
+    .ga-summary-stat__value { font-size: 28px; font-weight: 700; line-height: 1; color: #0b0c0c; }
+    .ga-summary-stat__label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      color: #505a5f;
+    }
+    .ga-summary-divider { width: 1px; height: 40px; background: #b1b4b6; }
+
+    .ga-pillar-block { border: 1px solid #b1b4b6; margin-bottom: 20px; }
+    .ga-pillar-block__header {
+      background: #f3f2f1;
+      border-bottom: 1px solid #b1b4b6;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ga-pillar-block__icon { font-size: 20px; }
+    .ga-pillar-block__name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b0c0c;
+      margin: 0;
+      flex: 1;
+    }
+    .ga-pillar-block__count { font-size: 14px; color: #505a5f; }
+    .ga-pillar-block__body { padding: 18px; }
+
+    .ga-pillar-assurance {
+      border-left: 4px solid #b1b4b6;
+      padding: 8px 14px;
+      margin-top: 12px;
+      background: #f8f8f8;
+      font-size: 14px;
+      color: #505a5f;
+    }
+    .ga-pillar-assurance__label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #505a5f;
+      margin: 0 0 3px;
+    }
+
+    /* ── Escalation matrix table ──────────────────────────── */
+    .ga-matrix-cell--public    { background: rgba(0, 112, 60, 0.08); }
+    .ga-matrix-cell--official  { background: rgba(29, 112, 184, 0.08); }
+    .ga-matrix-cell--sensitive { background: rgba(76, 44, 146, 0.08); }
+    .ga-matrix-cell--secret    { background: rgba(212, 53, 28, 0.08); }
+    .ga-matrix-cell--topsecret { background: rgba(125, 33, 5, 0.08); }
+
+    /* ── Sources list ─────────────────────────────────────── */
+    .ga-sources { list-style: none; padding: 0; margin: 20px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+    .ga-sources li { background: #f3f2f1; padding: 12px 15px; font-size: 15px; display: flex; gap: 10px; }
+    .ga-sources li::before { content: '§'; font-weight: 700; color: #1d70b8; flex-shrink: 0; }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .ga-nav__link { padding: 8px 10px; font-size: 14px; }
+      .ga-intro-grid { grid-template-columns: 1fr 1fr; }
+      .ga-summary-stat__value { font-size: 22px; }
+    }
+  </style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=6fec673dd6" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body class="govuk-template__body"><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled') + ' govuk-frontend-supported';</script>
+
+<!-- Skip link -->
+<a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+<!-- Header -->
+<header class="govuk-header" data-module="govuk-header" role="banner">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.govassured.com" class="ga-header-brand">GOV <span>Assured</span></a>
+      <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 4px 0 0; font-weight: 400; letter-spacing: 0.3px;">Open Source Community Project</p>
+    </div>
+    <div class="govuk-header__content">
+      <a href="/" class="govuk-header__link govuk-header__service-name">API Security Controls Matrix</a>
+    </div>
+  </div>
+</header>
+
+<!-- Phase / classification banner -->
+<div class="govuk-width-container">
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag ga-tag--official govuk-phase-banner__content__tag">OFFICIAL</strong>
+      <span class="govuk-phase-banner__text">
+        NCSC Securing HTTP-based APIs (Apr 2025) × GSCP 2023 × CAF 4.0 × GPG 13
+      </span>
+    </p>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content" role="main">
+
+    <h1 class="govuk-heading-xl" style="margin-bottom: 10px;">API Security Controls by Classification</h1>
+    <p class="govuk-body-l govuk-!-color-secondary" style="margin-bottom: 30px;">
+      Seven NCSC pillars mapped against UK GSCP 2023 classification tiers — PUBLIC through TOP SECRET.
+    </p>
+
+    <!-- Tab nav -->
+    <nav id="ga-nav" aria-label="Main navigation" style="margin-bottom: 0;"></nav>
+
+    <!-- Dynamic content -->
+    <div id="ga-content"></div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="govuk-footer">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <ul class="govuk-footer__inline-list">
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="https://www.ncsc.gov.uk/collection/securing-http-based-apis" target="_blank" rel="noopener">NCSC API Guidance</a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="https://www.gov.uk/government/publications/government-security-classifications" target="_blank" rel="noopener">GSCP 2023</a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework" target="_blank" rel="noopener">NCSC CAF 4.0</a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a>
+          </li>
+        </ul>
+        <svg aria-hidden="true" focusable="false" class="govuk-footer__licence-logo"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483.2 195.7" height="17" width="41">
+          <path fill="currentColor" d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"/>
+        </svg>
+        <span class="govuk-footer__licence-description">
+          All content available under the
+          <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('govuk-frontend-supported');
+
+/* ================================================================
+   DATA
+   ================================================================ */
+
+const TIER_KEYS = ['public', 'official', 'sensitive', 'secret', 'topsecret'];
+const TIER_META = {
+  public:    { label: 'PUBLIC',             vetting: 'Standard employment checks', threat: 'Integrity & availability focus; data is public' },
+  official:  { label: 'OFFICIAL',           vetting: 'BPSS',                       threat: 'Broad range of threat actors' },
+  sensitive: { label: 'OFFICIAL-SENSITIVE', vetting: 'BPSS + need-to-know',        threat: 'Enhanced handling caveat' },
+  secret:    { label: 'SECRET',             vetting: 'SC clearance',               threat: 'Sophisticated state actors, organised crime' },
+  topsecret: { label: 'TOP SECRET',         vetting: 'DV clearance',               threat: 'Advanced hostile state actors' }
+};
+
+const PILLARS = [
+  {
+    id: 'design',
+    name: '1. Secure development practices',
+    icon: '🛡️',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/1-secure-development-practices',
+    ncscSummary: 'NCSC sub-sections: Threat model your design · Use a well-documented API · Secure development and testing · Using standards · Asset register and governance.',
+    bff: {
+      summary: 'A BFF is a privileged intermediary holding tokens, performing identity translation, and aggregating across services. Threat modelling and asset management must account for its unique trust position.',
+      controls: [
+        'Treat the BFF as a distinct asset in the inventory with its own threat model',
+        'Threat model specifically for BFF-class risks: token leakage, response oversharing, request smuggling, confused-deputy attacks',
+        'Document both API surfaces in OpenAPI: client→BFF edge and BFF→backend internal',
+        'Two-tier asset register: BFF endpoints and the backend endpoints it consumes',
+        'Establish tier propagation rules — BFF inherits the highest classification of any backend it touches'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Threat model the API design before build (NCSC threat modelling, OWASP API Top 10)',
+          'Document the API using a recognised specification such as OpenAPI',
+          'Identify which endpoints should and should not be exposed (incl. dev/admin endpoints)',
+          'Use well-known standards (JSON for data exchange, OpenAPI for descriptions)',
+          'Maintain an asset register of all API endpoints, services and resources',
+          'Negative and fuzz testing in addition to positive testing'
+        ],
+        assurance: 'Self-assessment against NCSC API guidance; Cyber Essentials recommended'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'Embed secure-by-design across the product lifecycle (not bolted on)',
+          'Secure development environment per NCSC developers collection',
+          'Defended build pipeline (per NCSC software build pipeline guidance)',
+          'API version management with deprecation/sunset of insecure versions',
+          'BPSS-cleared development staff'
+        ],
+        assurance: 'Cyber Essentials baseline; NCSC secure development guidance applied'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Threat modelling extended to data flow analysis for sensitive assets',
+          'Formal API design review gate before deployment',
+          'SAST/DAST in pipeline with enforced quality gates',
+          'Separation of duties between development and deployment',
+          'API inventory linked to ITHC scope'
+        ],
+        assurance: 'Cyber Essentials Plus; annual ITHC on sensitive endpoints'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'Threat modelling against sophisticated state-actor TTPs',
+          'Development on accredited infrastructure only',
+          'SC-cleared development staff',
+          'Formal assurance review (e.g. CPA or NCSC-assessed tooling)',
+          'Code review by security-cleared personnel'
+        ],
+        assurance: 'NCSC risk assessment; accredited development environments; formal security architecture review'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'DV-cleared development and review staff',
+          'Development on secure isolated networks only',
+          'NCSC-approved development tooling',
+          'Formal GCSO sign-off on any baseline variance',
+          'Continuous assurance and re-validation cycle'
+        ],
+        assurance: 'NCSC direct engagement; GCSO-approved controls; no remote development permitted'
+      }
+    }
+  },
+  {
+    id: 'authn',
+    name: '2. Authentication and authorisation',
+    icon: '🔐',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/2-api-authentication-and-authorisation',
+    ncscSummary: 'NCSC: enforce least privilege, deny by default, validate on every request. Use OAuth 2.0 / OIDC. Avoid basic auth and long-term API keys. Use credentials resistant to replay (e.g. signed JWT, certificates).',
+    bff: {
+      summary: 'BFFs introduce two distinct auth contexts: user-facing edge auth and service-to-service internal auth. Token handling is the highest-risk area in BFF design.',
+      controls: [
+        'Edge: OAuth 2.0 / OIDC with the BFF as the OAuth client (not the browser)',
+        'Browser clients: HttpOnly, Secure, SameSite cookies — never expose tokens to JavaScript',
+        'Internal: mTLS plus token exchange (RFC 8693) — never blindly forward client tokens',
+        'Mint downstream tokens that are audience-restricted, scope-restricted, and short-lived',
+        'Multi-layer authorisation: edge (feature access), BFF (aggregated view access), backend (resource access)',
+        'Backends must independently verify propagated identity — BFF cannot be sole enforcement point',
+        'Never act on user-supplied parameters with BFF\'s elevated privileges (confused-deputy prevention)'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Anonymous read access permitted only for genuinely open public APIs',
+          'Authentication required on any non-read operation; admin endpoints fully authenticated',
+          'API keys (if used at all) restricted, monitored and rotated; not the sole credential for sensitive operations',
+          'Credentials never hard-coded in source or version control',
+          'Credentials stored in a secrets manager (HSM-backed or cloud KMS)',
+          'Credential lifetime set to the shortest appropriate to use case and threat'
+        ],
+        assurance: 'Consumer registration documented; admin access logging in place'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'OAuth 2.0 / OpenID Connect for delegated access; signed JWTs for assertions',
+          'Authorisation enforces least privilege, deny-by-default, validate-on-every-request',
+          'No basic auth or long-term static API keys as sole authentication',
+          'Replay-resistant credentials (e.g. certificate-bound tokens, DPoP)',
+          'Automated credential rotation; credential generation in secure environment'
+        ],
+        assurance: 'Aligned to NCSC API authentication guidance; secrets stored in KMS/vault'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Fine-grained ABAC for sensitive data scopes',
+          'Need-to-know enforced at token claim level',
+          'MFA on all privileged API management functions',
+          'Short-lived tokens with strict refresh and rotation controls',
+          'Consumer registration restricted to authorised entities'
+        ],
+        assurance: 'Enhanced access logging; handling instructions enforced via policy engine'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'Mutual TLS (mTLS) mandatory for all service-to-service calls',
+          'NCSC-approved cryptographic implementations',
+          'Hardware-backed credential storage (HSM / TPM)',
+          'SC-cleared administrators for IAM systems',
+          'No delegated auth to non-accredited identity providers'
+        ],
+        assurance: 'Accredited IAM infrastructure; crypto compliance validated by NCSC'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'DV-cleared IAM administrators only',
+          'NCSC-approved authentication products exclusively',
+          'Biometric + token MFA for administrative access',
+          'Strict need-to-know with formal access approval chain',
+          'No federation with external identity providers'
+        ],
+        assurance: 'NCSC-assessed identity infrastructure on isolated networks; zero external trust delegation'
+      }
+    }
+  },
+  {
+    id: 'transport',
+    name: '3. Data in transit protection',
+    icon: '🔒',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/3-data-in-transit-protection',
+    ncscSummary: 'NCSC: protect API data in transit using TLS configured per NCSC TLS profiles. Outdated TLS or weak ciphers expose APIs to AiTM attacks. For private/small-community APIs, consider mTLS (with private PKI for client auth).',
+    bff: {
+      summary: 'BFFs create two transport segments with different threat profiles: a potentially internet-facing edge and an internal closed-community leg. Different controls apply to each.',
+      controls: [
+        'Edge segment (client → BFF): TLS 1.3 per NCSC profiles; standard public-facing controls',
+        'Internal segment (BFF → backend): mTLS mandatory — meets NCSC closed-community recommendation',
+        'Separate certificate management for edge and internal certificates',
+        'Private PKI for BFF→backend mTLS client certificates (per NCSC PKI principles)',
+        'Document the trust boundary at the BFF in the architecture',
+        'Apply NCSC TLS profile to BOTH segments, not just the edge'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'TLS configured per NCSC recommended profiles (no outdated versions, no weak cipher suites)',
+          'Refer to NCSC "Using TLS to protect data" for specific configuration',
+          'Protect against adversary-in-the-middle (AiTM) attacks via correct TLS configuration',
+          'No expired, self-signed or misconfigured certificates in production',
+          'HSTS enforced; automated certificate renewal'
+        ],
+        assurance: 'Automated TLS scanning; compliance with NCSC TLS guidance'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'Certificate pinning considered for mobile clients',
+          'Monitoring for certificate expiry and misconfiguration',
+          'Explicit rejection of TLS downgrade attempts',
+          'OCSP stapling or CRL checking enabled',
+          'Hardened TLS configuration audited regularly'
+        ],
+        assurance: 'Regular TLS posture scanning; certificate lifecycle management'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'mTLS recommended for closed-community or private APIs (per NCSC)',
+          'Private PKI for mTLS client authentication where used',
+          'Certificate transparency monitoring',
+          'Explicit cipher suite allow-listing',
+          'VPN or private connectivity for sensitive integrations'
+        ],
+        assurance: 'Regular TLS configuration audits; CT log monitoring; private PKI per NCSC PKI principles'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'mTLS mandatory on all API connections',
+          'NCSC-approved encryption products',
+          'Dedicated secure network transport (PSN or equivalent)',
+          'No traversal of public internet',
+          'Network-level encryption in addition to TLS'
+        ],
+        assurance: 'Accredited network infrastructure; NCSC crypto product assessment'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'Secure isolated network transport only',
+          'NCSC Type 1 / High Grade crypto products',
+          'Physical layer security on network infrastructure',
+          'Air-gapped where required',
+          'End-to-end encryption with NCSC-approved algorithms'
+        ],
+        assurance: 'NCSC-assured isolated networks; TEMPEST considerations applied'
+      }
+    }
+  },
+  {
+    id: 'input',
+    name: '4. Input validation',
+    icon: '🧪',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/4-input-validation',
+    ncscSummary: 'NCSC: validate at both syntactic level (format, structure, type) and semantic level (correctness in business context). Use strict JSON parsers, well-tested validation libraries, allow-lists. Gateway validation must not be the sole layer — use multi-layered validation.',
+    bff: {
+      summary: 'A BFF must validate both inbound client requests AND inbound backend responses — the response validation step is the one most commonly forgotten.',
+      controls: [
+        'Validate inbound client requests at the BFF as the authoritative trust boundary',
+        'Validate inbound backend responses before aggregating — a compromised backend can poison the BFF',
+        'Schema validation on both directions (client→BFF requests and backend→BFF responses)',
+        'Client-side validation is for UX only — never treated as security control',
+        'BFF aggregation logic must fail closed if any backend response fails validation',
+        'Reject backend responses containing fields the BFF schema does not expect',
+        'Independent validation in the backend — never rely on the BFF having sanitised input'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Syntactic validation (format, type, length, range) on all inputs',
+          'Semantic validation (correctness within business context)',
+          'Strict JSON parsers that raise errors on malformed structure',
+          'Allow-list approach over deny-list',
+          'Use well-tested validation libraries / frameworks (do not roll your own)',
+          'Reject oversized or malformed requests at gateway'
+        ],
+        assurance: 'SAST/DAST in CI/CD; OWASP API Top 10 coverage'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'Multi-layered validation: gateway performs initial checks, backend performs context-specific validation',
+          'Central input validation library or process to ensure consistency',
+          'Content-type enforcement on all endpoints',
+          'Structured error responses that do not leak internal detail',
+          'Regular review of validation rules against emerging attack patterns'
+        ],
+        assurance: 'SAST/DAST in CI/CD with quality gates; periodic penetration testing'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Reject unexpected key-value pairs in payloads',
+          'Enhanced logging of validation failures for sensitive endpoints',
+          'Regular schema review cycle for sensitive APIs',
+          'Strict content negotiation on sensitive endpoints',
+          'Dedicated validation review during API change management'
+        ],
+        assurance: 'Annual penetration testing of sensitive API surfaces; schema regression testing'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'Gateway validation on accredited infrastructure',
+          'Formal verification of critical parsing logic',
+          'Input sanitisation reviewed by SC-cleared engineers',
+          'Fuzz testing with adversarial tooling',
+          'Strict content negotiation — reject ambiguous requests'
+        ],
+        assurance: 'Security-cleared code review; ITHC by CHECK/CREST team with SC clearance'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'Validation logic formally assured by NCSC',
+          'DV-cleared review of all input handling code',
+          'Zero tolerance for validation bypass — fail-closed only',
+          'Custom hardened parsers where COTS deemed insufficient',
+          'Continuous fuzz testing on isolated infrastructure'
+        ],
+        assurance: 'NCSC-assessed validation controls; no COTS parsers without formal evaluation'
+      }
+    }
+  },
+  {
+    id: 'dos',
+    name: '5. DoS attack mitigation',
+    icon: '⚡',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/5-dos-attack-mitigation',
+    ncscSummary: 'NCSC: throttle or rate-limit API use to prevent resource exhaustion. Allow for legitimate spikes. Log API access counts to distinguish legitimate spikes from DoS attempts. Refer also to NCSC DoS guidance collection.',
+    bff: {
+      summary: 'BFFs amplify traffic — one client request fans out to many backend calls. Rate limiting must be applied at both layers, and a misconfigured BFF can DoS its own backends.',
+      controls: [
+        'Per-client rate limiting at the edge (protecting the BFF)',
+        'Per-BFF rate limiting at each backend (protecting backends from runaway BFF)',
+        'Capacity planning must account for fan-out multiplier (1 client request = N backend calls)',
+        'Circuit breakers between BFF and each backend to prevent cascade failure',
+        'Bulkhead pattern: isolate backend dependencies so one slow backend cannot exhaust BFF threads',
+        'Timeouts on every backend call — never inherit defaults',
+        'Cache aggregation results where appropriate to reduce backend pressure'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Throttling and rate-limiting per consumer / API key / IP',
+          'Quotas calibrated to allow legitimate usage spikes',
+          'Log access counts per consumer to detect DoS vs legitimate traffic spikes',
+          'Apply NCSC DoS guidance (collection: Denial of Service guidance)',
+          'Request size limits enforced at gateway',
+          'Resource exhaustion protection on database/backend dependencies'
+        ],
+        assurance: 'Load testing in pre-production; NCSC DoS guidance applied; monitoring dashboards'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'Per-consumer quota management with alerting',
+          'Anomaly detection on traffic patterns',
+          'Documented incident response playbook for API abuse scenarios',
+          'Automated scaling or load shedding policies',
+          'SLA-driven availability targets with monitoring'
+        ],
+        assurance: 'Load and resilience testing; capacity planning reviewed quarterly'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Separate rate limits for sensitive vs general endpoints',
+          'Anomaly detection on traffic patterns to sensitive endpoints',
+          'Geo-blocking where consumer base is known',
+          'Enhanced incident response for sensitive data abuse',
+          'Per-consumer alerting thresholds'
+        ],
+        assurance: 'Scenario-based resilience testing; documented capacity planning'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'Traffic shaping on accredited network boundary',
+          'No public internet exposure — DoS risk profile changes',
+          'Resilience testing against sophisticated denial-of-service TTPs',
+          'Redundancy across accredited sites',
+          'Real-time SOC alerting on availability anomalies'
+        ],
+        assurance: 'Accredited infrastructure resilience; SOC with SC-cleared analysts'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'Isolated network removes internet-based DoS vector',
+          'Physical redundancy on isolated infrastructure',
+          'Availability monitoring by DV-cleared personnel',
+          'Failover to secondary isolated site tested quarterly',
+          'Capacity managed within NCSC-approved parameters'
+        ],
+        assurance: 'NCSC-approved resilience architecture; physical and logical redundancy on isolated networks'
+      }
+    }
+  },
+  {
+    id: 'logging',
+    name: '6. Logging and monitoring',
+    icon: '📊',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/6-logging-and-monitoring',
+    ncscSummary: 'NCSC: capture security-relevant events including authentication and authorisation activity, login attempts, permission changes, failed requests, errors, password changes, account modifications and privilege escalations. Use SIEM for monitoring and anomaly detection; alert on suspicious activity.',
+    bff: {
+      summary: 'The BFF is a critical correlation point — a single user action fans out across multiple backend calls. Correlation IDs and identity context propagation are essential for forensic readiness.',
+      controls: [
+        'Generate a correlation ID at the BFF for every inbound request',
+        'Propagate correlation ID to every downstream backend call (e.g. via traceparent header)',
+        'Log on the BFF: user identity, BFF identity, list of backends called, correlation ID',
+        'Log on each backend: correlation ID, BFF identity, user identity (from propagated token)',
+        'SIEM correlation rules that reconstruct full user journey across BFF + N backends',
+        'Alert on token exchange anomalies (e.g. BFF requesting downstream tokens for resources outside user scope)',
+        'Forensic readiness requires the ability to reconstruct a single user action end-to-end'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Log authentication and authorisation activities (login attempts, permission changes)',
+          'Log failed requests, errors, and privilege escalations',
+          'Log sensitive operations: password changes, account modifications',
+          'Centralised log aggregation',
+          'Alert on suspicious activity (e.g. multiple failed login attempts indicating brute force)',
+          'Logs cover full request lifecycle (method, endpoint, source, response code, timestamp)'
+        ],
+        assurance: 'Centralised logging in place; log retention per organisational policy; alerting reviewed regularly'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'SIEM with correlation rules and anomaly detection',
+          'Tamper-evident log storage',
+          'Alerting on brute force, credential stuffing, token abuse',
+          'Log retention aligned to legal and regulatory requirements',
+          'Authorisation decision logging including allow/deny outcomes'
+        ],
+        assurance: 'NCSC logging guidance compliance; SIEM operational with defined use cases'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Enhanced audit trail on sensitive data access',
+          'Correlation of API events with user identity for need-to-know audit',
+          'Real-time alerting on sensitive endpoint abuse',
+          'Log access restricted to authorised security personnel',
+          'Regular review of monitoring rule effectiveness'
+        ],
+        assurance: 'Protective monitoring aligned to NCSC GPG 13; tamper-proof audit logs'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'Protective monitoring (GPG 13 or equivalent) mandatory',
+          'SOC with SC-cleared analysts processing API telemetry',
+          'Real-time threat detection correlated with threat intelligence',
+          'Log infrastructure on accredited platform',
+          'Forensic readiness — logs sufficient for incident reconstruction'
+        ],
+        assurance: 'Accredited SIEM on dedicated infrastructure; 24/7 SOC coverage'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'Logging infrastructure on secure isolated network',
+          'DV-cleared analysts only',
+          'Full session reconstruction capability',
+          'Continuous monitoring with NCSC threat feeds',
+          'Log export prohibited — analysis in-situ only'
+        ],
+        assurance: 'NCSC-assessed monitoring infrastructure; no data egress from isolated environment'
+      }
+    }
+  },
+  {
+    id: 'exposure',
+    name: '7. Limiting exposure',
+    icon: '🎯',
+    sourceUrl: 'https://www.ncsc.gov.uk/collection/securing-http-based-apis/7-limiting-exposure',
+    ncscSummary: 'NCSC: do not over-expose endpoints; block known malicious IPs; ensure decommissioned endpoints are no longer accessible; keep admin endpoints off the public internet; minimise data in responses; for closed communities consider mTLS, IP allow-list or VPN; deploy an API gateway when at scale.',
+    bff: {
+      summary: 'A well-designed BFF reduces backend exposure — backends sit on internal networks, only the BFF is internet-facing. The BFF is also where rigorous response minimisation happens.',
+      controls: [
+        'Backends never internet-facing — only the BFF edge is exposed externally',
+        'Strict response minimisation at the BFF: strip internal IDs, debug fields, infrastructure detail',
+        'BFF returns only the specific fields each client needs (per-consumer response shaping)',
+        'Network segmentation: BFF in DMZ, backends in internal tier, separate egress controls',
+        'BFF cannot reach backends it does not need (least-privilege network policy)',
+        'Backend admin endpoints completely inaccessible from BFF (separate management plane)',
+        'mTLS + IP allow-list between BFF and backends meets NCSC closed-community pattern'
+      ]
+    },
+    tiers: {
+      public: {
+        controls: [
+          'Use an API gateway when deploying APIs at scale (consistent security approach)',
+          'Decommission endpoints fully — block access, do not just stop monitoring',
+          'Admin endpoints not publicly accessible',
+          'Block known malicious IP addresses; block IP categories that should not connect',
+          'Data minimisation: APIs must not return excessive data, internal identifiers, PII or debug details',
+          'Active scanning to find legacy, dev or admin APIs that are over-exposed'
+        ],
+        assurance: 'Regular API surface scanning; asset register reconciliation; no unintended data leakage'
+      },
+      official: {
+        controls: [
+          'All PUBLIC controls plus:',
+          'API gateway provides authentication/authorisation enforcement (OAuth 2.0/OIDC)',
+          'WAF and IDS integration at gateway layer (per NCSC)',
+          'Cloud-native infrastructure preferred over lift-and-shift on-prem patterns',
+          'API versioning with documented lifecycle and sunset policy',
+          'Periodic shadow / zombie API discovery scans'
+        ],
+        assurance: 'Regular API surface scanning; asset register reconciliation; periodic ITHC'
+      },
+      sensitive: {
+        controls: [
+          'All OFFICIAL controls plus:',
+          'Closed-community pattern: restrict consumers via mTLS, IP allow-list, or VPN (per NCSC)',
+          'Response filtering to strip internal identifiers and excessive fields',
+          'Continuous shadow / zombie API discovery',
+          'Stricter sunset enforcement for deprecated versions',
+          'Quarterly endpoint audit against asset register'
+        ],
+        assurance: 'Continuous API discovery scanning; quarterly endpoint audit against asset register'
+      },
+      secret: {
+        controls: [
+          'All OFFICIAL-SENSITIVE controls plus:',
+          'APIs only exposed on dedicated secure networks',
+          'Network segmentation with accredited boundary controls',
+          'No internet-facing endpoints whatsoever',
+          'Physical access controls on hosting infrastructure',
+          'mTLS + IP allow-list + VPN for all API consumers'
+        ],
+        assurance: 'Accredited network boundary; ITHC on boundary controls; SC-cleared infrastructure teams'
+      },
+      topsecret: {
+        controls: [
+          'All SECRET controls plus:',
+          'APIs on secure isolated networks with no external connectivity',
+          'Physically secured hosting with DV-cleared access only',
+          'Endpoint inventory registered in Protected Document Registry',
+          'No cloud hosting — dedicated government-owned infrastructure',
+          'Any new endpoint requires GCSO-level approval'
+        ],
+        assurance: 'NCSC-assured isolated infrastructure; physical security to TOP SECRET standard; GCSO sign-off on architecture changes'
+      }
+    }
+  }
+];
+
+const ESCALATION = [
+  { dimension: 'Network Isolation',          public: 'Internet-facing; CDN/DDoS essential',       official: 'Internet-facing with gateway/WAF',         sensitive: 'VPN/private connectivity for sensitive integrations', secret: 'Dedicated secure networks (PSN or equivalent)', topsecret: 'Secure isolated networks, air-gapped' },
+  { dimension: 'Authentication Strength',    public: 'Anonymous read; API key for ID; auth on writes', official: 'OAuth 2.0 / OIDC with signed JWTs', sensitive: 'ABAC + MFA on privileged functions',           secret: 'mTLS mandatory; NCSC-approved crypto',          topsecret: 'NCSC-approved products only; biometric MFA' },
+  { dimension: 'Personnel Vetting',          public: 'Standard employment checks',                official: 'BPSS',                                     sensitive: 'BPSS + need-to-know',                           secret: 'SC clearance',                                 topsecret: 'DV clearance' },
+  { dimension: 'Monitoring Rigour',          public: 'Centralised logging; abuse alerting',       official: 'SIEM with correlation rules',               sensitive: 'Enhanced audit; GPG 13 alignment',              secret: 'Protective monitoring; 24/7 SOC',               topsecret: 'Continuous assurance; in-situ only' },
+  { dimension: 'Infrastructure Assurance',   public: 'Cyber Essentials; cloud DDoS/WAF',         official: 'Cyber Essentials baseline',                 sensitive: 'Cyber Essentials Plus; annual ITHC',            secret: 'Accredited dedicated infrastructure',           topsecret: 'NCSC-assured isolated; GCSO sign-off' },
+  { dimension: 'Primary Security Focus',     public: 'Integrity & availability (data is public)', official: 'Confidentiality, integrity, availability', sensitive: 'Enhanced need-to-know; handling caveats',        secret: 'Defence against state actors',                 topsecret: 'Highest assurance vs hostile state actors' }
+];
+
+const SOURCES = [
+  'Government Security Classifications Policy (GSCP) 2023 — Cabinet Office / GOV.UK',
+  'Guidance 1.1: Working at OFFICIAL — GOV.UK',
+  'Guidance 1.2: Working at SECRET — GOV.UK',
+  'Guidance 1.3: Working at TOP SECRET — GOV.UK',
+  'Securing HTTP-based APIs (April 2025) — NCSC',
+  'NCSC Cyber Assessment Framework (CAF) 4.0',
+  'NCSC 14 Cloud Security Principles',
+  'Good Practice Guide 13 (GPG 13): Protective Monitoring — NCSC',
+  'Cyber Essentials / Cyber Essentials Plus — NCSC',
+  'Secure by Design: Example Controls Taxonomy — security.gov.uk',
+  'NCSC Zero Trust Architecture Guidance',
+  'OWASP API Security Top 10',
+  'GOV.UK API Technical and Data Standards'
+];
+
+/* ================================================================
+   STATE
+   ================================================================ */
+
+const state = {
+  active:             'intro',
+  visibleTiers:       new Set(TIER_KEYS),
+  openTiers:          {},
+  byClassTier:        'official',
+  byClassShowInherited: true,
+  showBff:            false
+};
+
+/* ================================================================
+   RENDER HELPERS
+   ================================================================ */
+
+function tierTag(tk) {
+  return `<strong class="govuk-tag ga-tag--${tk}">${TIER_META[tk].label}</strong>`;
+}
+
+/* ================================================================
+   RENDER: TABS
+   ================================================================ */
+
+function renderNav() {
+  const nav = document.getElementById('ga-nav');
+  const shortNames = {
+    design: 'Design & dev', authn: 'Auth', transport: 'Transit',
+    input: 'Input validation', dos: 'DoS mitigation', logging: 'Logging', exposure: 'Exposure'
+  };
+  const items = [
+    { id: 'intro',    label: 'Overview' },
+    { id: 'by-class', label: 'By Classification' },
+    ...PILLARS.map(p => ({ id: p.id, label: shortNames[p.id] || p.name })),
+    { id: 'matrix',  label: 'Escalation matrix' },
+    { id: 'sources', label: 'Sources' }
+  ];
+
+  nav.innerHTML = `
+    <div class="ga-nav">
+      <ul class="ga-nav__list" role="tablist">
+        ${items.map(t => `
+          <li class="ga-nav__item ${state.active === t.id ? 'ga-nav__item--active' : ''}" role="presentation">
+            <button class="ga-nav__link" data-section="${t.id}" role="tab"
+              aria-selected="${state.active === t.id}" tabindex="${state.active === t.id ? '0' : '-1'}">
+              ${t.label}
+            </button>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `;
+
+  nav.querySelectorAll('[data-section]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.active = btn.dataset.section;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      render();
+    });
+  });
+}
+
+/* ================================================================
+   RENDER: INTRO
+   ================================================================ */
+
+function renderIntro() {
+  const tiles = TIER_KEYS.map(tk => {
+    const m = TIER_META[tk];
+    return `
+      <div class="ga-intro-card ga-tier-bar--${tk}">
+        <p class="ga-intro-card__name">${tierTag(tk)}</p>
+        <p class="ga-intro-card__row"><strong>Vetting:</strong> ${m.vetting}</p>
+        <p class="ga-intro-card__row"><strong>Threat profile:</strong> ${m.threat}</p>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="ga-section-header">
+      <h2 class="govuk-heading-l">Overview</h2>
+      <p class="govuk-body-s govuk-!-color-secondary" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">GSCP × NCSC API guidance — how to read this document</p>
+    </div>
+
+    <p class="govuk-body">This document is a synthesis of two distinct UK government sources. The seven pillars and their underlying controls are taken from the
+      <a href="https://www.ncsc.gov.uk/collection/securing-http-based-apis" class="govuk-link" target="_blank" rel="noopener">NCSC's Securing HTTP-based APIs guidance</a>
+      (v1.0, published 3 April 2025). The five GSCP classification tiers — including a PUBLIC (FOR PUBLIC RELEASE) baseline — provide the assurance dimension.</p>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">Methodology note</span>
+      </summary>
+      <div class="govuk-details__text">
+        <p class="govuk-body">The NCSC guidance does not itself tier its controls by classification. The mapping of control intensity against GSCP tiers shown here is an architectural overlay applied on top of the NCSC's principles, drawing on GSCP 2023 working-at-tier guidance, NCSC CAF 4.0, GPG 13 protective monitoring, and Cyber Essentials. Each pillar links to its specific NCSC source page so reviewers can verify the underlying controls.</p>
+        <p class="govuk-body">Controls are <strong>cumulative</strong> — each tier inherits everything from the tier below. OFFICIAL-SENSITIVE is shown as a distinct column because in practice it triggers materially different controls, even though it's technically a handling caveat.</p>
+        <p class="govuk-body">The PUBLIC tier addresses APIs serving data cleared for public release. While the data itself carries no classification, the API endpoint, hosting infrastructure, and integrity obligations still require a meaningful control set — the primary focus shifts from confidentiality to <strong>integrity and availability</strong>.</p>
+      </div>
+    </details>
+
+    <div class="ga-intro-grid">${tiles}</div>
+
+    <p class="govuk-body">
+      <strong>Navigation:</strong> use the tabs above to jump between views.
+      <strong>By Classification</strong> shows every control applicable at a chosen tier across all seven pillars at once.
+      Each pillar tab drills into a single security domain showing how controls escalate.
+      Each pillar also offers a <strong>BFF / Facade overlay</strong> that surfaces additional controls applicable when a Backend-for-Frontend or aggregation layer is in the architecture.
+    </p>
+  `;
+}
+
+/* ================================================================
+   RENDER: TIER FILTER
+   ================================================================ */
+
+function renderTierFilter() {
+  return `
+    <div class="ga-filter" role="group" aria-label="Filter by tier">
+      <span class="ga-filter__label">Show:</span>
+      ${TIER_KEYS.map(tk => `
+        <button class="ga-filter__chip ${state.visibleTiers.has(tk) ? `ga-filter__chip--active-${tk}` : ''}"
+                data-filter-tier="${tk}" type="button">
+          ${TIER_META[tk].label}
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ================================================================
+   RENDER: PILLAR
+   ================================================================ */
+
+function renderPillar(pillar) {
+  const showBff = state.showBff && pillar.bff;
+
+  const sections = TIER_KEYS.map(tk => {
+    if (!state.visibleTiers.has(tk)) return '';
+    const t = pillar.tiers[tk];
+    const isOpen = state.openTiers[pillar.id] === tk;
+    const controlCount = t.controls.filter(c => !c.endsWith(':')).length;
+
+    const controlsHtml = t.controls.map(c => {
+      const isHeader = c.endsWith(':');
+      return `<li class="${isHeader ? 'ga-controls__header' : ''}">
+        ${isHeader ? '' : `<span class="ga-bullet ga-bullet--${tk}" aria-hidden="true"></span>`}
+        <span>${c}</span>
+      </li>`;
+    }).join('');
+
+    const bffBlock = showBff ? `
+      <div class="ga-bff-section">
+        <p class="ga-bff-section__label">🔄 BFF / Facade additional controls</p>
+        <ul class="ga-controls">
+          ${pillar.bff.controls.map(c => `
+            <li>
+              <span class="ga-bullet ga-bullet--bff" aria-hidden="true"></span>
+              <span>${c}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    ` : '';
+
+    const bffBadge = showBff
+      ? `<span class="govuk-tag" style="background:#0284c7; margin-left: 8px;">+${pillar.bff.controls.length} BFF</span>`
+      : '';
+
+    return `
+      <div class="ga-accordion__section ${isOpen ? 'ga-accordion__section--open' : ''}" data-tier="${tk}">
+        <button class="ga-accordion__header" type="button"
+                data-pillar="${pillar.id}" data-toggle-tier="${tk}"
+                aria-expanded="${isOpen}">
+          <div class="ga-accordion__header-left">
+            ${tierTag(tk)}
+            <span class="ga-accordion__count">${controlCount} controls${showBff ? ` + ${pillar.bff.controls.length} BFF` : ''}</span>
+          </div>
+          <span class="ga-accordion__chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="ga-accordion__body" role="region">
+          <ul class="ga-controls">${controlsHtml}</ul>
+          ${bffBlock}
+          <div class="ga-assurance">
+            <p class="ga-assurance__label">Assurance expectation</p>
+            <p class="ga-assurance__text">${t.assurance}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const bffContextBanner = showBff && pillar.bff ? `
+    <div class="ga-bff-context">
+      <strong>BFF context for this pillar:</strong> ${pillar.bff.summary}
+    </div>
+  ` : '';
+
+  return `
+    <div class="ga-section-header">
+      <h2 class="govuk-heading-l">${pillar.icon} ${pillar.name}</h2>
+      <p class="govuk-body-s govuk-!-color-secondary" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">NCSC pillar — controls escalation across GSCP tiers</p>
+    </div>
+
+    <div class="ga-bff-bar">
+      <div class="ga-bff-bar__info">
+        <p class="ga-bff-bar__label">🔄 BFF / Facade pattern overlay</p>
+        <p class="ga-bff-bar__desc">Show additional controls that apply when a Backend-for-Frontend or aggregation layer is in the architecture.</p>
+      </div>
+      <button class="ga-bff-btn ${state.showBff ? 'ga-bff-btn--active' : ''}" data-toggle-bff type="button">
+        ${state.showBff ? '✓ BFF controls shown' : 'Show BFF controls'}
+      </button>
+    </div>
+
+    <div class="ga-source-notice">
+      <p>${pillar.ncscSummary}</p>
+      <p><a href="${pillar.sourceUrl}" target="_blank" rel="noopener" class="govuk-link">View NCSC source →</a></p>
+    </div>
+
+    ${bffContextBanner}
+    ${renderTierFilter()}
+
+    <div class="ga-accordion" role="tablist">
+      ${sections}
+    </div>
+  `;
+}
+
+/* ================================================================
+   RENDER: BY CLASSIFICATION
+   ================================================================ */
+
+function renderByClassification() {
+  const tier = state.byClassTier;
+  const meta = TIER_META[tier];
+  const tierIndex = TIER_KEYS.indexOf(tier);
+  const inheritedTierKeys = TIER_KEYS.slice(0, tierIndex);
+  const showInherited = state.byClassShowInherited;
+
+  const tierButtons = TIER_KEYS.map(tk => `
+    <button class="ga-by-class-btn ${state.byClassTier === tk ? `ga-by-class-btn--active-${tk}` : ''}"
+            data-by-class="${tk}" type="button">
+      ${TIER_META[tk].label}
+    </button>
+  `).join('');
+
+  let newAtThisTier = 0;
+  let inheritedCount = 0;
+  PILLARS.forEach(p => {
+    newAtThisTier += p.tiers[tier].controls.filter(c => !c.endsWith(':')).length;
+    inheritedTierKeys.forEach(itk => {
+      inheritedCount += p.tiers[itk].controls.filter(c => !c.endsWith(':')).length;
+    });
+  });
+  const totalControls = newAtThisTier + inheritedCount;
+
+  const pillarBlocks = PILLARS.map(p => {
+    const sections = [];
+
+    if (showInherited) {
+      inheritedTierKeys.forEach(itk => {
+        const itierData = p.tiers[itk];
+        sections.push(`<li class="ga-controls__header">From ${TIER_META[itk].label}</li>`);
+        itierData.controls.forEach(c => {
+          if (c.endsWith(':')) return;
+          sections.push(`
+            <li class="ga-controls__inherited">
+              <span class="ga-bullet ga-bullet--${itk}" aria-hidden="true"></span>
+              <span style="flex: 1;">${c}</span>
+              <span class="ga-inherited-badge">inherited</span>
+            </li>
+          `);
+        });
+      });
+    }
+
+    const tierData = p.tiers[tier];
+    if (showInherited && inheritedTierKeys.length > 0) {
+      sections.push(`<li class="ga-controls__header">New at ${meta.label}</li>`);
+    }
+    tierData.controls.forEach(c => {
+      const isHeader = c.endsWith(':');
+      if (isHeader) {
+        if (!showInherited) sections.push(`<li class="ga-controls__header">${c}</li>`);
+        return;
+      }
+      sections.push(`
+        <li>
+          <span class="ga-bullet ga-bullet--${tier}" aria-hidden="true"></span>
+          <span>${c}</span>
+        </li>
+      `);
+    });
+
+    const totalForPillar = tierData.controls.filter(c => !c.endsWith(':')).length +
+      (showInherited ? inheritedTierKeys.reduce((sum, itk) =>
+        sum + p.tiers[itk].controls.filter(c => !c.endsWith(':')).length, 0) : 0);
+
+    return `
+      <div class="ga-pillar-block ga-tier-bar--${tier}">
+        <div class="ga-pillar-block__header">
+          <span class="ga-pillar-block__icon">${p.icon}</span>
+          <h3 class="ga-pillar-block__name">${p.name}</h3>
+          <span class="ga-pillar-block__count">${totalForPillar} controls</span>
+        </div>
+        <div class="ga-pillar-block__body">
+          <ul class="ga-controls">${sections.join('')}</ul>
+          <div class="ga-pillar-assurance">
+            <p class="ga-pillar-assurance__label">Assurance expectation</p>
+            <span>${tierData.assurance}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const summaryStats = `
+    <div class="summary-stat">
+      ${tierTag(tier)}
+      <span class="ga-summary-stat__label" style="margin-top: 6px;">Selected tier</span>
+    </div>
+    <div class="ga-summary-divider"></div>
+    <div class="ga-summary-stat">
+      <span class="ga-summary-stat__value">${showInherited ? totalControls : newAtThisTier}</span>
+      <span class="ga-summary-stat__label">${showInherited ? 'Baseline controls' : 'New at this tier'}</span>
+    </div>
+    ${showInherited && inheritedCount > 0 ? `
+      <div class="ga-summary-divider"></div>
+      <div class="ga-summary-stat">
+        <span class="ga-summary-stat__value" style="color: #505a5f;">${inheritedCount}</span>
+        <span class="ga-summary-stat__label">Inherited</span>
+      </div>
+      <div class="ga-summary-divider"></div>
+      <div class="ga-summary-stat">
+        <span class="ga-summary-stat__value">${newAtThisTier}</span>
+        <span class="ga-summary-stat__label">New at ${meta.label}</span>
+      </div>
+    ` : ''}
+    <div class="ga-summary-divider"></div>
+    <div class="ga-summary-stat">
+      <span class="ga-summary-stat__value" style="font-size: 18px;">${meta.vetting}</span>
+      <span class="ga-summary-stat__label">Personnel vetting</span>
+    </div>
+  `;
+
+  return `
+    <div class="ga-section-header">
+      <h2 class="govuk-heading-l">All Controls by Classification</h2>
+      <p class="govuk-body-s govuk-!-color-secondary" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">Pick a tier to see every applicable control across all seven pillars</p>
+    </div>
+
+    <div class="ga-by-class-nav">
+      <span class="ga-by-class-nav__label">Classification:</span>
+      <div class="ga-by-class-btns">${tierButtons}</div>
+      <label class="ga-inherited-toggle">
+        <input type="checkbox" id="show-inherited" ${showInherited ? 'checked' : ''}>
+        <span>Show inherited controls</span>
+      </label>
+    </div>
+
+    <div class="ga-summary-banner ga-tier-bar--${tier}">
+      ${summaryStats}
+    </div>
+
+    ${pillarBlocks}
+  `;
+}
+
+/* ================================================================
+   RENDER: ESCALATION MATRIX
+   ================================================================ */
+
+function renderMatrix() {
+  const headerRow = ['Dimension', ...TIER_KEYS.map(tk => TIER_META[tk].label)]
+    .map(h => `<th scope="col" class="govuk-table__header">${h}</th>`).join('');
+
+  const rows = ESCALATION.map(row => `
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">${row.dimension}</th>
+      ${TIER_KEYS.map(tk => `<td class="govuk-table__cell ga-matrix-cell--${tk}">${row[tk]}</td>`).join('')}
+    </tr>
+  `).join('');
+
+  return `
+    <div class="ga-section-header">
+      <h2 class="govuk-heading-l">Control Escalation Summary</h2>
+      <p class="govuk-body-s govuk-!-color-secondary" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">Six key dimensions across all classification tiers</p>
+    </div>
+
+    <p class="govuk-body">This matrix summarises how the six key control dimensions escalate across classification tiers, from PUBLIC through to TOP SECRET. Use it as a quick reference when designing API controls or assessing existing implementations.</p>
+
+    <div style="overflow-x: auto;">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">${headerRow}</tr>
+        </thead>
+        <tbody class="govuk-table__body">${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* ================================================================
+   RENDER: SOURCES
+   ================================================================ */
+
+function renderSources() {
+  return `
+    <div class="ga-section-header">
+      <h2 class="govuk-heading-l">Sources and references</h2>
+      <p class="govuk-body-s govuk-!-color-secondary" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">Authoritative UK government and international standards</p>
+    </div>
+
+    <p class="govuk-body">This document synthesises the following authoritative sources. All controls and assurance expectations reflect guidance current as of April 2026.</p>
+
+    <ul class="ga-sources">
+      ${SOURCES.map(s => `<li>${s}</li>`).join('')}
+    </ul>
+  `;
+}
+
+/* ================================================================
+   RENDER: MAIN
+   ================================================================ */
+
+function render() {
+  renderNav();
+  const content = document.getElementById('ga-content');
+
+  if      (state.active === 'intro')    content.innerHTML = renderIntro();
+  else if (state.active === 'by-class') content.innerHTML = renderByClassification();
+  else if (state.active === 'matrix')   content.innerHTML = renderMatrix();
+  else if (state.active === 'sources')  content.innerHTML = renderSources();
+  else {
+    const pillar = PILLARS.find(p => p.id === state.active);
+    if (pillar) content.innerHTML = renderPillar(pillar);
+  }
+
+  /* Wire: accordion toggle */
+  content.querySelectorAll('[data-toggle-tier]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pid  = btn.dataset.pillar;
+      const tier = btn.dataset.toggleTier;
+      state.openTiers[pid] = state.openTiers[pid] === tier ? null : tier;
+      render();
+    });
+  });
+
+  /* Wire: tier filter */
+  content.querySelectorAll('[data-filter-tier]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tier = btn.dataset.filterTier;
+      if (state.visibleTiers.has(tier)) {
+        if (state.visibleTiers.size > 1) state.visibleTiers.delete(tier);
+      } else {
+        state.visibleTiers.add(tier);
+      }
+      render();
+    });
+  });
+
+  /* Wire: by-classification tier buttons */
+  content.querySelectorAll('[data-by-class]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.byClassTier = btn.dataset.byClass;
+      render();
+    });
+  });
+
+  /* Wire: inherited controls toggle */
+  const inheritedToggle = content.querySelector('#show-inherited');
+  if (inheritedToggle) {
+    inheritedToggle.addEventListener('change', e => {
+      state.byClassShowInherited = e.target.checked;
+      render();
+    });
+  }
+
+  /* Wire: BFF toggle */
+  content.querySelectorAll('[data-toggle-bff]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.showBff = !state.showBff;
+      render();
+    });
+  });
+}
+
+/* Initial render */
+render();
+</script>
+</body>
+</html>
