@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSI Security Rings — Protocols & Security Controls by Layer</title>
+<meta name="description" content="Interactive concentric map of the OSI model, extended with Layer 0 (hardware and supply chain) and Layer 8 (people and governance): protocols at each layer, the controls that defend them tagged prevent/detect/respond, and animated dataflows showing attacks stopped layer by layer.">
+<meta name="author" content="GOV Assured">
+<link rel="canonical" href="https://osi.govassured.com/">
+
+<!-- Open Graph / social preview — replace the domain if you deploy elsewhere -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSI Security Rings">
+<meta property="og:url" content="https://osi.govassured.com/">
+<meta property="og:title" content="OSI Security Rings — Protocols & Security Controls by Layer">
+<meta property="og:description" content="OSI Layers 0–8: the protocols that run on each layer and the controls that defend them, tagged prevent / detect / respond — with animated dataflows. By GOV Assured.">
+<meta property="og:image" content="https://osi.govassured.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Two concentric ring diagrams of the OSI model: protocols on the left, security technologies on the right.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OSI Security Rings — Protocols & Security Controls by Layer">
+<meta name="twitter:description" content="OSI Layers 0–8: protocols, controls tagged prevent / detect / respond, and animated dataflows.">
+<meta name="twitter:image" content="https://osi.govassured.com/og.png">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0B0E14" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4EE" media="(prefers-color-scheme: light)">
+
+<link rel="preload" href="/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/ibm-plex-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/app.css">
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=f0dba3f7c8" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<header class="bar">
+  <a class="brand" href="/" aria-label="OSI Security Rings home"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>OSI Security Rings</span></a>
+  <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <input id="q" type="search" placeholder="Search protocols & controls  ( / )" autocomplete="off" aria-label="Search protocols and security controls"></label>
+  <button class="btn flow" id="flowBtn" type="button" aria-pressed="false" title="Play or pause the animated dataflow">
+    <svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg>
+    <svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+    <span class="lbl">Dataflow</span></button>
+  <div class="seg" id="themeSeg" role="group" aria-label="Colour theme">
+    <button type="button" data-set="auto" aria-pressed="false" title="Match system" aria-label="Match system theme"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
+    <button type="button" data-set="dark" aria-pressed="false" title="Dark" aria-label="Dark theme"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button type="button" data-set="light" aria-pressed="false" title="Light" aria-label="Light theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+  <a class="btn" href="/OSI-Security-Rings-A3.pdf" download title="Download the A3 landscape PDF">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M2.5 13.5h11"/></svg><span class="lbl">A3 PDF</span></a>
+  <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="btn li"><span class="in" aria-hidden="true">in</span><span class="lbl">GOV Assured</span></a>
+</header>
+<main>
+  <div class="stage">
+    <svg id="poster" viewBox="0 0 420 297" role="img" aria-label="Concentric OSI layer diagrams: protocols on the left, security technologies on the right, with Layer 0 Hardware on the outside and Layer 8 People at the centre."></svg>
+    <div class="flowlog" id="flowlog" aria-hidden="true">
+      <span class="fl-tag">Dataflow <i class="ok"></i>legit <i class="bad"></i>malicious</span>
+      <ol id="flList"></ol>
+      <span class="fl-stats" id="flStats">0 delivered · 0 blocked</span>
+    </div>
+  </div>
+  <aside id="panel" aria-live="polite"></aside>
+</main>
+<div id="tip" role="tooltip"></div>
+<noscript><p class="noscript">This interactive diagram needs JavaScript. You can still <a href="/OSI-Security-Rings-A3.pdf">download the A3 PDF</a>.</p></noscript>
+<script src="/data.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

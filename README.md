@@ -4,7 +4,7 @@ Consultancy site for [www.govassured.com](https://www.govassured.com). The bare 
 
 The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. Favicon, Apple touch icon, and the Open Graph image are generated from the same file.
 
-This repository is the website. The tools it lists are hosted on their own subdomains, and their code is not copied here.
+This repository is the website. The tools it lists are hosted on their own subdomains. Their source code is being moved into `apps/<name>/`, one app at a time; it is never published on `www`.
 
 ## Contact address
 
@@ -58,12 +58,17 @@ Write the description from the tool’s own page. If that page does not say what
 
 ## Deploy on Azure Static Web Apps
 
-The site is plain HTML, CSS, and JavaScript. There is no build step.
+The site is plain HTML, CSS, and JavaScript. `scripts/build.sh` assembles the deploy folder from an explicit list of hub files:
 
-1. In Azure, create a Static Web App from this repository.
-2. App location: `/`. Leave the API location empty. Skip the build, and leave the output location empty.
-3. Add the custom domain `www.govassured.com`.
-4. Point the apex `govassured.com` at the same app with a 301 to `https://www.govassured.com`. That forward is a host setting, not a rule in this repo, so the `www` site does not redirect to itself.
+```bash
+scripts/build.sh /tmp/www-build
+swa deploy /tmp/www-build/app --api-location /tmp/www-build/api --env production
+```
+
+Do not deploy the repository root. Source code for the subdomain apps lives under `apps/<name>/` and is built and deployed separately. Only `apps/index.html` (the directory page) belongs to the hub. The build stops if anything else under `apps/` reaches the output.
+
+1. Add the custom domain `www.govassured.com` to the Static Web App.
+2. Point the apex `govassured.com` at the same app with a 301 to `https://www.govassured.com`. That forward is a host setting, not a rule in this repo, so the `www` site does not redirect to itself.
 
 `staticwebapp.config.json` sets security headers, short caching for HTML and the catalogue, longer caching for images, and a 404 response that serves `404.html` with status 404.
 
