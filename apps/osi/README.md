@@ -9,10 +9,10 @@ The page is part of [GOV Assured](https://www.govassured.com). The company repos
 From this directory:
 
 ```bash
-tools/build.sh <src> <out>
+tools/build.sh . /tmp/osi-build
 ```
 
-`tools/build.sh` copies the files from `<src>` to `<out>`, adds `staticwebapp.config.json` from `tools/swa-config.json`, and content-hashes the CSS and JS references.
+`tools/build.sh` copies the files from `<src>` to `<out>` (leaving out `tools/`, `README.md` and `.gitignore`), adds `staticwebapp.config.json` from `tools/swa-config.json`, and content-hashes the CSS and JS references.
 
 ## Deploy
 

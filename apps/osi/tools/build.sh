@@ -4,7 +4,8 @@ set -euo pipefail
 SRC=${1:?src}; OUT=${2:?out}
 rm -rf "$OUT"; mkdir -p "$OUT"
 cp -a "$SRC"/. "$OUT"/
-rm -f "$OUT/download (1)"
+# repo-only files and stray downloads are never published
+rm -rf "$OUT/tools" "$OUT/README.md" "$OUT/.gitignore" "$OUT/download" "$OUT/download (1)"
 cp "$(dirname "$0")/swa-config.json" "$OUT/staticwebapp.config.json"
 python3 "$(dirname "$0")/version_assets.py" "$OUT"
 # the inline ga-brand <style> must still match the CSP hash
