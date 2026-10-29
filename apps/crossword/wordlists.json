@@ -1,0 +1,4134 @@
+[
+  {
+    "id": "cyber-foundations",
+    "title": "Foundations",
+    "category": "Cyber security",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "RANSOMWARE",
+        "Extortion software that locks up your files"
+      ],
+      [
+        "ENCRYPTION",
+        "Scrambling data so only key holders can read it"
+      ],
+      [
+        "FIREWALL",
+        "Barrier that filters network traffic"
+      ],
+      [
+        "PHISHING",
+        "Deceptive emails angling for credentials"
+      ],
+      [
+        "PASSWORD",
+        "Secret word typed at login"
+      ],
+      [
+        "MALWARE",
+        "Umbrella term for hostile software"
+      ],
+      [
+        "BOTNET",
+        "Army of compromised machines under remote control"
+      ],
+      [
+        "TROJAN",
+        "Malicious program disguised as something useful"
+      ],
+      [
+        "BACKUP",
+        "Copy kept so you can recover"
+      ],
+      [
+        "CIPHER",
+        "Algorithm used to encrypt"
+      ],
+      [
+        "PATCH",
+        "Fix issued for a software flaw"
+      ],
+      [
+        "HASH",
+        "Fixed-length digest of data"
+      ],
+      [
+        "WORM",
+        "Self-replicating program that spreads across networks"
+      ],
+      [
+        "SPAM",
+        "Unsolicited bulk email"
+      ],
+      [
+        "VPN",
+        "Encrypted tunnel across a public network (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "cyber-architecture",
+    "title": "Architecture & Frameworks",
+    "category": "Cyber security",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "DEFENCE IN DEPTH",
+        "Strategy of layering controls so one failure is not fatal"
+      ],
+      [
+        "LEAST PRIVILEGE",
+        "Grant only the access a task needs"
+      ],
+      [
+        "SEGMENTATION",
+        "Dividing a network into separate zones"
+      ],
+      [
+        "THREAT MODEL",
+        "Structured analysis of what could go wrong"
+      ],
+      [
+        "RESILIENCE",
+        "Ability to withstand and recover from disruption"
+      ],
+      [
+        "GOVERNANCE",
+        "Direction and oversight of security"
+      ],
+      [
+        "ZERO TRUST",
+        "Never trust, always verify"
+      ],
+      [
+        "IDENTITY",
+        "The new perimeter, some say"
+      ],
+      [
+        "STRIDE",
+        "Threat categorisation mnemonic from Microsoft"
+      ],
+      [
+        "SABSA",
+        "Business-driven enterprise security architecture framework"
+      ],
+      [
+        "AUDIT",
+        "Independent review of controls"
+      ],
+      [
+        "SIEM",
+        "Platform that aggregates logs and alerts (abbr.)"
+      ],
+      [
+        "RISK",
+        "Likelihood combined with impact"
+      ],
+      [
+        "CAF",
+        "NCSC's Cyber Assessment Framework (abbr.)"
+      ],
+      [
+        "MFA",
+        "Login needing two or more factors (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "cyber-threats",
+    "title": "Threats & Response",
+    "category": "Cyber security",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "CONTAINMENT",
+        "Response phase that stops an attack spreading"
+      ],
+      [
+        "FORENSICS",
+        "Gathering and analysing digital evidence"
+      ],
+      [
+        "KEYLOGGER",
+        "Records every keystroke"
+      ],
+      [
+        "INCIDENT",
+        "Event that compromises security"
+      ],
+      [
+        "SPOOFING",
+        "Faking a sender's identity"
+      ],
+      [
+        "HONEYPOT",
+        "Decoy system to lure attackers"
+      ],
+      [
+        "EXPLOIT",
+        "Code that takes advantage of a vulnerability"
+      ],
+      [
+        "ZERO-DAY",
+        "Flaw the vendor doesn't yet know about"
+      ],
+      [
+        "ROOTKIT",
+        "Malware that hides deep in the operating system"
+      ],
+      [
+        "SANDBOX",
+        "Isolated area for detonating suspicious files"
+      ],
+      [
+        "LATERAL",
+        "___ movement: pivoting across a network"
+      ],
+      [
+        "PAYLOAD",
+        "The harmful part of an attack"
+      ],
+      [
+        "BREACH",
+        "Unauthorised access to data"
+      ],
+      [
+        "TRIAGE",
+        "Prioritising alerts by severity"
+      ],
+      [
+        "DDOS",
+        "Flooding attack from many sources (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "general-mixed",
+    "title": "Mixed Bag",
+    "category": "General knowledge",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "ELEPHANT",
+        "Largest land mammal"
+      ],
+      [
+        "MARATHON",
+        "Race of 26.2 miles"
+      ],
+      [
+        "VOLCANO",
+        "Mountain that may erupt"
+      ],
+      [
+        "PYRAMID",
+        "Ancient tomb at Giza"
+      ],
+      [
+        "RAINBOW",
+        "Arc of seven colours"
+      ],
+      [
+        "PENGUIN",
+        "Flightless Antarctic bird"
+      ],
+      [
+        "THUNDER",
+        "It follows lightning"
+      ],
+      [
+        "EVEREST",
+        "World's highest peak"
+      ],
+      [
+        "LONDON",
+        "Capital on the Thames"
+      ],
+      [
+        "SAHARA",
+        "Africa's great desert"
+      ],
+      [
+        "OXYGEN",
+        "Element with the symbol O"
+      ],
+      [
+        "GALAXY",
+        "The Milky Way, for one"
+      ],
+      [
+        "PIANO",
+        "Instrument with 88 keys"
+      ],
+      [
+        "ORBIT",
+        "Path of a planet around the sun"
+      ],
+      [
+        "HONEY",
+        "Sweet product of bees"
+      ]
+    ]
+  },
+  {
+    "id": "general-everyday",
+    "title": "Everyday Things",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "SHAKESPEARE",
+        "The Bard of Avon"
+      ],
+      [
+        "TELESCOPE",
+        "Instrument for viewing distant objects"
+      ],
+      [
+        "CHOCOLATE",
+        "Treat made from cocoa"
+      ],
+      [
+        "ATLANTIC",
+        "Ocean between Europe and the Americas"
+      ],
+      [
+        "KANGAROO",
+        "Hopping marsupial"
+      ],
+      [
+        "WINDMILL",
+        "Sail-powered grinder"
+      ],
+      [
+        "OCTOPUS",
+        "Eight-armed sea creature"
+      ],
+      [
+        "DIAMOND",
+        "Hardest natural mineral"
+      ],
+      [
+        "BICYCLE",
+        "Two-wheeled pedal vehicle"
+      ],
+      [
+        "COMPASS",
+        "It points north"
+      ],
+      [
+        "LIBRARY",
+        "Place to borrow books"
+      ],
+      [
+        "SNOWMAN",
+        "Frosty figure built in winter"
+      ],
+      [
+        "GUITAR",
+        "Six-stringed instrument"
+      ],
+      [
+        "AUTUMN",
+        "Season of falling leaves"
+      ],
+      [
+        "TEACUP",
+        "Vessel for a brew"
+      ]
+    ]
+  },
+  {
+    "id": "general-british",
+    "title": "Best of British",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "STONEHENGE",
+        "Wiltshire's prehistoric stone circle"
+      ],
+      [
+        "BEEFEATER",
+        "Tower of London guard"
+      ],
+      [
+        "WIMBLEDON",
+        "Grand Slam played on grass"
+      ],
+      [
+        "PANTOMIME",
+        "Christmas stage show with a dame"
+      ],
+      [
+        "BAGPIPES",
+        "Scottish instrument with drones"
+      ],
+      [
+        "CORNWALL",
+        "County famous for pasties"
+      ],
+      [
+        "CRUMPET",
+        "Toasted teatime treat full of holes"
+      ],
+      [
+        "CRICKET",
+        "Sport played at Lord's"
+      ],
+      [
+        "DRIZZLE",
+        "Light rain"
+      ],
+      [
+        "BISCUIT",
+        "Often dunked in tea"
+      ],
+      [
+        "SNOWDON",
+        "Highest peak in Wales"
+      ],
+      [
+        "THAMES",
+        "River through Oxford and London"
+      ],
+      [
+        "SCONE",
+        "Cream tea staple"
+      ],
+      [
+        "QUEUE",
+        "Orderly line"
+      ],
+      [
+        "PUB",
+        "Local where you might order a pint"
+      ]
+    ]
+  },
+  {
+    "id": "general-science",
+    "title": "Science & Nature",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "PHOTOSYNTHESIS",
+        "Process by which plants turn sunlight into food"
+      ],
+      [
+        "EVOLUTION",
+        "Darwin's theory of change over generations"
+      ],
+      [
+        "MOLECULE",
+        "Two or more atoms bonded together"
+      ],
+      [
+        "CHLOROPHYLL",
+        "Green pigment that captures light in leaves"
+      ],
+      [
+        "GRAVITY",
+        "Force that keeps your feet on the ground"
+      ],
+      [
+        "NUCLEUS",
+        "Centre of an atom, or control centre of a cell"
+      ],
+      [
+        "GLACIER",
+        "Slow-moving river of ice"
+      ],
+      [
+        "ECLIPSE",
+        "When one body blocks another's light, as the Moon does the Sun"
+      ],
+      [
+        "HABITAT",
+        "Natural home of an animal or plant"
+      ],
+      [
+        "FOSSIL",
+        "Ancient remains preserved in rock"
+      ],
+      [
+        "MAGNET",
+        "It attracts iron and steel"
+      ],
+      [
+        "CARBON",
+        "Element at the heart of organic chemistry, symbol C"
+      ],
+      [
+        "NEURON",
+        "Nerve cell"
+      ],
+      [
+        "TIDE",
+        "Daily rise and fall of the sea, driven by the Moon"
+      ],
+      [
+        "ATOM",
+        "Basic building block of matter"
+      ]
+    ]
+  },
+  {
+    "id": "general-geography",
+    "title": "Around the World",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "MEDITERRANEAN",
+        "Sea between southern Europe and North Africa"
+      ],
+      [
+        "ARCHIPELAGO",
+        "Chain or cluster of islands"
+      ],
+      [
+        "HIMALAYAS",
+        "Mountain range that includes Everest"
+      ],
+      [
+        "AUSTRALIA",
+        "Country that is also a continent"
+      ],
+      [
+        "PENINSULA",
+        "Land almost surrounded by water"
+      ],
+      [
+        "CANBERRA",
+        "Purpose-built capital that opened in 1927, between Sydney and Melbourne"
+      ],
+      [
+        "MONSOON",
+        "Seasonal wind that brings heavy rain to South Asia"
+      ],
+      [
+        "EQUATOR",
+        "Imaginary line at zero degrees latitude"
+      ],
+      [
+        "ICELAND",
+        "Nordic island nation of fire and ice"
+      ],
+      [
+        "AMAZON",
+        "River through the world's largest rainforest"
+      ],
+      [
+        "TOKYO",
+        "Capital of Japan"
+      ],
+      [
+        "DELTA",
+        "Fan-shaped area where a river meets the sea"
+      ],
+      [
+        "ANDES",
+        "South America's great mountain chain"
+      ],
+      [
+        "CAIRO",
+        "Capital of Egypt"
+      ],
+      [
+        "NILE",
+        "Africa's longest river"
+      ]
+    ]
+  },
+  {
+    "id": "general-food",
+    "title": "Food & Drink",
+    "category": "General knowledge",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "SPAGHETTI",
+        "Long, thin pasta"
+      ],
+      [
+        "CROISSANT",
+        "Flaky, crescent-shaped French pastry"
+      ],
+      [
+        "ESPRESSO",
+        "Short, strong shot of Italian coffee"
+      ],
+      [
+        "CINNAMON",
+        "Sweet spice made from tree bark"
+      ],
+      [
+        "BAGUETTE",
+        "Long French loaf"
+      ],
+      [
+        "LEMONADE",
+        "Sweet citrus drink, often fizzy"
+      ],
+      [
+        "AVOCADO",
+        "Fruit mashed to make guacamole"
+      ],
+      [
+        "CHEDDAR",
+        "Somerset village that gave its name to a cheese"
+      ],
+      [
+        "RISOTTO",
+        "Creamy Italian rice dish"
+      ],
+      [
+        "PRETZEL",
+        "Twisted, salted baked snack"
+      ],
+      [
+        "TRUFFLE",
+        "Prized underground fungus, or a chocolate"
+      ],
+      [
+        "PAELLA",
+        "Spanish rice dish from Valencia"
+      ],
+      [
+        "WASABI",
+        "Fiery green Japanese condiment"
+      ],
+      [
+        "SUSHI",
+        "Japanese dish of vinegared rice"
+      ],
+      [
+        "CURRY",
+        "Spiced dish loved across South Asia and Britain"
+      ]
+    ]
+  },
+  {
+    "id": "general-sport",
+    "title": "Sporting Life",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "GOALKEEPER",
+        "Football player allowed to handle the ball"
+      ],
+      [
+        "BADMINTON",
+        "Racquet sport played with a shuttlecock"
+      ],
+      [
+        "TRIATHLON",
+        "Swim, cycle and run in one race"
+      ],
+      [
+        "OLYMPICS",
+        "Games held every four years"
+      ],
+      [
+        "SNOOKER",
+        "Cue sport played at the Crucible"
+      ],
+      [
+        "ARCHERY",
+        "Sport of shooting arrows at a target"
+      ],
+      [
+        "JAVELIN",
+        "Spear thrown in athletics"
+      ],
+      [
+        "PELOTON",
+        "Main pack of riders in a cycle race"
+      ],
+      [
+        "REFEREE",
+        "Official who enforces the rules"
+      ],
+      [
+        "HURDLES",
+        "Barriers jumped in a sprint race"
+      ],
+      [
+        "WICKET",
+        "Stumps and bails in cricket"
+      ],
+      [
+        "SLALOM",
+        "Zigzag race between gates"
+      ],
+      [
+        "RUGBY",
+        "Sport named after a Warwickshire school"
+      ],
+      [
+        "DARTS",
+        "Pub game where 180 is the top score"
+      ],
+      [
+        "PUTT",
+        "Gentle stroke on a golf green"
+      ]
+    ]
+  },
+  {
+    "id": "general-history",
+    "title": "History Lessons",
+    "category": "General knowledge",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "RENAISSANCE",
+        "European rebirth of art and learning"
+      ],
+      [
+        "SUFFRAGETTE",
+        "Campaigner for votes for women"
+      ],
+      [
+        "MAGNA CARTA",
+        "Charter sealed by King John in 1215"
+      ],
+      [
+        "GLADIATOR",
+        "Fighter in a Roman arena"
+      ],
+      [
+        "COLOSSEUM",
+        "Rome's great amphitheatre"
+      ],
+      [
+        "TRAFALGAR",
+        "Nelson's final battle, 1805"
+      ],
+      [
+        "BLETCHLEY",
+        "___ Park, home of the Second World War codebreakers"
+      ],
+      [
+        "HASTINGS",
+        "Battle of 1066"
+      ],
+      [
+        "SPITFIRE",
+        "Iconic RAF fighter of the Battle of Britain"
+      ],
+      [
+        "WATERLOO",
+        "Napoleon's final defeat, 1815"
+      ],
+      [
+        "PHARAOH",
+        "Ruler of ancient Egypt"
+      ],
+      [
+        "VIKINGS",
+        "Norse raiders and traders"
+      ],
+      [
+        "ARMADA",
+        "Spanish fleet defeated in 1588"
+      ],
+      [
+        "TUDOR",
+        "Dynasty of Henry VIII and Elizabeth I"
+      ],
+      [
+        "AZTEC",
+        "Empire whose capital was Tenochtitlan"
+      ]
+    ]
+  },
+  {
+    "id": "general-screen",
+    "title": "Screen & Sound",
+    "category": "General knowledge",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "BLOCKBUSTER",
+        "Hugely successful film"
+      ],
+      [
+        "SOUNDTRACK",
+        "Music that accompanies a film"
+      ],
+      [
+        "ORCHESTRA",
+        "Large ensemble of instruments"
+      ],
+      [
+        "ANIMATION",
+        "Films made frame by frame from drawings or models"
+      ],
+      [
+        "DIRECTOR",
+        "Person who calls \"Action!\""
+      ],
+      [
+        "BEATLES",
+        "Fab Four from Liverpool"
+      ],
+      [
+        "TRUMPET",
+        "Brass instrument with three valves"
+      ],
+      [
+        "MUSICAL",
+        "Show where characters burst into song"
+      ],
+      [
+        "VIOLIN",
+        "Four-stringed instrument played under the chin"
+      ],
+      [
+        "SEQUEL",
+        "Follow-up film"
+      ],
+      [
+        "CHORUS",
+        "Repeated part of a song"
+      ],
+      [
+        "CINEMA",
+        "Where films are shown on a big screen"
+      ],
+      [
+        "OSCAR",
+        "Nickname of the Academy Award statuette"
+      ],
+      [
+        "OPERA",
+        "Sung drama, as at Covent Garden"
+      ],
+      [
+        "TEMPO",
+        "Speed of a piece of music"
+      ]
+    ]
+  },
+  {
+    "id": "ai-threats",
+    "title": "AI Threats",
+    "category": "AI security",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "PROMPT INJECTION",
+        "Smuggling instructions to an AI inside its input"
+      ],
+      [
+        "DATA POISONING",
+        "Corrupting training data to plant flaws"
+      ],
+      [
+        "HALLUCINATION",
+        "Confident but false output from a model"
+      ],
+      [
+        "EXFILTRATION",
+        "Unauthorised extraction of data"
+      ],
+      [
+        "SUPPLY CHAIN",
+        "Third-party models and libraries are a ___ risk"
+      ],
+      [
+        "ADVERSARIAL",
+        "___ example: input tweaked to fool a model"
+      ],
+      [
+        "JAILBREAK",
+        "Prompt crafted to get round a model's safety rules"
+      ],
+      [
+        "INVERSION",
+        "Model ___: reconstructing training data from outputs"
+      ],
+      [
+        "DEEPFAKE",
+        "Synthetic video or audio impersonating a real person"
+      ],
+      [
+        "BACKDOOR",
+        "Hidden trigger planted in a model"
+      ],
+      [
+        "SCRAPING",
+        "Harvesting web content at scale"
+      ],
+      [
+        "LEAKAGE",
+        "Secrets or training data escaping through a model"
+      ],
+      [
+        "EVASION",
+        "Attack that slips malicious input past a detector"
+      ],
+      [
+        "MISUSE",
+        "Using AI for harmful purposes"
+      ],
+      [
+        "BIAS",
+        "Systematic skew in a model's outputs"
+      ]
+    ]
+  },
+  {
+    "id": "ai-ml-basics",
+    "title": "Machine Learning Basics",
+    "category": "AI security",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "NEURAL NETWORK",
+        "Layers of connected nodes loosely inspired by the brain"
+      ],
+      [
+        "OVERFITTING",
+        "Memorising the examples instead of generalising"
+      ],
+      [
+        "CLASSIFIER",
+        "Model that sorts inputs into categories"
+      ],
+      [
+        "REGRESSION",
+        "Predicting a continuous value"
+      ],
+      [
+        "ALGORITHM",
+        "Step-by-step procedure a computer follows"
+      ],
+      [
+        "INFERENCE",
+        "Using a trained model to make predictions"
+      ],
+      [
+        "TRAINING",
+        "Fitting a model to data"
+      ],
+      [
+        "ACCURACY",
+        "Share of predictions a model gets right"
+      ],
+      [
+        "DATASET",
+        "Collection of examples used to train a model"
+      ],
+      [
+        "FEATURE",
+        "Measurable input property a model uses"
+      ],
+      [
+        "WEIGHTS",
+        "Learned parameters of a network"
+      ],
+      [
+        "TENSOR",
+        "Multi-dimensional array of numbers"
+      ],
+      [
+        "LABEL",
+        "The right answer attached to an example"
+      ],
+      [
+        "EPOCH",
+        "One full pass through all the examples"
+      ],
+      [
+        "GPU",
+        "Graphics chip used to speed up deep learning (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "ai-llms",
+    "title": "Large Language Models",
+    "category": "AI security",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "CONTEXT WINDOW",
+        "How much text a model can consider at once"
+      ],
+      [
+        "TRANSFORMER",
+        "Architecture behind most modern language models"
+      ],
+      [
+        "TEMPERATURE",
+        "Setting that controls how random the output is"
+      ],
+      [
+        "FINE-TUNING",
+        "Further training on a specialised dataset"
+      ],
+      [
+        "PARAMETERS",
+        "Billions of these define a model's size"
+      ],
+      [
+        "GENERATIVE",
+        "___ AI creates text, images or code"
+      ],
+      [
+        "EMBEDDING",
+        "Numerical representation of meaning"
+      ],
+      [
+        "ATTENTION",
+        "Mechanism that lets a model weigh parts of its input"
+      ],
+      [
+        "CHATBOT",
+        "Conversational AI assistant"
+      ],
+      [
+        "LATENCY",
+        "Delay before a model responds"
+      ],
+      [
+        "PROMPT",
+        "Instruction given to a model"
+      ],
+      [
+        "VECTOR",
+        "___ database: finds items with similar meaning"
+      ],
+      [
+        "CORPUS",
+        "Body of text used for training"
+      ],
+      [
+        "TOKEN",
+        "Chunk of text a language model reads"
+      ],
+      [
+        "RAG",
+        "Retrieval-augmented generation (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "ai-agentic",
+    "title": "Agentic AI",
+    "category": "AI security",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "HUMAN IN THE LOOP",
+        "Oversight where a person approves key actions"
+      ],
+      [
+        "ORCHESTRATOR",
+        "Component that coordinates several AI systems"
+      ],
+      [
+        "PERMISSIONS",
+        "Rights an AI system is granted"
+      ],
+      [
+        "KILL SWITCH",
+        "Emergency stop for an autonomous system"
+      ],
+      [
+        "AUDIT TRAIL",
+        "Record of every action an AI system takes"
+      ],
+      [
+        "GUARDRAILS",
+        "Controls that keep an AI's behaviour in bounds"
+      ],
+      [
+        "DELEGATION",
+        "Handing a task on to another AI"
+      ],
+      [
+        "AUTONOMY",
+        "How far a system acts without human approval"
+      ],
+      [
+        "WORKFLOW",
+        "Sequence of steps an AI carries out"
+      ],
+      [
+        "TOOL USE",
+        "Letting a model call APIs and functions"
+      ],
+      [
+        "PLANNER",
+        "Module that breaks a goal into steps"
+      ],
+      [
+        "MEMORY",
+        "Store used to recall earlier context"
+      ],
+      [
+        "AGENT",
+        "AI system that plans and takes actions"
+      ],
+      [
+        "SCOPE",
+        "Boundaries of what an AI system may do"
+      ],
+      [
+        "MCP",
+        "Model Context Protocol, for connecting tools (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "ai-governance",
+    "title": "AI Governance",
+    "category": "AI security",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "ACCOUNTABILITY",
+        "Clear ownership of an AI system's outcomes"
+      ],
+      [
+        "EXPLAINABILITY",
+        "Showing why a model reached its decision"
+      ],
+      [
+        "TRANSPARENCY",
+        "Being open about how an AI system works"
+      ],
+      [
+        "RED TEAMING",
+        "Adversarial testing to find failures"
+      ],
+      [
+        "PROVENANCE",
+        "Record of where data or content came from"
+      ],
+      [
+        "MODEL CARD",
+        "Document describing a model's uses and limits"
+      ],
+      [
+        "ASSURANCE",
+        "Justified confidence that a system meets its requirements"
+      ],
+      [
+        "REGULATOR",
+        "Body that enforces the rules"
+      ],
+      [
+        "FAIRNESS",
+        "Avoiding unjust discrimination in outcomes"
+      ],
+      [
+        "EU AI ACT",
+        "Europe's risk-based law on artificial intelligence"
+      ],
+      [
+        "PRIVACY",
+        "Protection of personal data"
+      ],
+      [
+        "ETHICS",
+        "Moral principles that guide AI use"
+      ],
+      [
+        "IMPACT",
+        "___ assessment: weighing effects before deployment"
+      ],
+      [
+        "NIST",
+        "US body behind the AI Risk Management Framework (abbr.)"
+      ],
+      [
+        "ISO",
+        "___ 42001: AI management system standard (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "ai-defence",
+    "title": "Defending AI",
+    "category": "AI security",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "SANITISATION",
+        "Cleaning untrusted input before it's processed"
+      ],
+      [
+        "VERIFICATION",
+        "Checking outputs against trusted sources"
+      ],
+      [
+        "EVALUATION",
+        "Systematic testing of model behaviour"
+      ],
+      [
+        "MONITORING",
+        "Watching a deployed system for misuse"
+      ],
+      [
+        "ROBUSTNESS",
+        "Resistance to adversarial inputs"
+      ],
+      [
+        "ALIGNMENT",
+        "Making AI pursue the goals we intend"
+      ],
+      [
+        "WATERMARK",
+        "Hidden signal marking AI-generated content"
+      ],
+      [
+        "BENCHMARK",
+        "Standard test for comparing models"
+      ],
+      [
+        "ISOLATION",
+        "Keeping untrusted content apart from trusted components"
+      ],
+      [
+        "ALLOWLIST",
+        "Approved set of tools or domains"
+      ],
+      [
+        "RATE LIMIT",
+        "Cap on requests that slows abuse"
+      ],
+      [
+        "REFUSAL",
+        "A model declining a harmful request"
+      ],
+      [
+        "LOGGING",
+        "Keeping records for later investigation"
+      ],
+      [
+        "CANARY",
+        "Planted token that reveals a data leak"
+      ],
+      [
+        "FILTER",
+        "Screens inputs or outputs for harmful content"
+      ]
+    ]
+  },
+  {
+    "id": "econ-money",
+    "title": "Money Matters",
+    "category": "Economics",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "INFLATION",
+        "General rise in prices over time"
+      ],
+      [
+        "INCOME TAX",
+        "Levy on what you earn"
+      ],
+      [
+        "MORTGAGE",
+        "Loan used to buy a home"
+      ],
+      [
+        "INTEREST",
+        "Cost of borrowing money"
+      ],
+      [
+        "CURRENCY",
+        "Pounds, euros or dollars"
+      ],
+      [
+        "PENSION",
+        "Regular income paid in retirement"
+      ],
+      [
+        "SAVINGS",
+        "Money put aside for later"
+      ],
+      [
+        "INVOICE",
+        "Bill sent for goods or services"
+      ],
+      [
+        "RECEIPT",
+        "Proof of purchase"
+      ],
+      [
+        "BUDGET",
+        "Plan for income and spending"
+      ],
+      [
+        "PROFIT",
+        "Revenue minus costs"
+      ],
+      [
+        "SHARES",
+        "Units of ownership in a company"
+      ],
+      [
+        "BARTER",
+        "Swapping goods without using money"
+      ],
+      [
+        "WAGES",
+        "Pay for work, often weekly"
+      ],
+      [
+        "DEBT",
+        "Money owed"
+      ]
+    ]
+  },
+  {
+    "id": "econ-markets",
+    "title": "Markets & Trade",
+    "category": "Economics",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "SUPPLY AND DEMAND",
+        "The two forces that set prices in a market"
+      ],
+      [
+        "COMPETITION",
+        "Rivalry between firms for customers"
+      ],
+      [
+        "EQUILIBRIUM",
+        "Balance where the quantity supplied equals the quantity wanted"
+      ],
+      [
+        "ELASTICITY",
+        "How sensitive buying is to a change in price"
+      ],
+      [
+        "COMMODITY",
+        "Raw good such as oil, wheat or copper"
+      ],
+      [
+        "MONOPOLY",
+        "Market with a single seller"
+      ],
+      [
+        "SHORTAGE",
+        "When buyers want more than is available"
+      ],
+      [
+        "EXPORTS",
+        "Goods sold abroad"
+      ],
+      [
+        "IMPORTS",
+        "Goods bought from abroad"
+      ],
+      [
+        "SUBSIDY",
+        "Government payment that lowers a producer's costs"
+      ],
+      [
+        "SURPLUS",
+        "Excess, as in a trade ___"
+      ],
+      [
+        "AUCTION",
+        "Sale to the highest bidder"
+      ],
+      [
+        "TARIFF",
+        "Tax on imported goods"
+      ],
+      [
+        "CARTEL",
+        "Group of producers colluding to fix prices"
+      ],
+      [
+        "QUOTA",
+        "Limit on the quantity of goods allowed into a country"
+      ]
+    ]
+  },
+  {
+    "id": "econ-macro",
+    "title": "The Big Picture",
+    "category": "Economics",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "BANK OF ENGLAND",
+        "UK central bank in Threadneedle Street"
+      ],
+      [
+        "UNEMPLOYMENT",
+        "Share of the workforce without a job"
+      ],
+      [
+        "PRODUCTIVITY",
+        "Output per hour worked"
+      ],
+      [
+        "STAGFLATION",
+        "High inflation combined with stagnant growth"
+      ],
+      [
+        "RECESSION",
+        "Two consecutive quarters of falling output, by a common rule of thumb"
+      ],
+      [
+        "AUSTERITY",
+        "Cutting public spending to reduce borrowing"
+      ],
+      [
+        "MONETARY",
+        "___ policy: interest rates and the money supply"
+      ],
+      [
+        "TREASURY",
+        "HM ___: the UK's finance ministry"
+      ],
+      [
+        "STIMULUS",
+        "Spending boost to revive an economy"
+      ],
+      [
+        "DEFICIT",
+        "Shortfall when spending exceeds revenue"
+      ],
+      [
+        "KEYNES",
+        "Economist who argued for government spending to fight slumps"
+      ],
+      [
+        "FISCAL",
+        "___ policy: government tax and spending decisions"
+      ],
+      [
+        "GILTS",
+        "UK government bonds"
+      ],
+      [
+        "BOOM",
+        "Period of rapid economic growth"
+      ],
+      [
+        "GDP",
+        "Total value of a country's output (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "psych-basics",
+    "title": "Mind Basics",
+    "category": "Psychology",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "PERSONALITY",
+        "Characteristic pattern of thinking, feeling and behaving"
+      ],
+      [
+        "MOTIVATION",
+        "The drive behind behaviour"
+      ],
+      [
+        "CONFIDENCE",
+        "Belief in your own abilities"
+      ],
+      [
+        "INTROVERT",
+        "Someone who recharges with time alone"
+      ],
+      [
+        "EXTROVERT",
+        "Someone energised by other people's company"
+      ],
+      [
+        "INSTINCT",
+        "Innate, unlearned behaviour"
+      ],
+      [
+        "EMOTION",
+        "Feeling such as joy, anger or fear"
+      ],
+      [
+        "EMPATHY",
+        "Sharing and understanding another's feelings"
+      ],
+      [
+        "ANXIETY",
+        "Persistent worry or unease"
+      ],
+      [
+        "INSIGHT",
+        "Sudden understanding: the 'aha' moment"
+      ],
+      [
+        "PHOBIA",
+        "Intense, irrational fear"
+      ],
+      [
+        "STRESS",
+        "Strain caused by pressure or demands"
+      ],
+      [
+        "HABIT",
+        "Behaviour repeated until it's automatic"
+      ],
+      [
+        "DREAM",
+        "Story the mind tells during sleep"
+      ],
+      [
+        "BRAIN",
+        "Organ of thought"
+      ]
+    ]
+  },
+  {
+    "id": "psych-people",
+    "title": "Famous Psychologists",
+    "category": "Psychology",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "ZIMBARDO",
+        "Psychologist who ran the Stanford prison experiment"
+      ],
+      [
+        "KAHNEMAN",
+        "Author of 'Thinking, Fast and Slow'"
+      ],
+      [
+        "MILGRAM",
+        "Researcher behind the 1960s obedience experiments"
+      ],
+      [
+        "BANDURA",
+        "Social learning theorist of the Bobo doll study"
+      ],
+      [
+        "SKINNER",
+        "Behaviourist known for his conditioning box"
+      ],
+      [
+        "ERIKSON",
+        "Theorist of eight psychosocial stages"
+      ],
+      [
+        "PAVLOV",
+        "Russian physiologist who conditioned dogs to a bell"
+      ],
+      [
+        "PIAGET",
+        "Swiss theorist of children's cognitive development"
+      ],
+      [
+        "MASLOW",
+        "Psychologist behind the hierarchy of needs"
+      ],
+      [
+        "BOWLBY",
+        "British psychiatrist who developed attachment theory"
+      ],
+      [
+        "ROGERS",
+        "Carl ___, founder of person-centred therapy"
+      ],
+      [
+        "FREUD",
+        "Founder of psychoanalysis"
+      ],
+      [
+        "ADLER",
+        "Viennese founder of individual psychology"
+      ],
+      [
+        "WUNDT",
+        "Opened the first psychology laboratory, in Leipzig in 1879"
+      ],
+      [
+        "JUNG",
+        "Swiss psychiatrist who described the collective unconscious"
+      ]
+    ]
+  },
+  {
+    "id": "psych-biases",
+    "title": "Biases & Behaviour",
+    "category": "Psychology",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "CONFIRMATION BIAS",
+        "Favouring information that supports what you already believe"
+      ],
+      [
+        "DUNNING-KRUGER",
+        "___ effect: the least skilled overrate their ability most"
+      ],
+      [
+        "LOSS AVERSION",
+        "Feeling losses more keenly than equal gains"
+      ],
+      [
+        "DISSONANCE",
+        "Cognitive ___: discomfort from holding conflicting beliefs"
+      ],
+      [
+        "CONFORMITY",
+        "Going along with the group"
+      ],
+      [
+        "GROUPTHINK",
+        "Poor decisions made to keep a group in harmony"
+      ],
+      [
+        "ANCHORING",
+        "Leaning too heavily on the first number you hear"
+      ],
+      [
+        "HEURISTIC",
+        "Mental shortcut for making decisions"
+      ],
+      [
+        "HINDSIGHT",
+        "___ bias: 'I knew it all along'"
+      ],
+      [
+        "BYSTANDER",
+        "___ effect: people are less likely to help when others are present"
+      ],
+      [
+        "PLACEBO",
+        "Inert treatment that still produces an effect"
+      ],
+      [
+        "FRAMING",
+        "How a choice is presented changes the decision"
+      ],
+      [
+        "PRIMING",
+        "Earlier exposure shaping a later response"
+      ],
+      [
+        "NUDGE",
+        "Gentle steer towards a better choice, in Thaler and Sunstein's book"
+      ],
+      [
+        "HALO",
+        "___ effect: one good trait colours the whole impression"
+      ]
+    ]
+  },
+  {
+    "id": "general-expert",
+    "title": "Polymath",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "INEFFABLE",
+        "Too great to be expressed in words"
+      ],
+      [
+        "DEFENESTRATION",
+        "Throwing someone out of a window, as in Prague in 1618"
+      ],
+      [
+        "ANTEDILUVIAN",
+        "Hopelessly old-fashioned; literally, before the Flood"
+      ],
+      [
+        "SERENDIPITY",
+        "Happy accident of discovery"
+      ],
+      [
+        "PANGRAM",
+        "Sentence that uses every letter of the alphabet"
+      ],
+      [
+        "OBSEQUIOUS",
+        "Excessively eager to please"
+      ],
+      [
+        "PALIMPSEST",
+        "Manuscript scraped clean and written over"
+      ],
+      [
+        "MONDEGREEN",
+        "Misheard song lyric"
+      ],
+      [
+        "ZEITGEIST",
+        "Defining spirit of an era"
+      ],
+      [
+        "OUBLIETTE",
+        "Dungeon reached only through a trapdoor"
+      ],
+      [
+        "PETRICHOR",
+        "Earthy smell after rain on dry ground"
+      ],
+      [
+        "QUIXOTIC",
+        "Idealistic to an impractical degree, after Cervantes' knight"
+      ],
+      [
+        "APHELION",
+        "Point in an orbit farthest from the Sun"
+      ],
+      [
+        "LACONIC",
+        "Using very few words, like the Spartans"
+      ],
+      [
+        "ZENITH",
+        "Highest point"
+      ]
+    ]
+  },
+  {
+    "id": "general-cryptic",
+    "title": "Cryptic Mix",
+    "category": "General knowledge",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "SCHOOLMASTER",
+        "The classroom, oddly, contains this teacher",
+        "Anagram ('oddly') of THE CLASSROOM. Definition: teacher."
+      ],
+      [
+        "ASTRONOMER",
+        "Moon starer, possibly, studies the heavens",
+        "Anagram ('possibly') of MOON STARER. Definition: (one who) studies the heavens."
+      ],
+      [
+        "DORMITORY",
+        "Dirty room, rearranged, where students sleep",
+        "Anagram ('rearranged') of DIRTY ROOM. Definition: where students sleep."
+      ],
+      [
+        "BARGAIN",
+        "Pub profit is a good deal",
+        "BAR (pub) + GAIN (profit). Definition: a good deal."
+      ],
+      [
+        "SEAWEED",
+        "Marine plant: ocean and garden pest",
+        "SEA (ocean) + WEED (garden pest). Definition: marine plant."
+      ],
+      [
+        "DECIMAL",
+        "Claimed, sadly, to be a type of number",
+        "Anagram ('sadly') of CLAIMED. Definition: a type of number."
+      ],
+      [
+        "CARPET",
+        "Floor covering: vehicle and animal companion",
+        "CAR (vehicle) + PET (animal companion). Definition: floor covering."
+      ],
+      [
+        "LISTEN",
+        "Pay attention to silent rearrangement",
+        "Anagram ('rearrangement') of SILENT. Definition: pay attention."
+      ],
+      [
+        "DRAWER",
+        "Reward sent back for a chest compartment",
+        "REWARD reversed ('sent back'). Definition: chest compartment."
+      ],
+      [
+        "PARIS",
+        "Capital in comparison",
+        "Hidden in comPARISon. Definition: capital."
+      ],
+      [
+        "STAR",
+        "Celebrity's rats returning",
+        "RATS reversed ('returning'). Definition: celebrity."
+      ],
+      [
+        "EVIL",
+        "Wicked live show turned back",
+        "LIVE reversed ('turned back'). Definition: wicked."
+      ]
+    ]
+  },
+  {
+    "id": "cyber-expert",
+    "title": "Deep Defence",
+    "category": "Cyber security",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "NON-REPUDIATION",
+        "Assurance that a sender can't deny having sent a message"
+      ],
+      [
+        "CHAIN OF CUSTODY",
+        "Documented trail that keeps evidence admissible"
+      ],
+      [
+        "STEGANOGRAPHY",
+        "Hiding a message inside an innocent-looking file"
+      ],
+      [
+        "FUZZING",
+        "Throwing malformed input at software to find crashes"
+      ],
+      [
+        "EGRESS",
+        "Outbound traffic, filtered to stop data leaving"
+      ],
+      [
+        "PASS THE HASH",
+        "Moving laterally with a stolen credential digest instead of the password"
+      ],
+      [
+        "SIDE CHANNEL",
+        "Attack that infers secrets from timing, power draw or emissions"
+      ],
+      [
+        "ATTESTATION",
+        "Cryptographic proof of a device's state"
+      ],
+      [
+        "PERSISTENCE",
+        "An attacker's foothold that survives a reboot"
+      ],
+      [
+        "HONEYTOKEN",
+        "Decoy credential that raises an alarm when used"
+      ],
+      [
+        "ROWHAMMER",
+        "Exploit that flips bits in neighbouring memory cells"
+      ],
+      [
+        "EPHEMERAL",
+        "Short-lived, like the keys behind forward secrecy"
+      ],
+      [
+        "BEACONING",
+        "Malware's regular check-ins with its command server"
+      ],
+      [
+        "KERBEROS",
+        "Ticket-based authentication protocol named after a three-headed hound"
+      ],
+      [
+        "SALT",
+        "Random value added before hashing a password"
+      ]
+    ]
+  },
+  {
+    "id": "cyber-cryptic",
+    "title": "Cryptic Cyber",
+    "category": "Cyber security",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "ANTIVIRUS",
+        "Insect, I and bug: protective software",
+        "ANT (insect) + I + VIRUS (bug). Definition: protective software."
+      ],
+      [
+        "NETWORK",
+        "Mesh and labour give connected computers",
+        "NET (mesh) + WORK (labour). Definition: connected computers."
+      ],
+      [
+        "SPYWARE",
+        "Agent's goods? That's malicious software",
+        "SPY (agent) + WARE (goods). Definition: malicious software."
+      ],
+      [
+        "DECRYPT",
+        "Decode French 'of' tomb",
+        "DE (French for 'of') + CRYPT (tomb). Definition: decode."
+      ],
+      [
+        "HACKER",
+        "Hired horse, er, one breaking into computers",
+        "HACK (hired horse) + ER. Definition: one breaking into computers."
+      ],
+      [
+        "SERVER",
+        "Waiter, or machine hosting a website",
+        "Double definition: a waiter, and a computer that hosts a website."
+      ],
+      [
+        "ROUTER",
+        "Woodworking tool, or box that forwards packets",
+        "Double definition: a woodworking tool, and a network device."
+      ],
+      [
+        "SECURE",
+        "Rescue arranged to make safe",
+        "Anagram ('arranged') of RESCUE. Definition: make safe."
+      ],
+      [
+        "LOGIN",
+        "Record at home for sign-on",
+        "LOG (record) + IN (at home). Definition: sign-on."
+      ],
+      [
+        "ADMIN",
+        "System manager's mad in turmoil",
+        "Anagram ('in turmoil') of MAD IN. Definition: system manager."
+      ],
+      [
+        "PROXY",
+        "Substitute vote, or intermediary server",
+        "Double definition: a vote cast on someone's behalf, and a go-between server."
+      ],
+      [
+        "CLOUD",
+        "Obscure place where your files may live",
+        "Double definition: to obscure, and online storage."
+      ]
+    ]
+  },
+  {
+    "id": "ai-expert",
+    "title": "Under the Hood",
+    "category": "AI security",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "INTERPRETABILITY",
+        "Understanding what is actually happening inside a model"
+      ],
+      [
+        "BACKPROPAGATION",
+        "Algorithm that pushes error gradients back through a network"
+      ],
+      [
+        "ADAM",
+        "Popular optimiser whose name comes from adaptive moment estimation"
+      ],
+      [
+        "REGULARISATION",
+        "Penalising complexity to curb overfitting"
+      ],
+      [
+        "QUANTISATION",
+        "Shrinking a model by storing weights at lower precision"
+      ],
+      [
+        "DISTILLATION",
+        "Training a small student model to mimic a larger teacher"
+      ],
+      [
+        "SCALING LAWS",
+        "Power-law links between compute, data and performance"
+      ],
+      [
+        "SYCOPHANCY",
+        "A model's tendency to tell users what they want to hear"
+      ],
+      [
+        "PERPLEXITY",
+        "Measure of how surprised a language model is by some text"
+      ],
+      [
+        "STOCHASTIC",
+        "___ parrot: a famous critique of language models"
+      ],
+      [
+        "EMERGENCE",
+        "Abilities that seem to appear suddenly at scale"
+      ],
+      [
+        "SOFTMAX",
+        "Function that turns scores into probabilities"
+      ],
+      [
+        "DROPOUT",
+        "Randomly silencing neurons during training"
+      ],
+      [
+        "LORA",
+        "Low-rank adaptation, for cheap fine-tuning (abbr.)"
+      ],
+      [
+        "RLHF",
+        "Reinforcement learning from human feedback (abbr.)"
+      ]
+    ]
+  },
+  {
+    "id": "ai-cryptic",
+    "title": "Cryptic AI",
+    "category": "AI security",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "LEARNING",
+        "Pound making money brings knowledge",
+        "L (pound) + EARNING (making money). Definition: knowledge."
+      ],
+      [
+        "MACHINE",
+        "Speed ratio at home, English: a device",
+        "MACH (speed ratio) + IN (at home) + E (English). Definition: a device."
+      ],
+      [
+        "TURING",
+        "Rung it, scrambled, for the test's namesake",
+        "Anagram ('scrambled') of RUNG IT. Definition: the test's namesake."
+      ],
+      [
+        "NEURAL",
+        "Unreal mix, like a brain-inspired network",
+        "Anagram ('mix') of UNREAL. Definition: like a brain-inspired network."
+      ],
+      [
+        "ROBOT",
+        "Machine with decay around body odour",
+        "ROT (decay) around BO (body odour). Definition: machine."
+      ],
+      [
+        "MODEL",
+        "Pose, or trained AI system",
+        "Double definition: to pose, and a trained AI system."
+      ],
+      [
+        "SCALE",
+        "Climb, or grow a system bigger",
+        "Double definition: to climb, and to grow a system."
+      ],
+      [
+        "CODER",
+        "Programmer cored, mixed up",
+        "Anagram ('mixed up') of CORED. Definition: programmer."
+      ],
+      [
+        "DATA",
+        "Information hidden in Canada tables",
+        "Hidden in canaDA TAbles. Definition: information."
+      ],
+      [
+        "CHIP",
+        "Fried potato, or processor",
+        "Double definition: a fried potato, and a silicon chip."
+      ],
+      [
+        "NODE",
+        "Network point concealed in piano devices",
+        "Hidden in piaNO DEvices. Definition: network point."
+      ],
+      [
+        "BOT",
+        "Automated program, part of a bottle",
+        "Hidden in a BOTtle ('part of'). Definition: automated program."
+      ]
+    ]
+  },
+  {
+    "id": "econ-expert",
+    "title": "The Dismal Science",
+    "category": "Economics",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "OPPORTUNITY COST",
+        "Value of the next best alternative forgone"
+      ],
+      [
+        "HYPERINFLATION",
+        "Prices spiralling out of control, as in Weimar Germany"
+      ],
+      [
+        "INVISIBLE HAND",
+        "Adam Smith's metaphor for self-regulating markets"
+      ],
+      [
+        "MERCANTILISM",
+        "Doctrine of hoarding bullion through trade surpluses"
+      ],
+      [
+        "RENT-SEEKING",
+        "Lobbying to capture wealth without creating any"
+      ],
+      [
+        "MORAL HAZARD",
+        "Taking more risk because someone else bears the cost"
+      ],
+      [
+        "SEIGNIORAGE",
+        "Profit a government makes from issuing currency"
+      ],
+      [
+        "PIGOU",
+        "Economist after whom taxes on pollution are named"
+      ],
+      [
+        "OLIGOPOLY",
+        "Market dominated by a few large sellers"
+      ],
+      [
+        "MONOPSONY",
+        "Market with a single buyer"
+      ],
+      [
+        "ARBITRAGE",
+        "Profiting from price differences between markets"
+      ],
+      [
+        "PHILLIPS",
+        "___ curve: trade-off between inflation and unemployment"
+      ],
+      [
+        "PARETO",
+        "___ efficiency: no one can gain without someone else losing"
+      ],
+      [
+        "LAFFER",
+        "___ curve: tax rates plotted against tax revenue"
+      ],
+      [
+        "GINI",
+        "Coefficient that measures inequality"
+      ]
+    ]
+  },
+  {
+    "id": "econ-cryptic",
+    "title": "Cryptic Economics",
+    "category": "Economics",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "BANKER",
+        "Financier's shore, er…",
+        "BANK (shore) + ER. Definition: financier."
+      ],
+      [
+        "MARKET",
+        "Old currency with alien where trading happens",
+        "MARK (old German currency) + ET (alien). Definition: where trading happens."
+      ],
+      [
+        "INCOME",
+        "Earnings: at home, arrive",
+        "IN (at home) + COME (arrive). Definition: earnings."
+      ],
+      [
+        "CREDIT",
+        "Acknowledgement in a film, or borrowing power",
+        "Double definition: a film credit, and the ability to borrow."
+      ],
+      [
+        "TAXES",
+        "Duties in Texas, scrambled",
+        "Anagram ('scrambled') of TEXAS. Definition: duties."
+      ],
+      [
+        "TRADE",
+        "Tread carelessly in commerce",
+        "Anagram ('carelessly') of TREAD. Definition: commerce."
+      ],
+      [
+        "DEBIT",
+        "Bidet, oddly, is an entry against your account",
+        "Anagram ('oddly') of BIDET. Definition: an entry against your account."
+      ],
+      [
+        "STOCK",
+        "Soup base, or share",
+        "Double definition: soup stock, and a company share."
+      ],
+      [
+        "ASSET",
+        "Possession found in pass etiquette",
+        "Hidden in pASS ETiquette. Definition: possession."
+      ],
+      [
+        "CASH",
+        "Money found in cashmere, in part",
+        "Hidden ('in part') in CASHmere. Definition: money."
+      ],
+      [
+        "BULL",
+        "Optimistic investor, or nonsense",
+        "Double definition: an optimistic investor, and nonsense."
+      ],
+      [
+        "BEAR",
+        "Pessimistic trader, or carry",
+        "Double definition: a pessimistic trader, and to carry."
+      ]
+    ]
+  },
+  {
+    "id": "psych-expert",
+    "title": "Mind Games",
+    "category": "Psychology",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "PROPRIOCEPTION",
+        "Sense of where your body parts are"
+      ],
+      [
+        "SCHADENFREUDE",
+        "Pleasure at another's misfortune"
+      ],
+      [
+        "GESTALT",
+        "School holding that the whole is other than the sum of its parts"
+      ],
+      [
+        "PRIMACY",
+        "___ effect: remembering the first items in a list best"
+      ],
+      [
+        "SYNAESTHESIA",
+        "Hearing colours or tasting words"
+      ],
+      [
+        "PAREIDOLIA",
+        "Seeing faces in clouds or plug sockets"
+      ],
+      [
+        "APOPHENIA",
+        "Seeing meaningful patterns in random data"
+      ],
+      [
+        "ANHEDONIA",
+        "Inability to feel pleasure"
+      ],
+      [
+        "ZEIGARNIK",
+        "___ effect: unfinished tasks are remembered best"
+      ],
+      [
+        "FLASHBULB",
+        "___ memory: vivid recall of where you were when you heard shocking news"
+      ],
+      [
+        "HAWTHORNE",
+        "___ effect: behaving differently because you're being observed"
+      ],
+      [
+        "RORSCHACH",
+        "Inkblot test"
+      ],
+      [
+        "AMYGDALA",
+        "Almond-shaped brain region tied to fear"
+      ],
+      [
+        "STROOP",
+        "___ effect: slowness naming the ink colour of a clashing colour word"
+      ],
+      [
+        "LOCUS",
+        "___ of control: whether you credit yourself or circumstance"
+      ]
+    ]
+  },
+  {
+    "id": "psych-cryptic",
+    "title": "Cryptic Psychology",
+    "category": "Psychology",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "ELATION",
+        "Toenail repaired gives great joy",
+        "Anagram ('repaired') of TOENAIL. Definition: great joy."
+      ],
+      [
+        "RECALL",
+        "Remember, or withdraw a faulty product",
+        "Double definition: to remember, and to withdraw a product."
+      ],
+      [
+        "TEMPER",
+        "Mood, or harden steel",
+        "Double definition: a mood, and to harden steel."
+      ],
+      [
+        "MANIA",
+        "Craze in Germania",
+        "Hidden in gerMANIA. Definition: craze."
+      ],
+      [
+        "TRAIT",
+        "Characteristic seen in portrait",
+        "Hidden in porTRAIT. Definition: characteristic."
+      ],
+      [
+        "NERVE",
+        "Courage, or fibre carrying signals",
+        "Double definition: courage, and a nerve fibre."
+      ],
+      [
+        "MIND",
+        "Brain, or object",
+        "Double definition: the brain, and to object."
+      ],
+      [
+        "MOOD",
+        "Doom turned back to a frame of mind",
+        "DOOM reversed ('turned back'). Definition: frame of mind."
+      ],
+      [
+        "CALM",
+        "Serene in tropical meadow",
+        "Hidden in tropiCAL Meadow. Definition: serene."
+      ],
+      [
+        "SANE",
+        "Sean, all over the place, is of sound mind",
+        "Anagram ('all over the place') of SEAN. Definition: of sound mind."
+      ],
+      [
+        "IDEA",
+        "Notion found in hide away",
+        "Hidden in hIDE Away. Definition: notion."
+      ],
+      [
+        "EGO",
+        "Self found in San Diego",
+        "Hidden in san diEGO. Definition: self."
+      ]
+    ]
+  },
+  {
+    "id": "philo-basics",
+    "title": "Big Questions",
+    "category": "Philosophy",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "CONSCIENCE",
+        "Inner sense of right and wrong"
+      ],
+      [
+        "KNOWLEDGE",
+        "Understanding gained through learning or experience"
+      ],
+      [
+        "FREE WILL",
+        "The ability to have chosen otherwise"
+      ],
+      [
+        "MORALITY",
+        "Principles of right and wrong conduct"
+      ],
+      [
+        "ARGUMENT",
+        "Premises leading to a conclusion"
+      ],
+      [
+        "PARADOX",
+        "Statement that seems to contradict itself"
+      ],
+      [
+        "DILEMMA",
+        "Choice between two unwelcome options"
+      ],
+      [
+        "JUSTICE",
+        "Central theme of Plato's Republic"
+      ],
+      [
+        "MEANING",
+        "What many search for in life"
+      ],
+      [
+        "BELIEF",
+        "Something accepted as true"
+      ],
+      [
+        "VIRTUE",
+        "Moral excellence, such as courage or honesty"
+      ],
+      [
+        "BEAUTY",
+        "Chief concern of aesthetics"
+      ],
+      [
+        "WISDOM",
+        "'Philosophy' literally means the love of this"
+      ],
+      [
+        "LOGIC",
+        "Study of valid reasoning"
+      ],
+      [
+        "TRUTH",
+        "What a correct statement captures"
+      ]
+    ]
+  },
+  {
+    "id": "philo-thinkers",
+    "title": "Great Thinkers",
+    "category": "Philosophy",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "WITTGENSTEIN",
+        "Author of the Tractatus Logico-Philosophicus"
+      ],
+      [
+        "MACHIAVELLI",
+        "Author of The Prince"
+      ],
+      [
+        "ARISTOTLE",
+        "Tutor to Alexander the Great"
+      ],
+      [
+        "CONFUCIUS",
+        "Chinese sage of the Analects"
+      ],
+      [
+        "DESCARTES",
+        "'I think, therefore I am'"
+      ],
+      [
+        "NIETZSCHE",
+        "Thinker who declared 'God is dead'"
+      ],
+      [
+        "SOCRATES",
+        "Athenian who claimed only to know that he knew nothing"
+      ],
+      [
+        "ROUSSEAU",
+        "Author of The Social Contract"
+      ],
+      [
+        "SPINOZA",
+        "Dutch rationalist who equated God with Nature"
+      ],
+      [
+        "HOBBES",
+        "Author of Leviathan"
+      ],
+      [
+        "SARTRE",
+        "French existentialist of Being and Nothingness"
+      ],
+      [
+        "LOCKE",
+        "English philosopher of the mind as a 'blank slate'"
+      ],
+      [
+        "PLATO",
+        "Founder of the Academy in Athens"
+      ],
+      [
+        "KANT",
+        "Author of the Critique of Pure Reason"
+      ],
+      [
+        "HUME",
+        "Scottish empiricist sceptical about causation"
+      ]
+    ]
+  },
+  {
+    "id": "philo-isms",
+    "title": "Isms & Ideas",
+    "category": "Philosophy",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "EXISTENTIALISM",
+        "Existence precedes essence"
+      ],
+      [
+        "UTILITY",
+        "Bentham's measure of happiness, to be maximised"
+      ],
+      [
+        "RATIONALISM",
+        "Knowledge comes chiefly from reason"
+      ],
+      [
+        "DETERMINISM",
+        "Every event is fixed by prior causes"
+      ],
+      [
+        "EMPIRICISM",
+        "Knowledge comes from experience"
+      ],
+      [
+        "RELATIVISM",
+        "Truth depends on perspective or culture"
+      ],
+      [
+        "PRAGMATISM",
+        "Truth is what works, for William James"
+      ],
+      [
+        "SCEPTICISM",
+        "Doubt that certain knowledge is possible"
+      ],
+      [
+        "SOLIPSISM",
+        "Only one's own mind is sure to exist"
+      ],
+      [
+        "ABSURDISM",
+        "Camus's response to a meaningless universe"
+      ],
+      [
+        "STOICISM",
+        "Philosophy of Seneca and Marcus Aurelius"
+      ],
+      [
+        "NIHILISM",
+        "Belief that life has no inherent meaning"
+      ],
+      [
+        "HEDONISM",
+        "Pleasure as the highest good"
+      ],
+      [
+        "CYNICISM",
+        "School of Diogenes, who lived in a large jar"
+      ],
+      [
+        "DUALISM",
+        "Mind and body as distinct substances"
+      ]
+    ]
+  },
+  {
+    "id": "philo-expert",
+    "title": "Thinking Hard",
+    "category": "Philosophy",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "PHENOMENOLOGY",
+        "Husserl's study of the structures of experience"
+      ],
+      [
+        "EPISTEMOLOGY",
+        "Theory of knowledge"
+      ],
+      [
+        "TABULA RASA",
+        "Blank slate, in Locke's account of the mind"
+      ],
+      [
+        "DEONTOLOGY",
+        "Ethics grounded in duties and rules"
+      ],
+      [
+        "EUDAIMONIA",
+        "Aristotle's term for human flourishing"
+      ],
+      [
+        "IMPERATIVE",
+        "Categorical ___: Kant's unconditional moral command"
+      ],
+      [
+        "DIALECTIC",
+        "Method of thesis, antithesis and synthesis"
+      ],
+      [
+        "TELEOLOGY",
+        "Explaining things by their purpose or end"
+      ],
+      [
+        "ONTOLOGY",
+        "Study of being and what exists"
+      ],
+      [
+        "SOPHIST",
+        "Paid teacher of rhetoric in ancient Athens"
+      ],
+      [
+        "APORIA",
+        "State of puzzlement at the end of a Socratic dialogue"
+      ],
+      [
+        "QUALIA",
+        "Subjective qualities of experience, like the redness of red"
+      ],
+      [
+        "RAZOR",
+        "Ockham's ___: don't multiply entities beyond necessity"
+      ],
+      [
+        "MONAD",
+        "Leibniz's simple, indivisible substance"
+      ],
+      [
+        "ZENO",
+        "Thinker behind the paradox of Achilles and the tortoise"
+      ]
+    ]
+  },
+  {
+    "id": "philo-cryptic",
+    "title": "Cryptic Philosophy",
+    "category": "Philosophy",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "REALISM",
+        "Mailers sorted for a down-to-earth outlook",
+        "Anagram ('sorted') of MAILERS. Definition: a down-to-earth outlook."
+      ],
+      [
+        "THINKER",
+        "Consider, er, a philosopher",
+        "THINK (consider) + ER. Definition: a philosopher."
+      ],
+      [
+        "REASON",
+        "Senora, confused, gives cause",
+        "Anagram ('confused') of SENORA. Definition: cause."
+      ],
+      [
+        "IDEAL",
+        "Ailed, strangely, but perfect",
+        "Anagram ('strangely') of AILED. Definition: perfect."
+      ],
+      [
+        "MORAL",
+        "Molar broken, but ethical",
+        "Anagram ('broken') of MOLAR. Definition: ethical."
+      ],
+      [
+        "DOGMA",
+        "Am god, perversely: a fixed doctrine",
+        "Anagram ('perversely') of AM GOD. Definition: a fixed doctrine."
+      ],
+      [
+        "AXIOM",
+        "Self-evident truth found in taxi omnibus",
+        "Hidden in tAXI OMnibus. Definition: self-evident truth."
+      ],
+      [
+        "TENET",
+        "Principle held in ten etchings",
+        "Hidden in TEN ETchings. Definition: principle."
+      ],
+      [
+        "KARMA",
+        "Fate concealed in dark armada",
+        "Hidden in darK ARMAda. Definition: fate."
+      ],
+      [
+        "ETHOS",
+        "Those, rearranged, give a guiding spirit",
+        "Anagram ('rearranged') of THOSE. Definition: a guiding spirit."
+      ],
+      [
+        "SAGE",
+        "Wise person, or herb",
+        "Double definition: a wise person, and a herb."
+      ],
+      [
+        "MUSE",
+        "Ponder, or source of inspiration",
+        "Double definition: to ponder, and a source of inspiration."
+      ]
+    ]
+  },
+  {
+    "id": "general-arts",
+    "title": "Arts & Letters",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "REMBRANDT",
+        "Dutch master who painted The Night Watch"
+      ],
+      [
+        "BEETHOVEN",
+        "Composer who kept writing symphonies after losing his hearing"
+      ],
+      [
+        "LIMERICK",
+        "Five-line comic verse with an AABBA rhyme"
+      ],
+      [
+        "DICKENS",
+        "Creator of Pip, Fagin and Ebenezer Scrooge"
+      ],
+      [
+        "TOLSTOY",
+        "Russian author of War and Peace"
+      ],
+      [
+        "VERMEER",
+        "Painter of Girl with a Pearl Earring"
+      ],
+      [
+        "PICASSO",
+        "Painter of Guernica"
+      ],
+      [
+        "CHAUCER",
+        "Author of The Canterbury Tales"
+      ],
+      [
+        "ODYSSEY",
+        "Epic of a ten-year voyage home from Troy"
+      ],
+      [
+        "ORWELL",
+        "Author of Nineteen Eighty-Four and Animal Farm"
+      ],
+      [
+        "AUSTEN",
+        "Novelist who created Elizabeth Bennet and Mr Darcy"
+      ],
+      [
+        "BRONTE",
+        "Surname shared by Charlotte, Emily and Anne"
+      ],
+      [
+        "MOZART",
+        "Composer of The Magic Flute"
+      ],
+      [
+        "HANDEL",
+        "Composer of Messiah"
+      ],
+      [
+        "SONNET",
+        "Fourteen-line poem, as written by Petrarch"
+      ],
+      [
+        "MILTON",
+        "Poet of Paradise Lost"
+      ],
+      [
+        "TURNER",
+        "British painter of light and sea; also a prize for contemporary art"
+      ],
+      [
+        "HOMER",
+        "Epic poet of the Iliad"
+      ],
+      [
+        "DANTE",
+        "Poet guided through Hell by Virgil"
+      ],
+      [
+        "MONET",
+        "Impressionist of the water lilies at Giverny"
+      ],
+      [
+        "VERDI",
+        "Composer of Aida and La Traviata"
+      ],
+      [
+        "KAFKA",
+        "Author of The Metamorphosis"
+      ]
+    ]
+  },
+  {
+    "id": "general-discovery",
+    "title": "Science & Discovery",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "MENDELEEV",
+        "Chemist who arranged the first widely recognised periodic table"
+      ],
+      [
+        "EINSTEIN",
+        "Physicist behind special and general relativity"
+      ],
+      [
+        "GALILEO",
+        "Astronomer who observed Jupiter's moons in 1610"
+      ],
+      [
+        "FLEMING",
+        "Scientist who noticed penicillin killing bacteria in 1928"
+      ],
+      [
+        "PASTEUR",
+        "Pioneer of germ theory and of heat treatment for milk"
+      ],
+      [
+        "FARADAY",
+        "Pioneer of electromagnetic induction"
+      ],
+      [
+        "ENTROPY",
+        "Measure of disorder that never decreases in an isolated system"
+      ],
+      [
+        "ISOTOPE",
+        "Form of an element with a different number of neutrons"
+      ],
+      [
+        "NEWTON",
+        "Author of the Principia and the laws of motion"
+      ],
+      [
+        "DARWIN",
+        "Naturalist who sailed on HMS Beagle"
+      ],
+      [
+        "HUBBLE",
+        "Astronomer who showed galaxies are moving apart; also a telescope"
+      ],
+      [
+        "HELIUM",
+        "Second element in the periodic table"
+      ],
+      [
+        "PHOTON",
+        "Particle of light"
+      ],
+      [
+        "PULSAR",
+        "Spinning neutron star that sweeps out beams like a lighthouse"
+      ],
+      [
+        "ENZYME",
+        "Protein that speeds up a chemical reaction in the body"
+      ],
+      [
+        "GENOME",
+        "An organism's complete set of DNA"
+      ],
+      [
+        "NEBULA",
+        "Cloud of gas and dust where stars are born"
+      ],
+      [
+        "CURIE",
+        "First person to win Nobel Prizes in two different sciences"
+      ],
+      [
+        "QUARK",
+        "Fundamental particle that makes up protons and neutrons"
+      ],
+      [
+        "HOOKE",
+        "Scientist who coined the word 'cell' in Micrographia"
+      ],
+      [
+        "TESLA",
+        "SI unit of magnetic flux density, named after an inventor"
+      ]
+    ]
+  },
+  {
+    "id": "general-globe",
+    "title": "Around the Globe",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "ULAANBAATAR",
+        "Capital of Mongolia"
+      ],
+      [
+        "KILIMANJARO",
+        "Africa's highest mountain"
+      ],
+      [
+        "REYKJAVIK",
+        "World's most northerly national capital"
+      ],
+      [
+        "ACONCAGUA",
+        "Highest mountain in the Americas"
+      ],
+      [
+        "PATAGONIA",
+        "Region at the southern tip of South America, shared by Argentina and Chile"
+      ],
+      [
+        "BOSPORUS",
+        "Strait that divides Istanbul between Europe and Asia"
+      ],
+      [
+        "TASMANIA",
+        "Island state south of mainland Australia"
+      ],
+      [
+        "MALDIVES",
+        "Asia's smallest country, made up of coral atolls"
+      ],
+      [
+        "NAIROBI",
+        "Capital of Kenya"
+      ],
+      [
+        "ATACAMA",
+        "Chilean desert, one of the driest places on Earth"
+      ],
+      [
+        "ZAMBEZI",
+        "River that plunges over Victoria Falls"
+      ],
+      [
+        "DANUBE",
+        "River flowing through Vienna, Budapest and Belgrade"
+      ],
+      [
+        "MEKONG",
+        "River that flows through Laos, Cambodia and Vietnam"
+      ],
+      [
+        "OTTAWA",
+        "Capital of Canada"
+      ],
+      [
+        "ASTANA",
+        "Capital of Kazakhstan"
+      ],
+      [
+        "BHUTAN",
+        "Himalayan kingdom that measures Gross National Happiness"
+      ],
+      [
+        "HANOI",
+        "Capital of Vietnam"
+      ],
+      [
+        "VOLGA",
+        "Europe's longest river"
+      ],
+      [
+        "GOBI",
+        "Desert spanning southern Mongolia and northern China"
+      ],
+      [
+        "LIMA",
+        "Capital of Peru"
+      ]
+    ]
+  },
+  {
+    "id": "general-myths",
+    "title": "Myths & Legends",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "ARGONAUTS",
+        "Jason's crew in search of the Golden Fleece"
+      ],
+      [
+        "MINOTAUR",
+        "Bull-headed monster of the Cretan labyrinth"
+      ],
+      [
+        "VALHALLA",
+        "Hall where Odin receives warriors slain in battle"
+      ],
+      [
+        "HERCULES",
+        "Roman name for the hero of the twelve labours"
+      ],
+      [
+        "POSEIDON",
+        "Greek god of the sea"
+      ],
+      [
+        "CERBERUS",
+        "Three-headed dog guarding the underworld"
+      ],
+      [
+        "ACHILLES",
+        "Greek hero whose heel was his only weak spot"
+      ],
+      [
+        "CAMELOT",
+        "Seat of King Arthur's court"
+      ],
+      [
+        "CENTAUR",
+        "Half-human, half-horse creature"
+      ],
+      [
+        "PEGASUS",
+        "Winged horse of Greek myth"
+      ],
+      [
+        "OLYMPUS",
+        "Mountain home of the Greek gods"
+      ],
+      [
+        "PANDORA",
+        "She opened the jar that let the world's evils loose"
+      ],
+      [
+        "SPHINX",
+        "Creature whose riddle Oedipus solved"
+      ],
+      [
+        "ANUBIS",
+        "Jackal-headed Egyptian god of the dead"
+      ],
+      [
+        "MEDUSA",
+        "Gorgon whose gaze turned people to stone"
+      ],
+      [
+        "ICARUS",
+        "He flew too close to the Sun on wings of wax"
+      ],
+      [
+        "MERLIN",
+        "Wizard and adviser at Arthur's court"
+      ],
+      [
+        "MIDAS",
+        "King whose touch turned everything to gold"
+      ],
+      [
+        "ZEUS",
+        "King of the Olympian gods"
+      ],
+      [
+        "THOR",
+        "Norse god who wields the hammer Mjolnir"
+      ],
+      [
+        "ODIN",
+        "One-eyed chief of the Norse gods"
+      ],
+      [
+        "LOKI",
+        "Shape-shifting Norse trickster god"
+      ]
+    ]
+  },
+  {
+    "id": "general-turning",
+    "title": "Turning Points",
+    "category": "General knowledge",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "ARMSTRONG",
+        "First person to walk on the Moon"
+      ],
+      [
+        "CHURCHILL",
+        "Wartime leader who offered 'blood, toil, tears and sweat'"
+      ],
+      [
+        "PARTHENON",
+        "Temple to Athena on the Acropolis"
+      ],
+      [
+        "MAGELLAN",
+        "Leader of the first expedition to sail round the world, though he died on the way"
+      ],
+      [
+        "AMUNDSEN",
+        "First to reach the South Pole, in December 1911"
+      ],
+      [
+        "CONCORDE",
+        "Supersonic airliner retired in 2003"
+      ],
+      [
+        "HILLARY",
+        "He reached the summit of Everest with Tenzing Norgay in 1953"
+      ],
+      [
+        "GAGARIN",
+        "First human in space, in 1961"
+      ],
+      [
+        "SPUTNIK",
+        "First artificial satellite, launched in 1957"
+      ],
+      [
+        "TITANIC",
+        "Liner that sank on its maiden voyage in 1912"
+      ],
+      [
+        "ROSETTA",
+        "___ Stone: key to reading Egyptian hieroglyphs"
+      ],
+      [
+        "POMPEII",
+        "Roman town buried by Vesuvius in AD 79"
+      ],
+      [
+        "APOLLO",
+        "NASA programme that landed people on the Moon"
+      ],
+      [
+        "ENIGMA",
+        "German cipher machine broken by the codebreakers"
+      ],
+      [
+        "BERLIN",
+        "City divided by a wall from 1961 to 1989"
+      ],
+      [
+        "ANGKOR",
+        "___ Wat: vast temple complex in Cambodia"
+      ],
+      [
+        "PETRA",
+        "Rose-red city carved into rock in Jordan"
+      ],
+      [
+        "SCOTT",
+        "Explorer who reached the South Pole in January 1912 but died on the way back"
+      ],
+      [
+        "COOK",
+        "Captain who charted New Zealand and Australia's east coast"
+      ],
+      [
+        "INCA",
+        "Empire that built the citadel of Machu Picchu"
+      ]
+    ]
+  },
+  {
+    "id": "hist-basics",
+    "title": "Through the Ages",
+    "category": "History",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "REVOLUTION",
+        "Overthrow of a government, as in France in 1789"
+      ],
+      [
+        "PARLIAMENT",
+        "Lawmaking body that meets at Westminster"
+      ],
+      [
+        "ARMISTICE",
+        "Agreement that ended the fighting on 11 November 1918"
+      ],
+      [
+        "STONE AGE",
+        "Earliest period of human prehistory"
+      ],
+      [
+        "CRUSADES",
+        "Medieval religious wars over the Holy Land"
+      ],
+      [
+        "MONARCH",
+        "King or queen"
+      ],
+      [
+        "PEASANT",
+        "Poor farm worker of the Middle Ages"
+      ],
+      [
+        "CHARIOT",
+        "Two-wheeled horse-drawn war cart"
+      ],
+      [
+        "CASTLE",
+        "Fortified home of a medieval lord"
+      ],
+      [
+        "KNIGHT",
+        "Armoured warrior on horseback"
+      ],
+      [
+        "EMPIRE",
+        "Many lands ruled by one emperor"
+      ],
+      [
+        "PLAGUE",
+        "The Black Death, for one"
+      ],
+      [
+        "TRENCH",
+        "Long ditch where soldiers sheltered on the Western Front"
+      ],
+      [
+        "COLONY",
+        "Territory ruled by a distant country"
+      ],
+      [
+        "MUMMY",
+        "Preserved body wrapped in bandages"
+      ]
+    ]
+  },
+  {
+    "id": "hist-monarchs",
+    "title": "Kings & Queens",
+    "category": "History",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "PLANTAGENET",
+        "Royal house that ruled England from 1154 to 1485, in various branches"
+      ],
+      [
+        "ABDICATION",
+        "Edward VIII's giving up of the throne in 1936"
+      ],
+      [
+        "CORONATION",
+        "Crowning ceremony held at Westminster Abbey"
+      ],
+      [
+        "ELIZABETH",
+        "Name shared by the queen who saw off the Armada and Britain's longest-reigning monarch"
+      ],
+      [
+        "VICTORIA",
+        "Queen who reigned for most of the 19th century"
+      ],
+      [
+        "CROMWELL",
+        "Lord Protector after the execution of Charles I"
+      ],
+      [
+        "BOSWORTH",
+        "Battle of 1485 that ended the Wars of the Roses"
+      ],
+      [
+        "WINDSOR",
+        "Royal house name adopted in 1917"
+      ],
+      [
+        "RICHARD",
+        "___ the Lionheart"
+      ],
+      [
+        "ALFRED",
+        "Anglo-Saxon king known as 'the Great'"
+      ],
+      [
+        "CANUTE",
+        "Danish king of England, said to have commanded the tide"
+      ],
+      [
+        "BOLEYN",
+        "Anne ___, queen beheaded in 1536"
+      ],
+      [
+        "STUART",
+        "Dynasty of James I and Charles II"
+      ],
+      [
+        "NORMAN",
+        "___ Conquest of 1066"
+      ],
+      [
+        "HENRY",
+        "Tudor king with six wives"
+      ]
+    ]
+  },
+  {
+    "id": "hist-world",
+    "title": "World History",
+    "category": "History",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "MESOPOTAMIA",
+        "Land between the Tigris and the Euphrates"
+      ],
+      [
+        "CHARLEMAGNE",
+        "Frankish king crowned emperor in 800"
+      ],
+      [
+        "BOLSHEVIKS",
+        "Lenin's faction that seized power in 1917"
+      ],
+      [
+        "BYZANTIUM",
+        "Old name for the city later called Constantinople"
+      ],
+      [
+        "HAMMURABI",
+        "Babylonian king famed for his code of laws"
+      ],
+      [
+        "CLEOPATRA",
+        "Last active ruler of Ptolemaic Egypt"
+      ],
+      [
+        "APARTHEID",
+        "South Africa's system of racial segregation, ended in the early 1990s"
+      ],
+      [
+        "OTTOMAN",
+        "Empire that captured Constantinople in 1453"
+      ],
+      [
+        "SAMURAI",
+        "Japanese warrior class"
+      ],
+      [
+        "MANDELA",
+        "Prisoner who became South Africa's president in 1994"
+      ],
+      [
+        "GENGHIS",
+        "___ Khan, founder of the Mongol Empire"
+      ],
+      [
+        "RUBICON",
+        "River Caesar crossed in 49 BC"
+      ],
+      [
+        "GANDHI",
+        "Leader of India's non-violent independence movement"
+      ],
+      [
+        "SPARTA",
+        "Militaristic Greek rival of Athens"
+      ],
+      [
+        "MING",
+        "Chinese dynasty behind much of the Great Wall as it stands today"
+      ]
+    ]
+  },
+  {
+    "id": "hist-expert",
+    "title": "Deep History",
+    "category": "History",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "PELOPONNESIAN",
+        "___ War: Athens against Sparta"
+      ],
+      [
+        "RISORGIMENTO",
+        "Nineteenth-century movement to unify Italy"
+      ],
+      [
+        "THERMOPYLAE",
+        "Pass held by Leonidas and his Spartans in 480 BC"
+      ],
+      [
+        "VERSAILLES",
+        "Treaty of 1919 imposed on Germany"
+      ],
+      [
+        "WESTPHALIA",
+        "Peace of 1648 that ended the Thirty Years' War"
+      ],
+      [
+        "SUMERIANS",
+        "People credited with inventing cuneiform writing"
+      ],
+      [
+        "AGINCOURT",
+        "Henry V's victory of 1415"
+      ],
+      [
+        "CHARTISTS",
+        "Campaigners for the People's Charter of 1838"
+      ],
+      [
+        "CARTHAGE",
+        "Hannibal's city, destroyed by Rome in 146 BC"
+      ],
+      [
+        "CULLODEN",
+        "Last pitched battle on British soil, in 1746"
+      ],
+      [
+        "HITTITES",
+        "Bronze Age empire of Anatolia"
+      ],
+      [
+        "LUDDITES",
+        "Machine-breaking textile workers of the 1810s"
+      ],
+      [
+        "DOMESDAY",
+        "___ Book: William I's great survey of 1086"
+      ],
+      [
+        "ZIGGURAT",
+        "Stepped temple tower of ancient Mesopotamia"
+      ],
+      [
+        "MEIJI",
+        "Restoration that began Japan's rapid modernisation in 1868"
+      ]
+    ]
+  },
+  {
+    "id": "hist-cryptic",
+    "title": "Cryptic History",
+    "category": "History",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "ARMOUR",
+        "Limb belonging to us gives protection",
+        "ARM (limb) + OUR (belonging to us). Definition: protection."
+      ],
+      [
+        "HELMET",
+        "Steering gear and alien headgear",
+        "HELM (steering gear) + ET (alien). Definition: headgear."
+      ],
+      [
+        "TREATY",
+        "Entertain, year: a peace agreement",
+        "TREAT (entertain) + Y (year). Definition: a peace agreement."
+      ],
+      [
+        "ROMAN",
+        "Manor rebuilt for an ancient Italian",
+        "Anagram ('rebuilt') of MANOR. Definition: an ancient Italian."
+      ],
+      [
+        "REIGN",
+        "Niger, oddly, for a monarch's rule",
+        "Anagram ('oddly') of NIGER. Definition: a monarch's rule."
+      ],
+      [
+        "RELIC",
+        "Ancient object seen in squirrel icon",
+        "Hidden in squirREL ICon. Definition: ancient object."
+      ],
+      [
+        "SWORD",
+        "Words cut up for a blade",
+        "Anagram ('cut up') of WORDS. Definition: a blade."
+      ],
+      [
+        "SPEAR",
+        "Pears, sliced, make a weapon",
+        "Anagram ('sliced') of PEARS. Definition: a weapon."
+      ],
+      [
+        "BARON",
+        "Pub in use for a nobleman",
+        "BAR (pub) + ON (in use). Definition: a nobleman."
+      ],
+      [
+        "FORT",
+        "Stronghold in favour of time",
+        "FOR (in favour of) + T (time). Definition: stronghold."
+      ],
+      [
+        "RUIN",
+        "Wreck spotted in Peru, inland",
+        "Hidden in peRU INland. Definition: wreck."
+      ],
+      [
+        "PAST",
+        "Taps broken? That's history",
+        "Anagram ('broken') of TAPS. Definition: history."
+      ]
+    ]
+  },
+  {
+    "id": "geo-basics",
+    "title": "Planet Earth",
+    "category": "Geography",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "CONTINENT",
+        "One of Earth's seven great landmasses"
+      ],
+      [
+        "WATERFALL",
+        "Niagara or Victoria, for example"
+      ],
+      [
+        "MOUNTAIN",
+        "Peak such as Ben Nevis"
+      ],
+      [
+        "LATITUDE",
+        "Distance north or south of the equator"
+      ],
+      [
+        "PRAIRIE",
+        "Grassland of the American Midwest"
+      ],
+      [
+        "CAPITAL",
+        "City where a country's government sits"
+      ],
+      [
+        "ISLAND",
+        "Land surrounded by water"
+      ],
+      [
+        "DESERT",
+        "Very dry region"
+      ],
+      [
+        "VALLEY",
+        "Low land between hills"
+      ],
+      [
+        "CANYON",
+        "Deep gorge, like the Grand one in Arizona"
+      ],
+      [
+        "JUNGLE",
+        "Dense tropical forest"
+      ],
+      [
+        "LAGOON",
+        "Shallow water cut off from the sea by a reef or sandbar"
+      ],
+      [
+        "OCEAN",
+        "The Pacific, for one"
+      ],
+      [
+        "RIVER",
+        "Flowing body of fresh water"
+      ],
+      [
+        "COAST",
+        "Where land meets sea"
+      ]
+    ]
+  },
+  {
+    "id": "geo-capitals",
+    "title": "Capital Cities",
+    "category": "Geography",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "BUENOS AIRES",
+        "Argentina's capital"
+      ],
+      [
+        "NEW DELHI",
+        "India's capital"
+      ],
+      [
+        "BRASILIA",
+        "Brazil's purpose-built capital"
+      ],
+      [
+        "KINSHASA",
+        "Capital of the Democratic Republic of the Congo"
+      ],
+      [
+        "HELSINKI",
+        "Finland's capital"
+      ],
+      [
+        "BANGKOK",
+        "Thailand's capital"
+      ],
+      [
+        "MADRID",
+        "Spain's capital"
+      ],
+      [
+        "LISBON",
+        "Portugal's capital"
+      ],
+      [
+        "ATHENS",
+        "Greece's capital"
+      ],
+      [
+        "VIENNA",
+        "Austria's capital"
+      ],
+      [
+        "WARSAW",
+        "Poland's capital"
+      ],
+      [
+        "DUBLIN",
+        "Ireland's capital"
+      ],
+      [
+        "PRAGUE",
+        "Capital of the Czech Republic"
+      ],
+      [
+        "SEOUL",
+        "South Korea's capital"
+      ],
+      [
+        "OSLO",
+        "Norway's capital"
+      ]
+    ]
+  },
+  {
+    "id": "geo-features",
+    "title": "Rivers, Peaks & Lakes",
+    "category": "Geography",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "MISSISSIPPI",
+        "River that reaches the sea below New Orleans"
+      ],
+      [
+        "MATTERHORN",
+        "Pyramid-shaped Alpine peak on the Swiss-Italian border"
+      ],
+      [
+        "TITICACA",
+        "High lake shared by Peru and Bolivia"
+      ],
+      [
+        "SUPERIOR",
+        "Largest of North America's Great Lakes"
+      ],
+      [
+        "YANGTZE",
+        "Asia's longest river"
+      ],
+      [
+        "CASPIAN",
+        "Largest inland body of water, between Europe and Asia"
+      ],
+      [
+        "NIAGARA",
+        "Falls on the US-Canada border"
+      ],
+      [
+        "SEVERN",
+        "Britain's longest river"
+      ],
+      [
+        "GANGES",
+        "Sacred river of northern India"
+      ],
+      [
+        "DENALI",
+        "North America's highest peak"
+      ],
+      [
+        "ELBRUS",
+        "Europe's highest mountain, in the Caucasus"
+      ],
+      [
+        "BAIKAL",
+        "World's deepest lake, in Siberia"
+      ],
+      [
+        "RHINE",
+        "River flowing from the Swiss Alps to the North Sea"
+      ],
+      [
+        "FUJI",
+        "Japan's sacred volcano"
+      ],
+      [
+        "ETNA",
+        "Sicily's active volcano"
+      ]
+    ]
+  },
+  {
+    "id": "geo-expert",
+    "title": "Shaping the Land",
+    "category": "Geography",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "ANTICYCLONE",
+        "High-pressure weather system bringing settled weather"
+      ],
+      [
+        "PERMAFROST",
+        "Ground that stays frozen all year round"
+      ],
+      [
+        "STALACTITE",
+        "Cave formation that hangs from the roof"
+      ],
+      [
+        "WATERSHED",
+        "Ridge dividing two drainage basins"
+      ],
+      [
+        "ALLUVIUM",
+        "Silt and sand deposited by rivers"
+      ],
+      [
+        "DRUMLIN",
+        "Egg-shaped hill moulded by moving ice"
+      ],
+      [
+        "MORAINE",
+        "Rock debris dumped by a glacier"
+      ],
+      [
+        "TOMBOLO",
+        "Sand bar linking an island to the mainland"
+      ],
+      [
+        "ISTHMUS",
+        "Narrow neck of land joining two larger areas"
+      ],
+      [
+        "MEANDER",
+        "Winding bend in a river"
+      ],
+      [
+        "CALDERA",
+        "Huge crater left when a volcano collapses"
+      ],
+      [
+        "SIROCCO",
+        "Hot wind blowing from North Africa across the Mediterranean"
+      ],
+      [
+        "TUNDRA",
+        "Treeless Arctic plain"
+      ],
+      [
+        "ESKER",
+        "Long gravel ridge left by a glacial stream"
+      ],
+      [
+        "FJORD",
+        "Deep sea inlet carved by glaciers"
+      ]
+    ]
+  },
+  {
+    "id": "geo-cryptic",
+    "title": "Cryptic Geography",
+    "category": "Geography",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "STREAM",
+        "Master, in flux, becomes a brook",
+        "Anagram ('in flux') of MASTER. Definition: a brook."
+      ],
+      [
+        "TURKEY",
+        "Country, or Christmas bird",
+        "Double definition: a country, and a Christmas bird."
+      ],
+      [
+        "CHINA",
+        "Country, or fine porcelain",
+        "Double definition: a country, and fine porcelain."
+      ],
+      [
+        "ATLAS",
+        "A salt, scattered, makes a book of maps",
+        "Anagram ('scattered') of A SALT. Definition: a book of maps."
+      ],
+      [
+        "NEPAL",
+        "Plane crashed in a Himalayan country",
+        "Anagram ('crashed') of PLANE. Definition: a Himalayan country."
+      ],
+      [
+        "SPAIN",
+        "Pains, treated, in an Iberian country",
+        "Anagram ('treated') of PAINS. Definition: an Iberian country."
+      ],
+      [
+        "ITALY",
+        "Laity in disarray in a European country",
+        "Anagram ('in disarray') of LAITY. Definition: a European country."
+      ],
+      [
+        "WALES",
+        "Weals, oddly, form a country",
+        "Anagram ('oddly') of WEALS. Definition: a country."
+      ],
+      [
+        "PERU",
+        "Country found in super union",
+        "Hidden in suPER Union. Definition: country."
+      ],
+      [
+        "OMAN",
+        "Country hidden in woman",
+        "Hidden in wOMAN. Definition: country."
+      ],
+      [
+        "MALI",
+        "African country hidden in Somalia",
+        "Hidden in soMALIa. Definition: African country."
+      ],
+      [
+        "CUBA",
+        "Island seen in incubator",
+        "Hidden in inCUBAtor. Definition: island."
+      ]
+    ]
+  },
+  {
+    "id": "sci-basics",
+    "title": "Lab Basics",
+    "category": "Science",
+    "difficulty": "Easy",
+    "words": [
+      [
+        "MICROSCOPE",
+        "Instrument for seeing very small things"
+      ],
+      [
+        "DIGESTION",
+        "Breaking down food in the body"
+      ],
+      [
+        "SKELETON",
+        "The body's framework of bones"
+      ],
+      [
+        "FRICTION",
+        "Force that resists sliding"
+      ],
+      [
+        "VACCINE",
+        "Jab that trains the immune system"
+      ],
+      [
+        "ELEMENT",
+        "Substance such as iron or gold that can't be broken down chemically"
+      ],
+      [
+        "BATTERY",
+        "Power pack for a torch or phone"
+      ],
+      [
+        "PLANET",
+        "Mars or Venus, for example"
+      ],
+      [
+        "ENERGY",
+        "Capacity to do work"
+      ],
+      [
+        "LIQUID",
+        "State of matter between solid and gas"
+      ],
+      [
+        "INSECT",
+        "Six-legged creature"
+      ],
+      [
+        "HEART",
+        "Organ that pumps blood"
+      ],
+      [
+        "LUNGS",
+        "Organs that take in air"
+      ],
+      [
+        "METAL",
+        "Iron, copper or tin"
+      ],
+      [
+        "ACID",
+        "Lemon juice or vinegar, chemically speaking"
+      ]
+    ]
+  },
+  {
+    "id": "sci-biology",
+    "title": "Body & Biology",
+    "category": "Science",
+    "difficulty": "Medium",
+    "words": [
+      [
+        "HAEMOGLOBIN",
+        "Iron-rich pigment that carries oxygen in red blood cells"
+      ],
+      [
+        "CHROMOSOME",
+        "Thread-like package of DNA; humans have 46"
+      ],
+      [
+        "CARTILAGE",
+        "Flexible tissue in the nose and ears"
+      ],
+      [
+        "VERTEBRA",
+        "One of the bones of the spine"
+      ],
+      [
+        "ANTIBODY",
+        "Molecule that tags invaders for the immune system"
+      ],
+      [
+        "PANCREAS",
+        "Gland behind the stomach that makes digestive juices"
+      ],
+      [
+        "BACTERIA",
+        "Single-celled microbes, some useful, some harmful"
+      ],
+      [
+        "INSULIN",
+        "Hormone that controls blood sugar"
+      ],
+      [
+        "MITOSIS",
+        "Cell division that produces two identical cells"
+      ],
+      [
+        "PROTEIN",
+        "Nutrient built from amino acids"
+      ],
+      [
+        "CORNEA",
+        "Clear front layer of the eye"
+      ],
+      [
+        "KIDNEY",
+        "Organ that filters blood to make urine"
+      ],
+      [
+        "RETINA",
+        "Light-sensitive layer at the back of the eye"
+      ],
+      [
+        "PLASMA",
+        "Liquid part of the blood"
+      ],
+      [
+        "FEMUR",
+        "Thigh bone, the longest in the body"
+      ]
+    ]
+  },
+  {
+    "id": "sci-physics",
+    "title": "Physics & Chemistry",
+    "category": "Science",
+    "difficulty": "Hard",
+    "words": [
+      [
+        "ACCELERATION",
+        "Rate of change of velocity"
+      ],
+      [
+        "WAVELENGTH",
+        "Distance between successive peaks of a wave"
+      ],
+      [
+        "REFRACTION",
+        "Bending of light as it passes from one material to another"
+      ],
+      [
+        "OXIDATION",
+        "Chemical change behind rust forming on iron"
+      ],
+      [
+        "ELECTRON",
+        "Negatively charged particle"
+      ],
+      [
+        "MOMENTUM",
+        "Mass multiplied by velocity"
+      ],
+      [
+        "CATALYST",
+        "Speeds up a reaction without being used up"
+      ],
+      [
+        "HYDROGEN",
+        "Lightest element"
+      ],
+      [
+        "NEUTRON",
+        "Uncharged particle in an atomic nucleus"
+      ],
+      [
+        "VOLTAGE",
+        "Electrical potential difference"
+      ],
+      [
+        "INERTIA",
+        "Resistance to a change in motion"
+      ],
+      [
+        "DENSITY",
+        "Mass per unit volume"
+      ],
+      [
+        "PROTON",
+        "Positively charged particle in an atomic nucleus"
+      ],
+      [
+        "KELVIN",
+        "Temperature scale that starts at absolute zero"
+      ],
+      [
+        "ALLOY",
+        "Mixture of metals, such as bronze"
+      ]
+    ]
+  },
+  {
+    "id": "sci-expert",
+    "title": "Frontiers",
+    "category": "Science",
+    "difficulty": "Expert",
+    "words": [
+      [
+        "SUPERCONDUCTOR",
+        "Material with zero electrical resistance when very cold"
+      ],
+      [
+        "SPECTROSCOPY",
+        "Analysing light to find what something is made of"
+      ],
+      [
+        "ENTANGLEMENT",
+        "Quantum link between particles however far apart"
+      ],
+      [
+        "EPIGENETICS",
+        "Changes in gene activity that don't alter the DNA sequence"
+      ],
+      [
+        "TARDIGRADE",
+        "Microscopic 'water bear' that survives extreme conditions"
+      ],
+      [
+        "EXOPLANET",
+        "World orbiting a star other than the Sun"
+      ],
+      [
+        "NEUTRINO",
+        "Almost massless particle that streams through you by the trillion"
+      ],
+      [
+        "GRAPHENE",
+        "Sheet of carbon one atom thick"
+      ],
+      [
+        "CRISPR",
+        "Gene-editing tool adapted from a bacterial defence system"
+      ],
+      [
+        "QUASAR",
+        "Extremely bright core of a distant galaxy"
+      ],
+      [
+        "ALLELE",
+        "One of the alternative forms of a gene"
+      ],
+      [
+        "ISOMER",
+        "Molecule with the same formula as another but a different structure"
+      ],
+      [
+        "HIGGS",
+        "___ boson, confirmed at CERN in 2012"
+      ],
+      [
+        "PRION",
+        "Misfolded protein that can cause disease"
+      ],
+      [
+        "BIOME",
+        "Large ecological community, such as rainforest or tundra"
+      ]
+    ]
+  },
+  {
+    "id": "sci-cryptic",
+    "title": "Cryptic Science",
+    "category": "Science",
+    "difficulty": "Cryptic",
+    "words": [
+      [
+        "COMET",
+        "Arrive at time for a celestial visitor",
+        "COME (arrive) + T (time). Definition: a celestial visitor."
+      ],
+      [
+        "PRISM",
+        "Prudish, holding small, light-splitting glass",
+        "PRIM (prudish) holding S (small). Definition: light-splitting glass."
+      ],
+      [
+        "LASER",
+        "Earls, upset, produce a beam",
+        "Anagram ('upset') of EARLS. Definition: a beam."
+      ],
+      [
+        "NEON",
+        "None, oddly, a noble gas",
+        "Anagram ('oddly') of NONE. Definition: a noble gas."
+      ],
+      [
+        "HEAT",
+        "Hate turned into warmth",
+        "Anagram ('turned') of HATE. Definition: warmth."
+      ],
+      [
+        "IRON",
+        "Metal found in biro nib",
+        "Hidden in bIRO Nib. Definition: metal."
+      ],
+      [
+        "GOLD",
+        "Precious metal found in bog, older",
+        "Hidden in boG OLDer. Definition: precious metal."
+      ],
+      [
+        "LENS",
+        "Optical glass in fallen snow",
+        "Hidden in falLEN Snow. Definition: optical glass."
+      ],
+      [
+        "GENE",
+        "Unit of heredity in Eugene",
+        "Hidden in euGENE. Definition: unit of heredity."
+      ],
+      [
+        "OHM",
+        "Resistance unit in 'Oh my!'",
+        "Hidden in OH My. Definition: resistance unit."
+      ],
+      [
+        "CELL",
+        "Prison room, or unit of life",
+        "Double definition: a prison room, and the basic unit of life."
+      ],
+      [
+        "MASS",
+        "Amount of matter, or church service",
+        "Double definition: amount of matter, and a church service."
+      ]
+    ]
+  }
+]
