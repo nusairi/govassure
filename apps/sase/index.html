@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SASE — ZTNA, Defence in Depth &amp; PAM fulfilment</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L29 7.5V18c0 6.5-5.5 11.5-13 13C5.5 29.5 3 24.5 3 18V7.5Z' fill='%230c1424'/%3E%3Cpath d='M16 2L29 7.5V18c0 6.5-5.5 11.5-13 13C5.5 29.5 3 24.5 3 18V7.5Z' fill='none' stroke='%23f6b53c' stroke-width='2'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='%23f6b53c'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#0c1424;--bg-2:#0a0f1c;
+    --panel:#0f1a30;--node:#16233f;--node-line:#2a3a5c;
+    --ink:#eaf0fb;--ink-mute:#93a6c9;--ink-faint:#5d6f93;
+    --ztna:#f6b53c;--ztna-soft:#ffd587;
+    --did:#28d8ef;--did-soft:#7bf0de;
+    --pam:#c879f0;--pam-soft:#e6b6ff;
+    --inspect:#a78bfa;--grant:#34e0a1;--block:#ff6b6b;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Inter',system-ui,sans-serif;
+    --disp:'Space Grotesk','Inter',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--sans);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at 72% -10%, #142545 0%, transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, #10203c 0%, transparent 55%),
+      linear-gradient(160deg,var(--bg-1),var(--bg-2));
+  }
+  .wrap{max-width:1280px;margin:0 auto;padding:28px 22px 60px}
+
+  header.hd{margin-bottom:16px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 8px}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(23px,3.3vw,36px);line-height:1.05;margin:0;letter-spacing:-.01em}
+  h1 .thin{color:var(--ink-mute);font-weight:400}
+  .sub{margin:10px 0 0;color:var(--ink-mute);max-width:70ch;font-size:14.5px;line-height:1.55}
+
+  /* lens selector */
+  .lensbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 14px}
+  .lens{
+    flex:1 1 220px;min-width:200px;text-align:left;cursor:pointer;
+    background:#0b1426;border:1px solid var(--node-line);border-radius:12px;padding:12px 14px;
+    transition:.2s;position:relative;overflow:hidden
+  }
+  .lens:hover{border-color:var(--edge,#3a4d75)}
+  .lens .lk{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+  .lens .lt{font-family:var(--disp);font-weight:600;font-size:16px;margin-top:3px;color:var(--ink)}
+  .lens .ld{font-size:11.5px;color:var(--ink-mute);margin-top:4px;line-height:1.4}
+  .lens .bar{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--node-line);transition:.2s}
+  .lens[data-lens="ztna"] .bar{background:var(--ztna)}
+  .lens[data-lens="did"] .bar{background:var(--did)}
+  .lens[data-lens="pam"] .bar{background:var(--pam)}
+  .lens.on{background:#101d36}
+  .lens[data-lens="ztna"].on{border-color:var(--ztna);box-shadow:0 0 0 1px var(--ztna) inset, 0 6px 24px -12px var(--ztna)}
+  .lens[data-lens="did"].on{border-color:var(--did);box-shadow:0 0 0 1px var(--did) inset, 0 6px 24px -12px var(--did)}
+  .lens[data-lens="pam"].on{border-color:var(--pam);box-shadow:0 0 0 1px var(--pam) inset, 0 6px 24px -12px var(--pam)}
+
+  .minictl{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+  .ctl{font-family:var(--mono);font-size:12px;color:var(--ink-mute);background:#0b1426;border:1px solid var(--node-line);border-radius:8px;padding:7px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.18s}
+  .ctl:hover{color:var(--ink);border-color:#3a4d75}
+  .ctl svg{width:13px;height:13px}
+  .speed input{accent-color:var(--did);width:96px}
+  .statusline{margin-left:auto;color:var(--ink-mute)}
+  .statusline b{color:var(--ink)}
+
+  .stage{border:1px solid var(--node-line);border-radius:16px;overflow:hidden;background:var(--panel);position:relative}
+  .stage svg{display:block;width:100%;height:auto}
+  .zlabel{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  .n-title{font-family:var(--disp);font-weight:600;font-size:13px}
+  .n-sub{font-family:var(--mono);font-size:10px;letter-spacing:.01em}
+  .comp{transition:opacity .3s}
+
+  /* requirements panel */
+  .reqwrap{margin-top:16px;border:1px solid var(--node-line);border-radius:14px;overflow:hidden}
+  .reqhead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--node-line);background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
+  .reqhead .chip{width:12px;height:12px;border-radius:3px}
+  .reqhead h2{font-family:var(--disp);font-weight:600;font-size:17px;margin:0}
+  .reqhead p{margin:0;color:var(--ink-mute);font-size:12.5px}
+  .reqgrid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--node-line)}
+  .req{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:18px;background:var(--panel);
+    padding:13px 18px;cursor:default;transition:.18s
+  }
+  .req:hover,.req.active{background:#13203a}
+  .req .r-need{display:flex;gap:11px;align-items:flex-start}
+  .req .r-no{font-family:var(--mono);font-size:11px;color:var(--ink-faint);padding-top:2px;min-width:20px}
+  .req .r-need .t{font-size:13.5px;color:var(--ink);line-height:1.45}
+  .req .r-fix{display:flex;gap:9px;align-items:flex-start}
+  .req .r-fix .pin{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none;background:var(--ink-faint);transition:.18s}
+  .req .r-fix .ft{font-size:12.5px;color:var(--ink-mute);line-height:1.45}
+  .req .r-fix .ft b{color:var(--ink);font-weight:600}
+  .req.active .pin{transform:scale(1.5)}
+  .req .colhead{display:none}
+  .reqgrid .colrow{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;background:#0c1628;padding:8px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+
+  .foot{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+  .foot b{color:var(--ink-mute);font-weight:500}
+
+  @media (max-width:760px){
+    .req{grid-template-columns:1fr;gap:8px}
+    .reqgrid .colrow{display:none}
+    .lensbar{flex-direction:column}
+  }
+  @media (prefers-reduced-motion:reduce){.pulse-ring{display:none}}
+
+  /* ===== LIGHT THEME ===== */
+  html[data-theme="light"]{
+    --bg-1:#eef2fa;--bg-2:#e4ecf7;
+    --panel:#f4f8ff;--node:#ffffff;--node-line:#c5d2e8;
+    --ink:#0d1726;--ink-mute:#2e4068;--ink-faint:#5a6e92;
+  }
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(1200px 600px at 72% -10%,#cddaf5 0%,transparent 60%),
+      radial-gradient(900px 500px at 0% 110%,#c5d5f0 0%,transparent 55%),
+      linear-gradient(160deg,var(--bg-1),var(--bg-2));
+  }
+  html[data-theme="light"] .lens{background:#f0f5ff}
+  html[data-theme="light"] .lens.on{background:#e8f0ff}
+  html[data-theme="light"] .ctl{background:#f0f5ff}
+  html[data-theme="light"] .req{background:var(--panel)}
+  html[data-theme="light"] .req:hover,html[data-theme="light"] .req.active{background:#e8f0ff}
+  html[data-theme="light"] .reqgrid .colrow{background:#e0eaf8}
+  /* SVG: access + destination nodes */
+  html[data-theme="light"] [data-comp="user-std"] rect,
+  html[data-theme="light"] [data-comp="user-priv"] rect,
+  html[data-theme="light"] [data-comp="branch"] rect,
+  html[data-theme="light"] [data-comp="dest-net"] rect,
+  html[data-theme="light"] [data-comp="dest-saas"] rect,
+  html[data-theme="light"] [data-comp="dest-app"] rect,
+  html[data-theme="light"] [data-comp="dest-infra"] rect{fill:#fff;stroke:#c5d2e8}
+  /* SVG: PoP interior nodes */
+  html[data-theme="light"] [data-comp="ztna"] rect,
+  html[data-theme="light"] [data-comp="policy"] rect,
+  html[data-theme="light"] [data-comp="contauth"] rect{fill:#f0f5ff;stroke:#c5d2e8}
+  html[data-theme="light"] [data-comp="idp"] rect{fill:#fffaf0}
+  html[data-theme="light"] [data-comp="fwaas"] rect,
+  html[data-theme="light"] [data-comp="swg"] rect,
+  html[data-theme="light"] [data-comp="casb"] rect,
+  html[data-theme="light"] [data-comp="dlp"] rect,
+  html[data-theme="light"] [data-comp="threat"] rect{fill:#f0f5ff;stroke:#c5d2e8}
+  html[data-theme="light"] [data-comp="pam-vault"] rect,
+  html[data-theme="light"] [data-comp="pam-jit"] rect,
+  html[data-theme="light"] [data-comp="pam-rec"] rect{fill:#f8f0ff;stroke:#c5a8e0}
+  /* SVG: text */
+  html[data-theme="light"] .n-title{fill:#0d1726}
+  html[data-theme="light"] .n-sub{fill:#2e4068}
+  html[data-theme="light"] .zlabel{fill:#6070a0}
+  /* SVG: structure */
+  html[data-theme="light"] line[stroke="#1c2942"]{stroke:#c5d2e8}
+  html[data-theme="light"] g[stroke="#23344f"]{stroke:#c5d2e8}
+  html[data-theme="light"] #popRect{stroke:#a0b8d8}
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=19f24420f2" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+  <header class="hd">
+    <p class="eyebrow">Secure by Design · Controls Assurance</p>
+    <h1>SASE <span class="thin">— how ZTNA, Defence in Depth &amp; PAM are fulfilled</span></h1>
+    <p class="sub">Converged Secure Access Service Edge, viewed as a controls map. Pick a lens to focus the components involved, watch how a request is handled, and trace each requirement to the architectural control that satisfies it.</p>
+  </header>
+
+  <div class="lensbar" role="tablist" aria-label="Control lens">
+    <button class="lens on" data-lens="ztna" role="tab" aria-selected="true">
+      <span class="bar"></span>
+      <span class="lk">Lens 01</span>
+      <div class="lt">Zero Trust Network Access</div>
+      <div class="ld">Verify explicitly · least privilege · per-app, no lateral movement</div>
+    </button>
+    <button class="lens" data-lens="did" role="tab">
+      <span class="bar"></span>
+      <span class="lk">Lens 02</span>
+      <div class="lt">Defence in Depth</div>
+      <div class="ld">Overlapping inspection planes — network · web · cloud · data · threat</div>
+    </button>
+    <button class="lens" data-lens="pam" role="tab">
+      <span class="bar"></span>
+      <span class="lk">Lens 03</span>
+      <div class="lt">Privileged Access Management</div>
+      <div class="ld">No standing creds · JIT elevation · brokered, recorded sessions</div>
+    </button>
+  </div>
+
+  <div class="minictl">
+    <button class="ctl" id="themeBtn" aria-label="Switch to light theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <span id="themeLbl">Light</span>
+    </button>
+    <button class="ctl" id="playBtn" aria-label="Pause animation">
+      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <span id="playLbl">Pause</span>
+    </button>
+    <span>Speed</span>
+    <span class="speed"><input id="speed" type="range" min="0.4" max="2.2" step="0.05" value="1" aria-label="Speed"></span>
+    <span class="statusline" id="status">—</span>
+  </div>
+
+  <div class="stage">
+    <!-- viewBox 1200×760 to accommodate the vertical inspection-plane stack -->
+    <svg id="diagram" viewBox="0 0 1200 760" role="img" aria-label="SASE controls map">
+      <defs>
+        <linearGradient id="popGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a2c4f"/><stop offset="1" stop-color="#121f39"/>
+        </linearGradient>
+        <linearGradient id="popGradLight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e8f0ff"/><stop offset="1" stop-color="#dce8ff"/>
+        </linearGradient>
+        <!-- Subtle gradient for inspection-plane bands -->
+        <linearGradient id="osiGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#1a2f50"/><stop offset="1" stop-color="#13243f"/>
+        </linearGradient>
+      </defs>
+
+      <text class="zlabel" x="150" y="34" fill="#5d6f93" text-anchor="middle">Access edge</text>
+      <text class="zlabel" x="610" y="34" fill="#7bd0e0" text-anchor="middle">SASE cloud PoP</text>
+      <text class="zlabel" x="1050" y="34" fill="#5d6f93" text-anchor="middle">Destinations</text>
+      <line x1="292" y1="48" x2="292" y2="740" stroke="#1c2942" stroke-dasharray="2 6"/>
+      <line x1="930" y1="48" x2="930" y2="740" stroke="#1c2942" stroke-dasharray="2 6"/>
+
+      <!-- paths (ingress/egress anchor at y=360 — vertical mid-point of taller PoP) -->
+      <g id="paths" fill="none">
+        <path id="p-std-in"  d="M 240,118 C 320,118 300,360 350,360"/>
+        <path id="p-priv-in" d="M 240,206 C 320,206 320,360 350,360"/>
+        <path id="p-branch-in" d="M 240,338 C 312,338 318,360 350,360"/>
+        <path id="p-out-net"  d="M 872,360 C 928,360 936,128 960,128"/>
+        <path id="p-out-saas" d="M 872,360 C 928,360 928,210 960,210"/>
+        <path id="p-out-app"  d="M 872,360 C 928,360 930,340 960,340"/>
+        <path id="p-out-infra" d="M 872,360 C 928,360 905,530 960,530"/>
+      </g>
+      <g fill="none" stroke="#23344f" stroke-width="2" opacity=".45">
+        <use href="#p-std-in"/><use href="#p-priv-in"/>
+        <use href="#p-out-net"/><use href="#p-out-saas"/><use href="#p-out-app"/><use href="#p-out-infra"/>
+      </g>
+      <!-- branch / SD-WAN site tunnel — dashed to denote an always-on IPsec/SD-WAN overlay into the PoP -->
+      <use href="#p-branch-in" fill="none" stroke="#2a3a5c" stroke-width="2" stroke-dasharray="5 4" opacity=".7"/>
+      <!-- blocked lateral arrows (ZTNA) -->
+      <g id="lateralBlocks" opacity="0">
+        <path d="M 960,340 C 940,400 945,460 960,510" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4 5"/>
+        <g transform="translate(948,428)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#ff6b6b" stroke-width="2.5"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#ff6b6b" stroke-width="2.5"/></g>
+      </g>
+
+      <!-- ===== Access nodes ===== -->
+      <g class="comp" data-comp="user-std">
+        <rect x="60" y="90" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="78" y="116" fill="#eaf0fb">Standard user</text>
+        <text class="n-sub" x="78" y="134" fill="#93a6c9">managed endpoint</text>
+      </g>
+      <g class="comp" data-comp="user-priv">
+        <rect x="60" y="178" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="78" y="204" fill="#eaf0fb">Privileged user</text>
+        <text class="n-sub" x="78" y="222" fill="#93a6c9">administrator</text>
+      </g>
+      <g class="comp" data-comp="branch">
+        <rect x="60" y="310" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="78" y="336" fill="#eaf0fb">Branch / SD-WAN</text>
+        <text class="n-sub" x="78" y="354" fill="#93a6c9">site tunnel</text>
+      </g>
+
+      <!-- ===== PoP — height fits the vertical inspection-plane stack ===== -->
+      <rect id="popRect" x="350" y="64" width="522" height="648" rx="18" fill="url(#popGrad)" stroke="#33507f" stroke-opacity=".7"/>
+      <circle id="ingress" cx="350" cy="360" r="5" fill="#28d8ef" opacity="0"/>
+      <circle id="egress"  cx="872" cy="360" r="5" fill="#28d8ef" opacity="0"/>
+
+      <!-- IdP / identity -->
+      <g class="comp" data-comp="idp">
+        <rect x="368" y="84" width="486" height="46" rx="10" fill="#1a1631" stroke="#f6b53c" stroke-opacity=".5"/>
+        <text class="n-title" x="384" y="104" fill="#ffd587">Identity provider · MFA · device posture</text>
+        <text class="n-sub" x="384" y="120" fill="#caa86a">SAML / OIDC · step-up authentication · compliance signals</text>
+      </g>
+
+      <!-- Policy engine (PDP/PEP) — evaluated before the broker grants access -->
+      <g class="comp" data-comp="policy">
+        <rect x="368" y="142" width="486" height="46" rx="10" fill="#15233f" stroke="#3a4d75"/>
+        <circle cx="392" cy="165" r="6" fill="#1b2748" stroke="#f6b53c"/>
+        <text class="n-title" x="410" y="161" fill="#eaf0fb" font-size="12.5">Policy engine — PDP / PEP</text>
+        <text class="n-sub" x="410" y="177" fill="#93a6c9" font-size="9.5">identity · device · context · risk → least-privilege entitlement</text>
+      </g>
+
+      <!-- ===== Defence in Depth — overlapping inspection planes (single decrypt-once pass) ===== -->
+      <g>
+        <!-- Section container -->
+        <rect x="368" y="202" width="486" height="282" rx="12" fill="rgba(167,139,250,.07)" stroke="#3b3567" stroke-opacity=".55"/>
+        <text class="zlabel" x="384" y="222" fill="#b9a7f6" font-size="10" style="letter-spacing:.02em">Defence in depth — overlapping inspection planes (single pass)</text>
+
+        <!-- column headers -->
+        <text x="394" y="240" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#3d5075" letter-spacing=".12em">PLANE</text>
+        <line x1="562" y1="228" x2="562" y2="478" stroke="#1e3055" stroke-width="1" stroke-dasharray="2 4"/>
+        <text x="572" y="240" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#3d5075" letter-spacing=".12em">SASE CONTROL</text>
+
+        <!-- Network plane → FWaaS -->
+        <g class="comp" data-comp="fwaas">
+          <rect x="382" y="246" width="458" height="42" rx="7" fill="url(#osiGrad)" stroke="#3a4d75"/>
+          <rect x="382" y="246" width="5" height="42" rx="3" fill="#28d8ef" opacity="0.6"/>
+          <rect x="392" y="253" width="44" height="28" rx="5" fill="rgba(40,216,239,0.12)" stroke="#28d8ef" stroke-opacity=".3" stroke-width=".75"/>
+          <text x="414" y="271" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="600" fill="#28d8ef">NET</text>
+          <text x="446" y="271" font-family="'Inter',system-ui,sans-serif" font-size="9.5" fill="#93a6c9">Network</text>
+          <line x1="562" y1="250" x2="562" y2="284" stroke="#1e3055" stroke-width="1"/>
+          <text x="572" y="263" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" fill="#7bf0de">FWaaS</text>
+          <text x="572" y="278" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5d6f93">L3–L7 firewall · IPS · geo/IP filtering</text>
+        </g>
+
+        <!-- Web plane → SWG -->
+        <g class="comp" data-comp="swg">
+          <rect x="382" y="292" width="458" height="42" rx="7" fill="url(#osiGrad)" stroke="#3a4d75"/>
+          <rect x="382" y="292" width="5" height="42" rx="3" fill="#28d8ef" opacity="0.52"/>
+          <rect x="392" y="299" width="44" height="28" rx="5" fill="rgba(40,216,239,0.1)" stroke="#28d8ef" stroke-opacity=".26" stroke-width=".75"/>
+          <text x="414" y="317" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="600" fill="#28d8ef">WEB</text>
+          <text x="446" y="317" font-family="'Inter',system-ui,sans-serif" font-size="9.5" fill="#93a6c9">Web</text>
+          <line x1="562" y1="296" x2="562" y2="330" stroke="#1e3055" stroke-width="1"/>
+          <text x="572" y="309" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" fill="#7bf0de">SWG</text>
+          <text x="572" y="324" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5d6f93">TLS termination · inspection · RBI · URL filter</text>
+        </g>
+
+        <!-- Cloud-app plane → CASB -->
+        <g class="comp" data-comp="casb">
+          <rect x="382" y="338" width="458" height="42" rx="7" fill="url(#osiGrad)" stroke="#3a4d75"/>
+          <rect x="382" y="338" width="5" height="42" rx="3" fill="#28d8ef" opacity="0.44"/>
+          <rect x="392" y="345" width="44" height="28" rx="5" fill="rgba(40,216,239,0.08)" stroke="#28d8ef" stroke-opacity=".22" stroke-width=".75"/>
+          <text x="414" y="363" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="600" fill="#28d8ef">APP</text>
+          <text x="446" y="363" font-family="'Inter',system-ui,sans-serif" font-size="9.5" fill="#93a6c9">Cloud app</text>
+          <line x1="562" y1="342" x2="562" y2="376" stroke="#1e3055" stroke-width="1"/>
+          <text x="572" y="355" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" fill="#7bf0de">CASB</text>
+          <text x="572" y="370" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5d6f93">SaaS visibility · shadow IT · cloud-app control</text>
+        </g>
+
+        <!-- Data plane → DLP -->
+        <g class="comp" data-comp="dlp">
+          <rect x="382" y="384" width="458" height="42" rx="7" fill="url(#osiGrad)" stroke="#3a4d75"/>
+          <rect x="382" y="384" width="5" height="42" rx="3" fill="#28d8ef" opacity="0.36"/>
+          <rect x="392" y="391" width="44" height="28" rx="5" fill="rgba(40,216,239,0.06)" stroke="#28d8ef" stroke-opacity=".18" stroke-width=".75"/>
+          <text x="414" y="409" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" font-weight="600" fill="#28d8ef">DATA</text>
+          <text x="446" y="409" font-family="'Inter',system-ui,sans-serif" font-size="9.5" fill="#93a6c9">Content</text>
+          <line x1="562" y1="388" x2="562" y2="422" stroke="#1e3055" stroke-width="1"/>
+          <text x="572" y="401" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" fill="#7bf0de">DLP</text>
+          <text x="572" y="416" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5d6f93">content inspection · egress control · data tagging</text>
+        </g>
+
+        <!-- Threat plane → Threat Prevention -->
+        <g class="comp" data-comp="threat">
+          <rect x="382" y="430" width="458" height="42" rx="7" fill="url(#osiGrad)" stroke="#3a4d75"/>
+          <rect x="382" y="430" width="5" height="42" rx="3" fill="#28d8ef" opacity="0.28"/>
+          <rect x="392" y="437" width="44" height="28" rx="5" fill="rgba(40,216,239,0.05)" stroke="#28d8ef" stroke-opacity=".14" stroke-width=".75"/>
+          <text x="414" y="455" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="600" fill="#28d8ef">THR</text>
+          <text x="446" y="455" font-family="'Inter',system-ui,sans-serif" font-size="9.5" fill="#93a6c9">Threat</text>
+          <line x1="562" y1="434" x2="562" y2="468" stroke="#1e3055" stroke-width="1"/>
+          <text x="572" y="447" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" fill="#7bf0de">Threat Prevention</text>
+          <text x="572" y="462" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5d6f93">sandbox · threat intel · AV · malware</text>
+        </g>
+      </g>
+
+      <!-- ZTNA broker — sits after policy decision; brokers the per-app grant -->
+      <g class="comp" data-comp="ztna">
+        <rect x="368" y="498" width="486" height="46" rx="10" fill="#1b2748" stroke="#3a4d75"/>
+        <text class="n-title" x="384" y="518" fill="#eaf0fb">ZTNA broker — per-app, least privilege</text>
+        <text class="n-sub" x="384" y="534" fill="#93a6c9">outbound app connectors · no inbound exposure · no lateral movement</text>
+      </g>
+
+      <!-- Continuous authorisation -->
+      <g class="comp" data-comp="contauth">
+        <rect x="368" y="556" width="486" height="40" rx="10" fill="#13203a" stroke="#2a3a5c"/>
+        <text class="n-sub" x="384" y="574" fill="#ffd587" font-weight="600">Continuous authorisation &amp; telemetry</text>
+        <text class="n-sub" x="384" y="588" fill="#93a6c9" font-size="9.5">session re-evaluated on risk / posture change · full logging</text>
+      </g>
+
+      <!-- PAM service -->
+      <g>
+        <rect x="368" y="608" width="486" height="92" rx="12" fill="rgba(200,121,240,.08)" stroke="#5a3a78" stroke-opacity=".6"/>
+        <text class="zlabel" x="384" y="626" fill="#e6b6ff" font-size="10" style="letter-spacing:.02em">Privileged Access Management — adjacent control, integrated via ZTNA</text>
+        <g class="comp" data-comp="pam-vault">
+          <rect x="382" y="634" width="146" height="58" rx="8" fill="#1e1733" stroke="#6b4a8c"/>
+          <text class="n-sub" x="396" y="652" fill="#e6b6ff" font-weight="600">Credential vault</text>
+          <text class="n-sub" x="396" y="666" fill="#b794d0" font-size="9">no standing creds</text>
+          <text class="n-sub" x="396" y="679" fill="#b794d0" font-size="9">injection — never seen</text>
+        </g>
+        <g class="comp" data-comp="pam-jit">
+          <rect x="536" y="634" width="146" height="58" rx="8" fill="#1e1733" stroke="#6b4a8c"/>
+          <text class="n-sub" x="550" y="652" fill="#e6b6ff" font-weight="600">JIT elevation</text>
+          <text class="n-sub" x="550" y="666" fill="#b794d0" font-size="9">time-bound access</text>
+          <text class="n-sub" x="550" y="679" fill="#b794d0" font-size="9">approval + MFA step-up</text>
+        </g>
+        <g class="comp" data-comp="pam-rec">
+          <rect x="690" y="634" width="150" height="58" rx="8" fill="#1e1733" stroke="#6b4a8c"/>
+          <text class="n-sub" x="704" y="652" fill="#e6b6ff" font-weight="600">Session broker</text>
+          <text class="n-sub" x="704" y="666" fill="#b794d0" font-size="9">isolated proxy</text>
+          <text class="n-sub" x="704" y="679" fill="#b794d0" font-size="9">full recording · audit</text>
+        </g>
+      </g>
+
+      <!-- ===== Destinations ===== -->
+      <g class="comp" data-comp="dest-net">
+        <rect x="960" y="100" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="978" y="126" fill="#eaf0fb">Internet / web</text>
+        <text class="n-sub" x="978" y="144" fill="#93a6c9">filtered egress</text>
+      </g>
+      <g class="comp" data-comp="dest-saas">
+        <rect x="960" y="182" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="978" y="208" fill="#eaf0fb">SaaS apps</text>
+        <text class="n-sub" x="978" y="226" fill="#93a6c9">M365 · Salesforce</text>
+      </g>
+      <g class="comp" data-comp="dest-app">
+        <rect x="960" y="312" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="978" y="338" fill="#eaf0fb">Private apps</text>
+        <text class="n-sub" x="978" y="356" fill="#93a6c9">data centre · IaaS</text>
+      </g>
+      <g class="comp" data-comp="dest-infra">
+        <rect x="960" y="502" width="180" height="56" rx="10" fill="#16233f" stroke="#2a3a5c"/>
+        <text class="n-title" x="978" y="528" fill="#eaf0fb">Infrastructure</text>
+        <text class="n-sub" x="978" y="546" fill="#93a6c9">servers · databases</text>
+      </g>
+
+      <g id="dotLayer"></g>
+      <g id="pulseLayer"></g>
+    </svg>
+  </div>
+
+  <div class="reqwrap">
+    <div class="reqhead">
+      <span class="chip" id="reqChip"></span>
+      <div>
+        <h2 id="reqTitle">Zero Trust Network Access</h2>
+        <p id="reqBlurb"></p>
+      </div>
+    </div>
+    <div class="reqgrid" id="reqGrid"></div>
+  </div>
+
+  <div class="foot">
+    <span><b>Hover a requirement</b> to spotlight the control that fulfils it</span>
+    <span><b>Live highlight</b> follows the animation through the architecture</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const svgNS="http://www.w3.org/2000/svg";
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dotLayer=document.getElementById("dotLayer");
+  const pulseLayer=document.getElementById("pulseLayer");
+
+  const ACCENT={ztna:"#f6b53c",did:"#28d8ef",pam:"#c879f0"};
+
+  function P(id){const el=document.getElementById(id);return{el,len:el.getTotalLength()};}
+  const path={
+    stdIn:P("p-std-in"),privIn:P("p-priv-in"),
+    net:P("p-out-net"),saas:P("p-out-saas"),app:P("p-out-app"),infra:P("p-out-infra")
+  };
+  function comp(id){return document.querySelector('[data-comp="'+id+'"]');}
+  function rectOf(id){const c=comp(id);return c?c.querySelector('rect'):null;}
+
+  // ----- lens definitions -----
+  const LENS={
+    ztna:{
+      title:"Zero Trust Network Access",
+      chip:"#f6b53c",
+      blurb:"Never trust, always verify — access is brokered per application against live identity, device and risk.",
+      focus:["user-std","idp","ztna","policy","contauth","dest-app"],
+      reqs:[
+        {need:"No implicit trust — verify every request explicitly",fix:"Identity provider authenticates each session with MFA",comp:"idp"},
+        {need:"Least privilege, application-level access",fix:"ZTNA broker grants one app, never network access",comp:"ztna"},
+        {need:"Device posture as an access condition",fix:"Compliance signals feed the policy decision point",comp:"policy"},
+        {need:"No lateral movement / micro-segmentation",fix:"Per-app isolation — adjacent apps stay unreachable",comp:"ztna"},
+        {need:"No inbound exposure of private apps",fix:"Outbound-only app connectors; nothing listens publicly",comp:"dest-app"},
+        {need:"Continuous, adaptive re-evaluation",fix:"Session re-checked on any risk or posture change",comp:"contauth"}
+      ],
+      steps:[
+        {comp:"user-std",note:"Standard user requests an application"},
+        {comp:"idp",note:"Verify explicitly — MFA at the identity provider"},
+        {comp:"policy",note:"Policy engine evaluates identity + device + risk"},
+        {comp:"ztna",note:"ZTNA broker issues a per-app, least-privilege grant"},
+        {comp:"contauth",note:"Continuous authorisation watches the live session"},
+        {comp:"dest-app",note:"Access to one app only — lateral paths blocked",lateral:true}
+      ],
+      flow:{in:"stdIn",out:"app"}
+    },
+    did:{
+      title:"Defence in Depth",
+      chip:"#28d8ef",
+      blurb:"Independent, overlapping inspection planes in a single decrypt-once pass — network, web, cloud-app, data and threat engines each operate independently, so a miss at one plane is still caught at another. Branch/SD-WAN and user traffic converge on the same planes.",
+      focus:["user-std","branch","idp","policy","fwaas","swg","casb","dlp","threat","contauth","dest-saas"],
+      reqs:[
+        {need:"Identity assurance (pre-inspection)",fix:"IdP authentication and MFA before traffic enters",comp:"idp"},
+        {need:"Device trust (pre-inspection)",fix:"Posture & compliance at the policy engine",comp:"policy"},
+        {need:"Network plane — IP/port & intrusion controls",fix:"FWaaS L3–L7 firewalling and IPS",comp:"fwaas"},
+        {need:"Web plane — TLS inspection & filtering",fix:"SWG with TLS termination, inspection and RBI",comp:"swg"},
+        {need:"Cloud-app plane — SaaS governance",fix:"CASB visibility, access control, shadow IT",comp:"casb"},
+        {need:"Data plane — content protection on egress",fix:"DLP content inspection and data tagging",comp:"dlp"},
+        {need:"Threat plane — malware & exploit prevention",fix:"Sandboxing, AV and threat intelligence",comp:"threat"},
+        {need:"Continuous visibility & telemetry",fix:"Session re-evaluation and full logging layer",comp:"contauth"}
+      ],
+      steps:[
+        {comp:"idp",note:"Identity verified — before entering the inspection planes"},
+        {comp:"policy",note:"Device posture checked — least-privilege context established"},
+        {comp:"fwaas",note:"Network plane — FWaaS · IP filtering · IPS"},
+        {comp:"swg",note:"Web plane — SWG · TLS termination · RBI"},
+        {comp:"casb",note:"Cloud-app plane — CASB · SaaS visibility"},
+        {comp:"dlp",note:"Data plane — DLP · content inspection"},
+        {comp:"threat",note:"Threat plane — sandbox · threat intel · AV"},
+        {comp:"contauth",note:"Telemetry layer — continuous logging and re-authorisation"},
+        {comp:"dest-saas",note:"Clean traffic released to destination"}
+      ],
+      flow:{in:"stdIn",out:"saas"}
+    },
+    pam:{
+      title:"Privileged Access Management",
+      chip:"#c879f0",
+      blurb:"Privileged sessions reach infrastructure only through ZTNA and a PAM broker — no standing credentials, time-bound elevation, every action recorded.",
+      focus:["user-priv","idp","ztna","policy","pam-vault","pam-jit","pam-rec","dest-infra"],
+      reqs:[
+        {need:"No standing credentials",fix:"Vault injects secrets; endpoint never sees them",comp:"pam-vault"},
+        {need:"Just-in-time, time-bound elevation",fix:"JIT request with approval workflow",comp:"pam-jit"},
+        {need:"Step-up authentication for privileged ops",fix:"MFA step-up at the IdP on elevation",comp:"idp"},
+        {need:"Session isolation / brokering",fix:"PAM proxy isolates the session from the endpoint",comp:"pam-rec"},
+        {need:"Full session recording & immutable audit",fix:"Keystroke and session capture, tamper-evident",comp:"pam-rec"},
+        {need:"Privileged access without network exposure",fix:"ZTNA fronts PAM — no open management ports",comp:"ztna"},
+        {need:"Scoped privileged entitlements",fix:"Policy engine binds the role to least privilege",comp:"policy"}
+      ],
+      steps:[
+        {comp:"user-priv",note:"Administrator requests privileged access"},
+        {comp:"idp",note:"Step-up MFA for the privileged operation"},
+        {comp:"ztna",note:"ZTNA brokers the connection — no exposed ports"},
+        {comp:"pam-jit",note:"JIT elevation granted, time-bound, after approval"},
+        {comp:"pam-vault",note:"Vault injects credentials — admin never sees them"},
+        {comp:"pam-rec",note:"Isolated session opens, fully recorded"},
+        {comp:"dest-infra",note:"Recorded privileged session to infrastructure"}
+      ],
+      flow:{in:"privIn",out:"infra"}
+    }
+  };
+
+  // ----- dots & pulses -----
+  function makeDot(r,color,glow){
+    const c=document.createElementNS(svgNS,"circle");
+    c.setAttribute("r",r);c.setAttribute("fill",color);
+    c.style.filter="drop-shadow(0 0 "+(glow||7)+"px "+color+")";c.style.opacity=0;
+    dotLayer.appendChild(c);return c;
+  }
+  const TRAIL=8, TRAIL_GAP=11;
+  const trail=[], trailFade=[];
+  for(let i=0;i<TRAIL;i++){
+    const f=i/(TRAIL-1);
+    const r=4.4-3.0*f;
+    trail.push(makeDot(r,"#fff", r*1.7));
+    trailFade.push(+(1-0.92*f).toFixed(3));
+  }
+  function trailColor(c){trail.forEach(d=>d.setAttribute("fill",c));}
+  function trailHide(){trail.forEach(d=>d.style.opacity=0);}
+  function renderTrail(){
+    for(let i=0;i<TRAIL;i++){
+      const d=dist-i*TRAIL_GAP;
+      if(d<0){trail[i].style.opacity=0;continue;}
+      place2(trail[i],d);
+      trail[i].style.opacity=trailFade[i];
+    }
+  }
+  function place(dot,Pn,t){const pt=Pn.el.getPointAtLength(Math.max(0,Math.min(1,t))*Pn.len);dot.setAttribute("cx",pt.x);dot.setAttribute("cy",pt.y);}
+  function pulse(cx,cy,color){
+    if(reduced)return;
+    const ring=document.createElementNS(svgNS,"circle");
+    ring.setAttribute("class","pulse-ring");ring.setAttribute("cx",cx);ring.setAttribute("cy",cy);
+    ring.setAttribute("r",6);ring.setAttribute("fill","none");ring.setAttribute("stroke",color);ring.setAttribute("stroke-width","2.5");
+    pulseLayer.appendChild(ring);let r=6,o=.9;
+    const iv=setInterval(()=>{r+=2.4;o-=.05;ring.setAttribute("r",r);ring.setAttribute("opacity",o);if(o<=0){clearInterval(iv);ring.remove();}},28);
+  }
+  function centreOf(id){
+    const rc=rectOf(id);if(!rc)return null;
+    const x=+rc.getAttribute("x"),y=+rc.getAttribute("y"),w=+rc.getAttribute("width"),h=+rc.getAttribute("height");
+    return{x:x+w/2,y:y+h/2};
+  }
+
+  // ----- focus / dim -----
+  function applyFocus(lens){
+    const set=new Set(LENS[lens].focus);
+    document.querySelectorAll('.comp').forEach(el=>{
+      const inSet=set.has(el.dataset.comp);
+      el.style.opacity=inSet?1:0.22;
+      const rc=el.querySelector('rect');if(rc)rc.style.filter="";
+    });
+    document.getElementById("lateralBlocks").setAttribute("opacity",0);
+  }
+  function lightComp(id,color){
+    document.querySelectorAll('.comp rect').forEach(r=>{r.style.transition=".25s";});
+    const rc=rectOf(id);
+    if(rc){rc.style.filter="drop-shadow(0 0 10px "+color+")";}
+    const c=centreOf(id);if(c)pulse(c.x,c.y,color);
+  }
+  function clearLights(){document.querySelectorAll('.comp rect').forEach(r=>r.style.filter="");}
+
+  // ----- requirements panel -----
+  const reqGrid=document.getElementById("reqGrid");
+  const reqTitle=document.getElementById("reqTitle");
+  const reqBlurb=document.getElementById("reqBlurb");
+  const reqChip=document.getElementById("reqChip");
+  function renderReqs(lens){
+    const L=LENS[lens];
+    reqTitle.textContent=L.title;reqBlurb.textContent=L.blurb;reqChip.style.background=L.chip;
+    let html='<div class="colrow"><span>Requirement</span><span>Fulfilled by</span></div>';
+    L.reqs.forEach((r,i)=>{
+      const no=String(i+1).padStart(2,"0");
+      html+='<div class="req" data-comp="'+r.comp+'">'
+        +'<div class="r-need"><span class="r-no">'+no+'</span><span class="t">'+r.need+'</span></div>'
+        +'<div class="r-fix"><span class="pin" style="background:'+L.chip+'"></span><span class="ft"><b>'+r.fix.split(" ")[0]+'</b> '+r.fix.split(" ").slice(1).join(" ")+'</span></div>'
+        +'</div>';
+    });
+    reqGrid.innerHTML=html;
+    reqGrid.querySelectorAll('.req').forEach(row=>{
+      row.addEventListener('mouseenter',()=>{clearLights();lightComp(row.dataset.comp,L.chip);});
+      row.addEventListener('mouseleave',()=>{clearLights();});
+    });
+  }
+  function markRows(compId){
+    reqGrid.querySelectorAll('.req').forEach(r=>r.classList.toggle('active',r.dataset.comp===compId));
+  }
+
+  // ----- continuous route walker -----
+  let lens="ztna",playing=true,speedMul=1;
+  let last=performance.now();
+  const statusEl=document.getElementById("status");
+
+  const SPEED=200;   // px/s — no pause between loops; animation is continuous
+  let wp=[],cum=[],total=0,dist=0,nextIdx=0;
+
+  function rightEdge(id){
+    const r=rectOf(id);
+    return{x:(+r.getAttribute("x"))+(+r.getAttribute("width")),y:(+r.getAttribute("y"))+(+r.getAttribute("height"))/2};
+  }
+
+  function buildRoute(){
+    const L=LENS[lens];
+    const startNode=L.flow.in==="privIn"?"user-priv":"user-std";
+    const pts=[];
+    pts.push(Object.assign(rightEdge(startNode),{comp:null,light:false}));
+    let entered=false,exited=false;
+    L.steps.forEach(s=>{
+      if(s.comp===startNode){
+        pts[0].comp=s.comp;pts[0].light=true;pts[0].note=s.note;pts[0].lateral=s.lateral;
+        pts.push({x:350,y:360,comp:null,light:false});entered=true;
+      }else if(s.comp.indexOf("dest-")===0){
+        if(!exited){pts.push({x:872,y:360,comp:null,light:false});exited=true;}
+        const c=centreOf(s.comp);
+        pts.push({x:c.x,y:c.y,comp:s.comp,light:true,note:s.note,lateral:s.lateral});
+      }else{
+        if(!entered){pts.push({x:350,y:360,comp:null,light:false});entered=true;}
+        const c=centreOf(s.comp);
+        pts.push({x:c.x,y:c.y,comp:s.comp,light:true,note:s.note,lateral:s.lateral});
+      }
+    });
+    wp=pts;cum=[0];
+    for(let i=1;i<wp.length;i++){
+      cum[i]=cum[i-1]+Math.hypot(wp[i].x-wp[i-1].x,wp[i].y-wp[i-1].y);
+    }
+    total=cum[cum.length-1];
+  }
+
+  function pointAt(d){
+    d=Math.max(0,Math.min(total,d));
+    for(let i=0;i<wp.length-1;i++){
+      if(d<=cum[i+1]){
+        const seg=(cum[i+1]-cum[i])||1,t=(d-cum[i])/seg;
+        return{x:wp[i].x+(wp[i+1].x-wp[i].x)*t,y:wp[i].y+(wp[i+1].y-wp[i].y)*t};
+      }
+    }
+    const e=wp[wp.length-1];return{x:e.x,y:e.y};
+  }
+  function place2(dot,d){const p=pointAt(d);dot.setAttribute("cx",p.x);dot.setAttribute("cy",p.y);}
+
+  function startRoute(){
+    const L=LENS[lens];
+    dist=0;nextIdx=0;
+    clearLights();document.getElementById("lateralBlocks").setAttribute("opacity",0);
+    trailColor(L.chip);
+  }
+
+  function setLens(l){
+    lens=l;
+    applyFocus(l);renderReqs(l);
+    document.querySelectorAll('.lens').forEach(b=>{b.classList.toggle('on',b.dataset.lens===l);b.setAttribute('aria-selected',b.dataset.lens===l);});
+    buildRoute();startRoute();
+  }
+
+  function frame(now){
+    const dt=Math.min(0.05,(now-last)/1000);last=now;
+    if(playing)tick(dt*speedMul);
+    requestAnimationFrame(frame);
+  }
+
+  function tick(dt){
+    const L=LENS[lens];
+    dist+=SPEED*dt;
+    // trigger lighting as the lead dot reaches each waypoint
+    while(nextIdx<wp.length&&dist>=cum[nextIdx]){
+      const w=wp[nextIdx];
+      if(w.light){
+        clearLights();lightComp(w.comp,L.chip);markRows(w.comp);
+        if(w.note)statusEl.innerHTML="<b>"+w.note+"</b>";
+        if(w.lateral)document.getElementById("lateralBlocks").setAttribute("opacity",1);
+      }
+      nextIdx++;
+    }
+    // render trail
+    for(let i=0;i<TRAIL;i++){
+      const d=dist-i*TRAIL_GAP;
+      if(d<0){trail[i].style.opacity=0;continue;}
+      place2(trail[i],d);
+      trail[i].style.opacity=trailFade[i];
+    }
+    // continuous loop — restart immediately when tail clears the end
+    if(dist>=total+(TRAIL-1)*TRAIL_GAP){
+      startRoute();
+    }
+  }
+
+  // ----- controls -----
+  document.querySelectorAll('.lens').forEach(b=>{
+    b.addEventListener('click',()=>setLens(b.dataset.lens));
+  });
+  const playBtn=document.getElementById('playBtn'),playLbl=document.getElementById('playLbl'),playIcon=document.getElementById('playIcon');
+  playBtn.addEventListener('click',()=>{
+    playing=!playing;playLbl.textContent=playing?"Pause":"Play";
+    playBtn.setAttribute('aria-label',playing?"Pause animation":"Play animation");
+    playIcon.innerHTML=playing?'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>':'<path d="M7 4l12 8-12 8z"/>';
+  });
+  document.getElementById('speed').addEventListener('input',e=>{speedMul=parseFloat(e.target.value);});
+
+  // ----- theme switcher -----
+  const themeBtn=document.getElementById('themeBtn');
+  const themeIcon=document.getElementById('themeIcon');
+  const themeLbl=document.getElementById('themeLbl');
+  const popRect=document.getElementById('popRect');
+  const SUN='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const MOON='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor" stroke="none"/>';
+  let dark=localStorage.getItem('theme')!=='light';
+
+  function applyTheme(){
+    if(dark){
+      document.documentElement.removeAttribute('data-theme');
+      popRect.setAttribute('fill','url(#popGrad)');
+      themeIcon.innerHTML=SUN;themeLbl.textContent='Light';
+      themeBtn.setAttribute('aria-label','Switch to light theme');
+    }else{
+      document.documentElement.setAttribute('data-theme','light');
+      popRect.setAttribute('fill','url(#popGradLight)');
+      themeIcon.innerHTML=MOON;themeLbl.textContent='Dark';
+      themeBtn.setAttribute('aria-label','Switch to dark theme');
+    }
+    localStorage.setItem('theme',dark?'dark':'light');
+  }
+  themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme();});
+  applyTheme();
+
+  // init
+  setLens("ztna");
+  if(reduced)speedMul=0.5;
+  requestAnimationFrame(frame);
+})();
+</script>
+<p class="ga-linkedin"><a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a></p>
+</body>
+</html>
