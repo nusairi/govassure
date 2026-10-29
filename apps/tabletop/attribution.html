@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attribution — BLAST RADIUS</title>
+<meta name="description" content="Framework licences and attribution for BLAST RADIUS.">
+<meta property="og:title" content="Attribution — BLAST RADIUS">
+<meta property="og:description" content="Framework licences and attribution for BLAST RADIUS.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="mask-icon" href="/favicon.svg" color="#ff7b52">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbf9f7" media="(prefers-color-scheme: light)">
+<script>(function(){try{var t=localStorage.getItem('br-theme');if(!t){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#0d1117; --panel:#161b22; --line:#26303d;
+  --text:#e6edf3; --muted:#8b949e; --accent:#ff7b52; --accent-dim:#7d3f2a;
+  --on-accent:#1a0d07; --shade:rgba(13,17,23,.92);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+:root[data-theme="light"]{
+  --bg:#fbf9f7; --panel:#fff; --line:#e4ded6;
+  --text:#1c1917; --muted:#6b625a; --accent:#b8431b; --accent-dim:#e8c3b1;
+  --on-accent:#fff; --shade:rgba(251,249,247,.92);
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:820px; margin:0 auto; padding:0 24px}
+header.site{border-bottom:1px solid var(--line); padding:16px 0; position:sticky; top:0; background:var(--shade); backdrop-filter:blur(8px); z-index:10}
+header.site .wrap{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+.brand{font-family:var(--mono); font-weight:700; letter-spacing:.14em; color:var(--text); font-size:15px}
+.brand span{color:var(--accent)}
+nav{margin-left:auto; display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+nav a{color:var(--muted); font-size:14px}
+nav a:hover{color:var(--text); text-decoration:none}
+#theme-toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; padding:0; cursor:pointer;
+  background:transparent; border:1px solid var(--line); border-radius:8px;
+  color:var(--muted); line-height:0;
+}
+#theme-toggle:hover{color:var(--accent); border-color:var(--accent-dim)}
+#theme-toggle:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+#theme-toggle svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+#theme-toggle .i-sun{display:none}
+:root[data-theme="light"] #theme-toggle .i-sun{display:block}
+:root[data-theme="light"] #theme-toggle .i-moon{display:none}
+.hero{padding:72px 0 48px; border-bottom:1px solid var(--line)}
+.hero h1{font-family:var(--mono); font-size:clamp(34px,7vw,58px); letter-spacing:.04em; margin:0 0 8px; line-height:1.05}
+.hero .tag{color:var(--accent); font-family:var(--mono); font-size:13px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px}
+.hero p.lede{font-size:19px; max-width:62ch; margin:0 0 16px}
+.hero p.sub{color:var(--muted); max-width:62ch; margin:0 0 28px}
+.meta{display:flex; gap:28px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; color:var(--muted); margin-bottom:32px}
+.meta b{color:var(--text); font-weight:600}
+.btn{display:inline-block; padding:11px 20px; border:1px solid var(--accent-dim); border-radius:6px; color:var(--accent); font-size:14px; margin:0 10px 10px 0}
+.btn:hover{background:var(--accent-dim); text-decoration:none}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-weight:600}
+.btn.primary:hover{opacity:.88; color:var(--on-accent)}
+section{padding:56px 0; border-bottom:1px solid var(--line)}
+section h2{font-family:var(--mono); font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 20px}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:24px}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px}
+.card h4{margin:0 0 8px; font-size:15px; font-family:var(--mono); letter-spacing:.04em}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.notice{background:var(--panel); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; padding:16px 20px; margin:24px 0; color:var(--muted); font-size:14px}
+.notice b{color:var(--text)}
+table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14px}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.08em}
+code{font-family:var(--mono); font-size:.9em; background:var(--panel); padding:2px 6px; border-radius:4px}
+pre{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; overflow-x:auto; font-size:13px; line-height:1.5}
+pre code{background:none; padding:0}
+blockquote{margin:20px 0; padding:12px 20px; border-left:3px solid var(--accent-dim); color:var(--muted)}
+blockquote strong{color:var(--text)}
+footer{padding:40px 0 64px; color:var(--muted); font-size:13px}
+footer p{margin:0 0 10px; max-width:70ch}
+footer .byline{font-size:14px; color:var(--text); margin-bottom:18px}
+.doc h1{font-family:var(--mono); font-size:clamp(28px,5vw,42px); letter-spacing:.03em; margin:0 0 4px}
+.doc h2{font-size:24px; margin:44px 0 12px; padding-top:20px; border-top:1px solid var(--line); color:var(--text); font-family:inherit; letter-spacing:normal; text-transform:none}
+.doc h3{font-size:18px; margin:28px 0 8px; color:var(--accent)}
+.doc h4{font-size:15px; margin:20px 0 6px}
+.doc ul,.doc ol{padding-left:22px}
+.doc li{margin:5px 0}
+.doc hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+.backlink{display:inline-block; margin:32px 0 0; font-size:14px; color:var(--muted)}
+@media (max-width:600px){
+  .hero{padding:48px 0 36px}
+  nav{width:100%; margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  body{transition:background-color .18s ease, color .18s ease}
+}
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=b160d7af98" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<header class="site"><div class="wrap">
+  <a class="brand" href="/">BLAST<span>·</span>RADIUS</a>
+  <nav>
+    <a href="/rules.html">Rules</a>
+    <a href="/cards.html">Cards</a>
+    <a href="/design.html">Design</a>
+    <a href="/attribution.html" style="color:var(--text)">Attribution</a> <button id="theme-toggle" type="button" aria-label="Switch theme">
+<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+</button>
+  </nav>
+</div></header>
+<div class="wrap doc"><section style="border:0"><h1 id="attribution-and-third-party-notices">Attribution and third-party notices</h1>
+<p>BLAST RADIUS is built on four external frameworks, all of which permit
+redistribution and adaptation. This file records what is used, under which
+terms, and what each licence requires of us.</p>
+<p><strong>BLAST RADIUS is not affiliated with, sponsored by, or endorsed by The MITRE
+Corporation, MITRE Engenuity, NIST, or the National Cyber Security Centre.</strong></p>
+<hr />
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Licence</th>
+<th>Adaptation permitted</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MITRE ATT&amp;CK® v19.1</td>
+<td>MITRE terms of use, royalty-free</td>
+<td>Yes, with copyright designation</td>
+<td>Technique cards</td>
+</tr>
+<tr>
+<td>MITRE ATLAS™</td>
+<td>Public release, distribution unlimited</td>
+<td>Yes</td>
+<td>ATLAS expansion</td>
+</tr>
+<tr>
+<td>NIST SP 800-53 Rev 5</td>
+<td>US Government work, public domain</td>
+<td>Yes, unrestricted</td>
+<td>Control cards</td>
+</tr>
+<tr>
+<td>CTID 800-53 → ATT&amp;CK mappings</td>
+<td>Apache License 2.0</td>
+<td>Yes, with notice</td>
+<td>The detection mechanic</td>
+</tr>
+<tr>
+<td>NCSC CAF v4.0</td>
+<td>Open Government Licence v3.0</td>
+<td>Yes, with attribution</td>
+<td>Debrief scoring</td>
+</tr>
+</tbody>
+</table>
+<p>Everything the project ships is redistributable. There are no carve-outs, no
+verbatim-only constraints, and no files that must be kept out of the repository
+for licensing reasons.</p>
+<hr />
+<h2 id="mitre-attck">MITRE ATT&amp;CK®</h2>
+<p>Technique identifiers, names and descriptions on technique cards come from
+MITRE ATT&amp;CK Enterprise v19.1.</p>
+<blockquote>
+<p>© 2026 The MITRE Corporation. This work is reproduced and distributed with
+the permission of The MITRE Corporation.</p>
+</blockquote>
+<p>ATT&amp;CK® and MITRE ATT&amp;CK® are registered trademarks of The MITRE Corporation.
+Per MITRE's branding requirements the first written reference is "MITRE
+ATT&amp;CK®" and subsequent references are "ATT&amp;CK" — capitalised, unhyphenated,
+unabbreviated. The mark does not appear in this project's name, logo or domain.</p>
+<p><a href="https://attack.mitre.org/resources/legal-and-branding/terms-of-use/">https://attack.mitre.org/resources/legal-and-branding/terms-of-use/</a></p>
+<h2 id="mitre-atlastm">MITRE ATLAS™</h2>
+<p>Technique content in the ATLAS expansion comes from MITRE ATLAS.</p>
+<blockquote>
+<p>© 2026 The MITRE Corporation. Approved for public release; distribution
+unlimited.</p>
+</blockquote>
+<p><a href="https://atlas.mitre.org/">https://atlas.mitre.org/</a></p>
+<h2 id="nist-sp-800-53-rev-5">NIST SP 800-53 Rev 5</h2>
+<p>Control identifiers, names and text on control cards derive from NIST Special
+Publication 800-53 Revision 5.</p>
+<blockquote>
+<p>NIST SP 800-53 Rev. 5 is a work of the U.S. Government and is in the public
+domain under 17 U.S.C. §105.</p>
+</blockquote>
+<p>No licence restrictions apply. Card text is written to fit the card rather than
+reproduced verbatim, and the control identifier on every card lets players
+trace it back to the source.</p>
+<p><a href="https://csrc.nist.gov/projects/risk-management/sp800-53-controls">https://csrc.nist.gov/projects/risk-management/sp800-53-controls</a></p>
+<h2 id="ctid-nist-800-53-to-attck-mappings">CTID NIST 800-53 to ATT&amp;CK mappings</h2>
+<p>The control-to-technique relationship that drives detection in this game comes
+from the MITRE Engenuity Center for Threat-Informed Defense.</p>
+<blockquote>
+<p>NIST 800-53 to ATT&amp;CK mappings © MITRE Engenuity Center for Threat-Informed
+Defense. Licensed under the Apache License, Version 2.0.
+<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+</blockquote>
+<p>Apache 2.0 permits redistribution and derivative works provided the licence and
+notice are retained, which they are in every generated data file.</p>
+<p><a href="https://ctid.mitre.org/projects/nist-800-53-control-mappings/">https://ctid.mitre.org/projects/nist-800-53-control-mappings/</a></p>
+<h2 id="ncsc-cyber-assessment-framework-v40">NCSC Cyber Assessment Framework v4.0</h2>
+<p>The debrief scoring sheet uses CAF objective, principle and contributing
+outcome identifiers and titles.</p>
+<blockquote>
+<p>Contains public sector information licensed under the Open Government Licence
+v3.0. © Crown copyright.
+<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a></p>
+</blockquote>
+<p>OGL v3.0 permits copying, adapting and commercial exploitation with
+attribution. The evidence prompts and scoring guidance attached to each
+principle are original to this project.</p>
+<p><a href="https://www.ncsc.gov.uk/collection/caf">https://www.ncsc.gov.uk/collection/caf</a></p>
+<hr />
+<h2 id="version-reconciliation">Version reconciliation</h2>
+<p>CTID publishes mappings against ATT&amp;CK 16.1; the technique cards are built from
+ATT&amp;CK v19.1. <code>data/build/extract.py</code> reconciles the two and reports how many
+mapping edges point at techniques retired or restructured since 16.1. Retired
+edges are excluded from play and the count is printed on every build, so drift
+between releases is visible rather than silent.</p>
+<hr />
+<h2 id="original-content">Original content</h2>
+<p>The following are original to this project and licensed under <code>LICENSE.md</code>:</p>
+<ul>
+<li>All game rules and mechanics</li>
+<li>The posture draft, dwell and impact systems</li>
+<li>Cost, signal, role, coverage tier and stealth derivations</li>
+<li>All complication and objective cards</li>
+<li>The CAF debrief evidence prompts and scoring guidance</li>
+<li>All extraction, build and verification code</li>
+<li>Card layout, visual design and the website</li>
+</ul>
+<hr />
+<h2 id="source-files-are-not-redistributed">Source files are not redistributed</h2>
+<p><code>sources/</code> is git-ignored. Download the frameworks from their publishers — see
+the README for the current list and the expected filenames.</p>
+<hr />
+<h2 id="a-note-on-legal-advice">A note on legal advice</h2>
+<p>This file sets out a considered reading of five licences. It is not legal
+advice and was not written by a lawyer. Every source permits redistribution, so
+the position is a straightforward one, but a solicitor's review before public
+launch remains sensible.</p><a class="backlink" href="/">&larr; Back to overview</a></section></div>
+<footer><div class="wrap">
+  <p class="byline">Made by <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured</a></p>
+  <p>Built on MITRE ATT&amp;CK®, MITRE ATLAS™, NIST SP 800-53 Rev 5 and the NCSC
+  Cyber Assessment Framework v4.0. Original content licensed CC BY-SA 4.0.</p>
+  <p>BLAST RADIUS is not affiliated with, sponsored by, or endorsed by The MITRE
+  Corporation, MITRE Engenuity, NIST, or the National Cyber Security Centre.</p>
+  <p><a href="/attribution.html">Full attribution and licences</a> ·
+     <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">LinkedIn</a></p>
+</div></footer>
+<script>(function(){var r=document.documentElement,b=document.getElementById('theme-toggle');if(!b)return;function label(){var d=r.getAttribute('data-theme')==='dark';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');b.setAttribute('title',b.getAttribute('aria-label'));}label();b.addEventListener('click',function(){var n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('br-theme',n);}catch(e){}label();});try{window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',function(e){if(localStorage.getItem('br-theme'))return;r.setAttribute('data-theme',e.matches?'light':'dark');label();});}catch(e){}})();</script>
+</body>
+</html>
