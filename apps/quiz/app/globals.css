@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme tokens ─────────────────────────────────────────────────────────── */
+/* Each named theme sets the same variables; components read them via the
+   .home-hero / .btn-primary / .accent-* helpers and the body background below. */
+
+:root,
+[data-theme="default"] {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 241, 245, 249;
+  --accent: 37, 99, 235; /* blue-600 */
+  --accent-hover: 29, 78, 216; /* blue-700 */
+  --home-from: 15, 23, 42;
+  --home-via: 23, 37, 84;
+  --home-to: 15, 23, 42;
+}
+
+[data-theme="midnight"] {
+  --foreground-rgb: 20, 20, 40;
+  --background-start-rgb: 245, 243, 255;
+  --background-end-rgb: 237, 233, 254;
+  --accent: 124, 58, 237; /* violet-600 */
+  --accent-hover: 109, 40, 217; /* violet-700 */
+  --home-from: 23, 16, 43;
+  --home-via: 46, 16, 74;
+  --home-to: 15, 10, 30;
+}
+
+[data-theme="forest"] {
+  --foreground-rgb: 12, 35, 28;
+  --background-start-rgb: 240, 253, 244;
+  --background-end-rgb: 220, 252, 231;
+  --accent: 5, 150, 105; /* emerald-600 */
+  --accent-hover: 4, 120, 87; /* emerald-700 */
+  --home-from: 6, 30, 23;
+  --home-via: 6, 51, 41;
+  --home-to: 4, 24, 20;
+}
+
+[data-theme="rose"] {
+  --foreground-rgb: 40, 15, 24;
+  --background-start-rgb: 255, 241, 245;
+  --background-end-rgb: 255, 228, 236;
+  --accent: 225, 29, 72; /* rose-600 */
+  --accent-hover: 190, 18, 60; /* rose-700 */
+  --home-from: 43, 14, 24;
+  --home-via: 76, 16, 38;
+  --home-to: 30, 10, 18;
+}
+
+[data-theme="slate"] {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 226, 232, 240;
+  --accent: 71, 85, 105; /* slate-600 */
+  --accent-hover: 51, 65, 85; /* slate-700 */
+  --home-from: 15, 23, 42;
+  --home-via: 30, 41, 59;
+  --home-to: 2, 6, 23;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-white transition-colors duration-150 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: rgb(var(--accent));
+  }
+  .btn-primary:hover {
+    background-color: rgb(var(--accent-hover));
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors duration-150 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-slate-200 p-6;
+  }
+}
+
+/* Theme-driven helpers */
+.home-hero {
+  background: linear-gradient(
+    to bottom right,
+    rgb(var(--home-from)),
+    rgb(var(--home-via)),
+    rgb(var(--home-to))
+  );
+}
+.accent-text {
+  color: rgb(var(--accent));
+}
+.accent-bg {
+  background-color: rgb(var(--accent));
+}
+.accent-hover-text:hover {
+  color: rgb(var(--accent));
+}
+
+/* GOV Assured brand bar */
+.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}
