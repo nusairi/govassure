@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///E:/Users/jswin/Downloads/index_4.html -->
+<html lang="en-GB" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Cyber Attack Taxonomy — Human Impacts Cyber Framework</title>
+<meta name="description" content="A reference taxonomy classifying cyber attacks against individuals — six threat domains, forty attack types, mapped across attacker goal, delivery vector, target asset and primary harm.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 32 32&#39;%3E%3Cpath d=&#39;M16 2 4 7v8c0 7.2 5.1 13.4 12 15 6.9-1.6 12-7.8 12-15V7L16 2Z&#39; fill=&#39;%230f1a2e&#39; stroke=&#39;%234f9dff&#39; stroke-width=&#39;2&#39;/%3E%3Cpath d=&#39;M16 9.5v6M16 20.5v.5&#39; stroke=&#39;%237cc4ff&#39; stroke-width=&#39;2.6&#39; stroke-linecap=&#39;round&#39;/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 32 32&#39;%3E%3Crect width=&#39;32&#39; height=&#39;32&#39; rx=&#39;7&#39; fill=&#39;%230b1220&#39;/%3E%3Cpath d=&#39;M16 4 6 8v7c0 6.3 4.4 11.7 10 13 5.6-1.3 10-6.7 10-13V8L16 4Z&#39; fill=&#39;%230f1a2e&#39; stroke=&#39;%234f9dff&#39; stroke-width=&#39;1.8&#39;/%3E%3Cpath d=&#39;M16 10v6M16 20v.5&#39; stroke=&#39;%237cc4ff&#39; stroke-width=&#39;2.4&#39; stroke-linecap=&#39;round&#39;/%3E%3C/svg%3E">
+<meta name="theme-color" content="#f4f7fc">
+<style>
+  :root{
+    --bg:#0b1220; --bg-2:#0f1a2e; --panel:#111e34; --panel-2:#152540;
+    --line:#22334f; --line-2:#2c4468;
+    --ink:#eaf1fb; --ink-2:#9fb2ce; --ink-3:#8698b7;
+    --accent:#4f9dff; --accent-2:#7cc4ff;
+    --d1:#f0637a; --d2:#f2a53c; --d3:#c07bf0; --d4:#3fc7b7; --d5:#f5cf5b; --d6:#6d8bff; --dr:#8aa0bb;
+    --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    --mono:"SFMono-Regular",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="light"]{
+    --bg:#f4f7fc; --bg-2:#ffffff; --panel:#ffffff; --panel-2:#eef3fb;
+    --line:#dbe4f0; --line-2:#c6d4e8;
+    --ink:#132036; --ink-2:#42506a; --ink-3:#586780;
+    --accent:#1f6fe5; --accent-2:#1257c4;
+    --d1:#d63a56; --d2:#d1791a; --d3:#9a4ecf; --d4:#189c8c; --d5:#c79a12; --d6:#3f5fe0; --dr:#5f7089;
+    --shadow:0 10px 30px rgba(31,54,92,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--sans); color:var(--ink); background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(79,157,255,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(124,196,255,.06), transparent 55%),
+      var(--bg);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background-color .25s, color .25s;
+  }
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(31,111,229,.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(31,111,229,.05), transparent 55%),
+      var(--bg);
+  }
+  a{color:var(--accent-2); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  header.top{max-width:1180px; margin:0 auto; padding:46px 24px 8px}
+  .kicker{font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-2); margin:0 0 12px}
+  h1{font-size:clamp(28px,4vw,44px); line-height:1.08; margin:0 0 14px; letter-spacing:-.02em}
+  .lede{font-size:clamp(15px,1.6vw,18px); color:var(--ink-2); max-width:70ch; margin:0}
+  .source{margin-top:14px; font-size:13px; color:var(--ink-3)}
+
+  .controls{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+    background:linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.72));
+    border-bottom:1px solid var(--line); margin-top:26px;
+  }
+  html[data-theme="light"] .controls{
+    background:linear-gradient(180deg, rgba(244,247,252,.94), rgba(244,247,252,.74));
+  }
+  .controls-inner{max-width:1180px; margin:0 auto; padding:14px 24px; display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+  .search{flex:1 1 260px; position:relative; min-width:220px}
+  .search input{
+    width:100%; padding:11px 14px 11px 40px; border-radius:10px; border:1px solid var(--line-2);
+    background:var(--panel); color:var(--ink); font-size:15px; outline:none;
+  }
+  .search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(79,157,255,.18)}
+  .search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.6}
+  .facet{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+  .facet label{font-size:12px; color:var(--ink-3); font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase}
+  select{
+    appearance:none; background:var(--panel); color:var(--ink); border:1px solid var(--line-2);
+    border-radius:9px; padding:9px 30px 9px 12px; font-size:14px; cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239fb2ce'><path d='M2 4l4 4 4-4z'/></svg>");
+    background-repeat:no-repeat; background-position:right 10px center;
+  }
+  .count{font-size:13px; color:var(--ink-3); font-family:var(--mono); margin-left:auto}
+  .theme-toggle{
+    display:inline-flex; align-items:center; gap:7px; padding:9px 13px; border-radius:9px;
+    border:1px solid var(--line-2); background:var(--panel); color:var(--ink-2);
+    font-size:13px; cursor:pointer; transition:.15s; white-space:nowrap;
+  }
+  .theme-toggle:hover{border-color:var(--accent); color:var(--ink)}
+  .theme-toggle svg{width:16px; height:16px}
+  .theme-toggle .moon{display:none}
+  html[data-theme="light"] .theme-toggle .sun{display:none}
+  html[data-theme="light"] .theme-toggle .moon{display:inline}
+
+  main{max-width:1180px; margin:0 auto; padding:8px 24px 80px}
+
+  .legend{display:flex; flex-wrap:wrap; gap:8px; padding:22px 0 6px}
+  .chip{
+    display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border-radius:999px;
+    border:1px solid var(--line-2); background:var(--panel); font-size:13px; cursor:pointer;
+    color:var(--ink-2); transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--ink)}
+  .chip.active{background:var(--panel-2); color:var(--ink); border-color:var(--accent)}
+  .dot{width:10px; height:10px; border-radius:50%}
+  .chip .n{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+
+  .domain{margin-top:34px}
+  .domain-head{display:flex; align-items:baseline; gap:12px; border-bottom:1px solid var(--line); padding-bottom:10px}
+  .domain-head .bar{width:4px; align-self:stretch; border-radius:3px}
+  .domain-head h2{font-size:20px; margin:0; letter-spacing:-.01em}
+  .domain-head .id{font-family:var(--mono); font-size:12px; color:var(--ink-3)}
+  .domain-desc{color:var(--ink-2); font-size:14px; margin:10px 0 0; max-width:80ch}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; margin-top:18px}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 16px;
+    position:relative; overflow:hidden; transition:.16s; cursor:pointer;
+  }
+  .card:hover{border-color:var(--line-2); transform:translateY(-2px); box-shadow:var(--shadow)}
+  .card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--c,#4f9dff)}
+  .card h3{margin:0 0 4px; font-size:16px; padding-left:4px}
+  .card .code{font-family:var(--mono); font-size:11px; color:var(--ink-3); padding-left:4px}
+  .card p{margin:10px 0 12px; font-size:13.5px; color:var(--ink-2); padding-left:4px}
+  .tags{display:flex; flex-wrap:wrap; gap:6px; padding-left:4px}
+  .tag{
+    font-size:11px; font-family:var(--mono); padding:3px 8px; border-radius:6px;
+    background:var(--panel-2); border:1px solid var(--line); color:var(--ink-2); white-space:nowrap;
+  }
+  .tag b{color:var(--ink-3); font-weight:500}
+
+  .empty{padding:60px 20px; text-align:center; color:var(--ink-3)}
+
+  .overlay{
+    position:fixed; inset:0; z-index:60; background:rgba(4,8,16,.72); backdrop-filter:blur(4px);
+    display:none; align-items:flex-start; justify-content:center; padding:6vh 20px; overflow:auto;
+  }
+  .overlay.open{display:flex}
+  .modal{
+    max-width:640px; width:100%; background:linear-gradient(180deg,var(--panel-2),var(--bg-2));
+    border:1px solid var(--line-2); border-radius:16px; box-shadow:var(--shadow); padding:26px;
+  }
+  .modal .code{font-family:var(--mono); font-size:12px; color:var(--ink-3)}
+  .modal h3{margin:6px 0 4px; font-size:22px}
+  .modal .dname{font-size:13px; color:var(--ink-2); margin-bottom:16px}
+  .modal p.def{font-size:15px; color:var(--ink); margin:0 0 20px}
+  .attrs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .attr{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .attr .l{font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-3)}
+  .attr .v{font-size:14px; color:var(--ink); margin-top:3px}
+  .modal .foot{display:flex; justify-content:space-between; align-items:center; margin-top:22px; gap:12px; flex-wrap:wrap}
+  .btn{
+    background:var(--accent); color:#04101f; font-weight:600; border:none; border-radius:9px;
+    padding:10px 16px; font-size:14px; cursor:pointer; text-decoration:none; display:inline-block;
+  }
+  .btn:hover{background:var(--accent-2); text-decoration:none}
+  html[data-theme="light"] .btn{background:#0f52ba; color:#fff}
+  html[data-theme="light"] .btn:hover{background:#0c47a0}
+  .x{background:none; border:1px solid var(--line-2); color:var(--ink-2); border-radius:8px; padding:8px 12px; cursor:pointer; font-size:13px}
+  .x:hover{color:var(--ink)}
+
+  /* Keyboard focus: visible indicator on every interactive control (WCAG 2.4.7) */
+  html{scroll-padding-top:96px} /* keep focus clear of the sticky bar (WCAG 2.4.11) */
+  a:focus-visible, button:focus-visible, select:focus-visible,
+  input:focus-visible, .card:focus-visible, [tabindex]:focus-visible{
+    outline:3px solid var(--accent); outline-offset:2px; border-radius:6px;
+  }
+  .card:focus-visible{outline-offset:-1px}
+
+  footer{max-width:1180px; margin:0 auto; padding:30px 24px 60px; border-top:1px solid var(--line); color:var(--ink-3); font-size:13px}
+  footer p{margin:6px 0}
+  .li-badge{display:inline-flex; align-items:center; gap:9px; margin-top:14px; padding:7px 13px 7px 8px;
+    border:1px solid var(--line-2); border-radius:999px; background:var(--panel);
+    color:var(--ink); font-size:14px; font-weight:600; text-decoration:none; transition:.15s}
+  .li-badge:hover{border-color:#0a66c2; text-decoration:none}
+  .li-badge .li-mark{display:inline-flex; align-items:center; justify-content:center;
+    width:24px; height:24px; border-radius:5px; background:#0a66c2; color:#fff;
+    font-weight:800; font-size:12px; letter-spacing:.02em}
+  .li-badge:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  @media(max-width:520px){ .attrs{grid-template-columns:1fr} .count{width:100%; margin-left:0} .theme-toggle .tlabel{display:none} }
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=701a8a7a55" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<header class="top">
+  <p class="kicker">Human Impacts Cyber Framework · v1.0</p>
+  <h1>The Personal Cyber Attack Taxonomy</h1>
+  <p class="lede">A reference classification of cyber attacks that target <strong>people</strong> rather than enterprises. Forty attack types are organised into six threat domains and mapped across four dimensions — the attacker's <em>goal</em>, the delivery <em>vector</em>, the <em>target asset</em>, and the primary <em>harm</em> to the victim.</p>
+  <p class="source">Foundational source: <a href="https://www.thecyberhelpline.com/guides" target="_blank" rel="noopener">The Cyber Helpline — Recovery Guides</a>. Each attack type links to its corresponding victim-support guide.</p>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+      <input id="q" type="search" placeholder="Search attack types, definitions, tactics…" aria-label="Search attack types, definitions and tactics" autocomplete="off">
+    </div>
+    <div class="facet">
+      <label for="fgoal">Goal</label>
+      <select id="fgoal"><option value="">All</option><option value="Account takeover">Account takeover</option><option value="Credential / data theft">Credential / data theft</option><option value="Data theft">Data theft</option><option value="Data theft / damage">Data theft / damage</option><option value="Deception">Deception</option><option value="Device control">Device control</option><option value="Exploitation">Exploitation</option><option value="Extortion">Extortion</option><option value="Financial gain">Financial gain</option><option value="Harm / radicalisation">Harm / radicalisation</option><option value="Identity abuse">Identity abuse</option><option value="Impersonation">Impersonation</option><option value="Intimidation">Intimidation</option><option value="N/A (accidental)">N/A (accidental)</option><option value="Network access">Network access</option><option value="Psychological harm">Psychological harm</option><option value="Reputation damage">Reputation damage</option><option value="Response">Response</option><option value="Surveillance">Surveillance</option></select>
+    </div>
+    <div class="facet">
+      <label for="fvector">Vector</label>
+      <select id="fvector"><option value="">All</option><option value="Account compromise">Account compromise</option><option value="Coercion">Coercion</option><option value="Content exposure">Content exposure</option><option value="Cross-cutting">Cross-cutting</option><option value="Data exposure">Data exposure</option><option value="Deception">Deception</option><option value="Deception (SMS)">Deception (SMS)</option><option value="Deception (email)">Deception (email)</option><option value="Deception (voice)">Deception (voice)</option><option value="Human error">Human error</option><option value="Human error / loss">Human error / loss</option><option value="Identity abuse">Identity abuse</option><option value="Malware">Malware</option><option value="Network intrusion">Network intrusion</option><option value="Online abuse">Online abuse</option><option value="Physical / stalkerware">Physical / stalkerware</option><option value="Third-party breach">Third-party breach</option></select>
+    </div>
+    <div class="facet">
+      <label for="fharm">Harm</label>
+      <select id="fharm"><option value="">All</option><option value="Data &amp; financial">Data &amp; financial</option><option value="Data loss">Data loss</option><option value="Emotional &amp; financial">Emotional &amp; financial</option><option value="Financial &amp; privacy">Financial &amp; privacy</option><option value="Financial &amp; reputational">Financial &amp; reputational</option><option value="Financial loss">Financial loss</option><option value="Physical &amp; psychological">Physical &amp; psychological</option><option value="Privacy &amp; data loss">Privacy &amp; data loss</option><option value="Privacy &amp; physical">Privacy &amp; physical</option><option value="Privacy &amp; psychological">Privacy &amp; psychological</option><option value="Psychological">Psychological</option><option value="Psychological &amp; financial">Psychological &amp; financial</option><option value="Psychological &amp; reputational">Psychological &amp; reputational</option><option value="Reputational">Reputational</option><option value="Reputational &amp; privacy">Reputational &amp; privacy</option><option value="—">—</option></select>
+    </div>
+    <span class="count" id="count">42 of 42 attack types</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z"></path></svg>
+      <span class="tlabel">Theme</span>
+    </button>
+  </div>
+</div>
+
+<main>
+  <div class="legend" id="legend"><button class="chip" data-dom="D1" type="button" aria-pressed="false"><span class="dot" style="background:var(--d1)"></span>Ransom, Ransomware &amp; Malware <span class="n">5</span></button><button class="chip" data-dom="D2" type="button" aria-pressed="false"><span class="dot" style="background:var(--d2)"></span>Unauthorised Access <span class="n">10</span></button><button class="chip" data-dom="D3" type="button" aria-pressed="false"><span class="dot" style="background:var(--d3)"></span>Harassment, Stalking &amp; Surveillance <span class="n">10</span></button><button class="chip" data-dom="D4" type="button" aria-pressed="false"><span class="dot" style="background:var(--d4)"></span>Social Engineering <span class="n">3</span></button><button class="chip" data-dom="D5" type="button" aria-pressed="false"><span class="dot" style="background:var(--d5)"></span>Fraud &amp; Scams <span class="n">8</span></button><button class="chip" data-dom="D6" type="button" aria-pressed="false"><span class="dot" style="background:var(--d6)"></span>Accidents, Media &amp; Public Breaches <span class="n">4</span></button><button class="chip" data-dom="DR" type="button" aria-pressed="false"><span class="dot" style="background:var(--dr)"></span>Response &amp; Recovery (cross-cutting) <span class="n">2</span></button></div>
+  <div id="catalog"><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d1)"></span>
+      <span class="id">D1</span><h2>Ransom, Ransomware &amp; Malware</h2></div>
+      <p class="domain-desc">Malicious software and coercion used to deny access to data or devices, or to extract payment through threats.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Encrypting Ransomware — D1.01. View details and recovery guide." style="--c: var(--d1);"><div class="code">D1.01</div><h3>Encrypting Ransomware</h3><p>Malware encrypts the victim's files and changes their extensions; a ransom is demanded for the decryption key while the device otherwise still works.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Extortion</span>
+          <span class="tag"><b>vector</b> Malware</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Screen-Locking Ransomware — D1.02. View details and recovery guide." style="--c: var(--d1);"><div class="code">D1.02</div><h3>Screen-Locking Ransomware</h3><p>A ransom note appears the moment the device is switched on, locking the victim out of the device entirely until payment.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Extortion</span>
+          <span class="tag"><b>vector</b> Malware</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Content for Ransom — D1.03. View details and recovery guide." style="--c: var(--d1);"><div class="code">D1.03</div><h3>Content for Ransom</h3><p>An attacker obtains sensitive information about the victim and demands payment or action to prevent its release.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Extortion</span>
+          <span class="tag"><b>vector</b> Coercion</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Sextortion — D1.04. View details and recovery guide." style="--c: var(--d1);"><div class="code">D1.04</div><h3>Sextortion</h3><p>Threats to share intimate images or video of the victim unless money is paid or demands are met.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Extortion</span>
+          <span class="tag"><b>vector</b> Coercion</span>
+          <span class="tag"><b>harm</b> Psychological &amp; financial</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Malware Infection — D1.05. View details and recovery guide." style="--c: var(--d1);"><div class="code">D1.05</div><h3>Malware Infection</h3><p>Software is placed on a device to steal information or cause damage, without the owner's knowledge.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Data theft / damage</span>
+          <span class="tag"><b>vector</b> Malware</span>
+          <span class="tag"><b>harm</b> Data loss</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d2)"></span>
+      <span class="id">D2</span><h2>Unauthorised Access</h2></div>
+      <p class="domain-desc">An attacker gains control of an online account or device without the owner's permission.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Hacked Email Account — D2.01. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.01</div><h3>Hacked Email Account</h3><p>Unauthorised access to a webmail account such as Gmail, Hotmail or Yahoo.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Account takeover</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Social Media Account — D2.02. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.02</div><h3>Hacked Social Media Account</h3><p>Unauthorised access to a social media account such as Facebook, X or Instagram.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Account takeover</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Reputational &amp; privacy</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Online Bank Account — D2.03. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.03</div><h3>Hacked Online Bank Account</h3><p>Unauthorised access to the victim's online banking.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Virtual Currency Account — D2.04. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.04</div><h3>Hacked Virtual Currency Account</h3><p>Unauthorised access to an online cryptocurrency wallet or exchange account.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Online Gaming Account — D2.05. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.05</div><h3>Hacked Online Gaming Account</h3><p>Unauthorised access to a gaming account such as Steam, Fortnite or PlayStation Network.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Account takeover</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Online Shopping Account — D2.06. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.06</div><h3>Hacked Online Shopping Account</h3><p>Unauthorised access to a shopping account such as Amazon or eBay.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Hacked Home WiFi Network — D2.07. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.07</div><h3>Hacked Home WiFi Network</h3><p>Someone gains access to the victim's home wireless network without permission.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Network access</span>
+          <span class="tag"><b>vector</b> Network intrusion</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="SIM Swapping — D2.08. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.08</div><h3>SIM Swapping</h3><p>An attacker takes over the victim's mobile number so calls, texts and 2FA codes route to the attacker.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Account takeover</span>
+          <span class="tag"><b>vector</b> Identity abuse</span>
+          <span class="tag"><b>harm</b> Financial &amp; privacy</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Compromised Account (general) — D2.09. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.09</div><h3>Compromised Account (general)</h3><p>A general case where an online account is suspected of being accessed without permission.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Account takeover</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Compromised Device (general) — D2.10. View details and recovery guide." style="--c: var(--d2);"><div class="code">D2.10</div><h3>Compromised Device (general)</h3><p>A general case where a computer, phone or tablet is suspected of being accessed or controlled remotely.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Device control</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d3)"></span>
+      <span class="id">D3</span><h2>Harassment, Stalking &amp; Surveillance</h2></div>
+      <p class="domain-desc">The internet and connected devices used to bully, intimidate, monitor, impersonate or humiliate a person.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Online Harassment — D3.01. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.01</div><h3>Online Harassment</h3><p>Bullying or abuse online, including trolling and abusive direct messages.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Psychological harm</span>
+          <span class="tag"><b>vector</b> Online abuse</span>
+          <span class="tag"><b>harm</b> Psychological</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Cyberstalking — D3.02. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.02</div><h3>Cyberstalking</h3><p>Persistent online stalking accompanied by severe threats to the victim's personal safety.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Intimidation</span>
+          <span class="tag"><b>vector</b> Online abuse</span>
+          <span class="tag"><b>harm</b> Physical &amp; psychological</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Outing / Doxxing — D3.03. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.03</div><h3>Outing / Doxxing</h3><p>Sharing someone's personal information, secrets or sensitive images online without consent.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Reputation damage</span>
+          <span class="tag"><b>vector</b> Data exposure</span>
+          <span class="tag"><b>harm</b> Privacy &amp; psychological</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Fake Profiles / Impersonation — D3.04. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.04</div><h3>Fake Profiles / Impersonation</h3><p>Fake profiles created to harass the victim, or impersonating the victim to cause distress.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Impersonation</span>
+          <span class="tag"><b>vector</b> Identity abuse</span>
+          <span class="tag"><b>harm</b> Reputational</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Fraping — D3.05. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.05</div><h3>Fraping</h3><p>Someone with access to the victim's social account posts content that causes distress or reputational damage.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Reputation damage</span>
+          <span class="tag"><b>vector</b> Account compromise</span>
+          <span class="tag"><b>harm</b> Reputational</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Catfishing — D3.06. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.06</div><h3>Catfishing</h3><p>Someone pretends to be a different person to trick the victim into a personal relationship.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Deception</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Emotional &amp; financial</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Online Grooming — D3.07. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.07</div><h3>Online Grooming</h3><p>An adult builds a relationship with a minor online to manipulate, exploit or abuse them.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Exploitation</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Physical &amp; psychological</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Inappropriate Content — D3.08. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.08</div><h3>Inappropriate Content</h3><p>Exposure to hate speech, offensive material, adult content aimed at children, or harmful online 'challenges'.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Harm / radicalisation</span>
+          <span class="tag"><b>vector</b> Content exposure</span>
+          <span class="tag"><b>harm</b> Psychological</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Revenge Porn — D3.09. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.09</div><h3>Revenge Porn</h3><p>An ex-partner shares sexually explicit images or video of the victim without consent to cause distress.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Reputation damage</span>
+          <span class="tag"><b>vector</b> Data exposure</span>
+          <span class="tag"><b>harm</b> Psychological &amp; reputational</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Bugs, Cameras &amp; Trackers — D3.10. View details and recovery guide." style="--c: var(--d3);"><div class="code">D3.10</div><h3>Bugs, Cameras &amp; Trackers</h3><p>Physical or software surveillance — listening devices, hidden cameras, or location trackers/stalkerware.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Surveillance</span>
+          <span class="tag"><b>vector</b> Physical / stalkerware</span>
+          <span class="tag"><b>harm</b> Privacy &amp; physical</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d4)"></span>
+      <span class="id">D4</span><h2>Social Engineering</h2></div>
+      <p class="domain-desc">Direct deception by email, phone or text that manipulates the victim into compromising their own security.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Phishing — D4.01. View details and recovery guide." style="--c: var(--d4);"><div class="code">D4.01</div><h3>Phishing</h3><p>A deceptive email that tricks the victim into clicking, downloading or disclosing credentials.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Credential / data theft</span>
+          <span class="tag"><b>vector</b> Deception (email)</span>
+          <span class="tag"><b>harm</b> Data &amp; financial</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Vishing — D4.02. View details and recovery guide." style="--c: var(--d4);"><div class="code">D4.02</div><h3>Vishing</h3><p>A fraudulent phone call that manipulates the victim into disclosing information or taking harmful action.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Credential / data theft</span>
+          <span class="tag"><b>vector</b> Deception (voice)</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Smishing — D4.03. View details and recovery guide." style="--c: var(--d4);"><div class="code">D4.03</div><h3>Smishing</h3><p>A fraudulent text message that tricks the victim into clicking a link or disclosing information.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Credential / data theft</span>
+          <span class="tag"><b>vector</b> Deception (SMS)</span>
+          <span class="tag"><b>harm</b> Data &amp; financial</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d5)"></span>
+      <span class="id">D5</span><h2>Fraud &amp; Scams</h2></div>
+      <p class="domain-desc">Deception intended to produce financial or personal gain for the criminal at the victim's expense.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Virtual Currency Scams — D5.01. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.01</div><h3>Virtual Currency Scams</h3><p>The victim is defrauded through a cryptocurrency scheme or fake exchange.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Card Fraud — D5.02. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.02</div><h3>Card Fraud</h3><p>Unauthorised transactions made using the victim's bank card details.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Identity abuse</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Identity Theft — D5.03. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.03</div><h3>Identity Theft</h3><p>An attacker steals and uses the victim's identity, often to open accounts or obtain credit.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Identity abuse</span>
+          <span class="tag"><b>vector</b> Identity abuse</span>
+          <span class="tag"><b>harm</b> Financial &amp; reputational</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Online Auction Fraud — D5.04. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.04</div><h3>Online Auction Fraud</h3><p>The victim is deceived when buying on an auction or marketplace site such as eBay or Amazon.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Event-Based Scams — D5.05. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.05</div><h3>Event-Based Scams</h3><p>Scams that exploit a topical event or crisis (e.g. Covid-19) to add urgency and credibility.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Recruitment Scams — D5.06. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.06</div><h3>Recruitment Scams</h3><p>Job-fraud schemes that deceive the victim while applying for work at home or abroad.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Loan Scams — D5.07. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.07</div><h3>Loan Scams</h3><p>Fraud committed against the victim while they are taking out a loan.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Investment Scams — D5.08. View details and recovery guide." style="--c: var(--d5);"><div class="code">D5.08</div><h3>Investment Scams</h3><p>The victim is defrauded while making what they believe to be a legitimate investment.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Financial gain</span>
+          <span class="tag"><b>vector</b> Deception</span>
+          <span class="tag"><b>harm</b> Financial loss</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--d6)"></span>
+      <span class="id">D6</span><h2>Accidents, Media &amp; Public Breaches</h2></div>
+      <p class="domain-desc">Exposure of personal data through mistakes, third-party breaches, or inaccurate public reporting.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Lost Device — D6.01. View details and recovery guide." style="--c: var(--d6);"><div class="code">D6.01</div><h3>Lost Device</h3><p>A device is lost, creating risk to any information stored on or accessible from it.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> N/A (accidental)</span>
+          <span class="tag"><b>vector</b> Human error / loss</span>
+          <span class="tag"><b>harm</b> Data loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Accidental Information Share — D6.02. View details and recovery guide." style="--c: var(--d6);"><div class="code">D6.02</div><h3>Accidental Information Share</h3><p>The victim accidentally shares sensitive or confidential information online.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> N/A (accidental)</span>
+          <span class="tag"><b>vector</b> Human error</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Online Reporting Issue — D6.03. View details and recovery guide." style="--c: var(--d6);"><div class="code">D6.03</div><h3>Online Reporting Issue</h3><p>A website publishes fake or inaccurate information about the victim.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Reputation damage</span>
+          <span class="tag"><b>vector</b> Data exposure</span>
+          <span class="tag"><b>harm</b> Reputational</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Service Provider Breach — D6.04. View details and recovery guide." style="--c: var(--d6);"><div class="code">D6.04</div><h3>Service Provider Breach</h3><p>A company, app or service the victim uses is hacked, exposing the victim's data (third-party breach).</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Data theft</span>
+          <span class="tag"><b>vector</b> Third-party breach</span>
+          <span class="tag"><b>harm</b> Privacy &amp; data loss</span>
+        </div></article></div></section><section class="domain"><div class="domain-head"><span class="bar" style="background:var(--dr)"></span>
+      <span class="id">DR</span><h2>Response &amp; Recovery (cross-cutting)</h2></div>
+      <p class="domain-desc">Not attack types — the actions a victim takes across any incident to preserve evidence and recover losses.</p><div class="grid"><article class="card" tabindex="0" role="button" aria-label="Preserve Evidence &amp; Report — DR.01. View details and recovery guide." style="--c: var(--dr);"><div class="code">DR.01</div><h3>Preserve Evidence &amp; Report</h3><p>Cross-cutting response: how to save and protect digital evidence before reporting cybercrime to the authorities.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Response</span>
+          <span class="tag"><b>vector</b> Cross-cutting</span>
+          <span class="tag"><b>harm</b> —</span>
+        </div></article><article class="card" tabindex="0" role="button" aria-label="Recovering Money — DR.02. View details and recovery guide." style="--c: var(--dr);"><div class="code">DR.02</div><h3>Recovering Money</h3><p>Cross-cutting response: steps to try to recover money lost in an online scam or cybercrime.</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> Response</span>
+          <span class="tag"><b>vector</b> Cross-cutting</span>
+          <span class="tag"><b>harm</b> —</span>
+        </div></article></div></section></div>
+  <div class="empty" id="empty" style="display:none">No attack types match your filters.</div>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div>
+</div>
+
+<footer>
+  <p><strong>How to read a classification code.</strong> Codes follow <span style="font-family:var(--mono)">D#.##</span> — the domain number, then the attack index within it (e.g. <span style="font-family:var(--mono)">D4.02</span> = Social Engineering › Vishing).</p>
+  <p>This taxonomy is a descriptive reference model. It does not rank severity or likelihood; a single incident may span several types (for example, a phishing email that leads to account compromise and then fraud).</p>
+  <p>Built on guidance published by The Cyber Helpline (UK registered charity 1198335).</p>
+  <p><strong>Accessibility.</strong> This site is designed to conform to the <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.2</a> at Level AA — including full keyboard operation, visible focus indicators, AA-level colour contrast in both themes, and screen-reader labelling of controls and dialogs. If you encounter a barrier or need this content in another format, please <a href="mailto:hello@insynthesis.uk">let us know</a>.</p>
+</footer>
+
+<script>
+const DOMAINS = [
+  {id:"D1", name:"Ransom, Ransomware & Malware", color:"var(--d1)",
+   desc:"Malicious software and coercion used to deny access to data or devices, or to extract payment through threats."},
+  {id:"D2", name:"Unauthorised Access", color:"var(--d2)",
+   desc:"An attacker gains control of an online account or device without the owner's permission."},
+  {id:"D3", name:"Harassment, Stalking & Surveillance", color:"var(--d3)",
+   desc:"The internet and connected devices used to bully, intimidate, monitor, impersonate or humiliate a person."},
+  {id:"D4", name:"Social Engineering", color:"var(--d4)",
+   desc:"Direct deception by email, phone or text that manipulates the victim into compromising their own security."},
+  {id:"D5", name:"Fraud & Scams", color:"var(--d5)",
+   desc:"Deception intended to produce financial or personal gain for the criminal at the victim's expense."},
+  {id:"D6", name:"Accidents, Media & Public Breaches", color:"var(--d6)",
+   desc:"Exposure of personal data through mistakes, third-party breaches, or inaccurate public reporting."},
+  {id:"DR", name:"Response & Recovery (cross-cutting)", color:"var(--dr)",
+   desc:"Not attack types — the actions a victim takes across any incident to preserve evidence and recover losses."}
+];
+
+const A = [
+  {c:"D1.01", d:"D1", n:"Encrypting Ransomware", def:"Malware encrypts the victim's files and changes their extensions; a ransom is demanded for the decryption key while the device otherwise still works.", goal:"Extortion", vector:"Malware", asset:"Data & files", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/encrypting-ransomware"},
+  {c:"D1.02", d:"D1", n:"Screen-Locking Ransomware", def:"A ransom note appears the moment the device is switched on, locking the victim out of the device entirely until payment.", goal:"Extortion", vector:"Malware", asset:"Device", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/screenlocking-ransomware"},
+  {c:"D1.03", d:"D1", n:"Content for Ransom", def:"An attacker obtains sensitive information about the victim and demands payment or action to prevent its release.", goal:"Extortion", vector:"Coercion", asset:"Sensitive data", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/content-for-ransom"},
+  {c:"D1.04", d:"D1", n:"Sextortion", def:"Threats to share intimate images or video of the victim unless money is paid or demands are met.", goal:"Extortion", vector:"Coercion", asset:"Intimate content", harm:"Psychological & financial", url:"https://www.thecyberhelpline.com/guides/webcam-blackmail"},
+  {c:"D1.05", d:"D1", n:"Malware Infection", def:"Software is placed on a device to steal information or cause damage, without the owner's knowledge.", goal:"Data theft / damage", vector:"Malware", asset:"Device", harm:"Data loss", url:"https://www.thecyberhelpline.com/guides/removing-malware"},
+
+  {c:"D2.01", d:"D2", n:"Hacked Email Account", def:"Unauthorised access to a webmail account such as Gmail, Hotmail or Yahoo.", goal:"Account takeover", vector:"Account compromise", asset:"Email account", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/hacked-email-account"},
+  {c:"D2.02", d:"D2", n:"Hacked Social Media Account", def:"Unauthorised access to a social media account such as Facebook, X or Instagram.", goal:"Account takeover", vector:"Account compromise", asset:"Social account", harm:"Reputational & privacy", url:"https://www.thecyberhelpline.com/guides/hacked-social-account"},
+  {c:"D2.03", d:"D2", n:"Hacked Online Bank Account", def:"Unauthorised access to the victim's online banking.", goal:"Financial gain", vector:"Account compromise", asset:"Bank account", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/hacked-online-bank-account"},
+  {c:"D2.04", d:"D2", n:"Hacked Virtual Currency Account", def:"Unauthorised access to an online cryptocurrency wallet or exchange account.", goal:"Financial gain", vector:"Account compromise", asset:"Crypto wallet", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/hacked-virtual-currency"},
+  {c:"D2.05", d:"D2", n:"Hacked Online Gaming Account", def:"Unauthorised access to a gaming account such as Steam, Fortnite or PlayStation Network.", goal:"Account takeover", vector:"Account compromise", asset:"Gaming account", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/hacked-online-gaming"},
+  {c:"D2.06", d:"D2", n:"Hacked Online Shopping Account", def:"Unauthorised access to a shopping account such as Amazon or eBay.", goal:"Financial gain", vector:"Account compromise", asset:"Shopping account", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/hacked-online-shopping"},
+  {c:"D2.07", d:"D2", n:"Hacked Home WiFi Network", def:"Someone gains access to the victim's home wireless network without permission.", goal:"Network access", vector:"Network intrusion", asset:"Home network", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/hacked-wifi"},
+  {c:"D2.08", d:"D2", n:"SIM Swapping", def:"An attacker takes over the victim's mobile number so calls, texts and 2FA codes route to the attacker.", goal:"Account takeover", vector:"Identity abuse", asset:"Phone number", harm:"Financial & privacy", url:"https://www.thecyberhelpline.com/guides/sim-swapping"},
+  {c:"D2.09", d:"D2", n:"Compromised Account (general)", def:"A general case where an online account is suspected of being accessed without permission.", goal:"Account takeover", vector:"Account compromise", asset:"Online account", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/compromised-account"},
+  {c:"D2.10", d:"D2", n:"Compromised Device (general)", def:"A general case where a computer, phone or tablet is suspected of being accessed or controlled remotely.", goal:"Device control", vector:"Account compromise", asset:"Device", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/compromised-device"},
+
+  {c:"D3.01", d:"D3", n:"Online Harassment", def:"Bullying or abuse online, including trolling and abusive direct messages.", goal:"Psychological harm", vector:"Online abuse", asset:"Wellbeing", harm:"Psychological", url:"https://www.thecyberhelpline.com/guides/online-harassment"},
+  {c:"D3.02", d:"D3", n:"Cyberstalking", def:"Persistent online stalking accompanied by severe threats to the victim's personal safety.", goal:"Intimidation", vector:"Online abuse", asset:"Physical safety", harm:"Physical & psychological", url:"https://www.thecyberhelpline.com/guides/cyber-stalking"},
+  {c:"D3.03", d:"D3", n:"Outing / Doxxing", def:"Sharing someone's personal information, secrets or sensitive images online without consent.", goal:"Reputation damage", vector:"Data exposure", asset:"Personal data", harm:"Privacy & psychological", url:"https://www.thecyberhelpline.com/guides/outing"},
+  {c:"D3.04", d:"D3", n:"Fake Profiles / Impersonation", def:"Fake profiles created to harass the victim, or impersonating the victim to cause distress.", goal:"Impersonation", vector:"Identity abuse", asset:"Identity & reputation", harm:"Reputational", url:"https://www.thecyberhelpline.com/guides/fake-profiles"},
+  {c:"D3.05", d:"D3", n:"Fraping", def:"Someone with access to the victim's social account posts content that causes distress or reputational damage.", goal:"Reputation damage", vector:"Account compromise", asset:"Social account", harm:"Reputational", url:"https://www.thecyberhelpline.com/guides/fraping"},
+  {c:"D3.06", d:"D3", n:"Catfishing", def:"Someone pretends to be a different person to trick the victim into a personal relationship.", goal:"Deception", vector:"Deception", asset:"Trust & emotion", harm:"Emotional & financial", url:"https://www.thecyberhelpline.com/guides/catfishing"},
+  {c:"D3.07", d:"D3", n:"Online Grooming", def:"An adult builds a relationship with a minor online to manipulate, exploit or abuse them.", goal:"Exploitation", vector:"Deception", asset:"Child safety", harm:"Physical & psychological", url:"https://www.thecyberhelpline.com/guides/online-grooming"},
+  {c:"D3.08", d:"D3", n:"Inappropriate Content", def:"Exposure to hate speech, offensive material, adult content aimed at children, or harmful online 'challenges'.", goal:"Harm / radicalisation", vector:"Content exposure", asset:"Wellbeing", harm:"Psychological", url:"https://www.thecyberhelpline.com/guides/inappropriate-content"},
+  {c:"D3.09", d:"D3", n:"Revenge Porn", def:"An ex-partner shares sexually explicit images or video of the victim without consent to cause distress.", goal:"Reputation damage", vector:"Data exposure", asset:"Intimate content", harm:"Psychological & reputational", url:"https://www.thecyberhelpline.com/guides/revenge-porn"},
+  {c:"D3.10", d:"D3", n:"Bugs, Cameras & Trackers", def:"Physical or software surveillance — listening devices, hidden cameras, or location trackers/stalkerware.", goal:"Surveillance", vector:"Physical / stalkerware", asset:"Physical safety", harm:"Privacy & physical", url:"https://www.thecyberhelpline.com/guides/bugs-cameras-trackers"},
+
+  {c:"D4.01", d:"D4", n:"Phishing", def:"A deceptive email that tricks the victim into clicking, downloading or disclosing credentials.", goal:"Credential / data theft", vector:"Deception (email)", asset:"Credentials", harm:"Data & financial", url:"https://www.thecyberhelpline.com/guides/phishing-threatening-emails"},
+  {c:"D4.02", d:"D4", n:"Vishing", def:"A fraudulent phone call that manipulates the victim into disclosing information or taking harmful action.", goal:"Credential / data theft", vector:"Deception (voice)", asset:"Credentials", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/vishing"},
+  {c:"D4.03", d:"D4", n:"Smishing", def:"A fraudulent text message that tricks the victim into clicking a link or disclosing information.", goal:"Credential / data theft", vector:"Deception (SMS)", asset:"Credentials", harm:"Data & financial", url:"https://www.thecyberhelpline.com/guides/smishing"},
+
+  {c:"D5.01", d:"D5", n:"Virtual Currency Scams", def:"The victim is defrauded through a cryptocurrency scheme or fake exchange.", goal:"Financial gain", vector:"Deception", asset:"Money", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/virtual-currency-scam"},
+  {c:"D5.02", d:"D5", n:"Card Fraud", def:"Unauthorised transactions made using the victim's bank card details.", goal:"Financial gain", vector:"Identity abuse", asset:"Payment cards", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/card-fraud"},
+  {c:"D5.03", d:"D5", n:"Identity Theft", def:"An attacker steals and uses the victim's identity, often to open accounts or obtain credit.", goal:"Identity abuse", vector:"Identity abuse", asset:"Identity", harm:"Financial & reputational", url:"https://www.thecyberhelpline.com/guides/identity-theft"},
+  {c:"D5.04", d:"D5", n:"Online Auction Fraud", def:"The victim is deceived when buying on an auction or marketplace site such as eBay or Amazon.", goal:"Financial gain", vector:"Deception", asset:"Money", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/online-auction-fraud"},
+  {c:"D5.05", d:"D5", n:"Event-Based Scams", def:"Scams that exploit a topical event or crisis (e.g. Covid-19) to add urgency and credibility.", goal:"Financial gain", vector:"Deception", asset:"Money", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/covid19-scams"},
+  {c:"D5.06", d:"D5", n:"Recruitment Scams", def:"Job-fraud schemes that deceive the victim while applying for work at home or abroad.", goal:"Financial gain", vector:"Deception", asset:"Money & identity", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/recruitment-scams"},
+  {c:"D5.07", d:"D5", n:"Loan Scams", def:"Fraud committed against the victim while they are taking out a loan.", goal:"Financial gain", vector:"Deception", asset:"Money", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/loan-scams"},
+  {c:"D5.08", d:"D5", n:"Investment Scams", def:"The victim is defrauded while making what they believe to be a legitimate investment.", goal:"Financial gain", vector:"Deception", asset:"Money", harm:"Financial loss", url:"https://www.thecyberhelpline.com/guides/investment-scams"},
+
+  {c:"D6.01", d:"D6", n:"Lost Device", def:"A device is lost, creating risk to any information stored on or accessible from it.", goal:"N/A (accidental)", vector:"Human error / loss", asset:"Device & data", harm:"Data loss", url:"https://www.thecyberhelpline.com/guides/lost-device"},
+  {c:"D6.02", d:"D6", n:"Accidental Information Share", def:"The victim accidentally shares sensitive or confidential information online.", goal:"N/A (accidental)", vector:"Human error", asset:"Sensitive data", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/accidental-info-share"},
+  {c:"D6.03", d:"D6", n:"Online Reporting Issue", def:"A website publishes fake or inaccurate information about the victim.", goal:"Reputation damage", vector:"Data exposure", asset:"Reputation", harm:"Reputational", url:"https://www.thecyberhelpline.com/guides/online-reporting"},
+  {c:"D6.04", d:"D6", n:"Service Provider Breach", def:"A company, app or service the victim uses is hacked, exposing the victim's data (third-party breach).", goal:"Data theft", vector:"Third-party breach", asset:"Personal data", harm:"Privacy & data loss", url:"https://www.thecyberhelpline.com/guides/service-provider-breach"},
+
+  {c:"DR.01", d:"DR", n:"Preserve Evidence & Report", def:"Cross-cutting response: how to save and protect digital evidence before reporting cybercrime to the authorities.", goal:"Response", vector:"Cross-cutting", asset:"Evidence", harm:"—", url:"https://www.thecyberhelpline.com/preserving-evidence"},
+  {c:"DR.02", d:"DR", n:"Recovering Money", def:"Cross-cutting response: steps to try to recover money lost in an online scam or cybercrime.", goal:"Response", vector:"Cross-cutting", asset:"Money", harm:"—", url:"https://www.thecyberhelpline.com/guides/money-recovery"}
+];
+
+const dmap = Object.fromEntries(DOMAINS.map(d=>[d.id,d]));
+const uniq = k => [...new Set(A.map(a=>a[k]))].sort();
+let activeDomain = "";
+
+function fill(id,vals){const s=document.getElementById(id); vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);});}
+fill("fgoal",uniq("goal")); fill("fvector",uniq("vector")); fill("fharm",uniq("harm"));
+
+const legend=document.getElementById("legend");
+DOMAINS.forEach(d=>{
+  const n=A.filter(a=>a.d===d.id).length;
+  const el=document.createElement("button");
+  el.className="chip"; el.dataset.dom=d.id; el.type="button"; el.setAttribute("aria-pressed","false");
+  el.innerHTML=`<span class="dot" style="background:${d.color}"></span>${d.name} <span class="n">${n}</span>`;
+  el.onclick=()=>{activeDomain = activeDomain===d.id ? "" : d.id; syncChips(); render();};
+  legend.appendChild(el);
+});
+function syncChips(){document.querySelectorAll(".chip").forEach(c=>{
+  const on = c.dataset.dom===activeDomain;
+  c.classList.toggle("active",on);
+  c.setAttribute("aria-pressed", on?"true":"false");
+});}
+
+const catalog=document.getElementById("catalog");
+const empty=document.getElementById("empty");
+const countEl=document.getElementById("count");
+
+function current(){
+  const q=document.getElementById("q").value.trim().toLowerCase();
+  const g=document.getElementById("fgoal").value;
+  const v=document.getElementById("fvector").value;
+  const h=document.getElementById("fharm").value;
+  return A.filter(a=>{
+    if(activeDomain && a.d!==activeDomain) return false;
+    if(g && a.goal!==g) return false;
+    if(v && a.vector!==v) return false;
+    if(h && a.harm!==h) return false;
+    if(q){
+      const hay=(a.n+" "+a.def+" "+a.goal+" "+a.vector+" "+a.asset+" "+a.harm+" "+a.c+" "+dmap[a.d].name).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function render(){
+  const items=current();
+  countEl.textContent=`${items.length} of ${A.length} attack types`;
+  catalog.innerHTML="";
+  empty.style.display = items.length? "none":"block";
+  DOMAINS.forEach(d=>{
+    const list=items.filter(a=>a.d===d.id);
+    if(!list.length) return;
+    const sec=document.createElement("section"); sec.className="domain";
+    sec.innerHTML=`<div class="domain-head"><span class="bar" style="background:${d.color}"></span>
+      <span class="id">${d.id}</span><h2>${d.name}</h2></div>
+      <p class="domain-desc">${d.desc}</p><div class="grid"></div>`;
+    const grid=sec.querySelector(".grid");
+    list.forEach(a=>{
+      const card=document.createElement("article"); card.className="card"; card.style.setProperty("--c",d.color);
+      card.tabIndex=0; card.setAttribute("role","button");
+      card.setAttribute("aria-label",`${a.n} — ${a.c}. View details and recovery guide.`);
+      card.innerHTML=`<div class="code">${a.c}</div><h3>${a.n}</h3><p>${a.def}</p>
+        <div class="tags">
+          <span class="tag"><b>goal</b> ${a.goal}</span>
+          <span class="tag"><b>vector</b> ${a.vector}</span>
+          <span class="tag"><b>harm</b> ${a.harm}</span>
+        </div>`;
+      card.onclick=()=>openModal(a,card);
+      card.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openModal(a,card); } };
+      grid.appendChild(card);
+    });
+    catalog.appendChild(sec);
+  });
+}
+
+const overlay=document.getElementById("overlay");
+const modal=document.getElementById("modal");
+let lastFocused=null;
+
+function openModal(a,trigger){
+  lastFocused = trigger || document.activeElement;
+  const d=dmap[a.d];
+  modal.innerHTML=`
+    <div class="code">${a.c}</div>
+    <h3 id="modalTitle">${a.n}</h3>
+    <div class="dname"><span class="dot" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${d.color};margin-right:6px"></span>${d.name}</div>
+    <p class="def">${a.def}</p>
+    <div class="attrs">
+      <div class="attr"><div class="l">Attacker Goal</div><div class="v">${a.goal}</div></div>
+      <div class="attr"><div class="l">Delivery Vector</div><div class="v">${a.vector}</div></div>
+      <div class="attr"><div class="l">Target Asset</div><div class="v">${a.asset}</div></div>
+      <div class="attr"><div class="l">Primary Harm</div><div class="v">${a.harm}</div></div>
+    </div>
+    <div class="foot">
+      <a class="btn" href="${a.url}" target="_blank" rel="noopener">Open recovery guide ↗</a>
+      <button class="x" type="button" onclick="closeModal()">Close</button>
+    </div>`;
+  overlay.classList.add("open");
+  modal.focus();
+}
+function closeModal(){
+  if(!overlay.classList.contains("open")) return;
+  overlay.classList.remove("open");
+  if(lastFocused && typeof lastFocused.focus==="function") lastFocused.focus();
+  lastFocused=null;
+}
+overlay.onclick=e=>{if(e.target===overlay)closeModal();};
+document.addEventListener("keydown",e=>{
+  if(!overlay.classList.contains("open")) return;
+  if(e.key==="Escape"){ closeModal(); return; }
+  if(e.key==="Tab"){
+    // trap focus inside the dialog
+    const f=modal.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])');
+    if(!f.length){ e.preventDefault(); modal.focus(); return; }
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    else if(document.activeElement===modal){ e.preventDefault(); (e.shiftKey?last:first).focus(); }
+  }
+});
+
+["q","fgoal","fvector","fharm"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+
+// theme
+const root=document.documentElement;
+const themeMeta=document.querySelector('meta[name="theme-color"]');
+function applyTheme(t){
+  root.setAttribute("data-theme",t);
+  if(themeMeta) themeMeta.setAttribute("content", t==="light" ? "#f4f7fc" : "#0b1220");
+}
+(function initTheme(){
+  let saved=null;
+  try{ saved=localStorage.getItem("cyberassure-theme"); }catch(e){}
+  applyTheme(saved || "dark"); /* GOV Assured: hub dark by default */
+})();
+document.getElementById("themeToggle").addEventListener("click",()=>{
+  const next = root.getAttribute("data-theme")==="light" ? "dark" : "light";
+  applyTheme(next);
+  try{ localStorage.setItem("cyberassure-theme", next); }catch(e){}
+});
+
+render();
+</script>
+
+
+<p class="ga-linkedin"><a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a></p>
+</body></html>
