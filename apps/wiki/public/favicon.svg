@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path d="M32 4 L56 14 L56 34 C56 48 44 58 32 60 C20 58 8 48 8 34 L8 14 Z"
+        fill="#0b2318" stroke="#f0c987" stroke-width="2"/>
+  <path d="M32 16 L46 22 L46 34 C46 43 40 49 32 51 C24 49 18 43 18 34 L18 22 Z"
+        fill="#c9a15d" opacity="0.45"/>
+  <text x="32" y="38" text-anchor="middle" font-family="monospace"
+        font-size="16" font-weight="bold" fill="#f6f0e4">CA</text>
+</svg>
