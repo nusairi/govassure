@@ -28,6 +28,8 @@ The action does not post a pull request comment (`comment-summary-in-pr` is unse
 
 A pull request that does not change a manifest passes. On `main` today the only manifest Dependabot watches is GitHub Actions.
 
+Dependency graph has to be enabled in the repository code-security settings before this action can run. This change does not turn that setting on. Until it is on, the job fails at startup with "Dependency review is not supported on this repository."
+
 ## npm audit and pip-audit
 
 `.github/workflows/sca-audit.yml` is report-only. The job and both scan steps set `continue-on-error: true` so one ecosystem still runs if the other finds advisories. Remove those flags after the known advisories are cleared, then make the job required.
@@ -53,7 +55,7 @@ gitleaks detect --redact --verbose --no-banner --exit-code 1
 
 This job does not use `gitleaks-action`. That action also redacts, and it needs `GITHUB_TOKEN`, comments on pull requests unless comments are turned off, and a license secret for organization accounts. This change does not add secrets.
 
-There is no `.gitleaks.toml`. Gitleaks 8.30.1 was run locally with `gitleaks detect --redact` across every commit in this clone, including branches that are not on `main`. It reported no leaks. localStorage key names exist only on those other branches and were not reported, so no allowlist was added. If a later scan flags a key name, extend the default rules and allowlist that string only.
+`.gitleaks.toml` extends the built-in rules. It allowlists one false positive from `generic-api-key`: the localStorage key `ga-osi-hw-depth-v1` on `DEPTH_KEY` in `apps/osi/tutorial.js` (on `feature/osi-update-source`, not on `main`). The allowlist is limited to that rule, that path, and that string. A local scan of every fetched commit after the allowlist reports no other leaks.
 
 The Gitleaks step is report-only (`continue-on-error: true`).
 
