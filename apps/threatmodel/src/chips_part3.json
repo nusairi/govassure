@@ -1,0 +1,228 @@
+[
+  {
+    "id": "mitigation",
+    "label": "mitigation",
+    "stage": "mitigate",
+    "what": "A proportionate control you will use to prevent, detect or recover from a priority threat — or a decision to accept or transfer it. Prefer measures that make compromise and disruption difficult, make detection easier, and reduce the impact of a compromise (NCSC secure design principles 2–5). Put chosen work into the design, the backlog and the pipeline.",
+    "analogy": "The specific locks, alarms and backup plans you choose for the doors you actually worry about, not a copied catalogue of every possible lock.",
+    "without": "A long control list copied from a standard and not tied to the threats you found.",
+    "good": "Each priority threat has a mapped mitigation (or an accept or transfer record) with an owner.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/making-compromise-difficult",
+      "label": "NCSC — Principle 2: Make compromise difficult"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "slsa",
+    "label": "SLSA",
+    "stage": "mitigate",
+    "what": "Supply-chain Levels for Software Artifacts. Version 1.2 was announced 24 November 2025 and adds a Source Track alongside the Build Track. Its threats and mitigations pages are an industry companion to NCSC supply-chain guidance when you model CI/CD, dependencies and provenance. There is no NCSC page for SLSA itself.",
+    "analogy": "A set of levels for how you build and prove where software came from, used when you choose pipeline mitigations.",
+    "without": "Pipeline and dependency threats have no provenance or build practice attached.",
+    "good": "Where the pipeline is in scope, SLSA v1.2 source and build practices are considered as mitigations.",
+    "link": {
+      "href": "https://slsa.dev/spec/v1.2/",
+      "label": "SLSA specification v1.2"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/supply-chain-security",
+      "label": "NCSC — Supply chain security guidance"
+    }
+  },
+  {
+    "id": "accept",
+    "label": "accept",
+    "stage": "mitigate",
+    "what": "A decision to live with a residual risk rather than prevent, detect, recover or transfer it. Acceptance needs a named owner and a review point (“who accepted it, and until when”). “Accepted” with no name next to it is not a complete decision.",
+    "analogy": "Signing the exception in a named person’s book, with a date to look at it again — not ticking a box and walking away.",
+    "without": "“Accept” appears with no owner and no review date.",
+    "good": "Every accepted risk has a named owner and a review point, written in the mitigation plan.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a2-risk-management",
+      "label": "NCSC CAF — Principle A2 Risk management"
+    }
+  },
+  {
+    "id": "transfer",
+    "label": "transfer",
+    "stage": "mitigate",
+    "what": "A decision that another party will carry the residual risk (for example by contract or insurance), instead of preventing, detecting, recovering from or accepting it yourself. Like accept, it should be recorded with an owner and enough detail to be challenged.",
+    "analogy": "Handing a residual risk to someone else, in writing, rather than assuming it has gone away.",
+    "without": "“Transfer” is stated with no record of to whom, or with no owner for the decision.",
+    "good": "Any transferred risk is written in the plan, with an owner and the other party named.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "assurance",
+    "label": "assurance",
+    "stage": "validate",
+    "what": "Evidence that the model is good enough and that important controls work, including a review from someone who was not in the workshop. NCSC’s “How to gain and maintain assurance” is the hook; the fourth question is “did we miss anything?”",
+    "analogy": "A second pair of eyes, plus tests, so the walk-through is not the last word.",
+    "without": "Workshop notes are treated as finished work.",
+    "good": "A review from outside the workshop, plus test or red-team evidence, is on file.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/how-to-gain-and-maintain-assurance",
+      "label": "NCSC — How to gain and maintain assurance"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "stest",
+    "label": "security testing",
+    "stage": "validate",
+    "what": "Tests of the important controls: design review, automated security tests in the pipeline, and a penetration test for higher-risk services. NCSC secure development and deployment asks you to “continually test”. A conventional web scan is not enough when the service has an LLM or an agent.",
+    "analogy": "Trying the locks and alarms, not only writing down that they exist.",
+    "without": "No test of the controls, so residual issues only appear in an incident.",
+    "good": "Important controls have test evidence, including pipeline tests where you use them.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/developers-collection",
+      "label": "NCSC — Secure development and deployment"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "rt",
+    "label": "red teaming",
+    "stage": "validate",
+    "what": "A focused attempt to find failures the workshop missed. If the service uses an LLM or an agent, include GenAI red teaming (OWASP GenAI Red Teaming Guide v1.0, 23 January 2025), covering failures such as prompt injection and tool misuse, not only a conventional web test. There is no NCSC page that is a GenAI red-teaming method.",
+    "analogy": "Asking a specialist to try to trick the new agent, not only to scan the website.",
+    "without": "A conventional web scan is treated as enough for an agent or LLM feature.",
+    "good": "LLM or agent features have a GenAI red-team pass, and conventional tests still cover the rest of the service.",
+    "link": {
+      "href": "https://genai.owasp.org/download/44859/",
+      "label": "OWASP GenAI Red Teaming Guide v1.0"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "detection",
+    "label": "detection",
+    "stage": "validate",
+    "what": "Whether logging and monitoring would notice the priority attacks. NCSC design principle 4 is “make compromise detection easier”; CAF C1 covers security monitoring. Stage 8 should include a view of detection, not only prevention tests.",
+    "analogy": "Checking that the alarm would actually sound, not only that a lock was fitted.",
+    "without": "Controls are tested, but nobody asks whether you would notice the priority attacks.",
+    "good": "Detection coverage notes sit with the test evidence for the priority threats.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/making-compromise-detection-easier",
+      "label": "NCSC — Principle 4: Make compromise detection easier"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-c-detecting-cyber-security-events/principle-c1-security-monitoring",
+      "label": "NCSC CAF — Principle C1 Security monitoring"
+    }
+  },
+  {
+    "id": "artefact",
+    "label": "threat model (the artefact)",
+    "stage": "record",
+    "what": "The living record of the work: the diagram or model file, the threat list, the mitigations, residual risks and who accepted them. Prefer a file in the service repository plus a short readable pack, with a date and an owner. This is community or organisational analysis, not an official government assessment. The NCSC page covers why outputs should be recorded and used; there is no NCSC page on how to structure the document or a model-as-code file.",
+    "analogy": "The actual folder you can hand to a colleague, kept next to the code, not a photo of a whiteboard.",
+    "without": "Notes exist only as a photograph, or as a long report that cannot be updated when the code changes.",
+    "good": "A dated, owned pack and, where practical, a version-controlled model file sit with the service.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://owasp.org/projects/pytm",
+      "label": "OWASP pytm"
+    }
+  },
+  {
+    "id": "rrrec",
+    "label": "residual risk record",
+    "stage": "record",
+    "what": "The written list of residual risks, including who accepted them, that forms part of the living threat-model pack. It is what later tests should confirm, rather than rediscovering the same issues by surprise.",
+    "analogy": "The signed list of what you have agreed to live with, kept with the model so it can be reviewed.",
+    "without": "Accepted risks live only in someone’s memory, so a later test or a new colleague cannot see them.",
+    "good": "The pack includes residual risks and who accepted them, with a date.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a2-risk-management",
+      "label": "NCSC CAF — Principle A2 Risk management"
+    }
+  },
+  {
+    "id": "ctm",
+    "label": "continuous threat modelling",
+    "stage": "continuous",
+    "what": "Keeping the model alive in the same pipeline that ships the service, as a business-as-usual activity in risk management, development and CI/CD. NCSC already asked for this in 2023. There is no NCSC page that specifies a particular tool or a pipeline gate for threat-model files.",
+    "analogy": "Treating the map as something you update whenever the building changes, not a poster from the opening day.",
+    "without": "A one-off workshop whose diagram is never opened again.",
+    "good": "Review triggers exist, and the model is updated — or a dated “no material change” note is recorded.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/developers-collection",
+      "label": "NCSC — Secure development and deployment"
+    }
+  },
+  {
+    "id": "rtrigger",
+    "label": "review trigger",
+    "stage": "continuous",
+    "what": "A reason to reopen the model even if nobody requested a “security feature”: a change to data flows, trust boundaries, identities, a model or agent, or a material dependency; a relevant incident or advisory; or a planned cadence. If the model is in the repository, the pipeline can warn, or block where you have agreed a gate, when a new component has no review or the file is stale.",
+    "analogy": "The events that automatically send you back to the map: a new doorway, a new supplier, or a new warning.",
+    "without": "The model is only reopened when someone asks for a security feature.",
+    "good": "Triggers are written down, and a pipeline check can warn when the model file is stale, if you use one.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "label": "OWASP Threat Modeling Cheat Sheet"
+    }
+  },
+  {
+    "id": "lessons",
+    "label": "lessons learned",
+    "stage": "continuous",
+    "what": "What monitoring, incidents and reviews teach you, fed back into stages 2 and 5. CAF D2 is the NCSC hook. The cycle is not complete until those lessons change the landscape or the threat list.",
+    "analogy": "Writing down what the last alarm taught you, and using it the next time you walk the building.",
+    "without": "Incidents are closed without updating the model, so the same gap recurs.",
+    "good": "Lessons from monitoring and incidents are fed back into the landscape and the threat list.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-d/principle-d2-lessons-learned",
+      "label": "NCSC CAF — Principle D2 Lessons learned"
+    }
+  },
+  {
+    "id": "llmdraft",
+    "label": "LLM-assisted draft (human review)",
+    "stage": "continuous",
+    "what": "An assistant can draft a DFD, a threat list, a review of a change, or a proposed update to the model. It can also invent threats, miss context, and leak prompts if used carelessly. No NCSC page endorses replacing a workshop with a model. Any assisted draft needs a named human reviewer, and prompts must not contain secrets or other people’s data. This is emerging practice, not a verified standard method.",
+    "analogy": "A first draft from a helper, which a person who knows the system must correct and accept.",
+    "without": "An unreviewed draft is treated as the model, or prompts contain secrets or other people’s data.",
+    "good": "Any assisted update is clearly a draft until a named person accepts it, and prompts are kept clean of secrets and other people’s data.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  }
+]
