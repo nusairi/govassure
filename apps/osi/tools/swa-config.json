@@ -9,9 +9,41 @@
     "Cross-Origin-Opener-Policy": "same-origin"
   },
   "routes": [
-    { "route": "/og.html", "redirect": "/og", "statusCode": 301 },
-    { "route": "/og", "rewrite": "/og.html" }
+    {
+      "route": "/checklist",
+      "rewrite": "/checklist.html"
+    },
+    {
+      "route": "/checklist.html",
+      "redirect": "/checklist",
+      "statusCode": 301
+    },
+    {
+      "route": "/tutorial",
+      "rewrite": "/tutorial.html"
+    },
+    {
+      "route": "/tutorial.html",
+      "redirect": "/tutorial",
+      "statusCode": 301
+    },
+    {
+      "route": "/og.html",
+      "redirect": "/og",
+      "statusCode": 301
+    },
+    {
+      "route": "/og",
+      "rewrite": "/og.html"
+    }
   ],
-  "mimeTypes": { ".webmanifest": "application/manifest+json" },
-  "responseOverrides": { "404": { "rewrite": "/404.html" } }
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json",
+    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  }
 }

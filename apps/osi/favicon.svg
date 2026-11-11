@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0B0E14"/>
-  <g fill="none" stroke-width="3.2">
-    <circle cx="32" cy="32" r="25.5" stroke="#9B6BE8"/>
-    <circle cx="32" cy="32" r="21" stroke="#4A7FE8"/>
-    <circle cx="32" cy="32" r="16.5" stroke="#2BB8C8"/>
-    <circle cx="32" cy="32" r="12" stroke="#3CC48A"/>
-    <circle cx="32" cy="32" r="7.5" stroke="#F2C14E"/>
-  </g>
-  <circle cx="32" cy="32" r="4.2" fill="#E5487A"/>
-  <rect x="35.5" y="30.4" width="26" height="3.2" fill="#0B0E14"/>
-  <rect x="44" y="29.4" width="7" height="5.2" rx="1.4" fill="#F07A3E"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#021c17"/><g fill="#f0c987"><path d="M14.8 3h2.4v1.9h1.9v2.4h-1.9v2.2h-2.4V7.3h-1.9V4.9h1.9z"/><circle cx="7.4" cy="12.6" r="1.35"/><circle cx="9.6" cy="10.2" r="1.35"/><circle cx="12.6" cy="9" r="1.35"/><circle cx="19.4" cy="9" r="1.35"/><circle cx="22.4" cy="10.2" r="1.35"/><circle cx="24.6" cy="12.6" r="1.35"/><path d="M6 15.2c1.6 1.4 3.5 1.6 5-.4.6 1.4 1.4 2.3 2.4 2.6.4-2 1.3-3.4 2.6-4.6 1.3 1.2 2.2 2.6 2.6 4.6 1-.3 1.8-1.2 2.4-2.6 1.5 2 3.4 1.8 5 .4l-2.3 7.7H8.3z"/><path d="M8 24.2h16l-.5 3.3c-5-1.1-10-1.1-15 0z"/></g></svg>
