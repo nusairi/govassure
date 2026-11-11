@@ -268,3 +268,67 @@ html.print #poster{width:420mm;height:297mm;max-height:none;border:0;border-radi
 main.nf{display:grid;place-items:center;min-height:100vh;text-align:center;grid-template-columns:1fr}
 .nf-code{font:500 13px "IBM Plex Mono",monospace;letter-spacing:.12em;color:var(--bad)}
 .nf h1{margin:8px 0 22px}
+
+
+/* Clickable L0 explainers in the detail panel (hardware cards) */
+ul.items li.has-card{cursor:pointer}
+ul.items li.has-card:hover,ul.items li.has-card:focus-visible{background:var(--surface2);border-color:var(--line)}
+ul.items li.has-card:focus-visible{outline:2px solid var(--ga-gold,#f0c987);outline-offset:2px}
+.threats .threat-chip{
+  font:inherit;font-size:12.5px;padding:3px 9px;border-radius:999px;cursor:pointer;
+  border:1px solid color-mix(in srgb,var(--bad) 55%,transparent);
+  background:color-mix(in srgb,var(--bad) 12%,transparent);color:inherit
+}
+.threats .threat-chip:hover,.threats .threat-chip:focus-visible{border-color:var(--ga-gold,#f0c987)}
+.threats .threat-chip:focus-visible{outline:2px solid var(--ga-gold,#f0c987);outline-offset:2px}
+.pbody .card-hint{margin:0 0 8px;font-size:13px}
+
+#hwCardOverlay[hidden]{display:none !important}
+#hwCardOverlay{position:fixed;inset:0;z-index:2100;display:grid;place-items:center;padding:16px}
+#hwCardOverlay .osi-card-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+#hwCardOverlay .osi-card-sheet{
+  position:relative;z-index:1;width:min(520px,100%);max-height:min(80vh,720px);overflow:auto;
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;
+  padding:18px 16px 16px;box-shadow:0 16px 40px rgba(0,0,0,.35);
+}
+#hwCardOverlay.is-sheet{place-items:end center;padding:0}
+#hwCardOverlay.is-sheet .osi-card-sheet{
+  width:100%;max-width:100%;border-radius:16px 16px 0 0;max-height:78vh;
+}
+.osi-card-x{
+  position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:8px;
+  border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;font-size:1.15rem;
+}
+.osi-card-x:hover{border-color:var(--ga-gold,#f0c987)}
+.osi-card-x:focus-visible{outline:2px solid var(--ga-gold,#f0c987);outline-offset:2px}
+.osi-card h3{margin:0 28px 10px 0;font-size:1.15rem;font-family:"Space Grotesk",system-ui,sans-serif}
+.osi-card h4{
+  margin:0 0 .3rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);font-family:"IBM Plex Mono",monospace;font-weight:500;
+}
+.osi-card section{margin:0 0 12px}
+.osi-card p{margin:0;font-size:.92rem;line-height:1.45}
+.osi-card__list{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:.4rem}
+.osi-card__list li{font-size:.92rem;line-height:1.45}
+.osi-ext-link{
+  display:inline;color:var(--ga-gold,#f0c987)!important;text-decoration:underline!important;
+  text-underline-offset:.2em;font-weight:600;font-size:.92rem;line-height:1.45;cursor:pointer;
+}
+.osi-ext-link:hover{filter:brightness(1.08)}
+.osi-ext-link:focus-visible{outline:3px solid var(--ga-gold,#f0c987);outline-offset:3px;border-radius:4px}
+.osi-ext-link__tail{white-space:nowrap}
+.osi-ext-link__icon{font-size:.85em;margin-left:.15em;opacity:.9}
+.osi-int-link{color:var(--ga-gold,#f0c987);font-weight:600;text-decoration:underline;text-underline-offset:.2em}
+.osi-int-link:focus-visible{outline:3px solid var(--ga-gold,#f0c987);outline-offset:3px;border-radius:4px}
+.osi-card__note{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+.osi-card-jump{
+  border:0;background:none;padding:0;color:var(--ga-gold,#f0c987);font:inherit;font-weight:600;
+  text-decoration:underline;text-underline-offset:.2em;cursor:pointer;
+}
+.osi-card-jump:focus-visible{outline:2px solid var(--ga-gold,#f0c987);outline-offset:2px}
+body.hw-card-open{overflow:hidden}
+a.osi-ext-link.ga-delinked{display:inline!important;cursor:pointer}
+html.print #hwCardOverlay, html.og #hwCardOverlay{display:none!important}
+
+.osi-card__examples-extra{margin:.55rem 0 0;font-size:.88rem;line-height:1.45;color:var(--muted)}
+.osi-card__examples-note{margin:.65rem 0 0;font-size:.8rem;color:var(--muted);font-style:italic}

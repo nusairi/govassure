@@ -1,5 +1,6 @@
 /* OSI Security Rings — rendering, interaction and animated dataflow.
-   No dependencies. Layout is computed at runtime from measured text widths. */
+   No dependencies. Layout is computed at runtime from measured text widths.
+   Hardware-layer (L0) explainers: see hw-cards.js. */
 (function () {
 "use strict";
 const NS = "http://www.w3.org/2000/svg";
@@ -364,11 +365,27 @@ function wireInteraction() {
     if (lg) select(+lg.dataset.layer); else { pinned = null; applyFocus(); renderPanel(); }
   });
   panel.addEventListener("click", e => {
+    const threatBtn = e.target.closest("[data-threat]");
+    if (threatBtn && window.HWCards) { HWCards.openThreat(threatBtn.getAttribute("data-threat"), threatBtn); return; }
+    const cardLi = e.target.closest("li.has-card");
+    if (cardLi && window.HWCards) {
+      const it = itemOf(cardLi);
+      if (it && it.item) HWCards.openCard(it.item.n);
+      return;
+    }
     const b = e.target.closest("[data-go]");
     if (b) { const v = b.dataset.go; pinned = v === "all" ? null : +v; hovered = null; applyFocus(); renderPanel(); }
     if (e.target.closest("[data-flow]")) setFlow(!F.on, true);
     const fb = e.target.closest("[data-fn]");
     if (fb) { fnFilter = fb.dataset.fn; applyFnFilter(); renderPanel(); }
+  });
+  panel.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const cardLi = e.target.closest("li.has-card");
+    if (!cardLi || !window.HWCards) return;
+    e.preventDefault();
+    const it = itemOf(cardLi);
+    if (it && it.item) HWCards.openCard(it.item.n);
   });
   panel.addEventListener("mouseover", e => {
     svg.querySelectorAll(".chip.hl").forEach(c => c.classList.remove("hl"));
@@ -391,7 +408,10 @@ function wireInteraction() {
   document.addEventListener("keydown", e => {
     if (e.target === qEl) { if (e.key === "Escape") { qEl.value = ""; qEl.dispatchEvent(new Event("input")); qEl.blur(); } return; }
     if (e.target.closest && e.target.closest("input,textarea")) return;
-    if (e.key === "Escape") { pinned = null; hovered = null; hideTip(); applyFocus(); renderPanel(); }
+    if (e.key === "Escape") {
+      if (window.HWCards && HWCards.isOpen()) return;
+      pinned = null; hovered = null; hideTip(); applyFocus(); renderPanel();
+    }
     if (/^[0-8]$/.test(e.key)) { pinned = +e.key; applyFocus(); renderPanel(); }
     if (e.key === "/") { e.preventDefault(); qEl.focus(); }
     if (e.key === " " && e.target === document.body) { e.preventDefault(); setFlow(!F.on, true); }
@@ -414,9 +434,16 @@ function navHTML(active) {
     ${[...LAYERS].reverse().map(l => `<button data-go="${l.n}" class="${active === l.n ? "on" : ""}" style="--c:${l.colour}" aria-label="Layer ${l.n} ${l.name}">L${l.n}</button>`).join("")}
   </div>${fnRow}</div>`;
 }
+function itemLiAttrs(l, kind, i, it) {
+  const has = window.HWCards && HWCards.has(it.n);
+  const dim = kind === "s" && fnFilter !== "all" && !(it.f || "").includes(fnFilter);
+  const cls = [has ? "has-card" : "", dim ? "fn-dim" : ""].filter(Boolean).join(" ");
+  return `data-layer="${l.n}" data-kind="${kind}" data-idx="${i}" style="--c:${l.colour}" class="${cls}"` +
+    (has ? ` role="button" tabindex="0" aria-haspopup="dialog" aria-label="${esc(it.n)} — open explainer"` : "");
+}
 function listHTML(l, kind) {
   const items = l[kind === "p" ? "protocols" : "security"];
-  return `<ul class="items">${items.map((it, i) => `<li data-layer="${l.n}" data-kind="${kind}" data-idx="${i}" style="--c:${l.colour}" class="${kind === "s" && fnFilter !== "all" && !(it.f || "").includes(fnFilter) ? "fn-dim" : ""}"><b><i></i>${esc(it.n)}${kind === "s" ? fnBadges(it) : ""}</b><span>${esc(it.d)}</span></li>`).join("")}</ul>`;
+  return `<ul class="items">${items.map((it, i) => `<li ${itemLiAttrs(l, kind, i, it)}><b><i></i>${esc(it.n)}${kind === "s" ? fnBadges(it) : ""}</b><span>${esc(it.d)}</span></li>`).join("")}</ul>`;
 }
 const CREDIT = `<div class="credit">Created by <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener">GOV Assured</a> — Security Architecture.</div>`;
 function covTable() {
@@ -456,8 +483,8 @@ function renderPanel() {
   panel.innerHTML = navHTML(pinned) + `<div class="pbody" style="--c:${l.colour}">
     <div class="ph"><span class="num">L${l.n}</span><div><h2>${l.name}</h2><div class="pdu">PDU · ${l.pdu}</div></div></div>
     <p class="fn">${esc(l.fn)}</p>
-    <h3>Example threats</h3><div class="threats">${l.threats.map(t => `<span>${esc(t)}</span>`).join("")}</div>
-    <h3>Protocols & standards <span>${l.protocols.length}</span></h3>${listHTML(l, "p")}
+    <h3>Example threats</h3><div class="threats">${l.threats.map(t => (window.HWCards && HWCards.threat(t)) ? `<button type="button" class="threat-chip" data-threat="${esc(t)}" aria-haspopup="dialog">${esc(t)}</button>` : `<span>${esc(t)}</span>`).join("")}</div>
+    <h3>Protocols & standards <span>${l.protocols.length}</span></h3>${l.n === 0 && window.HWCards ? `<p class="hint card-hint">Tap a name for a plain-English explainer, NCSC and NIST links, and the matching tutorial stage.</p>` : ""}${listHTML(l, "p")}
     <h3>Security technologies <span>${l.security.length}</span></h3>${coverage(l)}${listHTML(l, "s")}
     ${blocked.length ? `<h3>Stopped here in the dataflow</h3><ul class="items">${blocked.map(t => `<li data-layer="${n}" data-kind="s" data-idx="${l.security.findIndex(s => s.n === t.control)}" style="--c:var(--bad)"><b><i></i>${esc(t.name)}</b><span>Blocked by ${esc(t.control)}</span></li>`).join("")}</ul>` : ""}
     <div class="pager">${next ? `<button class="btn" data-go="${next.n}">↑ L${next.n} ${next.name}</button>` : "<span></span>"}${prev ? `<button class="btn" data-go="${prev.n}">L${prev.n} ${prev.name} ↓</button>` : ""}</div>
@@ -469,7 +496,7 @@ function renderSearch() {
     if ((it.n + " " + it.d).toLowerCase().includes(query)) res.push({ l, kind, it, i });
   });
   panel.innerHTML = navHTML(null) + `<div class="pbody"><h3>${res.length} match${res.length === 1 ? "" : "es"} <span>“${esc(query)}”</span></h3>
-    <ul class="items">${res.map(r => `<li data-layer="${r.l.n}" data-kind="${r.kind}" data-idx="${r.i}" style="--c:${r.l.colour}"><b><i></i>${esc(r.it.n)}${r.kind === "s" ? fnBadges(r.it) : ""}<em>L${r.l.n} · ${r.kind === "p" ? "protocol" : "control"}</em></b><span>${esc(r.it.d)}</span></li>`).join("")}</ul></div>`;
+    <ul class="items">${res.map(r => `<li ${itemLiAttrs(r.l, r.kind, r.i, r.it)}><b><i></i>${esc(r.it.n)}${r.kind === "s" ? fnBadges(r.it) : ""}<em>L${r.l.n} · ${r.kind === "p" ? "protocol" : "control"}</em></b><span>${esc(r.it.d)}</span></li>`).join("")}</ul></div>`;
 }
 
 /* ---------- theme ---------- */
