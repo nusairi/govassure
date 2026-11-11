@@ -1,0 +1,280 @@
+[
+  {
+    "id": "model",
+    "num": 3,
+    "short": "Model",
+    "title": "Model the real system",
+    "full": "Model the real system: cloud, identity, supply chain and AI",
+    "purpose": "Draw a good-enough picture of how the service actually runs, including the parts classic application diagrams often miss.",
+    "do": "The foundation, from NCSC, is a model good enough for analysis: components (including users), data flows, connections to other systems, and — marked properly in stage 4 — trust boundaries. A data flow diagram (DFD) is the usual form; an architecture or use-case diagram also works. The model should include, where they exist: the identity provider and cloud IAM (users and service identities); CI/CD and artefact registries; third-party packages and model providers; any LLM or agent, its tools, memory and callbacks; data stores; and external feeds. You can start from a whiteboard, or from threat-modelling-as-code (for example pytm or Threagile YAML) in the same repository. An LLM may draft a diagram; a person who knows the system must correct it. The model will never be perfect.",
+    "output": "A DFD or architecture model, or a checked-in model file, with components and flows labelled.",
+    "mistake": "A neat diagram of the web app that omits the identity provider, the build pipeline, admin paths, backups, or the model API.",
+    "ncsc": "Yes.",
+    "sources": [
+      "S1",
+      "S15",
+      "S86",
+      "S87",
+      "S85",
+      "S26",
+      "S32",
+      "S78",
+      "S80",
+      "S41"
+    ],
+    "depth": {
+      "basics": {
+        "purpose": "Draw a good-enough picture of how the service actually runs, including the parts a neat web-app diagram often misses.",
+        "do": "Show the components (including users), the data flows, and connections to other systems. Include, where they exist, the identity provider, CI/CD, third-party packages and model providers, any LLM or agent, data stores and external feeds. A data flow diagram is the usual form. The model will never be perfect.",
+        "output": "A labelled diagram, or a model file in the repository, of components and flows.",
+        "mistake": "A neat picture of the web app that leaves out the identity provider, the pipeline, or the model API."
+      },
+      "practitioner": {
+        "purpose": "Draw a good-enough picture of how the service actually runs, including the parts classic application diagrams often miss.",
+        "do": "The foundation, from NCSC, is a model good enough for analysis: components (including users), data flows, connections to other systems, and — marked properly in stage 4 — trust boundaries. A data flow diagram (DFD) is the usual form; an architecture or use-case diagram also works. The model should include, where they exist: the identity provider and cloud IAM (users and service identities); CI/CD and artefact registries; third-party packages and model providers; any LLM or agent, its tools, memory and callbacks; data stores; and external feeds. You can start from a whiteboard, or from threat-modelling-as-code (for example pytm or Threagile YAML) in the same repository. An LLM may draft a diagram; a person who knows the system must correct it. The model will never be perfect.",
+        "output": "A DFD or architecture model, or a checked-in model file, with components and flows labelled.",
+        "mistake": "A neat diagram of the web app that omits the identity provider, the build pipeline, admin paths, backups, or the model API."
+      },
+      "architect": {
+        "purpose": "Draw a good-enough picture of how the service actually runs, including the parts classic application diagrams often miss.",
+        "do": "The foundation, from NCSC threat modelling Stage 1, is a model good enough for analysis: components (including users), data flows, connections to other systems, and trust boundaries in the next stage. Include the identity provider and cloud IAM (Cloud Security Principles 9 and 10, including service identities), CI/CD and artefact registries (Principle 7; NCSC secure development and deployment), third-party packages and model providers, any LLM or agent, its tools, memory and callbacks, data stores and external feeds. NCSC machine-learning principle 1.2 is “Model the threats to your system”. The agentic AI blog asks you to model failure scenarios before deployment. You can start from a whiteboard or from threat-modelling-as-code: pytm v1.4.1, Threagile (latest tag v0.9.1, 30 July 2024 — the tag may lag the code), or an exported Threat Dragon model. An LLM may draft a diagram; a person who knows the system must correct it. No NCSC page endorses replacing a workshop with a model. The model will never be perfect.",
+        "output": "A DFD or architecture model, or a checked-in model file, with components and flows labelled.",
+        "mistake": "A neat diagram of the web app that omits the identity provider, the build pipeline, admin paths, backups, or the model API."
+      }
+    },
+    "quiz": {
+      "question": "Which of these is most often missing from a neat web-app diagram?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The identity provider, the CI/CD pipeline, or the model API — all three are in a “real system” model.",
+          "correct": true,
+          "feedback": "Yes. The identity provider, the CI/CD pipeline, or the model API are most often missing — all three belong in a “real system” model."
+        },
+        {
+          "id": "b",
+          "label": "Only the public home page, because that is what users see.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "A perfect diagram of every packet, because the model must be complete.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "boundaries",
+    "num": 4,
+    "short": "Boundaries",
+    "title": "Assets and boundaries",
+    "full": "Identify assets, identities, data and trust boundaries",
+    "purpose": "Be explicit about what you are protecting, which identities can act, and where trust changes.",
+    "do": "Mark the data and functions that matter — including organisation or user content, prompts and model outputs, API credentials, database contents, the integrity of public feeds, and the integrity of the build. Treat identities and secrets as first-class assets, not an afterthought. Mark entry points (web UI, APIs, admin, CI/CD, callbacks, tool interfaces). Draw trust boundaries: browser to app, app to database, app to a cloud model or other API, pipeline to production, and the identity provider. For personal data, privacy threats can be added later with LINDDUN; many community apps will have little personal data, so treat that as an optional track.",
+    "output": "Assets, identities, entry points and trust boundaries marked on the model.",
+    "mistake": "Treating everything inside “the cloud” as equally trusted, or forgetting operators, service identities and the build system as entry points.",
+    "ncsc": "Yes.",
+    "sources": [
+      "S1",
+      "S21",
+      "S22b",
+      "S86",
+      "S87",
+      "S31",
+      "S32n",
+      "S37"
+    ],
+    "sourceNotes": {
+      "S31": "NIST SP 800-154 is still an Initial Public Draft (March 2016), not a final standard.",
+      "S32n": "Draft PDF of SP 800-154."
+    },
+    "depth": {
+      "basics": {
+        "purpose": "Be clear what you are protecting, who can act, and where trust changes.",
+        "do": "Mark the data and functions that matter, including prompts and model outputs, credentials, database contents, and the integrity of feeds and the build. Treat identities and secrets as assets. Mark entry points and draw trust boundaries — for example browser to app, app to database, app to a model API, and pipeline to production. Do not treat everything inside “the cloud” as equally trusted.",
+        "output": "Assets, identities, entry points and trust boundaries marked on the model.",
+        "mistake": "Treating the cloud as one trusted place, or forgetting operators, service identities and the build system as entry points."
+      },
+      "practitioner": {
+        "purpose": "Be explicit about what you are protecting, which identities can act, and where trust changes.",
+        "do": "Mark the data and functions that matter — including organisation or user content, prompts and model outputs, API credentials, database contents, the integrity of public feeds, and the integrity of the build. Treat identities and secrets as first-class assets, not an afterthought. Mark entry points (web UI, APIs, admin, CI/CD, callbacks, tool interfaces). Draw trust boundaries: browser to app, app to database, app to a cloud model or other API, pipeline to production, and the identity provider. For personal data, privacy threats can be added later with LINDDUN; many community apps will have little personal data, so treat that as an optional track.",
+        "output": "Assets, identities, entry points and trust boundaries marked on the model.",
+        "mistake": "Treating everything inside “the cloud” as equally trusted, or forgetting operators, service identities and the build system as entry points."
+      },
+      "architect": {
+        "purpose": "Be explicit about what you are protecting, which identities can act, and where trust changes.",
+        "do": "Mark the data and functions that matter — including organisation or user content, prompts and model outputs, API credentials, database contents, the integrity of public feeds, and the integrity of the build. Treat identities and secrets as first-class assets. Mark entry points (web UI, APIs, admin, CI/CD, callbacks, tool interfaces). Draw trust boundaries: browser to app, app to database, app to a cloud model or other API, pipeline to production, and the identity provider. NCSC defines trust boundaries on its threat-modelling page. CAF A3 covers asset management and CAF B2 identity and access control; Cloud Security Principles 9 and 10 cover user management and identity, including service identities. NIST SP 800-154 (still a 2016 draft, not a final standard) is useful for identifying and characterising the system and data. LINDDUN has no NCSC page; use it only if personal data justifies a privacy track. The OWASP cheat sheet covers decomposition.",
+        "output": "Assets, identities, entry points and trust boundaries marked on the model.",
+        "mistake": "Treating everything inside “the cloud” as equally trusted, or forgetting operators, service identities and the build system as entry points."
+      }
+    },
+    "quiz": {
+      "question": "A workload in the cloud calls a model API with a stored credential. Where is a trust boundary?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Where that service identity and the prompt data leave your app and enter the model provider.",
+          "correct": true,
+          "feedback": "Yes. A trust boundary is where that service identity and the prompt data leave your app and enter the model provider."
+        },
+        {
+          "id": "b",
+          "label": "Nowhere — everything inside “the cloud” is equally trusted.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "Only at the browser, because the model API is inside your network.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "threats",
+    "num": 5,
+    "short": "Threats",
+    "title": "Identify threats",
+    "full": "Identify threats from current catalogues, then check with a structured method",
+    "purpose": "Work out what can go wrong using up-to-date catalogues for this system, then use a structured method so whole classes of threat are not missed.",
+    "do": "Take one part of the model at a time. Lead with the catalogues you chose in stage 2: ATT&CK techniques that actually fit; ATLAS and OWASP LLM / Agentic Top 10 for model and agent flows (prompt injection, goal hijack, tool misuse, data leakage in prompts, poisoning, unbounded consumption); SLSA and NCSC supply-chain guidance for the pipeline and dependencies. Then, as NCSC still recommends, apply a structured check: STRIDE (spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege) across the same boundary, and an attack tree for a high-value attacker goal. STRIDE is a foundation and a completeness check, not the only lens — it does not, on its own, cover several AI-specific harms. Do not paste the entire ATT&CK or ATLAS matrix into the model.",
+    "output": "A structured threat list, each item tied to a place on the model and, where useful, to a catalogue ID.",
+    "mistake": "An unstructured brainstorm; or listing every technique in a catalogue; or using only STRIDE on an LLM or agent and thinking the job is done.",
+    "ncsc": "Partial. NCSC has pages on threat modelling and attack trees, but none for LINDDUN, SLSA, or applying the OWASP LLM Top 10; those link to their own sources.",
+    "sources": [
+      "S1",
+      "S3",
+      "S16",
+      "S31a",
+      "S82",
+      "S22a",
+      "S50",
+      "S51",
+      "S58",
+      "S70",
+      "S71",
+      "S73",
+      "S75",
+      "S89",
+      "S90",
+      "S47",
+      "S52",
+      "S49"
+    ],
+    "depth": {
+      "basics": {
+        "purpose": "Work out what can go wrong, using current catalogues for this system, then check with a structured method so whole classes of threat are not missed.",
+        "do": "Take one part of the model at a time. Start with the catalogues you chose: ATT&CK where it fits; ATLAS and the OWASP LLM / Agentic lists for model and agent flows; SLSA and NCSC supply-chain guidance for the pipeline. Then apply STRIDE as a completeness check, and an attack tree for a high-value attacker goal. STRIDE alone does not cover every AI-specific harm. Do not paste an entire catalogue into the model.",
+        "output": "A structured threat list, each item tied to a place on the model.",
+        "mistake": "An unstructured brainstorm, listing every technique, or using only STRIDE on an LLM or agent and stopping there."
+      },
+      "practitioner": {
+        "purpose": "Work out what can go wrong using up-to-date catalogues for this system, then use a structured method so whole classes of threat are not missed.",
+        "do": "Take one part of the model at a time. Lead with the catalogues you chose in stage 2: ATT&CK techniques that actually fit; ATLAS and OWASP LLM / Agentic Top 10 for model and agent flows (prompt injection, goal hijack, tool misuse, data leakage in prompts, poisoning, unbounded consumption); SLSA and NCSC supply-chain guidance for the pipeline and dependencies. Then, as NCSC still recommends, apply a structured check: STRIDE (spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege) across the same boundary, and an attack tree for a high-value attacker goal. STRIDE is a foundation and a completeness check, not the only lens — it does not, on its own, cover several AI-specific harms. Do not paste the entire ATT&CK or ATLAS matrix into the model.",
+        "output": "A structured threat list, each item tied to a place on the model and, where useful, to a catalogue ID.",
+        "mistake": "An unstructured brainstorm; or listing every technique in a catalogue; or using only STRIDE on an LLM or agent and thinking the job is done."
+      },
+      "architect": {
+        "purpose": "Work out what can go wrong using up-to-date catalogues for this system, then use a structured method so whole classes of threat are not missed.",
+        "do": "Take one part of the model at a time. Lead with the catalogues from stage 2: ATT&CK v20.1 techniques that actually fit; ATLAS 2026.10 and OWASP LLM / Agentic Top 10 for model and agent flows (prompt injection, goal hijack, tool misuse, data leakage in prompts, poisoning, unbounded consumption); SLSA v1.2 and NCSC supply-chain guidance (reviewed 22 October 2025) for the pipeline and dependencies. Then, as NCSC threat modelling Stage 2 still recommends, apply STRIDE and an attack tree for a high-value attacker goal. The NCSC adversarial-attacks paper (29 April 2026) and CAF A4 are further hooks. STRIDE is a foundation and a completeness check, not the only lens — it does not, on its own, cover several AI-specific harms. There is no NCSC page for LINDDUN, SLSA, or how to apply the OWASP LLM Top 10. PASTA is an alternative risk-centric method, not the spine of this lifecycle. Do not paste the entire ATT&CK or ATLAS matrix into the model.",
+        "output": "A structured threat list, each item tied to a place on the model and, where useful, to a catalogue ID.",
+        "mistake": "An unstructured brainstorm; or listing every technique in a catalogue; or using only STRIDE on an LLM or agent and thinking the job is done."
+      }
+    },
+    "quiz": {
+      "question": "You have walked STRIDE on an LLM feature and found nothing about “the model being tricked into ignoring its instructions”. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Check ATLAS and the OWASP LLM / Agentic lists — STRIDE alone does not cover every AI-specific threat.",
+          "correct": true,
+          "feedback": "Yes. Check ATLAS and the OWASP LLM / Agentic lists — STRIDE alone does not cover every AI-specific threat."
+        },
+        {
+          "id": "b",
+          "label": "Stop there; STRIDE is the only lens you need for an LLM or agent.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "Paste the entire ATT&CK and ATLAS matrices into the model.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "prioritise",
+    "num": 6,
+    "short": "Prioritise",
+    "title": "Assess and prioritise",
+    "full": "Assess and prioritise, including AI-specific harms",
+    "purpose": "Decide which threats matter most, given impact, likelihood and your risk appetite, including harms that are not only confidentiality, integrity or availability.",
+    "do": "For each credible threat, consider impact and likelihood, using the actors from stage 2 and the controls you already have. Rank them. For generative AI, also consider the kinds of risk called out in NIST AI 600-1 and NCSC’s ML and agentic advice (for example harmful or untrue output, over-reliance, or an agent acting beyond its brief). Record residual risk you might later accept. Align language with your organisation’s method — NCSC’s basic risk assessment guidance and CAF A2 are the UK starting points; NIST SP 800-30 is a detailed alternative. Avoid teaching DREAD: it often produces false precision, and it is not current Microsoft or NCSC practice.",
+    "output": "A prioritised threat and risk list, with a short rationale for the top items.",
+    "mistake": "Scoring everything “critical”, or ignoring AI-specific harms because they do not fit a classic CIA score neatly.",
+    "ncsc": "Yes.",
+    "sources": [
+      "S1",
+      "S5",
+      "S20",
+      "S35",
+      "S36",
+      "S61",
+      "S62",
+      "S63",
+      "S64",
+      "S26"
+    ],
+    "depth": {
+      "basics": {
+        "purpose": "Decide which threats matter most, given impact, likelihood and your risk appetite — including harms that are not only a data theft or an outage.",
+        "do": "For each credible threat, consider impact and likelihood, using the actors you listed and the controls you already have. Rank them. For generative AI, also consider harms such as harmful or untrue output, over-reliance, or an agent acting beyond its brief. Do not score everything “critical”. Avoid DREAD; it often produces false precision and is not current Microsoft or NCSC practice.",
+        "output": "A prioritised list, with a short rationale for the top items.",
+        "mistake": "Scoring everything “critical”, or ignoring AI-specific harms because they do not fit a classic confidentiality, integrity or availability score."
+      },
+      "practitioner": {
+        "purpose": "Decide which threats matter most, given impact, likelihood and your risk appetite, including harms that are not only confidentiality, integrity or availability.",
+        "do": "For each credible threat, consider impact and likelihood, using the actors from stage 2 and the controls you already have. Rank them. For generative AI, also consider the kinds of risk called out in NIST AI 600-1 and NCSC’s ML and agentic advice (for example harmful or untrue output, over-reliance, or an agent acting beyond its brief). Record residual risk you might later accept. Align language with your organisation’s method — NCSC’s basic risk assessment guidance and CAF A2 are the UK starting points; NIST SP 800-30 is a detailed alternative. Avoid teaching DREAD: it often produces false precision, and it is not current Microsoft or NCSC practice.",
+        "output": "A prioritised threat and risk list, with a short rationale for the top items.",
+        "mistake": "Scoring everything “critical”, or ignoring AI-specific harms because they do not fit a classic CIA score neatly."
+      },
+      "architect": {
+        "purpose": "Decide which threats matter most, given impact, likelihood and your risk appetite, including harms that are not only confidentiality, integrity or availability.",
+        "do": "For each credible threat, consider impact and likelihood, using the actors from stage 2 and the controls you already have. Rank them. For generative AI, also consider the kinds of risk called out in NIST AI 600-1 (published 26 July 2024) and NCSC’s ML principle 1.2 and agentic advice (for example harmful or untrue output, over-reliance, or an agent acting beyond its brief). AI RMF 1.0 (26 January 2023) remains the current framework; it is not yet a 2.0 publication. Record residual risk you might later accept. Align language with your organisation’s method — NCSC’s basic risk assessment guidance and CAF A2 are the UK starting points; NIST SP 800-30 Rev. 1 is a detailed alternative. Avoid teaching DREAD: it often produces false precision, and it is not current Microsoft or NCSC practice.",
+        "output": "A prioritised threat and risk list, with a short rationale for the top items.",
+        "mistake": "Scoring everything “critical”, or ignoring AI-specific harms because they do not fit a classic CIA score neatly."
+      }
+    },
+    "quiz": {
+      "question": "Why might a wrong but confident continuity plan matter even if no data was stolen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "AI-specific harm: people may rely on untrue output.",
+          "correct": true,
+          "feedback": "Yes. That is an AI-specific harm: people may rely on untrue output."
+        },
+        {
+          "id": "b",
+          "label": "It does not matter, because only confidentiality, integrity and availability count.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "It only matters if you scored it “critical” with DREAD.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  }
+]

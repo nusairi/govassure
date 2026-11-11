@@ -1,0 +1,258 @@
+[
+  {
+    "id": "asset",
+    "label": "asset",
+    "stage": "boundaries",
+    "what": "Something you are protecting: data and functions that matter, including organisation or user content, prompts and model outputs, API credentials, database contents, the integrity of public feeds, and the integrity of the build. Identities and secrets are first-class assets, not an afterthought. CAF A3 covers asset management.",
+    "analogy": "The valuables in the building — not only the furniture people can see, but also the keys and the integrity of the noticeboard.",
+    "without": "You protect the web page and forget drafts, prompts, credentials or the build.",
+    "good": "Assets are named on the model, including identities and secrets.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a3-asset-management",
+      "label": "NCSC CAF — Principle A3 Asset management"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "entry",
+    "label": "entry point",
+    "stage": "boundaries",
+    "what": "A place where someone or something can interact with the service: web UI, APIs, admin paths, CI/CD, callbacks and tool interfaces. Operators, service identities and the build system are entry points too.",
+    "analogy": "Every door, hatch and service entrance, including the staff door and the loading bay, not only the front door.",
+    "without": "You only mark the public website and miss admin paths, callbacks, or the pipeline.",
+    "good": "Entry points are marked on the model, including operators, service identities and the build system.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "label": "OWASP Threat Modeling Cheat Sheet"
+    }
+  },
+  {
+    "id": "tb",
+    "label": "trust boundary",
+    "stage": "boundaries",
+    "what": "A place where trust changes — for example browser to app, app to database, app to a cloud model or other API, pipeline to production, and the identity provider. NCSC defines trust boundaries on its threat-modelling page. Everything inside “the cloud” is not equally trusted. Where a service identity and prompt data leave your app and enter a model provider, that is a trust boundary.",
+    "analogy": "The line between rooms with different keys: crossing it should be deliberate and visible on the map.",
+    "without": "You treat the cloud as one trusted place, so a call to a model API looks like an internal step.",
+    "good": "Trust boundaries are drawn at each hop where trust changes, including the model API and the pipeline.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "asurf",
+    "label": "attack surface",
+    "stage": "boundaries",
+    "what": "The set of entry points and exposed flows an attacker could use. It grows when you add APIs, admin paths, CI/CD, callbacks, tool interfaces, or a model API. Marking assets, identities and trust boundaries makes that surface visible.",
+    "analogy": "How much of the building is reachable from the street, the loading bay and the staff entrance.",
+    "without": "The surface is assumed to be “just the website”, so new interfaces are never added to the model.",
+    "good": "The marked entry points and trust boundaries give a realistic picture of the attack surface for this change.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "label": "OWASP Threat Modeling Cheat Sheet"
+    }
+  },
+  {
+    "id": "ssc",
+    "label": "software supply chain",
+    "stage": "boundaries",
+    "what": "The third-party packages, model providers, artefact registries and build pipeline that your service depends on. Integrity of the build is an asset. NCSC supply-chain guidance (reviewed 22 October 2025) and CAF A4 are the UK hooks; SLSA v1.2 is an industry companion for CI/CD, dependencies and provenance.",
+    "analogy": "Not only your own kitchen, but the suppliers, the delivery van and the packing room.",
+    "without": "Dependencies and the pipeline are left off the model, so a poisoned package or a compromised build is never discussed.",
+    "good": "Third-party packages, model providers and the build appear as part of the real system and its assets.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/supply-chain-security",
+      "label": "NCSC — Supply chain security guidance"
+    },
+    "link2": {
+      "href": "https://slsa.dev/spec/v1.2/",
+      "label": "SLSA specification v1.2"
+    }
+  },
+  {
+    "id": "stride",
+    "label": "STRIDE",
+    "stage": "threats",
+    "what": "A structured check used across a boundary: spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege. NCSC still recommends it, with ATT&CK and attack trees, as a method. It is a foundation and a completeness check, not the only lens — it does not, on its own, cover several AI-specific harms.",
+    "analogy": "A six-point inspection of each doorway, useful but not the only inspection when the service includes a model or an agent.",
+    "without": "You use only STRIDE on an LLM or agent and think the job is done, or you skip a structured check and brainstorm only.",
+    "good": "STRIDE is applied across the same boundaries as the catalogues, then ATLAS and OWASP lists are used where AI is in scope.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling",
+      "label": "Microsoft SDL threat modelling"
+    }
+  },
+  {
+    "id": "atree",
+    "label": "attack tree",
+    "stage": "threats",
+    "what": "A structured way to explore how an attacker might reach a high-value goal, by breaking the goal into paths and conditions. NCSC has a page on using attack trees to understand cyber security risk, and also discusses them in Building and operating a secure online service.",
+    "analogy": "A family tree of ways someone might reach one important goal, so you can see the most likely or damaging paths.",
+    "without": "You only list isolated techniques and never work through how they combine to reach a goal.",
+    "good": "At least one high-value attacker goal has an attack tree, alongside catalogue and STRIDE findings.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/using-attack-trees-to-understand-cyber-security-risk",
+      "label": "NCSC — Using attack trees"
+    },
+    "link2": {
+      "href": "https://www.schneier.com/academic/archives/1999/12/attack_trees.html",
+      "label": "Attack Trees"
+    }
+  },
+  {
+    "id": "capec",
+    "label": "CAPEC",
+    "stage": "threats",
+    "what": "MITRE CAPEC is a catalogue of common attack patterns. It is a supporting catalogue when you identify threats, alongside ATT&CK, ATLAS and a structured method. Do not paste an entire catalogue into the model.",
+    "analogy": "A library of known attack patterns you can consult, not a list you copy out in full.",
+    "without": "Every pattern is dumped into the model, or the catalogue is ignored when a named pattern would have helped.",
+    "good": "Where useful, a threat is tied to a catalogue ID that actually fits this part of the model.",
+    "link": {
+      "href": "https://capec.mitre.org/",
+      "label": "MITRE CAPEC"
+    }
+  },
+  {
+    "id": "pinj",
+    "label": "prompt injection",
+    "stage": "threats",
+    "what": "An AI-specific threat in which crafted input tricks a model into ignoring its instructions or leaking data. It appears in the OWASP LLM Top 10 2026 and in ATLAS. STRIDE alone does not reliably surface it. There is no NCSC page on how to apply the OWASP LLM Top 10.",
+    "analogy": "Slipping a new instruction into a letter so the assistant who reads it does the wrong thing.",
+    "without": "You walk STRIDE, find nothing about the model being tricked, and stop.",
+    "good": "Model and agent flows are checked against ATLAS and the OWASP LLM / Agentic lists, including prompt injection.",
+    "link": {
+      "href": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+      "label": "OWASP GenAI LLM Top 10 2026"
+    },
+    "link2": {
+      "href": "https://atlas.mitre.org/",
+      "label": "MITRE ATLAS"
+    }
+  },
+  {
+    "id": "agency",
+    "label": "excessive agency",
+    "stage": "threats",
+    "what": "An AI-specific risk in which a model or agent can take actions beyond what is needed or intended. It is listed in the OWASP LLM Top 10 2026. Related agentic risks include tool misuse and an agent acting beyond its brief.",
+    "analogy": "Giving a helper the keys to every room when it only needed a notepad.",
+    "without": "You only score data theft and outages, and you miss an agent that can act too widely.",
+    "good": "The model records what the agent or model is allowed to do, and excessive agency is on the threat list where it applies.",
+    "link": {
+      "href": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+      "label": "OWASP GenAI LLM Top 10 2026"
+    }
+  },
+  {
+    "id": "hijack",
+    "label": "goal hijack",
+    "stage": "threats",
+    "what": "An agentic threat in which an attacker steers an agent away from its intended goal. It is listed in the OWASP Top 10 for Agentic Applications 2026. STRIDE and PASTA must be expanded for AI threats of this kind.",
+    "analogy": "Persuading a helper to chase a different task than the one you gave it.",
+    "without": "You treat the agent as a simple text generator and never ask how its goal could be redirected.",
+    "good": "Where an agent is in scope, goal hijack is checked using ATLAS and the OWASP Agentic lists.",
+    "link": {
+      "href": "https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/",
+      "label": "OWASP Top 10 for Agentic Applications 2026"
+    },
+    "link2": {
+      "href": "https://atlas.mitre.org/",
+      "label": "MITRE ATLAS"
+    }
+  },
+  {
+    "id": "appetite",
+    "label": "risk appetite",
+    "stage": "prioritise",
+    "what": "How much risk you are prepared to take, used with impact and likelihood when you decide which threats matter most. NCSC threat modelling Stage 3 covers risk appetite and risk treatment; CAF A2 and NCSC’s basic risk assessment method are the UK starting points.",
+    "analogy": "How much residual mess you are willing to live with, agreed in advance, not decided quietly at the end.",
+    "without": "Everything is scored “critical”, or accepted risks have no relation to an agreed appetite.",
+    "good": "Priorities and any accepted residual risk are stated against a clear appetite.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/a-basic-risk-assessment-and-management-method",
+      "label": "NCSC — A basic risk assessment and management method"
+    }
+  },
+  {
+    "id": "likelihood",
+    "label": "likelihood",
+    "stage": "prioritise",
+    "what": "How plausible a threat is, given the actors from stage 2 and the controls you already have. Used with impact to rank threats. Avoid DREAD: it often produces false precision, and it is not current Microsoft or NCSC practice.",
+    "analogy": "A plain-language view of how likely this is, not a made-up score to two decimal places.",
+    "without": "Unrealistic actors make everything look likely, or a scoring scheme gives a false sense of precision.",
+    "good": "Each priority item has a short, reasoned view of likelihood, tied to realistic actors and existing controls.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/a-basic-risk-assessment-and-management-method",
+      "label": "NCSC — A basic risk assessment and management method"
+    }
+  },
+  {
+    "id": "impact",
+    "label": "impact",
+    "stage": "prioritise",
+    "what": "How bad it would be if the threat succeeded. Include harms that are not only confidentiality, integrity or availability — for generative AI, also harmful or untrue output, over-reliance, or an agent acting beyond its brief.",
+    "analogy": "Not only “was data stolen?”, but also “did people act on a confident but wrong plan?”",
+    "without": "You ignore AI-specific harms because they do not fit a classic CIA score neatly.",
+    "good": "Impact statements cover classic harm and, where relevant, AI-specific harm.",
+    "link": {
+      "href": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "label": "NIST AI 600-1 PDF"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/a-basic-risk-assessment-and-management-method",
+      "label": "NCSC — A basic risk assessment and management method"
+    }
+  },
+  {
+    "id": "residual",
+    "label": "residual risk",
+    "stage": "prioritise",
+    "what": "The risk that remains after you take account of the controls you already have, and that you might later accept. Record it so stage 7 can assign an owner, and so later tests confirm it rather than surprise you.",
+    "analogy": "What is still at stake after the locks you already have are taken into account.",
+    "without": "Residual risk is left implicit, so “accept” later has nothing written down.",
+    "good": "Residual risk is recorded for items you might later accept, with enough detail to assign an owner.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a2-risk-management",
+      "label": "NCSC CAF — Principle A2 Risk management"
+    }
+  },
+  {
+    "id": "aiharm",
+    "label": "AI-specific harm",
+    "stage": "prioritise",
+    "what": "A harm that may not fit a classic confidentiality, integrity or availability score neatly — for example harmful or untrue output, over-reliance, or an agent acting beyond its brief. Called out in NIST AI 600-1 and in NCSC’s ML and agentic advice. A wrong but confident continuity plan can matter even if no data was stolen, because people may rely on untrue output.",
+    "analogy": "The damage from a confident wrong answer, not only from a stolen file.",
+    "without": "You only rank data theft and outages, and untrue or over-confident output never makes the list.",
+    "good": "AI-specific harms are included in the prioritised list where a model or agent is in scope.",
+    "link": {
+      "href": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "label": "NIST AI 600-1 PDF"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/machine-learning-principles/secure-design/model-threats",
+      "label": "NCSC — Machine learning principles, 1.2"
+    }
+  }
+]

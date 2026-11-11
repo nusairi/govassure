@@ -1,0 +1,311 @@
+{
+  "title": "What’s new in threat modelling (2024–2026)",
+  "checked": "10 November 2026 (Europe/London)",
+  "intro": "The important change since the classic workshop and STRIDE model is not that the four questions have been replaced. It is that the system under review and the catalogues you use have moved on: AI and agentic components, software and model supply chains, cloud identities, and a living model that can sit in the same pipeline as the code. The ten stages below are shaped around that. Dates and versions are those stated on the source pages or files themselves, unless noted. Every source link on this page returned HTTP 200 when checked on 10 November 2026 (Europe/London).",
+  "groups": [
+    {
+      "id": "ncsc",
+      "title": "NCSC — new AI guidance; the core threat-modelling page is unchanged",
+      "items": [
+        {
+          "when": "23 June 2023",
+          "title": "NCSC threat modelling page is still version 2.0",
+          "body": "Published and reviewed 23 June 2023, and not revised in 2024–2026. It remains the best official UK handrail: understand who might harm you; then the four questions (what are you building; what can go wrong; what should you do about it; did we do a good job); use a structured method such as STRIDE, MITRE ATT&CK or attack trees; treat threat modelling as a team workshop; and fold it into design, risk management and CI/CD.",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "when": "27 November 2023",
+          "title": "Guidelines for secure AI system development, version 1.0",
+          "body": "Published and reviewed 27 November 2023, issued with CISA and other international agencies. Still the current NCSC collection for secure AI development.",
+          "sources": [
+            "S28",
+            "S29a",
+            "S30a",
+            "S31b"
+          ]
+        },
+        {
+          "when": "22 May 2024",
+          "title": "Machine learning principles, version 2.0",
+          "body": "Published and reviewed 22 May 2024. Principle 1.2 is explicitly “Model the threats to your system”.",
+          "sources": [
+            "S26",
+            "S26a",
+            "S26b"
+          ]
+        },
+        {
+          "when": "22 October 2025",
+          "title": "Supply chain security guidance, reviewed",
+          "body": "Version 1.0, first published 28 January 2018, reviewed 22 October 2025.",
+          "sources": [
+            "S82"
+          ]
+        },
+        {
+          "when": "29 April 2026",
+          "title": "Understanding adversarial attacks against Machine Learning and AI",
+          "body": "Paper, version 1.0, published 29 April 2026.",
+          "sources": [
+            "S31a"
+          ]
+        },
+        {
+          "when": "20 August 2026",
+          "title": "Managing the cyber risk of agentic AI",
+          "body": "NCSC blog with interim practical advice, including modelling failure scenarios before deployment. The working URL is /blogs/managing-the-cyber-risk-of-agentic-ai (the /blog-post/ path returns 404 and is not used here).",
+          "sources": [
+            "S32"
+          ]
+        },
+        {
+          "when": "18 April 2024; reviewed 30 October 2026",
+          "title": "Cyber Assessment Framework (CAF) version 4.0",
+          "body": "Published 18 April 2024 and reviewed 30 October 2026 on the principle pages checked (A2, A3, A4, B2, B4, C1, D1, D2).",
+          "sources": [
+            "S19",
+            "S20",
+            "S21",
+            "S22a",
+            "S22b",
+            "S22",
+            "S23",
+            "S24",
+            "S25"
+          ]
+        },
+        {
+          "when": "7 June 2023",
+          "title": "Cloud Security Principles remain version 2.1",
+          "body": "Reviewed 7 June 2023. Older than the AI material but still the current official pages, and the right NCSC hook for cloud and identity (including service identities).",
+          "sources": [
+            "S83",
+            "S85",
+            "S84",
+            "S86",
+            "S87"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitre",
+      "title": "MITRE ATT&CK and ATLAS — living catalogues, not a one-off mnemonic",
+      "items": [
+        {
+          "when": "13 October 2026",
+          "title": "MITRE ATT&CK current version is v20.1",
+          "body": "The official Version History page lists v20.1 as current from 13 October 2026. The October 2026 updates page describes the v20 release of that date and lists both v20.0 and v20.1 data. The release expands recent adversary activity and includes AI-focused and AI-enabled techniques in Enterprise. Use the current ATT&CK site, not a frozen teaching slide.",
+          "sources": [
+            "S50",
+            "S50a",
+            "S50b"
+          ]
+        },
+        {
+          "when": "28 October 2026",
+          "title": "MITRE ATLAS content version 2026.10",
+          "body": "ATLAS (Adversarial Threat Landscape for AI Systems) is a separate, living knowledge base for attacks involving AI. The data manifest lists content version 2026.10, release date 28 October 2026 (format-version 6.1.0): 16 tactics, and (on the homepage when checked) 221 techniques, 44 mitigations and 77 case studies. ATLAS, not ATT&CK alone, is the catalogue to reach for when the system includes a model or an agent.",
+          "sources": [
+            "S58"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "owasp",
+      "title": "OWASP GenAI and agentic threat modelling",
+      "items": [
+        {
+          "when": "3 August 2026",
+          "title": "OWASP Top 10 for LLM Applications 2026",
+          "body": "Version 2026. The resource page is dated 3 August 2026. The PDF cover shows “August 4th, 2026” under a still-present “[Publication date to be set]” placeholder — that inconsistency is on the file itself. Risks include prompt injection, sensitive information disclosure, excessive agency, supply chain, data and model poisoning, and improper output handling. Appendix mappings in the PDF are to ATLAS content v2026.06 and ATT&CK v19.1, which already lag the catalogues above, so treat those matrices as a starting map, not as current.",
+          "sources": [
+            "S70",
+            "S71"
+          ]
+        },
+        {
+          "when": "December 2025",
+          "title": "OWASP Top 10 for Agentic Applications 2026",
+          "body": "Version 2026, December 2025 (project blog 9 December 2025). Risks include agent goal hijack, tool misuse, identity and privilege abuse, agentic supply chain, memory and context poisoning, insecure inter-agent communication, and rogue agents.",
+          "sources": [
+            "S75",
+            "S75a",
+            "S75b"
+          ]
+        },
+        {
+          "when": "December 2025",
+          "title": "Agentic AI — Threats and Mitigations, version 1.1",
+          "body": "Sets out a reference threat model for LLM-based agents, and notes that STRIDE and PASTA must be expanded for AI threats.",
+          "sources": [
+            "S73"
+          ]
+        },
+        {
+          "when": "23 April 2025",
+          "title": "Multi-Agentic System Threat Modeling Guide v1.0",
+          "body": "Resource page dated 23 April 2025.",
+          "sources": [
+            "S74"
+          ]
+        },
+        {
+          "when": "23 January 2025",
+          "title": "GenAI Red Teaming Guide, version 1.0",
+          "body": "Includes a section on threat modelling for GenAI/LLM systems and points to NIST AI 600-1, MITRE ATLAS and STRIDE as starting points.",
+          "sources": [
+            "S72"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nist",
+      "title": "NIST — AI risk, not only software threat modelling",
+      "items": [
+        {
+          "when": "26 January 2023; note of 7 April 2026",
+          "title": "AI RMF 1.0 remains the current framework",
+          "body": "NIST AI 100-1, 26 January 2023, remains the current framework. NIST’s AI RMF landing page, when checked, said the framework is being revised and that a concept note for a Critical Infrastructure profile was released 7 April 2026. AI RMF 1.0 itself is not yet a 2.0 publication.",
+          "sources": [
+            "S61",
+            "S62"
+          ]
+        },
+        {
+          "when": "26 July 2024",
+          "title": "NIST AI 600-1, Generative Artificial Intelligence Profile",
+          "body": "Published 26 July 2024 (PDF dated 5 August 2024). Companion profile for generative AI risks and actions.",
+          "sources": [
+            "S63",
+            "S64"
+          ]
+        },
+        {
+          "when": "26 July 2024",
+          "title": "SP 800-218A, SSDF Community Profile for generative AI",
+          "body": "Final, 26 July 2024, for generative AI and dual-use foundation models.",
+          "sources": [
+            "S65",
+            "S66",
+            "S68"
+          ]
+        },
+        {
+          "when": "February 2022; draft 17 December 2025",
+          "title": "SSDF 1.1 is final; SSDF 1.2 is still a draft",
+          "body": "SP 800-218 SSDF 1.1 remains the final software framework (February 2022); practice PW.1.1 asks for risk modelling “such as threat modeling”. SP 800-218 Rev. 1 (SSDF 1.2) is an initial public draft, 17 December 2025 (comment period closed 30 January 2026). Do not treat 1.2 as final.",
+          "sources": [
+            "S33",
+            "S34",
+            "S67"
+          ]
+        },
+        {
+          "when": "March 2016",
+          "title": "SP 800-154 remains an Initial Public Draft",
+          "body": "Guide to Data-Centric System Threat Modeling has not been finalised. Useful for its four data-centric steps; it is not a current final standard.",
+          "sources": [
+            "S31",
+            "S32n"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ascode",
+      "title": "Threat-modelling-as-code, automation and continuous use in CI/CD",
+      "items": [
+        {
+          "when": "1 November 2026",
+          "title": "OWASP pytm v1.4.1",
+          "body": "Published 1 November 2026 (GitHub published_at, converted from UTC to Europe/London). Python-defined models that can generate DFDs, sequence diagrams and threats.",
+          "sources": [
+            "S78"
+          ]
+        },
+        {
+          "when": "10 May 2026",
+          "title": "OWASP Threat Dragon v2.6.2",
+          "body": "Published 10 May 2026. Visual web or desktop tool; supports STRIDE, LINDDUN, CIA, DIE and PLOT4ai, with a rule engine. The repository was still receiving commits in early November 2026.",
+          "sources": [
+            "S41"
+          ]
+        },
+        {
+          "when": "30 July 2024",
+          "title": "Threagile latest tagged release is v0.9.1",
+          "body": "The repository still had pushes on 8 April 2026, so the tag may lag the code. Declarative YAML architecture models with automated risk rules, usable from a CLI, Docker or a REST server. Confirm the tag before relying on a version number.",
+          "sources": [
+            "S80"
+          ]
+        },
+        {
+          "when": "Checked 10 November 2026",
+          "title": "Commercial “AI threat modeling” platforms were not evaluated",
+          "body": "IriusRisk is a commercial platform. Its marketing page loaded; this is not an evaluation or a recommendation. GOV Assured should prefer open tools and human-reviewed models unless a later, approved decision is made to buy something.",
+          "sources": [
+            "S81"
+          ]
+        },
+        {
+          "when": "Emerging; not a standard",
+          "title": "LLM-assisted modelling is a draft, not a replacement",
+          "body": "Assistants can draft a DFD, a threat list or a review of a change. They also invent threats, miss context, and leak prompts if used carelessly. No NCSC page endorses replacing a workshop with a model. Any assisted draft needs a named human reviewer, and prompts must not contain secrets or other people’s data."
+        }
+      ]
+    },
+    {
+      "id": "slsa",
+      "title": "Supply chain — SLSA v1.2",
+      "items": [
+        {
+          "when": "24 November 2025",
+          "title": "SLSA version 1.2 announced",
+          "body": "It adds a Source Track alongside the Build Track. The v1.2 threats and mitigations pages are the right industry companion to NCSC supply-chain guidance when modelling CI/CD, dependencies and provenance.",
+          "sources": [
+            "S88",
+            "S88a",
+            "S88b",
+            "S89",
+            "S90"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundations",
+      "title": "The four questions and the Manifesto were not rewritten",
+      "items": [
+        {
+          "when": "12 January 2024",
+          "title": "Threat Modeling Capabilities catalogue added",
+          "body": "The Threat Modeling Manifesto itself does not show a 2024–2026 revision. What was added is the companion Threat Modeling Capabilities catalogue (process areas: Strategy, Education, Creating Threat Models, Acting on Threat Models, Communications, Measurement, Program Management). The four questions remain the foundation. This lifecycle uses them as a handrail, not as the only four stages.",
+          "sources": [
+            "S42",
+            "S46",
+            "S46a",
+            "S43",
+            "S44",
+            "S45"
+          ]
+        },
+        {
+          "when": "12 March 2025; 24 February 2026",
+          "title": "Microsoft still documents STRIDE and SDL, plus newer AI pages",
+          "body": "Two newer AI pages also loaded: Threat Modeling AI/ML Systems and Dependencies (last updated 12 March 2025) and Complete AI threat modeling in the Secure Future Initiative (last updated 24 February 2026). Use them as vendor guidance, not as UK official policy.",
+          "sources": [
+            "S47",
+            "S48",
+            "S48b",
+            "S48c"
+          ]
+        }
+      ]
+    }
+  ]
+}
