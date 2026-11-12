@@ -1,0 +1,352 @@
+/* Govassure – Global Styles
+   Uses GOV.UK Design System CSS (MIT licensed) as a base.
+   GDS Transport font is Crown copyright – we use the system font stack instead.
+*/
+
+
+/* Override font family to avoid GDS Transport (Crown copyright) */
+:root {
+  --govassure-blue: #1d70b8;
+  --govassure-green: #00703c;
+  --govassure-yellow: #ffdd00;
+  --govassure-red: #d4351c;
+  --govassure-black: #0b0c0c;
+  --govassure-dark-grey: #505a5f;
+  --govassure-mid-grey: #b1b4b6;
+  --govassure-light-grey: #f3f2f1;
+  --govassure-white: #ffffff;
+}
+
+html,
+body,
+.govuk-body,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-caption-xl,
+.govuk-caption-l,
+.govuk-caption-m,
+.govuk-label,
+.govuk-hint,
+.govuk-error-message,
+.govuk-fieldset__legend,
+.govuk-button,
+.govuk-tag,
+.govuk-table,
+.govuk-summary-list,
+.govuk-inset-text,
+.govuk-notification-banner {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* ── Govassure header ── */
+.ga-header {
+  background: var(--govassure-black);
+  border-bottom: 10px solid var(--govassure-blue);
+  padding: 12px 0;
+}
+
+.ga-header__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ga-header__logo {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ga-header__logo-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--govassure-white);
+  letter-spacing: -0.5px;
+}
+
+.ga-header__logo-tag {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--govassure-mid-grey);
+  letter-spacing: 0;
+}
+
+.ga-header__nav {
+  display: flex;
+  gap: 20px;
+}
+
+.ga-header__nav a {
+  color: var(--govassure-mid-grey);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.ga-header__nav a:hover {
+  color: var(--govassure-white);
+}
+
+/* ── Hamburger button (hidden on desktop) ── */
+.ga-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ga-hamburger__line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--govassure-white);
+  border-radius: 2px;
+}
+
+/* ── Mobile nav dropdown ── */
+.ga-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.ga-mobile-nav__link {
+  padding: 14px 24px;
+  color: var(--govassure-mid-grey);
+  text-decoration: none;
+  font-size: 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.ga-mobile-nav__link:hover,
+.ga-mobile-nav__link[aria-current="page"] {
+  color: var(--govassure-white);
+  background: #2a2a2a;
+}
+
+/* ── Responsive breakpoint ── */
+@media (max-width: 640px) {
+  .ga-header__nav {
+    display: none;
+  }
+
+  .ga-hamburger {
+    display: flex;
+  }
+
+  .ga-header__logo-tag {
+    display: none;
+  }
+}
+
+/* ── Phase banner ── */
+.ga-phase-banner {
+  background: var(--govassure-light-grey);
+  border-bottom: 1px solid var(--govassure-mid-grey);
+  padding: 6px 0;
+  font-size: 14px;
+}
+
+.ga-phase-banner__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Main content ── */
+.ga-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Objective cards ── */
+.ga-objective-card {
+  border-left: 6px solid;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  background: var(--govassure-white);
+  border: 1px solid var(--govassure-mid-grey);
+  border-left: 6px solid;
+}
+
+/* ── Progress bar ── */
+.ga-progress {
+  height: 12px;
+  background: var(--govassure-light-grey);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.ga-progress__fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+/* ── IGP card ── */
+.ga-igp-card {
+  background: var(--govassure-white);
+  border: 2px solid var(--govassure-mid-grey);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.ga-igp-card--achieved {
+  border-color: var(--govassure-green);
+  background: #f3faf6;
+}
+
+.ga-igp-card--partially_achieved {
+  border-color: #f47738;
+  background: #fef7f2;
+}
+
+.ga-igp-card--not_achieved {
+  border-color: var(--govassure-red);
+  background: #fdf2f1;
+}
+
+/* ── Score badge ── */
+.ga-score-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--govassure-white);
+}
+
+/* ── Principle list item ── */
+.ga-principle-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--govassure-mid-grey);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--govassure-white);
+  transition: background 0.1s;
+}
+
+.ga-principle-row:hover {
+  background: var(--govassure-light-grey);
+}
+
+.ga-principle-row__progress-wrap {
+  min-width: 160px;
+}
+
+/* ── Results table summary ── */
+.ga-results-obj {
+  margin-bottom: 32px;
+}
+
+.ga-results-obj__header {
+  border-left: 6px solid;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* ── Print / export ── */
+@media print {
+  .ga-header,
+  .ga-phase-banner,
+  .govuk-button,
+  .ga-no-print,
+  .govuk-breadcrumbs,
+  .govuk-warning-text {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt !important;
+    color: #000 !important;
+  }
+
+  .ga-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .govuk-heading-xl { font-size: 20pt !important; }
+  .govuk-heading-l  { font-size: 15pt !important; }
+  .govuk-heading-m  { font-size: 13pt !important; }
+
+  /* Score cards: force colour on print */
+  .govuk-table__cell,
+  .govuk-table__header {
+    font-size: 9pt !important;
+    padding: 4pt 6pt !important;
+  }
+
+  /* Avoid page breaks inside tables */
+  .ga-results-obj {
+    page-break-inside: avoid;
+  }
+
+  /* Print header in place of nav */
+  .ga-container::before {
+    content: "GOV Assured - CAF v4.0 Assessment";
+    display: block;
+    font-size: 9pt;
+    color: #505a5f;
+    border-bottom: 1pt solid #b1b4b6;
+    padding-bottom: 6pt;
+    margin-bottom: 12pt;
+  }
+
+  footer { display: none !important; }
+}
+
+/* ── Utility ── */
+.ga-caption {
+  font-size: 14px;
+  color: var(--govassure-dark-grey);
+}
+
+.ga-fw-bold {
+  font-weight: 700;
+}
+
+.ga-mt-0 { margin-top: 0; }
+.ga-mb-0 { margin-bottom: 0; }
+
+.ga-tag--achieved {
+  background: var(--govassure-green);
+  color: var(--govassure-white);
+}
+.ga-tag--partially_achieved {
+  background: #f47738;
+  color: var(--govassure-white);
+}
+.ga-tag--not_achieved {
+  background: var(--govassure-red);
+  color: var(--govassure-white);
+}
+.ga-tag--not_started {
+  background: var(--govassure-mid-grey);
+  color: var(--govassure-black);
+}
