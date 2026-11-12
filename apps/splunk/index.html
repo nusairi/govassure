@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SABSA Operating Model — Splunk Core &amp; Enterprise Security</title>
+<meta name="description" content="A SABSA-aligned operating model for Splunk Core and Enterprise Security: stakeholder roles, use cases, and live data &amp; information flows.">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#eef2fb" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<meta property="og:title" content="SABSA Operating Model — Splunk Core &amp; Enterprise Security">
+<meta property="og:description" content="Stakeholder operating model, use cases, and live data flows for Splunk Core &amp; Enterprise Security.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://splunk.govassured.com/">
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#0f1630; --panel:#121a35; --panel2:#172046;
+    --line:#243155; --ink:#e8edff; --mut:#9fb0d9; --dim:#6b7aa8;
+    --core:#3b82f6; --es:#f97316;
+    --soc:#22d3ee; --ir:#f59e0b; --ciso:#a78bfa; --ops:#34d399;
+    --good:#34d399; --shadow:0 10px 30px rgba(0,0,0,.45);
+    --r:14px;
+    /* diagram node fills */
+    --n-src:#1b2752; --n-src-st:#33437a; --n-stk:#1e2a55; --n-stk-st:#3a4a7a;
+    --bgrad1:#15214a; --bgrad2:#10193a;
+    --thead:#101a3c; --rowhover:#0e1733; --chipbg:#0e1733;
+    --linkCore:rgba(59,130,246,.4); --linkES:rgba(249,115,22,.45);
+  }
+  [data-theme="light"]{
+    --bg:#eef2fb; --bg2:#f6f8ff; --panel:#ffffff; --panel2:#f3f6ff;
+    --line:#d6deef; --ink:#16203a; --mut:#4a5878; --dim:#7c89a8;
+    --shadow:0 10px 26px rgba(40,60,110,.12);
+    --n-src:#e4eaf7; --n-src-st:#b7c4e0; --n-stk:#e7ecf9; --n-stk-st:#b7c4e0;
+    --bgrad1:#dfe8ff; --bgrad2:#eaf0ff;
+    --thead:#eef2fc; --rowhover:#f1f5ff; --chipbg:#eef2fc;
+    --linkCore:rgba(37,99,235,.5); --linkES:rgba(234,88,12,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 80% -10%,var(--bgrad1) 0%,transparent 55%),
+               radial-gradient(900px 600px at -10% 10%,var(--bgrad2) 0%,transparent 50%),
+               var(--bg);
+    color:var(--ink);
+    font:15px/1.55 "Segoe UI",Inter,system-ui,-apple-system,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background .3s,color .3s;
+  }
+  a{color:var(--core)}
+  .wrap{max-width:1280px;margin:0 auto;padding:28px 22px 80px}
+  header.top{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+  .kickrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .themebtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    background:var(--chipbg);color:var(--mut);padding:8px 14px;border-radius:999px;cursor:pointer;
+    font-weight:600;font-size:13px;transition:.15s}
+  .themebtn:hover{color:var(--ink);border-color:#3a4a7a}
+  .themebtn svg{width:15px;height:15px}
+  .kickactions{display:flex;align-items:center;gap:10px}
+  .linkedin{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    background:var(--chipbg);color:var(--ink);padding:8px 14px;border-radius:999px;
+    font-weight:600;font-size:13px;text-decoration:none;transition:.15s;white-space:nowrap}
+  .linkedin:hover{border-color:#0a66c2;color:#0a66c2}
+  .linkedin svg{width:16px;height:16px;color:#0a66c2;flex:0 0 auto}
+  @media(max-width:560px){.linkedin .lbl{display:none}.linkedin{padding:8px}}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--mut);font-weight:600}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--core),var(--es));box-shadow:0 0 12px var(--es)}
+  h1{font-size:30px;line-height:1.15;margin:2px 0 4px;font-weight:750;letter-spacing:-.01em}
+  h1 .grad{background:linear-gradient(90deg,#7cc0ff,#ffb27c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--mut);max-width:880px}
+  .meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;color:var(--dim);font-size:12.5px}
+  .meta b{color:var(--mut);font-weight:600}
+
+  /* nav tabs */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px;border-bottom:1px solid var(--line);padding-bottom:0}
+  .tab{appearance:none;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:10px 16px;border-radius:10px 10px 0 0;font-weight:600;cursor:pointer;font-size:14px;
+    border-bottom:2px solid transparent;transition:.15s}
+  .tab:hover{color:var(--ink);background:var(--rowhover)}
+  .tab.active{color:var(--ink);border-bottom-color:var(--es);background:linear-gradient(180deg,#16204a,transparent)}
+  section.view{display:none;animation:fade .35s ease}
+  section.view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--r);box-shadow:var(--shadow)}
+  .pad{padding:20px 22px}
+  h2.sec{font-size:19px;margin:26px 0 4px;font-weight:700}
+  .lead{color:var(--mut);margin:0 0 14px;max-width:920px}
+
+  /* legend / filters */
+  .filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 18px}
+  .flabel{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-right:2px}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+    border:1px solid var(--line);background:var(--chipbg);color:var(--mut);cursor:pointer;font-weight:600;font-size:13px;transition:.15s}
+  .chip .sw{width:10px;height:10px;border-radius:50%}
+  .chip:hover{color:var(--ink);border-color:#3a4a7a}
+  .chip.active{color:#06122a;border-color:transparent}
+  .chip[data-k="all"].active{background:#cdd8ff;color:#0a1430}
+  .chip[data-k="soc"].active{background:var(--soc)}
+  .chip[data-k="ir"].active{background:var(--ir)}
+  .chip[data-k="ciso"].active{background:var(--ciso)}
+  .chip[data-k="ops"].active{background:var(--ops)}
+
+  /* ===== Flow diagram ===== */
+  .flowcard{position:relative;overflow:hidden}
+  .flowhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:flex-end}
+  .diagram{width:100%;height:auto;display:block}
+  .node-rect{cursor:pointer;transition:filter .2s,opacity .2s}
+  .node-rect:hover{filter:brightness(1.18)}
+  .dimmed{opacity:.18 !important}
+  rect.n-src{fill:var(--n-src);stroke:var(--n-src-st)}
+  rect.n-stk{fill:var(--n-stk);stroke:var(--n-stk-st)}
+  rect.n-core{fill:url(#gCore);stroke:var(--core)}
+  rect.n-es{fill:url(#gES);stroke:var(--es)}
+  text.on-grad{fill:#fff !important}
+  text.on-grad.sub{fill:rgba(255,255,255,.85) !important}
+  .flowlink{fill:none;stroke-linecap:round}
+  .flowlink.core-link{stroke:var(--linkCore)}
+  .flowlink.es-link{stroke:var(--linkES)}
+  .nodelabel{font:600 13px "Segoe UI",sans-serif;fill:var(--ink);pointer-events:none}
+  .nodesub{font:500 10.5px "Segoe UI",sans-serif;fill:var(--mut);pointer-events:none}
+  .grouplabel{font:700 11px "Segoe UI",sans-serif;fill:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+  .detail{margin-top:14px;min-height:64px;border-top:1px dashed var(--line);padding-top:14px;
+    display:flex;gap:14px;align-items:flex-start}
+  .detail .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:800;color:#06122a}
+  .detail h4{margin:0 0 3px;font-size:15px}
+  .detail p{margin:0;color:var(--mut);font-size:13.5px}
+  .hint{color:var(--dim);font-size:12.5px;margin-top:10px}
+  .toggle{display:inline-flex;gap:6px;align-items:center}
+  .switch{position:relative;width:42px;height:22px;background:#23305a;border-radius:999px;cursor:pointer;transition:.2s;border:1px solid var(--line)}
+  .switch.on{background:var(--es)}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+  .switch.on::after{left:22px}
+
+  /* ===== cards grid ===== */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .uc{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:12px;padding:16px 16px 14px;position:relative;transition:.18s;overflow:hidden}
+  .uc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent,var(--core))}
+  .uc:hover{transform:translateY(-3px);border-color:#3a4a7a;box-shadow:var(--shadow)}
+  .uc.hide{display:none}
+  .uc .ph{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;
+    padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+  .ph.core{background:rgba(59,130,246,.16);color:#7cb0ff;border:1px solid rgba(59,130,246,.4)}
+  .ph.es{background:rgba(249,115,22,.16);color:#ffb27c;border:1px solid rgba(249,115,22,.4)}
+  .uc h4{margin:10px 0 6px;font-size:15.5px}
+  .uc p{margin:0 0 10px;color:var(--mut);font-size:13.3px}
+  .roles{display:flex;flex-wrap:wrap;gap:6px}
+  .rtag{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
+  .rtag[data-r="soc"]{color:var(--soc);border-color:rgba(34,211,238,.4)}
+  .rtag[data-r="ir"]{color:var(--ir);border-color:rgba(245,158,11,.4)}
+  .rtag[data-r="ciso"]{color:var(--ciso);border-color:rgba(167,139,250,.4)}
+  .rtag[data-r="ops"]{color:var(--ops);border-color:rgba(52,211,153,.4)}
+
+  /* ===== SABSA matrix ===== */
+  .matrix{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:880px}
+  th,td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line)}
+  thead th{position:sticky;top:0;background:var(--thead);z-index:2;font-size:12px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mut);font-weight:700}
+  tbody tr:hover{background:var(--rowhover)}
+  td.layer{white-space:nowrap}
+  .lname{font-weight:700;color:var(--ink)}
+  .lq{display:block;color:var(--dim);font-size:12px;font-weight:600;margin-top:2px}
+  .lview{display:block;color:var(--mut);font-size:11.5px;margin-top:4px}
+  td.core-c{border-left:3px solid rgba(59,130,246,.5)}
+  td.es-c{border-left:3px solid rgba(249,115,22,.5)}
+  td ul{margin:0;padding-left:16px}
+  td li{margin:3px 0;color:var(--mut);font-size:13px}
+
+  /* ===== stakeholder cards ===== */
+  .stk{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:6px}
+  .scard{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:14px;padding:18px;position:relative}
+  .scard .bar{height:4px;border-radius:4px;width:46px;margin-bottom:12px}
+  .scard h3{margin:0 0 2px;font-size:17px}
+  .scard .who{color:var(--dim);font-size:12.5px;margin-bottom:12px}
+  .scard h5{margin:12px 0 5px;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+  .scard ul{margin:0;padding-left:16px}
+  .scard li{margin:4px 0;color:var(--mut);font-size:13.2px}
+  .scard .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:4px}
+  .pill.core{background:rgba(59,130,246,.18);color:#7cb0ff}
+  .pill.es{background:rgba(249,115,22,.18);color:#ffb27c}
+
+  /* split table core vs es */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .vscol{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .vshead{padding:14px 18px;font-weight:700;display:flex;align-items:center;gap:10px;font-size:16px}
+  .vshead.core{background:linear-gradient(90deg,rgba(59,130,246,.22),transparent);border-bottom:1px solid var(--line)}
+  .vshead.es{background:linear-gradient(90deg,rgba(249,115,22,.22),transparent);border-bottom:1px solid var(--line)}
+  .vscol ul{margin:0;padding:14px 18px 18px 34px}
+  .vscol li{margin:7px 0;color:var(--mut);font-size:13.4px}
+  .vscol li b{color:var(--ink)}
+
+  .foot{margin-top:34px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+  .countpill{font-size:12px;color:var(--dim);margin-left:auto}
+  @media(max-width:760px){.vs{grid-template-columns:1fr}h1{font-size:24px}}
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=cb1e6759b6" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kickrow">
+      <span class="kicker"><span class="dot"></span> SABSA Security Operating Model</span>
+      <div class="kickactions">
+        <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="linkedin">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          <span class="lbl">GOV Assured</span>
+        </a>
+        <button class="themebtn" id="themeBtn" aria-label="Toggle colour theme">
+          <span id="themeIcon"></span><span id="themeLabel">Light mode</span>
+        </button>
+      </div>
+    </div>
+    <h1>Splunk Core &amp; Enterprise Security — Stakeholder Operating Model</h1>
+    <p class="sub">A SABSA-aligned view of how the Splunk platform delivers security outcomes: who uses what,
+      for which use cases, and how data flows in and out of each platform. Layered by SABSA, navigated by stakeholder.</p>
+    <div class="meta">
+      <span><b>Framework:</b> SABSA (Sherwood Applied Business Security Architecture)</span>
+      <span><b>Platforms:</b> Splunk Core (data &amp; search) · Splunk Enterprise Security (security analytics)</span>
+      <span><b>Stakeholders:</b> SOC · IR/Forensics · CISO · IT Ops/Eng/Compliance</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-view="flow">Data &amp; Information Flows</button>
+    <button class="tab" data-view="sabsa">SABSA Layer Model</button>
+    <button class="tab" data-view="stake">Stakeholder Operating Model</button>
+    <button class="tab" data-view="cases">Use Case Catalogue</button>
+    <button class="tab" data-view="split">Core vs ES — Boundary</button>
+  </nav>
+
+  <!-- ============ VIEW: FLOW ============ -->
+  <section class="view active" id="view-flow">
+    <h2 class="sec">Live data &amp; information flows</h2>
+    <p class="lead">Telemetry enters via forwarders, is normalised in <b style="color:#7cb0ff">Splunk Core</b>, enriched and
+      correlated in <b style="color:#ffb27c">Enterprise Security</b>, then drives action for each stakeholder — with
+      intelligence and response looping back. Click any node to isolate its flows and read its role; toggle the animation
+      to see data move.</p>
+
+    <div class="filterbar">
+      <span class="flabel">Highlight stakeholder</span>
+      <button class="chip active" data-k="all"><span class="sw" style="background:#cdd8ff"></span>All</button>
+      <button class="chip" data-k="soc"><span class="sw" style="background:var(--soc)"></span>SOC</button>
+      <button class="chip" data-k="ir"><span class="sw" style="background:var(--ir)"></span>IR / Forensics</button>
+      <button class="chip" data-k="ciso"><span class="sw" style="background:var(--ciso)"></span>CISO</button>
+      <button class="chip" data-k="ops"><span class="sw" style="background:var(--ops)"></span>IT Ops / Compliance</button>
+      <span class="toggle" style="margin-left:auto"><span style="color:var(--mut);font-size:13px">Animate flow</span>
+        <span class="switch on" id="animToggle" role="switch" aria-checked="true"></span></span>
+    </div>
+
+    <div class="panel pad flowcard">
+      <svg class="diagram" id="svg" viewBox="0 0 1180 620" xmlns="http://www.w3.org/2000/svg" aria-label="Splunk data flow diagram">
+        <defs>
+          <linearGradient id="gCore" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#2563eb"/>
+          </linearGradient>
+          <linearGradient id="gES" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/>
+          </linearGradient>
+          <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- group labels -->
+        <text class="grouplabel" x="60" y="40">Data Sources</text>
+        <text class="grouplabel" x="400" y="40">Splunk Core</text>
+        <text class="grouplabel" x="660" y="40">Enterprise Security</text>
+        <text class="grouplabel" x="980" y="40">Stakeholders &amp; Action</text>
+
+        <g id="links"></g>
+        <g id="particles"></g>
+        <g id="nodes"></g>
+      </svg>
+
+      <div class="detail" id="detail">
+        <div class="ic" style="background:linear-gradient(135deg,#7cc0ff,#ffb27c)">i</div>
+        <div><h4>Click a node to inspect</h4>
+          <p>Select any source, platform component, or stakeholder to isolate the flows it participates in and read how it fits the operating model.</p></div>
+      </div>
+      <p class="hint">Tip: use the stakeholder chips above to trace one audience end-to-end. Toggle off animation to reduce motion.</p>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: SABSA ============ -->
+  <section class="view" id="view-sabsa">
+    <h2 class="sec">SABSA layer model mapped to Splunk</h2>
+    <p class="lead">Each SABSA layer answers a different question and serves a different audience. Below, every layer is
+      expressed concretely in <b style="color:#7cb0ff">Splunk Core</b> and <b style="color:#ffb27c">Enterprise Security</b> terms.</p>
+    <div class="matrix">
+      <table>
+        <thead><tr>
+          <th style="width:210px">SABSA Layer</th>
+          <th class="core-c">Splunk Core expression</th>
+          <th class="es-c">Enterprise Security expression</th>
+        </tr></thead>
+        <tbody id="sabsaBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: STAKEHOLDER ============ -->
+  <section class="view" id="view-stake">
+    <h2 class="sec">Stakeholder operating model</h2>
+    <p class="lead">What each audience owns, the questions they ask, and the platform surface they live in day to day.</p>
+    <div class="stk" id="stkGrid"></div>
+  </section>
+
+  <!-- ============ VIEW: USE CASES ============ -->
+  <section class="view" id="view-cases">
+    <h2 class="sec">Use case catalogue</h2>
+    <p class="lead">Filter by stakeholder to see the use cases each audience runs, and which platform delivers them.</p>
+    <div class="filterbar">
+      <span class="flabel">Filter</span>
+      <button class="chip active" data-cf="all"><span class="sw" style="background:#cdd8ff"></span>All</button>
+      <button class="chip" data-cf="soc"><span class="sw" style="background:var(--soc)"></span>SOC</button>
+      <button class="chip" data-cf="ir"><span class="sw" style="background:var(--ir)"></span>IR / Forensics</button>
+      <button class="chip" data-cf="ciso"><span class="sw" style="background:var(--ciso)"></span>CISO</button>
+      <button class="chip" data-cf="ops"><span class="sw" style="background:var(--ops)"></span>IT Ops / Compliance</button>
+      <span class="countpill" id="ucCount"></span>
+    </div>
+    <div class="grid" id="ucGrid"></div>
+  </section>
+
+  <!-- ============ VIEW: SPLIT ============ -->
+  <section class="view" id="view-split">
+    <h2 class="sec">Where Core ends and ES begins</h2>
+    <p class="lead">A clean platform boundary prevents overlap and tool sprawl. Core is the data and search foundation;
+      ES is the security analytics and workflow layer that sits on top of it.</p>
+    <div class="vs">
+      <div class="vscol">
+        <div class="vshead core"><span style="width:12px;height:12px;border-radius:3px;background:var(--core);display:inline-block"></span>Splunk Core — the foundation</div>
+        <ul>
+          <li><b>Data onboarding &amp; ingest</b> — forwarders, HEC, TAs/add-ons, sourcetype &amp; CIM normalisation.</li>
+          <li><b>Indexing &amp; retention</b> — hot/warm/cold/frozen tiers, role-based index access, data lifecycle.</li>
+          <li><b>Search &amp; SPL</b> — ad-hoc investigation, statistics, lookups, KV store, data models.</li>
+          <li><b>Dashboards &amp; reports</b> — custom operational and security dashboards, scheduled reports.</li>
+          <li><b>Base alerting</b> — saved-search alerts, thresholds, custom triggers for any team.</li>
+          <li><b>Platform RBAC &amp; audit</b> — users, roles, capabilities, _audit / _internal monitoring.</li>
+        </ul>
+      </div>
+      <div class="vscol">
+        <div class="vshead es"><span style="width:12px;height:12px;border-radius:3px;background:var(--es);display:inline-block"></span>Enterprise Security — the security layer</div>
+        <ul>
+          <li><b>Correlation searches</b> — curated, content-managed detections producing notable events.</li>
+          <li><b>Risk-Based Alerting (RBA)</b> — risk index, risk modifiers, risk incident rules to cut noise.</li>
+          <li><b>Incident Review &amp; workflow</b> — triage, ownership, status, disposition of notables.</li>
+          <li><b>Investigation workbench</b> — timelines, artifacts, collaboration for IR.</li>
+          <li><b>Threat Intelligence framework</b> — feed ingestion, normalisation, indicator matching.</li>
+          <li><b>Assets &amp; Identities</b> — context enrichment, criticality, identity resolution.</li>
+          <li><b>Frameworks &amp; posture</b> — MITRE ATT&amp;CK mapping, security posture &amp; executive dashboards.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:18px"><b>Operating principle:</b> if it concerns <i>getting data in, storing it, or
+      asking arbitrary questions of it</i>, it belongs to Core. If it concerns <i>detecting, prioritising, investigating, or
+      reporting on security risk</i>, it belongs to ES. ES consumes Core; it never replaces it.</p>
+  </section>
+
+  <div class="foot">
+    SABSA operating model · Splunk Core &amp; Enterprise Security · Generated as an interactive reference.
+    SABSA layers: Contextual · Conceptual · Logical · Physical · Component · Operational (Service Management).
+  </div>
+</div>
+
+<script>
+/* ---------------- TAB NAV ---------------- */
+const tabs=document.getElementById('tabs');
+tabs.addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));
+  const v=b.dataset.view;
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));
+});
+
+/* ---------------- THEME TOGGLE ---------------- */
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+const themeBtn=document.getElementById('themeBtn');
+const themeIcon=document.getElementById('themeIcon');
+const themeLabel=document.getElementById('themeLabel');
+function setTheme(mode,persist){
+  if(mode==='light'){document.documentElement.setAttribute('data-theme','light');
+    themeIcon.innerHTML=MOON; themeLabel.textContent='Dark mode';}
+  else{document.documentElement.removeAttribute('data-theme');
+    themeIcon.innerHTML=SUN; themeLabel.textContent='Light mode';}
+  if(persist){try{localStorage.setItem('sabsaTheme',mode);}catch(e){}}
+}
+/* First open: use saved choice if any, else follow the OS preference */
+let _userSet=false, _saved=null;
+try{_saved=localStorage.getItem('sabsaTheme');}catch(e){}
+const _mql = null; /* GOV Assured: hub dark by default */
+if(_saved){ _userSet=true; setTheme(_saved); }
+else { setTheme(_mql && _mql.matches ? 'light' : 'dark'); }
+/* Keep following the OS until the user makes an explicit choice */
+if(_mql){
+  const _onOS = e => { if(!_userSet) setTheme(e.matches ? 'light' : 'dark'); };
+  _mql.addEventListener ? _mql.addEventListener('change',_onOS) : _mql.addListener(_onOS);
+}
+themeBtn.addEventListener('click',()=>{
+  _userSet=true;
+  const isLight=document.documentElement.getAttribute('data-theme')==='light';
+  setTheme(isLight?'dark':'light', true);
+});
+
+/* ---------------- DATA ---------------- */
+const ROLE={soc:'SOC',ir:'IR / Forensics',ciso:'CISO',ops:'IT Ops / Compliance'};
+const RCOL={soc:'#22d3ee',ir:'#f59e0b',ciso:'#a78bfa',ops:'#34d399'};
+
+/* Nodes: x,y in viewBox 1180x620. type: src|core|es|stk */
+const NODES=[
+  // sources
+  {id:'ep',  t:'Endpoint / EDR',  s:'Sysmon, AV, EDR',          x:40, y:70,  type:'src', roles:['soc','ir','ops'], d:'Endpoint and EDR telemetry — process, file, registry and detection events. Foundational for threat detection and forensic timelines.'},
+  {id:'net', t:'Network',         s:'Firewall, proxy, DNS, IDS', x:40, y:140, type:'src', roles:['soc','ir','ops'], d:'Perimeter and internal network logs — connection, web, DNS and IDS/IPS events used for lateral-movement and exfiltration detection.'},
+  {id:'cloud',t:'Cloud / SaaS',   s:'AWS, Azure, M365, GCP',     x:40, y:210, type:'src', roles:['soc','ciso','ops'],d:'Cloud control-plane and SaaS audit logs — API calls, config changes, sign-ins. Critical for cloud posture and account-compromise detection.'},
+  {id:'iam', t:'Identity / IAM',  s:'AD, Okta, Entra ID',        x:40, y:280, type:'src', roles:['soc','ir','ciso'],d:'Authentication and directory events — logons, privilege changes, MFA. Powers identity-based detection and Assets &amp; Identities enrichment.'},
+  {id:'app', t:'Apps / DB',       s:'Web, app, database logs',   x:40, y:350, type:'src', roles:['ops','ir'],       d:'Application, web server and database logs — transactions, errors, access. Used for app abuse detection, fraud and audit trails.'},
+  {id:'ti',  t:'Threat Intel',    s:'TAXII, OSINT, ISAC feeds',  x:40, y:420, type:'src', roles:['soc','ir','ciso'],d:'External threat intelligence feeds. Ingested by the ES Threat Intel framework and matched against live telemetry to flag known-bad indicators.'},
+
+  // core
+  {id:'fwd', t:'Forwarders / HEC',s:'Collect &amp; route',       x:330,y:120, type:'core',roles:['ops'],            d:'Universal/heavy forwarders and HTTP Event Collector gather data at the edge, filter and route it to indexers. Owned by IT Ops / platform engineering.'},
+  {id:'idx', t:'Indexers',        s:'Parse, store, retain',      x:330,y:230, type:'core',roles:['ops'],            d:'Indexing tier parses, normalises (CIM) and stores events across hot/warm/cold tiers with role-based access and retention policy.'},
+  {id:'sh',  t:'Search Head',     s:'SPL, dashboards, DMs',      x:330,y:340, type:'core',roles:['soc','ir','ops','ciso'],d:'Search and knowledge layer — SPL, data models, lookups, KV store, dashboards. The shared analytics surface every team queries.'},
+
+  // ES
+  {id:'corr',t:'Correlation',     s:'Detections → notables',     x:610,y:130, type:'es', roles:['soc'],            d:'ES correlation searches run curated detection content over CIM data models, generating notable events mapped to MITRE ATT&amp;CK.'},
+  {id:'rba', t:'Risk-Based Alerting',s:'Risk index &amp; rules', x:610,y:230, type:'es', roles:['soc','ciso'],     d:'Risk modifiers accumulate against assets/identities; risk incident rules raise a notable only when aggregate risk crosses threshold — cutting alert noise.'},
+  {id:'ai',  t:'Assets &amp; Identities',s:'Context &amp; enrich',x:610,y:330,type:'es', roles:['soc','ir','ciso'],d:'Asset and identity lookups enrich every event with ownership, criticality and category — turning raw data into prioritised, contextual findings.'},
+  {id:'ir',  t:'Incident Review',  s:'Triage workflow',          x:610,y:430, type:'es', roles:['soc','ir'],       d:'The SOC workbench: notable-event queue with ownership, status, urgency and disposition. Where triage and investigation begin.'},
+
+  // stakeholders
+  {id:'socS',t:'SOC',             s:'Detect &amp; triage',       x:940,y:90,  type:'stk',roles:['soc'],            d:'Tier 1–3 analysts live in Incident Review and RBA, pivoting to Core SPL for hunting. Primary consumers of ES detection content.'},
+  {id:'irS', t:'IR / Forensics',  s:'Investigate &amp; respond', x:940,y:200, type:'stk',roles:['ir'],            d:'Use the ES Investigation workbench for timelines and Core for deep raw-event drill-down and evidence reconstruction across all indexes.'},
+  {id:'cisoS',t:'CISO / Leadership',s:'Posture &amp; risk',      x:940,y:310, type:'stk',roles:['ciso'],          d:'Consume ES security-posture and risk dashboards plus executive reporting for board, compliance and risk-appetite decisions.'},
+  {id:'opsS',t:'IT Ops / Compliance',s:'Operate &amp; assure',   x:940,y:420, type:'stk',roles:['ops'],           d:'Run the platform, onboard data, monitor health, and use Core dashboards for infrastructure and compliance/audit evidence.'},
+
+  // outputs / loop-back
+  {id:'soar',t:'SOAR / Ticketing',s:'Automate &amp; orchestrate',x:940,y:520, type:'stk',roles:['soc','ir','ops'],d:'Notable events and risk incidents trigger SOAR playbooks and ITSM tickets — response actions and case management downstream of ES.'},
+];
+
+/* Links: from -> to, role tags for filtering */
+const LINKS=[
+  // sources to core
+  ['ep','fwd',['soc','ir','ops']],['net','fwd',['soc','ir','ops']],['cloud','fwd',['soc','ciso','ops']],
+  ['iam','fwd',['soc','ir','ciso']],['app','fwd',['ops','ir']],
+  ['fwd','idx',['soc','ir','ciso','ops']],['idx','sh',['soc','ir','ciso','ops']],
+  // threat intel into ES directly
+  ['ti','corr',['soc','ir','ciso']],
+  // core to ES
+  ['sh','corr',['soc']],['sh','rba',['soc','ciso']],['sh','ai',['soc','ir','ciso']],
+  // within ES
+  ['corr','ir',['soc','ir']],['rba','ir',['soc']],['ai','corr',['soc']],['ai','rba',['soc','ciso']],
+  // ES to stakeholders
+  ['ir','socS',['soc']],['ir','irS',['ir']],['rba','cisoS',['ciso']],['corr','socS',['soc']],
+  // core direct to stakeholders (ad-hoc / dashboards)
+  ['sh','irS',['ir']],['sh','opsS',['ops']],['sh','cisoS',['ciso']],
+  // outputs
+  ['ir','soar',['soc','ir']],['socS','soar',['soc']],
+  // loop back: SOAR/analysts feed intel & tuning back to core/es
+  ['soar','sh',['ops']],
+];
+
+/* ---------------- BUILD SVG ---------------- */
+const NS='http://www.w3.org/2000/svg';
+const W={src:150,core:160,es:170,stk:170}, H=52;
+const nodeById={}; NODES.forEach(n=>nodeById[n.id]=n);
+const gLinks=document.getElementById('links');
+const gNodes=document.getElementById('nodes');
+const gPart=document.getElementById('particles');
+
+function cy(n){return n.y + H/2;}
+
+/* path generator (smooth cubic) */
+function pathFor(a,b){
+  const x1=a.x+W[a.type], y1=cy(a), x2=b.x, y2=cy(b);
+  // if going right-to-left (loopback) start from left edge of a
+  let sx=x1, sy=y1, ex=x2, ey=y2;
+  if(b.x < a.x){ sx=a.x; ex=b.x+W[b.type]; }
+  const mx=(sx+ex)/2;
+  return `M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;
+}
+
+const linkEls=[];
+LINKS.forEach((lk,i)=>{
+  const a=nodeById[lk[0]], b=nodeById[lk[1]];
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d',pathFor(a,b));
+  const isES = a.type==='es'||b.type==='es'||a.id==='ti';
+  p.setAttribute('class','flowlink '+(isES?'es-link':'core-link'));
+  p.setAttribute('stroke-width','2');
+  p.dataset.from=lk[0]; p.dataset.to=lk[1]; p.dataset.roles=lk[2].join(',');
+  gLinks.appendChild(p);
+  linkEls.push({el:p,from:lk[0],to:lk[1],roles:lk[2],len:p.getTotalLength(),
+    color:isES?'#fb923c':'#60a5fa'});
+});
+
+/* nodes */
+NODES.forEach(n=>{
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('class','node-rect'); g.dataset.id=n.id;
+  const r=document.createElementNS(NS,'rect');
+  r.setAttribute('x',n.x); r.setAttribute('y',n.y);
+  r.setAttribute('width',W[n.type]); r.setAttribute('height',H);
+  r.setAttribute('rx',11); r.setAttribute('stroke-width','1.4');
+  r.setAttribute('class','n-'+n.type);
+  g.appendChild(r);
+  const grad = (n.type==='core'||n.type==='es');
+  const t1=document.createElementNS(NS,'text');
+  t1.setAttribute('class','nodelabel'+(grad?' on-grad':'')); t1.setAttribute('x',n.x+14); t1.setAttribute('y',n.y+22);
+  t1.innerHTML=n.t; g.appendChild(t1);
+  const t2=document.createElementNS(NS,'text');
+  t2.setAttribute('class','nodesub'+(grad?' on-grad sub':'')); t2.setAttribute('x',n.x+14); t2.setAttribute('y',n.y+39);
+  t2.innerHTML=n.s; g.appendChild(t2);
+  g.addEventListener('click',()=>selectNode(n.id));
+  gNodes.appendChild(g);
+});
+
+/* ---------------- PARTICLES ---------------- */
+let particles=[];
+function buildParticles(){
+  gPart.innerHTML=''; particles=[];
+  linkEls.forEach((L,i)=>{
+    const count = L.len>260?3:2;
+    for(let k=0;k<count;k++){
+      const c=document.createElementNS(NS,'circle');
+      c.setAttribute('r','2.8'); c.setAttribute('fill',L.color);
+      c.setAttribute('filter','url(#soft)');
+      gPart.appendChild(c);
+      particles.push({c,link:L,off:(k/count)+Math.random()*0.1,
+        spd:(0.0009+Math.random()*0.0006)});
+    }
+  });
+}
+buildParticles();
+
+let animOn=true, raf=null;
+function frame(){
+  particles.forEach(p=>{
+    p.off=(p.off+p.spd)%1;
+    const pt=p.link.el.getPointAtLength(p.off*p.link.len);
+    p.c.setAttribute('cx',pt.x); p.c.setAttribute('cy',pt.y);
+    const visible = p.link.el.style.display!=='none' && !p.link.el.classList.contains('dimmed');
+    p.c.style.opacity = (animOn&&visible)?0.95:0;
+  });
+  raf=requestAnimationFrame(frame);
+}
+raf=requestAnimationFrame(frame);
+
+const animToggle=document.getElementById('animToggle');
+animToggle.addEventListener('click',()=>{
+  animOn=!animOn; animToggle.classList.toggle('on',animOn);
+});
+
+/* ---------------- INTERACTION: filter + select ---------------- */
+let activeRole='all', selected=null;
+
+function applyHighlight(){
+  // links
+  linkEls.forEach(L=>{
+    let show=true;
+    if(activeRole!=='all') show = L.roles.includes(activeRole);
+    if(selected) show = show && (L.from===selected || L.to===selected);
+    L.el.classList.toggle('dimmed',!show);
+  });
+  // nodes
+  NODES.forEach(n=>{
+    const g=gNodes.querySelector(`[data-id="${n.id}"]`);
+    let show=true;
+    if(activeRole!=='all') show = n.roles.includes(activeRole) || n.type==='core';
+    if(selected){
+      const connected = selected===n.id || linkEls.some(L=>(L.from===selected&&L.to===n.id)||(L.to===selected&&L.from===n.id));
+      show = show && connected;
+    }
+    g.classList.toggle('dimmed',!show);
+  });
+}
+
+function selectNode(id){
+  selected = (selected===id)? null : id;
+  const n=nodeById[id], det=document.getElementById('detail');
+  if(selected){
+    const c = n.type==='core'?'#3b82f6':n.type==='es'?'#f97316':n.type==='src'?'#64748b':(RCOL[n.roles[0]]||'#a78bfa');
+    det.innerHTML=`<div class="ic" style="background:${c}">${n.type==='es'?'ES':n.type==='core'?'C':'•'}</div>
+      <div><h4>${n.t} <span style="color:var(--dim);font-weight:500;font-size:12px">— ${n.s}</span></h4>
+      <p>${n.d}</p></div>`;
+  } else {
+    det.innerHTML=`<div class="ic" style="background:linear-gradient(135deg,#7cc0ff,#ffb27c)">i</div>
+      <div><h4>Click a node to inspect</h4><p>Select any source, platform component, or stakeholder to isolate its flows and read how it fits the operating model.</p></div>`;
+  }
+  applyHighlight();
+}
+
+document.querySelectorAll('.chip[data-k]').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-k]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active'); activeRole=ch.dataset.k; selected=null;
+    applyHighlight();
+    // reset detail when changing role
+    const det=document.getElementById('detail');
+    if(activeRole!=='all'){
+      det.innerHTML=`<div class="ic" style="background:${RCOL[activeRole]}">•</div>
+        <div><h4>${ROLE[activeRole]} — end-to-end trace</h4>
+        <p>Highlighted: every source, platform component and ES function this audience depends on. Click a node for detail.</p></div>`;
+    } else {
+      det.innerHTML=`<div class="ic" style="background:linear-gradient(135deg,#7cc0ff,#ffb27c)">i</div>
+        <div><h4>Click a node to inspect</h4><p>Select any source, platform component, or stakeholder to isolate its flows and read how it fits the operating model.</p></div>`;
+    }
+  });
+});
+
+/* ---------------- SABSA TABLE ---------------- */
+const SABSA=[
+ {l:'Contextual',q:'What — business',v:'Business view',
+  core:['Defines which security outcomes and compliance mandates the platform must serve','Scope of data sources tied to business risk &amp; regulatory drivers'],
+  es:['Risk appetite expressed as detection priorities &amp; coverage goals','Security outcomes: threat detection, faster response, demonstrable assurance']},
+ {l:'Conceptual',q:'Why — risk &amp; attributes',v:'Architect view',
+  core:['Core positioned as the single normalised data &amp; search foundation','Security attributes: availability, integrity &amp; retention of evidence'],
+  es:['ES positioned as the security analytics &amp; workflow layer','Attributes: detect, prioritise, investigate, report on risk']},
+ {l:'Logical',q:'How — services &amp; flows',v:'Designer view',
+  core:['CIM data models, SPL services, lookups, KV store, dashboards','Logical information flows: ingest → index → search'],
+  es:['Correlation logic, Risk-Based Alerting model, notable-event lifecycle','Threat-intel matching, Assets &amp; Identities enrichment services']},
+ {l:'Physical',q:'With what — mechanisms',v:'Builder view',
+  core:['Forwarders, indexers, search heads, index tiers (hot/warm/cold/frozen)','Data-model acceleration, RBAC, clustering &amp; retention policy'],
+  es:['ES app on a dedicated search head, risk index, notable index','Accelerated data models powering correlation searches']},
+ {l:'Component',q:'Using what — products',v:'Tradesman view',
+  core:['Specific TAs/add-ons, sourcetypes, props/transforms, saved searches','Custom alerts, scheduled reports, role &amp; capability config'],
+  es:['Correlation-search content, risk modifiers &amp; incident rules','Threat-intel feeds, ATT&amp;CK mapping, MLTK / anomaly content']},
+ {l:'Operational',q:'Run &amp; manage',v:'Service management',
+  core:['Platform health (Monitoring Console), data-quality, license &amp; capacity','Onboarding pipeline, _internal/_audit monitoring, upgrades'],
+  es:['Content management &amp; detection tuning, false-positive reduction','Use-case lifecycle, posture reporting, SOC runbooks &amp; SLAs']},
+];
+const sb=document.getElementById('sabsaBody');
+SABSA.forEach(r=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td class="layer"><span class="lname">${r.l}</span>
+      <span class="lq">${r.q}</span><span class="lview">${r.v}</span></td>
+    <td class="core-c"><ul>${r.core.map(x=>`<li>${x}</li>`).join('')}</ul></td>
+    <td class="es-c"><ul>${r.es.map(x=>`<li>${x}</li>`).join('')}</ul></td>`;
+  sb.appendChild(tr);
+});
+
+/* ---------------- STAKEHOLDER CARDS ---------------- */
+const STK=[
+ {k:'soc',name:'SOC Analysts (T1–T3)',who:'Monitoring, triage, threat hunting',
+  asks:['Is this alert a real threat?','What is the blast radius?','What should I escalate?'],
+  owns:['Notable-event triage &amp; disposition','Detection coverage feedback','Threat hunting'],
+  surf:[['Incident Review &amp; RBA','es'],['MITRE ATT&amp;CK navigator','es'],['Ad-hoc SPL hunting','core'],['Correlation content','es']]},
+ {k:'ir',name:'Incident Response / Forensics',who:'Investigate, contain, reconstruct',
+  asks:['What was the full attack timeline?','What data was touched?','How did they get in?'],
+  owns:['Case investigation &amp; evidence','Root-cause &amp; scope','Post-incident reporting'],
+  surf:[['Investigation workbench','es'],['Raw-event drill-down','core'],['Cross-index search','core'],['Artifact timelines','es']]},
+ {k:'ciso',name:'CISO / Security Leadership',who:'Risk posture, assurance, reporting',
+  asks:['What is our risk exposure?','Are we improving?','Are we compliant?'],
+  owns:['Risk appetite &amp; priorities','Board &amp; regulator reporting','Program KPIs'],
+  surf:[['Security posture dashboards','es'],['Risk score trends','es'],['Executive reports','core'],['Compliance summaries','es']]},
+ {k:'ops',name:'IT Ops / Eng / Compliance',who:'Operate platform, onboard data, assure',
+  asks:['Is the platform healthy?','Is data flowing?','Can we prove control X?'],
+  owns:['Data onboarding &amp; pipelines','Platform &amp; license health','Audit evidence'],
+  surf:[['Monitoring Console','core'],['Data onboarding / TAs','core'],['Infra dashboards','core'],['Compliance correlation','es']]},
+];
+const sg=document.getElementById('stkGrid');
+STK.forEach(s=>{
+  const el=document.createElement('div'); el.className='scard';
+  el.innerHTML=`<div class="bar" style="background:${RCOL[s.k]}"></div>
+    <h3>${s.name}</h3><div class="who">${s.who}</div>
+    <h5>Key questions</h5><ul>${s.asks.map(a=>`<li>${a}</li>`).join('')}</ul>
+    <h5>Owns</h5><ul>${s.owns.map(a=>`<li>${a}</li>`).join('')}</ul>
+    <h5>Platform surface</h5><ul>${s.surf.map(a=>`<li>${a[0]}<span class="pill ${a[1]}">${a[1]==='es'?'ES':'Core'}</span></li>`).join('')}</ul>`;
+  sg.appendChild(el);
+});
+
+/* ---------------- USE CASES ---------------- */
+const UC=[
+ {p:'es',t:'Threat detection via correlation',roles:['soc'],d:'Curated correlation searches over CIM data models generate notable events mapped to MITRE ATT&CK techniques.'},
+ {p:'es',t:'Risk-Based Alerting',roles:['soc','ciso'],d:'Aggregate risk against assets and identities; raise a notable only when cumulative risk crosses threshold — fewer, higher-fidelity alerts.'},
+ {p:'es',t:'Alert triage &amp; workflow',roles:['soc','ir'],d:'Incident Review queue with ownership, urgency, status and disposition to drive consistent SOC triage.'},
+ {p:'es',t:'Threat intelligence enrichment',roles:['soc','ir','ciso'],d:'Ingest TAXII/OSINT feeds, normalise indicators, and match against live telemetry to surface known-bad activity.'},
+ {p:'es',t:'Investigation &amp; timeline',roles:['ir'],d:'Investigation workbench assembles artifacts, notes and event timelines for collaborative incident reconstruction.'},
+ {p:'es',t:'User &amp; entity behaviour analytics',roles:['soc','ir'],d:'Behavioural and anomaly content (MLTK / UBA-style) flags deviations in user and host activity.'},
+ {p:'es',t:'Security posture &amp; executive reporting',roles:['ciso'],d:'Posture, risk-trend and coverage dashboards translate operations into board-level assurance.'},
+ {p:'es',t:'MITRE ATT&CK coverage mapping',roles:['soc','ciso'],d:'Map detection content to ATT&CK tactics/techniques to expose and close coverage gaps.'},
+ {p:'es',t:'Compliance &amp; control monitoring',roles:['ciso','ops'],d:'Correlation content evidences control effectiveness (PCI, NIST, ISO 27001, etc.) for audit.'},
+ {p:'core',t:'Ad-hoc threat hunting (SPL)',roles:['soc','ir'],d:'Free-form SPL across all indexes to hunt hypotheses not yet covered by detection content.'},
+ {p:'core',t:'Forensic raw-event drill-down',roles:['ir'],d:'Reconstruct events from raw, retained data across any source for deep forensic analysis and evidence.'},
+ {p:'core',t:'Data onboarding &amp; normalisation',roles:['ops'],d:'Forwarders, HEC, TAs and CIM mapping bring new sources online with consistent field naming.'},
+ {p:'core',t:'Platform health &amp; capacity',roles:['ops'],d:'Monitoring Console tracks indexing, search load, license usage and component health.'},
+ {p:'core',t:'Infrastructure &amp; app monitoring',roles:['ops'],d:'Operational dashboards over infra, app and database logs — often shared with IT/SRE teams.'},
+ {p:'core',t:'Custom dashboards &amp; reports',roles:['soc','ciso','ops'],d:'Tailored dashboards and scheduled reports for any audience built directly on Core search.'},
+ {p:'core',t:'Audit &amp; access logging',roles:['ops','ciso'],d:'_audit and _internal indexes evidence who searched what and platform-level activity for assurance.'},
+ {p:'core',t:'Base threshold alerting',roles:['soc','ops'],d:'Saved-search alerts and thresholds for teams that need detection outside curated ES content.'},
+ {p:'es',t:'SOAR / automated response',roles:['soc','ir','ops'],d:'Notable events and risk incidents trigger SOAR playbooks and ITSM tickets for orchestrated response.'},
+];
+const ug=document.getElementById('ucGrid'), ucCount=document.getElementById('ucCount');
+function renderUC(filter){
+  ug.innerHTML='';let n=0;
+  UC.forEach(u=>{
+    if(filter!=='all' && !u.roles.includes(filter))return;
+    n++;
+    const accent = u.p==='es'?'#f97316':'#3b82f6';
+    const el=document.createElement('div'); el.className='uc'; el.style.setProperty('--accent',accent);
+    el.innerHTML=`<span class="ph ${u.p}">${u.p==='es'?'Enterprise Security':'Splunk Core'}</span>
+      <h4>${u.t}</h4><p>${u.d}</p>
+      <div class="roles">${u.roles.map(r=>`<span class="rtag" data-r="${r}">${ROLE[r]}</span>`).join('')}</div>`;
+    ug.appendChild(el);
+  });
+  ucCount.textContent=`${n} use case${n!==1?'s':''} shown`;
+}
+renderUC('all');
+document.querySelectorAll('.chip[data-cf]').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-cf]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active'); renderUC(ch.dataset.cf);
+  });
+});
+</script>
+</body>
+</html>
