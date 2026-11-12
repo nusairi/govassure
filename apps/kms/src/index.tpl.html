@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key Management Lifecycle — reference model | GOV Assured</title>
+<meta name="description" content="A vendor-neutral cryptographic key management lifecycle: twelve stages from Plan to Compromise response, each mapped to NCSC guidance.">
+<meta name="author" content="GOV Assured">
+<link rel="canonical" href="https://kms.govassured.com/">
+<meta name="theme-color" content="#021c17">
+<link rel="icon" href="/favicon.ico?v=%%V:favicon.ico%%" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=%%V:favicon.svg%%" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=%%V:apple-touch-icon.png%%">
+<link rel="manifest" href="/site.webmanifest?v=%%V:site.webmanifest%%">
+<link rel="stylesheet" href="/app.css?v=%%V:app.css%%">
+<link rel="stylesheet" href="/ga-brand.css?v=%%V:ga-brand.css%%" id="ga-brand">
+<link rel="stylesheet" href="/ga-theme.css?v=%%V:ga-theme.css%%" id="ga-theme">
+<link rel="stylesheet" href="/ga-app.css?v=%%V:ga-app.css%%" id="ga-app">
+<script src="/ga-sources.js?v=%%V:ga-sources.js%%" id="ga-sources-js" defer></script>
+</head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+<div class="mast">
+ <div class="mleft">
+  <div class="cl">REFERENCE MODEL</div>
+  <h1>Key Management Lifecycle</h1>
+  <div class="sl">CRYPTOGRAPHIC KEY LIFECYCLE &nbsp;|&nbsp; VENDOR-NEUTRAL &nbsp;|&nbsp; MAPPED TO NCSC GUIDANCE</div>
+  <nav class="rel" aria-label="Related GOV Assured tools">Related: <a href="https://devsecops.govassured.com/">DevSecOps operating model</a> · <a href="https://governance.govassured.com/">Governance</a> · <a href="https://www.govassured.com/apps">All GOV Assured apps</a></nav>
+ </div>
+ <div class="mright">
+  <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="li">
+   %%LI%%GOV Assured on LinkedIn</a>
+  <div class="meta">v0.1 &nbsp;|&nbsp; November 2026<br>
+  Plan · Generate · Store · Use · Rotate · Monitor · Disable · Archive · Destroy · Recover<br>
+  kms.govassured.com</div>
+ </div>
+</div>
+
+<div class="tabs" role="tablist">
+ <button class="tab" type="button" role="tab" id="tab-model" aria-controls="view-model" aria-selected="true">Lifecycle model</button>
+ <button class="tab" type="button" role="tab" id="tab-states" aria-controls="view-states" aria-selected="false">Key states &mdash; transitions</button>
+ <button class="tab planned" type="button" role="tab" id="tab-dep" aria-controls="view-dep" aria-selected="false">Dependency model<span class="pl">PLANNED</span></button>
+ <button class="tab" type="button" role="tab" id="tab-cmp" aria-controls="view-cmp" aria-selected="false">Compare: AWS KMS vs Azure Key Vault vs Google Cloud KMS</button>
+ <button class="tab" type="button" role="tab" id="tab-arch" aria-controls="view-arch" aria-selected="false">Architect's pack: AWS KMS</button>
+</div>
+
+<div class="tabpanel" id="view-model" role="tabpanel" aria-labelledby="tab-model">
+
+<div class="tools">
+ <span class="tl">Colour by</span>
+ <button type="button" id="v-tool" aria-pressed="true">Control area</button>
+ <button type="button" id="v-risk" aria-pressed="false">Risk if not implemented</button>
+ <span class="hint">Select any stage, key or gate for the NCSC recommendation, the checklist and the risk of not having it.</span>
+</div>
+
+<div class="dark">
+ <span class="h">BUSINESS &amp; REGULATORY DRIVERS</span>
+ <span class="m">NCSC cloud KMS guidance · NCSC Cloud Security Principles 1, 2, 9, 10, 13 · NCSC CAF v4.0 (A3, B2, B3, C1, D1) · NCSC PKI principles · NCSC PQC migration timelines · UK GDPR Art. 32 · NIST SP 800-57 Pt 1 (key states)</span>
+ <span class="s">Accountable: SIRO | CISO | Head of Security Architecture | Cloud Platform Owner | Information Asset Owners | Service Owners</span>
+</div>
+
+<div class="dark">
+ <span class="h">BUSINESS ATTRIBUTES &nbsp;|&nbsp; WHAT EVERY KEY AND KEY SERVICE MUST EXHIBIT</span>
+ <div class="attrs" id="attrs"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">The key management lifecycle — twelve stages</span>
+ <div class="domains k12" id="domains"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">Key hierarchy and who uses the keys</span>
+ <div class="plane" id="planes"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">The key lifecycle, end to end</span>
+ <div class="lifewrap">
+  <div class="loopwrap">
+   <div class="life" id="life"></div>
+   <div class="stages" id="stages"><span class="sl">NIST SP 800-57 PHASES</span></div>
+   <p class="loop">FEEDBACK LOOP — monitoring alerts, overdue rotations, failed recovery tests and compromise lessons return to PLAN and ACCESS CONTROL, and revise the key policy that let them through</p>
+  </div>
+  <div class="cad">
+   <span class="h">GOVERNANCE CADENCE</span>
+   <span class="r"><b>Daily</b> KMS anomaly alerts · disable / schedule-deletion events · denied decrypts</span>
+   <span class="r"><b>Weekly</b> Rotation overdue · disabled keys awaiting decision · inventory drift</span>
+   <span class="r"><b>Monthly</b> Key permission review · Design Authority exceptions (BYOK, software keys)</span>
+   <span class="r"><b>Quarterly</b> GovAssure / CAF return · algorithm and PQC plan review</span>
+   <span class="r"><b>Annually</b> Key recovery and compromise exercise · cryptoperiod policy review</span>
+  </div>
+ </div>
+</div>
+
+<div class="gpanel">
+ <div class="gh"><b>LIFECYCLE GATES — WHAT BLOCKS, WHAT WARNS</b>
+ <i>Checks a platform can run continuously against its key estate. Thresholds are illustrative opening positions; every bypass is a time-bound Design Authority exception.</i></div>
+ <div class="gates" id="gates"></div>
+</div>
+
+<div class="legend" id="legend"></div>
+
+</div><!-- /view-model -->
+
+<div class="tabpanel" id="view-states" role="tabpanel" aria-labelledby="tab-states" hidden>
+ <div class="bwrap">
+  <div class="bcanvas">
+   <div class="bhead">
+    <h2>KEY STATES AND TRANSITIONS</h2>
+    <span class="hint" id="modehint">Click a state, or run a scenario to trace a path</span>
+   </div>
+   <svg class="ksvg" id="ksvg" viewBox="0 0 1040 400" role="img" aria-label="Key state diagram: pre-activation, active, suspended, deactivated, compromised, destroyed"></svg>
+  </div>
+  <div class="brail">
+   <div class="bsec">
+    <div class="blab">Scenarios</div>
+    <div id="scen"></div>
+    <button class="clearbtn" id="clear" type="button">Clear selection</button>
+   </div>
+   <div class="bsec">
+    <div class="blab">How to read it</div>
+    <p class="bnote">The six states are the key states in NIST SP 800-57 Part 1 §7, used here only as a vocabulary. Each state names the lifecycle stages on the model tab that act on it, so you can move between the two. Every transition should be recorded in the key's metadata and audit log.</p>
+   </div>
+  </div>
+ </div>
+ <div class="detail">
+  <span class="d-code" id="d-code">Overview</span>
+  <h3 id="d-title">A key's life, as states</h3>
+  <p id="d-desc">A key is created in pre-activation, used while active, may be suspended, is deactivated once it should no longer protect new data, and ends destroyed. At any point it can become compromised, and from there it is only ever destroyed.</p>
+  <ol class="steps" id="d-steps"></ol>
+  <div class="d-side">
+   <span class="d-code">Lifecycle stages</span>
+   <div class="chips" id="d-refs"><span class="chip">12 lifecycle stages</span><span class="chip">6 key states</span></div>
+  </div>
+ </div>
+</div><!-- /view-states -->
+
+<div class="tabpanel" id="view-dep" role="tabpanel" aria-labelledby="tab-dep" hidden>
+ <div class="planbox">
+  <span class="tag">PLANNED · NOT BUILT</span>
+  <h2>Key management dependency model</h2>
+  <p>Will follow the dependency model on the GOV Assured DevSecOps operating model: an AND/OR tree showing what "keys are protected through their full lifecycle" depends on — HSM-backed KMS, IAM, audit logging, SOC monitoring, backup, the inventory and the recovery runbooks — with as-is and to-be coverage. Scores would be illustrative.</p>
+ </div>
+</div>
+
+<div class="tabpanel" id="view-cmp" role="tabpanel" aria-labelledby="tab-cmp" hidden>
+<div class="cmp" id="cmp">
+ <div class="cmphead">
+  <h2>Compare: AWS KMS vs Azure Key Vault vs Google Cloud KMS</h2>
+  <p>How each provider's key management service handles the twelve lifecycle stages, set against what NCSC expects. Facts come from each provider's own documentation and from NCSC; S-codes in each cell refer to the numbered Sources list at the foot of the page. Features, limits and validations change, so check the cited page before relying on a detail.</p>
+  <p class="checked">Last checked: <b id="cmp-checked"></b></p>
+ </div>
+ <div class="sec">
+  <span class="lbl">Stage by stage</span>
+  <div id="cmp-main"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">UK view: London and UK regions</span>
+  <div class="ukgrid" id="cmp-uk"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">NCSC expectations: built in, needs configuring or not covered</span>
+  <p class="legend"><span class="verd v-b">Built in</span> the service does it by default or by design. <span class="verd v-c">Needs configuring</span> supported, but you have to turn it on or choose it. <span class="verd v-n">Not covered</span> no documented feature found.</p>
+  <div id="cmp-prin-wrap"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">Best fit</span>
+  <div class="fitgrid" id="cmp-fit"></div>
+ </div>
+</div>
+</div>
+
+<div class="tabpanel" id="view-arch" role="tabpanel" aria-labelledby="tab-arch" hidden>
+<div class="cmp arch" id="arch" data-provider="aws">
+ <div class="cmphead">
+  <h2>Architect's pack: AWS KMS</h2>
+  <p id="arch-intro"></p>
+  <p class="checked">Last checked: <b id="arch-checked"></b>. AWS facts from docs.aws.amazon.com and aws.amazon.com; NCSC facts from ncsc.gov.uk. S-codes refer to the Sources list at the foot of the page.</p>
+  <div class="provs" aria-label="Packs in this series">
+   <span class="prov on">AWS KMS</span>
+   <span class="prov planned">Azure Key Vault<span class="pl">PLANNED</span></span>
+   <span class="prov planned">Google Cloud KMS<span class="pl">PLANNED</span></span>
+  </div>
+ </div>
+ <nav class="archnav" id="arch-nav" aria-label="Sections of the architect's pack"></nav>
+ <div id="arch-body"></div>
+ <span id="arch-rendered" hidden></span>
+</div>
+</div>
+
+<footer>Framework references: NCSC cloud KMS guidance · NCSC Cloud Security Principles · NCSC CAF v4.0 · NCSC PKI principles · NIST SP 800-57 Part 1 Rev 5 (key states and phases only). The model is vendor-neutral: "KMS" means whichever key management service your platform provides. Provider-specific detail is on the Compare tab and in the Architect's pack.<br>
+This is a generic reference model. Gate thresholds and severities are illustrative opening positions, not measurements of any estate.<br>
+Codes S1–S157 in each panel refer to the numbered Sources list at the foot of the page.%%SOURCES%%<br>
+Published by <a href="https://www.govassured.com/">GOV Assured</a> · Related: <a href="https://devsecops.govassured.com/">DevSecOps operating model</a> · <a href="https://github.com/nusairi/govassure" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">LinkedIn</a></footer>
+
+</div>
+
+<div class="back" id="back" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+ <div class="modal" id="modal">
+  <div class="mhead">
+   <button class="close" id="close" aria-label="Close">&times;</button>
+   <span class="k" id="mkind"></span>
+   <h2 id="mtitle"></h2>
+   <span class="s" id="msub"></span>
+  </div>
+  <div class="mbody">
+   <div><h3>What it is</h3><p id="mpurpose"></p></div>
+   <div id="mncwrap"><h3>What NCSC recommends</h3><p class="ncsc" id="mncsc"></p></div>
+   <div><h3>Control detail</h3><ul id="mctrl"></ul></div>
+   <div id="mchkwrap"><h3>Checklist</h3><ul class="chk" id="mchk"></ul></div>
+   <div id="mthwrap" hidden><h3>Thresholds — what this gate actually does</h3><table class="th" id="mth"></table></div>
+   <div class="riskbox" id="mriskbox">
+    <div class="rh"><span class="sevchip" id="msev"></span><h3 class="m0">Risk if not implemented</h3></div>
+    <p id="mrisk"></p>
+   </div>
+   <div><h3>References</h3><div class="refs" id="mrefs"></div></div>
+  </div>
+ </div>
+</div>
+
+<script src="/kms-data.js?v=%%V:kms-data.js%%"></script>
+<script src="/kms.js?v=%%V:kms.js%%"></script>
+<script src="/kms-compare.js?v=%%V:kms-compare.js%%"></script>
+<script src="/kms-glossary.js?v=%%V:kms-glossary.js%%"></script>
+<script src="/kms-arch-aws.js?v=%%V:kms-arch-aws.js%%"></script>
+<script src="/kms-arch.js?v=%%V:kms-arch.js%%"></script>
+<span id="ga-rendered" hidden></span>
+</body>
+</html>
