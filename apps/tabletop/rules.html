@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rules — BLAST RADIUS</title>
+<meta name="description" content="How to play BLAST RADIUS.">
+<meta property="og:title" content="Rules — BLAST RADIUS">
+<meta property="og:description" content="How to play BLAST RADIUS.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="mask-icon" href="/favicon.svg" color="#ff7b52">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbf9f7" media="(prefers-color-scheme: light)">
+<script>(function(){try{var t=localStorage.getItem('br-theme');if(!t){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#0d1117; --panel:#161b22; --line:#26303d;
+  --text:#e6edf3; --muted:#8b949e; --accent:#ff7b52; --accent-dim:#7d3f2a;
+  --on-accent:#1a0d07; --shade:rgba(13,17,23,.92);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+:root[data-theme="light"]{
+  --bg:#fbf9f7; --panel:#fff; --line:#e4ded6;
+  --text:#1c1917; --muted:#6b625a; --accent:#b8431b; --accent-dim:#e8c3b1;
+  --on-accent:#fff; --shade:rgba(251,249,247,.92);
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:820px; margin:0 auto; padding:0 24px}
+header.site{border-bottom:1px solid var(--line); padding:16px 0; position:sticky; top:0; background:var(--shade); backdrop-filter:blur(8px); z-index:10}
+header.site .wrap{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+.brand{font-family:var(--mono); font-weight:700; letter-spacing:.14em; color:var(--text); font-size:15px}
+.brand span{color:var(--accent)}
+nav{margin-left:auto; display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+nav a{color:var(--muted); font-size:14px}
+nav a:hover{color:var(--text); text-decoration:none}
+#theme-toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; padding:0; cursor:pointer;
+  background:transparent; border:1px solid var(--line); border-radius:8px;
+  color:var(--muted); line-height:0;
+}
+#theme-toggle:hover{color:var(--accent); border-color:var(--accent-dim)}
+#theme-toggle:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+#theme-toggle svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+#theme-toggle .i-sun{display:none}
+:root[data-theme="light"] #theme-toggle .i-sun{display:block}
+:root[data-theme="light"] #theme-toggle .i-moon{display:none}
+.hero{padding:72px 0 48px; border-bottom:1px solid var(--line)}
+.hero h1{font-family:var(--mono); font-size:clamp(34px,7vw,58px); letter-spacing:.04em; margin:0 0 8px; line-height:1.05}
+.hero .tag{color:var(--accent); font-family:var(--mono); font-size:13px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px}
+.hero p.lede{font-size:19px; max-width:62ch; margin:0 0 16px}
+.hero p.sub{color:var(--muted); max-width:62ch; margin:0 0 28px}
+.meta{display:flex; gap:28px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; color:var(--muted); margin-bottom:32px}
+.meta b{color:var(--text); font-weight:600}
+.btn{display:inline-block; padding:11px 20px; border:1px solid var(--accent-dim); border-radius:6px; color:var(--accent); font-size:14px; margin:0 10px 10px 0}
+.btn:hover{background:var(--accent-dim); text-decoration:none}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-weight:600}
+.btn.primary:hover{opacity:.88; color:var(--on-accent)}
+section{padding:56px 0; border-bottom:1px solid var(--line)}
+section h2{font-family:var(--mono); font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 20px}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:24px}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px}
+.card h4{margin:0 0 8px; font-size:15px; font-family:var(--mono); letter-spacing:.04em}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.notice{background:var(--panel); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; padding:16px 20px; margin:24px 0; color:var(--muted); font-size:14px}
+.notice b{color:var(--text)}
+table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14px}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.08em}
+code{font-family:var(--mono); font-size:.9em; background:var(--panel); padding:2px 6px; border-radius:4px}
+pre{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; overflow-x:auto; font-size:13px; line-height:1.5}
+pre code{background:none; padding:0}
+blockquote{margin:20px 0; padding:12px 20px; border-left:3px solid var(--accent-dim); color:var(--muted)}
+blockquote strong{color:var(--text)}
+footer{padding:40px 0 64px; color:var(--muted); font-size:13px}
+footer p{margin:0 0 10px; max-width:70ch}
+footer .byline{font-size:14px; color:var(--text); margin-bottom:18px}
+.doc h1{font-family:var(--mono); font-size:clamp(28px,5vw,42px); letter-spacing:.03em; margin:0 0 4px}
+.doc h2{font-size:24px; margin:44px 0 12px; padding-top:20px; border-top:1px solid var(--line); color:var(--text); font-family:inherit; letter-spacing:normal; text-transform:none}
+.doc h3{font-size:18px; margin:28px 0 8px; color:var(--accent)}
+.doc h4{font-size:15px; margin:20px 0 6px}
+.doc ul,.doc ol{padding-left:22px}
+.doc li{margin:5px 0}
+.doc hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+.backlink{display:inline-block; margin:32px 0 0; font-size:14px; color:var(--muted)}
+@media (max-width:600px){
+  .hero{padding:48px 0 36px}
+  nav{width:100%; margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  body{transition:background-color .18s ease, color .18s ease}
+}
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=b160d7af98" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<header class="site"><div class="wrap">
+  <a class="brand" href="/">BLAST<span>·</span>RADIUS</a>
+  <nav>
+    <a href="/rules.html" style="color:var(--text)">Rules</a>
+    <a href="/cards.html">Cards</a>
+    <a href="/design.html">Design</a>
+    <a href="/attribution.html">Attribution</a> <button id="theme-toggle" type="button" aria-label="Switch theme">
+<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+</button>
+  </nav>
+</div></header>
+<div class="wrap doc"><section style="border:0"><h1 id="blast-radius">BLAST RADIUS</h1>
+<h3 id="a-cooperative-incident-response-game">A cooperative incident response game</h3>
+<p><strong>3–7 players · 45–75 minutes · no preparation required</strong></p>
+<hr />
+<p>You are a security team. Some time ago — you are about to find out how long —
+someone got in. They are still here.</p>
+<p>The uncomfortable part is that you already made most of the decisions that
+determine how this goes. You chose which controls to fund. You are now going to
+find out what those choices bought you.</p>
+<p>BLAST RADIUS is played with two decks drawn from real security frameworks. The
+techniques the adversary uses come from MITRE ATT&amp;CK. The controls you defend
+with come from NIST SP 800-53. Crucially, <strong>the relationship between them is
+not invented for the game</strong> — when a control detects a technique, it is because
+MITRE's Center for Threat-Informed Defense maps that control to that technique.
+The game cannot teach you something the frameworks disagree with.</p>
+<hr />
+<h2 id="what-you-need">What you need</h2>
+<ul>
+<li>The <strong>technique deck</strong>, sorted into five stage piles</li>
+<li>The <strong>control deck</strong></li>
+<li>The <strong>complication deck</strong> (24 cards)</li>
+<li>The <strong>objective deck</strong> (8 cards)</li>
+<li>One twenty-sided die</li>
+<li>The impact track and dwell counter (or a scrap of paper and a pen)</li>
+</ul>
+<p>Optional: the ATLAS expansion, for incidents involving AI systems.</p>
+<hr />
+<h2 id="roles">Roles</h2>
+<p>One player is the <strong>Scenario Lead</strong>. You hold the hidden information, you
+narrate, and you adjudicate. You are not playing against the team — you are
+running the incident for them. Your job is to make the outcome legible, not to
+win.</p>
+<p>Everyone else is a <strong>Responder</strong>. You act as one team, by consensus. There are
+no individual turns and no hidden hands between you. If you cannot agree, you
+do not act, and the clock still runs. That is deliberate.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="1-the-adversarys-plan">1. The adversary's plan</h3>
+<p>The Scenario Lead draws one <strong>objective card</strong> and keeps it hidden. It sets the
+chain length, the impact ceiling, and any special rule for this game.</p>
+<p>The Lead then builds the <strong>attack chain</strong>: one technique card from each stage
+pile, in order.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What it represents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 — Entry</td>
+<td>How they got in</td>
+</tr>
+<tr>
+<td>2 — Foothold</td>
+<td>How they stayed</td>
+</tr>
+<tr>
+<td>3 — Elevation</td>
+<td>How they gained power and hid</td>
+</tr>
+<tr>
+<td>4 — Expansion</td>
+<td>How they spread</td>
+</tr>
+<tr>
+<td>5 — Objective</td>
+<td>What they came for</td>
+</tr>
+</tbody>
+</table>
+<p>Draw at random for a fair game, or choose deliberately to build a scenario that
+matches something your organisation actually worries about. The chain stays
+face down in a row where everyone can see the five empty slots.</p>
+<p>Some objective cards skip a stage or add one. Follow the card.</p>
+<h3 id="2-your-posture">2. Your posture</h3>
+<p>Deal twelve control cards face up. This is the <strong>market</strong>.</p>
+<p>The Responders have a budget of <strong>14 Control Points</strong> and buy control cards
+from the market together. Each card shows its cost. Refill the market as cards
+are taken. Unspent points are lost.</p>
+<p>You must all agree on every purchase.</p>
+<blockquote>
+<p><strong>Everything that follows is downstream of this step.</strong> Do not rush it. The
+argument about whether to spend five points on one foundational control or
+five points on five narrow ones is the argument your organisation has every
+budget cycle, compressed into ten minutes. Let it run.</p>
+</blockquote>
+<p>Note the tension built into the deck: <strong>broad controls cost more and detect
+weakly; narrow controls cost little and detect sharply.</strong> A foundational control
+like continuous monitoring applies to hundreds of techniques at +2. A tightly
+scoped one might apply to four techniques at +6. Neither is the right answer.</p>
+<h3 id="3-the-opening">3. The opening</h3>
+<p>Set the dwell counter to 0 and the impact track to 0. Unless the objective card
+says otherwise, the impact ceiling is 10.</p>
+<p>The Scenario Lead narrates the opening. Establish the organisation, the
+business context, and the first symptom — something odd that got escalated.
+Do not name a technique, and do not describe anything from a hidden card
+directly.</p>
+<p><em>Example opening: "You are a mid-sized logistics firm. Three hundred staff, two
+warehouses, most things in the cloud, one very old scheduling system nobody
+will let you turn off. This morning, finance called the service desk because a
+supplier says an invoice was paid to the wrong account. The service desk closed
+it as a finance problem. Finance called back."</em></p>
+<hr />
+<h2 id="playing">Playing</h2>
+<p>Each round, the Responders take <strong>one</strong> action as a team. Then the clock
+advances. Repeat until someone wins.</p>
+<h3 id="action-investigate">Action: INVESTIGATE</h3>
+<p>Name one control card you hold, and one stage you are probing.</p>
+<p>Roll d20 and add that control's <strong>Signal</strong>. Compare to the <strong>Stealth DC</strong> of
+the hidden technique in that stage — the Lead knows it, you do not.</p>
+<p><strong>If your control is listed on that technique's card</strong>, you need to meet the
+Stealth DC. The control was built for this.</p>
+<p><strong>If your control is not listed</strong>, you need to beat the Stealth DC <strong>by 5</strong>.
+You are looking with the wrong instrument. It is not impossible — people do
+trip over things — but you are working against the tool rather than with it.</p>
+<p>You will not know in advance which case you are in. That is the whole problem.</p>
+<ul>
+<li><strong>Success:</strong> the Lead reveals the technique. If your control was not listed,
+  the Lead says so, and narrates how you found it anyway.</li>
+<li><strong>Failure:</strong> nothing surfaces. If your control was not listed, the Lead tells
+  you that too. <strong>This is not a wasted turn</strong> — you have learned that a control
+  you paid for does not cover this stage, which is exactly the thing
+  organisations normally discover at the worst possible moment.</li>
+</ul>
+<p>Either way, the control goes on <strong>cooldown</strong> for two rounds and cannot be used
+again until then. Investigation is not free.</p>
+<p><strong>Natural 1:</strong> draw a complication.
+<strong>Natural 20:</strong> the technique is revealed regardless of mapping. The Lead must
+explain how it surfaced — a tip-off, a coincidence, someone being nosy on a
+quiet afternoon. These things do happen.</p>
+<h3 id="action-contain">Action: CONTAIN</h3>
+<p>Name a <strong>revealed</strong> technique and a control you hold.</p>
+<p>Roll d20 + Signal against that technique's Stealth DC <strong>+ 2</strong>, and <strong>+ 5 more</strong>
+if your control is not listed on it. Containment is harder than detection.</p>
+<p>On success, the technique is contained. Lay it sideways. It no longer
+contributes to impact and cannot come back.</p>
+<h3 id="action-convene">Action: CONVENE</h3>
+<p>Once per game only. You take no other action this round. Instead:</p>
+<ul>
+<li>Reduce the impact track by 2</li>
+<li>Refresh every control's cooldown</li>
+</ul>
+<p>This is standing up a formal incident bridge and getting the right people on
+it. It costs you time, which is the point.</p>
+<h3 id="the-clock">The clock</h3>
+<p>After every action, add 1 to the dwell counter.</p>
+<p>On rounds <strong>4, 7, 10 and 13</strong>, the adversary <strong>advances</strong>. Add to the impact
+track:</p>
+<ul>
+<li><strong>1 for every technique still hidden</strong>, plus</li>
+<li><strong>1 more</strong> if any revealed technique is still uncontained</li>
+</ul>
+<p>A <strong>Prevent</strong> control you hold reduces the advance by 1 if it is listed on a
+revealed technique. Minimum 1 per advance regardless.</p>
+<p>So at round 4 with nothing found, that is 5 impact. Find two by round 4 and it
+is 3 + 1 = 4. Find nothing at all and the second advance finishes you.</p>
+<p>The maths is unforgiving in one specific way, and it is the right way: <strong>what
+kills you is not being wrong, it is being slow.</strong> A team that reveals steadily
+survives even if it never contains anything. A team that spends four rounds
+debating loses before it learns anything.</p>
+<hr />
+<h2 id="winning-and-losing">Winning and losing</h2>
+<p><strong>You win</strong> when every technique in the chain has been revealed <strong>and</strong> the
+stage 5 technique has been contained, before the impact track reaches its
+ceiling.</p>
+<p><strong>You lose</strong> the moment the impact track reaches the ceiling.</p>
+<p>There is no turn limit. A team making progress is never arbitrarily cut off,
+and a team that is losing can see exactly why.</p>
+<hr />
+<h2 id="the-debrief">The debrief</h2>
+<p><strong>Do not skip this.</strong> It is fifteen minutes and it is the reason the exercise
+exists.</p>
+<ol>
+<li>The Lead reveals the full chain and the objective card.</li>
+<li>Take each technique in turn and read the controls listed on it. These are
+   the controls that, according to the CTID mapping, would have addressed it. Compare
+   against what the team bought.</li>
+<li>Every Responder names one control they did not buy and now would, and says
+   why in one sentence.</li>
+<li>Write down the gap list. That list is the artefact. Everything else was
+   the delivery mechanism.</li>
+</ol>
+<p>If any complication card came up, read its debrief prompt aloud and answer it
+honestly. Those questions are the ones that tend to sting.</p>
+<h3 id="caf-scoring-optional-uk">CAF scoring (optional, UK)</h3>
+<p>If your organisation is assessed against the NCSC <strong>Cyber Assessment Framework</strong>
+— NIS-regulated, CNI, or in scope for the UK government&#39;s GovAssure scheme — the debrief sheet in
+<code>data/authored/caf_debrief.json</code> maps what just happened onto CAF's four
+objectives and fourteen principles.</p>
+<p>Each principle carries a prompt tied to something the game actually produced:
+how many rounds until the first reveal (C1 Security monitoring), whether anyone
+drafted a Recover control (B5 Resilient networks and systems), whether the team
+could name a supplier's contractual response time (A4 Supply chain). Score each
+as not achieved, partially achieved, achieved, or <strong>not exercised</strong> — that last
+one matters, and you should use it rather than guessing.</p>
+<p>There is a pleasing circularity here: the GovAssure CAF profiles were built by
+modelling attacks against ATT&amp;CK and identifying which indicators of good
+practice would mitigate them. This game runs that logic backwards, from
+technique to control to outcome.</p>
+<blockquote>
+<p><strong>This is not a CAF assessment.</strong> It produces conversation and a list of
+things to go and check properly. Do not put these scores in a GovAssure
+return.</p>
+</blockquote>
+<hr />
+<h2 id="notes-for-the-scenario-lead">Notes for the Scenario Lead</h2>
+<p><strong>Narrate outcomes, do not just report them.</strong> "You fail" is a dead end. "You
+pull the logs and there is nothing obviously wrong, which is either good news
+or the worst news" keeps the room in the fiction.</p>
+<p><strong>Ask why before you resolve.</strong> When the team nominates a control, ask what
+they expect to find. It takes ten seconds and it converts a die roll into
+reasoning. It also lets you narrate a failure that makes sense.</p>
+<p><strong>Let the blind-control result land.</strong> When a check succeeds but the control
+does not map, resist the urge to soften it. Sit with it for a moment. That
+silence is the lesson.</p>
+<p><strong>Adjust openly.</strong> If the team is drowning, say so and give them a break — a
+free reveal, a reduced DC. If they are coasting, bring the advances forward.
+Announce that you are doing it. Nobody learns anything from a Lead secretly
+steering the outcome.</p>
+<p><strong>On rules disputes:</strong> you decide, immediately, and you move on. Write it down
+and argue about it afterwards.</p>
+<p><strong>Running it for a mixed audience.</strong> With non-technical players in the room,
+have a technical player read the technique description aloud and translate it
+into one plain sentence before anyone rolls. The translation is often more
+valuable than the game.</p>
+<hr />
+<h2 id="variants">Variants</h2>
+<p><strong>Solo or pairs.</strong> Play the objective card face up and the chain face down.
+You are optimising your posture against a known adversary goal, which is a
+different and quieter exercise.</p>
+<p><strong>Your actual estate.</strong> Before setup, remove every control card your
+organisation does not have. Do not replace them. Play with what is left. This
+is the most uncomfortable version and by far the most useful.</p>
+<p><strong>Your actual budget.</strong> Run the posture draft alone, twice: once with this
+year's budget, once with next year's proposed number. The difference between
+the two postures is a slide your CFO will understand.</p>
+<p><strong>AI incident.</strong> Use the ATLAS expansion for the Entry and Foothold stages. Be
+aware that ATLAS carries no 800-53 control mapping, so those cards use authored
+difficulty rather than derived, and are flagged accordingly.</p>
+<hr />
+<h2 id="about-the-frameworks">About the frameworks</h2>
+<p>Technique cards reproduce content from MITRE ATT&amp;CK v19.1 and MITRE ATLAS.
+Control cards derive from NIST SP 800-53 Rev 5, which is a work of the US
+Government and in the public domain — so card text is written to fit the card,
+with the control identifier printed on every card so you can look up the full
+wording. The control-to-technique mapping comes from MITRE's Center for
+Threat-Informed Defense under the Apache 2.0 licence. The optional debrief
+scoring sheet uses the NCSC Cyber Assessment Framework v4.0 under the Open
+Government Licence.</p>
+<p>BLAST RADIUS is not affiliated with, sponsored by, or endorsed by The MITRE
+Corporation, MITRE Engenuity, NIST, or the NCSC.</p>
+<p>See <a href="/attribution.html">ATTRIBUTION.md</a> for the full notices.</p><a class="backlink" href="/">&larr; Back to overview</a></section></div>
+<footer><div class="wrap">
+  <p class="byline">Made by <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured</a></p>
+  <p>Built on MITRE ATT&amp;CK®, MITRE ATLAS™, NIST SP 800-53 Rev 5 and the NCSC
+  Cyber Assessment Framework v4.0. Original content licensed CC BY-SA 4.0.</p>
+  <p>BLAST RADIUS is not affiliated with, sponsored by, or endorsed by The MITRE
+  Corporation, MITRE Engenuity, NIST, or the National Cyber Security Centre.</p>
+  <p><a href="/attribution.html">Full attribution and licences</a> ·
+     <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">LinkedIn</a></p>
+</div></footer>
+<script>(function(){var r=document.documentElement,b=document.getElementById('theme-toggle');if(!b)return;function label(){var d=r.getAttribute('data-theme')==='dark';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');b.setAttribute('title',b.getAttribute('aria-label'));}label();b.addEventListener('click',function(){var n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('br-theme',n);}catch(e){}label();});try{window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',function(e){if(localStorage.getItem('br-theme'))return;r.setAttribute('data-theme',e.matches?'light':'dark');label();});}catch(e){}})();</script>
+</body>
+</html>
