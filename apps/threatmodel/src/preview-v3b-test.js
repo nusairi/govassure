@@ -49,7 +49,7 @@ const pass = (m) => console.log("PASS", m);
   function hrefChecks(data) {
     if (data.github.some((u) => !/^https:\/\/github.com\/nusairi\/govassure\/?$/.test(u))) fail("unexpected github " + data.github);
     else pass("github only nusairi/govassure (" + data.github.length + ")");
-    if (data.linkedin.some((u) => !/^https:\/\/www.linkedin.com\/company\/102617034\/?$/.test(u))) fail("unexpected linkedin");
+    if (data.linkedin.some((u) => !/^https:\/\/www\.linkedin\.com\/company\/102617034\/?$/.test(u))) fail("unexpected linkedin");
     else pass("linkedin company page");
     if (data.names && data.names.length) fail("personal names " + data.names.join(","));
     else pass("no personal names in body text");

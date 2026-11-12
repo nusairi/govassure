@@ -83,7 +83,7 @@ const pass = (m) => console.log("PASS", m);
   if (home.names.length) fail("personal names " + home.names.join(",")); else pass("no personal names in body text");
   if (home.github.some((u) => !/^https:\/\/github.com\/nusairi\/govassure\/?$/.test(u))) fail("unexpected github " + home.github);
   else pass("github only nusairi/govassure (" + home.github.length + ")");
-  if (home.linkedin.some((u) => !/^https:\/\/www.linkedin.com\/company\/102617034\/?$/.test(u))) fail("unexpected linkedin");
+  if (home.linkedin.some((u) => !/^https:\/\/www\.linkedin\.com\/company\/102617034\/?$/.test(u))) fail("unexpected linkedin");
   else pass("linkedin company page");
   if (p.errs.length) fail("console errors on home: " + p.errs.join(" | ")); else pass("no console errors on home");
   if (home.csp.length || p.csp.length) fail("CSP " + home.csp.concat(p.csp)); else pass("no CSP violations");

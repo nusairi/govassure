@@ -31,8 +31,8 @@ for p in ('index.html','ga-404.html'):
     t = open(os.path.join(OUT,p)).read()
     assert not re.search(r'\son[a-z]+=', t, re.I), p+': inline handler'
     assert ' style="' not in t, p+': inline style attribute'
-    for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>', t, re.S): sh.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
-    for m in re.finditer(r'<style[^>]*>(.*?)</style>', t, re.S): st.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
+    for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script[^>]*>', t, re.S | re.I): sh.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
+    for m in re.finditer(r'<style[^>]*>(.*?)</style[^>]*>', t, re.S | re.I): st.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
 hs = lambda s: ''.join(f" 'sha256-{x}'" for x in sorted(s))
 csp = ("default-src 'none'; script-src 'self'"+hs(sh)+"; style-src 'self'"+hs(st)+"; img-src 'self' data:; font-src 'self'; "
        "manifest-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests")

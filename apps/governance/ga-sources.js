@@ -14,6 +14,14 @@
   var box, list, last = "";
 
   function host(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } }
+  // Only http(s) URLs may become a Sources link: data-ga-src is read back from the DOM, so a
+  // javascript:, data: or other scheme is dropped instead of being written into an href.
+  function safeUrl(u) {
+    try {
+      var p = new URL(String(u || ""), document.baseURI);
+      return (p.protocol === "http:" || p.protocol === "https:") ? p.href : "";
+    } catch (e) { return ""; }
+  }
   function label(a, href) {
     var t = (a.textContent || "").replace(/\s+/g, " ").trim();
     if (!t) t = (a.getAttribute("aria-label") || a.getAttribute("title") || "").trim();
@@ -53,7 +61,8 @@
     var seen = {}, items = [];
     var moved = document.querySelectorAll("[data-ga-src]");
     for (var j = 0; j < moved.length; j++) {
-      var u = moved[j].getAttribute("data-ga-src");
+      var u = safeUrl(moved[j].getAttribute("data-ga-src"));
+      if (!u) continue;
       var lb = moved[j].getAttribute("data-ga-label") || host(u), lk = "L:" + lb.toLowerCase();
       if (moved[j].closest("#ga-sources") || seen[u] || seen[lk]) continue;
       seen[u] = 1; seen[lk] = 1; items.push([u, lb]);

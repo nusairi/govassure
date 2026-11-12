@@ -291,4 +291,6 @@ def not_found(_e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    # Local development only (the container serves the app with a production server).
+    # The debugger stays off unless FLASK_DEBUG=1 is set, and the dev server binds to localhost.
+    app.run(host="127.0.0.1", port=5000, debug=os.environ.get("FLASK_DEBUG", "") == "1")

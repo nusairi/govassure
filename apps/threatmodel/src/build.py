@@ -57,9 +57,9 @@ for p in ("index.html", "ga-404.html"):
     t = open(os.path.join(OUT, p)).read()
     assert not re.search(r"\son[a-z]+=", t, re.I), p + ": inline handler"
     assert ' style="' not in t, p + ": inline style attribute"
-    for m in re.finditer(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", t, re.S):
+    for m in re.finditer(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script[^>]*>", t, re.S | re.I):
         sh.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
-    for m in re.finditer(r"<style[^>]*>(.*?)</style>", t, re.S):
+    for m in re.finditer(r"<style[^>]*>(.*?)</style[^>]*>", t, re.S | re.I):
         st.add(base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())
 hs = lambda s: "".join(f" 'sha256-{x}'" for x in sorted(s))
 csp = (

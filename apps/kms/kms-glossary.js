@@ -78,7 +78,7 @@ var G={
 };
 var PLURAL={SCP:1,RCP:1,HSM:1,KEK:1,DEK:1,ADR:1,OU:1,CMK:1,DBA:1,ARN:1,API:1,CA:1,VPC:1,VM:1,SDK:1};
 var keys=Object.keys(G).sort(function(a,b){ return b.length-a.length; });
-var RE=new RegExp("(?<![A-Za-z0-9-])("+keys.map(function(k){return k.replace(/[-]/g,"\\-");}).join("|")+")(s?)(?![A-Za-z0-9])","g");
+var RE=new RegExp("(?<![A-Za-z0-9-])("+keys.map(function(k){return k.replace(/[\\^$.*+?()[\]{}|\/-]/g,"\\$&");}).join("|")+")(s?)(?![A-Za-z0-9])","g");
 var SKIP={THEAD:1,CAPTION:1,H1:1,H2:1,H3:1,H4:1,PRE:1,CODE:1,A:1,ABBR:1,BUTTON:1,SCRIPT:1,STYLE:1,svg:1,SVG:1,TEXTAREA:1,TITLE:1,OPTION:1};
 function skip(n, root, ex){ for(var p=n.parentNode; p && p!==root.parentNode; p=p.parentNode){ if(SKIP[p.nodeName]) return true; if(p.classList && (p.classList.contains("noabbr")||p.classList.contains("crefs"))) return true; if(p.getAttribute && p.getAttribute("role")==="tab") return true; if(ex && p.classList && p.classList.contains(ex)) return true; } return false; }
 function abbr(k, s){ var a=document.createElement("abbr"); a.title=G[k][0]; a.textContent=k+(s||""); return a; }
