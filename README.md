@@ -1,8 +1,8 @@
 # GOV Assured
 
-Consultancy site for [www.govassured.com](https://www.govassured.com). The bare `govassured.com` host forwards to `www`. The page sets out services and the tools used for that work. Every tool opens on a `govassured.com` subdomain.
+Community site for [www.govassured.com](https://www.govassured.com). The bare `govassured.com` host forwards to `www`. The home page opens with the threat dashboard; the tools are listed on `/apps`. Every tool opens on a `govassured.com` subdomain.
 
-The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. Favicon, Apple touch icon, and the Open Graph image are generated from the same file.
+The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. The crown favicons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png` at the site root) are the same set every app serves; the Open Graph image is generated from the logo.
 
 This repository is the website. The tools it lists are hosted on their own subdomains. Their source code is being moved into `apps/<name>/`, one app at a time; it is never published on `www`.
 
@@ -77,10 +77,16 @@ Do not deploy the repository root. Source code for the subdomain apps lives unde
 ## Layout
 
 ```
-index.html                 page shell
+index.html                 home page shell (threat dashboard first)
+apps/index.html            the /apps tool directory
 styles.css                 layout and theme
 app.js                     search, category filter, and card rendering
+live.js, live.css          threat dashboard (feeds come from api/)
+api/                       Azure Functions behind the dashboard feeds
 data/apps.json             the tool catalogue
+favicon.ico, favicon.svg   crown favicons (site root)
+apple-touch-icon.png       crown touch icon (site root)
+scripts/build.sh           builds the deploy folder from an allowlist
 scripts/check_links.py     rejects links off *.govassured.com
 public/logo.jpg            official logo
 public/wordmark.png        header crop of the logo
