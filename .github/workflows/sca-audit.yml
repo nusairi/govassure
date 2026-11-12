@@ -1,0 +1,79 @@
+name: SCA audit
+
+on:
+  pull_request:
+  schedule:
+    # Monday 07:17 UTC.
+    - cron: "17 7 * * 1"
+
+# Jobs below set their own permissions. The workflow token starts with none.
+permissions: {}
+
+jobs:
+  audit:
+    name: npm audit and pip-audit
+    runs-on: ubuntu-latest
+    # Report-only for the first round because known advisories exist.
+    # Remove continue-on-error here and on the steps once those are cleared,
+    # then make this job required.
+    continue-on-error: true
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: npm audit (production)
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -d apps ]]; then
+            echo "No apps directory on this revision. npm audit skipped."
+            exit 0
+          fi
+          mapfile -t locks < <(find apps -mindepth 2 -maxdepth 2 -type f -name package-lock.json | sort)
+          if [[ "${#locks[@]}" -eq 0 ]]; then
+            echo "No apps/*/package-lock.json on this revision. npm audit skipped."
+            exit 0
+          fi
+          status=0
+          for lock in "${locks[@]}"; do
+            dir="$(dirname "${lock}")"
+            echo "::group::npm audit ${dir}"
+            if ! npm --prefix "${dir}" audit --omit=dev --audit-level=high; then
+              echo "npm audit reported advisories at high or above in ${dir}"
+              status=1
+            fi
+            echo "::endgroup::"
+          done
+          exit "${status}"
+
+      - name: pip-audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -d apps ]]; then
+            echo "No apps directory on this revision. pip-audit skipped."
+            exit 0
+          fi
+          mapfile -t reqs < <(find apps -mindepth 2 -maxdepth 2 -type f -name requirements.txt | sort)
+          if [[ "${#reqs[@]}" -eq 0 ]]; then
+            echo "No apps/*/requirements.txt on this revision. pip-audit skipped."
+            exit 0
+          fi
+          python3 -m venv "${RUNNER_TEMP}/pip-audit-venv"
+          "${RUNNER_TEMP}/pip-audit-venv/bin/pip" install --disable-pip-version-check "pip-audit==2.10.1"
+          status=0
+          for req in "${reqs[@]}"; do
+            echo "::group::pip-audit ${req}"
+            if ! "${RUNNER_TEMP}/pip-audit-venv/bin/pip-audit" -r "${req}"; then
+              echo "pip-audit reported advisories in ${req}"
+              status=1
+            fi
+            echo "::endgroup::"
+          done
+          exit "${status}"

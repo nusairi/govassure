@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # npm and pip are not listed. On main there is no package-lock.json and no
+  # requirements.txt. apps/ is only the catalogue page. api/package.json has
+  # no dependencies and no lockfile. Add an npm or pip entry for a directory
+  # when a lockfile or requirements.txt reaches main. The SCA audit workflow
+  # discovers those files on its own.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
