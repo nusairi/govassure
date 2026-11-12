@@ -100,6 +100,15 @@
       "url": "https://devsecops.govassured.com"
     },
     {
+      "id": "kms",
+      "name": "Key Management Lifecycle",
+      "description": "Vendor-neutral guidance on the full cryptographic key management lifecycle: twelve stages from Plan to Compromise response, each with checklists, controls and risks, mapped to NCSC cryptography guidance.",
+      "category": "cyberassure",
+      "language": "HTML",
+      "repo": "govassure",
+      "url": "https://kms.govassured.com"
+    },
+    {
       "id": "sase-cyberassure",
       "name": "SASE Architecture & Controls",
       "description": "Vendor-neutral Secure Access Service Edge reference showing how zero trust network access, defence in depth, and privileged access management requirements are fulfilled.",

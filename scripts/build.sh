@@ -8,6 +8,7 @@ set -euo pipefail
 here="$(cd "$(dirname "$0")/.." && pwd)"; out="${1:?out dir}"
 
 HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.css
+           favicon.ico favicon.svg apple-touch-icon.png
            robots.txt sitemap.xml staticwebapp.config.json vercel.json)
 HUB_DIRS=(data public)
 
