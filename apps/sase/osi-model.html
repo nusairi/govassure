@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SASE Defence-in-Depth — OSI Operating Model</title>
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#0f1630; --panel:#121a35; --panel2:#172046;
+    --line:#243155; --ink:#e8edff; --mut:#9fb0d9; --dim:#6b7aa8;
+    --osi:#3b82f6; --ops:#f97316;
+    --ztna:#14b8a6; --sse:#3b82f6; --net:#34d399; --pam:#a78bfa; --secops:#f97316;
+    --good:#34d399; --shadow:0 10px 30px rgba(0,0,0,.45);
+    --r:14px;
+    --n-src:#1b2752; --n-src-st:#33437a;
+    --bgrad1:#15214a; --bgrad2:#10193a;
+    --thead:#101a3c; --rowhover:#0e1733; --chipbg:#0e1733;
+    --linkDown:rgba(59,130,246,.42); --linkUp:rgba(249,115,22,.45); --linkPam:rgba(167,139,250,.5);
+  }
+  [data-theme="light"]{
+    --bg:#eef2fb; --bg2:#f6f8ff; --panel:#ffffff; --panel2:#f3f6ff;
+    --line:#d6deef; --ink:#16203a; --mut:#4a5878; --dim:#7c89a8;
+    --shadow:0 10px 26px rgba(40,60,110,.12);
+    --n-src:#e4eaf7; --n-src-st:#b7c4e0;
+    --bgrad1:#dfe8ff; --bgrad2:#eaf0ff;
+    --thead:#eef2fc; --rowhover:#f1f5ff; --chipbg:#eef2fc;
+    --linkDown:rgba(37,99,235,.5); --linkUp:rgba(234,88,12,.5); --linkPam:rgba(124,58,237,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 80% -10%,var(--bgrad1) 0%,transparent 55%),
+               radial-gradient(900px 600px at -10% 10%,var(--bgrad2) 0%,transparent 50%),
+               var(--bg);
+    color:var(--ink);
+    font:15px/1.55 "Segoe UI",Inter,system-ui,-apple-system,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; transition:background .3s,color .3s;
+  }
+  a{color:var(--osi)}
+  .wrap{max-width:1280px;margin:0 auto;padding:28px 22px 80px}
+  header.top{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+  .kickrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .themebtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    background:var(--chipbg);color:var(--mut);padding:8px 14px;border-radius:999px;cursor:pointer;
+    font-weight:600;font-size:13px;transition:.15s}
+  .themebtn:hover{color:var(--ink);border-color:#3a4a7a}
+  .themebtn svg{width:15px;height:15px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--mut);font-weight:600}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--ztna),var(--pam));box-shadow:0 0 12px var(--pam)}
+  h1{font-size:30px;line-height:1.15;margin:2px 0 4px;font-weight:750;letter-spacing:-.01em}
+  h1 .grad{background:linear-gradient(90deg,#5eead4,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--mut);max-width:900px}
+  .meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;color:var(--dim);font-size:12.5px}
+  .meta b{color:var(--mut);font-weight:600}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px;border-bottom:1px solid var(--line);padding-bottom:0}
+  .tab{appearance:none;border:1px solid transparent;background:transparent;color:var(--mut);
+    padding:10px 16px;border-radius:10px 10px 0 0;font-weight:600;cursor:pointer;font-size:14px;
+    border-bottom:2px solid transparent;transition:.15s}
+  .tab:hover{color:var(--ink);background:var(--rowhover)}
+  .tab.active{color:var(--ink);border-bottom-color:var(--pam);background:linear-gradient(180deg,#16204a,transparent)}
+  section.view{display:none;animation:fade .35s ease}
+  section.view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--r);box-shadow:var(--shadow)}
+  .pad{padding:20px 22px}
+  h2.sec{font-size:19px;margin:26px 0 4px;font-weight:700}
+  .lead{color:var(--mut);margin:0 0 14px;max-width:940px}
+
+  .filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 18px}
+  .flabel{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-right:2px}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+    border:1px solid var(--line);background:var(--chipbg);color:var(--mut);cursor:pointer;font-weight:600;font-size:13px;transition:.15s}
+  .chip .sw{width:10px;height:10px;border-radius:50%}
+  .chip:hover{color:var(--ink);border-color:#3a4a7a}
+  .chip.active{color:#06122a;border-color:transparent}
+  .chip[data-k="all"].active,.chip[data-cf="all"].active{background:#cdd8ff;color:#0a1430}
+  .chip[data-k="ztna"].active,.chip[data-cf="ztna"].active{background:var(--ztna)}
+  .chip[data-k="sse"].active,.chip[data-cf="sse"].active{background:var(--sse)}
+  .chip[data-k="net"].active,.chip[data-cf="net"].active{background:var(--net)}
+  .chip[data-k="pam"].active,.chip[data-cf="pam"].active{background:var(--pam)}
+  .chip[data-k="secops"].active,.chip[data-cf="secops"].active{background:var(--secops)}
+
+  .flowcard{position:relative;overflow:hidden}
+  .diagram{width:100%;height:auto;display:block}
+  .node-rect{cursor:pointer;transition:filter .2s,opacity .2s}
+  .node-rect:hover{filter:brightness(1.18)}
+  .dimmed{opacity:.16 !important}
+  rect.n-src{fill:var(--n-src);stroke:var(--n-src-st)}
+  rect.n-res{fill:var(--n-src);stroke:var(--n-src-st)}
+  rect.n-osi{fill:url(#gOSI);stroke:var(--osi)}
+  rect.n-ops{fill:url(#gOps);stroke:var(--ops)}
+  rect.n-ztna{fill:url(#gZTNA);stroke:#0d9488}
+  rect.n-pam{fill:url(#gPAM);stroke:#7c3aed}
+  text.on-grad{fill:#fff !important}
+  text.on-grad.sub{fill:rgba(255,255,255,.85) !important}
+  .flowlink{fill:none;stroke-linecap:round}
+  .flowlink.down-link{stroke:var(--linkDown)}
+  .flowlink.up-link{stroke:var(--linkUp)}
+  .flowlink.pam-link{stroke:var(--linkPam)}
+  .nodelabel{font:600 13px "Segoe UI",sans-serif;fill:var(--ink);pointer-events:none}
+  .nodesub{font:500 10.5px "Segoe UI",sans-serif;fill:var(--mut);pointer-events:none}
+  .grouplabel{font:700 11px "Segoe UI",sans-serif;fill:var(--dim);letter-spacing:.13em;text-transform:uppercase}
+  .axislabel{font:700 10px "Segoe UI",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+  .detail{margin-top:14px;min-height:64px;border-top:1px dashed var(--line);padding-top:14px;display:flex;gap:14px;align-items:flex-start}
+  .detail .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:800;color:#06122a}
+  .detail h4{margin:0 0 3px;font-size:15px}
+  .detail p{margin:0;color:var(--mut);font-size:13.5px}
+  .hint{color:var(--dim);font-size:12.5px;margin-top:10px}
+  .toggle{display:inline-flex;gap:6px;align-items:center}
+  .switch{position:relative;width:42px;height:22px;background:#23305a;border-radius:999px;cursor:pointer;transition:.2s;border:1px solid var(--line)}
+  .switch.on{background:var(--pam)}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+  .switch.on::after{left:22px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .uc{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:12px;padding:16px 16px 14px;position:relative;transition:.18s;overflow:hidden}
+  .uc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent,var(--osi))}
+  .uc:hover{transform:translateY(-3px);border-color:#3a4a7a;box-shadow:var(--shadow)}
+  .uc .ph{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+  .uc .lbadge{display:inline-block;font-size:10.5px;font-weight:700;margin-left:7px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
+  .uc h4{margin:10px 0 6px;font-size:15.5px}
+  .uc p{margin:0 0 6px;color:var(--mut);font-size:13.3px}
+
+  .matrix{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:900px}
+  th,td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line)}
+  thead th{position:sticky;top:0;background:var(--thead);z-index:2;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:700}
+  tbody tr:hover{background:var(--rowhover)}
+  td.layer{white-space:nowrap}
+  .lname{font-weight:700;color:var(--ink)}
+  .lq{display:block;color:var(--dim);font-size:12px;font-weight:600;margin-top:2px}
+  td.down-c{border-left:3px solid rgba(59,130,246,.5)}
+  td.up-c{border-left:3px solid rgba(249,115,22,.5)}
+  td ul{margin:0;padding-left:16px}
+  td li{margin:3px 0;color:var(--mut);font-size:13px}
+
+  .stk{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:6px}
+  .scard{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:18px;position:relative}
+  .scard .bar{height:4px;border-radius:4px;width:46px;margin-bottom:12px}
+  .scard h3{margin:0 0 2px;font-size:16.5px}
+  .scard .who{color:var(--dim);font-size:12.5px;margin-bottom:12px}
+  .scard h5{margin:12px 0 5px;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+  .scard ul{margin:0;padding-left:16px}
+  .scard li{margin:4px 0;color:var(--mut);font-size:13.2px}
+  .scard .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:4px}
+
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .vscol{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .vshead{padding:14px 18px;font-weight:700;display:flex;align-items:center;gap:10px;font-size:16px}
+  .vshead.ztna{background:linear-gradient(90deg,rgba(20,184,166,.22),transparent);border-bottom:1px solid var(--line)}
+  .vshead.pam{background:linear-gradient(90deg,rgba(167,139,250,.22),transparent);border-bottom:1px solid var(--line)}
+  .vscol ul{margin:0;padding:14px 18px 18px 34px}
+  .vscol li{margin:7px 0;color:var(--mut);font-size:13.4px}
+  .vscol li b{color:var(--ink)}
+
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px}
+
+  .pass{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+  .passend{flex:0 0 150px;background:linear-gradient(180deg,var(--panel2),var(--bg2));border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+  .passend i{font-style:normal;font-weight:700;color:var(--ink)}
+  .passend span{font-size:12px;color:var(--mut)}
+  .passarrow{display:flex;align-items:center;color:var(--dim);font-size:22px}
+  .planes{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;min-width:260px}
+  .plane{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:12px}
+  .plane b{display:block;font-size:13px;color:var(--c);letter-spacing:.06em}
+  .plane span{font-size:12px;color:var(--mut)}
+
+  .trace{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .reqcol,.ctrlcol{display:flex;flex-direction:column;gap:8px}
+  .reqgrp{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);font-weight:700;margin:8px 0 2px}
+  .req{border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:var(--chipbg);transition:.15s;font-size:13.5px;color:var(--ink)}
+  .req:hover{border-color:#3a4a7a}
+  .req.sel{border-color:transparent;color:#06122a;font-weight:600}
+  .ctrl{border:1px solid var(--line);border-radius:10px;padding:10px 12px;transition:.15s}
+  .ctrl .cname{font-weight:600;color:var(--ink);font-size:13.5px}
+  .ctrl .cmeta{font-size:11.5px;color:var(--mut);margin-top:4px}
+  .ctrl.dim{opacity:.26}
+  .ctrl.hit{border-color:transparent;box-shadow:0 0 0 2px var(--hl,var(--pam)) inset}
+  @media(max-width:760px){.trace{grid-template-columns:1fr}}
+
+  .covbadge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:5px;white-space:nowrap}
+  .objrow td{background:var(--panel2);font-weight:700;color:var(--ink);letter-spacing:.03em;font-size:12.5px}
+  td.ccode{white-space:nowrap;font-weight:700;color:var(--ink)}
+  td.ccode small{display:block;font-weight:500;color:var(--mut);font-size:12px;margin-top:2px;white-space:normal;max-width:230px}
+  .chip[data-co="all"].active{background:#cdd8ff;color:#0a1430}
+  .chip[data-co="A"].active{background:#a78bfa}
+  .chip[data-co="B"].active{background:#3b82f6}
+  .chip[data-co="C"].active{background:#34d399}
+  .chip[data-co="D"].active{background:#f59e0b}
+
+  .foot{margin-top:34px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+  .countpill{font-size:12px;color:var(--dim);margin-left:auto}
+  @media(max-width:760px){.vs{grid-template-columns:1fr}h1{font-size:24px}}
+</style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=19f24420f2" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kickrow">
+      <span class="kicker"><span class="dot"></span> SASE Security Operating Model</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="themebtn" style="text-decoration:none">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          <span>GOV Assured</span>
+        </a>
+        <button class="themebtn" id="themeBtn" aria-label="Toggle colour theme">
+          <span id="themeIcon"></span><span id="themeLabel">Light mode</span>
+        </button>
+      </div>
+    </div>
+    <h1>SASE Defence-in-Depth — OSI Operating Model</h1>
+    <p class="sub">A layered view of how SASE controls defend each tier of the OSI stack. Traffic and policy flow
+      <b style="color:#7cb0ff">down</b> the stack as enforcement; telemetry flows <b style="color:#ffb27c">up</b> into a
+      closed detect-respond-adapt loop. Zero Trust Network Access brokers entry at the session layer and Privileged
+      Access Management governs the admin plane throughout.</p>
+    <div class="meta">
+      <span><b>Spine:</b> 7-layer OSI model · enforcement down / telemetry up</span>
+      <span><b>Access governance:</b> ZTNA (who reaches what) · PAM (privileged power)</span>
+      <span><b>Loop:</b> Collect → Detect → Respond → Adapt</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-view="flow">Data &amp; control flows</button>
+    <button class="tab" data-view="osi">OSI defence-in-depth</button>
+    <button class="tab" data-view="pass">Single-pass SSE</button>
+    <button class="tab" data-view="model">Operating model</button>
+    <button class="tab" data-view="cat">Control catalogue</button>
+    <button class="tab" data-view="trace">Traceability</button>
+    <button class="tab" data-view="caf">NCSC CAF v4.0</button>
+    <button class="tab" data-view="split">ZTNA vs PAM</button>
+  </nav>
+
+  <!-- ============ VIEW: FLOW ============ -->
+  <section class="view active" id="view-flow">
+    <h2 class="sec">Live data &amp; control flows</h2>
+    <p class="lead">A user or device is brokered by <b style="color:#5eead4">ZTNA</b> into the
+      <b style="color:#7cb0ff">OSI enforcement stack</b>. On egress, traffic descends the
+      <b style="color:#7cb0ff">left rail</b> through every layer to the protected resource (<b style="color:#7cb0ff">blue, down</b>).
+      Every layer independently streams its <b style="color:#ffb27c">telemetry</b> up into the
+      <b style="color:#ffb27c">SIEM</b> (<b style="color:#ffb27c">orange, up</b>) — a data-to-everything feed that the
+      <b style="color:#ffb27c">operating model</b> correlates, responds to, and turns into adaptive policy back to ZTNA. <b style="color:#c4b5fd">PAM</b> vaults privileged sessions before they enter the stack.
+      Click any node to isolate its flows; use the chips to trace one pillar end-to-end.
+      The OSI layering is a teaching lens — in practice SSE applies these controls in a single pass at the PoP (see the Single-pass SSE tab).</p>
+
+    <div class="filterbar">
+      <span class="flabel">Highlight pillar</span>
+      <button class="chip active" data-k="all"><span class="sw" style="background:#cdd8ff"></span>All</button>
+      <button class="chip" data-k="ztna"><span class="sw" style="background:var(--ztna)"></span>ZTNA</button>
+      <button class="chip" data-k="sse"><span class="sw" style="background:var(--sse)"></span>SSE</button>
+      <button class="chip" data-k="net"><span class="sw" style="background:var(--net)"></span>Network</button>
+      <button class="chip" data-k="pam"><span class="sw" style="background:var(--pam)"></span>PAM</button>
+      <button class="chip" data-k="secops"><span class="sw" style="background:var(--secops)"></span>SecOps</button>
+      <span class="toggle" style="margin-left:auto"><span style="color:var(--mut);font-size:13px">Animate flow</span>
+        <span class="switch on" id="animToggle" role="switch" aria-checked="true"></span></span>
+    </div>
+
+    <div class="panel pad flowcard">
+      <svg class="diagram" id="svg" viewBox="0 0 1180 540" xmlns="http://www.w3.org/2000/svg" aria-label="SASE OSI flow diagram">
+        <defs>
+          <linearGradient id="gOSI" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+          <linearGradient id="gOps" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+          <linearGradient id="gZTNA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#0d9488"/></linearGradient>
+          <linearGradient id="gPAM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+          <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <text class="grouplabel" x="40" y="34">Identity &amp; device</text>
+        <text class="grouplabel" x="300" y="34">Zero trust access</text>
+        <text class="grouplabel" x="555" y="34">OSI enforcement stack</text>
+        <text class="grouplabel" x="880" y="34">Resource</text>
+        <text class="grouplabel" x="1000" y="34">Operating model</text>
+        <text class="axislabel" x="510" y="360" fill="#60a5fa" text-anchor="middle" transform="rotate(-90 510 360)">enforcement &#8595; down</text>
+        <text class="axislabel" x="838" y="150" fill="#fb923c">telemetry &#8594; SIEM</text>
+        <g id="links"></g>
+        <g id="particles"></g>
+        <g id="nodes"></g>
+      </svg>
+
+      <div class="detail" id="detail">
+        <div class="ic" style="background:linear-gradient(135deg,#5eead4,#c4b5fd)">i</div>
+        <div><h4>Click a node to inspect</h4>
+          <p>Select any origin, ZTNA broker, OSI layer, resource, or operating-model stage to isolate its flows and read how it fits the model.</p></div>
+      </div>
+      <p class="hint">Tip: the OSI stack stays visible under every filter — it is the backbone. Toggle off animation to reduce motion.</p>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: OSI ============ -->
+  <section class="view" id="view-osi">
+    <h2 class="sec">Defence-in-depth across the OSI stack</h2>
+    <p class="lead">Every layer enforces independently, so a bypass at one tier is still caught at another. The left column is
+      what each layer <b style="color:#7cb0ff">enforces on traffic going down</b>; the right column is the
+      <b style="color:#ffb27c">telemetry and detections that rise up</b> to the operating model.</p>
+    <div class="matrix">
+      <table>
+        <thead><tr>
+          <th style="width:210px">OSI layer</th>
+          <th class="down-c">Controls — enforcement (down &#8595;)</th>
+          <th class="up-c">Telemetry &amp; detections (up &#8593;)</th>
+        </tr></thead>
+        <tbody id="osiBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: SINGLE-PASS ============ -->
+  <section class="view" id="view-pass">
+    <h2 class="sec">How SASE actually enforces — single-pass inspection</h2>
+    <p class="lead">The OSI layering in the other tabs is a teaching lens for defence-in-depth reasoning. In a real SASE/SSE
+      cloud PoP, traffic is decrypted <b>once</b>, inspected by all planes <b>in parallel in a single pass</b>, then
+      re-encrypted and forwarded — not passed sequentially down seven layers. This delivers overlapping coverage without the
+      latency of chained appliances.</p>
+    <div class="panel pad">
+      <div class="pass">
+        <div class="passend"><i>Decrypt once</i><span>TLS termination at PoP</span></div>
+        <div class="passarrow">&#8594;</div>
+        <div class="planes">
+          <div class="plane" style="--c:var(--net)"><b>NET</b><span>FWaaS · IPS · geo/IP filtering</span></div>
+          <div class="plane" style="--c:var(--sse)"><b>WEB</b><span>SWG · RBI · URL filtering</span></div>
+          <div class="plane" style="--c:var(--sse)"><b>APP</b><span>CASB · SaaS · shadow IT</span></div>
+          <div class="plane" style="--c:var(--sse)"><b>DATA</b><span>DLP · egress · data tagging</span></div>
+          <div class="plane" style="--c:var(--secops)"><b>THR</b><span>sandbox · AV · threat intel</span></div>
+        </div>
+        <div class="passarrow">&#8594;</div>
+        <div class="passend"><i>Forward once</i><span>re-encrypt &amp; deliver</span></div>
+      </div>
+      <p class="hint">All five planes act on the same decrypted stream simultaneously — overlapping inspection, one pass, minimal added latency. ZTNA decides access <i>before</i> the pass; PAM governs privileged sessions <i>through</i> it.</p>
+    </div>
+    <p class="lead" style="margin-top:16px"><b>Reconciling the two views:</b> the OSI tab answers <i>"what control lives at which layer"</i>
+      for defence-in-depth reasoning and audit; this tab answers <i>"how the controls are actually executed"</i> at run time. Both are true at once.</p>
+  </section>
+
+  <!-- ============ VIEW: MODEL ============ -->
+  <section class="view" id="view-model">
+    <h2 class="sec">Operating model by pillar</h2>
+    <p class="lead">Five pillars run the model: who decides access, who protects the edge and the network, who governs
+      privilege, and who detects and adapts. Each owns part of the stack and feeds the same telemetry loop.</p>
+    <div class="stk" id="stkGrid"></div>
+  </section>
+
+  <!-- ============ VIEW: CATALOGUE ============ -->
+  <section class="view" id="view-cat">
+    <h2 class="sec">SASE control catalogue</h2>
+    <p class="lead">Filter by pillar to see the controls each one delivers and the OSI layer where it primarily enforces.</p>
+    <div class="filterbar">
+      <span class="flabel">Filter</span>
+      <button class="chip active" data-cf="all"><span class="sw" style="background:#cdd8ff"></span>All</button>
+      <button class="chip" data-cf="ztna"><span class="sw" style="background:var(--ztna)"></span>ZTNA</button>
+      <button class="chip" data-cf="sse"><span class="sw" style="background:var(--sse)"></span>SSE</button>
+      <button class="chip" data-cf="net"><span class="sw" style="background:var(--net)"></span>Network</button>
+      <button class="chip" data-cf="pam"><span class="sw" style="background:var(--pam)"></span>PAM</button>
+      <button class="chip" data-cf="secops"><span class="sw" style="background:var(--secops)"></span>SecOps</button>
+      <span class="countpill" id="ucCount"></span>
+    </div>
+    <div class="grid" id="ucGrid"></div>
+  </section>
+
+  <!-- ============ VIEW: TRACEABILITY ============ -->
+  <section class="view" id="view-trace">
+    <h2 class="sec">Requirement &#8594; control traceability</h2>
+    <p class="lead">Click a requirement on the left to spotlight the architectural control(s) that fulfil it on the right.
+      Requirements are grouped by lens: Zero Trust, Defence in Depth, and Privileged Access.</p>
+    <div class="trace">
+      <div class="reqcol" id="reqCol"></div>
+      <div class="ctrlcol" id="ctrlCol"></div>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: CAF ============ -->
+  <section class="view" id="view-caf">
+    <h2 class="sec">NCSC CAF v4.0 — contributing-outcome coverage</h2>
+    <p class="lead">How this SASE model helps evidence the NCSC Cyber Assessment Framework v4.0 (published 6 Aug 2025;
+      4 objectives, 14 principles, 41 contributing outcomes). SASE is a technical control set — it contributes
+      strongly to Objectives B and C, partially to D, and provides context for A. It does <b>not</b> satisfy
+      governance, process, training or supply-chain outcomes on its own (see scope note below).</p>
+    <div class="filterbar">
+      <span class="flabel">Objective</span>
+      <button class="chip active" data-co="all"><span class="sw" style="background:#cdd8ff"></span>All</button>
+      <button class="chip" data-co="A"><span class="sw" style="background:#a78bfa"></span>A · Managing risk</button>
+      <button class="chip" data-co="B"><span class="sw" style="background:#3b82f6"></span>B · Protecting</button>
+      <button class="chip" data-co="C"><span class="sw" style="background:#34d399"></span>C · Detecting</button>
+      <button class="chip" data-co="D"><span class="sw" style="background:#f59e0b"></span>D · Minimising impact</button>
+      <span class="countpill" id="cafCount"></span>
+    </div>
+    <div class="matrix">
+      <table>
+        <thead><tr>
+          <th style="width:240px">Contributing outcome</th>
+          <th>Contributing SASE controls in this model</th>
+          <th style="width:110px">Coverage</th>
+        </tr></thead>
+        <tbody id="cafBody"></tbody>
+      </table>
+    </div>
+    <p class="lead" style="margin-top:16px"><b>Scope note — not covered by SASE:</b> A1 Governance, A2.a Risk management process,
+      A4 Supply chain (incl. A4.b Secure software development &amp; support), B1 Policies &amp; processes, B6 Staff awareness &amp; training,
+      B5.c Backups, D1.a/D1.c Response planning &amp; exercising, and D2 Lessons learned are organisational and process outcomes that
+      require controls beyond this architecture.</p>
+  </section>
+
+  <!-- ============ VIEW: SPLIT ============ -->
+  <section class="view" id="view-split">
+    <h2 class="sec">ZTNA vs PAM — the access boundary</h2>
+    <p class="lead">Both are zero-trust access controls, but they answer different questions. ZTNA decides
+      <i>who can reach a resource</i>; PAM decides <i>what a privileged identity can do once connected</i>.</p>
+    <div class="vs">
+      <div class="vscol">
+        <div class="vshead ztna"><span style="width:12px;height:12px;border-radius:3px;background:var(--ztna);display:inline-block"></span>ZTNA — access to applications</div>
+        <ul>
+          <li><b>Identity-aware access</b> — every request authenticated and authorised per session.</li>
+          <li><b>Least privilege per app</b> — users reach only the specific apps they are entitled to, never the flat network.</li>
+          <li><b>Continuous verification</b> — device posture and risk re-checked throughout the session.</li>
+          <li><b>Default-deny</b> — no implicit trust; nothing is reachable until policy explicitly allows it.</li>
+          <li><b>Broad scope</b> — applies to the whole workforce, for north-south and east-west app access.</li>
+          <li><b>Shrinks attack surface</b> — applications stay invisible until access is granted.</li>
+        </ul>
+      </div>
+      <div class="vscol">
+        <div class="vshead pam"><span style="width:12px;height:12px;border-radius:3px;background:var(--pam);display:inline-block"></span>PAM — privilege within systems</div>
+        <ul>
+          <li><b>Privileged accounts</b> — governs admin, root and service identities, not general users.</li>
+          <li><b>Credential vaulting</b> — secrets are stored and brokered, never exposed to the operator.</li>
+          <li><b>Just-in-time elevation</b> — standing privilege is removed; access is granted for a task, then revoked.</li>
+          <li><b>Session recording</b> — privileged sessions are monitored, recorded and fully auditable.</li>
+          <li><b>Secret rotation</b> — passwords and keys are rotated automatically after use.</li>
+          <li><b>Contains blast radius</b> — limits what a trusted insider or stolen admin account can do.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:18px"><b>Operating principle:</b> ZTNA is the <i>front door</i> — it brokers entry to the
+      OSI stack at the session layer and shrinks the attack surface. PAM is the <i>inner safe</i> — privileged sessions are
+      vaulted, time-boxed and recorded as they ride the same enforcement stack down to the resource. Together: zero trust for
+      access, least privilege for power. Both stream their decisions up to SecOps, which tunes policy and closes the loop.</p>
+  </section>
+
+  <div class="foot">
+    SASE defence-in-depth operating model · OSI layers L7–L1 · ZTNA &amp; PAM access governance · Interactive reference.
+  </div>
+</div>
+
+<script>
+/* ---------------- TAB NAV ---------------- */
+const tabs=document.getElementById('tabs');
+tabs.addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));
+  const v=b.dataset.view;
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));
+});
+
+/* ---------------- THEME ---------------- */
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+const themeBtn=document.getElementById('themeBtn'),themeIcon=document.getElementById('themeIcon'),themeLabel=document.getElementById('themeLabel');
+function setTheme(mode,persist){
+  if(mode==='light'){document.documentElement.setAttribute('data-theme','light');themeIcon.innerHTML=MOON;themeLabel.textContent='Dark mode';}
+  else{document.documentElement.removeAttribute('data-theme');themeIcon.innerHTML=SUN;themeLabel.textContent='Light mode';}
+  if(persist){try{localStorage.setItem('saseTheme',mode);}catch(e){}}
+}
+let _userSet=false,_saved=null;
+try{_saved=localStorage.getItem('saseTheme');}catch(e){}
+const _mql=null;/* GOV Assured: hub dark by default */
+if(_saved){_userSet=true;setTheme(_saved);}else{setTheme(_mql&&_mql.matches?'light':'dark');}
+if(_mql){const _onOS=e=>{if(!_userSet)setTheme(e.matches?'light':'dark');};_mql.addEventListener?_mql.addEventListener('change',_onOS):_mql.addListener(_onOS);}
+themeBtn.addEventListener('click',()=>{_userSet=true;const isLight=document.documentElement.getAttribute('data-theme')==='light';setTheme(isLight?'dark':'light',true);});
+
+/* ---------------- DATA ---------------- */
+const ROLE={ztna:'ZTNA',sse:'SSE',net:'Network',pam:'PAM',secops:'SecOps'};
+const RCOL={ztna:'#14b8a6',sse:'#3b82f6',net:'#34d399',pam:'#a78bfa',secops:'#f97316'};
+
+/* Nodes: viewBox 1180x540. type: src|ztna|osi|res|pam|ops */
+const NODES=[
+  {id:'usr', t:'User / device',     s:'Workforce & endpoints',  x:40,  y:90,  type:'src', roles:['ztna'],  d:'Any user or device requesting access. Identity and device posture are evaluated by ZTNA before anything in the stack is reachable.'},
+  {id:'adm', t:'Privileged admin',  s:'Operators & service IDs', x:40, y:300, type:'src', roles:['pam'],   d:'Administrators, root and service accounts. Their access is never direct — it is brokered through the PAM vault with just-in-time elevation.'},
+  {id:'pam', t:'PAM vault',         s:'Vault · JIT · recording', x:40, y:380, type:'pam', roles:['pam'],   d:'Privileged Access Management: credentials are vaulted, elevation is just-in-time, and every privileged session is recorded. PAM injects credentials so the operator never sees them.'},
+  {id:'ztna',t:'ZTNA broker',       s:'Policy decision point',   x:300,y:90,  type:'ztna',roles:['ztna'],  d:'Zero Trust Network Access broker and policy decision point. Authenticates identity, checks device posture, and grants least-privilege, per-session access — default-deny until allowed.'},
+
+  {id:'l7', t:'L7 application',  s:'SWG · CASB · DLP',          x:555,y:70,  type:'osi', roles:['sse'],   d:'Application layer. SASE controls: Secure Web Gateway, CASB for SaaS governance, Data Loss Prevention, remote browser isolation, email and API security.'},
+  {id:'l6', t:'L6 presentation', s:'TLS inspect · encrypt',    x:555,y:132, type:'osi', roles:['sse'],   d:'Presentation layer. TLS/SSL inspection and decryption for visibility, plus encryption, certificate management and tokenization of sensitive data.'},
+  {id:'l5', t:'L5 session',     s:'Identity-aware proxy',      x:555,y:194, type:'osi', roles:['ztna'],  d:'Session layer — where ZTNA lives. Identity-aware proxy, SAML/OIDC SSO, MFA and continuous verification. PAM-brokered privileged sessions enter here.'},
+  {id:'l4', t:'L4 transport',   s:'FWaaS · IPS · DDoS',        x:555,y:256, type:'osi', roles:['net'],   d:'Transport layer. Firewall-as-a-Service L4 policy, intrusion prevention (IPS/IDS), DDoS protection and port/protocol control.'},
+  {id:'l3', t:'L3 network',     s:'SD-WAN · microseg',         x:555,y:318, type:'osi', roles:['net'],   d:'Network layer. SD-WAN secure fabric, microsegmentation, IPsec tunnels and secure routing to constrain east-west movement.'},
+  {id:'l2', t:'L2 data link',   s:'802.1X · MACsec · VLAN',    x:555,y:380, type:'osi', roles:['net'],   d:'Data-link layer. 802.1X port authentication, MACsec link encryption and VLAN segmentation with switch-port security.'},
+  {id:'l1', t:'L1 physical',    s:'Posture · NAC · RoT',       x:555,y:442, type:'osi', roles:['net'],   d:'Physical layer. Device posture and health checks, NAC admission control, hardware root of trust and physical access control.'},
+
+  {id:'res',t:'Protected resource', s:'Apps · cloud · data',   x:880,y:380, type:'res', roles:['ztna','sse','net','pam'], d:'The applications, cloud services and data the model exists to protect. Reached only after traffic has cleared every layer of the stack.'},
+
+  {id:'siem',t:'Collect & analyze', s:'SIEM · UEBA',           x:1000,y:270,type:'ops', roles:['secops'],d:'Telemetry from every layer is collected and correlated — the data-to-everything foundation. SIEM and UEBA surface anomalies across the whole stack.'},
+  {id:'soar',t:'Detect & respond',  s:'SOAR · playbooks',      x:1000,y:170,type:'ops', roles:['secops'],d:'Detections trigger SOAR playbooks: automated containment, enrichment and case management to respond at machine speed.'},
+  {id:'pol', t:'Adapt policy',      s:'Risk-based tuning',     x:1000,y:70, type:'ops', roles:['secops'],d:'Risk-based policy tuning feeds decisions back into ZTNA and the layer controls — the loop that makes this an operating model, not a static stack.'},
+];
+
+/* Links: [from, to, roleTags] */
+const LINKS=[
+  ['usr','ztna',['ztna'],'flat'],
+  ['ztna','l7',['ztna','sse'],'flat'],
+  ['l7','l1',['sse','net','ztna'],'railDown'],
+  ['l1','res',['net'],'flat'],
+  ['res','l1',['net','secops'],'flatup'],
+  /* telemetry taps: every OSI layer streams up into the SIEM */
+  ['l7','siem',['secops','sse'],'feed'],
+  ['l6','siem',['secops','sse'],'feed'],
+  ['l5','siem',['secops','ztna'],'feed'],
+  ['l4','siem',['secops','net'],'feed'],
+  ['l3','siem',['secops','net'],'feed'],
+  ['l2','siem',['secops','net'],'feed'],
+  ['l1','siem',['secops','net'],'feed'],
+  ['adm','pam',['pam'],'flat'],['pam','l5',['pam'],'flat'],
+  ['siem','soar',['secops'],'opsv'],['soar','pol',['secops'],'opsv'],['pol','ztna',['secops','ztna'],'loop'],
+];
+
+/* ---------------- BUILD SVG ---------------- */
+const NS='http://www.w3.org/2000/svg';
+const W={src:160,ztna:180,osi:210,res:170,pam:160,ops:170}, H=54;
+/* staggered entry points on the SIEM's left edge so the 7 layer feeds fan in */
+const FEEDY={l7:276,l6:282,l5:288,l4:294,l3:300,l2:306,l1:312};
+const nodeById={};NODES.forEach(n=>nodeById[n.id]=n);
+const gLinks=document.getElementById('links'),gNodes=document.getElementById('nodes'),gPart=document.getElementById('particles');
+function cx(n){return n.x+W[n.type]/2;}
+function cy(n){return n.y+H/2;}
+
+function pathFor(a,b,kind){
+  if(kind==='loop'){ /* feedback loop routed along the top channel */
+    return `M${cx(a)},${a.y} L${cx(a)},22 L${cx(b)},22 L${cx(b)},${b.y}`;
+  }
+  if(kind==='railDown'){ /* egress: down the left of the stack */
+    const x=540,ay=cy(a),by=cy(b);
+    return `M${a.x},${ay} L${x},${ay} L${x},${by} L${b.x},${by}`;
+  }
+  if(kind==='railUp'){ /* ingress: up the right of the stack */
+    const x=780,ax=a.x+W[a.type],bx=b.x+W[b.type],ay=cy(a),by=cy(b);
+    return `M${ax},${ay} L${x},${ay} L${x},${by} L${bx},${by}`;
+  }
+  if(kind==='feed'){ /* telemetry tap: layer right edge -> SIEM left edge, fanning in above the resource */
+    const ax=a.x+W[a.type],ay=cy(a),ex=b.x,ey=FEEDY[a.id]||cy(b);
+    return `M${ax},${ay} C${ax+55},${ey} ${ex-120},${ey} ${ex},${ey}`;
+  }
+  if(kind==='opsv'){ /* vertical chain in the operating-model column */
+    const x=cx(a);let y1,y2;
+    if(b.y>a.y){y1=a.y+H;y2=b.y;}else{y1=a.y;y2=b.y+H;}
+    const my=(y1+y2)/2;
+    return `M${x},${y1} C${x},${my} ${x},${my} ${x},${y2}`;
+  }
+  /* flat / flatup horizontal, dy separates reciprocal links */
+  const dy=kind==='flatup'?9:(kind==='flat'?-7:0);
+  let x1=a.x+W[a.type],y1=cy(a)+dy,x2=b.x,y2=cy(b)+dy,sx=x1,ex=x2;
+  if(b.x<a.x){sx=a.x;ex=b.x+W[b.type];}
+  const mx=(sx+ex)/2;
+  return `M${sx},${y1} C${mx},${y1} ${mx},${y2} ${ex},${y2}`;
+}
+function linkColor(a,b,kind){
+  if(a.type==='pam'||b.type==='pam')return'pam';
+  if(kind==='up'||kind==='flatup'||kind==='opsv'||kind==='loop'||kind==='railUp'||kind==='feed')return'up';
+  return'down';
+}
+const CATCOL={down:'#60a5fa',up:'#fb923c',pam:'#c4b5fd'};
+
+const linkEls=[];
+LINKS.forEach(lk=>{
+  const a=nodeById[lk[0]],b=nodeById[lk[1]],kind=lk[3];
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d',pathFor(a,b,kind));
+  const cat=linkColor(a,b,kind);
+  p.setAttribute('class','flowlink '+cat+'-link');
+  p.setAttribute('stroke-width','2');
+  p.dataset.from=lk[0];p.dataset.to=lk[1];p.dataset.roles=lk[2].join(',');
+  gLinks.appendChild(p);
+  linkEls.push({el:p,from:lk[0],to:lk[1],roles:lk[2],len:p.getTotalLength(),color:CATCOL[cat]});
+});
+
+NODES.forEach(n=>{
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('class','node-rect');g.dataset.id=n.id;
+  const r=document.createElementNS(NS,'rect');
+  r.setAttribute('x',n.x);r.setAttribute('y',n.y);
+  r.setAttribute('width',W[n.type]);r.setAttribute('height',H);
+  r.setAttribute('rx',11);r.setAttribute('stroke-width','1.4');
+  r.setAttribute('class','n-'+n.type);
+  g.appendChild(r);
+  const grad=(n.type==='osi'||n.type==='ops'||n.type==='ztna'||n.type==='pam');
+  const t1=document.createElementNS(NS,'text');
+  t1.setAttribute('class','nodelabel'+(grad?' on-grad':''));t1.setAttribute('x',n.x+14);t1.setAttribute('y',n.y+22);
+  t1.textContent=n.t;g.appendChild(t1);
+  const t2=document.createElementNS(NS,'text');
+  t2.setAttribute('class','nodesub'+(grad?' on-grad sub':''));t2.setAttribute('x',n.x+14);t2.setAttribute('y',n.y+39);
+  t2.textContent=n.s;g.appendChild(t2);
+  g.addEventListener('click',()=>selectNode(n.id));
+  gNodes.appendChild(g);
+});
+
+/* ---------------- PARTICLES ---------------- */
+let particles=[];
+function buildParticles(){
+  gPart.innerHTML='';particles=[];
+  linkEls.forEach(L=>{
+    const count=L.len>260?3:2;
+    for(let k=0;k<count;k++){
+      const c=document.createElementNS(NS,'circle');
+      c.setAttribute('r','2.8');c.setAttribute('fill',L.color);c.setAttribute('filter','url(#soft)');
+      gPart.appendChild(c);
+      particles.push({c,link:L,off:(k/count)+Math.random()*0.1,spd:(0.0026+Math.random()*0.0014)});
+    }
+  });
+}
+buildParticles();
+let animOn=true,raf=null;
+function frame(){
+  particles.forEach(p=>{
+    p.off=(p.off+p.spd)%1;
+    const pt=p.link.el.getPointAtLength(p.off*p.link.len);
+    p.c.setAttribute('cx',pt.x);p.c.setAttribute('cy',pt.y);
+    const visible=!p.link.el.classList.contains('dimmed');
+    p.c.style.opacity=(animOn&&visible)?0.95:0;
+  });
+  raf=requestAnimationFrame(frame);
+}
+raf=requestAnimationFrame(frame);
+const animToggle=document.getElementById('animToggle');
+animToggle.addEventListener('click',()=>{animOn=!animOn;animToggle.classList.toggle('on',animOn);});
+
+/* ---------------- INTERACTION ---------------- */
+let activeRole='all',selected=null;
+function applyHighlight(){
+  linkEls.forEach(L=>{
+    let show=true;
+    if(activeRole!=='all')show=L.roles.includes(activeRole);
+    if(selected)show=show&&(L.from===selected||L.to===selected);
+    L.el.classList.toggle('dimmed',!show);
+  });
+  NODES.forEach(n=>{
+    const g=gNodes.querySelector('[data-id="'+n.id+'"]');
+    let show=true;
+    if(activeRole!=='all')show=n.roles.includes(activeRole)||n.type==='osi';
+    if(selected){
+      const connected=selected===n.id||linkEls.some(L=>(L.from===selected&&L.to===n.id)||(L.to===selected&&L.from===n.id));
+      show=show&&connected;
+    }
+    g.classList.toggle('dimmed',!show);
+  });
+}
+function selectNode(id){
+  selected=(selected===id)?null:id;
+  const n=nodeById[id],det=document.getElementById('detail');
+  if(selected){
+    const c=n.type==='osi'?'#3b82f6':n.type==='ops'?'#f97316':n.type==='ztna'?'#14b8a6':n.type==='pam'?'#a78bfa':'#64748b';
+    const tag=n.type==='ztna'?'ZT':n.type==='pam'?'PAM':n.type==='ops'?'OPS':n.type==='osi'?'OSI':'•';
+    det.innerHTML='<div class="ic" style="background:'+c+'">'+tag+'</div><div><h4>'+n.t+' <span style="color:var(--dim);font-weight:500;font-size:12px">— '+n.s+'</span></h4><p>'+n.d+'</p></div>';
+  }else{
+    det.innerHTML='<div class="ic" style="background:linear-gradient(135deg,#5eead4,#c4b5fd)">i</div><div><h4>Click a node to inspect</h4><p>Select any origin, ZTNA broker, OSI layer, resource, or operating-model stage to isolate its flows.</p></div>';
+  }
+  applyHighlight();
+}
+document.querySelectorAll('.chip[data-k]').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-k]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');activeRole=ch.dataset.k;selected=null;applyHighlight();
+    const det=document.getElementById('detail');
+    if(activeRole!=='all'){
+      det.innerHTML='<div class="ic" style="background:'+RCOL[activeRole]+'">•</div><div><h4>'+ROLE[activeRole]+' — end-to-end trace</h4><p>Highlighted: every node and flow this pillar touches. The OSI stack stays visible as the backbone. Click a node for detail.</p></div>';
+    }else{selectNode.length;det.innerHTML='<div class="ic" style="background:linear-gradient(135deg,#5eead4,#c4b5fd)">i</div><div><h4>Click a node to inspect</h4><p>Select any origin, ZTNA broker, OSI layer, resource, or operating-model stage to isolate its flows.</p></div>';}
+  });
+});
+
+/* ---------------- OSI TABLE ---------------- */
+const OSITAB=[
+ {l:'L7 · application',q:'Apps, content & data',
+  down:['Secure Web Gateway (SWG): URL &amp; content filtering','CASB for SaaS governance; DLP for sensitive data','Remote browser isolation, email &amp; API security'],
+  up:['Web/SaaS access logs, DLP events, API anomalies','Detects: data exfiltration, malware, account misuse']},
+ {l:'L6 · presentation',q:'Encryption & formats',
+  down:['TLS/SSL inspection &amp; decryption for visibility','Encryption, certificate management, tokenization'],
+  up:['Decrypted-session metadata, certificate anomalies','Detects: weak ciphers, expired certs, C2 hidden in TLS']},
+ {l:'L5 · session',q:'Identity & sessions',
+  down:['ZTNA identity-aware proxy, per-session authorization','SAML/OIDC SSO, MFA, continuous verification','PAM-brokered privileged sessions with recording'],
+  up:['Auth events, access grants/denials, privileged-session logs','Detects: impossible travel, session hijack, privilege misuse']},
+ {l:'L4 · transport',q:'Ports & flows',
+  down:['Firewall-as-a-Service (FWaaS) L4 policy','IPS/IDS, DDoS protection, port &amp; protocol control'],
+  up:['Flow records, blocked-connection logs, IPS alerts','Detects: scanning, DDoS, protocol abuse']},
+ {l:'L3 · network',q:'Routing & paths',
+  down:['SD-WAN secure fabric, microsegmentation','IPsec tunnels, secure routing, east-west controls'],
+  up:['NetFlow, tunnel status, segmentation-policy hits','Detects: lateral movement, rogue routes, exfil paths']},
+ {l:'L2 · data link',q:'Switching & access',
+  down:['802.1X port authentication, MACsec encryption','VLAN segmentation, switch-port security'],
+  up:['Port-auth events, MAC anomalies, VLAN violations','Detects: rogue devices, ARP spoofing, MAC flooding']},
+ {l:'L1 · physical',q:'Devices & media',
+  down:['Device posture &amp; health checks, NAC admission','Hardware root of trust, physical access control'],
+  up:['Posture results, admission decisions, device inventory','Detects: non-compliant or unknown devices, tamper']},
+];
+const ob=document.getElementById('osiBody');
+OSITAB.forEach(r=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML='<td class="layer"><span class="lname">'+r.l+'</span><span class="lq">'+r.q+'</span></td>'+
+    '<td class="down-c"><ul>'+r.down.map(x=>'<li>'+x+'</li>').join('')+'</ul></td>'+
+    '<td class="up-c"><ul>'+r.up.map(x=>'<li>'+x+'</li>').join('')+'</ul></td>';
+  ob.appendChild(tr);
+});
+
+/* ---------------- OPERATING MODEL CARDS ---------------- */
+const STK=[
+ {k:'ztna',name:'Identity & Zero Trust Access',who:'Decides who reaches what',
+  asks:['Is this identity &amp; device trusted right now?','What is the minimum access needed?','Should this session continue?'],
+  owns:['ZTNA policy &amp; app entitlements','MFA/SSO &amp; continuous verification','Default-deny access posture'],
+  surf:[['Identity-aware proxy','ztna'],['Device posture checks','ztna'],['Per-app least privilege','ztna'],['Policy decision point','ztna']]},
+ {k:'sse',name:'Secure Service Edge (SSE)',who:'Protects web, SaaS & data',
+  asks:['Is this web/SaaS use safe?','Is sensitive data leaving?','Is the content malicious?'],
+  owns:['SWG, CASB, DLP, RBI policy','TLS inspection &amp; decryption','Email &amp; API security'],
+  surf:[['Secure Web Gateway','sse'],['CASB','sse'],['Data Loss Prevention','sse'],['Browser isolation','sse']]},
+ {k:'net',name:'Network & Connectivity',who:'Secures transport & paths',
+  asks:['Is this flow allowed?','Are segments isolated?','Is traffic encrypted in transit?'],
+  owns:['FWaaS &amp; IPS policy','SD-WAN &amp; microsegmentation','Tunnel &amp; NAC enforcement'],
+  surf:[['Firewall-as-a-Service','net'],['Microsegmentation','net'],['IPsec / SD-WAN','net'],['802.1X / NAC','net']]},
+ {k:'pam',name:'Privileged Access (PAM)',who:'Controls admin power',
+  asks:['Does this admin need access now?','What can they do once in?','Is the session recorded?'],
+  owns:['Credential vaulting &amp; rotation','Just-in-time elevation','Privileged session monitoring'],
+  surf:[['Credential vault','pam'],['JIT elevation','pam'],['Session recording','pam'],['Secret rotation','pam']]},
+ {k:'secops',name:'Security Operations',who:'Detects, responds, adapts',
+  asks:['Is this a real incident?','How do we contain it?','How should policy change?'],
+  owns:['SIEM correlation &amp; UEBA','SOAR response playbooks','Risk-based policy tuning'],
+  surf:[['SIEM / analytics','secops'],['SOAR automation','secops'],['Risk dashboards','secops'],['Policy feedback','secops']]},
+];
+const sg=document.getElementById('stkGrid');
+STK.forEach(s=>{
+  const el=document.createElement('div');el.className='scard';
+  el.innerHTML='<div class="bar" style="background:'+RCOL[s.k]+'"></div><h3>'+s.name+'</h3><div class="who">'+s.who+'</div>'+
+    '<h5>Key questions</h5><ul>'+s.asks.map(a=>'<li>'+a+'</li>').join('')+'</ul>'+
+    '<h5>Owns</h5><ul>'+s.owns.map(a=>'<li>'+a+'</li>').join('')+'</ul>'+
+    '<h5>Control surface</h5><ul>'+s.surf.map(a=>'<li>'+a[0]+'<span class="pill" style="background:'+RCOL[a[1]]+'22;color:'+RCOL[a[1]]+'">'+ROLE[a[1]]+'</span></li>').join('')+'</ul>';
+  sg.appendChild(el);
+});
+
+/* ---------------- CONTROL CATALOGUE ---------------- */
+const CTRL=[
+ {p:'ztna',L:'L5',t:'ZTNA identity-aware proxy',d:'Brokers per-session, least-privilege access to apps; nothing is reachable until identity and posture pass.'},
+ {p:'ztna',L:'L5',t:'Continuous verification (MFA/SSO)',d:'SAML/OIDC single sign-on with MFA and ongoing re-evaluation of risk during the session.'},
+ {p:'ztna',L:'L5',t:'Least-privilege per-app access',d:'Users reach only the specific applications they are entitled to — never the flat network.'},
+ {p:'ztna',L:'L1',t:'Device posture check',d:'Health, patch level and compliance of the device are verified before admission.'},
+ {p:'sse',L:'L7',t:'Secure Web Gateway (SWG)',d:'URL filtering, content inspection and malware blocking for all web traffic.'},
+ {p:'sse',L:'L7',t:'Cloud Access Security Broker (CASB)',d:'Visibility and policy control over sanctioned and shadow SaaS usage.'},
+ {p:'sse',L:'L7',t:'Data Loss Prevention (DLP)',d:'Detects and blocks sensitive data from leaving via web, email or cloud channels.'},
+ {p:'sse',L:'L7',t:'Remote browser isolation (RBI)',d:'Renders risky web content in an isolated container away from the endpoint.'},
+ {p:'sse',L:'L6',t:'TLS inspection / decryption',d:'Decrypts traffic for inspection so threats cannot hide inside encrypted sessions.'},
+ {p:'sse',L:'L6',t:'Encryption & tokenization',d:'Protects data in transit and at rest; replaces sensitive values with tokens.'},
+ {p:'net',L:'L4',t:'Firewall-as-a-Service (FWaaS)',d:'Cloud-delivered L4 firewalling with consistent policy for every edge and user.'},
+ {p:'net',L:'L4',t:'Intrusion prevention (IPS/IDS)',d:'Signature and behaviour-based detection and blocking of network exploits.'},
+ {p:'net',L:'L4',t:'DDoS protection',d:'Absorbs and filters volumetric and protocol attacks before they reach resources.'},
+ {p:'net',L:'L3',t:'SD-WAN secure fabric',d:'Policy-driven, encrypted connectivity across sites and cloud with path control.'},
+ {p:'net',L:'L3',t:'Microsegmentation',d:'Fine-grained east-west controls so a breach in one segment cannot spread.'},
+ {p:'net',L:'L3',t:'IPsec tunnel encryption',d:'Encrypted site-to-site and remote tunnels securing data over untrusted networks.'},
+ {p:'net',L:'L2',t:'802.1X / MACsec',d:'Port-level authentication and link-layer encryption for wired and wireless access.'},
+ {p:'net',L:'L2',t:'VLAN segmentation',d:'Logical separation of traffic at the switch to contain broadcast and reduce reach.'},
+ {p:'pam',L:'Mgmt',t:'Credential vault',d:'Stores and brokers privileged secrets so operators never handle raw credentials.'},
+ {p:'pam',L:'Mgmt',t:'Just-in-time elevation',d:'Removes standing privilege; grants admin rights for a task, then revokes them.'},
+ {p:'pam',L:'L5',t:'Privileged session recording',d:'Monitors and records admin sessions end-to-end for audit and forensics.'},
+ {p:'pam',L:'Mgmt',t:'Secret rotation',d:'Automatically rotates passwords and keys after each privileged use.'},
+ {p:'secops',L:'All',t:'SIEM correlation & UEBA',d:'Correlates telemetry from every layer; behavioural analytics surface anomalies.'},
+ {p:'secops',L:'All',t:'SOAR automated response',d:'Playbooks enrich, contain and ticket incidents at machine speed.'},
+ {p:'secops',L:'All',t:'Risk-based policy adaptation',d:'Feeds detected risk back into ZTNA and layer controls to tighten policy.'},
+];
+const ug=document.getElementById('ucGrid'),ucCount=document.getElementById('ucCount');
+function renderUC(filter){
+  ug.innerHTML='';let n=0;
+  CTRL.forEach(u=>{
+    if(filter!=='all'&&u.p!==filter)return;
+    n++;
+    const el=document.createElement('div');el.className='uc';el.style.setProperty('--accent',RCOL[u.p]);
+    el.innerHTML='<span class="ph" style="background:'+RCOL[u.p]+'22;color:'+RCOL[u.p]+';border:1px solid '+RCOL[u.p]+'66">'+ROLE[u.p]+'</span>'+
+      '<span class="lbadge">'+u.L+'</span>'+
+      '<h4>'+u.t+'</h4><p>'+u.d+'</p>';
+    ug.appendChild(el);
+  });
+  ucCount.textContent=n+' control'+(n!==1?'s':'')+' shown';
+}
+renderUC('all');
+document.querySelectorAll('.chip[data-cf]').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-cf]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');renderUC(ch.dataset.cf);
+  });
+});
+
+/* ---------------- TRACEABILITY ---------------- */
+const TCTRL=[
+ {id:'proxy',n:'ZTNA identity-aware proxy',p:'ztna',L:'L5'},
+ {id:'cv',n:'Continuous verification (MFA/SSO)',p:'ztna',L:'L5'},
+ {id:'lp',n:'Per-app least privilege',p:'ztna',L:'L5'},
+ {id:'post',n:'Device posture check',p:'ztna',L:'L1'},
+ {id:'mseg',n:'Microsegmentation',p:'net',L:'L3'},
+ {id:'fwaas',n:'FWaaS / IPS',p:'net',L:'L4'},
+ {id:'swg',n:'Secure Web Gateway + RBI',p:'sse',L:'L7'},
+ {id:'casb',n:'CASB',p:'sse',L:'L7'},
+ {id:'dlp',n:'Data Loss Prevention',p:'sse',L:'L7'},
+ {id:'thr',n:'Threat prevention (sandbox/AV/TI)',p:'sse',L:'L4-L7'},
+ {id:'tls',n:'TLS inspection',p:'sse',L:'L6'},
+ {id:'siem',n:'SIEM / UEBA',p:'secops',L:'All'},
+ {id:'soar',n:'SOAR response',p:'secops',L:'All'},
+ {id:'vault',n:'Credential vault',p:'pam',L:'Mgmt'},
+ {id:'jit',n:'Just-in-time elevation',p:'pam',L:'Mgmt'},
+ {id:'rec',n:'Privileged session recording',p:'pam',L:'L5'},
+ {id:'rot',n:'Secret rotation',p:'pam',L:'Mgmt'},
+];
+const TREQ=[
+ {lens:'Zero Trust',k:'ztna',t:'Verify every request explicitly',c:['proxy','cv','post']},
+ {lens:'Zero Trust',k:'ztna',t:'Grant least-privilege access',c:['lp']},
+ {lens:'Zero Trust',k:'ztna',t:'Prevent lateral movement',c:['proxy','mseg']},
+ {lens:'Zero Trust',k:'ztna',t:'Re-evaluate sessions continuously',c:['cv','siem']},
+ {lens:'Zero Trust',k:'ztna',t:'Keep apps invisible to the internet',c:['proxy']},
+ {lens:'Defence in Depth',k:'sse',t:'Inspect & filter network traffic',c:['fwaas']},
+ {lens:'Defence in Depth',k:'sse',t:'Secure web browsing',c:['swg']},
+ {lens:'Defence in Depth',k:'sse',t:'Govern SaaS & shadow IT',c:['casb']},
+ {lens:'Defence in Depth',k:'sse',t:'Prevent data exfiltration',c:['dlp']},
+ {lens:'Defence in Depth',k:'sse',t:'Block malware & threats',c:['thr']},
+ {lens:'Defence in Depth',k:'sse',t:'See inside encrypted traffic',c:['tls']},
+ {lens:'Defence in Depth',k:'sse',t:'Detect & respond to incidents',c:['siem','soar']},
+ {lens:'Privileged Access',k:'pam',t:'No standing privileged credentials',c:['vault','rot']},
+ {lens:'Privileged Access',k:'pam',t:'Time-bound privileged access',c:['jit']},
+ {lens:'Privileged Access',k:'pam',t:'Brokered, recorded admin sessions',c:['rec']},
+ {lens:'Privileged Access',k:'pam',t:'Step-up auth for elevation',c:['cv','jit']},
+];
+const cc=document.getElementById('ctrlCol');
+TCTRL.forEach(c=>{
+  const el=document.createElement('div');el.className='ctrl';el.id='c-'+c.id;
+  el.innerHTML='<div class="cname">'+c.n+'</div><div class="cmeta"><span class="pill" style="background:'+RCOL[c.p]+'22;color:'+RCOL[c.p]+'">'+ROLE[c.p]+'</span> &middot; '+c.L+'</div>';
+  cc.appendChild(el);
+});
+const rc=document.getElementById('reqCol');
+let curLens='';
+TREQ.forEach(r=>{
+  if(r.lens!==curLens){curLens=r.lens;const h=document.createElement('div');h.className='reqgrp';h.textContent=r.lens;rc.appendChild(h);}
+  const el=document.createElement('div');el.className='req';el.textContent=r.t;
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.req').forEach(x=>{x.classList.remove('sel');x.style.background='';});
+    el.classList.add('sel');el.style.background=RCOL[r.k];
+    TCTRL.forEach(c=>{const ce=document.getElementById('c-'+c.id);const hit=r.c.includes(c.id);
+      ce.classList.toggle('hit',hit);ce.classList.toggle('dim',!hit);
+      if(hit)ce.style.setProperty('--hl',RCOL[r.k]);});
+  });
+  rc.appendChild(el);
+});
+
+/* ---------------- NCSC CAF v4.0 ---------------- */
+const OBJ={A:'Objective A — Managing security risk',B:'Objective B — Protecting against cyber attack',C:'Objective C — Detecting cyber security events',D:'Objective D — Minimising the impact of cyber security incidents'};
+const COV={strong:['Strong','#34d399'],partial:['Partial','#f59e0b'],contextual:['Context','#9fb0d9']};
+const CAF=[
+ {o:'A',code:'A2.b',name:'Understanding threat',cov:'contextual',ctrl:'SIEM/UEBA telemetry and integrated threat intelligence inform threat analysis and attack-scenario modelling'},
+ {o:'A',code:'A3.a',name:'Asset management',cov:'partial',ctrl:'Device posture / NAC build a device inventory; CASB discovers shadow-IT SaaS'},
+ {o:'B',code:'B2.a',name:'Identity verification, authentication & authorisation',cov:'strong',ctrl:'ZTNA identity-aware proxy; MFA/SSO with continuous verification'},
+ {o:'B',code:'B2.b',name:'Device management',cov:'strong',ctrl:'Device posture checks; 802.1X / NAC admission control'},
+ {o:'B',code:'B2.c',name:'Privileged user management',cov:'strong',ctrl:'PAM credential vault, just-in-time elevation, session recording, secret rotation'},
+ {o:'B',code:'B2.d',name:'Identity and access management',cov:'strong',ctrl:'Per-app least privilege; default-deny ZTNA access; no flat-network reachability'},
+ {o:'B',code:'B3.b',name:'Data in transit',cov:'strong',ctrl:'TLS inspection; IPsec tunnels; MACsec link-layer encryption'},
+ {o:'B',code:'B3.c',name:'Stored data',cov:'partial',ctrl:'Encryption & tokenization; DLP data classification and tagging'},
+ {o:'B',code:'B4.b',name:'Secure configuration',cov:'partial',ctrl:'Consistent FWaaS / SWG policy enforced uniformly at the SASE PoP'},
+ {o:'B',code:'B4.c',name:'Secure management',cov:'strong',ctrl:'PAM-brokered admin access; segregated, microsegmented management plane'},
+ {o:'B',code:'B4.d',name:'Vulnerability management',cov:'contextual',ctrl:'IPS / threat prevention provides virtual patching and exploit blocking (compensating)'},
+ {o:'B',code:'B5.b',name:'Design for resilience (segregation)',cov:'strong',ctrl:'Microsegmentation, SD-WAN and VLAN segmentation contain blast radius'},
+ {o:'C',code:'C1.a',name:'Monitoring coverage',cov:'strong',ctrl:'Telemetry collected from every OSI layer into the SIEM (data-to-everything)'},
+ {o:'C',code:'C1.c',name:'Generating alerts',cov:'strong',ctrl:'SIEM correlation plus IPS, DLP and FWaaS alerting'},
+ {o:'C',code:'C1.d',name:'Identifying security incidents',cov:'strong',ctrl:'SIEM correlation with risk-based alerting to cut noise'},
+ {o:'C',code:'C1.f',name:"Understanding users' & systems' behaviour, and threat intelligence",cov:'strong',ctrl:'UEBA behavioural analytics with integrated threat intel (new in v4.0)'},
+ {o:'C',code:'C2.a',name:'System abnormalities for attack detection',cov:'strong',ctrl:'UEBA anomaly detection across identity, network and data planes'},
+ {o:'C',code:'C2.b',name:'Threat hunting',cov:'partial',ctrl:'Cross-layer SIEM data foundation enables structured, intel-led hunting (renamed in v4.0)'},
+ {o:'D',code:'D1.b',name:'Response and recovery capability',cov:'partial',ctrl:'SOAR automated containment and orchestrated response; ZTNA can revoke access instantly'},
+];
+const cb=document.getElementById('cafBody'),cafCount=document.getElementById('cafCount');
+function renderCAF(filter){
+  cb.innerHTML='';let n=0,lastO='';
+  CAF.forEach(r=>{
+    if(filter!=='all'&&r.o!==filter)return;
+    if(r.o!==lastO){lastO=r.o;const hr=document.createElement('tr');hr.className='objrow';
+      hr.innerHTML='<td colspan="3">'+OBJ[r.o]+'</td>';cb.appendChild(hr);}
+    n++;
+    const cvc=COV[r.cov];
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="ccode">'+r.code+'<small>'+r.name+'</small></td>'+
+      '<td style="color:var(--mut);font-size:13px">'+r.ctrl+'</td>'+
+      '<td><span class="covbadge" style="background:'+cvc[1]+'22;color:'+cvc[1]+'">'+cvc[0]+'</span></td>';
+    cb.appendChild(tr);
+  });
+  cafCount.textContent=n+' outcome'+(n!==1?'s':'')+' addressed';
+}
+renderCAF('all');
+document.querySelectorAll('.chip[data-co]').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-co]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');renderCAF(ch.dataset.co);
+  });
+});
+</script>
+</body></html>
