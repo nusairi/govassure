@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="govuk-template">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0c">
+  <title>Penetration Test Scoping Tool — GOV Assured</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b0c0c'/%3E%3Cpath d='M16 4 L26 8 L26 17 C26 22.5 21.5 27 16 29 C10.5 27 6 22.5 6 17 L6 8 Z' fill='%2300703c'/%3E%3Cpath d='M13 16.5 L15.5 19 L20 13.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+  <style>
+    /* ── GOV.UK Design System tokens ──────────────────────────────── */
+    :root {
+      --govuk-black:        #0b0c0c;
+      --govuk-white:        #ffffff;
+      --govuk-blue:         #1d70b8;
+      --govuk-blue-hover:   #003078;
+      --govuk-green:        #00703c;
+      --govuk-green-hover:  #005a30;
+      --govuk-light-grey:   #f3f2f1;
+      --govuk-mid-grey:     #b1b4b6;
+      --govuk-dark-grey:    #505a5f;
+      --govuk-focus:        #ffdd00;
+      --govuk-focus-text:   #0b0c0c;
+      --govuk-error:        #d4351c;
+      --govuk-border:       #b1b4b6;
+      --govuk-red:          #d4351c;
+      --govuk-yellow:       #fd0;
+      --ga-purple:          #4c2c92;
+    }
+
+    /* ── Reset / base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 100%; }
+
+    body {
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--govuk-black);
+      background: var(--govuk-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Skip link ─────────────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 0;
+      background: var(--govuk-yellow);
+      color: var(--govuk-black);
+      font-weight: 700;
+      padding: .75rem 1rem;
+      z-index: 999;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Header ────────────────────────────────────────────────────── */
+    .govuk-header {
+      background: var(--govuk-black);
+      border-bottom: 10px solid var(--govuk-white);
+    }
+    .govuk-header__container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: .75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .govuk-header__logo-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .govuk-header__logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--govuk-green);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .govuk-header__logo-mark svg { display: block; }
+    .govuk-header__logotype {
+      color: var(--govuk-white);
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .govuk-header__logotype span {
+      display: block;
+      font-size: .75rem;
+      font-weight: 400;
+      color: #b1b4b6;
+    }
+    .govuk-header__service-name {
+      color: var(--govuk-white);
+      font-size: .9rem;
+      text-decoration: none;
+      opacity: .85;
+    }
+
+    /* ── Phase banner ──────────────────────────────────────────────── */
+    .govuk-phase-banner {
+      background: var(--govuk-white);
+      border-bottom: 1px solid var(--govuk-border);
+    }
+    .govuk-phase-banner__content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: .5rem 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      font-size: .875rem;
+    }
+    .govuk-tag {
+      display: inline-block;
+      background: var(--govuk-blue);
+      color: var(--govuk-white);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: .15em .55em;
+      border-radius: 2px;
+    }
+    .govuk-phase-banner__text { color: var(--govuk-black); }
+    .govuk-phase-banner__text a { color: var(--govuk-blue); }
+
+    /* ── Main container ────────────────────────────────────────────── */
+    .govuk-width-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .govuk-main-wrapper {
+      padding: 2rem 0 3rem;
+    }
+
+    /* ── Heading ───────────────────────────────────────────────────── */
+    .govuk-heading-xl {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.09375;
+      margin-bottom: .5rem;
+      color: var(--govuk-black);
+    }
+    .govuk-heading-l {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.04167;
+      margin-bottom: 1rem;
+      color: var(--govuk-black);
+      border-bottom: 2px solid var(--govuk-border);
+      padding-bottom: .5rem;
+    }
+    .govuk-heading-m {
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.11111;
+      margin-bottom: .75rem;
+    }
+    .govuk-body-l {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--govuk-dark-grey);
+    }
+    .govuk-body {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .govuk-hint {
+      font-size: .875rem;
+      color: var(--govuk-dark-grey);
+      margin-bottom: .5rem;
+    }
+
+    /* ── Step nav ──────────────────────────────────────────────────── */
+    .step-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid var(--govuk-border);
+    }
+    .step-nav__item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1rem .65rem;
+      font-size: .875rem;
+      font-weight: 400;
+      color: var(--govuk-dark-grey);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      cursor: default;
+      text-decoration: none;
+    }
+    .step-nav__item.active {
+      font-weight: 700;
+      color: var(--govuk-black);
+      border-bottom-color: var(--govuk-blue);
+    }
+    .step-nav__item.completed {
+      color: var(--govuk-green);
+    }
+    .step-nav__number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--govuk-mid-grey);
+      color: var(--govuk-white);
+      font-size: .75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-nav__item.active   .step-nav__number { background: var(--govuk-blue); }
+    .step-nav__item.completed .step-nav__number { background: var(--govuk-green); }
+
+    /* ── Panels / sections ─────────────────────────────────────────── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .govuk-inset-text {
+      border-left: 5px solid var(--govuk-mid-grey);
+      padding: .75rem 1rem;
+      margin-bottom: 1.5rem;
+      background: var(--govuk-light-grey);
+      font-size: .875rem;
+    }
+
+    /* ── Forms ─────────────────────────────────────────────────────── */
+    .govuk-form-group {
+      margin-bottom: 1.5rem;
+    }
+    .govuk-label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+      color: var(--govuk-black);
+    }
+    .govuk-label--s { font-weight: 400; font-size: .875rem; }
+
+    .govuk-input, .govuk-select, .govuk-textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--govuk-black);
+      background: var(--govuk-white);
+      border: 2px solid var(--govuk-black);
+      padding: .5rem .75rem;
+      width: 100%;
+      max-width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .govuk-input:focus, .govuk-select:focus, .govuk-textarea:focus {
+      outline: 3px solid var(--govuk-focus);
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px var(--govuk-focus-text);
+    }
+    .govuk-input--width-two-thirds { max-width: 66%; }
+    .govuk-input--width-one-half   { max-width: 50%; }
+    .govuk-input--width-one-third  { max-width: 33%; }
+
+    .govuk-textarea { min-height: 120px; resize: vertical; }
+
+    .govuk-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='8'%3E%3Cpath fill='%230b0c0c' d='M0 0l6.5 8L13 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; padding-right: 2.5rem; cursor: pointer; }
+
+    /* Checkboxes / radios */
+    .govuk-checkboxes, .govuk-radios { margin-bottom: 0; }
+    .govuk-checkboxes__item, .govuk-radios__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      margin-bottom: .5rem;
+    }
+    .govuk-checkboxes__input, .govuk-radios__input {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: 2px solid var(--govuk-black);
+      background: var(--govuk-white);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      margin-top: .1rem;
+    }
+    .govuk-radios__input { border-radius: 50%; }
+    .govuk-checkboxes__input:checked {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath fill='%230b0c0c' d='M3 12l6 6L21 6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .govuk-radios__input:checked {
+      background: var(--govuk-black);
+      box-shadow: inset 0 0 0 4px var(--govuk-white);
+    }
+    .govuk-checkboxes__input:focus, .govuk-radios__input:focus {
+      outline: 3px solid var(--govuk-focus);
+      outline-offset: 2px;
+    }
+    .govuk-checkboxes__label, .govuk-radios__label {
+      font-size: 1rem;
+      padding-top: .5rem;
+      cursor: pointer;
+    }
+
+    /* ── Fieldset / legend ─────────────────────────────────────────── */
+    .govuk-fieldset { border: none; }
+    .govuk-fieldset__legend {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    /* ── Repeating target rows ─────────────────────────────────────── */
+    .target-list { margin-bottom: 1rem; }
+    .target-row {
+      display: flex;
+      gap: .5rem;
+      align-items: flex-start;
+      margin-bottom: .5rem;
+      flex-wrap: wrap;
+    }
+    .target-row input, .target-row select {
+      font-family: inherit;
+      font-size: .9rem;
+      border: 2px solid var(--govuk-black);
+      padding: .4rem .6rem;
+      background: var(--govuk-white);
+      color: var(--govuk-black);
+    }
+    .target-row input { flex: 1; min-width: 140px; }
+    .target-row select { width: 130px; flex-shrink: 0; }
+    .target-row .notes-input { flex: 1.5; }
+    .target-row .remove-btn {
+      border: none;
+      background: none;
+      color: var(--govuk-red);
+      font-size: .875rem;
+      cursor: pointer;
+      padding: .4rem .2rem;
+      white-space: nowrap;
+      text-decoration: underline;
+      flex-shrink: 0;
+    }
+    .target-row .remove-btn:hover { color: #942514; }
+
+    .target-col-headers {
+      display: flex;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--govuk-dark-grey);
+      margin-bottom: .25rem;
+      flex-wrap: wrap;
+    }
+    .target-col-headers span:first-child  { flex: 1; min-width: 140px; }
+    .target-col-headers span:nth-child(2) { width: 130px; flex-shrink: 0; }
+    .target-col-headers span:nth-child(3) { flex: 1.5; }
+    .target-col-headers span:last-child   { width: 40px; flex-shrink: 0; }
+
+    /* ── Buttons ───────────────────────────────────────────────────── */
+    .govuk-button {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      display: inline-block;
+      padding: .625rem 1rem;
+      border: 2px solid transparent;
+      background: var(--govuk-green);
+      color: var(--govuk-white);
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-appearance: none;
+      appearance: none;
+      box-shadow: 0 2px 0 #002d18;
+    }
+    .govuk-button:hover   { background: var(--govuk-green-hover); }
+    .govuk-button:focus   { outline: 3px solid var(--govuk-focus); outline-offset: 0; }
+    .govuk-button--secondary {
+      background: var(--govuk-light-grey);
+      color: var(--govuk-black);
+      box-shadow: 0 2px 0 #929191;
+    }
+    .govuk-button--secondary:hover { background: #dbdad9; }
+    .govuk-button--warning {
+      background: var(--govuk-red);
+      box-shadow: 0 2px 0 #55150b;
+    }
+    .govuk-button--warning:hover { background: #aa2a16; }
+    .govuk-button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+    .govuk-button-group .link-button {
+      background: none;
+      border: none;
+      color: var(--govuk-blue);
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+    .govuk-button-group .link-button:hover { color: var(--govuk-blue-hover); }
+
+    /* Add target button */
+    .add-target-btn {
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 700;
+      border: 2px solid var(--govuk-blue);
+      background: var(--govuk-white);
+      color: var(--govuk-blue);
+      padding: .35rem .75rem;
+      cursor: pointer;
+    }
+    .add-target-btn:hover { background: #e8f0f8; }
+
+    /* ── Notification banner ───────────────────────────────────────── */
+    .govuk-notification-banner {
+      border: 5px solid var(--govuk-blue);
+      margin-bottom: 2rem;
+    }
+    .govuk-notification-banner__header {
+      background: var(--govuk-blue);
+      color: var(--govuk-white);
+      padding: .5rem 1rem;
+      font-size: .875rem;
+      font-weight: 700;
+    }
+    .govuk-notification-banner__content { padding: .75rem 1rem; }
+
+    /* ── Summary list ──────────────────────────────────────────────── */
+    .govuk-summary-list {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      font-size: .9375rem;
+    }
+    .govuk-summary-list__row {
+      display: flex;
+      border-bottom: 1px solid var(--govuk-border);
+      padding: .5rem 0;
+      gap: 1rem;
+    }
+    .govuk-summary-list__key {
+      font-weight: 700;
+      width: 220px;
+      flex-shrink: 0;
+      padding-right: 1rem;
+      color: var(--govuk-black);
+    }
+    .govuk-summary-list__value {
+      flex: 1;
+      color: var(--govuk-dark-grey);
+      word-break: break-word;
+    }
+
+    /* ── Scope table ───────────────────────────────────────────────── */
+    .scope-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .875rem;
+      margin-bottom: 1.5rem;
+    }
+    .scope-table th, .scope-table td {
+      border: 1px solid var(--govuk-border);
+      padding: .5rem .75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .scope-table th {
+      background: var(--govuk-light-grey);
+      font-weight: 700;
+    }
+    .scope-table tr:nth-child(even) td { background: #fafafa; }
+    .badge {
+      display: inline-block;
+      padding: .1em .5em;
+      border-radius: 2px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .badge--in    { background: #cce2d8; color: #005a30; }
+    .badge--out   { background: #f6d7d2; color: #942514; }
+    .badge--tbd   { background: #ffecc9; color: #6e4400; }
+
+    /* ── Export section ────────────────────────────────────────────── */
+    .export-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .export-card {
+      border: 1px solid var(--govuk-border);
+      padding: 1.25rem 1rem;
+      background: var(--govuk-white);
+    }
+    .export-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+    .export-card p {
+      font-size: .875rem;
+      color: var(--govuk-dark-grey);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Document preview ──────────────────────────────────────────── */
+    .preview-box {
+      border: 2px solid var(--govuk-border);
+      padding: 2rem;
+      background: var(--govuk-white);
+      margin-bottom: 2rem;
+      font-size: .9375rem;
+    }
+    .preview-box h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: .25rem; }
+    .preview-box .preview-meta { font-size: .8125rem; color: var(--govuk-dark-grey); margin-bottom: 1.5rem; }
+    .preview-box h3 { font-size: 1.05rem; font-weight: 700; margin: 1.25rem 0 .5rem; border-bottom: 1px solid var(--govuk-border); padding-bottom: .25rem; }
+    .preview-box p, .preview-box li { font-size: .9375rem; line-height: 1.5; margin-bottom: .5rem; }
+    .preview-box ul { padding-left: 1.5rem; }
+
+    /* ── Declaration box ───────────────────────────────────────────── */
+    .declaration-box {
+      border: 2px solid var(--govuk-black);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      background: var(--govuk-light-grey);
+    }
+
+    /* ── Footer ────────────────────────────────────────────────────── */
+    .govuk-footer {
+      background: var(--govuk-light-grey);
+      border-top: 1px solid var(--govuk-border);
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+    }
+    .govuk-footer__container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      font-size: .875rem;
+      color: var(--govuk-dark-grey);
+    }
+    .govuk-footer a { color: var(--govuk-blue); }
+
+    /* ── Responsive tweaks ─────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .govuk-heading-xl    { font-size: 1.5rem; }
+      .govuk-heading-l     { font-size: 1.25rem; }
+      .govuk-summary-list__key { width: 140px; }
+      .step-nav__item      { font-size: .8rem; padding: .6rem .6rem .5rem; }
+      .target-col-headers  { display: none; }
+      .target-row          { flex-direction: column; }
+      .target-row select   { width: 100%; }
+    }
+
+    /* ── Print styles ──────────────────────────────────────────────── */
+    @media print {
+      .step-nav, .govuk-header, .govuk-phase-banner, .govuk-footer,
+      .govuk-button-group, .export-grid, .step-panel:not(.active) { display: none !important; }
+      .step-panel.active { display: block !important; }
+      body { font-size: 11pt; color: #000; }
+      .preview-box { border: 1px solid #ccc; padding: 1rem; }
+      a { color: #000; text-decoration: none; }
+    }
+  </style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=34a4654d9a" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body class="govuk-template__body">
+
+<a class="skip-link" href="#main-content">Skip to main content</a><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+
+<!-- ── Header ───────────────────────────────────────────────────── -->
+<header class="govuk-header" role="banner">
+  <div class="govuk-header__container">
+    <a class="govuk-header__logo-link" href="https://www.govassured.com/" aria-label="GOV Assured home">
+      <span class="govuk-header__logo-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1L13 7H19L14 11L16 17L10 13L4 17L6 11L1 7H7L10 1Z" fill="white"/>
+        </svg>
+      </span>
+      <span class="govuk-header__logotype">
+        GOV Assured
+      </span>
+    </a>
+    <a class="govuk-header__service-name" href="/">Penetration Test Scoping Tool</a>
+  </div>
+</header>
+
+<!-- ── Phase banner ──────────────────────────────────────────────── -->
+<div class="govuk-phase-banner" role="region" aria-label="Phase">
+  <div class="govuk-phase-banner__content">
+    <span class="govuk-tag">Beta</span>
+    <span class="govuk-phase-banner__text">
+      This is a working tool to define pen test scope and rules of engagement.
+      All data is stored in your browser only — nothing is sent to a server.
+    </span>
+  </div>
+</div>
+
+<!-- ── Main ──────────────────────────────────────────────────────── -->
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content" role="main">
+
+    <h1 class="govuk-heading-xl">Penetration Test Scope &amp; Rules of Engagement</h1>
+    <p class="govuk-body-l">
+      Define the targets, constraints and authorisation for a penetration test engagement.
+      Your responses are stored in this browser only — nothing is sent to a server.
+    </p>
+
+    <!-- Step navigation -->
+    <nav class="step-nav" aria-label="Steps" id="stepNav">
+      <a class="step-nav__item active" href="#" data-step="1">
+        <span class="step-nav__number">1</span> Engagement
+      </a>
+      <a class="step-nav__item" href="#" data-step="2">
+        <span class="step-nav__number">2</span> Scope
+      </a>
+      <a class="step-nav__item" href="#" data-step="3">
+        <span class="step-nav__number">3</span> Rules of Engagement
+      </a>
+      <a class="step-nav__item" href="#" data-step="4">
+        <span class="step-nav__number">4</span> Review &amp; Export
+      </a>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- STEP 1: Engagement Details                                  -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="step-panel active" id="panel-1" aria-labelledby="heading-1">
+      <h2 class="govuk-heading-l" id="heading-1">1. Engagement details</h2>
+      <p class="govuk-body">Capture the metadata that will appear on the front page of your scoping document.</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="engagementName">Engagement name</label>
+        <span class="govuk-hint">A short, descriptive title for this assessment</span>
+        <input class="govuk-input govuk-input--width-two-thirds" id="engagementName" type="text" autocomplete="off" placeholder="e.g. External Infrastructure Assessment — Q3 2026">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="refNumber">Engagement reference</label>
+        <span class="govuk-hint">Internal reference, PO number, or ticket ID</span>
+        <input class="govuk-input govuk-input--width-one-third" id="refNumber" type="text" autocomplete="off" placeholder="e.g. PT-2026-047">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="clientOrg">Client organisation</label>
+        <input class="govuk-input govuk-input--width-two-thirds" id="clientOrg" type="text" autocomplete="off">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="clientContact">Client authorising contact</label>
+        <span class="govuk-hint">Name and job title of the person authorising the test</span>
+        <input class="govuk-input govuk-input--width-two-thirds" id="clientContact" type="text" autocomplete="off" placeholder="e.g. Name, CISO">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="leadTester">Lead tester / consultant</label>
+        <input class="govuk-input govuk-input--width-two-thirds" id="leadTester" type="text" autocomplete="off">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="testingOrg">Testing organisation</label>
+        <input class="govuk-input govuk-input--width-two-thirds" id="testingOrg" type="text" autocomplete="off">
+      </div>
+
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+        <div class="govuk-form-group" style="flex:1; min-width:180px;">
+          <label class="govuk-label" for="startDate">Planned start date</label>
+          <input class="govuk-input" id="startDate" type="date">
+        </div>
+        <div class="govuk-form-group" style="flex:1; min-width:180px;">
+          <label class="govuk-label" for="endDate">Planned end date</label>
+          <input class="govuk-input" id="endDate" type="date">
+        </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="testType">Assessment type</label>
+        <select class="govuk-select" id="testType">
+          <option value="">-- choose --</option>
+          <option>Black box — no prior knowledge</option>
+          <option>Grey box — partial knowledge (credentials or architecture docs)</option>
+          <option>White box — full knowledge (source code, architecture, credentials)</option>
+          <option>Red team exercise</option>
+          <option>Purple team exercise</option>
+          <option>Social engineering / phishing simulation</option>
+          <option>Physical security assessment</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="methodology">Primary methodology / framework</label>
+        <select class="govuk-select" id="methodology">
+          <option value="">-- choose --</option>
+          <option>OWASP Testing Guide (OTG)</option>
+          <option>Penetration Testing Execution Standard (PTES)</option>
+          <option>NIST SP 800-115</option>
+          <option>CREST methodology</option>
+          <option>CHECK scheme (NCSC)</option>
+          <option>TIBER-EU</option>
+          <option>Bespoke / client-defined</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="classificationLevel">Information classification</label>
+        <span class="govuk-hint">Per Government Security Classifications Policy 2023 (if applicable)</span>
+        <select class="govuk-select" id="classificationLevel">
+          <option value="">-- choose --</option>
+          <option>OFFICIAL</option>
+          <option>OFFICIAL-SENSITIVE</option>
+          <option>SECRET</option>
+          <option>Not applicable</option>
+        </select>
+      </div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button" onclick="goToStep(2)">Continue</button>
+        <button class="link-button" onclick="clearAll()">Start again</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- STEP 2: Scope Definition                                    -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="step-panel" id="panel-2" aria-labelledby="heading-2">
+      <h2 class="govuk-heading-l" id="heading-2">2. Scope definition</h2>
+      <p class="govuk-body">List every target that is in scope or explicitly out of scope for this engagement. Include IP addresses, IP ranges (CIDR), hostnames, URLs, applications, and any other assets.</p>
+
+      <!-- In scope -->
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend">
+          <h3 class="govuk-heading-m">In-scope targets</h3>
+        </legend>
+        <div class="govuk-inset-text">
+          Add every asset that may be tested. Be as specific as possible — include individual hosts rather than broad subnets unless the whole range is confirmed in scope.
+        </div>
+
+        <div class="target-col-headers">
+          <span>Target (IP / CIDR / hostname / URL)</span>
+          <span>Asset type</span>
+          <span>Notes / description</span>
+          <span></span>
+        </div>
+        <div class="target-list" id="inScopeList"></div>
+        <button class="add-target-btn" onclick="addTarget('in')">+ Add in-scope target</button>
+      </fieldset>
+
+      <!-- Out of scope -->
+      <fieldset class="govuk-fieldset" style="margin-top:2rem;">
+        <legend class="govuk-fieldset__legend">
+          <h3 class="govuk-heading-m">Out-of-scope targets</h3>
+        </legend>
+        <div class="govuk-inset-text">
+          Explicitly list any systems that <strong>must not</strong> be tested — shared infrastructure, third-party services, production databases in live environments, etc.
+        </div>
+
+        <div class="target-col-headers">
+          <span>Target (IP / CIDR / hostname / URL)</span>
+          <span>Asset type</span>
+          <span>Reason for exclusion</span>
+          <span></span>
+        </div>
+        <div class="target-list" id="outScopeList"></div>
+        <button class="add-target-btn" onclick="addTarget('out')">+ Add out-of-scope target</button>
+      </fieldset>
+
+      <!-- Environment -->
+      <div class="govuk-form-group" style="margin-top:2rem;">
+        <label class="govuk-label" for="environment">Target environment</label>
+        <select class="govuk-select" id="environment">
+          <option value="">-- choose --</option>
+          <option>Production</option>
+          <option>Pre-production / staging</option>
+          <option>Development</option>
+          <option>Test / QA</option>
+          <option>Isolated lab / clone</option>
+          <option>Mixed — see notes</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="scopeNotes">Additional scope notes</label>
+        <span class="govuk-hint">Any ambiguities, shared infrastructure caveats, cloud accounts in scope, etc.</span>
+        <textarea class="govuk-textarea" id="scopeNotes" rows="4"></textarea>
+      </div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button--secondary govuk-button" onclick="goToStep(1)">Back</button>
+        <button class="govuk-button" onclick="goToStep(3)">Continue</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- STEP 3: Rules of Engagement                                 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="step-panel" id="panel-3" aria-labelledby="heading-3">
+      <h2 class="govuk-heading-l" id="heading-3">3. Rules of engagement</h2>
+      <p class="govuk-body">Define the constraints and operational parameters that govern testing activity.</p>
+
+      <!-- Testing hours -->
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="testingHours">Permitted testing hours</label>
+        <span class="govuk-hint">Include timezone. e.g. "Monday–Friday, 09:00–17:00 BST only" or "24/7"</span>
+        <input class="govuk-input govuk-input--width-two-thirds" id="testingHours" type="text" placeholder="e.g. Monday–Friday 09:00–17:00 BST">
+      </div>
+
+      <!-- Techniques -->
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend">Permitted testing techniques</legend>
+        <span class="govuk-hint" style="margin-bottom:.75rem; display:block;">Select all that are explicitly permitted for this engagement</span>
+        <div class="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-recon" type="checkbox" value="passive-recon">
+            <label class="govuk-checkboxes__label" for="tech-recon">Passive reconnaissance (OSINT, DNS enumeration)</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-active" type="checkbox" value="active-scanning">
+            <label class="govuk-checkboxes__label" for="tech-active">Active scanning (port scanning, service fingerprinting)</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-vuln" type="checkbox" value="vuln-scanning">
+            <label class="govuk-checkboxes__label" for="tech-vuln">Automated vulnerability scanning</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-exploit" type="checkbox" value="exploitation">
+            <label class="govuk-checkboxes__label" for="tech-exploit">Manual exploitation of identified vulnerabilities</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-privesc" type="checkbox" value="priv-esc">
+            <label class="govuk-checkboxes__label" for="tech-privesc">Privilege escalation</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-lateral" type="checkbox" value="lateral">
+            <label class="govuk-checkboxes__label" for="tech-lateral">Lateral movement / pivoting</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-dos" type="checkbox" value="dos">
+            <label class="govuk-checkboxes__label" for="tech-dos">Denial of Service (DoS) / availability testing</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-phishing" type="checkbox" value="phishing">
+            <label class="govuk-checkboxes__label" for="tech-phishing">Social engineering / phishing simulation</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-physical" type="checkbox" value="physical">
+            <label class="govuk-checkboxes__label" for="tech-physical">Physical access / on-site testing</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="tech-c2" type="checkbox" value="c2">
+            <label class="govuk-checkboxes__label" for="tech-c2">Command and control (C2) / persistence testing</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Restrictions -->
+      <div class="govuk-form-group" style="margin-top:1.5rem;">
+        <label class="govuk-label" for="restrictions">Explicit restrictions &amp; prohibited activities</label>
+        <span class="govuk-hint">e.g. "Do not test the payments API", "No destructive payloads", "Do not exfiltrate real PII"</span>
+        <textarea class="govuk-textarea" id="restrictions" rows="4"></textarea>
+      </div>
+
+      <!-- Contacts -->
+      <h3 class="govuk-heading-m" style="margin-top:1rem;">Emergency &amp; escalation contacts</h3>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="clientEmergency">Client emergency contact</label>
+        <span class="govuk-hint">Name, phone number, and email. Available 24/7 if an incident occurs during testing.</span>
+        <textarea class="govuk-textarea" id="clientEmergency" rows="2" placeholder="e.g. Name — +44 7700 900123 — j.smith@client.gov.uk"></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="testerEmergency">Tester emergency contact</label>
+        <span class="govuk-hint">Testing team contact available during the engagement</span>
+        <textarea class="govuk-textarea" id="testerEmergency" rows="2" placeholder="e.g. Pentest team duty — +44 7700 900456 — pentest@testingco.com"></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="dataHandling">Data handling &amp; evidence</label>
+        <span class="govuk-hint">How will screenshots, logs, and credentials captured during testing be stored and destroyed?</span>
+        <textarea class="govuk-textarea" id="dataHandling" rows="3" placeholder="e.g. All evidence stored encrypted on an air-gapped laptop. Destroyed within 30 days of report delivery."></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="ipWhitelist">Tester source IP address(es) for whitelisting</label>
+        <span class="govuk-hint">Provide static IPs or ranges the client should whitelist on firewalls / WAFs</span>
+        <textarea class="govuk-textarea" id="ipWhitelist" rows="2" placeholder="e.g. 203.0.113.0/24, 198.51.100.10"></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="stopConditions">Stop conditions / break-glass criteria</label>
+        <span class="govuk-hint">Under what circumstances should testing pause immediately and who should be notified?</span>
+        <textarea class="govuk-textarea" id="stopConditions" rows="3" placeholder="e.g. Testing stops immediately if a live data breach is detected, if production systems become unavailable, or on instruction from the client's emergency contact."></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="additionalRoe">Additional rules / special conditions</label>
+        <textarea class="govuk-textarea" id="additionalRoe" rows="3"></textarea>
+      </div>
+
+      <!-- Declaration -->
+      <div class="declaration-box">
+        <div class="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="authorised" type="checkbox">
+            <label class="govuk-checkboxes__label" for="authorised">
+              <strong>I confirm that the testing described in this document has been formally authorised</strong>
+              by the client organisation named above, and that a written authorisation letter or purchase order
+              is in place prior to any testing commencing.
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button--secondary govuk-button" onclick="goToStep(2)">Back</button>
+        <button class="govuk-button" onclick="goToStep(4)">Continue to review</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- STEP 4: Review & Export                                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="step-panel" id="panel-4" aria-labelledby="heading-4">
+      <h2 class="govuk-heading-l" id="heading-4">4. Review &amp; export</h2>
+
+      <div class="govuk-notification-banner" role="region" aria-label="Ready to export">
+        <div class="govuk-notification-banner__header">Scoping document ready</div>
+        <div class="govuk-notification-banner__content">
+          Review the document preview below, then download in your preferred format.
+        </div>
+      </div>
+
+      <!-- Export cards -->
+      <div class="export-grid">
+        <div class="export-card">
+          <h3>Word document (.doc)</h3>
+          <p>Editable document for sharing and signature</p>
+          <button class="govuk-button govuk-button--secondary" onclick="exportWord()">Download Word (.doc)</button>
+        </div>
+        <div class="export-card">
+          <h3>Print / Save as PDF</h3>
+          <p>Use your browser's print dialog to save as PDF</p>
+          <button class="govuk-button govuk-button--secondary" onclick="window.print()">Print or save as PDF</button>
+        </div>
+        <div class="export-card">
+          <h3>Save progress (JSON)</h3>
+          <p>Save all data locally and reload later</p>
+          <button class="govuk-button govuk-button--secondary" onclick="saveJSON()">Save progress</button>
+        </div>
+        <div class="export-card">
+          <h3>Load progress (JSON)</h3>
+          <p>Restore a previously saved scoping session</p>
+          <input type="file" id="loadFile" accept=".json" style="display:none" onchange="loadJSON(event)">
+          <button class="govuk-button govuk-button--secondary" onclick="document.getElementById('loadFile').click()">Load progress</button>
+        </div>
+      </div>
+
+      <!-- Document preview -->
+      <h3 class="govuk-heading-m">Document preview</h3>
+      <div class="preview-box" id="previewBox">
+        <!-- rendered by JS -->
+      </div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button--secondary govuk-button" onclick="goToStep(3)">Back</button>
+        <button class="link-button" onclick="clearAll()">Start again</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── Footer ────────────────────────────────────────────────────── -->
+<footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-footer__container">
+    <p>
+      An open tool for any software delivery or security team — hosted at
+      <a href="https://scope.govassured.com">scope.govassured.com</a>.
+      Not affiliated with GOV.UK.
+      All data is stored in your browser only — nothing is sent to a server.
+    </p>
+    <p style="margin-top:.5rem;">
+      Licensed under the
+      <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ────────────────────────────────────────────────────────────────
+   State
+   ──────────────────────────────────────────────────────────────── */
+const ASSET_TYPES = [
+  '-- type --',
+  'Web application',
+  'API / web service',
+  'Mobile application',
+  'Network / infrastructure',
+  'IP address / host',
+  'IP range (CIDR)',
+  'Database',
+  'Cloud service / SaaS',
+  'Active Directory / IAM',
+  'VPN / remote access',
+  'Physical device / IoT',
+  'Other'
+];
+
+let inScopeTargets  = [];
+let outScopeTargets = [];
+let currentStep = 1;
+
+/* ────────────────────────────────────────────────────────────────
+   Step navigation
+   ──────────────────────────────────────────────────────────────── */
+function goToStep(n) {
+  // Save current state
+  saveToStorage();
+
+  // Update panels
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+
+  // Update nav
+  document.querySelectorAll('.step-nav__item').forEach(item => {
+    const s = parseInt(item.dataset.step);
+    item.classList.remove('active', 'completed');
+    if (s === n) item.classList.add('active');
+    else if (s < n) item.classList.add('completed');
+  });
+
+  currentStep = n;
+
+  if (n === 4) renderPreview();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Step nav click handlers
+document.querySelectorAll('.step-nav__item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    goToStep(parseInt(item.dataset.step));
+  });
+});
+
+/* ────────────────────────────────────────────────────────────────
+   Target rows
+   ──────────────────────────────────────────────────────────────── */
+function addTarget(type) {
+  const list = document.getElementById(type === 'in' ? 'inScopeList' : 'outScopeList');
+  const id = Date.now();
+
+  const typeOpts = ASSET_TYPES.map(t => `<option>${t}</option>`).join('');
+  const notesPlaceholder = type === 'in' ? 'Description / context' : 'Reason for exclusion';
+
+  const row = document.createElement('div');
+  row.className = 'target-row';
+  row.dataset.id = id;
+  row.dataset.type = type;
+  row.innerHTML = `
+    <input type="text" placeholder="IP / CIDR / hostname / URL" aria-label="Target">
+    <select aria-label="Asset type">${typeOpts}</select>
+    <input type="text" class="notes-input" placeholder="${notesPlaceholder}" aria-label="Notes">
+    <button class="remove-btn" onclick="removeTarget(this)" aria-label="Remove target">Remove</button>
+  `;
+  list.appendChild(row);
+}
+
+function removeTarget(btn) {
+  btn.closest('.target-row').remove();
+}
+
+function getTargets(type) {
+  const list = document.getElementById(type === 'in' ? 'inScopeList' : 'outScopeList');
+  return Array.from(list.querySelectorAll('.target-row')).map(row => {
+    const inputs = row.querySelectorAll('input');
+    const select = row.querySelector('select');
+    return {
+      target:    inputs[0].value.trim(),
+      assetType: select.value === '-- type --' ? '' : select.value,
+      notes:     inputs[1].value.trim()
+    };
+  }).filter(t => t.target);
+}
+
+function renderTargetList(targets, type, listEl) {
+  listEl.innerHTML = '';
+  targets.forEach(t => {
+    const typeOpts = ASSET_TYPES.map(at => `<option${at === t.assetType ? ' selected' : ''}>${at}</option>`).join('');
+    const notesPlaceholder = type === 'in' ? 'Description / context' : 'Reason for exclusion';
+    const row = document.createElement('div');
+    row.className = 'target-row';
+    row.dataset.type = type;
+    row.innerHTML = `
+      <input type="text" placeholder="IP / CIDR / hostname / URL" value="${escHtml(t.target)}" aria-label="Target">
+      <select aria-label="Asset type">${typeOpts}</select>
+      <input type="text" class="notes-input" placeholder="${notesPlaceholder}" value="${escHtml(t.notes)}" aria-label="Notes">
+      <button class="remove-btn" onclick="removeTarget(this)" aria-label="Remove target">Remove</button>
+    `;
+    listEl.appendChild(row);
+  });
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Get checked techniques
+   ──────────────────────────────────────────────────────────────── */
+function getCheckedTechniques() {
+  return Array.from(document.querySelectorAll('.govuk-checkboxes__input[id^="tech-"]:checked'))
+    .map(cb => cb.nextElementSibling.textContent.trim());
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Collect form data
+   ──────────────────────────────────────────────────────────────── */
+function collectData() {
+  return {
+    engagementName:     v('engagementName'),
+    refNumber:          v('refNumber'),
+    clientOrg:          v('clientOrg'),
+    clientContact:      v('clientContact'),
+    leadTester:         v('leadTester'),
+    testingOrg:         v('testingOrg'),
+    startDate:          v('startDate'),
+    endDate:            v('endDate'),
+    testType:           v('testType'),
+    methodology:        v('methodology'),
+    classificationLevel:v('classificationLevel'),
+    environment:        v('environment'),
+    scopeNotes:         v('scopeNotes'),
+    testingHours:       v('testingHours'),
+    techniques:         getCheckedTechniques(),
+    restrictions:       v('restrictions'),
+    clientEmergency:    v('clientEmergency'),
+    testerEmergency:    v('testerEmergency'),
+    dataHandling:       v('dataHandling'),
+    ipWhitelist:        v('ipWhitelist'),
+    stopConditions:     v('stopConditions'),
+    additionalRoe:      v('additionalRoe'),
+    authorised:         document.getElementById('authorised').checked,
+    inScope:            getTargets('in'),
+    outScope:           getTargets('out')
+  };
+}
+
+function v(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Populate form from data object
+   ──────────────────────────────────────────────────────────────── */
+function populateForm(d) {
+  const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  setVal('engagementName',     d.engagementName);
+  setVal('refNumber',          d.refNumber);
+  setVal('clientOrg',          d.clientOrg);
+  setVal('clientContact',      d.clientContact);
+  setVal('leadTester',         d.leadTester);
+  setVal('testingOrg',         d.testingOrg);
+  setVal('startDate',          d.startDate);
+  setVal('endDate',            d.endDate);
+  setVal('testType',           d.testType);
+  setVal('methodology',        d.methodology);
+  setVal('classificationLevel',d.classificationLevel);
+  setVal('environment',        d.environment);
+  setVal('scopeNotes',         d.scopeNotes);
+  setVal('testingHours',       d.testingHours);
+  setVal('restrictions',       d.restrictions);
+  setVal('clientEmergency',    d.clientEmergency);
+  setVal('testerEmergency',    d.testerEmergency);
+  setVal('dataHandling',       d.dataHandling);
+  setVal('ipWhitelist',        d.ipWhitelist);
+  setVal('stopConditions',     d.stopConditions);
+  setVal('additionalRoe',      d.additionalRoe);
+  document.getElementById('authorised').checked = !!d.authorised;
+
+  // Techniques
+  const techMap = {
+    'passive-recon': 'tech-recon', 'active-scanning': 'tech-active',
+    'vuln-scanning':  'tech-vuln',  'exploitation':    'tech-exploit',
+    'priv-esc':       'tech-privesc','lateral':        'tech-lateral',
+    'dos':            'tech-dos',   'phishing':        'tech-phishing',
+    'physical':       'tech-physical','c2':            'tech-c2'
+  };
+  // uncheck all first
+  Object.values(techMap).forEach(id => { const el = document.getElementById(id); if (el) el.checked = false; });
+  if (d.techniques) {
+    d.techniques.forEach(label => {
+      // Match by label text
+      document.querySelectorAll('.govuk-checkboxes__input[id^="tech-"]').forEach(cb => {
+        if (cb.nextElementSibling && cb.nextElementSibling.textContent.trim() === label) cb.checked = true;
+      });
+    });
+  }
+
+  // Targets
+  renderTargetList(d.inScope  || [], 'in',  document.getElementById('inScopeList'));
+  renderTargetList(d.outScope || [], 'out', document.getElementById('outScopeList'));
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Session storage (auto-save)
+   ──────────────────────────────────────────────────────────────── */
+function saveToStorage() {
+  try { sessionStorage.setItem('pentest-scope', JSON.stringify(collectData())); } catch(e){}
+}
+
+function loadFromStorage() {
+  try {
+    const raw = sessionStorage.getItem('pentest-scope');
+    if (raw) populateForm(JSON.parse(raw));
+  } catch(e){}
+}
+
+/* ────────────────────────────────────────────────────────────────
+   JSON save / load
+   ──────────────────────────────────────────────────────────────── */
+function saveJSON() {
+  const d = collectData();
+  const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (d.refNumber || 'scope') + '-progress.json';
+  a.click();
+}
+
+function loadJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      populateForm(JSON.parse(ev.target.result));
+      renderPreview();
+      alert('Progress loaded successfully.');
+    } catch(err) {
+      alert('Could not read file. Make sure it is a valid JSON file saved from this tool.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Clear all
+   ──────────────────────────────────────────────────────────────── */
+function clearAll() {
+  if (!confirm('Clear all data and start again?')) return;
+  sessionStorage.removeItem('pentest-scope');
+  document.querySelectorAll('input[type="text"], input[type="date"], textarea, select').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+  document.getElementById('inScopeList').innerHTML  = '';
+  document.getElementById('outScopeList').innerHTML = '';
+  goToStep(1);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Document preview renderer
+   ──────────────────────────────────────────────────────────────── */
+function renderPreview() {
+  const d = collectData();
+  const today = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+
+  const fmtDate = s => s ? new Date(s).toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+
+  function scopeTable(targets, outMode) {
+    if (!targets.length) return '<p><em>None specified.</em></p>';
+    const noteHeader = outMode ? 'Reason for exclusion' : 'Description';
+    let rows = targets.map(t => `
+      <tr>
+        <td><code>${escHtml(t.target)}</code></td>
+        <td>${escHtml(t.assetType) || '—'}</td>
+        <td>${escHtml(t.notes) || '—'}</td>
+      </tr>`).join('');
+    return `<table class="scope-table">
+      <thead><tr><th>Target</th><th>Asset type</th><th>${escHtml(noteHeader)}</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  }
+
+  function techList(techniques) {
+    if (!techniques.length) return '<p><em>None selected.</em></p>';
+    return '<ul>' + techniques.map(t => `<li>${escHtml(t)}</li>`).join('') + '</ul>';
+  }
+
+  const html = `
+    <h2>${escHtml(d.engagementName) || 'Penetration Test Scoping Document'}</h2>
+    <p class="preview-meta">
+      Reference: ${escHtml(d.refNumber) || '—'} &nbsp;|&nbsp;
+      Classification: ${escHtml(d.classificationLevel) || '—'} &nbsp;|&nbsp;
+      Generated: ${today}
+    </p>
+
+    <h3>1. Engagement details</h3>
+    <div class="govuk-summary-list">
+      ${row('Client organisation',       d.clientOrg)}
+      ${row('Authorising contact',       d.clientContact)}
+      ${row('Lead tester',               d.leadTester)}
+      ${row('Testing organisation',      d.testingOrg)}
+      ${row('Test dates',                d.startDate || d.endDate ? fmtDate(d.startDate) + ' – ' + fmtDate(d.endDate) : '')}
+      ${row('Assessment type',           d.testType)}
+      ${row('Methodology / framework',   d.methodology)}
+      ${row('Target environment',        d.environment)}
+    </div>
+
+    <h3>2. In-scope targets</h3>
+    ${scopeTable(d.inScope, false)}
+
+    <h3>3. Out-of-scope targets</h3>
+    ${scopeTable(d.outScope, true)}
+
+    ${d.scopeNotes ? `<h3>Scope notes</h3><p>${escHtml(d.scopeNotes).replace(/\n/g,'<br>')}</p>` : ''}
+
+    <h3>4. Rules of engagement</h3>
+    <div class="govuk-summary-list">
+      ${row('Permitted testing hours', d.testingHours)}
+    </div>
+
+    <strong>Permitted techniques</strong>
+    ${techList(d.techniques)}
+
+    ${d.restrictions ? `<strong>Restrictions &amp; prohibited activities</strong><p>${escHtml(d.restrictions).replace(/\n/g,'<br>')}</p>` : ''}
+
+    <h3>5. Contacts</h3>
+    <div class="govuk-summary-list">
+      ${row('Client emergency contact', d.clientEmergency)}
+      ${row('Tester emergency contact', d.testerEmergency)}
+      ${row('Source IPs for whitelisting', d.ipWhitelist)}
+    </div>
+
+    ${d.dataHandling   ? `<strong>Data handling &amp; evidence</strong><p>${escHtml(d.dataHandling).replace(/\n/g,'<br>')}</p>` : ''}
+    ${d.stopConditions ? `<strong>Stop conditions</strong><p>${escHtml(d.stopConditions).replace(/\n/g,'<br>')}</p>` : ''}
+    ${d.additionalRoe  ? `<strong>Additional rules</strong><p>${escHtml(d.additionalRoe).replace(/\n/g,'<br>')}</p>` : ''}
+
+    <h3>6. Authorisation</h3>
+    <p>${d.authorised
+      ? '✅ Formal authorisation confirmed by the lead tester at time of document generation.'
+      : '⚠️ Authorisation not yet confirmed — do not commence testing until this is in place.'
+    }</p>
+    <p><strong>Lead tester:</strong> ${escHtml(d.leadTester) || '—'} &nbsp;&nbsp; <strong>Date:</strong> ${today}</p>
+    <p><strong>Client authorising contact:</strong> ${escHtml(d.clientContact) || '—'}</p>
+    <br>
+    <p style="border-top:1px solid #ccc; padding-top:1rem; font-size:.8125rem; color:#505a5f;">
+      Generated by GOV Assured Penetration Test Scoping Tool — scope.govassured.com<br>
+      This document is a draft. It must be reviewed, agreed, and signed by both parties before testing commences.
+    </p>
+  `;
+
+  document.getElementById('previewBox').innerHTML = html;
+}
+
+function row(label, value) {
+  return `<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">${escHtml(label)}</dt>
+    <dd class="govuk-summary-list__value">${value ? escHtml(value) : '—'}</dd>
+  </div>`;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Word export
+   ──────────────────────────────────────────────────────────────── */
+function exportWord() {
+  saveToStorage();
+  const d = collectData();
+  const today = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+  const fmtDate = s => s ? new Date(s).toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+
+  function tbl(targets, outMode) {
+    if (!targets.length) return '<p><em>None specified.</em></p>';
+    const noteHeader = outMode ? 'Reason for exclusion' : 'Description';
+    const rows = targets.map(t => `<tr>
+      <td style="border:1px solid #ccc;padding:4px 8px;"><code>${escHtml(t.target)}</code></td>
+      <td style="border:1px solid #ccc;padding:4px 8px;">${escHtml(t.assetType)||'—'}</td>
+      <td style="border:1px solid #ccc;padding:4px 8px;">${escHtml(t.notes)||'—'}</td>
+    </tr>`).join('');
+    return `<table style="border-collapse:collapse;width:100%;font-size:10pt">
+      <tr style="background:#f3f2f1">
+        <th style="border:1px solid #ccc;padding:4px 8px;text-align:left">Target</th>
+        <th style="border:1px solid #ccc;padding:4px 8px;text-align:left">Asset type</th>
+        <th style="border:1px solid #ccc;padding:4px 8px;text-align:left">${escHtml(noteHeader)}</th>
+      </tr>${rows}</table>`;
+  }
+
+  const techHtml = d.techniques.length
+    ? '<ul>' + d.techniques.map(t => `<li>${escHtml(t)}</li>`).join('') + '</ul>'
+    : '<p><em>None selected.</em></p>';
+
+  const docHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta charset="utf-8">
+  <title>${escHtml(d.engagementName)||'Pentest Scope'}</title>
+  <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 11pt; color: #0b0c0c; margin: 2cm; }
+    h1 { font-size: 18pt; font-weight: bold; color: #0b0c0c; border-bottom: 2pt solid #0b0c0c; padding-bottom: 4pt; }
+    h2 { font-size: 14pt; font-weight: bold; color: #0b0c0c; margin-top: 16pt; border-bottom: 1pt solid #b1b4b6; padding-bottom: 2pt; }
+    h3 { font-size: 11pt; font-weight: bold; margin-top: 10pt; }
+    table.meta { width: 100%; border-collapse: collapse; margin: 8pt 0; }
+    table.meta td { padding: 4pt 0; vertical-align: top; font-size: 10pt; }
+    table.meta td:first-child { font-weight: bold; width: 40%; color: #0b0c0c; }
+    table.meta td:last-child { color: #505a5f; }
+    .badge { display: inline; padding: 1pt 4pt; }
+    .authorised { background: #cce2d8; padding: 8pt; margin: 8pt 0; }
+    .not-authorised { background: #f6d7d2; padding: 8pt; margin: 8pt 0; }
+    footer { font-size: 9pt; color: #505a5f; border-top: 1pt solid #b1b4b6; margin-top: 24pt; padding-top: 8pt; }
+  </style>
+</head>
+<body>
+  <h1>${escHtml(d.engagementName)||'Penetration Test Scoping Document'}</h1>
+  <p style="font-size:10pt; color:#505a5f;">
+    Reference: ${escHtml(d.refNumber)||'—'} &nbsp;|&nbsp;
+    Classification: ${escHtml(d.classificationLevel)||'—'} &nbsp;|&nbsp;
+    Generated: ${today}
+  </p>
+
+  <h2>1. Engagement Details</h2>
+  <table class="meta">
+    <tr><td>Client organisation</td><td>${escHtml(d.clientOrg)||'—'}</td></tr>
+    <tr><td>Authorising contact</td><td>${escHtml(d.clientContact)||'—'}</td></tr>
+    <tr><td>Lead tester</td><td>${escHtml(d.leadTester)||'—'}</td></tr>
+    <tr><td>Testing organisation</td><td>${escHtml(d.testingOrg)||'—'}</td></tr>
+    <tr><td>Test dates</td><td>${fmtDate(d.startDate)} – ${fmtDate(d.endDate)}</td></tr>
+    <tr><td>Assessment type</td><td>${escHtml(d.testType)||'—'}</td></tr>
+    <tr><td>Methodology</td><td>${escHtml(d.methodology)||'—'}</td></tr>
+    <tr><td>Target environment</td><td>${escHtml(d.environment)||'—'}</td></tr>
+  </table>
+
+  <h2>2. In-Scope Targets</h2>
+  ${tbl(d.inScope, false)}
+
+  <h2>3. Out-of-Scope Targets</h2>
+  ${tbl(d.outScope, true)}
+
+  ${d.scopeNotes ? `<h3>Scope Notes</h3><p>${escHtml(d.scopeNotes).replace(/\n/g,'<br>')}</p>` : ''}
+
+  <h2>4. Rules of Engagement</h2>
+  <table class="meta">
+    <tr><td>Permitted testing hours</td><td>${escHtml(d.testingHours)||'—'}</td></tr>
+  </table>
+
+  <h3>Permitted Techniques</h3>
+  ${techHtml}
+
+  ${d.restrictions ? `<h3>Restrictions &amp; Prohibited Activities</h3><p>${escHtml(d.restrictions).replace(/\n/g,'<br>')}</p>` : ''}
+
+  <h2>5. Contacts</h2>
+  <table class="meta">
+    <tr><td>Client emergency contact</td><td>${escHtml(d.clientEmergency)||'—'}</td></tr>
+    <tr><td>Tester emergency contact</td><td>${escHtml(d.testerEmergency)||'—'}</td></tr>
+    <tr><td>Tester source IPs</td><td>${escHtml(d.ipWhitelist)||'—'}</td></tr>
+  </table>
+
+  ${d.dataHandling   ? `<h3>Data Handling &amp; Evidence</h3><p>${escHtml(d.dataHandling).replace(/\n/g,'<br>')}</p>` : ''}
+  ${d.stopConditions ? `<h3>Stop Conditions</h3><p>${escHtml(d.stopConditions).replace(/\n/g,'<br>')}</p>` : ''}
+  ${d.additionalRoe  ? `<h3>Additional Rules</h3><p>${escHtml(d.additionalRoe).replace(/\n/g,'<br>')}</p>` : ''}
+
+  <h2>6. Authorisation</h2>
+  <div class="${d.authorised ? 'authorised' : 'not-authorised'}">
+    <p><strong>${d.authorised ? '✓ Authorisation confirmed' : '⚠ Authorisation NOT confirmed'}</strong></p>
+    <p>${d.authorised
+      ? 'The lead tester confirms that formal written authorisation is in place prior to testing commencing.'
+      : 'Testing must not commence until formal written authorisation has been received from the client.'
+    }</p>
+  </div>
+
+  <table class="meta" style="margin-top:16pt; border-top:1pt solid #b1b4b6; padding-top:8pt;">
+    <tr><td>Lead tester:</td><td>${escHtml(d.leadTester)||'—'}</td></tr>
+    <tr><td>Signature:</td><td style="height:40pt; border-bottom:1pt solid #505a5f; width:200pt;">&nbsp;</td></tr>
+    <tr><td>Date:</td><td>${today}</td></tr>
+  </table>
+  <br>
+  <table class="meta" style="margin-top:8pt;">
+    <tr><td>Client authorising contact:</td><td>${escHtml(d.clientContact)||'—'}</td></tr>
+    <tr><td>Signature:</td><td style="height:40pt; border-bottom:1pt solid #505a5f; width:200pt;">&nbsp;</td></tr>
+    <tr><td>Date:</td><td>&nbsp;</td></tr>
+  </table>
+
+  <footer>
+    <p>Generated by GOV Assured Penetration Test Scoping Tool — scope.govassured.com</p>
+    <p>This document is a draft. It must be reviewed, agreed, and signed by both parties before testing commences.</p>
+  </footer>
+<p class="ga-linkedin"><a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a></p>
+</body>
+</html>`;
+
+  const blob = new Blob([docHtml], { type: 'application/msword' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (d.refNumber || 'pentest-scope') + '.doc';
+  a.click();
+}
+
+/* ────────────────────────────────────────────────────────────────
+   HTML escape
+   ──────────────────────────────────────────────────────────────── */
+function escHtml(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,  '&amp;')
+    .replace(/</g,  '&lt;')
+    .replace(/>/g,  '&gt;')
+    .replace(/"/g,  '&quot;')
+    .replace(/'/g,  '&#39;');
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Init
+   ──────────────────────────────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', () => {
+  // Add one empty row to each list
+  addTarget('in');
+  addTarget('out');
+  // Restore session
+  loadFromStorage();
+});
+
+// Auto-save on unload
+window.addEventListener('beforeunload', saveToStorage);
+</script>
+</body>
+</html>
