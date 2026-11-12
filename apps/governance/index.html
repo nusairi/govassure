@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="govuk-template">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0c">
+  <title>Governance Review Tool — GOV Assured</title>
+  <!-- Favicon: dark background with blue governance pillars icon -->
+  <script src="/vendor/docx-8.5.0.umd.js"></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b0c0c'/%3E%3Crect x='5' y='24' width='22' height='3' rx='1' fill='%231d70b8'/%3E%3Crect x='5' y='5' width='22' height='3' rx='1' fill='%231d70b8'/%3E%3Crect x='7' y='10' width='3' height='12' rx='1' fill='%231d70b8'/%3E%3Crect x='14.5' y='10' width='3' height='12' rx='1' fill='%231d70b8'/%3E%3Crect x='22' y='10' width='3' height='12' rx='1' fill='%231d70b8'/%3E%3C/svg%3E">
+  <style>
+    /* ── GOV.UK Design System tokens ──────────────────────────────── */
+    :root {
+      --govuk-black:        #0b0c0c;
+      --govuk-white:        #ffffff;
+      --govuk-blue:         #1d70b8;
+      --govuk-blue-hover:   #003078;
+      --govuk-green:        #00703c;
+      --govuk-green-hover:  #005a30;
+      --govuk-light-grey:   #f3f2f1;
+      --govuk-mid-grey:     #b1b4b6;
+      --govuk-dark-grey:    #505a5f;
+      --govuk-focus:        #ffdd00;
+      --govuk-focus-text:   #0b0c0c;
+      --govuk-error:        #d4351c;
+      --govuk-border:       #b1b4b6;
+      --govuk-red:          #d4351c;
+      --govuk-yellow:       #fd0;
+      --ga-purple:          #4c2c92;
+      --rag-red-bg:         #fcd9d4;
+      --rag-amber-bg:       #fff3cd;
+      --rag-green-bg:       #d4edda;
+    }
+
+    /* ── Reset / base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 100%; }
+    body {
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--govuk-black);
+      background: var(--govuk-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Skip link ─────────────────────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -9999px; left: 0;
+      background: var(--govuk-yellow); color: var(--govuk-black);
+      font-weight: 700; padding: .75rem 1rem; z-index: 999; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Header ────────────────────────────────────────────────────── */
+    .govuk-header {
+      background: var(--govuk-black);
+      border-bottom: 10px solid var(--govuk-white);
+    }
+    .govuk-header__container {
+      max-width: 960px; margin: 0 auto; padding: .75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .5rem;
+    }
+    .govuk-header__logo-link {
+      text-decoration: none; display: flex; align-items: center; gap: .6rem;
+    }
+    .govuk-header__logo-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; background: var(--govuk-blue);
+      border-radius: 4px; flex-shrink: 0;
+    }
+    .govuk-header__logo-mark svg { display: block; }
+    .govuk-header__logotype {
+      color: var(--govuk-white); font-size: 1.1rem; font-weight: 700; line-height: 1.2;
+    }
+    .govuk-header__logotype span {
+      display: block; font-size: .75rem; font-weight: 400; color: #b1b4b6;
+    }
+    .govuk-header__service-name {
+      color: var(--govuk-white); font-size: .9rem; text-decoration: none; opacity: .85;
+    }
+
+    /* ── Phase banner ──────────────────────────────────────────────── */
+    .govuk-phase-banner {
+      background: var(--govuk-white); border-bottom: 1px solid var(--govuk-border);
+    }
+    .govuk-phase-banner__content {
+      max-width: 960px; margin: 0 auto; padding: .5rem 1rem;
+      display: flex; align-items: baseline; gap: .75rem; font-size: .875rem;
+    }
+    .govuk-tag {
+      display: inline-block; background: var(--govuk-blue); color: var(--govuk-white);
+      font-size: .75rem; font-weight: 700; letter-spacing: .5px;
+      text-transform: uppercase; padding: .15em .55em; border-radius: 2px;
+    }
+    .govuk-phase-banner__text { color: var(--govuk-black); }
+    .govuk-phase-banner__text a { color: var(--govuk-blue); }
+
+    /* ── Main container ────────────────────────────────────────────── */
+    .govuk-width-container { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+    .govuk-main-wrapper { padding: 2rem 0 3rem; }
+
+    /* ── Headings ──────────────────────────────────────────────────── */
+    .govuk-heading-xl {
+      font-size: 2rem; font-weight: 700; line-height: 1.09375;
+      margin-bottom: .5rem; color: var(--govuk-black);
+    }
+    .govuk-heading-l {
+      font-size: 1.5rem; font-weight: 700; line-height: 1.04167;
+      margin-bottom: 1rem; color: var(--govuk-black);
+      border-bottom: 2px solid var(--govuk-border); padding-bottom: .5rem;
+    }
+    .govuk-heading-m {
+      font-size: 1.125rem; font-weight: 700; line-height: 1.11111; margin-bottom: .75rem;
+    }
+    .govuk-body-l {
+      font-size: 1.125rem; line-height: 1.6;
+      margin-bottom: 1.5rem; color: var(--govuk-dark-grey);
+    }
+    .govuk-body { font-size: 1rem; line-height: 1.5; margin-bottom: 1rem; }
+    .govuk-hint { font-size: .875rem; color: var(--govuk-dark-grey); margin-bottom: .5rem; }
+
+    /* ── Tab navigation ────────────────────────────────────────────── */
+    .tab-nav {
+      display: flex; flex-wrap: wrap; gap: 0;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid var(--govuk-border);
+    }
+    .tab-nav__item {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.25rem .65rem;
+      font-size: 1rem; font-weight: 400;
+      color: var(--govuk-dark-grey);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: none;
+      background: none; border-top: none; border-left: none; border-right: none;
+      font-family: inherit;
+      transition: color .1s;
+    }
+    .tab-nav__item:hover { color: var(--govuk-black); }
+    .tab-nav__item.active {
+      font-weight: 700; color: var(--govuk-black);
+      border-bottom: 3px solid var(--govuk-blue);
+    }
+    .tab-nav__item:focus {
+      outline: 3px solid var(--govuk-focus); outline-offset: 0;
+      background: var(--govuk-focus); color: var(--govuk-black);
+    }
+
+    /* Badge showing completion count */
+    .tab-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 22px; height: 22px; padding: 0 5px;
+      border-radius: 11px;
+      background: var(--govuk-mid-grey); color: var(--govuk-white);
+      font-size: .7rem; font-weight: 700; flex-shrink: 0;
+    }
+    .tab-nav__item.active .tab-badge { background: var(--govuk-blue); }
+    .tab-badge.complete { background: var(--govuk-green); }
+
+    /* ── Tab panels ────────────────────────────────────────────────── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Inset text ────────────────────────────────────────────────── */
+    .govuk-inset-text {
+      border-left: 5px solid var(--govuk-mid-grey);
+      padding: .75rem 1rem; margin-bottom: 1.5rem;
+      background: var(--govuk-light-grey); font-size: .875rem;
+    }
+
+    /* ── Question card ─────────────────────────────────────────────── */
+    .question-card {
+      border: 1px solid var(--govuk-border);
+      margin-bottom: 1.25rem;
+      background: var(--govuk-white);
+    }
+    .question-card__header {
+      padding: .875rem 1rem .75rem;
+      border-bottom: 1px solid var(--govuk-border);
+      display: flex; align-items: flex-start; gap: .75rem;
+    }
+    .question-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 28px; height: 28px; padding: 0 4px;
+      border-radius: 4px; background: var(--govuk-blue);
+      color: var(--govuk-white); font-size: .75rem; font-weight: 700;
+      flex-shrink: 0; margin-top: .1rem;
+    }
+    .question-text-wrap { flex: 1; }
+    .question-text {
+      font-size: 1rem; font-weight: 700; line-height: 1.4;
+      color: var(--govuk-black); margin-bottom: .2rem;
+    }
+    .question-hint { font-size: .8125rem; color: var(--govuk-dark-grey); }
+
+    .question-card__body { padding: .875rem 1rem; }
+
+    /* RAG selector */
+    .rag-row {
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: .75rem; flex-wrap: wrap;
+    }
+    .rag-label { font-size: .8125rem; font-weight: 700; color: var(--govuk-dark-grey); }
+    .rag-btn {
+      font-family: inherit; font-size: .75rem; font-weight: 700;
+      padding: .25rem .65rem; border: 2px solid transparent;
+      border-radius: 2px; cursor: pointer; text-transform: uppercase; letter-spacing: .3px;
+    }
+    .rag-btn:focus { outline: 3px solid var(--govuk-focus); }
+    .rag-btn--red   { background: #fcd9d4; color: #6e1c12; border-color: #d4351c; }
+    .rag-btn--amber { background: #fff3cd; color: #6b4c00; border-color: #f4b400; }
+    .rag-btn--green { background: #d4edda; color: #0a4c22; border-color: #00703c; }
+    .rag-btn--na    { background: var(--govuk-light-grey); color: var(--govuk-dark-grey); border-color: var(--govuk-border); }
+    .rag-btn.selected.rag-btn--red   { background: #d4351c; color: #fff; }
+    .rag-btn.selected.rag-btn--amber { background: #f4b400; color: #0b0c0c; }
+    .rag-btn.selected.rag-btn--green { background: #00703c; color: #fff; }
+    .rag-btn.selected.rag-btn--na    { background: var(--govuk-dark-grey); color: #fff; }
+
+    .govuk-textarea {
+      font-family: inherit; font-size: .9375rem; color: var(--govuk-black);
+      background: var(--govuk-white); border: 2px solid var(--govuk-black);
+      padding: .5rem .75rem; width: 100%; min-height: 80px; resize: vertical;
+      -webkit-appearance: none; appearance: none;
+    }
+    .govuk-textarea:focus {
+      outline: 3px solid var(--govuk-focus); outline-offset: 0;
+      box-shadow: inset 0 0 0 2px var(--govuk-focus-text);
+    }
+    /* Card highlight by RAG */
+    .question-card[data-rag="red"]   { border-left: 4px solid #d4351c; }
+    .question-card[data-rag="amber"] { border-left: 4px solid #f4b400; }
+    .question-card[data-rag="green"] { border-left: 4px solid #00703c; }
+
+    /* ── Progress bar ──────────────────────────────────────────────── */
+    .progress-wrap {
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .progress-bar-outer {
+      flex: 1; min-width: 140px; height: 8px;
+      background: var(--govuk-light-grey); border-radius: 4px; overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%; background: var(--govuk-blue);
+      border-radius: 4px; transition: width .3s;
+    }
+    .progress-text { font-size: .875rem; color: var(--govuk-dark-grey); white-space: nowrap; }
+
+    /* ── Buttons ───────────────────────────────────────────────────── */
+    .govuk-button {
+      font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1;
+      display: inline-block; padding: .625rem 1rem;
+      border: 2px solid transparent; background: var(--govuk-green);
+      color: var(--govuk-white); cursor: pointer; text-decoration: none;
+      -webkit-appearance: none; appearance: none; box-shadow: 0 2px 0 #002d18;
+    }
+    .govuk-button:hover   { background: var(--govuk-green-hover); }
+    .govuk-button:focus   { outline: 3px solid var(--govuk-focus); outline-offset: 0; }
+    .govuk-button--secondary {
+      background: var(--govuk-light-grey); color: var(--govuk-black);
+      box-shadow: 0 2px 0 #929191;
+    }
+    .govuk-button--secondary:hover { background: #dbdad9; }
+    .govuk-button--warning {
+      background: var(--govuk-red); color: var(--govuk-white);
+      box-shadow: 0 2px 0 #55140b;
+    }
+    .govuk-button--warning:hover { background: #aa2a16; }
+    .govuk-button-group {
+      display: flex; flex-wrap: wrap; gap: .75rem; align-items: center;
+      margin-top: 1.5rem;
+    }
+    .govuk-button-group a {
+      color: var(--govuk-blue); font-size: .875rem; text-decoration: underline;
+    }
+
+    /* ── Summary panel ─────────────────────────────────────────────── */
+    .summary-section { margin-bottom: 2rem; }
+    .summary-table { width: 100%; border-collapse: collapse; font-size: .9375rem; }
+    .summary-table th, .summary-table td {
+      text-align: left; padding: .5rem .75rem;
+      border-bottom: 1px solid var(--govuk-border);
+    }
+    .summary-table th { font-weight: 700; color: var(--govuk-dark-grey); font-size: .8125rem; background: var(--govuk-light-grey); }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .rag-pill {
+      display: inline-block; padding: .15em .6em; border-radius: 2px;
+      font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .3px;
+    }
+    .rag-pill--red    { background: #d4351c; color: #fff; }
+    .rag-pill--amber  { background: #f4b400; color: #0b0c0c; }
+    .rag-pill--green  { background: #00703c; color: #fff; }
+    .rag-pill--na     { background: var(--govuk-mid-grey); color: #fff; }
+    .rag-pill--none   { color: var(--govuk-dark-grey); font-size: .8125rem; font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+    /* ── Footer ────────────────────────────────────────────────────── */
+    .govuk-footer {
+      border-top: 1px solid var(--govuk-border);
+      background: var(--govuk-light-grey);
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+    }
+    .govuk-footer__container {
+      max-width: 960px; margin: 0 auto; padding: 0 1rem;
+      font-size: .875rem; color: var(--govuk-dark-grey);
+    }
+    .govuk-footer__container a { color: var(--govuk-blue); }
+
+    /* ── Notification banner ───────────────────────────────────────── */
+    .notification-banner {
+      background: var(--govuk-blue); color: var(--govuk-white);
+      padding: .75rem 1rem; margin-bottom: 1.5rem;
+      display: none; font-size: .875rem; font-weight: 700;
+    }
+    .notification-banner.show { display: block; }
+    .notification-banner--success { background: var(--govuk-green); }
+
+    @media (max-width: 640px) {
+      .govuk-heading-xl { font-size: 1.5rem; }
+      .tab-nav__item { padding: .6rem .75rem; font-size: .875rem; }
+      .govuk-button-group { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=3ad52e60b7" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script></head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+
+<!-- Header -->
+<header class="govuk-header" role="banner">
+  <div class="govuk-header__container">
+    <a href="https://www.govassured.com/" class="govuk-header__logo-link" aria-label="GOV Assured home">
+      <span class="govuk-header__logo-mark" aria-hidden="true">
+        <!-- Governance pillars icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none">
+          <rect x="2" y="18" width="20" height="2.5" rx=".75" fill="white"/>
+          <rect x="2" y="3.5" width="20" height="2.5" rx=".75" fill="white"/>
+          <rect x="4" y="7.5" width="3" height="9" rx=".75" fill="white"/>
+          <rect x="10.5" y="7.5" width="3" height="9" rx=".75" fill="white"/>
+          <rect x="17" y="7.5" width="3" height="9" rx=".75" fill="white"/>
+        </svg>
+      </span>
+      <span class="govuk-header__logotype">
+        GOV Assured
+      </span>
+    </a>
+    <a href="/" class="govuk-header__service-name" onclick="switchTab('overview');return false">Governance Review Tool</a>
+  </div>
+</header>
+
+<!-- Phase banner -->
+<div class="govuk-phase-banner" role="region" aria-label="Phase">
+  <div class="govuk-phase-banner__content">
+    <span class="govuk-tag">Beta</span>
+    <span class="govuk-phase-banner__text">
+      This is a working tool for governance board submissions.
+      All data is stored in your browser only — nothing is sent to a server.
+    </span>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content">
+
+    <h1 class="govuk-heading-xl">Governance Review Tool</h1>
+    <p class="govuk-body-l">
+      Prepare submissions for governance board reviews. Complete the questions for the relevant board,
+      then export your responses as a document.
+    </p>
+
+    <!-- Notification banner -->
+    <div class="notification-banner notification-banner--success" id="notif" role="alert" aria-live="polite"></div>
+
+    <!-- Tab navigation -->
+    <nav class="tab-nav" role="tablist" aria-label="Governance boards">
+      <button class="tab-nav__item active" role="tab" aria-selected="true"  aria-controls="panel-overview" id="tab-overview" onclick="switchTab('overview')">
+        Overview
+      </button>
+      <button class="tab-nav__item" role="tab" aria-selected="false" aria-controls="panel-sab" id="tab-sab" onclick="switchTab('sab')">
+        SAB
+        <span class="tab-badge" id="badge-sab" aria-label="0 of 12 answered">0/12</span>
+      </button>
+      <button class="tab-nav__item" role="tab" aria-selected="false" aria-controls="panel-tda" id="tab-tda" onclick="switchTab('tda')">
+        TDA
+        <span class="tab-badge" id="badge-tda" aria-label="0 of 12 answered">0/12</span>
+      </button>
+      <button class="tab-nav__item" role="tab" aria-selected="false" aria-controls="panel-arb" id="tab-arb" onclick="switchTab('arb')">
+        ARB
+        <span class="tab-badge" id="badge-arb" aria-label="0 of 12 answered">0/12</span>
+      </button>
+      <button class="tab-nav__item" role="tab" aria-selected="false" aria-controls="panel-cab" id="tab-cab" onclick="switchTab('cab')">
+        CAB
+        <span class="tab-badge" id="badge-cab" aria-label="0 of 12 answered">0/12</span>
+      </button>
+      <button class="tab-nav__item" role="tab" aria-selected="false" aria-controls="panel-summary" id="tab-summary" onclick="switchTab('summary')">
+        Review &amp; Export
+        <span class="tab-badge" id="badge-summary">→</span>
+      </button>
+    </nav>
+
+    <!-- ══════════ TDA PANEL ══════════ -->
+    <div class="tab-panel" id="panel-tda" role="tabpanel" aria-labelledby="tab-tda">
+
+      <h2 class="govuk-heading-l">Technical Design Authority (TDA)</h2>
+      <div class="govuk-inset-text">
+        The TDA validates technical designs against organisational standards, security requirements and
+        architecture principles before development begins. Answer each question and set a RAG status
+        to indicate confidence or compliance.
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar-outer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="prog-tda-bar">
+          <div class="progress-bar-inner" id="prog-tda-inner" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="prog-tda-text">0 of 12 answered</span>
+      </div>
+
+      <div id="questions-tda"></div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button govuk-button--secondary" onclick="exportWordBoard('tda')">Download TDA report (.docx)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="printBoard('tda')">Print / Save TDA as PDF</button>
+      </div>
+      <div class="govuk-button-group" style="margin-top:.25rem">
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('sab')">← Back: SAB</button>
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('arb')">Next: ARB questions →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ ARB PANEL ══════════ -->
+    <div class="tab-panel" id="panel-arb" role="tabpanel" aria-labelledby="tab-arb">
+
+      <h2 class="govuk-heading-l">Architecture Review Board (ARB)</h2>
+      <div class="govuk-inset-text">
+        The ARB reviews architecture decisions, technology choices and strategic alignment. It ensures
+        solutions fit within the enterprise architecture landscape and support long-term organisational goals.
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar-outer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="prog-arb-bar">
+          <div class="progress-bar-inner" id="prog-arb-inner" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="prog-arb-text">0 of 12 answered</span>
+      </div>
+
+      <div id="questions-arb"></div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button govuk-button--secondary" onclick="exportWordBoard('arb')">Download ARB report (.docx)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="printBoard('arb')">Print / Save ARB as PDF</button>
+      </div>
+      <div class="govuk-button-group" style="margin-top:.25rem">
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('tda')">← Back: TDA</button>
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('cab')">Next: CAB questions →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ CAB PANEL ══════════ -->
+    <div class="tab-panel" id="panel-cab" role="tabpanel" aria-labelledby="tab-cab">
+
+      <h2 class="govuk-heading-l">Change Advisory Board (CAB)</h2>
+      <div class="govuk-inset-text">
+        The CAB governs changes to live services and infrastructure. It assesses risk, ensures rollback
+        plans are in place, and formally authorises changes before they proceed to production.
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar-outer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="prog-cab-bar">
+          <div class="progress-bar-inner" id="prog-cab-inner" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="prog-cab-text">0 of 12 answered</span>
+      </div>
+
+      <div id="questions-cab"></div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button govuk-button--secondary" onclick="exportWordBoard('cab')">Download CAB report (.docx)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="printBoard('cab')">Print / Save CAB as PDF</button>
+      </div>
+      <div class="govuk-button-group" style="margin-top:.25rem">
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('arb')">← Back: ARB</button>
+        <button class="govuk-button" onclick="switchTab('summary')">Review &amp; Export →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ OVERVIEW PANEL ══════════ -->
+    <div class="tab-panel active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+
+      <h2 class="govuk-heading-l">Governance Framework</h2>
+      <p class="govuk-body-l">
+        This tool supports formal submission to four governance boards. Each board plays a distinct role
+        in managing risk, ensuring compliance, and maintaining architectural integrity across the delivery lifecycle.
+      </p>
+
+      <!-- Flow diagram -->
+      <div style="margin-bottom:2rem;overflow-x:auto">
+        <svg viewBox="0 0 860 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Governance board flow: SAB leads to TDA, then ARB, then CAB"
+             style="width:100%;max-width:860px;min-width:480px;display:block">
+          <!-- SAB -->
+          <rect x="10" y="20" width="170" height="80" rx="6" fill="#1d70b8"/>
+          <text x="95" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="white">SAB</text>
+          <text x="95" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#cce0f5">Solution Architecture</text>
+          <text x="95" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#cce0f5">Board</text>
+          <!-- Arrow 1 -->
+          <line x1="182" y1="60" x2="212" y2="60" stroke="#505a5f" stroke-width="2" marker-end="url(#arr)"/>
+          <!-- TDA -->
+          <rect x="215" y="20" width="170" height="80" rx="6" fill="#003078"/>
+          <text x="300" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="white">TDA</text>
+          <text x="300" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#99b8e8">Technical Design</text>
+          <text x="300" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#99b8e8">Authority</text>
+          <!-- Arrow 2 -->
+          <line x1="387" y1="60" x2="417" y2="60" stroke="#505a5f" stroke-width="2" marker-end="url(#arr)"/>
+          <!-- ARB -->
+          <rect x="420" y="20" width="170" height="80" rx="6" fill="#4c2c92"/>
+          <text x="505" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="white">ARB</text>
+          <text x="505" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#c8b8f0">Architecture Review</text>
+          <text x="505" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#c8b8f0">Board</text>
+          <!-- Arrow 3 -->
+          <line x1="592" y1="60" x2="622" y2="60" stroke="#505a5f" stroke-width="2" marker-end="url(#arr)"/>
+          <!-- CAB -->
+          <rect x="625" y="20" width="170" height="80" rx="6" fill="#00703c"/>
+          <text x="710" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="white">CAB</text>
+          <text x="710" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#99d9b8">Change Advisory</text>
+          <text x="710" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#99d9b8">Board</text>
+          <!-- Delivery lifecycle label -->
+          <text x="430" y="114" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#505a5f">← Design &amp; Build phase ─────────────────────────── Change &amp; Release →</text>
+          <!-- Arrowhead marker -->
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#505a5f"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Board cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
+
+        <div style="border-top:4px solid #1d70b8;padding:1rem;background:#f3f2f1">
+          <div style="font-size:1.1rem;font-weight:700;color:#1d70b8;margin-bottom:.4rem">SAB</div>
+          <div style="font-size:.8125rem;font-weight:700;color:#0b0c0c;margin-bottom:.5rem">Solution Architecture Board</div>
+          <p style="font-size:.8125rem;line-height:1.5;color:#505a5f;margin:0">
+            <strong>Governance:</strong> Formally approves solution designs before build begins, ensuring decisions are documented and accountable.<br><br>
+            <strong>Risk:</strong> Identifies solution-level risks early, including dependency, cost and delivery risks, before commitments are made.<br><br>
+            <strong>Compliance:</strong> Verifies alignment with business requirements, regulatory obligations and organisational policy.
+          </p>
+        </div>
+
+        <div style="border-top:4px solid #003078;padding:1rem;background:#f3f2f1">
+          <div style="font-size:1.1rem;font-weight:700;color:#003078;margin-bottom:.4rem">TDA</div>
+          <div style="font-size:.8125rem;font-weight:700;color:#0b0c0c;margin-bottom:.5rem">Technical Design Authority</div>
+          <p style="font-size:.8125rem;line-height:1.5;color:#505a5f;margin:0">
+            <strong>Governance:</strong> Validates technical designs against organisational standards, ensuring all design decisions are reviewed and approved.<br><br>
+            <strong>Risk:</strong> Identifies technical and security risks in the design, including threat vectors, integration weaknesses and resilience gaps.<br><br>
+            <strong>Compliance:</strong> Ensures conformance with NCSC Secure by Design, NIST, ISO 27001 and UK GDPR data protection requirements.
+          </p>
+        </div>
+
+        <div style="border-top:4px solid #4c2c92;padding:1rem;background:#f3f2f1">
+          <div style="font-size:1.1rem;font-weight:700;color:#4c2c92;margin-bottom:.4rem">ARB</div>
+          <div style="font-size:.8125rem;font-weight:700;color:#0b0c0c;margin-bottom:.5rem">Architecture Review Board</div>
+          <p style="font-size:.8125rem;line-height:1.5;color:#505a5f;margin:0">
+            <strong>Governance:</strong> Ensures architecture decisions are formally recorded, consistent with enterprise strategy and not made in isolation.<br><br>
+            <strong>Risk:</strong> Manages architecture risk including technical debt, vendor lock-in, scalability constraints and cross-cutting concerns.<br><br>
+            <strong>Compliance:</strong> Enforces enterprise architecture standards, cloud strategy alignment and interoperability requirements.
+          </p>
+        </div>
+
+        <div style="border-top:4px solid #00703c;padding:1rem;background:#f3f2f1">
+          <div style="font-size:1.1rem;font-weight:700;color:#00703c;margin-bottom:.4rem">CAB</div>
+          <div style="font-size:.8125rem;font-weight:700;color:#0b0c0c;margin-bottom:.5rem">Change Advisory Board</div>
+          <p style="font-size:.8125rem;line-height:1.5;color:#505a5f;margin:0">
+            <strong>Governance:</strong> Provides formal authorisation for all changes to live services, ensuring accountability and traceability of every change.<br><br>
+            <strong>Risk:</strong> Assesses change risk, rollback plans and implementation schedules to minimise service disruption.<br><br>
+            <strong>Compliance:</strong> Enforces ITIL/ITSM change management processes and ensures audit trails meet regulatory and contractual requirements.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button" onclick="switchTab('sab')">Start: SAB questions →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ SAB PANEL ══════════ -->
+    <div class="tab-panel" id="panel-sab" role="tabpanel" aria-labelledby="tab-sab">
+
+      <h2 class="govuk-heading-l">Solution Architecture Board (SAB)</h2>
+      <div class="govuk-inset-text">
+        The SAB reviews solution designs against business requirements, delivery approach and operational
+        readiness. It ensures the proposed solution delivers value, is commercially sound and can be
+        sustained after go-live.
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar-outer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="prog-sab-bar">
+          <div class="progress-bar-inner" id="prog-sab-inner" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="prog-sab-text">0 of 12 answered</span>
+      </div>
+
+      <div id="questions-sab"></div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button govuk-button--secondary" onclick="exportWordBoard('sab')">Download SAB report (.docx)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="printBoard('sab')">Print / Save SAB as PDF</button>
+      </div>
+      <div class="govuk-button-group" style="margin-top:.25rem">
+        <button class="govuk-button govuk-button--secondary" onclick="switchTab('tda')">Next: TDA questions →</button>
+      </div>
+    </div>
+
+    <!-- ══════════ SUMMARY / EXPORT PANEL ══════════ -->
+    <div class="tab-panel" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary">
+
+      <h2 class="govuk-heading-l">Review &amp; Export</h2>
+      <p class="govuk-body">
+        Review your responses across all four boards before exporting. Unanswered questions are
+        highlighted — you can return to any tab to complete them.
+      </p>
+
+      <div id="summary-content"></div>
+
+      <div class="govuk-button-group">
+        <button class="govuk-button" onclick="exportWord()">Download Word (.docx)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+
+      <div class="govuk-button-group" style="margin-top:.75rem">
+        <button class="govuk-button govuk-button--secondary" onclick="saveProgress()">Save progress (JSON)</button>
+        <button class="govuk-button govuk-button--secondary" onclick="document.getElementById('load-input').click()">Load progress (JSON)</button>
+        <input type="file" id="load-input" accept=".json" style="display:none" onchange="loadProgress(event)">
+        <button class="govuk-button govuk-button--warning" onclick="confirmReset()">Start again</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-footer__container">
+    An open tool for any software delivery or governance team — hosted at
+    <a href="https://governance.govassured.com">governance.govassured.com</a>.
+    Not affiliated with GOV.UK.
+    All data is stored in your browser only — nothing is sent to a server.
+    Licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>.
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   DATA: Questions for each board
+══════════════════════════════════════════════════════════════════ */
+const BOARDS = {
+  tda: {
+    label: 'Technical Design Authority (TDA)',
+    questions: [
+      {
+        q: 'Has a technical design document (TDD) been produced and version-controlled?',
+        hint: 'Confirm the document reference, version number, and where it is stored.'
+      },
+      {
+        q: 'Does the design adhere to organisational technical standards and architecture principles?',
+        hint: 'List any standards applied (e.g. NCSC Secure by Design, NIST, ISO 27001 controls).'
+      },
+      {
+        q: 'Has a threat model been produced for the solution?',
+        hint: 'Describe the methodology used (e.g. STRIDE, PASTA) and any significant threats identified.'
+      },
+      {
+        q: 'What security controls have been designed into the solution?',
+        hint: 'Cover authentication, authorisation, encryption at rest and in transit, input validation, and secrets management.'
+      },
+      {
+        q: 'What is the data classification of information processed, stored, or transmitted?',
+        hint: 'Reference the Government Security Classifications Policy 2023 where applicable (OFFICIAL, OFFICIAL-SENSITIVE, SECRET).'
+      },
+      {
+        q: 'Has a Data Protection Impact Assessment (DPIA) been conducted or scoped?',
+        hint: 'Confirm whether a DPIA is required under UK GDPR Article 35 and its current status.'
+      },
+      {
+        q: 'What are the integration points and external dependencies? How are APIs and interfaces secured?',
+        hint: 'List all upstream and downstream systems, API authentication methods, and data exchange formats.'
+      },
+      {
+        q: 'What are the resilience, availability and disaster recovery requirements, and how are they met by the design?',
+        hint: 'State the target RTO/RPO, redundancy approach, and any failover or backup mechanisms.'
+      },
+      {
+        q: 'Has accessibility been considered for any user-facing components?',
+        hint: 'Confirm WCAG 2.1 AA compliance approach and any automated or manual testing planned.'
+      },
+      {
+        q: 'What is the approach to logging, monitoring and alerting?',
+        hint: 'Describe what events are logged, where logs are stored, retention period, and how alerts are raised and actioned.'
+      },
+      {
+        q: 'Have technical debt items been identified and documented with a remediation plan?',
+        hint: 'List known compromises made during design and the agreed plan to address them post-delivery.'
+      },
+      {
+        q: 'What are the performance and scalability requirements, and how does the design address them?',
+        hint: 'State expected load profiles, performance SLAs, and the approach to horizontal or vertical scaling.'
+      }
+    ]
+  },
+  arb: {
+    label: 'Architecture Review Board (ARB)',
+    questions: [
+      {
+        q: 'Does the solution align with the enterprise architecture vision, roadmap, and target state?',
+        hint: 'Reference the relevant enterprise architecture strategy documents and explain how the solution contributes to the target state.'
+      },
+      {
+        q: 'What architecture patterns are being adopted, and what is the rationale for each?',
+        hint: 'e.g. microservices, event-driven, serverless, monolith. Explain why each pattern was chosen over alternatives.'
+      },
+      {
+        q: 'What are the key build-vs-buy decisions, and what commercial or open-source products are being used?',
+        hint: 'Provide the rationale for each decision including cost, supportability, strategic fit, and exit strategy.'
+      },
+      {
+        q: 'How does the solution integrate with the existing technology landscape? Has a technology landscape diagram been produced?',
+        hint: 'Identify all touchpoints with existing systems, shared services, and platforms. Highlight any deviations from approved standards.'
+      },
+      {
+        q: 'How does the solution align with the cloud strategy?',
+        hint: 'Confirm cloud-first, cloud-native, hybrid, or on-premise approach and alignment with any approved cloud platforms or IaaS/PaaS agreements.'
+      },
+      {
+        q: 'What are the data flows and boundary definitions? Has a data flow diagram (DFD) been produced?',
+        hint: 'Define data flows at each system boundary, including cross-domain or cross-classification flows. Identify any data residency requirements.'
+      },
+      {
+        q: 'Have interoperability and open standards been considered? What APIs or standards are being adopted?',
+        hint: 'Reference relevant standards (e.g. REST, OpenAPI, GDS API standards, FHIR for health). Explain how the solution avoids vendor lock-in.'
+      },
+      {
+        q: 'What is the decommissioning or migration plan for any systems being replaced or superseded?',
+        hint: 'Describe the cutover approach, parallel running period (if any), data migration, and how legacy systems will be retired.'
+      },
+      {
+        q: 'What is the target operating model, and how will the solution be supported and maintained post-delivery?',
+        hint: 'Confirm who owns the service, the support tier, on-call arrangements, and any managed service or third-party support contracts.'
+      },
+      {
+        q: 'How does the solution address capacity and demand planning over a 3–5 year horizon?',
+        hint: 'State expected growth in users, data volume, or transactions and how the architecture accommodates that growth without significant re-engineering.'
+      },
+      {
+        q: 'What architecture risks have been identified, and how are they being managed?',
+        hint: 'List risks with likelihood and impact ratings, mitigations in place, and residual risk. Identify any risks requiring escalation.'
+      },
+      {
+        q: 'Has a cross-cutting concerns review been conducted?',
+        hint: 'Confirm how the following are handled consistently across the solution: identity and access management, observability, secrets management, configuration management, and certificate lifecycle.'
+      }
+    ]
+  },
+  sab: {
+    label: 'Solution Architecture Board (SAB)',
+    questions: [
+      {
+        q: 'Does the solution meet the stated business requirements? How have user needs been captured and incorporated?',
+        hint: 'Reference the business requirements document or user research outputs. List any requirements not being met and the agreed position.'
+      },
+      {
+        q: 'What are the key design decisions and trade-offs, and how were they reached?',
+        hint: 'Document significant decisions using an Architecture Decision Record (ADR) or equivalent. Include options considered and the rationale for the chosen approach.'
+      },
+      {
+        q: 'Has a service dependency map been produced?',
+        hint: 'Identify all upstream and downstream service dependencies, including shared platforms, APIs, and third-party services the solution relies on.'
+      },
+      {
+        q: 'What is the approach to change management, and how will stakeholders be engaged throughout delivery?',
+        hint: 'Describe how changes to the solution design will be governed, communicated, and approved. Identify key stakeholder groups and engagement channels.'
+      },
+      {
+        q: 'What are the cost implications, and has a value-for-money assessment been completed?',
+        hint: 'Provide a high-level total cost of ownership (TCO) including build, run, and licence costs. Reference any business case or spending approval.'
+      },
+      {
+        q: 'What is the delivery approach, and how does the architecture support iterative delivery?',
+        hint: 'Describe how the solution will be delivered in phases or sprints. Confirm that interim states are viable and that the architecture does not block early delivery of value.'
+      },
+      {
+        q: 'What assumptions and constraints have been identified, and how do they affect the solution?',
+        hint: 'List all assumptions (technical, commercial, organisational) and constraints (budget, timeline, technology). State how each is being managed.'
+      },
+      {
+        q: 'Has a commercial and contractual risk assessment been conducted?',
+        hint: 'Confirm supplier due diligence, contract terms (IP ownership, exit provisions, data handling), and any single points of commercial failure.'
+      },
+      {
+        q: 'What is the transition and migration plan, including data migration?',
+        hint: 'Describe how the organisation will move from the current state to the target state. Include data migration approach, cleansing, validation, and rollback plan.'
+      },
+      {
+        q: 'How will the solution be tested, and what test strategy is in place?',
+        hint: 'Describe the testing approach (unit, integration, UAT, performance, security, accessibility). Confirm who is responsible for each test phase and what pass criteria apply.'
+      },
+      {
+        q: 'What are the key project and delivery risks, and how do they relate to the architecture?',
+        hint: 'Identify risks that could cause the solution architecture to change materially during delivery. Include any dependency on third parties, skills gaps, or procurement timelines.'
+      },
+      {
+        q: 'Has business continuity and operational resilience been considered for the solution?',
+        hint: 'Confirm that a Business Continuity Plan (BCP) has been considered or is in place, and that the solution has been assessed against the organisation\'s operational resilience requirements.'
+      }
+    ]
+  },
+  cab: {
+    label: 'Change Advisory Board (CAB)',
+    questions: [
+      {
+        q: 'What is the nature, scope and category of the change?',
+        hint: 'Classify the change as Standard, Normal or Emergency. Describe what is changing and why, including affected components, services, and systems.'
+      },
+      {
+        q: 'What is the business justification and expected benefit of the change?',
+        hint: 'State the reason for the change, the benefit it delivers, and any regulatory, contractual or operational driver.'
+      },
+      {
+        q: 'What is the risk assessment for this change?',
+        hint: 'Rate likelihood and impact. Identify risks introduced by the change and mitigations in place. Include residual risk after mitigations.'
+      },
+      {
+        q: 'What systems, services, and users are affected by this change?',
+        hint: 'List all impacted systems, dependent services, and user groups. Confirm whether production, pre-production or both are affected.'
+      },
+      {
+        q: 'What testing has been completed prior to this change request?',
+        hint: 'Confirm the test types completed (unit, integration, regression, UAT, performance). State who signed off test results and where evidence is held.'
+      },
+      {
+        q: 'What is the rollback and back-out plan if the change fails?',
+        hint: 'Describe the step-by-step rollback procedure, who will execute it, and how long it will take. Confirm the rollback has been tested where possible.'
+      },
+      {
+        q: 'What is the proposed implementation schedule, maintenance window, and estimated duration?',
+        hint: 'State the planned date, time, and duration of the change window. Confirm the window has been agreed with service owners and operations teams.'
+      },
+      {
+        q: 'Have all relevant stakeholders been notified and approvals obtained?',
+        hint: 'List stakeholders who have been informed and those whose approval is required. Confirm that service owners, security, and operations have reviewed the change.'
+      },
+      {
+        q: 'Are there any change freeze periods, blackout dates, or release conflicts that apply?',
+        hint: 'Confirm the change does not fall within a release freeze, critical business period, or conflict with another scheduled change.'
+      },
+      {
+        q: 'What dependencies exist that could affect or be affected by this change?',
+        hint: 'Identify upstream and downstream dependencies. Confirm that dependency owners have been consulted and that sequencing is correct.'
+      },
+      {
+        q: 'What are the post-implementation review arrangements and success criteria?',
+        hint: 'Define how success will be measured, who will conduct the post-implementation review, and within what timeframe. Include monitoring and alerting checks to be performed after the change.'
+      },
+      {
+        q: 'Has a communication plan been prepared for impacted users and support teams?',
+        hint: 'Confirm that affected users and support staff have been notified in advance. Include planned communications for during and after the change window.'
+      }
+    ]
+  }
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════════════ */
+const state = {
+  sab: { answers: [], rags: [] },
+  tda: { answers: [], rags: [] },
+  arb: { answers: [], rags: [] },
+  cab: { answers: [], rags: [] }
+};
+
+/* Initialise state arrays */
+Object.keys(BOARDS).forEach(board => {
+  const n = BOARDS[board].questions.length;
+  state[board].answers = new Array(n).fill('');
+  state[board].rags    = new Array(n).fill('');
+});
+
+/* ══════════════════════════════════════════════════════════════════
+   RENDER QUESTIONS
+══════════════════════════════════════════════════════════════════ */
+function renderQuestions(boardKey) {
+  const board = BOARDS[boardKey];
+  const container = document.getElementById('questions-' + boardKey);
+  container.innerHTML = '';
+
+  board.questions.forEach((item, idx) => {
+    const rag = state[boardKey].rags[idx] || '';
+    const answer = state[boardKey].answers[idx] || '';
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.rag = rag;
+    card.id = boardKey + '-q-' + idx;
+
+    const ragBtns = ['red','amber','green','na'].map(r => {
+      const sel = rag === r ? ' selected' : '';
+      const labels = { red: 'Red', amber: 'Amber', green: 'Green', na: 'N/A' };
+      return `<button class="rag-btn rag-btn--${r}${sel}" onclick="setRag('${boardKey}',${idx},'${r}')" type="button" aria-pressed="${rag===r}">${labels[r]}</button>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="question-card__header">
+        <span class="question-number" aria-hidden="true">${idx + 1}</span>
+        <div class="question-text-wrap">
+          <div class="question-text">${item.q}</div>
+          ${item.hint ? `<div class="question-hint">${item.hint}</div>` : ''}
+        </div>
+      </div>
+      <div class="question-card__body">
+        <div class="rag-row">
+          <span class="rag-label">RAG status:</span>
+          ${ragBtns}
+        </div>
+        <label class="govuk-label govuk-label--s" for="${boardKey}-ans-${idx}">Response</label>
+        <textarea
+          class="govuk-textarea"
+          id="${boardKey}-ans-${idx}"
+          rows="3"
+          placeholder="Enter your response…"
+          oninput="setAnswer('${boardKey}',${idx},this.value)"
+        >${answer}</textarea>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function renderAllQuestions() {
+  ['sab','tda','arb','cab'].forEach(renderQuestions);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   STATE UPDATES
+══════════════════════════════════════════════════════════════════ */
+function setRag(board, idx, rag) {
+  // Toggle off if already selected
+  state[board].rags[idx] = (state[board].rags[idx] === rag) ? '' : rag;
+  const card = document.getElementById(board + '-q-' + idx);
+  card.dataset.rag = state[board].rags[idx];
+  // Update buttons
+  card.querySelectorAll('.rag-btn').forEach(btn => {
+    const r = btn.className.match(/rag-btn--(\w+)/)[1];
+    const active = state[board].rags[idx] === r;
+    btn.classList.toggle('selected', active);
+    btn.setAttribute('aria-pressed', active);
+  });
+  updateProgress(board);
+  autosave();
+}
+
+function setAnswer(board, idx, value) {
+  state[board].answers[idx] = value;
+  updateProgress(board);
+  autosave();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PROGRESS
+══════════════════════════════════════════════════════════════════ */
+function updateProgress(board) {
+  const q = BOARDS[board].questions;
+  const answered = q.filter((_, i) => state[board].answers[i].trim() !== '' || state[board].rags[i] !== '').length;
+  const pct = Math.round((answered / q.length) * 100);
+
+  document.getElementById('prog-' + board + '-inner').style.width = pct + '%';
+  document.getElementById('prog-' + board + '-text').textContent = `${answered} of ${q.length} answered`;
+  document.getElementById('prog-' + board + '-bar').setAttribute('aria-valuenow', pct);
+
+  const badge = document.getElementById('badge-' + board);
+  badge.textContent = `${answered}/${q.length}`;
+  badge.classList.toggle('complete', answered === q.length);
+  badge.setAttribute('aria-label', `${answered} of ${q.length} answered`);
+}
+
+function updateAllProgress() {
+  ['sab','tda','arb','cab'].forEach(updateProgress);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════════════════════════════════ */
+function switchTab(key) {
+  // If switching to summary, rebuild it
+  if (key === 'summary') buildSummary();
+
+  document.querySelectorAll('.tab-nav__item').forEach(btn => {
+    const active = btn.id === 'tab-' + key;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', active);
+  });
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.id === 'panel-' + key);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SUMMARY
+══════════════════════════════════════════════════════════════════ */
+function buildSummary() {
+  const container = document.getElementById('summary-content');
+  container.innerHTML = '';
+
+  ['sab','tda','arb','cab'].forEach(boardKey => {
+    const board = BOARDS[boardKey];
+    const section = document.createElement('div');
+    section.className = 'summary-section';
+
+    const heading = document.createElement('h3');
+    heading.className = 'govuk-heading-m';
+    heading.textContent = board.label;
+    section.appendChild(heading);
+
+    const table = document.createElement('table');
+    table.className = 'summary-table';
+    table.innerHTML = `<thead><tr><th>#</th><th>Question</th><th>RAG</th><th>Response</th></tr></thead>`;
+    const tbody = document.createElement('tbody');
+
+    board.questions.forEach((item, idx) => {
+      const rag = state[boardKey].rags[idx] || '';
+      const ans = state[boardKey].answers[idx] || '';
+      const tr = document.createElement('tr');
+      let ragHtml = rag
+        ? `<span class="rag-pill rag-pill--${rag}">${rag.toUpperCase()}</span>`
+        : `<span class="rag-pill rag-pill--none">Not set</span>`;
+      let ansHtml = ans.trim()
+        ? ans.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')
+        : `<span style="color:var(--govuk-dark-grey);font-size:.875rem">No response entered</span>`;
+
+      tr.innerHTML = `<td style="width:32px;font-weight:700;color:var(--govuk-dark-grey)">${idx+1}</td>
+        <td style="font-size:.875rem">${item.q}</td>
+        <td style="white-space:nowrap">${ragHtml}</td>
+        <td style="font-size:.875rem">${ansHtml}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    section.appendChild(table);
+    container.appendChild(section);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   EXPORT: WORD (.docx)
+══════════════════════════════════════════════════════════════════ */
+const RAG_FILL  = { red: 'D4351C', amber: 'F4B400', green: '00703C', na: '888888' };
+const RAG_TEXT  = { red: 'FFFFFF', amber: '0B0C0C', green: 'FFFFFF', na: 'FFFFFF' };
+const BORDER    = { style: window.docx ? docx.BorderStyle.SINGLE : 'single', size: 4, color: 'B1B4B6' };
+const CELL_BORDERS = { top: BORDER, bottom: BORDER, left: BORDER, right: BORDER };
+
+function makeDocxCell(text, opts = {}) {
+  const { Document, Paragraph, TextRun, TableCell, WidthType, ShadingType } = docx;
+  return new TableCell({
+    borders: CELL_BORDERS,
+    shading: opts.fill ? { fill: opts.fill, type: ShadingType.CLEAR, color: 'auto' } : undefined,
+    width: opts.w ? { size: opts.w, type: WidthType.DXA } : undefined,
+    children: [new Paragraph({
+      spacing: { before: 60, after: 60 },
+      children: [new TextRun({ text: text || '', bold: opts.bold || false, color: opts.color || '0B0C0C', size: opts.size || 20 })]
+    })]
+  });
+}
+
+async function buildDocx(boardKeys) {
+  const { Document, Paragraph, Table, TableRow, TextRun, HeadingLevel, WidthType, Packer, ShadingType } = docx;
+  const date = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+
+  const children = [
+    new Paragraph({
+      spacing: { after: 120 },
+      children: [new TextRun({ text: 'Governance Review — Responses', bold: true, size: 40, color: '0B0C0C' })]
+    }),
+    new Paragraph({
+      spacing: { after: 480 },
+      children: [new TextRun({ text: `Exported: ${date}`, size: 20, color: '505A5F' })]
+    })
+  ];
+
+  boardKeys.forEach(boardKey => {
+    const board = BOARDS[boardKey];
+    children.push(new Paragraph({
+      heading: HeadingLevel.HEADING_1,
+      spacing: { before: 480, after: 200 },
+      children: [new TextRun({ text: board.label, bold: true, size: 28, color: '0B0C0C' })]
+    }));
+
+    const headerRow = new TableRow({
+      tableHeader: true,
+      children: [
+        makeDocxCell('#',        { bold: true, fill: 'F3F2F1', w: 450 }),
+        makeDocxCell('Question', { bold: true, fill: 'F3F2F1', w: 4400 }),
+        makeDocxCell('RAG',      { bold: true, fill: 'F3F2F1', w: 900 }),
+        makeDocxCell('Response', { bold: true, fill: 'F3F2F1' })
+      ]
+    });
+
+    const dataRows = board.questions.map((item, idx) => {
+      const rag = state[boardKey].rags[idx] || '';
+      const ans = state[boardKey].answers[idx] || '';
+      return new TableRow({
+        children: [
+          makeDocxCell(String(idx + 1), { w: 450 }),
+          makeDocxCell(item.q, { w: 4400 }),
+          makeDocxCell(rag ? rag.toUpperCase() : '—', {
+            bold: !!rag, fill: rag ? RAG_FILL[rag] : undefined,
+            color: rag ? RAG_TEXT[rag] : '505A5F', w: 900
+          }),
+          makeDocxCell(ans || 'No response entered', { color: ans ? '0B0C0C' : '505A5F' })
+        ]
+      });
+    });
+
+    children.push(new Table({
+      width: { size: 100, type: WidthType.PERCENTAGE },
+      rows: [headerRow, ...dataRows]
+    }));
+    children.push(new Paragraph({ text: '', spacing: { after: 300 } }));
+  });
+
+  const doc = new Document({ sections: [{ children }] });
+  return await Packer.toBlob(doc);
+}
+
+async function exportWord() {
+  try {
+    const blob = await buildDocx(['sab','tda','arb','cab']);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'governance-review.docx';
+    a.click(); URL.revokeObjectURL(url);
+  } catch(e) { notify('Export failed: ' + e.message, true); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SAVE / LOAD / AUTOSAVE
+══════════════════════════════════════════════════════════════════ */
+function saveProgress() {
+  const json = JSON.stringify({ version: 1, state });
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'governance-review.json';
+  a.click(); URL.revokeObjectURL(url);
+  notify('Progress saved as governance-review.json', false);
+}
+
+function loadProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.state) throw new Error('Invalid file');
+      ['sab','tda','arb','cab'].forEach(board => {
+        if (data.state[board]) {
+          const n = BOARDS[board].questions.length;
+          state[board].answers = (data.state[board].answers || []).slice(0, n);
+          state[board].rags    = (data.state[board].rags    || []).slice(0, n);
+          // Pad if shorter
+          while (state[board].answers.length < n) state[board].answers.push('');
+          while (state[board].rags.length    < n) state[board].rags.push('');
+        }
+      });
+      renderAllQuestions();
+      updateAllProgress();
+      notify('Progress loaded successfully.', false);
+    } catch {
+      notify('Could not load file — please check it is a valid progress JSON.', true);
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function autosave() {
+  try {
+    sessionStorage.setItem('govassure-governance', JSON.stringify(state));
+  } catch {}
+}
+
+function loadAutosave() {
+  try {
+    const raw = sessionStorage.getItem('govassure-governance');
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    ['sab','tda','arb','cab'].forEach(board => {
+      if (saved[board]) {
+        const n = BOARDS[board].questions.length;
+        state[board].answers = (saved[board].answers || []).slice(0, n);
+        state[board].rags    = (saved[board].rags    || []).slice(0, n);
+        while (state[board].answers.length < n) state[board].answers.push('');
+        while (state[board].rags.length    < n) state[board].rags.push('');
+      }
+    });
+  } catch {}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESET
+══════════════════════════════════════════════════════════════════ */
+function confirmReset() {
+  if (!confirm('This will clear all responses. Are you sure?')) return;
+  Object.keys(BOARDS).forEach(board => {
+    const n = BOARDS[board].questions.length;
+    state[board].answers = new Array(n).fill('');
+    state[board].rags    = new Array(n).fill('');
+  });
+  try { sessionStorage.removeItem('govassure-governance'); } catch {}
+  renderAllQuestions();
+  updateAllProgress();
+  switchTab('overview');
+  notify('All responses cleared.', false);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   NOTIFICATION
+══════════════════════════════════════════════════════════════════ */
+function notify(msg, isError) {
+  const el = document.getElementById('notif');
+  el.textContent = msg;
+  el.className = 'notification-banner show' + (isError ? '' : ' notification-banner--success');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.classList.remove('show'); }, 4000);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SINGLE-BOARD EXPORT
+══════════════════════════════════════════════════════════════════ */
+function boardReportHTML(boardKey) {
+  const board = BOARDS[boardKey];
+  const date = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+  let html = `<html><head><meta charset="utf-8"><title>${board.label} — Governance Review</title>
+    <style>
+      body { font-family: Arial, sans-serif; font-size: 11pt; color: #0b0c0c; }
+      h1 { font-size: 18pt; } h2 { font-size: 14pt; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+      table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+      th { background: #f3f2f1; font-size: 9pt; text-align: left; padding: 6px 8px; border: 1px solid #b1b4b6; }
+      td { padding: 6px 8px; border: 1px solid #b1b4b6; font-size: 10pt; vertical-align: top; }
+      .rag-red   { background: #d4351c; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 8pt; }
+      .rag-amber { background: #f4b400; color: #0b0c0c; padding: 2px 6px; font-weight: bold; font-size: 8pt; }
+      .rag-green { background: #00703c; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 8pt; }
+      .rag-na    { background: #888; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 8pt; }
+    </style></head><body>
+    <h1>${board.label}</h1>
+    <p>Exported: ${date}</p>
+    <table><tr><th>#</th><th>Question</th><th>RAG</th><th>Response</th></tr>`;
+
+  board.questions.forEach((item, idx) => {
+    const rag = state[boardKey].rags[idx] || '';
+    const ans = (state[boardKey].answers[idx] || '').replace(/\n/g,'<br>');
+    const ragCell = rag ? `<span class="rag-${rag}">${rag.toUpperCase()}</span>` : '—';
+    html += `<tr>
+      <td>${idx+1}</td>
+      <td>${item.q}</td>
+      <td>${ragCell}</td>
+      <td>${ans || '<em>No response</em>'}</td>
+    </tr>`;
+  });
+  html += '</table></body></html>';
+  return html;
+}
+
+async function exportWordBoard(boardKey) {
+  try {
+    const blob = await buildDocx([boardKey]);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `governance-${boardKey}-report.docx`;
+    a.click(); URL.revokeObjectURL(url);
+  } catch(e) { notify('Export failed: ' + e.message, true); }
+}
+
+function printBoard(boardKey) {
+  const html = boardReportHTML(boardKey);
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  win.print();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════════════ */
+loadAutosave();
+renderAllQuestions();
+updateAllProgress();
+</script>
+<p class="ga-linkedin"><a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a></p>
+</body>
+</html>
