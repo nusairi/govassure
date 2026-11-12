@@ -1,0 +1,17 @@
+{
+  "routes": [],
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json",
+    ".avif": "image/avif",
+    ".webp": "image/webp"
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-vRc79FC9uPLJlMuhzrYFCDJ3KB7kvZCZDT5FD50nWoo=' 'sha256-iaQuBL+CytLx/L9IsOos9zFdhYJ6CSxgcruR7uENsn0='; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/ga-404.html",
+      "statusCode": 404
+    }
+  }
+}

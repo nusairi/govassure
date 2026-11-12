@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="govuk-template">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GOV Assured Open Source Community Tools — cyber governance, risk, compliance and resilience</title>
+<meta name="description" content="Free, open source tools that help UK organisations with cyber governance, risk, compliance, business continuity and resilience. NCSC CAF v4.0 self-assessment, Secure by Design Statement of Applicability, Cyber Essentials readiness, supplier risk tracking, BCP creation, penetration test scoping and more.">
+<meta name="theme-color" content="#021c17">
+<link rel="canonical" href="https://home.govassured.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="GOV Assured Open Source Community Tools">
+<meta property="og:description" content="Free, open source tools for cyber governance, risk, compliance, business continuity and resilience.">
+<meta property="og:url" content="https://home.govassured.com/">
+<meta property="og:image" content="https://home.govassured.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23021c17'/%3E%3Cpath d='M16 5l9 3.5v7c0 6-3.9 9.8-9 11.5-5.1-1.7-9-5.5-9-11.5v-7L16 5z' fill='none' stroke='%23f0c987' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M11.5 16.2l3.2 3.2 6-6.4' fill='none' stroke='%23f0c987' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preload" as="image" type="image/avif" media="(max-width: 759.98px)" imagesrcset="/img/hero-wide-640.avif 640w, /img/hero-wide-960.avif 960w, /img/hero-wide-1200.avif 1200w" imagesizes="calc(100vw - 2rem)" fetchpriority="high">
+<link rel="stylesheet" href="/home.css?v=3" id="home-base">
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style><link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme"><link rel="stylesheet" href="/ga-app.css?v=a3bb86d77d" id="ga-app"><script src="/ga-sources.js?v=74dd5ae5ce" id="ga-sources-js" defer></script>
+<link rel="stylesheet" href="/home-layout.css?v=3" id="home-layout">
+<noscript><link rel="stylesheet" href="/home-nojs.css?v=1"></noscript>
+<script src="/home.js?v=3" defer></script>
+</head>
+
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+
+<!-- ============ HEADER ============ -->
+<header class="gv-header js-nav" role="banner">
+  <div class="width-container">
+    <div class="gv-header__inner">
+      <a href="https://www.govassured.com/" class="gv-header__logo" aria-label="GOV Assured home">
+        <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M16 3l11 4.2v8.3c0 7.2-4.7 11.8-11 13.5-6.3-1.7-11-6.3-11-13.5V7.2L16 3z" fill="none" stroke="#f0c987" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M10.8 16.4l3.7 3.7 6.9-7.4" fill="none" stroke="#f0c987" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="gv-header__name">GOV Assured</span>
+      </a>
+      <span class="gv-header__tag">Open Source</span>
+
+      <button type="button" class="gv-header__toggle" id="menu-toggle"
+              aria-controls="primary-nav" aria-expanded="false" aria-label="Menu">
+        <span class="gv-header__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+
+      <nav class="gv-header__nav" id="primary-nav" aria-label="Primary">
+        <a href="#tools">Tools</a>
+        <a href="#why">Why GOV Assured</a>
+        <a href="#who">Who it's for</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ REQUIRED TOP-OF-PAGE STATEMENT ============ -->
+<div class="gv-servicebar">
+  <div class="width-container">
+    <p class="gv-servicebar__inner">GOV Assured Open Source Community Tools</p>
+  </div>
+</div>
+
+<!-- ============ PHASE BANNER ============ -->
+<div class="gv-phase">
+  <div class="width-container">
+    <div class="gv-phase__inner">
+      <strong class="gv-tag">Beta</strong>
+      <span>Free community tools. Most run entirely in your browser — no account, no data sent to a server.</span>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- ============ HERO ============ -->
+<section class="gx-hero" aria-labelledby="hero-h">
+  <div class="width-container gx-hero__grid">
+    <div class="gx-hero__copy">
+      <hr class="gv-hero__rule">
+      <h1 id="hero-h">
+        Cyber governance, risk and resilience
+        <span class="accent">without the licence fee</span>
+      </h1>
+      <p class="gx-hero__lede">
+        A growing suite of free, open source tools that help UK public sector bodies, suppliers and
+        charities assess, evidence and improve their cyber security posture — from NCSC CAF v4.0
+        self-assessment through to business continuity planning and penetration test scoping.
+      </p>
+      <div class="gv-hero__actions">
+        <a href="#tools" class="gv-button">Browse the tools</a>
+        <a href="https://assessment.govassured.com" class="gv-button gv-button--secondary">Start a CAF assessment</a>
+      </div>
+    </div>
+    <div class="gx-hero__art" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 760px)" type="image/avif" srcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-960.avif 960w" sizes="(min-width: 1120px) 440px, 40vw" width="960" height="960">
+        <source media="(min-width: 760px)" type="image/webp" srcset="/img/hero-480.webp 480w, /img/hero-720.webp 720w, /img/hero-960.webp 960w" sizes="(min-width: 1120px) 440px, 40vw" width="960" height="960">
+        <source type="image/avif" srcset="/img/hero-wide-640.avif 640w, /img/hero-wide-960.avif 960w, /img/hero-wide-1200.avif 1200w" sizes="calc(100vw - 2rem)" width="1200" height="560">
+        <img src="/img/hero-wide-960.webp" srcset="/img/hero-wide-640.webp 640w, /img/hero-wide-960.webp 960w, /img/hero-wide-1200.webp 1200w" sizes="calc(100vw - 2rem)" width="1200" height="560" alt="" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+  </div>
+
+  <!-- ============ STATS ============ -->
+  <div class="width-container">
+    <div class="gx-stats" role="group" aria-label="Service at a glance">
+      <div class="gv-stat"><span class="gv-stat__num">8</span><span class="gv-stat__label">Live tools, all free to use</span></div>
+      <div class="gv-stat"><span class="gv-stat__num">38</span><span class="gv-stat__label">CAF v4.0 IGPs covered</span></div>
+      <div class="gv-stat"><span class="gv-stat__num">1,046</span><span class="gv-stat__label">NIST SP 800-53 controls mapped</span></div>
+      <div class="gv-stat"><span class="gv-stat__num">£0</span><span class="gv-stat__label">Cost — no account required</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section class="gv-section gx-tools" id="tools">
+  <div class="width-container">
+    <hr class="gv-rule">
+    <h2 class="gv-h2">The tools</h2>
+    <p class="gv-section__intro">
+      Each tool runs independently in your browser at its own address. Pick the one that matches the
+      job in front of you, or work through them in sequence to build a complete assurance picture.
+    </p>
+
+    <nav class="gx-jump" aria-label="Tool categories">
+      <a href="#group-assess">Assess and certify</a>
+      <a href="#group-design">Design and build securely</a>
+      <a href="#group-govern">Govern and recover</a>
+    </nav>
+
+    <!-- Group 1: Assess and certify -->
+    <section class="gx-group" id="group-assess" aria-labelledby="group-assess-h">
+      <div class="gx-group__head">
+        <span class="gx-group__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <div>
+          <p class="gx-group__eyebrow">Step 1</p>
+          <h3 class="gx-group__h" id="group-assess-h">Assess and certify</h3>
+        </div>
+      </div>
+      <div class="gx-cards">
+
+      <!-- 1. CAF -->
+      <article class="gv-card gv-card--caf gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          <p class="gv-card__domain">assessment.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">CAF v4.0 Self-Assessment</h4>
+          <p>Assess your organisation against the full NCSC Cyber Assessment Framework v4.0 — all
+             4 objectives, 14 principles and 38 Indicators of Good Practice.</p>
+          <ul class="gv-card__list">
+            <li>Achieved / Partially achieved / Not achieved scoring</li>
+            <li>Progress saved automatically to your browser</li>
+            <li>Export and re-import as JSON for review or handover</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://assessment.govassured.com">
+            Open the CAF tool
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 5. Cyber Essentials -->
+      <article class="gv-card gv-card--ce gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <p class="gv-card__domain">ce.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">Cyber Essentials Readiness</h4>
+          <p>Work through 29 questions across the five Cyber Essentials control areas before you pay
+             for certification, so you find the gaps before an assessor does.</p>
+          <ul class="gv-card__list">
+            <li>Firewalls, secure configuration, user access control, malware protection, patching</li>
+            <li>Shows where you are ready and where remediation is needed</li>
+            <li>Preparation only — certification comes from an IASME-accredited body</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://ce.govassured.com">
+            Open the CE readiness tool
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      </div>
+    </section>
+
+    <!-- Group 2: Design and build securely -->
+    <section class="gx-group" id="group-design" aria-labelledby="group-design-h">
+      <div class="gx-group__head">
+        <span class="gx-group__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span>
+        <div>
+          <p class="gx-group__eyebrow">Step 2</p>
+          <h3 class="gx-group__h" id="group-design-h">Design and build securely</h3>
+        </div>
+      </div>
+      <div class="gx-cards">
+
+      <!-- 2. Secure by Design SoA -->
+      <article class="gv-card gv-card--sbd gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+          </span>
+          <p class="gv-card__domain">sbd.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">Secure by Design SoA Generator</h4>
+          <p>Produce a Statement of Applicability for your service. Declare the data, stakeholders and
+             technologies in scope, and the tool works out which controls apply and why.</p>
+          <ul class="gv-card__list">
+            <li>Every control mapped to Secure by Design, CAF v4.0 and NIST SP 800-53 Rev. 5</li>
+            <li>130-control curated baseline, or browse the full 1,046-control library</li>
+            <li>Inherent and residual risk capture, plus a traceable scope-to-control map</li>
+            <li>Export to Word, PDF or a CSV risk register</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://sbd.govassured.com">
+            Open the SoA generator
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. API Matrix -->
+      <article class="gv-card gv-card--api gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          </span>
+          <p class="gv-card__domain">api.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">API Security Controls Matrix</h4>
+          <p>The seven NCSC API security pillars mapped against every UK classification tier, from
+             OFFICIAL through to TOP SECRET, so you can see exactly which controls apply.</p>
+          <ul class="gv-card__list">
+            <li>Based on NCSC <em>Securing HTTP-based APIs</em> (April 2025)</li>
+            <li>Cross-referenced to GSCP 2023, CAF v4.0 and GPG 13</li>
+            <li>Settles “what controls does this API actually need?” at design time</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://api.govassured.com">
+            Open the API matrix
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 8. Scope -->
+      <article class="gv-card gv-card--scope gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+          </span>
+          <p class="gv-card__domain">scope.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">Penetration Test Scoping</h4>
+          <p>Define targets, constraints and authorisation for a test engagement, then export a
+             signed-off scope and rules of engagement document.</p>
+          <ul class="gv-card__list">
+            <li>In-scope and explicitly out-of-scope assets, IP ranges and environments</li>
+            <li>Testing windows, permitted techniques, stop conditions and escalation contacts</li>
+            <li>OWASP, PTES, NIST SP 800-115, CREST, CHECK and TIBER-EU methodologies</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://scope.govassured.com">
+            Open the scoping tool
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      </div>
+    </section>
+
+    <!-- Group 3: Govern and recover -->
+    <section class="gx-group" id="group-govern" aria-labelledby="group-govern-h">
+      <div class="gx-group__head">
+        <span class="gx-group__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg></span>
+        <div>
+          <p class="gx-group__eyebrow">Step 3</p>
+          <h3 class="gx-group__h" id="group-govern-h">Govern and recover</h3>
+        </div>
+      </div>
+      <div class="gx-cards">
+
+      <!-- 4. Governance -->
+
+      <article class="gv-card gv-card--gov gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>
+          </span>
+          <p class="gv-card__domain">governance.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">Governance Review Tool</h4>
+          <p>Prepare submissions for governance board reviews. Work through the questions for each
+             board, set a RAG status, then export the whole pack as a document.</p>
+          <ul class="gv-card__list">
+            <li>Technical Design Authority, Architecture Review Board and Solution Architecture Board</li>
+            <li>12 questions per board with RAG confidence ratings</li>
+            <li>Export to Word or PDF; save and reload progress as JSON</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://governance.govassured.com">
+            Open the governance tool
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 7. BCP -->
+      <article class="gv-card gv-card--bcp gx-card">
+        <div class="gx-card__top">
+          <span class="gv-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </span>
+          <p class="gv-card__domain">bcp.govassured.com</p>
+        </div>
+        <div class="gv-card__body">
+          <h4 class="gv-h3">BCP Generator</h4>
+          <p>Answer a nine-step guided wizard about your organisation and get a tailored, professional
+             business continuity plan written for you. About 20–30 minutes.</p>
+          <ul class="gv-card__list">
+            <li>Covers cyber attack, IT failure, supply chain, premises, weather and more</li>
+            <li>AI drafts the narrative; download the finished plan as a Word document</li>
+            <li>Aligned to Cabinet Office BCM guidance, NCSC and BS 65000:2022</li>
+          </ul>
+        </div>
+        <div class="gv-card__foot">
+          <a class="gv-card__link" href="https://bcp.govassured.com">
+            Open the BCP builder
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      </div>
+    </section>
+
+    <!-- Where to start (moved up from "Who" so it sits next to the tools it points to) -->
+    <div class="gv-inset gx-start">
+      <span class="gx-start__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+      <p class="gx-start__text">
+        <strong>Not sure where to start?</strong> Smaller organisations usually begin with
+        <a href="https://ce.govassured.com">Cyber Essentials readiness</a> and a
+        <a href="https://bcp.govassured.com">business continuity plan</a>. Public sector bodies in scope for
+        assurance reporting tend to start with the <a href="https://assessment.govassured.com">CAF v4.0 self-assessment</a>,
+        then use the <a href="https://governance.govassured.com">governance review tool</a> to take the gaps to a board.
+        If you are standing up a new service, begin with the
+        <a href="https://sbd.govassured.com">Secure by Design SoA generator</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY (approach) ============ -->
+<section class="gv-section gv-section--grey gx-why" id="why">
+  <div class="width-container">
+    <div class="gx-why__head">
+      <div>
+        <hr class="gv-rule">
+        <h2 class="gv-h2">Built for the people doing the work</h2>
+        <p class="gv-section__intro">
+          Governance, risk and compliance tooling is usually sold by the seat and priced for
+          organisations that already have a security budget. GOV Assured exists for everyone else.
+        </p>
+      </div>
+      <div class="gx-why__art" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="/img/approach-480.avif 480w, /img/approach-760.avif 760w, /img/approach-1000.avif 1000w" sizes="(min-width: 760px) 420px, calc(100vw - 2rem)">
+          <img src="/img/approach-760.webp" srcset="/img/approach-480.webp 480w, /img/approach-760.webp 760w, /img/approach-1000.webp 1000w" sizes="(min-width: 760px) 420px, calc(100vw - 2rem)" width="1000" height="760" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </div>
+    <ul class="gv-list-tick gx-features">
+      <li><strong>Free and open source</strong> — no licence, no seats, no sales call.</li>
+      <li><strong>Private by design</strong> — most tools store everything in your browser and send nothing to a server.</li>
+      <li><strong>Aligned to UK frameworks</strong> — NCSC CAF v4.0, Cyber Essentials, GSCP 2023, GPG 13 and BS 65000:2022.</li>
+      <li><strong>Portable evidence</strong> — export to Word, PDF or JSON so the output is yours to keep and hand over.</li>
+      <li><strong>Practical, not theoretical</strong> — built from real assurance, audit and continuity engagements.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHO ============ -->
+<section class="gv-section" id="who">
+  <div class="width-container">
+    <hr class="gv-rule">
+    <h2 class="gv-h2">Who these tools are for</h2>
+    <p class="gv-section__intro">
+      If you are accountable for cyber security outcomes but do not have an enterprise GRC platform
+      behind you, these tools are built for your situation.
+    </p>
+    <ul class="gv-chips">
+      <li>Central government departments and ALBs</li>
+      <li>Local authorities</li>
+      <li>NHS trusts and health bodies</li>
+      <li>Emergency services</li>
+      <li>Education and academy trusts</li>
+      <li>Housing associations</li>
+      <li>Charities and the third sector</li>
+      <li>Public sector suppliers</li>
+      <li>SMEs entering public procurement</li>
+      <li>Consultants and virtual CISOs</li>
+      <li>Internal audit and assurance teams</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ABOUT / LINKEDIN ============ -->
+<section class="gv-section gv-section--dark gx-about" id="about">
+  <div class="width-container">
+    <div class="gv-author">
+      <div class="gv-author__media gx-about__art" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="/img/about-450.avif 450w, /img/about-675.avif 675w, /img/about-900.avif 900w" sizes="(min-width: 760px) 440px, calc(100vw - 2rem)">
+          <img src="/img/about-675.webp" srcset="/img/about-450.webp 450w, /img/about-675.webp 675w, /img/about-900.webp 900w" sizes="(min-width: 760px) 440px, calc(100vw - 2rem)" width="900" height="600" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div>
+        <hr class="gv-rule">
+        <h2 class="gv-h2">About GOV Assured</h2>
+        <p class="gv-section__intro">
+          GOV Assured is an independent, community-run project. The tools are built and maintained by
+          GOV Assured, a cyber security consultancy working in and around UK public sector assurance,
+          and shared openly so that other teams do not have to rebuild the same spreadsheets.
+        </p>
+        <p class="gx-about__note">
+          Feedback, corrections and contributions are welcome — particularly from practitioners who
+          are using these frameworks in anger.
+        </p>
+        <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="gv-linkedin">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="gv-footer" role="contentinfo">
+  <div class="width-container">
+    <div class="gv-footer__grid">
+      <div>
+        <h2>GOV Assured Open Source Community Tools</h2>
+        <p class="gx-footer__lede">
+          Free tools supporting organisations with cyber governance, risk, compliance, business
+          continuity and resilience.
+        </p>
+        <p class="gv-oss">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+          Open source · community maintained
+        </p>
+      </div>
+
+      <div>
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="https://assessment.govassured.com">CAF v4.0 self-assessment</a></li>
+          <li><a href="https://sbd.govassured.com">Secure by Design SoA generator</a></li>
+          <li><a href="https://api.govassured.com">API security controls matrix</a></li>
+          <li><a href="https://governance.govassured.com">Governance review tool</a></li>
+          <li><a href="https://ce.govassured.com">Cyber Essentials readiness</a></li>
+          <li><a href="https://bcp.govassured.com">BCP generator</a></li>
+          <li><a href="https://scope.govassured.com">Penetration test scoping</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Elsewhere</h2>
+        <ul>
+          <li><a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">GOV Assured on LinkedIn</a></li>
+          <li><a href="https://github.com/nusairi/govassure" target="_blank" rel="noopener">GOV Assured on GitHub</a></li>
+          <li><a href="https://www.ncsc.gov.uk/collection/caf" rel="noopener">NCSC CAF collection</a></li>
+          <li><a href="https://www.ncsc.gov.uk/cyberessentials/overview" rel="noopener">NCSC Cyber Essentials</a></li>
+          <li><a href="https://www.ncsc.gov.uk/collection/securing-http-based-apis" rel="noopener">NCSC securing HTTP-based APIs</a></li>
+          <li><a href="https://www.gov.uk/government/publications/government-security-classifications" rel="noopener">Government Security Classifications</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gv-footer__meta">
+      <p>
+        <strong>Independence statement.</strong> GOV Assured is an independent community project. It is
+        not affiliated with, endorsed by, or produced by the NCSC, the Cabinet Office, the Government
+        Security Group or any UK government department. Framework content referenced by these tools
+        remains the property of its respective publishers.
+      </p>
+      <p>
+        <strong>Design.</strong> Visual style is inspired by the GOV.UK Design System. It is not an
+        official GOV.UK service and does not use the Royal Arms or GDS Transport typeface.
+      </p>
+      <p>
+        <strong>Illustrations.</strong> Original artwork made for GOV Assured. No stock photography is used on this page.
+      </p>
+      <p class="gx-footer__last">
+        © <span id="year">2026</span> GOV Assured. Content available under the
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noopener">Open Government Licence v3.0</a>,
+        except where otherwise stated.
+      </p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
