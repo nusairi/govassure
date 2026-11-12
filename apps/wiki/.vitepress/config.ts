@@ -10,7 +10,9 @@ export default defineConfig({
   lang: 'en-GB',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'icon', href: '/favicon.ico?v=08e5767b65', sizes: '48x48' }],
+    ['link', { rel: 'icon', href: '/favicon.svg?v=2b46852867', type: 'image/svg+xml' }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=eea7edda9b' }],
     ['meta', { name: 'theme-color', content: '#1a1a2e' }],
     ['meta', { property: 'og:title', content: 'GOV Assured — Security Architecture Wiki' }],
     ['meta', { property: 'og:description', content: 'Open-source security architecture reference covering zero trust, network security, threat modelling, identity, and more.' }],

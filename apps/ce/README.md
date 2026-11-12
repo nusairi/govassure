@@ -8,7 +8,7 @@ This is a self-assessed readiness indicator only. It is not an official Cyber Es
 
 ## Files
 
-- `app/`: the App Router pages. `layout.tsx` has the metadata, the GOV.UK Frontend stylesheet link, the GOV Assured brand bar and the phase banner; `page.tsx` is the landing page; `assessment/page.tsx` the overview; `assessment/[section]/page.tsx` generates the five section pages at build time and renders `SectionClient.tsx` (the question wizard); `results/page.tsx` the results; `accessibility/page.tsx` the accessibility statement; `globals.css` (with the brand bar styles) and `icon.svg`.
+- `app/`: the App Router pages. `layout.tsx` has the metadata, the GOV.UK Frontend stylesheet link, the GOV Assured brand bar and the phase banner; `page.tsx` is the landing page; `assessment/page.tsx` the overview; `assessment/[section]/page.tsx` generates the five section pages at build time and renders `SectionClient.tsx` (the question wizard); `results/page.tsx` the results; `accessibility/page.tsx` the accessibility statement; `globals.css` (with the brand bar styles). Crown icons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and `icon.svg` kept at the old address) are in `public/` and linked from the `metadata.icons` in `layout.tsx`.
 - `components/`: `GovHeader.tsx` and `GovFooter.tsx` (with the GOV Assured LinkedIn link).
 - `context/AssessmentContext.tsx`, `lib/`: the browser-only state and the results calculation.
 - `data/questions.ts`: the question bank.

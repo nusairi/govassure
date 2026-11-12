@@ -6,7 +6,7 @@ The quiz is part of [GOV Assured](https://www.govassured.com). The company repos
 
 ## Files
 
-- `app/`: the App Router shell (`layout.tsx` with the metadata and the GOV Assured brand bar, `page.tsx`, `globals.css` with Tailwind and the brand bar styles, `icon.svg`).
+- `app/`: the App Router shell (`layout.tsx` with the metadata and the GOV Assured brand bar, `page.tsx`, `globals.css` with Tailwind and the brand bar styles). Crown icons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and `icon.svg` kept at the old address) are in `public/` and linked from the `metadata.icons` in `layout.tsx`.
 - `components/QuizApp.tsx`: the quiz logic and UI (one client component, with the theme switcher and the GOV Assured LinkedIn link in the footer).
 - `data/questions.ts`: the questions, answers and explanations.
 - `public/`: `ga-logo.png` and the shared GOV Assured `ga-theme.css`, `ga-app.css` and `ga-sources.js`.

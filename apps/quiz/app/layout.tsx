@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     "practice quiz",
     "certification prep",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=08e5767b65", sizes: "48x48" },
+      { url: "/favicon.svg?v=2b46852867", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png?v=eea7edda9b" }],
+  },
 };
 
 export default function RootLayout({

@@ -10,7 +10,7 @@ The wiki is part of [GOV Assured](https://www.govassured.com). The company repos
 - `foundations/`, `network-security/`, `network-app-security/`, `identity-access/`, `infrastructure/`, `cloud-security/`, `data-security/`, `endpoint-device/`, `analytics/`, `threat-intelligence/`, `risk-governance/`, `ai-security/`: one folder per section, each with an `index.md` and its topic pages.
 - `.vitepress/config.ts`: site title, navigation, sidebar, local search, footer and the LinkedIn link. `buildConcurrency: 1` keeps the search index in a fixed page order, so every build gives the same files.
 - `.vitepress/theme/index.ts`: the default theme with the GOV Assured brand bar in the `layout-top` slot; `.vitepress/theme/custom.css`: the brand colours and the brand bar styles.
-- `public/`: `favicon.svg`, `ga-logo.png` and the shared GOV Assured `ga-theme.css`, `ga-app.css` and `ga-sources.js`.
+- `public/`: the crown `favicon.svg`, `favicon.ico` and `apple-touch-icon.png`, `ga-logo.png` and the shared GOV Assured `ga-theme.css`, `ga-app.css` and `ga-sources.js`.
 - `package.json`, `package-lock.json`: VitePress 1.6 (Vue 3).
 - `tools/postbuild.mjs`: edits to the built HTML: links to the ga-* files at the end of `<head>` with `?v=` set to the first 10 hex digits of each file's SHA-256, and one attribute order (href, target, rel, aria-label, class) on the GOV Assured LinkedIn links.
 - `tools/build.sh`: copies the source to a clean build folder, runs `npm ci`, `vitepress build` and `tools/postbuild.mjs`, copies `.vitepress/dist` to the output folder and checks that the brand bar is on every page.

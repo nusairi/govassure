@@ -13,7 +13,7 @@ This is a self-assessment only. It is not an official NCSC assessment, and GOV A
 - `data/caf.js`: the CAF v4.0 objectives, principles and IGPs.
 - `lib/storage.js` (browser-only state, merging an imported file, progress counts), `lib/wordExport.js` (the Word export).
 - `styles/globals.css`: the app styles.
-- `public/`: `govuk-frontend.min.css` and `assets/fonts/` (unchanged copies of GOV.UK Frontend 5.4.1), `favicon.svg`, `favicon.ico`, `ga-logo.png` and the shared GOV Assured `ga-theme.css`, `ga-app.css` and `ga-sources.js`.
+- `public/`: `govuk-frontend.min.css` and `assets/fonts/` (unchanged copies of GOV.UK Frontend 5.4.1), the crown `favicon.svg`, `favicon.ico` and `apple-touch-icon.png`, `ga-logo.png` and the shared GOV Assured `ga-theme.css`, `ga-app.css` and `ga-sources.js`.
 - `next.config.mjs`: static export (`output: 'export'`, trailing slashes, unoptimised images); `NEXT_BUILD_ID` pins the build ID.
 - `package.json`, `package-lock.json`: Next.js 16.2.7 (Turbopack), React 18.
 - `tools/postbuild.mjs`: edits to the exported HTML after `next build`: the brand bar styles from `tools/ga-brand.css` inlined as `<style id="ga-brand">`, and links to the ga-* files at the end of `<head>` with `?v=` set to the first 10 hex digits of each file's SHA-256.
