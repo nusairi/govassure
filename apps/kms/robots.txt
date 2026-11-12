@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kms.govassured.com/sitemap.xml

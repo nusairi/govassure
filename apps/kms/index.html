@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key Management Lifecycle — reference model | GOV Assured</title>
+<meta name="description" content="A vendor-neutral cryptographic key management lifecycle: twelve stages from Plan to Compromise response, each mapped to NCSC guidance.">
+<meta name="author" content="GOV Assured">
+<link rel="canonical" href="https://kms.govassured.com/">
+<meta name="theme-color" content="#021c17">
+<link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+<link rel="manifest" href="/site.webmanifest?v=68a69be4a5">
+<link rel="stylesheet" href="/app.css?v=83220f16b7">
+<link rel="stylesheet" href="/ga-brand.css?v=bd173bf450" id="ga-brand">
+<link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme">
+<link rel="stylesheet" href="/ga-app.css?v=d0e1d11c1b" id="ga-app">
+<script src="/ga-sources.js?v=cb51347e74" id="ga-sources-js" defer></script>
+</head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+<div class="mast">
+ <div class="mleft">
+  <div class="cl">REFERENCE MODEL</div>
+  <h1>Key Management Lifecycle</h1>
+  <div class="sl">CRYPTOGRAPHIC KEY LIFECYCLE &nbsp;|&nbsp; VENDOR-NEUTRAL &nbsp;|&nbsp; MAPPED TO NCSC GUIDANCE</div>
+  <nav class="rel" aria-label="Related GOV Assured tools">Related: <a href="https://devsecops.govassured.com/">DevSecOps operating model</a> · <a href="https://governance.govassured.com/">Governance</a> · <a href="https://www.govassured.com/apps">All GOV Assured apps</a></nav>
+ </div>
+ <div class="mright">
+  <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="li">
+   <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+   </svg>GOV Assured on LinkedIn</a>
+  <div class="meta">v0.1 &nbsp;|&nbsp; November 2026<br>
+  Plan · Generate · Store · Use · Rotate · Monitor · Disable · Archive · Destroy · Recover<br>
+  kms.govassured.com</div>
+ </div>
+</div>
+
+<div class="tabs" role="tablist">
+ <button class="tab" type="button" role="tab" id="tab-model" aria-controls="view-model" aria-selected="true">Lifecycle model</button>
+ <button class="tab" type="button" role="tab" id="tab-states" aria-controls="view-states" aria-selected="false">Key states &mdash; transitions</button>
+ <button class="tab planned" type="button" role="tab" id="tab-dep" aria-controls="view-dep" aria-selected="false">Dependency model<span class="pl">PLANNED</span></button>
+ <button class="tab" type="button" role="tab" id="tab-cmp" aria-controls="view-cmp" aria-selected="false">Compare: AWS KMS vs Azure Key Vault vs Google Cloud KMS</button>
+ <button class="tab" type="button" role="tab" id="tab-arch" aria-controls="view-arch" aria-selected="false">Architect's pack: AWS KMS</button>
+</div>
+
+<div class="tabpanel" id="view-model" role="tabpanel" aria-labelledby="tab-model">
+
+<div class="tools">
+ <span class="tl">Colour by</span>
+ <button type="button" id="v-tool" aria-pressed="true">Control area</button>
+ <button type="button" id="v-risk" aria-pressed="false">Risk if not implemented</button>
+ <span class="hint">Select any stage, key or gate for the NCSC recommendation, the checklist and the risk of not having it.</span>
+</div>
+
+<div class="dark">
+ <span class="h">BUSINESS &amp; REGULATORY DRIVERS</span>
+ <span class="m">NCSC cloud KMS guidance · NCSC Cloud Security Principles 1, 2, 9, 10, 13 · NCSC CAF v4.0 (A3, B2, B3, C1, D1) · NCSC PKI principles · NCSC PQC migration timelines · UK GDPR Art. 32 · NIST SP 800-57 Pt 1 (key states)</span>
+ <span class="s">Accountable: SIRO | CISO | Head of Security Architecture | Cloud Platform Owner | Information Asset Owners | Service Owners</span>
+</div>
+
+<div class="dark">
+ <span class="h">BUSINESS ATTRIBUTES &nbsp;|&nbsp; WHAT EVERY KEY AND KEY SERVICE MUST EXHIBIT</span>
+ <div class="attrs" id="attrs"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">The key management lifecycle — twelve stages</span>
+ <div class="domains k12" id="domains"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">Key hierarchy and who uses the keys</span>
+ <div class="plane" id="planes"></div>
+</div>
+
+<div class="sec">
+ <span class="lbl">The key lifecycle, end to end</span>
+ <div class="lifewrap">
+  <div class="loopwrap">
+   <div class="life" id="life"></div>
+   <div class="stages" id="stages"><span class="sl">NIST SP 800-57 PHASES</span></div>
+   <p class="loop">FEEDBACK LOOP — monitoring alerts, overdue rotations, failed recovery tests and compromise lessons return to PLAN and ACCESS CONTROL, and revise the key policy that let them through</p>
+  </div>
+  <div class="cad">
+   <span class="h">GOVERNANCE CADENCE</span>
+   <span class="r"><b>Daily</b> KMS anomaly alerts · disable / schedule-deletion events · denied decrypts</span>
+   <span class="r"><b>Weekly</b> Rotation overdue · disabled keys awaiting decision · inventory drift</span>
+   <span class="r"><b>Monthly</b> Key permission review · Design Authority exceptions (BYOK, software keys)</span>
+   <span class="r"><b>Quarterly</b> GovAssure / CAF return · algorithm and PQC plan review</span>
+   <span class="r"><b>Annually</b> Key recovery and compromise exercise · cryptoperiod policy review</span>
+  </div>
+ </div>
+</div>
+
+<div class="gpanel">
+ <div class="gh"><b>LIFECYCLE GATES — WHAT BLOCKS, WHAT WARNS</b>
+ <i>Checks a platform can run continuously against its key estate. Thresholds are illustrative opening positions; every bypass is a time-bound Design Authority exception.</i></div>
+ <div class="gates" id="gates"></div>
+</div>
+
+<div class="legend" id="legend"></div>
+
+</div><!-- /view-model -->
+
+<div class="tabpanel" id="view-states" role="tabpanel" aria-labelledby="tab-states" hidden>
+ <div class="bwrap">
+  <div class="bcanvas">
+   <div class="bhead">
+    <h2>KEY STATES AND TRANSITIONS</h2>
+    <span class="hint" id="modehint">Click a state, or run a scenario to trace a path</span>
+   </div>
+   <svg class="ksvg" id="ksvg" viewBox="0 0 1040 400" role="img" aria-label="Key state diagram: pre-activation, active, suspended, deactivated, compromised, destroyed"></svg>
+  </div>
+  <div class="brail">
+   <div class="bsec">
+    <div class="blab">Scenarios</div>
+    <div id="scen"></div>
+    <button class="clearbtn" id="clear" type="button">Clear selection</button>
+   </div>
+   <div class="bsec">
+    <div class="blab">How to read it</div>
+    <p class="bnote">The six states are the key states in NIST SP 800-57 Part 1 §7, used here only as a vocabulary. Each state names the lifecycle stages on the model tab that act on it, so you can move between the two. Every transition should be recorded in the key's metadata and audit log.</p>
+   </div>
+  </div>
+ </div>
+ <div class="detail">
+  <span class="d-code" id="d-code">Overview</span>
+  <h3 id="d-title">A key's life, as states</h3>
+  <p id="d-desc">A key is created in pre-activation, used while active, may be suspended, is deactivated once it should no longer protect new data, and ends destroyed. At any point it can become compromised, and from there it is only ever destroyed.</p>
+  <ol class="steps" id="d-steps"></ol>
+  <div class="d-side">
+   <span class="d-code">Lifecycle stages</span>
+   <div class="chips" id="d-refs"><span class="chip">12 lifecycle stages</span><span class="chip">6 key states</span></div>
+  </div>
+ </div>
+</div><!-- /view-states -->
+
+<div class="tabpanel" id="view-dep" role="tabpanel" aria-labelledby="tab-dep" hidden>
+ <div class="planbox">
+  <span class="tag">PLANNED · NOT BUILT</span>
+  <h2>Key management dependency model</h2>
+  <p>Will follow the dependency model on the GOV Assured DevSecOps operating model: an AND/OR tree showing what "keys are protected through their full lifecycle" depends on — HSM-backed KMS, IAM, audit logging, SOC monitoring, backup, the inventory and the recovery runbooks — with as-is and to-be coverage. Scores would be illustrative.</p>
+ </div>
+</div>
+
+<div class="tabpanel" id="view-cmp" role="tabpanel" aria-labelledby="tab-cmp" hidden>
+<div class="cmp" id="cmp">
+ <div class="cmphead">
+  <h2>Compare: AWS KMS vs Azure Key Vault vs Google Cloud KMS</h2>
+  <p>How each provider's key management service handles the twelve lifecycle stages, set against what NCSC expects. Facts come from each provider's own documentation and from NCSC; S-codes in each cell refer to the numbered Sources list at the foot of the page. Features, limits and validations change, so check the cited page before relying on a detail.</p>
+  <p class="checked">Last checked: <b id="cmp-checked"></b></p>
+ </div>
+ <div class="sec">
+  <span class="lbl">Stage by stage</span>
+  <div id="cmp-main"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">UK view: London and UK regions</span>
+  <div class="ukgrid" id="cmp-uk"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">NCSC expectations: built in, needs configuring or not covered</span>
+  <p class="legend"><span class="verd v-b">Built in</span> the service does it by default or by design. <span class="verd v-c">Needs configuring</span> supported, but you have to turn it on or choose it. <span class="verd v-n">Not covered</span> no documented feature found.</p>
+  <div id="cmp-prin-wrap"></div>
+ </div>
+ <div class="sec">
+  <span class="lbl">Best fit</span>
+  <div class="fitgrid" id="cmp-fit"></div>
+ </div>
+</div>
+</div>
+
+<div class="tabpanel" id="view-arch" role="tabpanel" aria-labelledby="tab-arch" hidden>
+<div class="cmp arch" id="arch" data-provider="aws">
+ <div class="cmphead">
+  <h2>Architect's pack: AWS KMS</h2>
+  <p id="arch-intro"></p>
+  <p class="checked">Last checked: <b id="arch-checked"></b>. AWS facts from docs.aws.amazon.com and aws.amazon.com; NCSC facts from ncsc.gov.uk. S-codes refer to the Sources list at the foot of the page.</p>
+  <div class="provs" aria-label="Packs in this series">
+   <span class="prov on">AWS KMS</span>
+   <span class="prov planned">Azure Key Vault<span class="pl">PLANNED</span></span>
+   <span class="prov planned">Google Cloud KMS<span class="pl">PLANNED</span></span>
+  </div>
+ </div>
+ <nav class="archnav" id="arch-nav" aria-label="Sections of the architect's pack"></nav>
+ <div id="arch-body"></div>
+ <span id="arch-rendered" hidden></span>
+</div>
+</div>
+
+<footer>Framework references: NCSC cloud KMS guidance · NCSC Cloud Security Principles · NCSC CAF v4.0 · NCSC PKI principles · NIST SP 800-57 Part 1 Rev 5 (key states and phases only). The model is vendor-neutral: "KMS" means whichever key management service your platform provides. Provider-specific detail is on the Compare tab and in the Architect's pack.<br>
+This is a generic reference model. Gate thresholds and severities are illustrative opening positions, not measurements of any estate.<br>
+Codes S1–S157 in each panel refer to the numbered Sources list at the foot of the page.<span hidden><a href="https://www.ncsc.gov.uk/guidance/using-tls-to-protect-data">S1 Using TLS to protect data</a><a href="https://www.ncsc.gov.uk/collection/cloud/understanding-cloud-services/choosing-and-configuring-a-kms-for-secure-key-management-in-the-cloud">S2 Choosing and configuring a KMS for secure key management in the cloud</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-1-data-in-transit-protection">S3 Cloud Security Principle 1: data in transit protection</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-2-asset-protection-and-resilience">S4 Cloud Security Principle 2: asset protection and resilience</a><a href="https://www.ncsc.gov.uk/blog-post/mythbusting-cloud-key-management-services">S5 Mythbusting cloud key management services (NCSC blog)</a><a href="https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/protect-your-private-keys">S6 PKI principle 2: protect your private keys</a><a href="https://www.ncsc.gov.uk/collection/cloud/using-cloud-services-securely/using-a-cloud-platform-securely">S7 Using a cloud platform securely</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-9-secure-user-management">S8 Cloud Security Principle 9: secure user management</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-10-identity-and-authentication">S9 Cloud Security Principle 10: identity and authentication</a><a href="https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/keep-certificate-lifetimes-as-short-as-practical">S10 PKI principle 6: keep certificate lifetimes as short as practical</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-13-audit-information-and-alerting-for-customers">S11 Cloud Security Principle 13: audit information and alerting</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b2-identity-and-access-control">S12 CAF B2: identity and access control</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-c-detecting-cyber-security-events/principle-c1-security-monitoring">S13 CAF C1: security monitoring</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a3-asset-management">S14 CAF A3: asset management</a><a href="https://www.ncsc.gov.uk/guidance/secure-sanitisation-storage-media">S15 Secure sanitisation and disposal of storage media</a><a href="https://www.ncsc.gov.uk/guidance/pqc-migration-timelines">S16 Timelines for migration to post-quantum cryptography</a><a href="https://www.ncsc.gov.uk/guidance/introduction-logging-security-purposes">S17 Introduction to logging for security purposes</a><a href="https://www.ncsc.gov.uk/collection/operational-technology/secure-rf-communications/principle-6">S18 Secure RF communications for OT, principle 6</a><a href="https://www.ncsc.gov.uk/collection/ransomware-resistant-backups/principles-for-ransomware-resistant-cloud-backups">S19 Principles for ransomware-resistant cloud backups</a><a href="https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final">S20 NIST SP 800-57 Part 1 Rev 5: Recommendation for key management</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-d/principle-d1-response-and-recovery-planning">S21 CAF D1: response and recovery planning</a><a href="https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/use-certificate-revocation">S22 PKI principle 12: use certificate revocation</a><a href="https://www.ncsc.gov.uk/collection/incident-management">S23 NCSC incident management</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b3-data-security">S24 CAF B3: data security</a><a href="https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/monitor-your-pki-environment">S25 PKI principle 9: monitor your PKI environment</a><a href="https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/use-current-strong-cryptographic-algorithms">S26 PKI principle 11: use current strong cryptographic algorithms</a><a href="https://www.ncsc.gov.uk/guidance/provisioning-and-managing-certificates-in-the-web-pki">S27 Provisioning and managing certificates in the Web PKI</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html">S28 AWS KMS: AWS Key Management Service overview</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">S29 AWS KMS: AWS KMS keys (concepts)</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose-key-spec.html">S30 AWS KMS: key spec reference (choosing a key spec)</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html">S31 AWS KMS: key stores</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html">S32 AWS KMS: AWS CloudHSM key stores</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html">S33 AWS KMS: external key stores (XKS)</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">S34 AWS KMS: importing key material</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/data-protection.html">S35 AWS KMS: data protection</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/data-keys.html">S36 AWS KMS: generate data keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">S37 AWS KMS: key policies</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/control-access.html">S38 AWS KMS: KMS key access and permissions</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">S39 AWS KMS: grants</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html">S40 AWS KMS: encryption context</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html">S41 AWS KMS: rotate AWS KMS keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable.html">S42 AWS KMS: enable automatic key rotation</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-on-demand.html">S43 AWS KMS: perform on-demand key rotation</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html">S44 AWS KMS: logging AWS KMS API calls with CloudTrail</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html">S45 AWS KMS: enable and disable keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">S46 AWS KMS: delete an AWS KMS key</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">S47 AWS KMS: multi-Region keys</a><a href="https://docs.aws.amazon.com/general/latest/gr/kms.html">S48 AWS: AWS KMS endpoints and quotas</a><a href="https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html">S49 AWS: Regions list</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-ncsc.html">S50 AWS Config: operational best practices for NCSC Cloud Security Principles</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys">S51 Azure Key Vault: about keys</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys-details">S52 Azure Key Vault: key types, algorithms and operations</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/overview">S53 Azure Managed HSM: overview</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/external-key-management-overview">S54 Azure Managed HSM: external key management</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/keys/hsm-protected-keys-byok">S55 Azure Key Vault: import HSM-protected keys (BYOK)</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/keys/byok-specification">S56 Azure Key Vault: BYOK specification</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/hsm-protected-keys-byok">S57 Azure Managed HSM: import HSM-protected keys (BYOK)</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation">S58 Azure Key Vault: configure key auto-rotation</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/key-rotation">S59 Azure Managed HSM: key auto-rotation</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-access-policy">S60 Azure Key Vault: Azure RBAC vs access policies</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide">S61 Azure Key Vault: access with Azure RBAC</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/access-control">S62 Azure Managed HSM: access control</a><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest">S63 Azure: data encryption at rest</a><a href="https://learn.microsoft.com/en-us/rest/api/keyvault/keys/encrypt/encrypt?view=rest-keyvault-keys-2025-07-01">S64 Azure Key Vault REST API: Encrypt (aad parameter)</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/logging">S65 Azure Key Vault: logging</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/howto-logging">S66 Azure Key Vault: enable logging</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/logging">S67 Azure Managed HSM: logging</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview">S68 Azure Key Vault: soft-delete overview</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/soft-delete-overview">S69 Azure Managed HSM: soft-delete overview</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/backup">S70 Azure Key Vault: backup and restore</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/backup-restore">S71 Azure Managed HSM: full backup and restore</a><a href="https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault">S72 Azure: reliability in Key Vault</a><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/multi-region-replication">S73 Azure Managed HSM: multi-region replication</a><a href="https://learn.microsoft.com/en-us/azure/reliability/regions-list">S74 Azure: list of regions</a><a href="https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-uk-g-cloud">S75 Azure compliance: UK G-Cloud</a><a href="https://docs.cloud.google.com/kms/docs/protection-levels">S76 Google Cloud KMS: protection levels</a><a href="https://docs.cloud.google.com/kms/docs/hsm">S77 Google Cloud KMS: Cloud HSM</a><a href="https://docs.cloud.google.com/kms/docs/ekm">S78 Google Cloud KMS: Cloud External Key Manager (EKM)</a><a href="https://docs.cloud.google.com/kms/docs/key-import">S79 Google Cloud KMS: importing a key version</a><a href="https://docs.cloud.google.com/kms/docs/resource-hierarchy">S80 Google Cloud KMS: Cloud KMS resources</a><a href="https://docs.cloud.google.com/kms/docs/algorithms">S81 Google Cloud KMS: key purposes and algorithms</a><a href="https://docs.cloud.google.com/kms/docs/locations">S82 Google Cloud KMS: locations</a><a href="https://docs.cloud.google.com/kms/docs/envelope-encryption">S83 Google Cloud KMS: envelope encryption</a><a href="https://docs.cloud.google.com/kms/docs/additional-authenticated-data">S84 Google Cloud KMS: additional authenticated data</a><a href="https://docs.cloud.google.com/kms/docs/iam">S85 Google Cloud KMS: access control with IAM</a><a href="https://docs.cloud.google.com/kms/docs/separation-of-duties">S86 Google Cloud KMS: separation of duties</a><a href="https://docs.cloud.google.com/kms/docs/key-rotation">S87 Google Cloud KMS: key rotation</a><a href="https://docs.cloud.google.com/kms/docs/rotate-key">S88 Google Cloud KMS: rotate a key</a><a href="https://docs.cloud.google.com/kms/docs/re-encrypt-data">S89 Google Cloud KMS: re-encrypt data</a><a href="https://docs.cloud.google.com/kms/docs/audit-logging">S90 Google Cloud KMS: audit logging</a><a href="https://docs.cloud.google.com/logging/docs/audit">S91 Google Cloud: Cloud Audit Logs overview</a><a href="https://docs.cloud.google.com/kms/docs/enable-disable">S92 Google Cloud KMS: enable and disable key versions</a><a href="https://docs.cloud.google.com/kms/docs/key-states">S93 Google Cloud KMS: key version states</a><a href="https://docs.cloud.google.com/kms/docs/destroy-restore">S94 Google Cloud KMS: destroy and restore key versions</a><a href="https://cloud.google.com/security/compliance/ncsc-uk">S95 Google Cloud compliance: NCSC Cloud Security Principles (UK)</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html">S96 AWS KMS: default key policy</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html">S97 AWS KMS: AWS KMS condition keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/conditions-aws.html">S98 AWS KMS: AWS global condition keys in KMS policies</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html">S99 AWS KMS: allowing users in other accounts to use a KMS key</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-best-practices.html">S100 AWS KMS: best practices for grants</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/requests-per-second.html">S101 AWS KMS: request quotas</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html">S102 AWS KMS: resource quotas</a><a href="https://aws.amazon.com/kms/pricing/">S103 AWS KMS pricing</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html">S104 AWS KMS: aliases</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html">S105 AWS KMS: tags</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/abac.html">S106 AWS KMS: ABAC for AWS KMS</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-events.html">S107 AWS KMS: monitoring with Amazon EventBridge</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys-creating-cloudwatch-alarm.html">S108 AWS KMS: alarm on use of a key pending deletion</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys-cancelling-key-deletion.html">S109 AWS KMS: cancel key deletion</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-considerations.html">S110 AWS KMS: special considerations for imported key material</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html">S111 AWS KMS: import (and reimport) key material</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/imported-key-material-expiration-alarm.html">S112 AWS KMS: alarm for expiring imported key material</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/mrk-when-to-use.html">S113 AWS KMS: when to use multi-Region keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-auth.html">S114 AWS KMS: control access to multi-Region keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">S115 AWS KMS: key states</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/unusable-kms-keys.html">S116 AWS KMS: how unusable KMS keys affect data keys</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys-manually.html">S117 AWS KMS: rotate keys manually</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/monitoring-keys-determining-usage.html">S118 AWS KMS: determine past usage of a KMS key</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/resource-control-policies.html">S119 AWS KMS: resource control policies in AWS KMS</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/xks-connect-disconnect.html">S120 AWS KMS: connect and disconnect external key stores</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/choose-xks-connectivity.html">S121 AWS KMS: external key store proxy connectivity options</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html">S122 AWS KMS: create an AWS CloudHSM key store</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/disaster-recovery-resiliency.html">S123 AWS KMS: resilience in AWS KMS</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/least-privilege.html">S124 AWS KMS: least privilege permissions</a><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html">S125 AWS IAM: the confused deputy problem</a><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html">S126 AWS IAM: global condition context keys</a><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html">S127 AWS Organizations: service control policies (SCPs)</a><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html">S128 AWS Organizations: SCP syntax</a><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html">S129 AWS Organizations: resource control policies (RCPs)</a><a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_kms.html">S130 AWS: actions and condition keys for AWS KMS</a><a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_cloudtrail.html">S131 AWS: actions and condition keys for AWS CloudTrail</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html">S132 AWS Config rule: cmk-backing-key-rotation-enabled</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/kms-cmk-not-scheduled-for-deletion.html">S133 AWS Config rule: kms-cmk-not-scheduled-for-deletion</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/kms-key-policy-no-public-access.html">S134 AWS Config rule: kms-key-policy-no-public-access</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/kms-key-tagged.html">S135 AWS Config rule: kms-key-tagged</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html">S136 AWS Config rule: multi-region-cloudtrail-enabled</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-security-trail-enabled.html">S137 AWS Config rule: cloudtrail-security-trail-enabled</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html">S138 AWS Config rule: cloud-trail-log-file-validation-enabled</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html">S139 AWS Config rule: cloud-trail-encryption-enabled</a><a href="https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html">S140 AWS Config rule: iam-customer-policy-blocked-kms-actions</a><a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event-cloudtrail.html">S141 EventBridge: AWS API Call via CloudTrail events</a><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html">S142 CloudTrail: creating a trail for an organization</a><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-kms-key-policy-for-cloudtrail.html">S143 CloudTrail: KMS key policy for CloudTrail</a><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html">S144 CloudTrail: validating log file integrity</a><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/log-archive.html">S145 AWS SRA: Security OU, Log Archive account</a><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-kms-best-practices/introduction.html">S146 AWS Prescriptive Guidance: AWS KMS best practices</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-4-governance-framework">S147 Cloud Security Principle 4: governance framework</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-5-operational-security">S148 Cloud Security Principle 5: operational security</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-6-personnel-security">S149 Cloud Security Principle 6: personnel security</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-12-secure-service-administration">S150 Cloud Security Principle 12: secure service administration</a><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-14-secure-use-of-the-service">S151 Cloud Security Principle 14: secure use of the service</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a1-governance">S152 CAF A1: governance</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a2-risk-management">S153 CAF A2: risk management</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b4-system-security">S154 CAF B4: system security</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b5-resilient-networks-and-systems">S155 CAF B5: resilient networks and systems</a><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-d/principle-d2-lessons-learned">S156 CAF D2: lessons learned</a><a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-get-public-key-and-token.html">S157 AWS KMS: download the wrapping public key and import token</a></span><br>
+Published by <a href="https://www.govassured.com/">GOV Assured</a> · Related: <a href="https://devsecops.govassured.com/">DevSecOps operating model</a> · <a href="https://github.com/nusairi/govassure" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">LinkedIn</a></footer>
+
+</div>
+
+<div class="back" id="back" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+ <div class="modal" id="modal">
+  <div class="mhead">
+   <button class="close" id="close" aria-label="Close">&times;</button>
+   <span class="k" id="mkind"></span>
+   <h2 id="mtitle"></h2>
+   <span class="s" id="msub"></span>
+  </div>
+  <div class="mbody">
+   <div><h3>What it is</h3><p id="mpurpose"></p></div>
+   <div id="mncwrap"><h3>What NCSC recommends</h3><p class="ncsc" id="mncsc"></p></div>
+   <div><h3>Control detail</h3><ul id="mctrl"></ul></div>
+   <div id="mchkwrap"><h3>Checklist</h3><ul class="chk" id="mchk"></ul></div>
+   <div id="mthwrap" hidden><h3>Thresholds — what this gate actually does</h3><table class="th" id="mth"></table></div>
+   <div class="riskbox" id="mriskbox">
+    <div class="rh"><span class="sevchip" id="msev"></span><h3 class="m0">Risk if not implemented</h3></div>
+    <p id="mrisk"></p>
+   </div>
+   <div><h3>References</h3><div class="refs" id="mrefs"></div></div>
+  </div>
+ </div>
+</div>
+
+<script src="/kms-data.js?v=4aa28798d7"></script>
+<script src="/kms.js?v=f2c707994c"></script>
+<script src="/kms-compare.js?v=47a6dc8f61"></script>
+<script src="/kms-glossary.js?v=45690d46f6"></script>
+<script src="/kms-arch-aws.js?v=25158c0ef9"></script>
+<script src="/kms-arch.js?v=e9df2ee522"></script>
+<span id="ga-rendered" hidden></span>
+</body>
+</html>

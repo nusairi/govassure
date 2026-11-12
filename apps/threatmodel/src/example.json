@@ -1,0 +1,73 @@
+{
+  "title": "Worked example — Continuity Plan Helper",
+  "lede": "A generic GOV Assured-style community web app, with no personal names. This is an illustrative walk-through, not a complete threat model.",
+  "setup": [
+    "People complete a form about continuity needs and can optionally save a draft.",
+    "A cloud model API generates a draft plan.",
+    "Drafts are stored in a database.",
+    "The home page also shows a public threat dashboard whose items link out to their sources.",
+    "The service is built and deployed through CI/CD to a cloud platform, with a service identity for the model API."
+  ],
+  "steps": [
+    {
+      "num": 1,
+      "id": "scope",
+      "title": "Scope",
+      "text": "This service, including the model API, the database, the public feed, identities and the pipeline; not the rest of the GOV Assured estate."
+    },
+    {
+      "num": 2,
+      "id": "landscape",
+      "title": "Landscape",
+      "text": "Opportunistic web attackers, abuse of the model API, supply-chain compromise of a dependency or the pipeline; catalogues: ATT&CK v20.1, ATLAS 2026.10, OWASP LLM Top 10 2026 (prompt injection, sensitive disclosure, excessive agency, supply chain)."
+    },
+    {
+      "num": 3,
+      "id": "model",
+      "title": "Model",
+      "text": "Browser → app → database; app → model API; app → external feeds; CI/CD → production; identity and service credentials."
+    },
+    {
+      "num": 4,
+      "id": "boundaries",
+      "title": "Assets and boundaries",
+      "text": "Draft plan content, prompts and outputs, model API credentials, feed integrity, community reputation; trust boundaries at each of those hops."
+    },
+    {
+      "num": 5,
+      "id": "threats",
+      "title": "Threats",
+      "text": "Examples: spoofed or tampered feed items; another organisation’s draft being disclosed; prompt injection into the model; the service identity for the model being stolen from the pipeline; a poisoned dependency."
+    },
+    {
+      "num": 6,
+      "id": "prioritise",
+      "title": "Prioritise",
+      "text": "Information disclosure of drafts, abuse of the model API, and pipeline compromise typically outrank cosmetic defacement; include untrue or over-confident plan text as an AI-specific harm."
+    },
+    {
+      "num": 7,
+      "id": "mitigate",
+      "title": "Mitigations",
+      "text": "Least-privilege service identity, no secrets in prompts or logs, signed builds / provenance, output handling, rate limits, owner-accepted residual risk for a public feed that only links to sources."
+    },
+    {
+      "num": 8,
+      "id": "validate",
+      "title": "Validate",
+      "text": "Tests for access control on drafts; a GenAI red-team pass for prompt injection; a check that detection would notice credential misuse."
+    },
+    {
+      "num": 9,
+      "id": "record",
+      "title": "Record",
+      "text": "A version-controlled model file plus a short pack, dated and owned."
+    },
+    {
+      "num": 10,
+      "id": "continuous",
+      "title": "Continuous",
+      "text": "Re-open when the model provider, the feed, or a major dependency changes; pipeline warns if the model file is stale."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+/* Loaded only inside <noscript>: with scripting off, show the nav links and hide the dead menu button. */
+@media (max-width:40.0625em){
+  .gv-header.js-nav .gv-header__toggle{display:none}
+  .gv-header.js-nav .gv-header__nav{display:flex}
+}
