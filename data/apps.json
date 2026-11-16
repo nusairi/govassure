@@ -1,6 +1,15 @@
 {
   "apps": [
     {
+      "id": "govmap",
+      "name": "UK government map",
+      "description": "Departments, arm's-length bodies, budgets and who answers to Parliament.",
+      "category": "other",
+      "language": "JavaScript",
+      "repo": "govassure",
+      "url": "https://www.govassured.com/govmap/"
+    },
+    {
       "id": "cyber-assessment",
       "name": "NCSC CAF v4.0 Self-Assessment",
       "description": "Self-assessment of an organisation’s cyber security posture against the NCSC Cyber Assessment Framework v4.0, covering all four objectives and 14 principles. Progress stays in the browser and can be exported or imported as JSON.",

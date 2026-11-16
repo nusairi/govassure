@@ -1,0 +1,348 @@
+{
+  "measure": "Total DEL (resource DEL plus capital DEL)",
+  "year": "2026-27",
+  "basis": "plans",
+  "unit": "£ million",
+  "title": "Table 1.9 Total Departmental Expenditure Limits (1), 2021-22 to 2028-29",
+  "source": {
+    "title": "Public Expenditure Statistical Analyses 2026, Table 1.9",
+    "publisher": "HM Treasury",
+    "published": "16 July 2026",
+    "url": "https://www.gov.uk/government/statistics/public-expenditure-statistical-analyses-2026",
+    "workbook": "https://assets.publishing.service.gov.uk/media/6a57728b822fbe6b8245c9a1/PESA_2026_CP_Chapter_1_tables.xlsx",
+    "sheet": "Table_1_9",
+    "licence": "Open Government Licence v3.0",
+    "licenceUrl": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3"
+  },
+  "total": {
+    "plansMillion": 664958,
+    "outturnMillion": 639807,
+    "outturnYear": "2025-26"
+  },
+  "groups": [
+    {
+      "pesaName": "Health and Social Care",
+      "plansMillion": 226238,
+      "outturnMillion": 217409,
+      "map": "Department of Health and Social Care",
+      "slug": "department-of-health-and-social-care",
+      "kind": "min",
+      "shareOfTotalDel": 0.3402290069447995
+    },
+    {
+      "pesaName": "Education",
+      "plansMillion": 102398,
+      "outturnMillion": 97262,
+      "map": "Department for Education",
+      "slug": "department-for-education",
+      "kind": "min",
+      "shareOfTotalDel": 0.15399168067757663
+    },
+    {
+      "pesaName": "Home Office",
+      "plansMillion": 22099,
+      "outturnMillion": 19622,
+      "map": "Home Office",
+      "slug": "home-office",
+      "kind": "min",
+      "note": "PESA includes the National Crime Agency in this group.",
+      "shareOfTotalDel": 0.03323367791649999
+    },
+    {
+      "pesaName": "Justice",
+      "plansMillion": 15056,
+      "outturnMillion": 14071,
+      "map": "Ministry of Justice",
+      "slug": "ministry-of-justice",
+      "kind": "min",
+      "shareOfTotalDel": 0.022642031526803198
+    },
+    {
+      "pesaName": "Law Officers' Departments",
+      "plansMillion": 1192,
+      "outturnMillion": 982,
+      "kind": "group",
+      "missing": "no-ago-line",
+      "note": "The Attorney General's Office has no line of its own in PESA. This group is the Crown Prosecution Service, the Serious Fraud Office, and HM Procurator General and Treasury Solicitor.",
+      "shareOfTotalDel": 0.0017925944194971712
+    },
+    {
+      "pesaName": "Defence",
+      "plansMillion": 65106,
+      "outturnMillion": 61994,
+      "map": "Ministry of Defence",
+      "slug": "ministry-of-defence",
+      "kind": "min",
+      "shareOfTotalDel": 0.09790994318438156
+    },
+    {
+      "pesaName": "Single Intelligence Account",
+      "plansMillion": 5539,
+      "outturnMillion": 4932,
+      "kind": "other",
+      "missing": "not-on-map",
+      "note": "Not a department on this map.",
+      "shareOfTotalDel": 0.00832984940402251
+    },
+    {
+      "pesaName": "Foreign, Commonwealth and Development Office",
+      "plansMillion": 9427,
+      "outturnMillion": 10890,
+      "map": "Foreign, Commonwealth & Development Office",
+      "slug": "foreign-commonwealth-development-office",
+      "kind": "min",
+      "shareOfTotalDel": 0.014176835228691136
+    },
+    {
+      "pesaName": "MHCLG - Local Government",
+      "plansMillion": 18401,
+      "outturnMillion": 13813,
+      "map": "Ministry of Housing, Communities and Local Government",
+      "slug": "ministry-of-housing-communities-local-government",
+      "kind": "min",
+      "mhclgPart": "local-government",
+      "note": "One of two PESA lines for MHCLG. This line is mainly grants to English local authorities.",
+      "shareOfTotalDel": 0.027672424423798195
+    },
+    {
+      "pesaName": "MHCLG - Housing and Communities",
+      "plansMillion": 14500,
+      "outturnMillion": 13020,
+      "map": "Ministry of Housing, Communities and Local Government",
+      "slug": "ministry-of-housing-communities-local-government",
+      "kind": "min",
+      "mhclgPart": "housing-and-communities",
+      "note": "The other PESA line for MHCLG. Together with Local Government this is one ministerial department on the map.",
+      "shareOfTotalDel": 0.021805888492205522
+    },
+    {
+      "pesaName": "Culture, Media and Sport",
+      "plansMillion": 2334,
+      "outturnMillion": 2206,
+      "map": "Department for Digital, Culture, Media and Sport",
+      "slug": "department-for-digital-culture-media-and-sport",
+      "kind": "min",
+      "note": "PESA still uses the older name, without Digital.",
+      "shareOfTotalDel": 0.003509996120055703
+    },
+    {
+      "pesaName": "Science, Innovation and Technology",
+      "plansMillion": 16127,
+      "outturnMillion": 14970,
+      "kind": "former",
+      "pesaNameNote": "DSIT",
+      "missing": "closed-on-map",
+      "note": "PESA still lists the Department for Science, Innovation and Technology, which has closed on this map. That work now sits with BIST and DCMS. These figures are not added to Business and Trade and called BIST.",
+      "shareOfTotalDel": 0.02425265956646886
+    },
+    {
+      "pesaName": "Transport",
+      "plansMillion": 30188,
+      "outturnMillion": 28974,
+      "map": "Department for Transport",
+      "slug": "department-for-transport",
+      "kind": "min",
+      "shareOfTotalDel": 0.04539835598639313
+    },
+    {
+      "pesaName": "Energy Security and Net Zero",
+      "plansMillion": 10568,
+      "outturnMillion": 13299,
+      "map": "Department for Energy Security and Net Zero",
+      "slug": "department-for-energy-security-and-net-zero",
+      "kind": "min",
+      "shareOfTotalDel": 0.015892733074870893
+    },
+    {
+      "pesaName": "Environment, Food and Rural Affairs",
+      "plansMillion": 7577,
+      "outturnMillion": 7313,
+      "map": "Department for Environment, Food & Rural Affairs",
+      "slug": "department-for-environment-food-rural-affairs",
+      "kind": "min",
+      "shareOfTotalDel": 0.011394704627961464
+    },
+    {
+      "pesaName": "Business and Trade",
+      "plansMillion": 3210,
+      "outturnMillion": 3413,
+      "kind": "former",
+      "pesaNameNote": "Business and Trade",
+      "missing": "old-name",
+      "note": "PESA still lists the Department for Business and Trade as its own group. On this map that work is part of BIST. These figures are not added to the Science, Innovation and Technology line.",
+      "shareOfTotalDel": 0.004827372555860671
+    },
+    {
+      "pesaName": "Work and Pensions",
+      "plansMillion": 14890,
+      "outturnMillion": 14759,
+      "map": "Department for Work and Pensions",
+      "slug": "department-for-work-pensions",
+      "kind": "min",
+      "note": "This is DEL only. Most social security spending is Annually Managed Expenditure (AME) and is not in this table.",
+      "shareOfTotalDel": 0.022392391699926913
+    },
+    {
+      "pesaName": "HM Revenue and Customs",
+      "plansMillion": 7611,
+      "outturnMillion": 6727,
+      "map": "HM Revenue & Customs",
+      "slug": "hm-revenue-customs",
+      "kind": "nmd",
+      "shareOfTotalDel": 0.01144583567683974
+    },
+    {
+      "pesaName": "HM Treasury",
+      "plansMillion": 1259,
+      "outturnMillion": 1195,
+      "map": "HM Treasury",
+      "slug": "hm-treasury",
+      "kind": "min",
+      "shareOfTotalDel": 0.0018933526628749486
+    },
+    {
+      "pesaName": "Cabinet Office",
+      "plansMillion": 1777,
+      "outturnMillion": 1134,
+      "map": "Cabinet Office",
+      "slug": "cabinet-office",
+      "kind": "min",
+      "shareOfTotalDel": 0.002672349231079256
+    },
+    {
+      "pesaName": "Scottish Government",
+      "plansMillion": 50535,
+      "outturnMillion": 47757,
+      "map": "The Scottish Government",
+      "slug": "the-scottish-government",
+      "kind": "dev",
+      "shareOfTotalDel": 0.07599728103128318
+    },
+    {
+      "pesaName": "Welsh Government",
+      "plansMillion": 22559,
+      "outturnMillion": 21609,
+      "map": "Welsh Government",
+      "slug": "welsh-government",
+      "kind": "dev",
+      "shareOfTotalDel": 0.03392545093073548
+    },
+    {
+      "pesaName": "Northern Ireland Executive",
+      "plansMillion": 19141,
+      "outturnMillion": 19115,
+      "map": "Northern Ireland Executive",
+      "slug": "northern-ireland-executive",
+      "kind": "dev",
+      "shareOfTotalDel": 0.028785276664090063
+    },
+    {
+      "pesaName": "Small and Independent Bodies",
+      "plansMillion": 3597,
+      "outturnMillion": 3342,
+      "kind": "group",
+      "missing": "many-bodies",
+      "note": "PESA folds the Scotland Office, the Office of the Advocate General, the Wales Office, the Northern Ireland Office, UK Export Finance, many non-ministerial departments, the Houses of Parliament, and the bodies accountable to Parliament into this group. Those small offices have no group of their own here.",
+      "shareOfTotalDel": 0.005409364200445742
+    },
+    {
+      "pesaName": "Growth Mission Fund",
+      "plansMillion": 31,
+      "outturnMillion": null,
+      "kind": "adjustment",
+      "shareOfTotalDel": 4.6619485741956635e-05
+    },
+    {
+      "pesaName": "Provision for intra-governmental leases",
+      "plansMillion": 742,
+      "outturnMillion": null,
+      "kind": "adjustment",
+      "shareOfTotalDel": 0.0011158599490494136
+    },
+    {
+      "pesaName": "Reserves",
+      "plansMillion": 5847,
+      "outturnMillion": null,
+      "kind": "adjustment",
+      "shareOfTotalDel": 0.00879303655268453
+    },
+    {
+      "pesaName": "OBR allowance for shortfall",
+      "plansMillion": -11487,
+      "outturnMillion": null,
+      "kind": "adjustment",
+      "shareOfTotalDel": -0.017274775248963092
+    },
+    {
+      "pesaName": "Adjustment for Budget Exchange",
+      "plansMillion": -1505,
+      "outturnMillion": null,
+      "kind": "adjustment",
+      "shareOfTotalDel": -0.002263300840053056
+    }
+  ],
+  "combined": {
+    "pesaName": "MHCLG (Local Government plus Housing and Communities)",
+    "kind": "combined",
+    "map": "Ministry of Housing, Communities and Local Government",
+    "slug": "ministry-of-housing-communities-local-government",
+    "plansMillion": 32901,
+    "outturnMillion": 26833,
+    "note": "Sum of the two MHCLG lines in Table 1.9. Not a separate PESA group.",
+    "parts": [
+      "MHCLG - Local Government",
+      "MHCLG - Housing and Communities"
+    ],
+    "shareOfTotalDel": 0.04947831291600372
+  },
+  "footnotes": [
+    "(1) Total DEL is given by resource DEL plus capital DEL. This excludes the Scottish Government Block Grant adjustments as shown in Table 1.3.",
+    "(2) The Scottish Government total for Total DEL excludes the Block Grant Adjustment from the Resource DEL calculation shown in Table 1.3.",
+    "(3) As agreed in the Welsh Government's fiscal framework, their Resource DEL block grant is adjusted for the devolution of tax powers. For detailed information on the devolution of tax powers see the Block Grant Transparency publication available on GOV.UK.",
+    "(4) Departmental budgets include amounts carried forward through Budget Exchange. These increases will be offset by any deposits at Supplementary Estimates in future years so are excluded from spending totals."
+  ],
+  "missingLines": {
+    "source": "PESA 2026 Annex B, pages 199-200",
+    "smallAndIndependentBodies": [
+      "charity-commission",
+      "competition-and-markets-authority",
+      "uk-export-finance",
+      "food-standards-agency",
+      "government-actuarys-department",
+      "nsandi",
+      "northern-ireland-office",
+      "ofsted",
+      "ofgem",
+      "ofqual",
+      "office-of-rail-and-road",
+      "scotland-office",
+      "office-of-the-advocate-general-for-scotland",
+      "uk-statistics-authority",
+      "the-national-archives",
+      "supreme-court-of-the-united-kingdom",
+      "wales-office",
+      "the-water-services-regulation-authority"
+    ],
+    "noSeparateFigure": [
+      "attorney-generals-office",
+      "the-office-of-the-leader-of-the-house-of-commons",
+      "office-of-the-leader-of-the-house-of-lords",
+      "national-crime-agency",
+      "crown-prosecution-service",
+      "serious-fraud-office",
+      "government-legal-department",
+      "forestry-commission",
+      "land-registry"
+    ]
+  },
+  "caveats": [
+    "These are Treasury departmental groups, not the 23 ministerial departments on the map.",
+    "PESA still uses older names: Science, Innovation and Technology (DSIT) and Business and Trade, and Culture, Media and Sport without Digital.",
+    "MHCLG is split into two PESA lines. A combined total is provided separately and is labelled as a sum.",
+    "The Home Office group includes the National Crime Agency.",
+    "Scotland Office, Wales Office, the Northern Ireland Office, the Office of the Advocate General and UK Export Finance sit under Small and Independent Bodies. The Offices of the Leader of the House of Commons and of the Lords have no separate line.",
+    "Welfare payments and debt interest are mostly Annually Managed Expenditure (AME), not DEL, so they are not in this table.",
+    "Percentages use the published Total DEL as the denominator, including reserves and the negative OBR shortfall, so the department lines do not add to 100% on their own. PESA also warns that figures may not sum due to rounding.",
+    "Bodies accountable to Parliament are not shown on this chart. Even the NAO is about 0.02% of Total DEL and would be invisible on this scale."
+  ]
+}

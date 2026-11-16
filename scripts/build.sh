@@ -9,8 +9,12 @@ here="$(cd "$(dirname "$0")/.." && pwd)"; out="${1:?out dir}"
 
 HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.css
            favicon.ico favicon.svg apple-touch-icon.png
-           robots.txt sitemap.xml staticwebapp.config.json vercel.json)
-HUB_DIRS=(data public)
+           robots.txt sitemap.xml staticwebapp.config.json vercel.json
+           govmap.js govmap.css govmap-chart.js govmap-chart.css
+           govmap-glossary.js govmap-terms.js
+           govmap-parliament.js govmap-parliament.css
+           govmap-budget.js govmap-budget.css govmap-budget-share.js)
+HUB_DIRS=(data public govmap)
 
 rm -rf "$out" && mkdir -p "$out/app"
 for f in "${HUB_FILES[@]}"; do

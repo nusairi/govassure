@@ -25,7 +25,7 @@
   <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
   <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
-  <link rel="stylesheet" href="/styles.css?v=9495526936">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,7 +40,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="/live.css?v=d58b3a5d2d">
+  <link rel="stylesheet" href="/live.css?v=4811b5663c">
 </head>
 <body>
   <a class="skip-link" href="#threats">Skip to content</a>
@@ -53,8 +53,8 @@
       <nav class="header-nav" aria-label="Site">
         <a href="/" aria-current="page">Home</a>
         <a href="/#threats">Live threats</a>
+        <a href="/govmap/">Government map</a>
         <a href="/apps" class="nav-apps">All apps</a>
-        <a href="/#services">Services</a>
         <a href="/#about">About</a>
         <a href="/#contact">Contact</a>
         <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
@@ -75,9 +75,9 @@
     <section class="band lv-dash lv-top" id="threats" aria-labelledby="threats-title">
       <div class="wrap">
         <h1 id="threats-title" class="section-title lv-dash-h1"><span class="lv-live" aria-hidden="true"></span> UK cyber threat dashboard</h1>
-        <p class="section-intro">A live view of the threat: actively exploited vulnerabilities, recent UK security news and the latest UK advisories. Updated automatically.</p>
+        <p class="section-intro">A live view of the threat: actively exploited vulnerabilities, recent UK security news, the latest UK advisories, and new IT-related publications from government and Parliament. Updated automatically.</p>
         <div id="featured-wrap" class="lv-featured-slot"><div class="lv-featured lv-skel-card"><div class="lv-flabel">Latest exploited vulnerability</div><div class="lv-skel"><div class="lv-bar lv-w55"></div><div class="lv-bar lv-w90"></div><div class="lv-bar lv-w70"></div></div></div></div>
-        <div class="lv-dash-grid lv-dash-3">
+        <div class="lv-dash-grid lv-dash-2 lv-dash-even">
           <div class="lv-panel">
             <div class="lv-panel-head">
               <h2 class="lv-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg> Patch now: CISA KEV</h2>
@@ -99,8 +99,44 @@
             </div>
             <div class="lv-panel-body lv-fixed" id="adv-body" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w75"></div><div class="lv-bar lv-w65"></div><div class="lv-bar lv-w80"></div></div></div>
           </div>
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h2 class="lv-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg> Government and Parliament publications</h2>
+              <span class="lv-src">GOV.UK · UK Parliament</span>
+            </div>
+            <div class="lv-panel-body lv-fixed" id="pubs-body" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w70"></div><div class="lv-bar lv-w85"></div><div class="lv-bar lv-w60"></div></div></div>
+          </div>
         </div>
+        <a class="lv-map-tile" href="/govmap/">
+          <span class="lv-map-kicker">UK government map</span>
+          <span class="lv-map-copy">Departments, arm&#39;s-length bodies, budgets and who answers to Parliament</span>
+        </a>
         <p class="lv-foot" id="threats-foot">Loading live feeds…</p>
+        <p class="lv-foot" id="pubs-foot">Publications on IT, cyber, digital, AI and data from GOV.UK (public sector information under the <span id="pubs-ogl">Open Government Licence v3.0</span>) and UK Parliament (Parliamentary information under the <span id="pubs-opl">Open Parliament Licence v3.0</span>).</p>
+      </div>
+    </section>
+
+    <section class="band lv-dash lv-alt" id="outages" aria-labelledby="outages-title">
+      <div class="wrap">
+        <h2 id="outages-title" class="section-title"><span class="lv-live" aria-hidden="true"></span> What&#39;s down in the UK</h2>
+        <p class="section-intro">Problems with UK mobile networks, broadband, banks, government services, email and websites, from providers&#39; status pages and user reports, plus the latest outage news. Updated every few minutes.</p>
+        <div class="lv-dash-grid lv-dash-2 lv-out-panels">
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h3 class="lv-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg> Problems right now</h3>
+              <span class="lv-src" id="out-updated">StatusPages</span>
+            </div>
+            <div class="lv-panel-body lv-fixed" id="out-problems" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w60"></div><div class="lv-bar lv-w85"></div><div class="lv-bar lv-w50"></div></div></div>
+          </div>
+          <div class="lv-panel">
+            <div class="lv-panel-head">
+              <h3 class="lv-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg> Outage news</h3>
+              <span class="lv-src">BBC · tech press</span>
+            </div>
+            <div class="lv-panel-body lv-fixed" id="out-news" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w75"></div><div class="lv-bar lv-w65"></div><div class="lv-bar lv-w80"></div></div></div>
+          </div>
+        </div>
+        <p class="lv-foot"><span id="out-credit">Data: StatusPages (user reports are unverified)</span>. Each provider&#39;s own status page is the authority. Not affiliated with any provider listed. News items open the source in a new tab.</p>
       </div>
     </section>
 
@@ -110,7 +146,7 @@
           <h2 id="tools-title" class="section-title">Resilience and cyber toolkit</h2>
           <p class="section-intro">Free cyber security, assurance and continuity tools from GOV Assured for UK organisations.</p>
         </div>
-        <a class="btn btn-primary lv-all-apps" href="/apps">All 22 apps →</a>
+        <a class="btn btn-primary lv-all-apps" href="/apps">All 23 apps →</a>
       </div>
     </section>
 
@@ -126,64 +162,6 @@
           <div class="lv-panel-body lv-tall" id="ransom-body"><div class="lv-skel"><div class="lv-bar lv-w65"></div><div class="lv-bar lv-w80"></div><div class="lv-bar lv-w55"></div><div class="lv-bar lv-w70"></div></div></div>
         </div>
         <p class="lv-foot">Source: ransomware.live (UK-tagged victims, newest first).</p>
-      </div>
-    </section>
-
-    <section class="band" id="services" aria-labelledby="services-title">
-      <div class="wrap">
-        <h2 id="services-title" class="section-title">Services</h2>
-        <p class="section-intro">
-          The work follows the tools: assessment, governance of design and change, continuity planning, architecture references, and practice.
-        </p>
-        <ul class="service-grid">
-          <li>
-            <article class="service">
-              <h3>Cyber assurance and assessments</h3>
-              <p>
-                Self-assessment against the NCSC Cyber Assessment Framework v4.0.
-                Readiness questions across the five Cyber Essentials control areas.
-                Secure by Design statements of applicability, API controls mapped to classification tiers, penetration-test scope and rules of engagement, and a prioritised view of defence gaps for a selected threat group.
-              </p>
-            </article>
-          </li>
-          <li>
-            <article class="service">
-              <h3>Governance and compliance</h3>
-              <p>
-                Submissions for the Solution Architecture Board, Technical Design Authority, Architecture Review Board, and Change Advisory Board, with a RAG status and a document export.
-                Control choices can be recorded against the data, stakeholders, technologies, and laws in scope.
-              </p>
-            </article>
-          </li>
-          <li>
-            <article class="service">
-              <h3>Resilience and business continuity</h3>
-              <p>
-                Guided business continuity plans for UK small and medium businesses, with narrative drafting, a return link, and a Word download, aligned to the Cabinet Office BCP Toolkit, NCSC, and BS 65000.
-                The live dashboard above reports UK cyber threats and ransomware.
-              </p>
-            </article>
-          </li>
-          <li>
-            <article class="service">
-              <h3>Security architecture</h3>
-              <p>
-                Reference material for enterprise security architecture, an OSI model with the controls at each layer, a Secure Access Service Edge view, a DevSecOps pipeline model, and a Splunk operating model.
-                A taxonomy classifies attacks that target people, and a dashboard shows recent cybersecurity reporting.
-              </p>
-            </article>
-          </li>
-          <li>
-            <article class="service">
-              <h3>Training and awareness</h3>
-              <p>
-                An exam-style quiz on AI safety, security, governance, and ethics.
-                Crosswords with cyber security and AI security sets.
-                A cooperative incident-response tabletop, and a short piece on social engineering.
-              </p>
-            </article>
-          </li>
-        </ul>
       </div>
     </section>
 
@@ -234,6 +212,6 @@
     </div>
   </footer>
 
-  <script src="/live.js?v=7c318912f2" defer></script>
+  <script src="/live.js?v=ae92edfeb4" defer></script>
 </body>
 </html>

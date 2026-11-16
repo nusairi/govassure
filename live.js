@@ -132,6 +132,85 @@
   loadNews();
   setInterval(loadNews, 5 * 60 * 1000);
 
+  // What's down in the UK (our own /api/outages, data from StatusPages + outage headlines): three panels in the advisories style.
+  var OUT_RANK = { outage: 0, spike: 1, degraded: 2, maintenance: 3 };
+  var OUT_PILL = {
+    outage: ["Outage", "lv-pill-crit"],
+    spike: ["Spike", "lv-pill-ransom"],
+    degraded: ["Degraded", "lv-pill-ransom"],
+    maintenance: ["Maintenance", "lv-pill-news"]
+  };
+  function outState(p) {
+    if (p.status === "major_outage" || p.status === "partial_outage") return "outage";
+    if (p.reportLevel === "spike" || p.reportLevel === "elevated") return "spike";
+    if (p.status === "degraded") return "degraded";
+    if (p.status === "maintenance") return "maintenance";
+    return "";
+  }
+  function hhmm(d) {
+    var t = new Date(d);
+    return isNaN(t) ? "" : t.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  }
+  function ago(d) {
+    var t = new Date(d);
+    if (isNaN(t)) return "";
+    var m = Math.round((Date.now() - t) / 60000);
+    if (m < 60) return m <= 1 ? "just now" : m + " min ago";
+    var h = Math.round(m / 60);
+    return h < 48 ? h + (h === 1 ? " hour ago" : " hours ago") : daysAgo(d);
+  }
+  function loadOutages() {
+    get("/api/outages").then(function (data) {
+      var ok = data && data.available;
+      var cats = (data && data.categories) || [];
+      var when = hhmm(data && data.updated);
+
+      // 1. Problems right now
+      var probs = [];
+      cats.forEach(function (c) {
+        (c.problems || []).forEach(function (p) {
+          var st = outState(p);
+          if (st) probs.push({ p: p, c: c, st: st });
+        });
+      });
+      probs.sort(function (a, b) { return OUT_RANK[a.st] - OUT_RANK[b.st]; });
+      var pel = byId("out-problems");
+      if (!ok) empty(pel, "Status unavailable.");
+      else if (!probs.length) empty(pel, "No major problems reported right now.");
+      else pel.innerHTML = list(probs.map(function (x) {
+        var pill = OUT_PILL[x.st];
+        var rep = x.p.reportLevel === "spike" ? "spike in user reports" : x.p.reportLevel === "elevated" ? "more user reports than usual" : (x.p.source ? "from " + x.p.source : "");
+        return item("div", "lv-row", x.p.link,
+          '<div class="lv-r-top"><span class="lv-r-title">' + esc(x.p.name) + "</span>" +
+          '<span class="lv-pill ' + pill[1] + '">' + esc(pill[0]) + "</span></div>" +
+          '<div class="lv-r-meta">' + esc(x.c.label) + (rep ? " · " + esc(rep) : "") + (when ? " · checked " + esc(when) : "") + "</div>" +
+          (x.p.summary ? '<div class="lv-r-desc">' + esc(x.p.summary) + "</div>" : ""));
+      }), "problems");
+
+      // 2. Outage news
+      var news = (data && data.news) || [];
+      var nel = byId("out-news");
+      if (!news.length) empty(nel, data && (ok || data.news) ? "No outage news in the last 48 hours." : "Status unavailable.");
+      else nel.innerHTML = list(news.map(function (n) {
+        return item("div", "lv-row", n.url,
+          '<div class="lv-r-top"><span class="lv-r-title">' + esc(n.title) + "</span>" +
+          '<span class="lv-pill lv-pill-news">' + esc(n.source || "News") + "</span></div>" +
+          (n.date ? '<div class="lv-r-meta">' + esc(fmtDate(n.date)) + " " + esc(hhmm(n.date)) + " · " + esc(ago(n.date)) + "</div>" : ""));
+      }), "outage news");
+
+      if (ok && when) byId("out-updated").textContent = "StatusPages · " + when;
+      var src = (data && data.source) || {};
+      if (safe(src.url)) byId("out-credit").innerHTML = '<a class="lv-out-credit" href="' + esc(src.url) + '" target="_blank" rel="noopener noreferrer">Data: StatusPages (user reports are unverified)</a>';
+    }).catch(function () {
+      empty(byId("out-problems"), "Status unavailable.");
+      empty(byId("out-news"), "Status unavailable.");
+    });
+  }
+  if (byId("out-problems")) {
+    loadOutages();
+    setInterval(loadOutages, 5 * 60 * 1000);
+  }
+
   // NCSC and UK advisories
   get("/api/advisories").then(function (data) {
     var el = byId("adv-body");
@@ -146,8 +225,28 @@
     }), "advisories");
   }).catch(function () { empty(byId("adv-body"), "Advisory feed unavailable."); });
 
+  // Government and Parliament publications (our own /api/govpubs: GOV.UK Search API, Commons/Lords Library, POST, Committees API)
+  get("/api/govpubs").then(function (data) {
+    var el = byId("pubs-body");
+    if (!data || !data.available) return empty(el, "Publications unavailable.");
+    if (!data.items || !data.items.length) return empty(el, "No IT-related publications in the last 30 days.");
+    el.innerHTML = list(data.items.map(function (p) {
+      var parl = /^https:\/\/([a-z0-9-]+\.)*parliament\.uk\//i.test(p.url || "");
+      return item("div", "lv-row", p.url,
+        '<div class="lv-r-top"><span class="lv-r-title">' + esc(p.title) + "</span>" +
+        '<span class="lv-pill ' + (parl ? "lv-pill-grp" : "lv-pill-news") + '">' + esc(p.source || (parl ? "Parliament" : "GOV.UK")) + "</span></div>" +
+        '<div class="lv-r-meta">' + (p.kind ? esc(p.kind) + " · " : "") + esc(fmtDate(p.date)) + "</div>");
+    }), "publications");
+    (data.licences || []).forEach(function (l, k) {
+      var span = byId(k === 0 ? "pubs-ogl" : "pubs-opl");
+      if (span && /^https:\/\/www\.(nationalarchives\.gov\.uk|parliament\.uk)\/[^\s"'<>]*$/.test(l.url || "")) {
+        span.innerHTML = '<a class="lv-out-credit" href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.name) + "</a>";
+      }
+    });
+  }).catch(function () { empty(byId("pubs-body"), "Publications unavailable."); });
+
   byId("threats-foot").textContent =
-    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), UK security press, NCSC and Action Fraud. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
+    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), UK security press, NCSC, Action Fraud, GOV.UK and UK Parliament. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
 
   // Ransomware tracker
   get("/api/ransomware").then(function (data) {

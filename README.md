@@ -1,6 +1,6 @@
 # GOV Assured
 
-Community site for [www.govassured.com](https://www.govassured.com). The bare `govassured.com` host forwards to `www`. The home page opens with the threat dashboard; the tools are listed on `/apps`. Every tool opens on a `govassured.com` subdomain.
+Community site for [www.govassured.com](https://www.govassured.com). The bare `govassured.com` host forwards to `www`. The home page opens with the threat dashboard, then a link to the UK government map; the tools are listed on `/apps`. Every tool opens on a `govassured.com` subdomain.
 
 The mark in `public/logo.jpg` is the official logo: a gold crown and serif wordmark on dark green. `public/wordmark.png` is a tight crop of that file for the header. The crown favicons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png` at the site root) are the same set every app serves; the Open Graph image is generated from the logo.
 
@@ -28,7 +28,7 @@ Fetching `data/apps.json` needs HTTP. Opening `index.html` directly from the fil
 python3 scripts/check_links.py
 ```
 
-The script fails if a page, stylesheet, script, or `data/apps.json` points outside `*.govassured.com`. `mailto:` links are allowed. The only other web addresses allowed are the company LinkedIn page `https://www.linkedin.com/company/102617034`, the company repository `https://github.com/nusairi/govassure`, and the JSON-LD context `https://schema.org`. Any other GitHub address fails the check. It also fails if those files contain a personal name or `vercel.app`, or if a tool still has a `source` field. The publisher named on the site is GOV Assured.
+The script fails if a served page, stylesheet, script, or data file points outside `*.govassured.com`. `mailto:` links are allowed. The other allowed web addresses are the company LinkedIn page `https://www.linkedin.com/company/102617034`, the company repository `https://github.com/nusairi/govassure`, the JSON-LD context `https://schema.org`, and official UK government and Parliament source pages used by the government map (`gov.uk`, `parliament.uk`, and a short list of named independent bodies such as the National Audit Office). Any other GitHub address fails the check. It also fails if those files contain a personal name or `vercel.app`, or if a tool still has a `source` field. The publisher named on the site is GOV Assured.
 
 ## Add a tool
 
@@ -74,27 +74,82 @@ Do not deploy the repository root. Source code for the subdomain apps lives unde
 
 `vercel.json` only sets the same style of security headers. Azure ignores it.
 
+## Tests
+
+From the repository root:
+
+```bash
+# Link and wording checks (also run by scripts/build.sh)
+python3 scripts/check_links.py
+
+# Data snapshots
+python3 scripts/test_govmap_data.py
+python3 scripts/test_budget.py          # needs openpyxl, to read the PESA workbook
+python3 scripts/test_glossary_terms.py
+
+# API unit tests (Node 18+, no extra packages)
+node api/shared/_rss.test.js
+node api/shared/_outages.test.js
+node api/shared/_outagenews.test.js
+node api/shared/_govpubs.test.js
+```
+
+Browser checks live in `tools/e2e-*.js`. They use Playwright and a static server for the hub files:
+
+```bash
+python3 -m http.server 8000
+cd tools && npm install
+B=http://127.0.0.1:8000 SHOTS=./shots node e2e-home-govmap.js
+```
+
+Set `B` to the URL under test. Screenshots are written to `SHOTS` and are not committed.
+
+## Refresh the government map data
+
+```bash
+python3 scripts/build_govmap.py                  # from the GOV.UK APIs (OGL v3.0)
+python3 scripts/build_budget.py                  # from scripts/vendor/PESA_2026_CP_Chapter_1_tables.xlsx
+python3 scripts/build_glossary.py                # rebuilds the glossary page from the term list
+python3 scripts/bust_govmap.py                   # refresh ?v= hashes on govmap pages
+```
+
+`data/govmap.json` is a snapshot of GOV.UK organisations. `data/budget.json` is built from the Treasury's Public Expenditure Statistical Analyses 2026 Chapter 1 tables (Open Government Licence). The Accountable to Parliament figures in `data/parliament.json` come from each body's 2026-27 Main Estimate or equivalent, with source links on the page. Do not invent amounts.
+
 ## Layout
 
 ```
-index.html                 home page shell (threat dashboard first)
+index.html                 home page shell (threat dashboard, then the map tile)
 apps/index.html            the /apps tool directory
+govmap/                    government map, charts, glossary, Parliament and budget pages
+govmap.js, govmap.css      map tree, diagram and shared chrome
+govmap-*.js, govmap-*.css  charts, glossary tooltips, Parliament and budget views
 styles.css                 layout and theme
 app.js                     search, category filter, and card rendering
-live.js, live.css          threat dashboard (feeds come from api/)
+live.js, live.css          threat dashboard and outage / publication panels (feeds from api/)
 api/                       Azure Functions behind the dashboard feeds
 data/apps.json             the tool catalogue
+data/govmap.json           GOV.UK organisations snapshot (OGL v3.0)
+data/budget.json           department budget shares from PESA 2026 (OGL v3.0)
+data/parliament.json       bodies accountable to Parliament
+data/govmap-glossary.json, data/govmap-terms.json
 favicon.ico, favicon.svg   crown favicons (site root)
 apple-touch-icon.png       crown touch icon (site root)
 scripts/build.sh           builds the deploy folder from an allowlist
-scripts/check_links.py     rejects links off *.govassured.com
+scripts/check_links.py     rejects links off *.govassured.com (with official source exceptions)
+scripts/build_govmap.py    refresh data/govmap.json from GOV.UK
+scripts/build_budget.py    refresh data/budget.json from the PESA workbook
+scripts/build_glossary.py  rebuild the glossary page
+scripts/bust_govmap.py     cache-bust govmap assets
+scripts/test_*.py          data tests
+scripts/vendor/            official PESA workbook
+tools/                     Playwright browser checks
 public/logo.jpg            official logo
 public/wordmark.png        header crop of the logo
 public/favicon.ico         icon
 public/apple-touch-icon.png
 public/og.jpg              social preview
 404.html                   not-found page
-sitemap.xml                https://www.govassured.com/
+sitemap.xml                https://www.govassured.com/ and /govmap/ pages
 robots.txt                 sitemap pointer
 staticwebapp.config.json   Azure Static Web Apps headers, cache, and 404
 vercel.json                unused on Azure; security headers only
