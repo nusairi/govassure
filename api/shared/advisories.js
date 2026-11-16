@@ -1,5 +1,6 @@
 // NCSC advisories/news (+ best-effort Action Fraud / NFIB). Degrades gracefully per source.
 const { fetchFeed } = require("./_rss");
+const safeUrl = require("./_url");
 
 const SOURCES = [
   { url: "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml", source: "NCSC Reports" },
@@ -23,7 +24,7 @@ module.exports = async (req, res) => {
       .filter((i) => i.title && i.link && !seen.has(i.link) && seen.add(i.link))
       .sort((a, b) => ts(b.date) - ts(a.date))
       .slice(0, 10)
-      .map((i) => ({ title: i.title, date: i.date, summary: i.summary, source: i.source })); // no outbound links
+      .map((i) => ({ title: i.title, url: safeUrl(i.link), date: i.date, summary: i.summary, source: i.source }));
     res.status(200).json({ updated: new Date().toISOString(), items });
   } catch (e) {
     res.status(200).json({ error: "Advisory feeds temporarily unavailable", items: [] });

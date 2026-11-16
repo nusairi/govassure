@@ -1,4 +1,6 @@
 // CISA Known Exploited Vulnerabilities (KEV) — newest entries + "latest exploited vuln".
+const safeUrl = require("./_url");
+const CVE_RE = /^CVE-\d{4}-\d{4,}$/;
 const KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json";
 
 module.exports = async (req, res) => {
@@ -25,6 +27,7 @@ module.exports = async (req, res) => {
         action: v.requiredAction,
         description: (v.shortDescription || "").slice(0, 240),
         ransomware: v.knownRansomwareCampaignUse === "Known",
+        url: CVE_RE.test(v.cveID || "") ? safeUrl("https://nvd.nist.gov/vuln/detail/" + v.cveID) : null,
       }))
       .sort((a, b) => (a.dateAdded < b.dateAdded ? 1 : -1));
 
@@ -39,8 +42,19 @@ module.exports = async (req, res) => {
     const featuredId = featured ? featured.cveID : null;
     const items = vulns.filter((v) => v.cveID !== featuredId).slice(0, 12);
 
+    // Last-30-days trend from CISA dateAdded (UTC days, oldest first).
+    const DAY = 86400000;
+    const today = Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate());
+    const trend = [];
+    for (let i = 29; i >= 0; i--) trend.push({ date: new Date(today - i * DAY).toISOString().slice(0, 10), count: 0 });
+    const idx = Object.fromEntries(trend.map((d, i) => [d.date, i]));
+    for (const v of vulns) { const k = (v.dateAdded || "").slice(0, 10); if (k in idx) trend[idx[k]].count++; }
+    const added30 = trend.reduce((n, d) => n + d.count, 0);
+
     res.status(200).json({
       updated: data.dateReleased || new Date().toISOString(),
+      added30,
+      trend,
       total: data.count || vulns.length,
       featured,
       items,

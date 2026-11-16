@@ -6,4 +6,22 @@
   <url>
     <loc>https://www.govassured.com/apps</loc>
   </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/ministerial/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/non-ministerial/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/parliament/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/budget/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/govmap/glossary/</loc>
+  </url>
 </urlset>

@@ -1,0 +1,30 @@
+/* Accountable to Parliament page */
+.gm-parl-banner { margin: 0 0 1.2rem; padding: 0.85rem 1rem; border: 1px solid var(--parl-line); border-radius: 12px; background: var(--parl-bg); color: var(--parl-ink); }
+.gm-parl-banner p { margin: 0; font-size: 0.95rem; line-height: 1.45; }
+.gm-parl-kicker { margin: 0 0 0.35rem; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--parl-ink); }
+.gm-parl-list { display: grid; gap: 0.9rem; margin: 0 0 1.6rem; padding: 0; list-style: none; }
+.gm-parl-card { min-width: 0; padding: 1rem 1.05rem 1.1rem; border: 1px solid var(--parl-line); border-radius: 14px; background: var(--parl-bg); color: var(--parl-ink); }
+.gm-parl-card:target { box-shadow: 0 0 0 3px var(--focus); }
+.gm-parl-name { margin: 0 0 0.2rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; line-height: 1.2; color: var(--parl-ink); }
+.gm-parl-ab { margin-left: 0.4rem; padding: 0.05rem 0.4rem; border: 1px solid var(--parl-line); border-radius: 999px; font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; }
+.gm-parl-role, .gm-parl-acc, .gm-parl-budget, .gm-parl-fn { margin: 0.45rem 0 0; font-size: 0.92rem; line-height: 1.45; }
+.gm-parl-acc-l, .gm-parl-bud-l { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c8d3; margin-bottom: 0.15rem; }
+.gm-parl-del { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--parl-ink); }
+.gm-parl-fn { color: #e3c8d3; }
+.gm-parl-links { display: flex; flex-wrap: wrap; gap: 0.45rem 0.7rem; margin: 0.7rem 0 0; padding: 0; list-style: none; }
+.gm-parl-links a { color: var(--parl-ink); font-weight: 700; text-underline-offset: 2px; }
+.gm-parl-links a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.gm-parl-dev { margin: 0 0 1.4rem; padding: 0.9rem 1rem 1rem; border: 1px dashed var(--parl-line); border-radius: 12px; background: transparent; }
+.gm-parl-dev h2 { margin: 0 0 0.5rem; font-family: var(--serif); font-size: 1.25rem; color: var(--parl-ink); }
+.gm-parl-dev p, .gm-parl-dev li { font-size: 0.92rem; line-height: 1.45; color: var(--ink); }
+.gm-parl-dev ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+.gm-parl-dev a { color: var(--gold); }
+.gm-parl-credit { margin: 0 0 0.4rem; font-size: 0.85rem; color: var(--ink-soft); }
+.gm-parl-credit a { color: var(--gold); }
+@media (min-width: 900px) {
+  .gm-parl-list { grid-template-columns: 1fr 1fr; }
+  .gm-parl-card[id="ipsa"] { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm-parl-card { transition: none; }
+}

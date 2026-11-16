@@ -1,0 +1,644 @@
+[
+  {
+    "id": "S1",
+    "title": "NCSC — Threat modelling (v2.0, published and reviewed 23 June 2023)",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S2",
+    "title": "NCSC — Risk management collection",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S3",
+    "title": "NCSC — Using attack trees to understand cyber security risk",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/using-attack-trees-to-understand-cyber-security-risk",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S4",
+    "title": "NCSC — How to gain and maintain assurance",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/how-to-gain-and-maintain-assurance",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S5",
+    "title": "NCSC — A basic risk assessment and management method",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/a-basic-risk-assessment-and-management-method",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S6",
+    "title": "NCSC — The fundamentals and basics of cyber risk",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/the-fundamentals-and-basics-of-cyber-risk",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S7",
+    "title": "NCSC — Cyber security risk management framework",
+    "href": "https://www.ncsc.gov.uk/collection/risk-management/cyber-security-risk-management-framework",
+    "group": "NCSC threat modelling, risk and assurance"
+  },
+  {
+    "id": "S8",
+    "title": "NCSC — Secure design principles (collection)",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S9",
+    "title": "NCSC — Cyber security design principles (overview)",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/cyber-security-design-principles",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S10",
+    "title": "NCSC — Principle 1: Establish the context before designing a system",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/establish-the-context-before-designing-a-system",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S11",
+    "title": "NCSC — Principle 2: Make compromise difficult",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/making-compromise-difficult",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S12",
+    "title": "NCSC — Principle 3: Make disruption difficult",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/making-disruption-difficult",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S13",
+    "title": "NCSC — Principle 4: Make compromise detection easier",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/making-compromise-detection-easier",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S14",
+    "title": "NCSC — Principle 5: Reduce the impact of compromise",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/reducing-the-impact-of-compromise",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S15",
+    "title": "NCSC — Secure development and deployment guidance",
+    "href": "https://www.ncsc.gov.uk/collection/developers-collection",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S16",
+    "title": "NCSC — Building and operating a secure online service",
+    "href": "https://www.ncsc.gov.uk/guidance/building-operating-secure-online-service",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S17",
+    "title": "NCSC — Digital Service Security",
+    "href": "https://www.ncsc.gov.uk/collection/digital-service-security",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S18",
+    "title": "NCSC — Building a secure digital service",
+    "href": "https://www.ncsc.gov.uk/collection/digital-service-security/digital-services-building-secure-digital-service",
+    "group": "NCSC secure design, development and digital services"
+  },
+  {
+    "id": "S19",
+    "title": "NCSC — Cyber Assessment Framework",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S20",
+    "title": "NCSC CAF — Principle A2 Risk management",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a2-risk-management",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S21",
+    "title": "NCSC CAF — Principle A3 Asset management",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a3-asset-management",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S22a",
+    "title": "NCSC CAF — Principle A4 Supply chain",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk/principle-a4-supply-chain",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S22b",
+    "title": "NCSC CAF — Principle B2 Identity and access control",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b2-identity-and-access-control",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S22",
+    "title": "NCSC CAF — Principle B4 System security",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b/principle-b4-system-security",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S23",
+    "title": "NCSC CAF — Principle C1 Security monitoring",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-c-detecting-cyber-security-events/principle-c1-security-monitoring",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S24",
+    "title": "NCSC CAF — Principle D1 Response and recovery planning",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-d/principle-d1-response-and-recovery-planning",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S25",
+    "title": "NCSC CAF — Principle D2 Lessons learned",
+    "href": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-d/principle-d2-lessons-learned",
+    "group": "NCSC CAF v4.0"
+  },
+  {
+    "id": "S26",
+    "title": "NCSC — Machine learning principles, 1.2 Model the threats to your system (collection v2.0, 22 May 2024)",
+    "href": "https://www.ncsc.gov.uk/collection/machine-learning-principles/secure-design/model-threats",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S26a",
+    "title": "NCSC — Machine learning principles (collection)",
+    "href": "https://www.ncsc.gov.uk/collection/machine-learning-principles",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S26b",
+    "title": "NCSC — Machine learning principles (PDF)",
+    "href": "https://www.ncsc.gov.uk/files/NCSC-Machine-learning-principles.pdf",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S28",
+    "title": "NCSC — Guidelines for secure AI system development (v1.0, 27 November 2023)",
+    "href": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S29a",
+    "title": "NCSC — Guidelines for secure AI system development (detail)",
+    "href": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development/guidelines",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S30a",
+    "title": "NCSC — Introducing the guidelines for secure AI (27 November 2023)",
+    "href": "https://www.ncsc.gov.uk/blog-post/introducing-guidelines-secure-ai-system-development",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S31b",
+    "title": "NCSC — UK and US develop new global guidelines for AI security (27 November 2023)",
+    "href": "https://www.ncsc.gov.uk/news/uk-develops-new-global-guidelines-ai-security",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S32",
+    "title": "NCSC — Managing the cyber risk of agentic AI (20 August 2026)",
+    "href": "https://www.ncsc.gov.uk/blogs/managing-the-cyber-risk-of-agentic-ai",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S31a",
+    "title": "NCSC — Understanding adversarial attacks against Machine Learning and AI (v1.0, 29 April 2026)",
+    "href": "https://www.ncsc.gov.uk/paper/understanding-adversarial-attacks-against-machine-learning-and-ai",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S82",
+    "title": "NCSC — Supply chain security guidance (v1.0, reviewed 22 October 2025)",
+    "href": "https://www.ncsc.gov.uk/collection/supply-chain-security",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S83",
+    "title": "NCSC — The cloud security principles (v2.1, reviewed 7 June 2023)",
+    "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S85",
+    "title": "NCSC Cloud Security Principle 7: Secure development",
+    "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-7-secure-development",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S84",
+    "title": "NCSC Cloud Security Principle 8: Supply chain security",
+    "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-8-supply-chain-security",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S86",
+    "title": "NCSC Cloud Security Principle 9: Secure user management",
+    "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-9-secure-user-management",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S87",
+    "title": "NCSC Cloud Security Principle 10: Identity and authentication",
+    "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-10-identity-and-authentication",
+    "group": "NCSC AI, ML, agentic, cloud and supply chain"
+  },
+  {
+    "id": "S26g",
+    "title": "UK Government Security — Performing threat modelling (not NCSC; public Secure by Design material; not a GOV Assured requirement)",
+    "href": "https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/performing-threat-modelling/",
+    "group": "UK Government Security (not NCSC)"
+  },
+  {
+    "id": "S27",
+    "title": "UK Government Security — Sourcing a threat assessment (not NCSC; not a GOV Assured requirement)",
+    "href": "https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/sourcing-a-threat-assessment/",
+    "group": "UK Government Security (not NCSC)"
+  },
+  {
+    "id": "S28g",
+    "title": "UK Government Security — Secure by Design principles (not NCSC; not a GOV Assured requirement)",
+    "href": "https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/",
+    "group": "UK Government Security (not NCSC)"
+  },
+  {
+    "id": "S29",
+    "title": "UK Government Security — Example threat model (not NCSC; not a GOV Assured requirement)",
+    "href": "https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/performing-threat-modelling/example-threat-model/",
+    "group": "UK Government Security (not NCSC)"
+  },
+  {
+    "id": "S30",
+    "title": "UK Government Security — Secure by Design activities (not NCSC; not a GOV Assured requirement)",
+    "href": "https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/",
+    "group": "UK Government Security (not NCSC)"
+  },
+  {
+    "id": "S31",
+    "title": "NIST SP 800-154 (Initial Public Draft, March 2016) landing",
+    "href": "https://csrc.nist.gov/pubs/sp/800/154/ipd",
+    "group": "NIST"
+  },
+  {
+    "id": "S32n",
+    "title": "NIST SP 800-154 draft PDF",
+    "href": "https://csrc.nist.gov/files/pubs/sp/800/154/ipd/docs/sp800_154_draft.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S33",
+    "title": "NIST SP 800-218 SSDF 1.1 (final, February 2022)",
+    "href": "https://csrc.nist.gov/pubs/sp/800/218/final",
+    "group": "NIST"
+  },
+  {
+    "id": "S34",
+    "title": "NIST SP 800-218 SSDF 1.1 PDF",
+    "href": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S35",
+    "title": "NIST SP 800-30 Rev. 1 landing",
+    "href": "https://csrc.nist.gov/pubs/sp/800/30/r1/final",
+    "group": "NIST"
+  },
+  {
+    "id": "S36",
+    "title": "NIST SP 800-30 Rev. 1 PDF",
+    "href": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-30r1.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S61",
+    "title": "NIST — AI Risk Management Framework landing",
+    "href": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "group": "NIST"
+  },
+  {
+    "id": "S62",
+    "title": "NIST AI RMF 1.0 PDF (NIST AI 100-1, 26 January 2023)",
+    "href": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S63",
+    "title": "NIST AI 600-1 publication record (26 July 2024)",
+    "href": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+    "group": "NIST"
+  },
+  {
+    "id": "S64",
+    "title": "NIST AI 600-1 PDF",
+    "href": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S65",
+    "title": "NIST SP 800-218A (final, 26 July 2024)",
+    "href": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+    "group": "NIST"
+  },
+  {
+    "id": "S66",
+    "title": "NIST SP 800-218A PDF",
+    "href": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf",
+    "group": "NIST"
+  },
+  {
+    "id": "S67",
+    "title": "NIST SP 800-218 Rev. 1 IPD (SSDF 1.2 draft, 17 December 2025)",
+    "href": "https://csrc.nist.gov/pubs/sp/800/218/r1/ipd",
+    "group": "NIST"
+  },
+  {
+    "id": "S68",
+    "title": "NIST publishes SP 800-218A (news, 26 July 2024)",
+    "href": "https://csrc.nist.gov/News/2024/nist-publishes-sp-800-218a",
+    "group": "NIST"
+  },
+  {
+    "id": "S37",
+    "title": "OWASP — Threat Modeling Cheat Sheet",
+    "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+    "group": "OWASP"
+  },
+  {
+    "id": "S38",
+    "title": "OWASP Threat Modeling Project",
+    "href": "https://owasp.org/projects/threat-modeling-project",
+    "group": "OWASP"
+  },
+  {
+    "id": "S39",
+    "title": "OWASP — Threat Modeling Process (Historical)",
+    "href": "https://community.owasp.org/Threat_Modeling_Process",
+    "group": "OWASP"
+  },
+  {
+    "id": "S40",
+    "title": "OWASP Developer Guide — threat modeling",
+    "href": "https://devguide.owasp.org/en/04-design/01-threat-modeling/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S41",
+    "title": "OWASP Threat Dragon (latest tagged release v2.6.2, 10 May 2026)",
+    "href": "https://owasp.org/projects/threat-dragon",
+    "group": "OWASP"
+  },
+  {
+    "id": "S69",
+    "title": "OWASP Gen AI Security Project",
+    "href": "https://genai.owasp.org/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S70",
+    "title": "OWASP GenAI LLM Top 10 2026 (resource, 3 August 2026)",
+    "href": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S71",
+    "title": "OWASP Top 10 for LLM Applications 2026 (PDF)",
+    "href": "https://genai.owasp.org/download/56857/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S72",
+    "title": "OWASP GenAI Red Teaming Guide v1.0 (23 January 2025)",
+    "href": "https://genai.owasp.org/download/44859/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S73",
+    "title": "OWASP Agentic AI — Threats and Mitigations v1.1 (December 2025)",
+    "href": "https://genai.owasp.org/download/45674/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S74",
+    "title": "OWASP Multi-Agentic system Threat Modeling Guide v1.0 (23 April 2025)",
+    "href": "https://genai.owasp.org/resource/multi-agentic-system-threat-modeling-guide-v1-0/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S75",
+    "title": "OWASP Top 10 for Agentic Applications 2026 (blog, 9 December 2025)",
+    "href": "https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S75a",
+    "title": "OWASP Top 10 for Agentic Applications 2026 (PDF, December 2025)",
+    "href": "https://genai.owasp.org/download/52117/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S75b",
+    "title": "OWASP Agentic Security Initiative",
+    "href": "https://genai.owasp.org/initiatives/agentic-security-initiative/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S75c",
+    "title": "OWASP GenAI resources archive",
+    "href": "https://genai.owasp.org/resources/",
+    "group": "OWASP"
+  },
+  {
+    "id": "S78",
+    "title": "OWASP pytm (v1.4.1, 1 November 2026)",
+    "href": "https://owasp.org/projects/pytm",
+    "group": "OWASP"
+  },
+  {
+    "id": "S42",
+    "title": "Threat Modeling Manifesto",
+    "href": "https://www.threatmodelingmanifesto.org/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S46",
+    "title": "Threat Modeling Capabilities",
+    "href": "https://www.threatmodelingmanifesto.org/capabilities/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S46a",
+    "title": "Threat Modeling Capabilities announcement (12 January 2024)",
+    "href": "https://shostack.org/blog/threat-modeling-capabilities/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S43",
+    "title": "Beginner’s guide to threat modeling",
+    "href": "https://shostack.org/resources/threat-modeling.html",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S44",
+    "title": "The Four Question Framework",
+    "href": "https://shostack.org/blog/four-question-frame/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S45",
+    "title": "The Four-Question Framework (PDF)",
+    "href": "https://shostack.org/files/papers/The_Four_Question_Framework.pdf",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S47",
+    "title": "Microsoft SDL threat modelling",
+    "href": "https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S48",
+    "title": "Microsoft Threat Modeling Tool — threats (STRIDE)",
+    "href": "https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S48a",
+    "title": "Uncover security design flaws using STRIDE (MSDN archive)",
+    "href": "https://learn.microsoft.com/en-us/archive/msdn-magazine/2006/november/uncover-security-design-flaws-using-the-stride-approach",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S48b",
+    "title": "Microsoft — Threat Modeling AI/ML Systems and Dependencies (last updated 12 March 2025)",
+    "href": "https://learn.microsoft.com/en-us/security/engineering/threat-modeling-aiml",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S48c",
+    "title": "Microsoft — Complete AI threat modeling, Secure Future Initiative (last updated 24 February 2026)",
+    "href": "https://learn.microsoft.com/en-us/security/zero-trust/sfi/threat-modeling-ai",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S49",
+    "title": "LINDDUN",
+    "href": "https://linddun.org/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S50",
+    "title": "MITRE ATT&CK (current v20.1)",
+    "href": "https://attack.mitre.org/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S50a",
+    "title": "MITRE ATT&CK — Version History",
+    "href": "https://attack.mitre.org/resources/versions/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S50b",
+    "title": "MITRE ATT&CK — October 2026 updates",
+    "href": "https://attack.mitre.org/resources/updates/updates-october-2026/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S51",
+    "title": "MITRE CAPEC",
+    "href": "https://capec.mitre.org/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S58",
+    "title": "MITRE ATLAS (content 2026.10, 28 October 2026)",
+    "href": "https://atlas.mitre.org/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S52",
+    "title": "Attack Trees",
+    "href": "https://www.schneier.com/academic/archives/1999/12/attack_trees.html",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S53",
+    "title": "OASIS STIX Version 2.1",
+    "href": "https://www.oasis-open.org/standard/stix-version-2-1/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S54",
+    "title": "PASTA book record (Wiley)",
+    "href": "https://www.wiley.com/en-us/Risk+Centric+Threat+Modeling%3A+Process+for+Attack+Simulation+and+Threat+Analysis-p-9780470500965",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S55",
+    "title": "PASTA, AppSecEU 2012 PDF",
+    "href": "https://wiki.owasp.org/images/a/aa/AppSecEU2012_PASTA.pdf",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S56",
+    "title": "CISA Secure by Design (US guidance; not UK official policy)",
+    "href": "https://www.cisa.gov/resources-tools/resources/secure-by-design",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S57",
+    "title": "CISA Secure by Design PDF (2023)",
+    "href": "https://www.cisa.gov/sites/default/files/2023-10/Shifting-the-Balance-of-Cybersecurity-Risk-Principles-and-Approaches-for-Secure-by-Design-Software.pdf",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S80",
+    "title": "Threagile (latest tagged release v0.9.1, 30 July 2024)",
+    "href": "https://threagile.io/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S81",
+    "title": "IriusRisk platform (commercial; not evaluated or recommended)",
+    "href": "https://www.iriusrisk.com/threat-modeling-platform",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S88",
+    "title": "SLSA specification v1.2",
+    "href": "https://slsa.dev/spec/v1.2/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S88a",
+    "title": "SLSA — v1.2 announcement (24 November 2025)",
+    "href": "https://slsa.dev/blog/2025/11/announce-slsa-v1.2",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S88b",
+    "title": "SLSA home",
+    "href": "https://slsa.dev/",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S89",
+    "title": "SLSA v1.2 threats and mitigations",
+    "href": "https://slsa.dev/spec/v1.2/threats",
+    "group": "Manifesto, catalogues, methods and tools"
+  },
+  {
+    "id": "S90",
+    "title": "SLSA v1.2 supply chain threats",
+    "href": "https://slsa.dev/spec/v1.2/threats-overview",
+    "group": "Manifesto, catalogues, methods and tools"
+  }
+]

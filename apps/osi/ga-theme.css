@@ -1,0 +1,50 @@
+/* GOV Assured shared theme (ga-theme.css)
+   Tokens and base styles taken from the hub, https://www.govassured.com/ (styles.css).
+   Copy this file into a new app's static root and link it from every page:
+     <link rel="stylesheet" href="/ga-theme.css">
+   Copy docs/assets/ga-logo.png to the app's root as /ga-logo.png for the logo bar.
+   This is the one canonical generic stylesheet for all 21 apps. Each app links this file unchanged;
+   app-specific remaps live in a separate /ga-app.css linked after it. */
+:root{
+  --ga-field:#021c17; --ga-raised:#102e26; --ga-raised-2:#163a30; --ga-sunk:#011511;
+  --ga-ink:#f6f0e4; --ga-ink-soft:#d2c8b4; --ga-ink-faint:#b3a993;
+  --ga-gold:#f0c987; --ga-gold-hover:#f7e1b8; --ga-gold-deep:#c9a15d;
+  --ga-line:rgba(240,201,135,.32); --ga-line-soft:rgba(240,201,135,.18);
+  --ga-ok:#8fdcb0; --ga-warn:#f3c969; --ga-bad:#ff9d8f; --ga-info:#9fd3e6;
+  --ga-ok-bg:#123d2c; --ga-warn-bg:#3a3214; --ga-bad-bg:#3d1c18; --ga-info-bg:#113340;
+  --ga-serif:"Palatino Linotype",Palatino,"Iowan Old Style","Book Antiqua","Times New Roman",Times,serif;
+  --ga-sans:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ga-mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,Consolas,monospace;
+  --ga-radius:14px;
+  --ga-bg:radial-gradient(ellipse at 0% 0%,rgba(240,201,135,.09),transparent 46%) no-repeat,#021c17;
+  color-scheme:dark;
+}
+html{background:#021c17}
+body{background:var(--ga-bg);background-color:#021c17;color:var(--ga-ink);font-family:var(--ga-sans);font-size:1.0625rem;line-height:1.55}
+::selection{background:var(--ga-gold);color:var(--ga-field)}
+:focus-visible{outline:3px solid var(--ga-gold);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--ga-serif);font-weight:500;letter-spacing:-.01em}
+a{color:var(--ga-gold)}
+a:hover{color:var(--ga-gold-hover)}
+code,kbd,samp,pre{font-family:var(--ga-mono)}
+/* keep the GOV Assured logo bar identical everywhere */
+.ga-brandbar{background:#0b2318!important;border-bottom:1px solid rgba(240,201,135,.35)!important}
+
+/* GOV Assured logo bar (identical on every app page). Markup:
+   <div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div> */
+.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}
+.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}
+.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}
+.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}
+
+/* Components, copied from the hub's .wrap, .btn, .btn-primary, .btn-quiet, .card and .eyebrow rules
+   under ga- prefixed names so they don't collide with an app's own classes. */
+.ga-wrap{width:min(1120px,calc(100% - 2rem));margin-inline:auto}
+.ga-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6rem;padding:.4rem .85rem;border-radius:8px;font-family:var(--ga-sans);font-size:.95rem;font-weight:700;text-decoration:none;cursor:pointer;border:0}
+.ga-btn-primary,a.ga-btn-primary,a.ga-btn-primary:visited{background:var(--ga-gold);color:var(--ga-field)}
+.ga-btn-primary:hover,a.ga-btn-primary:hover{background:var(--ga-gold-hover);color:var(--ga-field)}
+.ga-btn-quiet,a.ga-btn-quiet,a.ga-btn-quiet:visited{background:transparent;color:var(--ga-gold);border:1px solid var(--ga-line)}
+.ga-btn-quiet:hover,a.ga-btn-quiet:hover{background:rgba(240,201,135,.1);color:var(--ga-gold-hover)}
+.ga-card{padding:1.15rem 1.15rem 1rem;background:var(--ga-raised);border:1px solid var(--ga-line);border-radius:var(--ga-radius)}
+.ga-card h3,.ga-card h4{margin:0;font-family:var(--ga-serif);font-size:1.32rem;font-weight:500;letter-spacing:-.02em;line-height:1.2}
+.ga-eyebrow{margin:0 0 .7rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ga-gold)}

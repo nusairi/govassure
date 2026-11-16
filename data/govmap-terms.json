@@ -1,0 +1,656 @@
+{
+  "terms": [
+    {
+      "id": "accountable-to-parliament",
+      "term": "Accountable to Parliament",
+      "short": null,
+      "def": "A small group of bodies that are independent of ministers.",
+      "patterns": [
+        {
+          "t": "Accountable to Parliament",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "ad-hoc-advisory-group",
+      "term": "Ad-hoc advisory group",
+      "short": null,
+      "def": "A temporary group of advisers set up for one task or a fixed period, such as reviewing evidence on a particular issue.",
+      "patterns": [
+        {
+          "t": "Ad-hoc advisory group",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "advisory-ndpb",
+      "term": "Advisory NDPB",
+      "short": "Advisory non-departmental public body",
+      "def": "A non-departmental public body whose job is to give ministers independent, expert advice rather than to run services.",
+      "patterns": [
+        {
+          "t": "Advisory NDPB",
+          "s": false
+        },
+        {
+          "t": "Advisory non-departmental public body",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "annually-managed-expenditure",
+      "term": "Annually Managed Expenditure",
+      "short": "AME",
+      "def": "Spending that is not in the departmental expenditure limit, mainly social security, debt interest, public service pensions and similar demand-led or non-cash items.",
+      "patterns": [
+        {
+          "t": "AME",
+          "s": true
+        },
+        {
+          "t": "Annually Managed Expenditure",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "arms-length-body",
+      "term": "Arm's-length body",
+      "short": "ALB",
+      "def": "The umbrella term for public bodies that work at a distance from ministers but are still accountable to them through a sponsor department.",
+      "patterns": [
+        {
+          "t": "ALB",
+          "s": true
+        },
+        {
+          "t": "ALBs",
+          "s": true
+        },
+        {
+          "t": "arm's-length body",
+          "s": false
+        },
+        {
+          "t": "arm's-length bodies",
+          "s": false
+        },
+        {
+          "t": "arm's length body",
+          "s": false
+        },
+        {
+          "t": "arms-length body",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "capital-del",
+      "term": "Capital DEL",
+      "short": "CDEL",
+      "def": "The part of a departmental expenditure limit that covers capital spending, such as investment in buildings, equipment and infrastructure.",
+      "patterns": [
+        {
+          "t": "CDEL",
+          "s": true
+        },
+        {
+          "t": "Capital DEL",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "comptroller-and-auditor-general",
+      "term": "Comptroller and Auditor General",
+      "short": "C&AG",
+      "def": "The Officer of the House of Commons who leads the National Audit Office.",
+      "patterns": [
+        {
+          "t": "C&AG",
+          "s": true
+        },
+        {
+          "t": "Comptroller and Auditor General",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "court",
+      "term": "Court",
+      "short": null,
+      "def": "A court that decides civil, family or criminal cases.",
+      "patterns": [
+        {
+          "t": "Court",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "crown-body",
+      "term": "Crown body / Crown NDPB",
+      "short": null,
+      "def": "A body that legally acts on behalf of the Crown and shares some of its legal status, so its staff can be civil servants.",
+      "patterns": [
+        {
+          "t": "Crown body / Crown NDPB",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "departmental-expenditure-limit",
+      "term": "Departmental expenditure limit",
+      "short": "DEL",
+      "def": "The Treasury's planning and control total for department-like spending.",
+      "patterns": [
+        {
+          "t": "DEL",
+          "s": true
+        },
+        {
+          "t": "departmental expenditure limit",
+          "s": false
+        },
+        {
+          "t": "departmental expenditure limits",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "devolved-government",
+      "term": "Devolved government",
+      "short": null,
+      "def": "The governments of Scotland, Wales and Northern Ireland.",
+      "patterns": [
+        {
+          "t": "devolved government",
+          "s": false
+        },
+        {
+          "t": "devolved governments",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "electoral-commission",
+      "term": "Electoral Commission",
+      "short": null,
+      "def": "The independent body that oversees elections and referendums and regulates political finance in the UK.",
+      "patterns": [
+        {
+          "t": "Electoral Commission",
+          "s": false
+        },
+        {
+          "t": "the Electoral Commission",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "executive-agency",
+      "term": "Executive agency",
+      "short": "EA",
+      "def": "A part of a government department that has its own management and budget to deliver a particular service, but legally stays inside the department.",
+      "patterns": [
+        {
+          "t": "executive agency",
+          "s": false
+        },
+        {
+          "t": "executive agencies",
+          "s": false
+        },
+        {
+          "t": "EA",
+          "s": true
+        },
+        {
+          "t": "EAs",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "executive-ndpb",
+      "term": "Executive NDPB",
+      "short": "Executive non-departmental public body",
+      "def": "A non-departmental public body that delivers services, hands out funding or regulates, at arm's length from ministers.",
+      "patterns": [
+        {
+          "t": "Executive NDPB",
+          "s": false
+        },
+        {
+          "t": "Executive non-departmental public body",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "executive-office",
+      "term": "Executive office",
+      "short": null,
+      "def": "An office whose job is to support the head of government directly.",
+      "patterns": [
+        {
+          "t": "Executive office",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "independent-monitoring-body",
+      "term": "Independent monitoring body",
+      "short": null,
+      "def": "A body that inspects, monitors or reports on part of the system, independently of the department it looks at.",
+      "patterns": [
+        {
+          "t": "Independent monitoring body",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "independent-parliamentary-standards-authority",
+      "term": "Independent Parliamentary Standards Authority",
+      "short": "IPSA",
+      "def": "The body that independently regulates and pays MPs' salaries, pensions, business costs and expenses.",
+      "patterns": [
+        {
+          "t": "IPSA",
+          "s": true
+        },
+        {
+          "t": "Independent Parliamentary Standards Authority",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "local-government-boundary-commission-for-england",
+      "term": "Local Government Boundary Commission for England",
+      "short": "LGBCE",
+      "def": "Recommends fair electoral and boundary arrangements for local authorities in England, and reviews London Assembly constituencies.",
+      "patterns": [
+        {
+          "t": "LGBCE",
+          "s": true
+        },
+        {
+          "t": "Local Government Boundary Commission for England",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "main-estimates",
+      "term": "Main Estimates",
+      "short": "Main Supply Estimates",
+      "def": "The government's annual request to Parliament to vote money for each department and certain other bodies for the financial year.",
+      "patterns": [
+        {
+          "t": "Main Estimates",
+          "s": false
+        },
+        {
+          "t": "Main Supply Estimates",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "ministerial-department",
+      "term": "Ministerial department",
+      "short": null,
+      "def": "A government department led by a Secretary of State or another minister, who answers to Parliament for its work.",
+      "patterns": [
+        {
+          "t": "ministerial department",
+          "s": false
+        },
+        {
+          "t": "ministerial departments",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "national-audit-office",
+      "term": "National Audit Office",
+      "short": "NAO",
+      "def": "The UK's independent public spending watchdog.",
+      "patterns": [
+        {
+          "t": "NAO",
+          "s": true
+        },
+        {
+          "t": "National Audit Office",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "non-departmental-public-body",
+      "term": "Non-departmental public body",
+      "short": "NDPB",
+      "def": "A public body that works at arm's length from ministers and is not part of a department.",
+      "patterns": [
+        {
+          "t": "NDPB",
+          "s": true
+        },
+        {
+          "t": "NDPBs",
+          "s": true
+        },
+        {
+          "t": "non-departmental public body",
+          "s": false
+        },
+        {
+          "t": "non-departmental public bodies",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "non-ministerial-department",
+      "term": "Non-ministerial department",
+      "short": "NMD",
+      "def": "A government department with no minister of its own.",
+      "patterns": [
+        {
+          "t": "NMD",
+          "s": true
+        },
+        {
+          "t": "NMDs",
+          "s": true
+        },
+        {
+          "t": "non-ministerial department",
+          "s": false
+        },
+        {
+          "t": "non-ministerial departments",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "not-attached",
+      "term": "Not attached (map marker)",
+      "short": null,
+      "def": "Our label for bodies that GOV.UK lists without a current parent department.",
+      "patterns": [
+        {
+          "t": "Not attached (map marker)",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "other-public-body",
+      "term": "Other public body",
+      "short": null,
+      "def": "GOV.UK's catch-all label for organisations that do not fit a standard category.",
+      "patterns": [
+        {
+          "t": "Other public body",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "own-website",
+      "term": "Own website (map marker)",
+      "short": null,
+      "def": "Our marker for bodies that mainly publish on their own website rather than on GOV.UK.",
+      "patterns": [
+        {
+          "t": "Own website (map marker)",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "parliamentary-and-health-service-ombudsman",
+      "term": "Parliamentary and Health Service Ombudsman",
+      "short": "PHSO",
+      "def": "Makes final decisions on complaints that have not been resolved by the NHS in England, UK government departments and some other UK public organisations.",
+      "patterns": [
+        {
+          "t": "PHSO",
+          "s": true
+        },
+        {
+          "t": "Parliamentary and Health Service Ombudsman",
+          "s": false
+        },
+        {
+          "t": "Public Service Ombudsman",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "pesa",
+      "term": "PESA",
+      "short": "Public Expenditure Statistical Analyses",
+      "def": "The Treasury's annual statistics on public spending.",
+      "patterns": [
+        {
+          "t": "PESA",
+          "s": true
+        },
+        {
+          "t": "Public Expenditure Statistical Analyses",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "public-accounts-commission",
+      "term": "Public Accounts Commission",
+      "short": "TPAC",
+      "def": "A statutory committee of MPs that sets the National Audit Office's budget, scrutinises its performance, and appoints most of its non-executive board members and its external auditor.",
+      "patterns": [
+        {
+          "t": "TPAC",
+          "s": true
+        },
+        {
+          "t": "Public Accounts Commission",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "public-administration-and-constitutional-affairs-committee",
+      "term": "Public Administration and Constitutional Affairs Committee",
+      "short": "PACAC",
+      "def": "A House of Commons select committee.",
+      "patterns": [
+        {
+          "t": "PACAC",
+          "s": true
+        },
+        {
+          "t": "Public Administration and Constitutional Affairs Committee",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "public-corporation",
+      "term": "Public corporation",
+      "short": null,
+      "def": "A publicly owned or controlled body that earns most of its income by selling goods or services, for example broadcasting, mapping or post.",
+      "patterns": [
+        {
+          "t": "public corporation",
+          "s": false
+        },
+        {
+          "t": "public corporations",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "resource-del",
+      "term": "Resource DEL",
+      "short": "RDEL",
+      "def": "The part of a departmental expenditure limit that covers day-to-day (resource) spending.",
+      "patterns": [
+        {
+          "t": "RDEL",
+          "s": true
+        },
+        {
+          "t": "Resource DEL",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "shared",
+      "term": "Shared (map marker)",
+      "short": null,
+      "def": "Our marker for a body that more than one department lists, for example when departments or governments share responsibility for it.",
+      "patterns": [
+        {
+          "t": "Shared (map marker)",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "small-and-independent-bodies",
+      "term": "Small and independent bodies",
+      "short": "PESA group",
+      "def": "A Treasury grouping in Public Expenditure Statistical Analyses (PESA).",
+      "patterns": [
+        {
+          "t": "Small and independent bodies",
+          "s": false
+        },
+        {
+          "t": "PESA group",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "speakers-committee",
+      "term": "Speaker's Committee",
+      "short": null,
+      "def": "A statutory committee of MPs, chaired by the Speaker, that oversees certain bodies accountable to Parliament and sets their budgets.",
+      "patterns": [
+        {
+          "t": "Speaker's Committee",
+          "s": false
+        },
+        {
+          "t": "Speaker’s Committee",
+          "s": false
+        },
+        {
+          "t": "Speaker's Committee on the Electoral Commission",
+          "s": false
+        },
+        {
+          "t": "Speaker's Committee for IPSA",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "special-health-authority",
+      "term": "Special health authority",
+      "short": "SHA",
+      "def": "A type of NHS body set up to run a single health service function across England, such as blood and organ donation or handling NHS legal claims.",
+      "patterns": [
+        {
+          "t": "SHA",
+          "s": true
+        },
+        {
+          "t": "special health authority",
+          "s": false
+        },
+        {
+          "t": "special health authorities",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "sponsor-department",
+      "term": "Sponsor department",
+      "short": null,
+      "def": "The department responsible for an arm's-length body.",
+      "patterns": [
+        {
+          "t": "sponsor department",
+          "s": false
+        },
+        {
+          "t": "sponsor departments",
+          "s": false
+        },
+        {
+          "t": "sponsoring minister",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "sub-organisation",
+      "term": "Sub-organisation",
+      "short": null,
+      "def": "A team, unit or programme inside a department or body that GOV.UK lists separately because it has its own public profile.",
+      "patterns": [
+        {
+          "t": "Sub-organisation",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "total-del",
+      "term": "Total DEL",
+      "short": null,
+      "def": "Resource DEL plus capital DEL.",
+      "patterns": [
+        {
+          "t": "Total DEL",
+          "s": false
+        }
+      ]
+    },
+    {
+      "id": "tribunal",
+      "term": "Tribunal (NDPB)",
+      "short": null,
+      "def": "A body that makes legal decisions in a specialist area, such as competition or copyright disputes.",
+      "patterns": [
+        {
+          "t": "Tribunal (NDPB)",
+          "s": false
+        }
+      ]
+    }
+  ]
+}

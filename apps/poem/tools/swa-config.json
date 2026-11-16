@@ -1,0 +1,12 @@
+{
+  "routes": [],
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/ga-404.html",
+      "statusCode": 404
+    }
+  }
+}

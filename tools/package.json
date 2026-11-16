@@ -1,0 +1,11 @@
+{
+  "name": "govassure-www-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright checks for the www.govassured.com hub. Set B to the site under test.",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "dependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}

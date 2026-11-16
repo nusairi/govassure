@@ -1,0 +1,250 @@
+[
+  {
+    "id": "tm",
+    "label": "threat modelling",
+    "stage": "scope",
+    "what": "A structured way to understand a system, who might harm it, what can go wrong, what you will do about it, and whether that work was good enough. NCSC treats it as a team workshop and asks for it to be folded into design, risk management and CI/CD.",
+    "analogy": "Like a walk-through of a building before you open it, asking who might get in and what you will lock, rather than waiting for a break-in.",
+    "without": "You only find problems after something goes wrong, or you harden the wrong part of the service.",
+    "good": "A short, current model of this change, done as a team, and kept next to the service.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.threatmodelingmanifesto.org/",
+      "label": "Threat Modeling Manifesto"
+    }
+  },
+  {
+    "id": "scope-term",
+    "label": "scope",
+    "stage": "scope",
+    "what": "The decision about what you are modelling this time: the system or change, what is in and out, who takes part, and how deep is good enough. It should include AI components, identities and the build pipeline where they exist, not only application code.",
+    "analogy": "Deciding which rooms you will inspect today, not trying to survey the whole street in one visit.",
+    "without": "You either model the entire estate in one sitting, or you miss the model API, the identity provider or the pipeline.",
+    "good": "A short scoping note that names the change, in-scope and out-of-scope, attendees and depth.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "label": "OWASP Threat Modeling Cheat Sheet"
+    }
+  },
+  {
+    "id": "fourq",
+    "label": "four questions",
+    "stage": "scope",
+    "what": "The handrail used by the Threat Modeling Manifesto and by NCSC: what are we working on (or building); what can go wrong; what are we going to do about it; and did we do a good enough job? They underpin every stage of this lifecycle; they are not a separate four-stage method.",
+    "analogy": "Four questions you keep asking, like a pilot’s checklist, rather than a one-page form you fill in once.",
+    "without": "The work becomes a loose brainstorm with no way to tell whether you finished, or a claim that the four questions are the only four stages you need.",
+    "good": "Each pass can answer the four questions, even when you use ten teaching stages to get there.",
+    "link": {
+      "href": "https://shostack.org/blog/four-question-frame/",
+      "label": "The Four Question Framework"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "trigger",
+    "label": "change trigger",
+    "stage": "scope",
+    "what": "The reason you start or reopen a pass: a new feature, a new model or agent, a new cloud identity, a new dependency, or a change to CI/CD — and later, a relevant incident or advisory.",
+    "analogy": "The event that sends you back to the checklist: a new door, a new contractor, or a new alarm.",
+    "without": "Threat modelling only happens when someone asks for a “security feature”, so real changes go unreviewed.",
+    "good": "The scoping note names the change that triggered this pass.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "label": "OWASP Threat Modeling Cheat Sheet"
+    }
+  },
+  {
+    "id": "actor",
+    "label": "threat actor",
+    "stage": "landscape",
+    "what": "Someone or some group who might try to harm the service. NCSC’s first step is to understand who might be motivated to harm you, with their intent, motivation and capability. List actors that are plausible for this service, not a generic list of nation states.",
+    "analogy": "Asking who might actually try to break in, rather than listing every burglar in the country.",
+    "without": "You jump straight to technical threats, or you list actors that are not realistic for this service.",
+    "good": "A short, realistic threat-actor list used to choose catalogues and later to judge likelihood.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/establish-the-context-before-designing-a-system",
+      "label": "NCSC — Principle 1: Establish the context"
+    }
+  },
+  {
+    "id": "intent",
+    "label": "intent",
+    "stage": "landscape",
+    "what": "What a threat actor is trying to achieve — their motivation and what success looks like for them. It sits with capability when you judge who is relevant.",
+    "analogy": "The difference between someone who wants to deface a homepage and someone who wants a copy of every draft plan.",
+    "without": "You treat every actor as having the same goal, so you prioritise the wrong work.",
+    "good": "Each listed actor has a short note of intent and motivation that is plausible for this service.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "capability",
+    "label": "capability",
+    "stage": "landscape",
+    "what": "What a threat actor can actually do — their skill, access and resources. Used with intent when you decide who is relevant and, later, how likely a threat is.",
+    "analogy": "Knowing whether you are planning for a curious passer-by or a well-equipped specialist.",
+    "without": "You assume every actor can do everything, or you ignore a realistic actor who already has enough capability.",
+    "good": "Capability is stated in plain language and used when you later assess likelihood.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "attack",
+    "label": "ATT&CK",
+    "stage": "landscape",
+    "what": "MITRE ATT&CK is a living catalogue of adversary techniques. The current version when this page was checked was v20.1, from 13 October 2026. Use the current site for conventional techniques that actually fit this system, not a frozen teaching slide, and not the entire matrix pasted into the model.",
+    "analogy": "An up-to-date catalogue of known methods, like a current field guide rather than last year’s photocopied page.",
+    "without": "You start from last year’s slide, or you dump every technique into the model.",
+    "good": "The pass names ATT&CK v20.1 (or whatever is current) and uses only techniques that fit.",
+    "link": {
+      "href": "https://attack.mitre.org/",
+      "label": "MITRE ATT&CK"
+    }
+  },
+  {
+    "id": "atlas",
+    "label": "ATLAS",
+    "stage": "landscape",
+    "what": "MITRE ATLAS (Adversarial Threat Landscape for AI Systems) is a separate, living knowledge base for attacks involving AI. Content version 2026.10 is dated 28 October 2026. Reach for ATLAS, not ATT&CK alone, when the system includes a model or an agent.",
+    "analogy": "The AI-focused field guide you pick up when the service uses a model or an agent.",
+    "without": "You only use ATT&CK or STRIDE on an LLM or agent and miss AI-specific threats.",
+    "good": "If the service uses a model or an agent, the pass names ATLAS 2026.10 (or whatever is current) as a catalogue.",
+    "link": {
+      "href": "https://atlas.mitre.org/",
+      "label": "MITRE ATLAS"
+    }
+  },
+  {
+    "id": "cti",
+    "label": "cyber threat intelligence (CTI)",
+    "stage": "landscape",
+    "what": "The best threat information you have — catalogues, advisories and your own incident history — used to understand who might harm this service. This lifecycle is not a classified intelligence product.",
+    "analogy": "Reading current reports and your own incident notes before you guess what might go wrong.",
+    "without": "You invent a dramatic actor list, or you rely on a static slide and ignore recent advisories.",
+    "good": "A short note of which current sources and versions informed this pass.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cyber-security-design-principles/establish-the-context-before-designing-a-system",
+      "label": "NCSC — Principle 1: Establish the context"
+    }
+  },
+  {
+    "id": "dfd",
+    "label": "data flow diagram (DFD)",
+    "stage": "model",
+    "what": "The usual form of a good-enough model for analysis: components (including users), data flows and connections to other systems. An architecture or use-case diagram also works. The model will never be perfect.",
+    "analogy": "A simple map of who talks to whom and what moves between them, good enough to walk around, not a wiring diagram of every cable.",
+    "without": "A neat picture of the web app that omits the identity provider, the pipeline, admin paths, backups or the model API.",
+    "good": "A labelled DFD or equivalent that includes those real-system parts where they exist.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "sid",
+    "label": "service identity",
+    "stage": "model",
+    "what": "A non-human identity a workload uses to call another service — for example a stored credential used to call a model API. Cloud Security Principles 9 and 10 cover user management and identity, including service identities. Treat these identities as first-class assets and entry points.",
+    "analogy": "The staff pass a machine uses, not only the logins that people type.",
+    "without": "The diagram shows users but not the credentials the app uses in the background.",
+    "good": "Service identities appear on the model, with the trust boundary where they are used.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-10-identity-and-authentication",
+      "label": "NCSC Cloud Security Principle 10: Identity and authentication"
+    }
+  },
+  {
+    "id": "cicd",
+    "label": "CI/CD",
+    "stage": "model",
+    "what": "Continuous integration and continuous delivery: the pipeline that builds and deploys the service, including artefact registries. NCSC asks for threat modelling to be folded into CI/CD, and Cloud Security Principle 7 covers secure development and an automated pipeline.",
+    "analogy": "The factory line that turns code into the running service.",
+    "without": "The pipeline is left off the diagram, so a compromised build or a stolen service identity in the pipeline is never discussed.",
+    "good": "CI/CD and artefact registries appear on the real-system model.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/developers-collection",
+      "label": "NCSC — Secure development and deployment"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/principle-7-secure-development",
+      "label": "NCSC Cloud Security Principle 7: Secure development"
+    }
+  },
+  {
+    "id": "tmac",
+    "label": "threat-modelling-as-code",
+    "stage": "model",
+    "what": "A practical option: the model is a YAML or Python file in the same repository as the service, checked on pull requests, and updated when architecture or dependencies change. Verified examples include OWASP pytm v1.4.1 (1 November 2026) and Threagile (latest tag v0.9.1, 30 July 2024 — the tag may lag the code). You can still start from a whiteboard.",
+    "analogy": "Keeping the map in the same filing cabinet as the plans, so it is updated when the plans change.",
+    "without": "The only record is a whiteboard photograph that nobody can update when the code changes.",
+    "good": "Where practical, a version-controlled model file sits next to the service.",
+    "link": {
+      "href": "https://owasp.org/projects/pytm",
+      "label": "OWASP pytm"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  },
+  {
+    "id": "agent",
+    "label": "agent",
+    "stage": "model",
+    "what": "An AI component that can use tools, memory or callbacks, and may act beyond a single prompt-and-response. NCSC’s August 2026 blog gives interim advice on the cyber risk of agentic AI, including modelling failure scenarios before deployment. When an agent is in scope, ATLAS and the OWASP Agentic guides apply from stage 2 onwards.",
+    "analogy": "A helper that can not only draft text but also take actions, so you have to model those actions and how they can go wrong.",
+    "without": "The agent is treated as just another text box, and goal hijack, tool misuse or a rogue agent are never considered.",
+    "good": "Any agent, its tools, memory and callbacks are on the model, and failure scenarios are thought through before deployment.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/blogs/managing-the-cyber-risk-of-agentic-ai",
+      "label": "NCSC — Managing the cyber risk of agentic AI"
+    },
+    "link2": {
+      "href": "https://atlas.mitre.org/",
+      "label": "MITRE ATLAS"
+    }
+  },
+  {
+    "id": "mapi",
+    "label": "model API",
+    "stage": "model",
+    "what": "The external (or internal) interface used to call a cloud or hosted model: prompts go out, outputs come back, usually with a service identity. It is one of the parts most often missing from a neat web-app diagram, and a trust boundary sits where that data and identity leave your app.",
+    "analogy": "The hatch in the wall where you pass a question to an outside specialist and get an answer back.",
+    "without": "The diagram stops at the new screen, so prompt injection, leaked credentials and untrue output are never placed on the model.",
+    "good": "The model API, its credentials, prompts and outputs are in scope and on the diagram.",
+    "link": {
+      "href": "https://www.ncsc.gov.uk/collection/machine-learning-principles/secure-design/model-threats",
+      "label": "NCSC — Machine learning principles, 1.2 Model the threats to your system"
+    },
+    "link2": {
+      "href": "https://www.ncsc.gov.uk/collection/risk-management/threat-modelling",
+      "label": "NCSC — Threat modelling"
+    }
+  }
+]

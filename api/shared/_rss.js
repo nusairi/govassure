@@ -3,17 +3,18 @@
 
 function decode(s) {
   if (!s) return "";
-  return s
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+  // Unwrap CDATA, decode entities once (&amp; last so &amp;lt; stays as &lt;),
+  // then strip tags, so a feed cannot hide markup as &lt;script&gt;.
+  s = String(s).replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+  s = s
+    .replace(/&nbsp;/g, " ")
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+  s = s.replace(/<[^>]*>?/g, "");
+  return s.replace(/\s+/g, " ").trim();
 }
 
 function tag(block, name) {

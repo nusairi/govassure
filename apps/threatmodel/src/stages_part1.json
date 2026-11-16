@@ -1,0 +1,136 @@
+[
+  {
+    "id": "scope",
+    "num": 1,
+    "short": "Scope",
+    "title": "Scope the change",
+    "full": "Scope the change (including AI, identity and the pipeline)",
+    "purpose": "Decide what you are modelling this time, why, and what “good enough” looks like.",
+    "do": "Name the system or the change — a new feature, a new model or agent, a new cloud identity, a new dependency, or a change to CI/CD — and set in-scope and out-of-scope. Agree who will take part (this remains a team activity). Time-box the work. The four questions from the Threat Modeling Manifesto, which NCSC also uses as its handrail, are the foundation for the whole pass, not a separate method.",
+    "output": "A short scoping note: system or change name, in-scope and out-of-scope (including AI components, identities, and the build pipeline), attendees, and depth.",
+    "mistake": "Modelling the entire estate in one sitting, or scoping only the application code and leaving out the model, the identity provider, or the pipeline.",
+    "ncsc": "Partial. NCSC has a page on when and why to do the work, but none devoted only to how to write a scope note.",
+    "sources": [
+      "S1",
+      "S42",
+      "S43",
+      "S44",
+      "S46",
+      "S37"
+    ],
+    "depth": {
+      "basics": {
+        "purpose": "Decide what you are modelling this time, why, and what “good enough” looks like.",
+        "do": "Name the system or the change, set what is in scope and out of scope, agree who will take part, and time-box the work. The four questions (what are we working on; what can go wrong; what will we do about it; did we do a good enough job) are the handrail for the whole pass.",
+        "output": "A short scoping note: what is in, what is out, who is involved, and how deep you will go.",
+        "mistake": "Trying to model everything at once, or looking only at the new screen and missing the model, the identity provider, or the pipeline."
+      },
+      "practitioner": {
+        "purpose": "Decide what you are modelling this time, why, and what “good enough” looks like.",
+        "do": "Name the system or the change — a new feature, a new model or agent, a new cloud identity, a new dependency, or a change to CI/CD — and set in-scope and out-of-scope. Agree who will take part (this remains a team activity). Time-box the work. The four questions from the Threat Modeling Manifesto, which NCSC also uses as its handrail, are the foundation for the whole pass, not a separate method.",
+        "output": "A short scoping note: system or change name, in-scope and out-of-scope (including AI components, identities, and the build pipeline), attendees, and depth.",
+        "mistake": "Modelling the entire estate in one sitting, or scoping only the application code and leaving out the model, the identity provider, or the pipeline."
+      },
+      "architect": {
+        "purpose": "Decide what you are modelling this time, why, and what “good enough” looks like — as a programme habit, not only a single workshop.",
+        "do": "Name the system or the change — a new feature, a new model or agent, a new cloud identity, a new dependency, or a change to CI/CD — and set in-scope and out-of-scope. Agree who will take part (this remains a team activity). Time-box the work. Use the four questions as the foundation for the whole pass. The Threat Modeling Capabilities catalogue treats this as part of a programme (strategy, education, creating models, acting on them, communications, measurement, programme management), not a one-off workshop. OWASP’s cheat sheet also places threat modelling early in the lifecycle, then kept alive. There is no NCSC page devoted only to how to write a scope note; the NCSC threat-modelling page covers when and why to do the work, and asks for it to be folded into design, risk management and CI/CD.",
+        "output": "A short scoping note: system or change name, in-scope and out-of-scope (including AI components, identities, and the build pipeline), attendees, and depth.",
+        "mistake": "Modelling the entire estate in one sitting, or scoping only the application code and leaving out the model, the identity provider, or the pipeline."
+      }
+    },
+    "quiz": {
+      "question": "You are adding a cloud model that drafts text for users. What must be in scope as well as the new screen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model API, its credentials, prompts and outputs, and any change to the pipeline — not only the new page.",
+          "correct": true,
+          "feedback": "Yes. The model API, its credentials, prompts and outputs, and any change to the pipeline must be in scope — not only the new page."
+        },
+        {
+          "id": "b",
+          "label": "Only the new screen and its buttons, because threat modelling starts after the feature ships.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "The entire estate in one sitting, so that nothing can be missed.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "landscape",
+    "num": 2,
+    "short": "Landscape",
+    "title": "Refresh the landscape",
+    "full": "Refresh the current threat landscape",
+    "purpose": "Understand, with current sources, who might try to harm this service and which catalogues apply now — not a static list from a previous year.",
+    "do": "Describe what the service does and what would go wrong if it failed. Using the best threat information you have, list plausible threat actors and their intent, motivation and capability (this is the first step on the NCSC threat-modelling page). Then pick the current catalogues that apply: ATT&CK v20.1 for conventional techniques; ATLAS 2026.10 and the OWASP GenAI / Agentic guides if the service uses a model or an agent; relevant advisories and your own incident history. This is not a classified intelligence product.",
+    "output": "A short context statement, a short threat-actor list, and a note of which catalogues and versions will be used on this pass.",
+    "mistake": "Jumping straight to technical threats; listing nation-state actors that are not realistic for this service; or using an out-of-date ATT&CK or LLM Top 10 slide.",
+    "ncsc": "Yes.",
+    "sources": [
+      "S1",
+      "S10",
+      "S20",
+      "S50",
+      "S50a",
+      "S58",
+      "S70",
+      "S71",
+      "S73",
+      "S75",
+      "S27"
+    ],
+    "sourceNotes": {
+      "S27": "Useful public guidance, but it is government Secure by Design policy, not NCSC, and is not mandatory for this community."
+    },
+    "depth": {
+      "basics": {
+        "purpose": "Understand who might try to harm this service, and which up-to-date catalogues apply — not a list from last year.",
+        "do": "Say what the service does and what would go wrong if it failed. List plausible threat actors and their intent, motivation and capability. Then pick the current catalogues: ATT&CK v20.1 for conventional techniques; ATLAS 2026.10 and the current OWASP GenAI / Agentic guides if you use a model or an agent.",
+        "output": "A short context statement, a short threat-actor list, and which catalogue versions you will use.",
+        "mistake": "Jumping straight to technical threats, listing unrealistic nation-state actors, or using last year’s slide."
+      },
+      "practitioner": {
+        "purpose": "Understand, with current sources, who might try to harm this service and which catalogues apply now — not a static list from a previous year.",
+        "do": "Describe what the service does and what would go wrong if it failed. Using the best threat information you have, list plausible threat actors and their intent, motivation and capability (this is the first step on the NCSC threat-modelling page). Then pick the current catalogues that apply: ATT&CK v20.1 for conventional techniques; ATLAS 2026.10 and the OWASP GenAI / Agentic guides if the service uses a model or an agent; relevant advisories and your own incident history. This is not a classified intelligence product. NCSC secure design principle 1 includes “Establish the context” and 1.2, understand the threat model. CAF A2 is the risk-management hook.",
+        "output": "A short context statement, a short threat-actor list, and a note of which catalogues and versions will be used on this pass.",
+        "mistake": "Jumping straight to technical threats; listing nation-state actors that are not realistic for this service; or using an out-of-date ATT&CK or LLM Top 10 slide."
+      },
+      "architect": {
+        "purpose": "Understand, with current sources, who might try to harm this service and which catalogues apply now — not a static list from a previous year.",
+        "do": "Describe what the service does and what would go wrong if it failed. Using the best threat information you have, list plausible threat actors and their intent, motivation and capability (the first step on the NCSC threat-modelling page). Pick the current catalogues: ATT&CK v20.1 (current from 13 October 2026) for conventional techniques; ATLAS 2026.10 (28 October 2026) and the OWASP GenAI / Agentic guides if the service uses a model or an agent; relevant advisories and your own incident history. This is not a classified intelligence product. UK Government Security “Sourcing a threat assessment” is useful public guidance, but it is government Secure by Design policy, not NCSC, and is not mandatory for this community. security.gov.uk pages were in Beta when checked and are written for government departments; they must not be presented as rules for this community site.",
+        "output": "A short context statement, a short threat-actor list, and a note of which catalogues and versions will be used on this pass.",
+        "mistake": "Jumping straight to technical threats; listing nation-state actors that are not realistic for this service; or using an out-of-date ATT&CK or LLM Top 10 slide."
+      }
+    },
+    "quiz": {
+      "question": "Why is “use last year’s ATT&CK slide” a weak way to start?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Catalogues are updated; the current ATT&CK and, if you use AI, ATLAS and the current OWASP GenAI guides should be the ones you check.",
+          "correct": true,
+          "feedback": "Yes. Catalogues are updated; the current ATT&CK and, if you use AI, ATLAS and the current OWASP GenAI guides should be the ones you check."
+        },
+        {
+          "id": "b",
+          "label": "Last year’s slide is enough if it already lists nation-state actors.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "ATT&CK is a one-off mnemonic, so the version does not matter.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  }
+]

@@ -213,37 +213,6 @@ a:hover {
   color: var(--ink-soft);
 }
 
-.service-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.service {
-  height: 100%;
-  padding: 1.15rem 1.15rem 1.2rem;
-  background: var(--raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.service h3 {
-  margin: 0 0 0.55rem;
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-.service p {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
 .contact .actions {
   margin-top: 1.1rem;
 }
@@ -618,4 +587,45 @@ code {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* UK government map tile (home and apps directory) */
+.lv-map-tile {
+  display: block;
+  margin: 1.1rem 0 0;
+  padding: 0.95rem 1.15rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.directory .lv-map-tile { margin: 0 0 1.2rem; }
+.lv-map-tile:hover {
+  border-color: var(--gold);
+}
+.lv-map-tile:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.lv-map-kicker {
+  display: block;
+  margin: 0 0 0.28rem;
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lv-map-copy {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lv-map-tile { transition: none; }
 }

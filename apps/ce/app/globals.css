@@ -1,0 +1,74 @@
+/* govuk-frontend is imported via layout.tsx using the npm package */
+/* Additional custom overrides */
+
+.ce-tag--pass {
+  background: #00703c;
+  color: white;
+}
+
+.ce-tag--fail {
+  background: #d4351c;
+  color: white;
+}
+
+.ce-tag--incomplete {
+  background: #f47738;
+  color: white;
+}
+
+.ce-section-card {
+  border-left: 4px solid #1d70b8;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  background: #f3f2f1;
+}
+
+.ce-section-card--pass {
+  border-left-color: #00703c;
+}
+
+.ce-section-card--fail {
+  border-left-color: #d4351c;
+}
+
+.ce-section-card--incomplete {
+  border-left-color: #f47738;
+}
+
+.ce-progress-bar {
+  height: 8px;
+  background: #b1b4b6;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.ce-progress-bar__fill {
+  height: 100%;
+  background: #1d70b8;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.ce-remediation {
+  background: #fff4e5;
+  border-left: 4px solid #f47738;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.ce-critical-badge {
+  display: inline-block;
+  background: #d4351c;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* GOV Assured brand bar */
+.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}

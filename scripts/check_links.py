@@ -3,7 +3,9 @@
 
 mailto links are allowed. The only other web addresses allowed are the GOV
 Assured LinkedIn company page, the company repository
-https://github.com/nusairi/govassure, and the schema.org JSON-LD context.
+https://github.com/nusairi/govassure, the schema.org JSON-LD context, and
+official UK government and Parliament source pages used by the government map
+(gov.uk, parliament.uk, and the named independent bodies).
 """
 
 import json
@@ -25,10 +27,32 @@ SERVED = [
     "app.js",
     "styles.css",
     "data/apps.json",
+    "data/govmap.json",
+    "data/govmap-glossary.json",
+    "data/govmap-terms.json",
+    "data/budget.json",
+    "data/parliament.json",
     "sitemap.xml",
     "robots.txt",
     "staticwebapp.config.json",
     "vercel.json",
+    "govmap.js",
+    "govmap.css",
+    "govmap-chart.js",
+    "govmap-chart.css",
+    "govmap-glossary.js",
+    "govmap-terms.js",
+    "govmap-parliament.js",
+    "govmap-parliament.css",
+    "govmap-budget.js",
+    "govmap-budget.css",
+    "govmap-budget-share.js",
+    "govmap/index.html",
+    "govmap/ministerial/index.html",
+    "govmap/non-ministerial/index.html",
+    "govmap/glossary/index.html",
+    "govmap/parliament/index.html",
+    "govmap/budget/index.html",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
@@ -36,6 +60,33 @@ ALLOWED_EXACT = {
     "https://github.com/nusairi/govassure",
     "https://schema.org",
 }
+
+# Official UK government, Parliament and related public-body hosts used as
+# sources on the government map. Suffixes are matched on the hostname only
+# (www.gov.uk is allowed; gov.uk.evil.example is not).
+ALLOWED_SOURCE_HOSTS = {
+    "gov.uk",
+    "parliament.uk",
+    "parliament.scot",
+    "www.nao.org.uk",
+    "www.ombudsman.org.uk",
+    "www.electoralcommission.org.uk",
+    "www.lgbce.org.uk",
+    "www.theipsa.org.uk",
+    "www.audit.wales",
+}
+ALLOWED_SOURCE_SUFFIXES = (
+    ".gov.uk",
+    ".parliament.uk",
+    ".parliament.scot",
+)
+
+
+def is_official_source_host(host):
+    name = (host or "").lower()
+    if name in ALLOWED_SOURCE_HOSTS:
+        return True
+    return any(name.endswith(suffix) for suffix in ALLOWED_SOURCE_SUFFIXES)
 
 
 class AttrParser(HTMLParser):
@@ -85,6 +136,8 @@ def problem(url):
             return None
         if host == "govassured.com" or host.endswith(".govassured.com"):
             return None
+        if is_official_source_host(host):
+            return None
         return "host is outside *.govassured.com"
     if "://" in raw:
         return "disallowed URL scheme"
@@ -116,6 +169,17 @@ def self_test():
         "https://github.com/nusairi/govassure/": None,
         "https://github.com/nusairi/govassure/issues": "host is outside *.govassured.com",
         "https://github.com/other/govassure": "host is outside *.govassured.com",
+        "https://www.gov.uk/government/organisations": None,
+        "https://assets.publishing.service.gov.uk/media/x.xlsx": None,
+        "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3": None,
+        "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence": None,
+        "https://publications.parliament.uk/pa/cm5902/cmselect/cmspeak/309/report.html": None,
+        "https://www.nao.org.uk/about-us/governance/": None,
+        "https://www.audit.wales/publication.pdf": None,
+        "https://gov.uk.evil.example/x": "host is outside *.govassured.com",
+        "https://parliament.uk.evil.example/": "host is outside *.govassured.com",
+        "https://www.gov.uk/search?q=1": "web links must not add a query or fragment",
+        "http://www.gov.uk/government/organisations": "web links must use https",
     }
     failed = False
     for url, expected in cases.items():

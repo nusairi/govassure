@@ -252,12 +252,14 @@
     var anchor = document.createElement("a");
     anchor.className = "btn btn-primary";
     anchor.href = href;
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
+    if (!/^https:\/\/([a-z0-9-]+\.)*govassured\.com(\/|$)/i.test(href)) {
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+    }
     anchor.appendChild(document.createTextNode(label));
     var extra = document.createElement("span");
     extra.className = "visually-hidden";
-    extra.textContent = ": " + name + " (opens in a new tab)";
+    extra.textContent = ": " + name + (anchor.target === "_blank" ? " (opens in a new tab)" : "");
     anchor.appendChild(extra);
     return anchor;
   }

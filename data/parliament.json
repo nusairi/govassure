@@ -1,0 +1,239 @@
+{
+  "title": "Accountable to Parliament",
+  "outsideGovernment": true,
+  "generated": "2026-11-16",
+  "measure": "Total DEL (resource DEL plus capital DEL), 2026-27 plans",
+  "unit": "£ million",
+  "intro": "These bodies are independent of ministers. Their budgets are voted by Parliament and examined by a parliamentary or statutory committee, not set by a sponsor department. They are not part of the UK government, and they are not shown on the ministerial or non-ministerial charts.",
+  "licences": [
+    {
+      "label": "Contains public sector information licensed under the Open Government Licence v3.0.",
+      "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3",
+      "host": "www.nationalarchives.gov.uk"
+    },
+    {
+      "label": "Contains Parliamentary information licensed under the Open Parliament Licence v3.0.",
+      "url": "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence",
+      "host": "www.parliament.uk"
+    }
+  ],
+  "bodies": [
+    {
+      "id": "nao",
+      "name": "National Audit Office",
+      "abbreviation": "NAO",
+      "also": "Led by the Comptroller and Auditor General (C&AG), an Officer of the House of Commons.",
+      "role": "The UK’s independent public spending watchdog. It audits government accounts and reports to Parliament on whether public money has been used properly and with value for money.",
+      "accountableTo": "Public Accounts Commission (TPAC)",
+      "accountableToNote": "TPAC sets the NAO’s budget. The Committee of Public Accounts uses NAO reports to scrutinise government, but does not set the budget.",
+      "rdelMillion": 113.25,
+      "cdelMillion": 4.5,
+      "totalDelMillion": 117.75,
+      "rdelNote": "Of which £0.350 million is non-voted.",
+      "official": {
+        "label": "NAO website",
+        "url": "https://www.nao.org.uk/about-us/governance/",
+        "host": "www.nao.org.uk"
+      },
+      "sources": [
+        {
+          "label": "Main Estimates 2026-27, Tables 3 and 5",
+          "url": "https://assets.publishing.service.gov.uk/media/69f098800bb62e692c5d6d58/Main_Supply_Estimates_26-27_Accessible.pdf",
+          "host": "assets.publishing.service.gov.uk"
+        },
+        {
+          "label": "NAO Main Supply Estimate 2026-27",
+          "url": "https://www.nao.org.uk/wp-content/uploads/2026/04/nao-main-estimate-202627.pdf",
+          "host": "www.nao.org.uk"
+        }
+      ]
+    },
+    {
+      "id": "phso",
+      "name": "Parliamentary and Health Service Ombudsman",
+      "abbreviation": "PHSO",
+      "role": "Makes final decisions on complaints that have not been resolved by the NHS in England, UK government departments and some other UK public organisations.",
+      "accountableTo": "Public Administration and Constitutional Affairs Committee (PACAC)",
+      "accountableToNote": "The Ombudsman is a Crown appointment and is accountable to Parliament. PACAC is the principal scrutiny committee.",
+      "rdelMillion": 48.469,
+      "cdelMillion": 10.789,
+      "totalDelMillion": 59.258,
+      "rdelNote": "Of which £0.235 million is non-voted.",
+      "official": {
+        "label": "PHSO website",
+        "url": "https://www.ombudsman.org.uk/",
+        "host": "www.ombudsman.org.uk"
+      },
+      "govuk": {
+        "label": "GOV.UK lists this as Public Service Ombudsman",
+        "url": "https://www.gov.uk/government/organisations/public-service-ombudsman",
+        "host": "www.gov.uk",
+        "slug": "public-service-ombudsman"
+      },
+      "unattachedOnMap": true,
+      "sources": [
+        {
+          "label": "Main Estimates 2026-27, Tables 3 and 5 (Office of the Parliamentary Commissioner for Administration and the Health Service Commissioner for England)",
+          "url": "https://assets.publishing.service.gov.uk/media/69f098800bb62e692c5d6d58/Main_Supply_Estimates_26-27_Accessible.pdf",
+          "host": "assets.publishing.service.gov.uk"
+        }
+      ]
+    },
+    {
+      "id": "electoral-commission",
+      "name": "The Electoral Commission",
+      "abbreviation": "",
+      "role": "The independent body that oversees elections and referendums and regulates political finance in the UK.",
+      "accountableTo": "Speaker’s Committee on the Electoral Commission",
+      "accountableToNote": "A statutory committee chaired by the Speaker. Since 2021 the Commission is also directly accountable to the Senedd and the Scottish Parliament for devolved elections work. The Westminster Estimate excludes that separate funding.",
+      "rdelMillion": 48.779,
+      "cdelMillion": 4.207,
+      "totalDelMillion": 52.986,
+      "rdelNote": "Of which £0.266 million is non-voted.",
+      "official": {
+        "label": "Electoral Commission website",
+        "url": "https://www.electoralcommission.org.uk/",
+        "host": "www.electoralcommission.org.uk"
+      },
+      "govuk": {
+        "label": "GOV.UK organisation page",
+        "url": "https://www.gov.uk/government/organisations/the-electoral-commission",
+        "host": "www.gov.uk",
+        "slug": "the-electoral-commission"
+      },
+      "unattachedOnMap": true,
+      "sources": [
+        {
+          "label": "Main Estimates 2026-27, Tables 3 and 5",
+          "url": "https://assets.publishing.service.gov.uk/media/69f098800bb62e692c5d6d58/Main_Supply_Estimates_26-27_Accessible.pdf",
+          "host": "assets.publishing.service.gov.uk"
+        },
+        {
+          "label": "Work of the Speaker’s Committee in 2025-26",
+          "url": "https://publications.parliament.uk/pa/cm5902/cmselect/cmspeak/309/report.html",
+          "host": "publications.parliament.uk"
+        }
+      ]
+    },
+    {
+      "id": "ipsa",
+      "name": "Independent Parliamentary Standards Authority",
+      "abbreviation": "IPSA",
+      "role": "Independently regulates and pays MPs’ salaries, pensions, business costs and expenses.",
+      "accountableTo": "Speaker’s Committee for IPSA (SCIPSA)",
+      "accountableToNote": "Established by the Parliamentary Standards Act 2009.",
+      "rdelMillion": 315.693,
+      "cdelMillion": 2.66,
+      "totalDelMillion": 318.353,
+      "note": "Almost all of this budget is MPs’ pay, pensions, staffing and business costs, not IPSA’s own running costs. A separate 2026-27 operating-cost figure was not confirmed from an IPSA Estimate and is missing here.",
+      "official": {
+        "label": "IPSA website",
+        "url": "https://www.theipsa.org.uk/publications/annual-funding-estimates",
+        "host": "www.theipsa.org.uk"
+      },
+      "govuk": {
+        "label": "GOV.UK organisation page (it labels IPSA as an executive NDPB, which is misleading)",
+        "url": "https://www.gov.uk/government/organisations/independent-parliamentary-standards-authority",
+        "host": "www.gov.uk",
+        "slug": "independent-parliamentary-standards-authority"
+      },
+      "unattachedOnMap": true,
+      "sources": [
+        {
+          "label": "Main Estimates 2026-27, Tables 3 and 5",
+          "url": "https://assets.publishing.service.gov.uk/media/69f098800bb62e692c5d6d58/Main_Supply_Estimates_26-27_Accessible.pdf",
+          "host": "assets.publishing.service.gov.uk"
+        }
+      ]
+    },
+    {
+      "id": "lgbce",
+      "name": "Local Government Boundary Commission for England",
+      "abbreviation": "LGBCE",
+      "role": "Recommends fair electoral and boundary arrangements for local authorities in England, and reviews London Assembly constituencies. It is not the Boundary Commission for England, which reviews UK Parliament constituencies.",
+      "accountableTo": "Speaker’s Committee on the Electoral Commission",
+      "accountableToNote": "The same statutory committee as for the Electoral Commission.",
+      "rdelMillion": 3.761,
+      "cdelMillion": 0.275,
+      "totalDelMillion": 4.036,
+      "official": {
+        "label": "LGBCE website",
+        "url": "https://www.lgbce.org.uk/parliament",
+        "host": "www.lgbce.org.uk"
+      },
+      "sources": [
+        {
+          "label": "Main Estimates 2026-27, Tables 3 and 5",
+          "url": "https://assets.publishing.service.gov.uk/media/69f098800bb62e692c5d6d58/Main_Supply_Estimates_26-27_Accessible.pdf",
+          "host": "assets.publishing.service.gov.uk"
+        },
+        {
+          "label": "LGBCE Main Supply Estimate 2026-27",
+          "url": "https://www.lgbce.org.uk/sites/default/files/2026-04/e03571788_lgbce_main_supply_estimate_2026-27_elay.pdf",
+          "host": "www.lgbce.org.uk"
+        }
+      ]
+    }
+  ],
+  "unattachedFlags": [
+    {
+      "slug": "public-service-ombudsman",
+      "id": "phso",
+      "name": "Parliamentary and Health Service Ombudsman"
+    },
+    {
+      "slug": "the-electoral-commission",
+      "id": "electoral-commission",
+      "name": "The Electoral Commission"
+    },
+    {
+      "slug": "independent-parliamentary-standards-authority",
+      "id": "ipsa",
+      "name": "Independent Parliamentary Standards Authority"
+    }
+  ],
+  "devolved": {
+    "intro": "These audit bodies are the counterparts of the NAO for the devolved institutions. They are not accountable to the UK Parliament, so they are not in the panel above.",
+    "bodies": [
+      {
+        "id": "audit-scotland",
+        "name": "Audit Scotland",
+        "accountableTo": "Scottish Parliament, through the Scottish Commission for Public Audit",
+        "figure": "2026-27 budget proposal: total £41.84 million, of which £16.21 million from the Scottish Consolidated Fund and £25.63 million fee income. This is a proposal, not a confirmed approved figure.",
+        "status": "proposal",
+        "source": {
+          "label": "Audit Scotland Budget proposal 2026-27",
+          "url": "https://www.parliament.scot/-/media/files/scottish-commission-for-public-audit/2025/audit-scotland_2026_27-budget-proposal_final.pdf",
+          "host": "www.parliament.scot"
+        }
+      },
+      {
+        "id": "audit-wales",
+        "name": "Audit Wales",
+        "also": "GOV.UK still uses the name Wales Audit Office, and lists it as unattached on the map.",
+        "accountableTo": "Senedd, through the Finance Committee",
+        "figure": "2026-27 Estimate: expenses £28.788 million, income £18.491 million, resource call on the Welsh Consolidated Fund £10.477 million, capital £0.180 million.",
+        "status": "estimate",
+        "govukSlug": "wales-audit-office",
+        "source": {
+          "label": "Audit Wales supporting information for the 2026-27 Estimate",
+          "url": "https://www.audit.wales/sites/default/files/publications/Supporting_information_for_the_Estimate_of_Income_and_Expenses_for_Audit_Wales_for_the_year_ended_31_March_2027.pdf",
+          "host": "www.audit.wales"
+        }
+      },
+      {
+        "id": "niao",
+        "name": "Northern Ireland Audit Office",
+        "abbreviation": "NIAO",
+        "accountableTo": "Northern Ireland Assembly, through the Assembly Audit Committee",
+        "figure": "A full-year 2026-27 Estimate was not found. The latest full-year figure located is 2025-26 authorised net current DEL £10.743 million and capital DEL £0.040 million. 2026-27 is missing here.",
+        "status": "missing-2026-27",
+        "source": {
+          "label": "Budget Act (Northern Ireland) 2026",
+          "url": "https://www.legislation.gov.uk/nia/2026/3/pdfs/nia_20260003_en.pdf",
+          "host": "www.legislation.gov.uk"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Threat Modelling Lifecycle — community resource | GOV Assured</title>
+<meta name="description" content="A community teaching lifecycle for current threat modelling practice: ten stages, a 2024–2026 what’s-new briefing, a worked example, and links to NCSC, NIST and OWASP. Not official guidance.">
+<meta name="author" content="GOV Assured">
+<link rel="canonical" href="https://threatmodel.govassured.com/">
+<meta name="theme-color" content="#021c17">
+<link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+<link rel="manifest" href="/site.webmanifest?v=b73b9c996a">
+<link rel="stylesheet" href="/app.css?v=b32e0d4346">
+<link rel="stylesheet" href="/ga-brand.css?v=bd173bf450" id="ga-brand">
+<link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme">
+<link rel="stylesheet" href="/ga-app.css?v=d0e1d11c1b" id="ga-app">
+<script src="/ga-sources.js?v=cb51347e74" id="ga-sources-js" data-keep=".wrap,#back,#chipback,#tmTip,footer,body" defer></script>
+</head>
+<body><div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<div class="wrap">
+
+<div class="mast">
+ <div class="mleft">
+  <div class="cl">COMMUNITY RESOURCE</div>
+  <h1>Threat Modelling Lifecycle</h1>
+  <div class="sl">THREAT MODELLING &nbsp;|&nbsp; CURRENT PRACTICE &nbsp;|&nbsp; MAPPED TO NCSC, NIST AND OWASP</div>
+ </div>
+ <div class="mright">
+  <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="li" data-ga-keep="" data-keep="">
+   <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+   </svg>GOV Assured on LinkedIn</a>
+  <div class="meta">v0.4 &nbsp;|&nbsp; November 2026<br>
+  Scope · Landscape · Model · Boundaries · Threats · Prioritise · Mitigate · Validate · Record · Continuous<br>
+  threatmodel.govassured.com</div>
+  <span class="quizbadge" id="tmQuizBadge" aria-live="polite">Quick checks 0/10</span>
+ </div>
+</div>
+
+<div class="tabs" role="tablist" aria-label="On this site">
+ <button class="tab" type="button" role="tab" id="tab-model" aria-controls="view-model" aria-selected="true">Lifecycle model</button>
+ <button class="tab" type="button" role="tab" id="tab-whatsnew" aria-controls="view-whatsnew" aria-selected="false">What’s new 2024–2026</button>
+ <button class="tab" type="button" role="tab" id="tab-example" aria-controls="view-example" aria-selected="false">Worked example</button>
+ <button class="tab" type="button" role="tab" id="tab-glossary" aria-controls="view-glossary" aria-selected="false">Glossary</button>
+</div>
+
+<div class="tabpanel" id="view-model" role="tabpanel" aria-labelledby="tab-model">
+
+<div class="tools">
+ <span class="tl">The lifecycle</span>
+ <button type="button" class="walk" id="tmStartTour">Walk through the stages</button>
+ <span class="hint">Select any stage for the purpose, the steps, the sources and a quick check.</span>
+</div>
+
+<div class="sec">
+ <span class="lbl">The threat modelling lifecycle — ten stages</span>
+ <div class="domains k10" id="domains"></div>
+</div>
+
+<div class="dark">
+ <span class="h">CURRENT CATALOGUES AND GUIDANCE</span>
+ <span class="m">NCSC threat modelling v2.0 · MITRE ATT&amp;CK v20.1 · MITRE ATLAS 2026.10 · OWASP LLM Top 10 2026 · OWASP Agentic AI · NIST AI RMF 1.0 · SLSA v1.2</span>
+ <span class="s">For people working in cyber security, resilience and assurance. A community teaching resource, not a standard and not official guidance.</span>
+</div>
+
+<div class="dark">
+ <span class="h">THE FOUR QUESTIONS &nbsp;|&nbsp; THE HANDRAIL FOR THE WHOLE PASS</span>
+ <div class="attrs q4" id="attrs">
+  <span>What are we working on?</span>
+  <span>What can go wrong?</span>
+  <span>What will we do about it?</span>
+  <span>Did we do a good enough job?</span>
+ </div>
+</div>
+
+<div class="dark wnbar">
+ <span class="h">WHAT’S NEW 2024–2026</span>
+ <div class="wnchips" id="wnHigh"></div>
+ <span class="s">Dates and versions were checked on 10 November 2026 (Europe/London). Open the What’s new tab for the full briefing.</span>
+</div>
+
+<div class="sec">
+ <span class="lbl">The lifecycle, end to end</span>
+ <div class="lifewrap">
+  <div class="loopwrap">
+   <div class="life k10" id="life"></div>
+   <div class="stages" id="stages"><span class="sl">TEN STAGES</span></div>
+   <p class="loop">FEEDBACK LOOP — when the design, the threats or your assumptions change, stage 10 returns you to stage 1 and the model is opened again</p>
+  </div>
+  <div class="cad">
+   <span class="h">WHEN TO REOPEN</span>
+   <span class="r"><b>Change</b> Data flows, trust boundaries, identities, a model or agent, or a dependency alter</span>
+   <span class="r"><b>Signal</b> A relevant incident or advisory appears</span>
+   <span class="r"><b>Cadence</b> On the planned review cycle you have agreed</span>
+   <span class="r"><b>Learn</b> Monitoring, incidents and lessons feed back into stages 2 and 5</span>
+   <span class="r"><b>Retire</b> Close the model when the service itself is retired</span>
+  </div>
+ </div>
+</div>
+
+</div><!-- /view-model -->
+
+<div class="tabpanel" id="view-whatsnew" role="tabpanel" aria-labelledby="tab-whatsnew" hidden>
+ <div class="sec">
+  <span class="lbl">What’s new in threat modelling (2024–2026)</span>
+  <div id="tmWhatsNew"></div>
+ </div>
+</div>
+
+<div class="tabpanel" id="view-example" role="tabpanel" aria-labelledby="tab-example" hidden>
+ <div class="sec">
+  <span class="lbl">Worked example — Continuity Plan Helper</span>
+  <div id="tmExample"></div>
+ </div>
+</div>
+
+<div class="tabpanel" id="view-glossary" role="tabpanel" aria-labelledby="tab-glossary" hidden>
+ <div class="sec">
+  <span class="lbl">Glossary</span>
+  <div id="tmGlossaryPage"></div>
+ </div>
+</div>
+
+<footer id="tmSources" data-ga-keep="">
+Framework references: NCSC threat modelling (v2.0, 23 June 2023) · MITRE ATT&amp;CK and ATLAS · OWASP LLM and Agentic guidance · NIST AI RMF · SLSA. There is no single agreed industry lifecycle; this is a community synthesis, not a standard and not a government-mandated process. Where NCSC has no page for a stage, that is stated in the stage panel and a NIST, OWASP or SLSA source is linked instead.<br>
+Codes such as S1 refer to the verified links below. Every URL returned HTTP 200 when checked on 10 November 2026 (Europe/London).<br>
+<details class="srcacc" id="tmSourcesAcc">
+ <summary>Sources <span id="tmSourcesCount"></span></summary>
+ <div id="tmSourcesList"></div>
+</details>
+Published by <a href="https://www.govassured.com/">GOV Assured</a> · Related: <a href="https://devsecops.govassured.com/">DevSecOps operating model</a> · <a href="https://kms.govassured.com/">Key Management Lifecycle</a> · <a href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" data-ga-keep="" data-keep="">GitHub</a> · <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" data-ga-keep="" data-keep="">LinkedIn</a><br>
+<span class="legal">Community resource by GOV Assured. Not official NCSC, NIST, MITRE or OWASP guidance.</span>
+</footer>
+
+</div>
+
+<div class="back" id="back" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+ <div class="modal" id="modal">
+  <div class="mhead">
+   <button class="close" id="close" aria-label="Close">&times;</button>
+   <span class="k" id="mkind"></span>
+   <h2 id="mtitle"></h2>
+   <span class="s" id="msub"></span>
+   <ol class="dots" id="mDots" aria-label="Stage progress"></ol>
+  </div>
+  <div class="mbody" id="mbody"></div>
+  <div class="mnav" id="mNav"></div>
+ </div>
+</div>
+
+<div class="back" id="chipback" role="dialog" aria-modal="true" aria-labelledby="chiptitle">
+ <div class="modal chipmodal" id="chipmodal">
+  <div class="mhead">
+   <button class="close" id="chipclose" aria-label="Close">&times;</button>
+   <span class="k">Key term</span>
+   <h2 id="chiptitle"></h2>
+  </div>
+  <div class="mbody" id="chipbody"></div>
+ </div>
+</div>
+
+<div id="tmTip" class="tm-tip" role="tooltip" hidden></div>
+<noscript><p>This page needs JavaScript. You can still read NCSC threat modelling guidance at https://www.ncsc.gov.uk/collection/risk-management/threat-modelling</p></noscript>
+<script src="/tm-data.js?v=06803a1f78"></script>
+<script src="/tm.js?v=6e90950dd5"></script>
+<span id="ga-rendered" hidden></span>
+</body>
+</html>

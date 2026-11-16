@@ -1,4 +1,15 @@
 // Recent UK ransomware / leak-site victims via ransomware.live (free v2 API).
+const safeUrl = require("./_url");
+// Link each victim to its own ransomware.live entry. Use the permalink when the API gives one;
+// otherwise build it the way ransomware.live does (/id/ + unpadded base64 of "victim@group").
+function victimUrl(v) {
+  const p = safeUrl(v.permalink || "");
+  if (p && /^https:\/\/www\.ransomware\.live\/id\//.test(p)) return p;
+  if (!v.post_title || !v.group_name) return null;
+  const id = Buffer.from(v.post_title + "@" + v.group_name, "utf8").toString("base64").replace(/=+$/, "");
+  return safeUrl("https://www.ransomware.live/id/" + id.replace(/\+/g, "%2B").replace(/\//g, "%2F"));
+}
+
 const URL = "https://api.ransomware.live/v2/countryvictims/GB";
 
 module.exports = async (req, res) => {
@@ -21,6 +32,7 @@ module.exports = async (req, res) => {
         sector: v.activity && v.activity !== "Not Found" ? v.activity : null,
         discovered: v.discovered || v.published || null,
         published: v.published || null,
+        url: victimUrl(v),
       }))
       .sort((a, b) => Date.parse(b.discovered || 0) - Date.parse(a.discovered || 0))
       .slice(0, 12);

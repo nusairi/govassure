@@ -1,0 +1,13 @@
+title = "GOV Assured Gitleaks config"
+
+[extend]
+useDefault = true
+
+# generic-api-key matches the localStorage key assigned to DEPTH_KEY in
+# apps/osi/tutorial.js. The value is a browser storage name, not a credential.
+[[allowlists]]
+targetRules = ["generic-api-key"]
+description = "localStorage key name"
+condition = "AND"
+paths = ['''(?:^|/)apps/osi/tutorial\.js$''']
+regexes = ['''ga-osi-hw-depth-v1''']

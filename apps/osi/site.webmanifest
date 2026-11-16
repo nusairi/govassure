@@ -1,0 +1,14 @@
+{
+  "name": "OSI Security Rings",
+  "short_name": "OSI Rings",
+  "description": "Protocols and security controls at every layer of the OSI model, with animated dataflows.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0E14",
+  "theme_color": "#0B0E14",
+  "icons": [
+    { "src": "/icon-192.png?v=f8f71219a1", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png?v=1ed86a61d3", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512-maskable.png?v=1ed86a61d3", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

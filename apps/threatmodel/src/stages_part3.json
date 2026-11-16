@@ -1,0 +1,272 @@
+[
+  {
+    "id": "mitigate",
+    "num": 7,
+    "short": "Mitigate",
+    "title": "Decide mitigations",
+    "full": "Decide proportionate mitigations",
+    "purpose": "Choose what you will prevent, detect or recover from — or accept or transfer — and why.",
+    "do": "For each priority threat, pick a proportionate control. Prefer measures that make compromise and disruption difficult, make detection easier, and reduce the impact of a compromise (NCSC secure design principles 2–5). Use ATT&CK and ATLAS mitigation guidance where it fits; for the pipeline, consider SLSA source and build practices; for models and agents, use NCSC’s secure AI development guidelines and the OWASP GenAI mitigations. For access, follow CAF B2 and Cloud Security Principles 9 and 10. Say clearly when you are accepting a risk, who accepted it, and until when. Put chosen work into the design, the backlog and the pipeline.",
+    "output": "A mitigation plan mapped to threats, with owners, and an accept or transfer record where relevant.",
+    "mistake": "A long control catalogue copied from a standard and not tied to the threats you found; or “accept” with no named owner.",
+    "ncsc": "Yes.",
+    "sources": [
+      "S1",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S28",
+      "S29a",
+      "S22",
+      "S22b",
+      "S88",
+      "S33",
+      "S65",
+      "S56"
+    ],
+    "sourceNotes": {
+      "S56": "CISA Secure by Design is US guidance; not UK official policy."
+    },
+    "depth": {
+      "basics": {
+        "purpose": "Choose what you will prevent, detect or recover from — or accept or transfer — and why.",
+        "do": "For each priority threat, pick a proportionate control. Prefer measures that make compromise and disruption difficult, make detection easier, and reduce the impact of a compromise. Say clearly when you are accepting a risk, who accepted it, and until when. Put the work into the design, the backlog and the pipeline.",
+        "output": "A mitigation plan mapped to threats, with owners, and an accept or transfer record where relevant.",
+        "mistake": "A long control list copied from a standard and not tied to the threats you found; or “accept” with no named owner."
+      },
+      "practitioner": {
+        "purpose": "Choose what you will prevent, detect or recover from — or accept or transfer — and why.",
+        "do": "For each priority threat, pick a proportionate control. Prefer measures that make compromise and disruption difficult, make detection easier, and reduce the impact of a compromise (NCSC secure design principles 2–5). Use ATT&CK and ATLAS mitigation guidance where it fits; for the pipeline, consider SLSA source and build practices; for models and agents, use NCSC’s secure AI development guidelines and the OWASP GenAI mitigations. For access, follow CAF B2 and Cloud Security Principles 9 and 10. Say clearly when you are accepting a risk, who accepted it, and until when. Put chosen work into the design, the backlog and the pipeline.",
+        "output": "A mitigation plan mapped to threats, with owners, and an accept or transfer record where relevant.",
+        "mistake": "A long control catalogue copied from a standard and not tied to the threats you found; or “accept” with no named owner."
+      },
+      "architect": {
+        "purpose": "Choose what you will prevent, detect or recover from — or accept or transfer — and why.",
+        "do": "For each priority threat, pick a proportionate control. Prefer NCSC secure design principles 2–5 (make compromise and disruption difficult, make detection easier, reduce the impact of a compromise). Use ATT&CK and ATLAS mitigation guidance where it fits; for the pipeline, consider SLSA v1.2 source and build practices; for models and agents, use NCSC’s guidelines for secure AI system development (v1.0, 27 November 2023) and the OWASP GenAI mitigations. For access, follow CAF B2 and B4 and Cloud Security Principles 9 and 10. SSDF 1.1 practice PW.1, and SP 800-218A for AI software practices, are useful industry companions; SSDF 1.2 is still a draft and should not be treated as final. CISA Secure by Design is US guidance, not UK official policy. Say clearly when you are accepting a risk, who accepted it, and until when. Put chosen work into the design, the backlog and the pipeline.",
+        "output": "A mitigation plan mapped to threats, with owners, and an accept or transfer record where relevant.",
+        "mistake": "A long control catalogue copied from a standard and not tied to the threats you found; or “accept” with no named owner."
+      }
+    },
+    "quiz": {
+      "question": "What is wrong with “accepted” on a risk with no name next to it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Acceptance needs a named owner and a review point.",
+          "correct": true,
+          "feedback": "Yes. Acceptance needs a named owner and a review point."
+        },
+        {
+          "id": "b",
+          "label": "Nothing — “accept” can be left blank if the control catalogue is long.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "The word “accepted” is never allowed; every risk must be transferred.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "validate",
+    "num": 8,
+    "short": "Validate",
+    "title": "Validate",
+    "full": "Validate with testing, red teaming and detection",
+    "purpose": "Check that the model is good enough, that the controls work, and that you can detect important failures.",
+    "do": "Ask NCSC’s fourth question: did we miss anything? Get a review from someone who was not in the workshop. Test the important controls — design review, automated security tests in the pipeline, and a penetration test for higher-risk services. If the service uses an LLM or an agent, include GenAI red teaming (OWASP guide, January 2025), not only a conventional web test. Check that logging and detection would notice the priority attacks (CAF C1; NCSC design principle 4). Any LLM-assisted review is itself a draft until a person accepts it. Track known issues so a later test confirms residual risk rather than surprising you.",
+    "output": "Review comments, test or red-team evidence, detection coverage notes, and an updated residual-issue list.",
+    "mistake": "Treating workshop notes as finished work, with no test of the controls and no thought about detection.",
+    "ncsc": "Partial. NCSC has pages on testing, review and continual improvement, but none that is a GenAI red-teaming method; that links to the OWASP GenAI Red Teaming Guide.",
+    "sources": [
+      "S1",
+      "S4",
+      "S15",
+      "S18",
+      "S23",
+      "S13",
+      "S72"
+    ],
+    "depth": {
+      "basics": {
+        "purpose": "Check that the model is good enough, that the controls work, and that you can detect important failures.",
+        "do": "Ask whether you missed anything. Get a review from someone who was not in the workshop. Test the important controls. If the service uses an LLM or an agent, include GenAI red teaming, not only a conventional web scan. Check that logging and detection would notice the priority attacks.",
+        "output": "Review comments, test or red-team evidence, detection notes, and an updated list of residual issues.",
+        "mistake": "Treating workshop notes as finished work, with no test of the controls and no thought about detection."
+      },
+      "practitioner": {
+        "purpose": "Check that the model is good enough, that the controls work, and that you can detect important failures.",
+        "do": "Ask NCSC’s fourth question: did we miss anything? Get a review from someone who was not in the workshop. Test the important controls — design review, automated security tests in the pipeline, and a penetration test for higher-risk services. If the service uses an LLM or an agent, include GenAI red teaming (OWASP guide, January 2025), not only a conventional web test. Check that logging and detection would notice the priority attacks (CAF C1; NCSC design principle 4). Any LLM-assisted review is itself a draft until a person accepts it. Track known issues so a later test confirms residual risk rather than surprising you.",
+        "output": "Review comments, test or red-team evidence, detection coverage notes, and an updated residual-issue list.",
+        "mistake": "Treating workshop notes as finished work, with no test of the controls and no thought about detection."
+      },
+      "architect": {
+        "purpose": "Check that the model is good enough, that the controls work, and that you can detect important failures.",
+        "do": "Ask NCSC’s fourth question (threat modelling Stage 4): did we miss anything? Get a review from someone who was not in the workshop. Test the important controls — design review, automated security tests in the pipeline (NCSC secure development and deployment: “continually test”), and a penetration test for higher-risk services. If the service uses an LLM or an agent, include GenAI red teaming using the OWASP GenAI Red Teaming Guide v1.0 (23 January 2025), not only a conventional web test. There is no NCSC page that is a GenAI red-teaming method. Check that logging and detection would notice the priority attacks (CAF C1; NCSC design principle 4). Any LLM-assisted review is itself a draft until a person accepts it. Track known issues so a later test confirms residual risk rather than surprising you. NCSC’s “How to gain and maintain assurance” and “Building a secure digital service” are the wider assurance hooks.",
+        "output": "Review comments, test or red-team evidence, detection coverage notes, and an updated residual-issue list.",
+        "mistake": "Treating workshop notes as finished work, with no test of the controls and no thought about detection."
+      }
+    },
+    "quiz": {
+      "question": "You have a new agent feature. Why is a conventional web scan not enough?",
+      "options": [
+        {
+          "id": "a",
+          "label": "You also need tests that target agent or GenAI failures — for example prompt injection and tool misuse — and a view of detection.",
+          "correct": true,
+          "feedback": "Yes. You also need tests that target agent or GenAI failures — for example prompt injection and tool misuse — and a view of detection."
+        },
+        {
+          "id": "b",
+          "label": "A conventional web scan already covers prompt injection and tool misuse.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "Workshop notes are finished work, so no further test is needed.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "record",
+    "num": 9,
+    "short": "Record",
+    "title": "Record the model",
+    "full": "Record a living artefact, preferably as code",
+    "purpose": "Write the work down so others can use it, challenge it, and keep it next to the service.",
+    "do": "Keep a living threat model: the diagram or model file, the threat list, the mitigations, residual risks and who accepted them. Prefer a file in the service repository (threat-modelling-as-code, or an exported Threat Dragon model) plus a short readable pack. A 40-page report that nobody opens is worse than a short, current file. Make clear this is community or organisational analysis, not an official government assessment. STIX is mentioned by NCSC for sharing threat information; most community teams will not need it.",
+    "output": "A threat-model pack and, where practical, a version-controlled model file, with a date and an owner.",
+    "mistake": "Notes left only on a whiteboard photograph, or a document that cannot be updated when the code changes.",
+    "ncsc": "Partial. The NCSC threat-modelling page covers why outputs should be recorded and used, but there is no NCSC page on how to structure a threat-model document or a model-as-code file.",
+    "sources": [
+      "S1",
+      "S20",
+      "S37",
+      "S78",
+      "S80",
+      "S41",
+      "S29"
+    ],
+    "sourceNotes": {
+      "S29": "This is government Secure by Design material, not an NCSC how-to, and GOV Assured should not present it as a required template."
+    },
+    "depth": {
+      "basics": {
+        "purpose": "Write the work down so others can use it, challenge it, and keep it next to the service.",
+        "do": "Keep a living threat model: the diagram or model file, the threat list, the mitigations, residual risks and who accepted them. If the team already keeps code in git, prefer a file in the same repository plus a short readable pack. A long report that nobody opens is worse than a short, current file. Make clear this is community or organisational analysis, not an official government assessment.",
+        "output": "A short pack and, where practical, a version-controlled model file, with a date and an owner.",
+        "mistake": "Notes left only on a whiteboard photograph, or a document that cannot be updated when the code changes."
+      },
+      "practitioner": {
+        "purpose": "Write the work down so others can use it, challenge it, and keep it next to the service.",
+        "do": "Keep a living threat model: the diagram or model file, the threat list, the mitigations, residual risks and who accepted them. Prefer a file in the service repository (threat-modelling-as-code, or an exported Threat Dragon model) plus a short readable pack. A 40-page report that nobody opens is worse than a short, current file. Make clear this is community or organisational analysis, not an official government assessment. STIX is mentioned by NCSC for sharing threat information; most community teams will not need it.",
+        "output": "A threat-model pack and, where practical, a version-controlled model file, with a date and an owner.",
+        "mistake": "Notes left only on a whiteboard photograph, or a document that cannot be updated when the code changes."
+      },
+      "architect": {
+        "purpose": "Write the work down so others can use it, challenge it, and keep it next to the service.",
+        "do": "Keep a living threat model: the diagram or model file, the threat list, the mitigations, residual risks and who accepted them. Prefer a file in the service repository — threat-modelling-as-code with pytm or Threagile, or an exported Threat Dragon model — plus a short readable pack. The NCSC threat-modelling page covers why outputs should be recorded and used (articulate risks; feed risk treatment and assurance plans) and CAF A2 is the risk-management hook. There is no NCSC page on how to structure a threat-model document or a model-as-code file. UK Government Security has an example threat-model pack; it is government Secure by Design material, not an NCSC how-to, and GOV Assured should not present it as a required template. A 40-page report that nobody opens is worse than a short, current file. Make clear this is community or organisational analysis, not an official government assessment. STIX is mentioned by NCSC for sharing threat information; most community teams will not need it.",
+        "output": "A threat-model pack and, where practical, a version-controlled model file, with a date and an owner.",
+        "mistake": "Notes left only on a whiteboard photograph, or a document that cannot be updated when the code changes."
+      }
+    },
+    "quiz": {
+      "question": "Where should the living model live if the team already keeps code in git?",
+      "options": [
+        {
+          "id": "a",
+          "label": "In the repository, as a model file or exported diagram, with a short readable pack.",
+          "correct": true,
+          "feedback": "Yes. Keep it in the repository, as a model file or exported diagram, with a short readable pack."
+        },
+        {
+          "id": "b",
+          "label": "Only as a whiteboard photograph, so it stays informal.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "In a 40-page report that is not updated when the code changes.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "continuous",
+    "num": 10,
+    "short": "Continuous",
+    "title": "Keep it continuous",
+    "full": "Keep it continuous in CI/CD",
+    "purpose": "Keep the model alive as the system, the threats, or your assumptions change — in the same pipeline that ships the service.",
+    "do": "Revisit the model when a change alters data flows, trust boundaries, identities, a model or agent, or a dependency; when a relevant incident or advisory appears; or on a planned cadence. If the model is in the repository, the pipeline can warn (or, where you have agreed a gate, block) when a new component has no review, or when the model file is stale. Feed monitoring, incidents and lessons learned back into stages 2 and 5 (CAF D2). An assistant can propose an update; a person accepts it. Retire the model when the service is retired.",
+    "output": "Review triggers, pipeline checks if you use them, an updated model (or a dated “no material change” note), and a retirement note when the service ends.",
+    "mistake": "A one-off workshop whose diagram is never opened again.",
+    "ncsc": "Partial. NCSC covers making threat modelling business as usual in CI/CD, but has no page that specifies a particular tool or a pipeline gate for threat-model files.",
+    "sources": [
+      "S1",
+      "S15",
+      "S85",
+      "S25",
+      "S56",
+      "S37"
+    ],
+    "sourceNotes": {
+      "S56": "CISA Secure by Design (update as functionality changes) is US guidance; not UK official policy."
+    },
+    "depth": {
+      "basics": {
+        "purpose": "Keep the model alive as the system, the threats, or your assumptions change — in the same pipeline that ships the service.",
+        "do": "Revisit the model when data flows, trust boundaries, identities, a model or agent, or a material dependency change, or when a relevant advisory appears — even if nobody asked for a “security feature”. Feed lessons learned back in. Retire the model when the service is retired.",
+        "output": "Review triggers, an updated model or a dated “no material change” note, and a retirement note when the service ends.",
+        "mistake": "A one-off workshop whose diagram is never opened again."
+      },
+      "practitioner": {
+        "purpose": "Keep the model alive as the system, the threats, or your assumptions change — in the same pipeline that ships the service.",
+        "do": "Revisit the model when a change alters data flows, trust boundaries, identities, a model or agent, or a dependency; when a relevant incident or advisory appears; or on a planned cadence. If the model is in the repository, the pipeline can warn (or, where you have agreed a gate, block) when a new component has no review, or when the model file is stale. Feed monitoring, incidents and lessons learned back into stages 2 and 5 (CAF D2). An assistant can propose an update; a person accepts it. Retire the model when the service is retired.",
+        "output": "Review triggers, pipeline checks if you use them, an updated model (or a dated “no material change” note), and a retirement note when the service ends.",
+        "mistake": "A one-off workshop whose diagram is never opened again."
+      },
+      "architect": {
+        "purpose": "Keep the model alive as the system, the threats, or your assumptions change — in the same pipeline that ships the service.",
+        "do": "Revisit the model when a change alters data flows, trust boundaries, identities, a model or agent, or a dependency; when a relevant incident or advisory appears; or on a planned cadence. NCSC already asked, in 2023, for threat modelling to be business as usual in risk management, development and CI/CD (Stage 4 continual improvement). Secure development and deployment and Cloud Security Principle 7 are the development hooks. If the model is in the repository, the pipeline can warn (or, where you have agreed a gate, block) when a new component has no review, or when the model file is stale. There is no NCSC page that specifies a particular tool or a pipeline gate for threat-model files. Feed monitoring, incidents and lessons learned back into stages 2 and 5 (CAF D2). CISA Secure by Design says to update as functionality changes; that is US guidance, not UK official policy. The OWASP cheat sheet says to maintain the model alongside the system. An assistant can propose an update; a person accepts it. Prompts must not contain secrets or other people’s data. Retire the model when the service is retired.",
+        "output": "Review triggers, pipeline checks if you use them, an updated model (or a dated “no material change” note), and a retirement note when the service ends.",
+        "mistake": "A one-off workshop whose diagram is never opened again."
+      }
+    },
+    "quiz": {
+      "question": "When must you reopen the model even if no “security feature” was requested?",
+      "options": [
+        {
+          "id": "a",
+          "label": "When data flows, trust boundaries, identities, the model or agent, or a material dependency change — or when a relevant advisory appears.",
+          "correct": true,
+          "feedback": "Yes. Reopen when data flows, trust boundaries, identities, the model or agent, or a material dependency change — or when a relevant advisory appears."
+        },
+        {
+          "id": "b",
+          "label": "Only when someone asks for a new security feature.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        },
+        {
+          "id": "c",
+          "label": "Never; a one-off workshop is enough for the life of the service.",
+          "correct": false,
+          "feedback": "That is not what this stage teaches."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,68 @@
+/* GOV Assured — government map chart views */
+.gm-chart-controls { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 0.8rem 1.2rem; margin-bottom: 0.4rem; }
+.gm-find { flex: 1 1 22rem; min-width: 0; }
+.gm-find-row { display: flex; gap: 0.5rem; }
+.gm-find-row input { flex: 1 1 auto; min-width: 0; }
+.gm-find-row .gm-tool { min-height: 3rem; }
+.gm-chart-status { min-height: 1.5rem; margin: 0.3rem 0 0.8rem; color: var(--ink-soft); font-size: 0.92rem; }
+.gm-chart-layout { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: 1rem; align-items: start; }
+.gm-stage { position: relative; min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); background: radial-gradient(circle at 50% 50%, #0d2f27 0%, #021c17 70%); overflow: hidden; touch-action: pan-y; }
+.gm-stage canvas { display: block; width: 100%; height: 560px; cursor: default; }
+.gm-stage canvas.gm-pointer { cursor: pointer; }
+.gm-stage canvas:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+.gm-tip { position: absolute; z-index: 2; max-width: min(24rem, 85%); padding: 0.55rem 0.75rem; border: 1px solid var(--gold-deep); border-radius: 10px; background: rgba(2, 28, 23, 0.95); color: var(--ink); font-size: 0.85rem; line-height: 1.35; pointer-events: none; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45); }
+.gm-tip strong { display: inline; font-size: 0.95rem; margin-right: 0.35rem; }
+.gm-tip-ab { display: inline-block; padding: 0 0.35rem; border: 1px solid var(--gold-deep); border-radius: 5px; color: var(--gold); font-family: var(--mono); font-size: 0.75rem; }
+.gm-tip-line { display: block; margin-top: 0.25rem; color: var(--ink-soft); }
+.gm-tip-hint { display: block; margin-top: 0.3rem; color: var(--gold); font-size: 0.78rem; }
+.gm-side { display: grid; gap: 0.6rem; min-width: 0; }
+.gm-side-h { margin: 0; font-family: var(--serif); font-size: 1.2rem; font-weight: 500; }
+.gm-legend { list-style: none; margin: 0; padding: 0.7rem 0.8rem; display: grid; gap: 0.3rem; border: 1px solid var(--line); border-radius: 12px; background: var(--raised); font-size: 0.85rem; color: var(--ink-soft); }
+.gm-legend li { display: flex; align-items: center; gap: 0.5rem; }
+.gm-sw { flex: 0 0 auto; display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: #a3b8ad; }
+.gm-sw-big { width: 0.95rem; height: 0.95rem; }
+.gm-sw-ministerial { background: #f0c987; } .gm-sw-nmd { background: #e8a35c; } .gm-sw-ea { background: #6fd3b0; }
+.gm-sw-endpb { background: #7fb8ff; } .gm-sw-andpb { background: #c59cff; } .gm-sw-tribunal { background: #ff8a80; }
+.gm-sw-pc { background: #ffd166; } .gm-sw-sha { background: #9be564; } .gm-sw-imb { background: #4dd0e1; }
+.gm-sw-adhoc { background: #f78fb3; } .gm-sw-office { background: #ffffff; } .gm-sw-cs { background: #b0bec5; }
+.gm-sw-other { background: #a3b8ad; } .gm-sw-sub { background: #5fa08a; } .gm-sw-devolved { background: #d2c8b4; }
+.gm-sw-sponsor { background: #c9a15d; }
+.gm-sw-link { width: 1.1rem; height: 0; border-radius: 0; background: none; border-top: 2px dashed #c9a15d; }
+.gm-panel { padding: 0.8rem; border: 1px solid var(--line); border-radius: 12px; background: var(--raised); min-width: 0; }
+.gm-panel-hint, .gm-panel-meta { margin: 0 0 0.5rem; color: var(--ink-soft); font-size: 0.88rem; }
+.gm-panel-h { margin: 0 0 0.4rem; font-family: var(--serif); font-size: 1.15rem; font-weight: 500; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: baseline; overflow-wrap: anywhere; }
+.gm-panel-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.6rem; }
+.gm-panel-actions .gm-link { margin-left: 0; }
+.gm-panel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; max-height: 26rem; overflow-y: auto; font-size: 0.88rem; }
+.gm-panel-list li { display: flex; align-items: center; gap: 0.45rem; min-width: 0; }
+.gm-panel-list a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(240, 201, 135, 0.5); text-underline-offset: 2px; overflow-wrap: anywhere; min-width: 0; }
+.gm-panel-list a:hover, .gm-panel-list a:focus-visible { color: var(--gold); }
+.gm-list-h { margin-top: 1.6rem; margin-bottom: 0.6rem; }
+.gm-dept-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: 0.45rem; }
+.gm-dept-btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; padding: 0.45rem 0.75rem; border: 1px solid var(--line); border-radius: 10px; background: var(--raised); color: var(--ink); font: inherit; font-size: 0.92rem; text-align: left; cursor: pointer; }
+.gm-dept-btn:hover { border-color: var(--gold); }
+.gm-dept-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.gm-dept-btn[aria-pressed="true"] { border-color: var(--gold); background: #1c3f33; }
+.gm-dept-btn-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.gm-dept-btn .gm-count { padding: 0.05rem 0.5rem; border-radius: 999px; background: var(--field); color: var(--gold); font-size: 0.8rem; font-weight: 700; }
+@media (max-width: 960px) {
+  .gm-chart-layout { grid-template-columns: minmax(0, 1fr); }
+  .gm-legend { grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); }
+}
+
+/* Circle / Org chart switch (overview and department views) */
+.gm-chart-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem 0.8rem; margin: 0 0 0.8rem; }
+.gm-chart-switch[hidden] { display: none; }
+.gm-chart-switch-l { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); }
+.gm-stage-org { overflow: visible; background: #0b241e; }
+.gm-stage-org canvas[hidden] { display: none; }
+.gm-org { min-width: 0; padding: 0.2rem 0.15rem 0.6rem; }
+.gm-org[hidden] { display: none; }
+.gm-org .gm-dv-dg { border: 0; padding: 0.35rem 0.2rem; background: transparent; }
+.gm-org-view { min-width: 0; }
+@media (max-width: 639px) {
+  .gm-chart-switch { margin-bottom: 0.65rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm-chart-switch .gm-seg-b { transition: none; }
+}
