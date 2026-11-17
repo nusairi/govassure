@@ -10,6 +10,33 @@
   },
   "routes": [
     {
+      "route": "/matrix",
+      "rewrite": "/matrix.html"
+    },
+    {
+      "route": "/matrix.html",
+      "redirect": "/matrix",
+      "statusCode": 301
+    },
+    {
+      "route": "/matrix/game",
+      "rewrite": "/game.html"
+    },
+    {
+      "route": "/game.html",
+      "redirect": "/matrix/game",
+      "statusCode": 301
+    },
+    {
+      "route": "/matrix/tools",
+      "rewrite": "/tools.html"
+    },
+    {
+      "route": "/tools.html",
+      "redirect": "/matrix/tools",
+      "statusCode": 301
+    },
+    {
       "route": "/checklist",
       "rewrite": "/checklist.html"
     },
