@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guard the building: workshop game — OSI Security Rings</title>
+<meta name="description" content="A team game for a non-technical audience: match everyday security problems to the OSI layer and the tool that guards it.">
+<meta name="author" content="GOV Assured">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSI Security Rings">
+<meta property="og:title" content="Guard the building: workshop game — OSI Security Rings">
+<meta property="og:description" content="A team game for a non-technical audience: match everyday security problems to the OSI layer and the tool that guards it.">
+<meta property="og:image" content="/og.png">
+<meta property="og:locale" content="en_GB">
+<link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+<link rel="manifest" href="/site.webmanifest?v=6440e5bfc0">
+<meta name="theme-color" content="#0B0E14" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4EE" media="(prefers-color-scheme: light)">
+<link rel="preload" href="/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/ibm-plex-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script src="/theme-init.js?v=591d7f7067"></script>
+<link rel="stylesheet" href="/app.css?v=hwcard3">
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style>
+<link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7" id="ga-theme">
+<link rel="stylesheet" href="/ga-app.css?v=f0dba3f7c8" id="ga-app">
+<link rel="stylesheet" href="/checklist.css?v=hwcheck2">
+<link rel="stylesheet" href="/matrix.css?v=mx3">
+<link rel="stylesheet" href="/game.css?v=mx3">
+<script src="/ga-sources.js?v=cb51347e74" id="ga-sources-js" data-keep=".mx-page,#mxSources,body" defer></script>
+</head>
+<body>
+<a class="sr-only" href="#gMain">Skip to game</a>
+<div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+<header class="bar tut-bar">
+  <a class="brand" href="/" aria-label="OSI Security Rings home"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>OSI Security Rings</span></a>
+  <a class="btn tut-nav-link" href="/" title="Back to the interactive OSI rings" aria-label="Back to OSI Rings"><span class="lbl">← Rings</span></a>
+  <a class="btn tut-nav-link" href="/matrix" title="Editable protection matrix (facilitator view)"><span class="lbl">Matrix</span></a>
+  <span class="btn tut-nav-link is-current" aria-current="page" title="Workshop game">Play</span>
+  <a class="btn tut-nav-link" href="/matrix/tools" title="Which Microsoft tool covers what"><span class="lbl">Tool list</span></a>
+  <div class="seg" id="themeSeg" role="group" aria-label="Colour theme">
+    <button type="button" data-set="auto" aria-pressed="false" title="Match system" aria-label="Match system theme"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
+    <button type="button" data-set="dark" aria-pressed="false" title="Dark" aria-label="Dark theme"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button type="button" data-set="light" aria-pressed="false" title="Light" aria-label="Light theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+  <a href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn" class="btn li"><span class="in" aria-hidden="true">in</span><span class="lbl">GOV Assured</span></a>
+  <a href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub" class="btn"><span class="lbl">GitHub</span></a>
+</header>
+<div class="mx-page">
+  <main id="gMain" class="g-main" tabindex="-1">
+    <div class="g-stage" id="gStage">
+      <div class="g-bar" id="gBar">
+        <span class="g-where" id="gWhere"></span>
+        <span class="g-timer" id="gTimer" hidden></span>
+        <ol class="g-mini" id="gMini" aria-label="Scores"></ol>
+        <div class="g-ctl">
+          <button type="button" class="btn" id="gPrev" aria-label="Previous (Left arrow)">←</button>
+          <button type="button" class="btn" id="gSkip" title="Skip this card (S)">Skip</button>
+          <button type="button" class="btn mx-primary" id="gNext" aria-label="Next (Right arrow)">Next →</button>
+          <button type="button" class="btn" id="gFull" title="Full screen (F)">Full screen</button>
+          <button type="button" class="btn" id="gHome" title="Back to the start (Home)">Menu</button>
+        </div>
+      </div>
+      <div class="g-screen" id="gScreen" aria-live="polite"></div>
+      <p class="g-keys" id="gKeys">Keys: → or PageDown next (reveals first) · ← back · R reveal · S skip · T timer · 1–6 give a team points · A accept another tool · F full screen</p>
+    </div>
+  </main>
+  <div class="g-print" id="gPrintView" aria-hidden="true"></div>
+  <footer class="cl-footer mx-footer" id="mxSources" data-ga-keep="">
+    <div class="cl-footer__top">
+      <a href="/">← Back to OSI Security Rings</a>
+      <a class="cl-ext" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener noreferrer" data-ga-keep="">LinkedIn<span aria-hidden="true"> ↗</span></a>
+      <a class="cl-ext" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener noreferrer" data-ga-keep="">GitHub<span aria-hidden="true"> ↗</span></a>
+    </div>
+    <p class="cl-legal">GOV Assured is a community project and is not a government website</p>
+  </footer>
+</div>
+<noscript><p class="noscript">The game needs JavaScript.</p></noscript>
+<script src="/data.js?v=d9ee6f274a"></script>
+<script src="/ms-tools.js?v=mx3"></script>
+<script src="/our-tools.js?v=mx3"></script>
+<script src="/game-data.js?v=mx3"></script>
+<script src="/game.js?v=mx3"></script>
+</body>
+</html>

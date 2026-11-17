@@ -37,6 +37,10 @@ data.js
 downloads/hardware-assurance-checklist.xlsx
 favicon.ico
 favicon.svg
+game-data.js
+game.css
+game.html
+game.js
 ga-app.css
 ga-logo.png
 ga-sources.js
@@ -49,8 +53,14 @@ icon-192.png
 icon-512-maskable.png
 icon-512.png
 index.html
+matrix-data.js
+matrix.css
+matrix.html
+matrix.js
+ms-tools.js
 og.html
 og.png
+our-tools.js
 robots.txt
 site.webmanifest
 sitemap.xml
@@ -60,6 +70,8 @@ space-grotesk-latin-600-normal.woff2
 space-grotesk-latin-700-normal.woff2
 staticwebapp.config.json
 theme-init.js
+tools-page.js
+tools.html
 tutorial-data.js
 tutorial.css
 tutorial.html
@@ -68,7 +80,7 @@ tutorial.js
 got="$(cd "$OUT" && find . -type f | sed 's|^\./||' | sort)"
 want="$(printf '%s\n' $expected | sed '/^$/d' | sort)"
 if [ "$got" = "$want" ]; then
-  ok "43 published files"
+  ok "55 published files"
 else
   bad "file set differs"
   printf '%s\n' "$want" > /tmp/osi-test-want.txt
@@ -155,12 +167,18 @@ need={
     ("/tutorial", "/tutorial.html", None, None),
     ("/tutorial.html", None, "/tutorial", 301),
     ("/og", "/og.html", None, None),
+    ("/matrix", "/matrix.html", None, None),
+    ("/matrix.html", None, "/matrix", 301),
+    ("/matrix/game", "/game.html", None, None),
+    ("/game.html", None, "/matrix/game", 301),
+    ("/matrix/tools", "/tools.html", None, None),
+    ("/tools.html", None, "/matrix/tools", 301),
     ("/og.html", None, "/og", 301),
 }
 if not need <= routes:
     print("BAD missing or wrong clean-URL routes"); ok=False
 else:
-    print("OK /tutorial /checklist /og routes")
+    print("OK /tutorial /checklist /og /matrix /matrix/game /matrix/tools routes")
 mt=cfg.get("mimeTypes",{})
 if mt.get(".webmanifest")!="application/manifest+json":
     print("BAD webmanifest MIME type"); ok=False
@@ -170,6 +188,59 @@ if mt.get(".xlsx")!="application/vnd.openxmlformats-officedocument.spreadsheetml
     print("BAD xlsx MIME type"); ok=False
 else:
     print("OK xlsx MIME type")
+# Protection matrix, workshop game and tool list (preview): unlisted, noindex, no inline script/style, allowed links only
+import re as _re
+PAGES = ["matrix.html", "game.html", "tools.html"]
+JS = ["matrix.js", "matrix-data.js", "ms-tools.js", "our-tools.js", "tools-page.js", "game.js", "game-data.js"]
+allowed = _re.compile(r"^https://(www\.ncsc\.gov\.uk/|learn\.microsoft\.com/en-us/|www\.linkedin\.com/company/102617034/$|github\.com/nusairi/govassure$|www\.govassured\.com/$)")
+for pg in PAGES:
+    html = (out/pg).read_text(encoding="utf-8")
+    if "matrix" in robots or "/matrix" in sitemap or "game" in sitemap or "/tools" in sitemap:
+        print("BAD matrix pages listed in sitemap.xml or robots.txt"); ok=False
+    if '<meta name="robots" content="noindex,nofollow">' not in html:
+        print(f"BAD {pg} missing noindex,nofollow meta"); ok=False
+    if 'href="/"' not in html:
+        print(f"BAD {pg} has no link back to the OSI main page"); ok=False
+    scripts = _re.findall(r"<script\b([^>]*)>(.*?)</script>", html, _re.S)
+    if any("src=" not in a or body.strip() for a, body in scripts):
+        print(f"BAD {pg} has an inline script"); ok=False
+    if _re.findall(r"<style\b([^>]*)>", html) != [' id="ga-brand"']:
+        print(f"BAD {pg} has an extra inline <style>"); ok=False
+    if _re.search(r"\son[a-z]+\s*=", html) or 'style="' in html:
+        print(f"BAD {pg} has inline event handlers or style attributes"); ok=False
+    print(f"OK {pg}: noindex, links home, no inline script/style/handlers")
+for pg in ["index.html", "tutorial.html", "checklist.html", "404.html"]:
+    h = (out/pg).read_text(encoding="utf-8")
+    if "/matrix" in h or "game.html" in h or "tools.html" in h:
+        print(f"BAD {pg} links to the matrix pages"); ok=False
+print("OK matrix, game and tool list not linked from index/tutorial/checklist/404")
+alltext = "".join((out/f).read_text(encoding="utf-8") for f in PAGES + JS)
+urls = set(_re.findall(r"https?://[^\s\"'<>)]+", alltext))
+badu = sorted(u for u in urls if not allowed.match(u))
+if badu:
+    print("BAD non-allowed external URLs:", *badu); ok=False
+else:
+    print(f"OK external URLs allowed: NCSC, Microsoft Learn, company LinkedIn, repo ({len(urls)} literal)")
+mslinks = (out/"ms-tools.js").read_text(encoding="utf-8")
+if 'var L = "https://learn.microsoft.com/en-us/";' not in mslinks or "http" in mslinks.replace('var L = "https://learn.microsoft.com/en-us/";', ""):
+    print("BAD ms-tools.js links must all be built from the Microsoft Learn base"); ok=False
+else:
+    print("OK ms-tools.js links all on learn.microsoft.com/en-us/")
+_bad_js = [f for f in JS if any(w in (out/f).read_text(encoding="utf-8") for w in ("innerHTML", "eval(", "new Function", "document.write"))]
+if _bad_js:
+    print("BAD uses innerHTML/eval/document.write:", *_bad_js); ok=False
+else:
+    print("OK scripts write text only (no innerHTML/eval)")
+if "SECRET" in alltext:
+    print("BAD matrix/game text mentions SECRET"); ok=False
+else:
+    print("OK no SECRET text")
+mdata = (out/"matrix-data.js").read_text(encoding="utf-8")
+n_ex = mdata.count("Example: ")
+if n_ex < 40:
+    print("BAD expected generic examples marked 'Example:' (found", n_ex, ")"); ok=False
+else:
+    print(f"OK matrix examples marked 'Example:' ({n_ex})")
 ov=cfg.get("responseOverrides",{}).get("404",{})
 if ov.get("rewrite")!="/404.html":
     print("BAD 404 override missing or wrong"); ok=False
