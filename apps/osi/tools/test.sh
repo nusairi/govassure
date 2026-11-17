@@ -53,6 +53,7 @@ icon-192.png
 icon-512-maskable.png
 icon-512.png
 index.html
+layer-cards.js
 matrix-data.js
 matrix.css
 matrix.html
@@ -80,7 +81,7 @@ tutorial.js
 got="$(cd "$OUT" && find . -type f | sed 's|^\./||' | sort)"
 want="$(printf '%s\n' $expected | sed '/^$/d' | sort)"
 if [ "$got" = "$want" ]; then
-  ok "55 published files"
+  ok "56 published files"
 else
   bad "file set differs"
   printf '%s\n' "$want" > /tmp/osi-test-want.txt

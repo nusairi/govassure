@@ -370,7 +370,7 @@ function wireInteraction() {
     const cardLi = e.target.closest("li.has-card");
     if (cardLi && window.HWCards) {
       const it = itemOf(cardLi);
-      if (it && it.item) HWCards.openCard(it.item.n);
+      if (it && it.item) HWCards.openCard(it.item.n, cardLi.dataset.kind);
       return;
     }
     const b = e.target.closest("[data-go]");
@@ -385,7 +385,7 @@ function wireInteraction() {
     if (!cardLi || !window.HWCards) return;
     e.preventDefault();
     const it = itemOf(cardLi);
-    if (it && it.item) HWCards.openCard(it.item.n);
+    if (it && it.item) HWCards.openCard(it.item.n, cardLi.dataset.kind);
   });
   panel.addEventListener("mouseover", e => {
     svg.querySelectorAll(".chip.hl").forEach(c => c.classList.remove("hl"));
@@ -441,6 +441,17 @@ function itemLiAttrs(l, kind, i, it) {
   return `data-layer="${l.n}" data-kind="${kind}" data-idx="${i}" style="--c:${l.colour}" class="${cls}"` +
     (has ? ` role="button" tabindex="0" aria-haspopup="dialog" aria-label="${esc(it.n)} — open explainer"` : "");
 }
+function crossLiAttrs(c, i) {
+  const has = window.HWCards && HWCards.has(c.n, "x");
+  return `data-kind="x" data-idx="${i}" style="--c:var(--muted)"` +
+    (has ? ` class="has-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="${esc(c.n)} — open explainer"` : "");
+}
+function cardHint(n) {
+  if (!window.HWCards) return "";
+  return n === 0
+    ? `<p class="hint card-hint">Tap a name for a plain-English explainer, NCSC and NIST links, and the matching tutorial stage.</p>`
+    : `<p class="hint card-hint">Tap a name for a plain-English explainer and NCSC links.</p>`;
+}
 function listHTML(l, kind) {
   const items = l[kind === "p" ? "protocols" : "security"];
   return `<ul class="items">${items.map((it, i) => `<li ${itemLiAttrs(l, kind, i, it)}><b><i></i>${esc(it.n)}${kind === "s" ? fnBadges(it) : ""}</b><span>${esc(it.d)}</span></li>`).join("")}</ul>`;
@@ -471,7 +482,7 @@ function renderPanel() {
       <h3>Layers</h3><div class="legend">${[...LAYERS].reverse().map(l => `<button data-go="${l.n}" style="--c:${l.colour}"><span class="n">L${l.n}</span><span>${l.name}<br><small>${l.pdu}</small></span><small>${l.protocols.length} · ${l.security.length}</small></button>`).join("")}</div>
       <h3>Control coverage by function</h3>${covTable()}
       <h3>Cross-layer capabilities</h3>
-      <ul class="items">${CROSS_LAYER.map(c => `<li style="--c:var(--muted)"><b><i></i>${esc(c.n)}${fnBadges(c)}</b><span>${esc(c.d)}</span></li>`).join("")}</ul>
+      ${cardHint("x")}<ul class="items">${CROSS_LAYER.map((c, i) => `<li ${crossLiAttrs(c, i)}><b><i></i>${esc(c.n)}${fnBadges(c)}</b><span>${esc(c.d)}</span></li>`).join("")}</ul>
       <h3>Downloads</h3>
       <div class="dl"><a class="btn" href="/OSI-Security-Rings-A3.pdf" download>A3 PDF · dark</a><a class="btn" href="/OSI-Security-Rings-A3-print-light.pdf" download>A3 PDF · light (print)</a></div>
       ${CREDIT}
@@ -484,7 +495,7 @@ function renderPanel() {
     <div class="ph"><span class="num">L${l.n}</span><div><h2>${l.name}</h2><div class="pdu">PDU · ${l.pdu}</div></div></div>
     <p class="fn">${esc(l.fn)}</p>
     <h3>Example threats</h3><div class="threats">${l.threats.map(t => (window.HWCards && HWCards.threat(t)) ? `<button type="button" class="threat-chip" data-threat="${esc(t)}" aria-haspopup="dialog">${esc(t)}</button>` : `<span>${esc(t)}</span>`).join("")}</div>
-    <h3>Protocols & standards <span>${l.protocols.length}</span></h3>${l.n === 0 && window.HWCards ? `<p class="hint card-hint">Tap a name for a plain-English explainer, NCSC and NIST links, and the matching tutorial stage.</p>` : ""}${listHTML(l, "p")}
+    <h3>Protocols & standards <span>${l.protocols.length}</span></h3>${cardHint(l.n)}${listHTML(l, "p")}
     <h3>Security technologies <span>${l.security.length}</span></h3>${coverage(l)}${listHTML(l, "s")}
     ${blocked.length ? `<h3>Stopped here in the dataflow</h3><ul class="items">${blocked.map(t => `<li data-layer="${n}" data-kind="s" data-idx="${l.security.findIndex(s => s.n === t.control)}" style="--c:var(--bad)"><b><i></i>${esc(t.name)}</b><span>Blocked by ${esc(t.control)}</span></li>`).join("")}</ul>` : ""}
     <div class="pager">${next ? `<button class="btn" data-go="${next.n}">↑ L${next.n} ${next.name}</button>` : "<span></span>"}${prev ? `<button class="btn" data-go="${prev.n}">L${prev.n} ${prev.name} ↓</button>` : ""}</div>

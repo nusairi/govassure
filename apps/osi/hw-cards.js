@@ -788,6 +788,13 @@
   }
 };
 
+  /* Layers 1–8 and cross-layer explainers live in layer-cards.js (same card layout).
+     Cross-layer cards are kept apart because "XDR" is both an L6 format and a cross-layer tool. */
+  var EXTRA = window.OSI_LAYER_CARDS || {};
+  var XCARDS = EXTRA.cross || {};
+  Object.keys(EXTRA.cards || {}).forEach(function (k) { if (!CARDS[k]) CARDS[k] = EXTRA.cards[k]; });
+  function findCard(name, scope) { return scope === "x" ? XCARDS[name] : CARDS[name]; }
+
   var lastFocus = null;
   var openKind = null;
   var overlay, sheet, bodyEl, titleEl;
@@ -1003,17 +1010,21 @@
     nc.appendChild(list(card.ncsc, function (li, it) { li.appendChild(makeExt(it.href, it.label)); }));
     bodyEl.appendChild(section("NCSC relationship", nc));
 
-    var ni = document.createElement("div");
-    ni.appendChild(list(card.nist, function (li, it) { li.appendChild(makeExt(it.href, it.label)); }));
-    bodyEl.appendChild(section("NIST relationship", ni));
+    if (card.nist && card.nist.length) {
+      var ni = document.createElement("div");
+      ni.appendChild(list(card.nist, function (li, it) { li.appendChild(makeExt(it.href, it.label)); }));
+      bodyEl.appendChild(section("NIST relationship", ni));
+    }
 
-    var st = document.createElement("p");
-    st.className = "osi-card__tutorial";
-    st.appendChild(makeInternal("/tutorial?stage=" + encodeURIComponent(card.stage),
-      "Open in the hardware lifecycle tutorial — " + card.stageLabel));
-    bodyEl.appendChild(section("In the tutorial", st));
+    if (card.stage) {
+      var st = document.createElement("p");
+      st.className = "osi-card__tutorial";
+      st.appendChild(makeInternal("/tutorial?stage=" + encodeURIComponent(card.stage),
+        "Open in the hardware lifecycle tutorial — " + card.stageLabel));
+      bodyEl.appendChild(section("In the tutorial", st));
+    }
 
-    var exList = EXAMPLES[name] || [];
+    var exList = EXAMPLES[name] || card.examples || [];
     if (exList.length) {
       var ex = document.createElement("div");
       ex.appendChild(list(exList, function (li, it) { li.appendChild(makeExt(it.href, it.label)); }));
@@ -1076,8 +1087,8 @@
     sheet.focus();
   }
 
-  function openCard(name) {
-    var card = CARDS[name];
+  function openCard(name, scope) {
+    var card = findCard(name, scope);
     if (!card) return false;
     ensure();
     if (!lastFocus) lastFocus = document.activeElement;
@@ -1116,7 +1127,7 @@
   }, true);
 
   window.HWCards = {
-    has: function (name) { return !!CARDS[name]; },
+    has: function (name, scope) { return !!findCard(name, scope); },
     threat: function (name) { return !!THREATS[name]; },
     openCard: openCard,
     openThreat: openThreat,
