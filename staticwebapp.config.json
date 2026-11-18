@@ -104,6 +104,19 @@
       }
     },
     {
+      "route": "/architect",
+      "rewrite": "/architect/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"
