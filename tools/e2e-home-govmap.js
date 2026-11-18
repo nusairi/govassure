@@ -37,6 +37,7 @@ function fail(errors, cond, msg) { if (!cond) errors.push(msg); }
         kev: !!document.getElementById("kev-body"),
         pubs: !!document.getElementById("pubs-body"),
         outages: !!document.getElementById("out-problems"),
+        cisa: !!document.getElementById("cisa-body"),
       };
     });
     fail(errors, rec.status === 200, "home status");
@@ -45,7 +46,7 @@ function fail(errors, cond, msg) { if (!cond) errors.push(msg); }
     fail(errors, /UK government map/i.test(rec.home.tileText) && /arm'?s-length bodies/i.test(rec.home.tileText) && /Parliament/i.test(rec.home.tileText), "tile text " + rec.home.tileText);
     fail(errors, rec.home.navHref === "/govmap/" && !rec.home.navTarget && rec.home.navText === "Government map", "nav " + rec.home.navText);
     fail(errors, !rec.home.hscroll, "hscroll home");
-    fail(errors, rec.home.kev && rec.home.pubs && rec.home.outages, "home sections missing");
+    fail(errors, rec.home.kev && rec.home.pubs && rec.home.outages && rec.home.cisa, "home sections missing");
 
     const tile = pg.locator("a.lv-map-tile");
     await tile.scrollIntoViewIfNeeded();

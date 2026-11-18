@@ -245,8 +245,29 @@
     });
   }).catch(function () { empty(byId("pubs-body"), "Publications unavailable."); });
 
+  // CISA alerts and advisories (including items not yet on the KEV list)
+  get("/api/cisa-alerts").then(function (data) {
+    var el = byId("cisa-body");
+    if (!el) return;
+    if (!data.items || !data.items.length) return empty(el, data.error || "No CISA alerts available.");
+    el.innerHTML = list(data.items.map(function (a) {
+      var pills = (a.cves || []).slice(0, 4).map(function (c) {
+        var id = c && c.id ? c.id : c;
+        var onKev = c && c.inKev;
+        return '<span class="lv-pill ' + (onKev ? "lv-pill-kev" : "lv-pill-cve") + '">' + esc(id) + (onKev ? " · on KEV list" : "") + "</span>";
+      }).join("");
+      var extra = (a.cves && a.cves.length > 4) ? '<span class="lv-r-meta">and ' + esc(String(a.cves.length - 4)) + " more</span>" : "";
+      var typeClass = a.type === "Alert" ? "lv-pill-crit" : a.type === "ICS" || a.type === "Medical" ? "lv-pill-news" : "lv-pill-date";
+      return item("div", "lv-row", a.url,
+        '<div class="lv-r-top"><span class="lv-r-title">' + esc(a.title) + "</span>" +
+        (a.type ? '<span class="lv-pill ' + typeClass + '">' + esc(a.type) + "</span>" : "") + "</div>" +
+        (a.date ? '<div class="lv-r-meta">' + esc(fmtDate(a.date)) + " · " + esc(daysAgo(a.date)) + "</div>" : "") +
+        (pills ? '<div class="lv-cves">' + pills + extra + "</div>" : ""));
+    }), "CISA alerts");
+  }).catch(function () { var el = byId("cisa-body"); if (el) empty(el, "CISA alerts unavailable."); });
+
   byId("threats-foot").textContent =
-    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), UK security press, NCSC, Action Fraud, GOV.UK and UK Parliament. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
+    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), CISA alerts and advisories, UK security press, NCSC, Action Fraud, GOV.UK and UK Parliament. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
 
   // Ransomware tracker
   get("/api/ransomware").then(function (data) {

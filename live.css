@@ -124,3 +124,10 @@ a.lv-link:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .lv-out-credit{color:var(--gold);text-underline-offset:3px}
 .lv-dash-even{align-items:stretch}
 #pubs-foot{margin-top:.4rem}
+
+/* CISA alerts panel sits under the 2x2 dashboard, full width */
+.lv-cisa-panel{margin-top:1rem}
+.lv-cisa-panel .lv-r-title{overflow-wrap:anywhere}
+.lv-cves{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem}
+.lv-pill-cve{background:#123d2c;color:#8fdcb0}
+.lv-pill-kev{background:#3a3214;color:#f3c969}
