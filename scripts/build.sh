@@ -10,6 +10,7 @@ here="$(cd "$(dirname "$0")/.." && pwd)"; out="${1:?out dir}"
 HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.css
            favicon.ico favicon.svg apple-touch-icon.png
            robots.txt sitemap.xml staticwebapp.config.json vercel.json
+           .well-known/security.txt
            govmap.js govmap.css govmap-chart.js govmap-chart.css
            govmap-glossary.js govmap-terms.js
            govmap-parliament.js govmap-parliament.css
@@ -29,6 +30,11 @@ if [ -f "$here/scripts/version_assets.py" ]; then
   python3 "$here/scripts/version_assets.py" "$out/app"
 fi
 python3 "$here/scripts/check_links.py"
+
+# Guard: security.txt must be at the RFC 9116 location in the output.
+if [ ! -f "$out/app/.well-known/security.txt" ]; then
+  echo "build.sh: missing $out/app/.well-known/security.txt" >&2; exit 1
+fi
 
 # Guard: apps/ in the output may hold only the hub's directory page.
 extra="$(cd "$out/app" && find apps -mindepth 1 ! -path apps/index.html)"

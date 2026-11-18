@@ -3,7 +3,8 @@
 
 mailto links are allowed. The only other web addresses allowed are the GOV
 Assured LinkedIn company page, the company repository
-https://github.com/nusairi/govassure, the schema.org JSON-LD context, and
+https://github.com/nusairi/govassure (plus its security advisory form and
+SECURITY.md), the schema.org JSON-LD context, and
 official UK government and Parliament source pages used by the government map
 (gov.uk, parliament.uk, and the named independent bodies).
 """
@@ -34,6 +35,7 @@ SERVED = [
     "data/parliament.json",
     "sitemap.xml",
     "robots.txt",
+    ".well-known/security.txt",
     "staticwebapp.config.json",
     "vercel.json",
     "govmap.js",
@@ -58,6 +60,8 @@ BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.
 ALLOWED_EXACT = {
     "https://www.linkedin.com/company/102617034",
     "https://github.com/nusairi/govassure",
+    "https://github.com/nusairi/govassure/security/advisories/new",
+    "https://github.com/nusairi/govassure/blob/main/SECURITY.md",
     "https://schema.org",
 }
 
@@ -167,6 +171,8 @@ def self_test():
         "https://schema.org/Person": "host is outside *.govassured.com",
         "https://github.com/nusairi/govassure": None,
         "https://github.com/nusairi/govassure/": None,
+        "https://github.com/nusairi/govassure/security/advisories/new": None,
+        "https://github.com/nusairi/govassure/blob/main/SECURITY.md": None,
         "https://github.com/nusairi/govassure/issues": "host is outside *.govassured.com",
         "https://github.com/other/govassure": "host is outside *.govassured.com",
         "https://www.gov.uk/government/organisations": None,
