@@ -230,3 +230,6 @@
   content: " →";
   content: " →" / "";
 }
+
+.arch-tpl-list li { margin: 0.45rem 0; }
+.arch-tpl-list a { font-weight: 700; }

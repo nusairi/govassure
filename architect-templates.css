@@ -1,0 +1,140 @@
+/* Security Architect Corner templates (/architect/templates/) */
+.tpl-privacy p { margin: 0; color: var(--ink-soft); }
+.tpl-privacy p + p { margin-top: 0.5rem; }
+.tpl-privacy strong { color: var(--ink); }
+.tpl-how-h { margin-top: 1.6rem; }
+.tpl-how { margin: 0; padding-left: 1.4rem; color: var(--ink-soft); max-width: 42rem; }
+.tpl-how li { margin: 0.25rem 0; }
+
+.tpl-guide {
+  max-width: 46rem;
+  padding: 1rem 1.15rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.tpl-guide h2, .tpl-fill-h {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.tpl-fill-h { margin-top: 1.6rem; }
+.tpl-guide ul { margin: 0; padding-left: 1.3rem; color: var(--ink-soft); }
+.tpl-guide li { margin: 0.3rem 0; }
+.tpl-example-text {
+  margin: 0.9rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-left: 5px solid var(--gold);
+  background: rgba(2, 28, 23, 0.55);
+  color: var(--ink-soft);
+}
+.tpl-example-text strong { color: var(--ink); }
+
+.tpl-status { min-height: 1.5rem; margin: 0 0 0.4rem; color: var(--ink-soft); font-size: 0.95rem; }
+.tpl-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.1rem; }
+.tpl-actions .btn, .tpl-add, .tpl-remove { font: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+.tpl-actions .btn-quiet, .tpl-add, .tpl-remove { background: transparent; }
+
+.tpl-form { max-width: 46rem; }
+.tpl-fieldset {
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1.1rem 0.4rem;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.tpl-fieldset legend {
+  padding: 0 0.4rem;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+.tpl-field { margin: 0 0 1rem; }
+.tpl-field label { display: block; margin: 0 0 0.3rem; font-weight: 700; }
+.tpl-hint { margin: 0 0 0.4rem; color: var(--ink-soft); font-size: 0.95rem; }
+.tpl-field input,
+.tpl-field select,
+.tpl-field textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border: 2px solid #b9ad95;
+  border-radius: 8px;
+  background: var(--field);
+  color: var(--ink);
+  font: inherit;
+}
+.tpl-field textarea { resize: vertical; line-height: 1.45; }
+.tpl-field select { appearance: auto; }
+.tpl-field input:focus-visible,
+.tpl-field select:focus-visible,
+.tpl-field textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; border-color: var(--gold); }
+.tpl-field input[type="date"] { max-width: 14rem; color-scheme: dark; }
+.tpl-score { margin: 0 0 0.9rem; font-weight: 700; color: var(--gold); }
+.tpl-remove { margin: 0 0 0.8rem; }
+.tpl-add { margin: 0 0 0.5rem; }
+.tpl-top { margin: 1.2rem 0 0; font-size: 0.95rem; }
+.tpl-print-view { display: none; }
+
+@media (max-width: 760px) {
+  .tpl-fieldset { padding-inline: 0.75rem; }
+  .tpl-actions .btn { flex: 1 1 100%; }
+}
+
+/* Print only the chosen template, in black on white. */
+@media print {
+  body.is-printing > *:not(#tpl-print-view) { display: none !important; }
+  body.is-printing { background: #fff; color: #000; }
+  body.is-printing .tpl-print-view { display: block; font-family: Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.4; color: #000; }
+  .tpl-print-view h1 { font-family: Arial, Helvetica, sans-serif; font-size: 20pt; color: #000; margin: 0 0 8pt; letter-spacing: 0; }
+  .tpl-print-view h2 { font-size: 14pt; margin: 14pt 0 4pt; border-bottom: 1px solid #000; break-after: avoid; }
+  .tpl-print-view h3 { font-size: 11pt; margin: 8pt 0 2pt; break-after: avoid; }
+  .tpl-print-view p { margin: 0 0 4pt; }
+  .tpl-print-view .tpl-empty { color: #444; font-style: italic; }
+  .tpl-print-view .tpl-print-note { margin-top: 16pt; font-size: 9pt; color: #333; }
+  body:not(.is-printing) .site-header,
+  body:not(.is-printing) .site-footer,
+  body:not(.is-printing) .tpl-actions,
+  body:not(.is-printing) .skip-link { display: none; }
+}
+
+/* Template list cards */
+.tpl-cards { margin-bottom: 2rem; }
+.tpl-card h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* Previous and next template links (GOV.UK pagination pattern) */
+.tpl-pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  max-width: 46rem;
+}
+.tpl-pager a {
+  display: block;
+  min-height: 2.75rem;
+  padding: 0.3rem 0;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.tpl-pager-next { margin-left: auto; text-align: right; }
+.tpl-pager-label { display: block; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; }
+.tpl-pager-prev .tpl-pager-label::before { content: "← "; content: "← " / ""; }
+.tpl-pager-next .tpl-pager-label::after { content: " →"; content: " →" / ""; }
+.tpl-pager-title { display: block; color: var(--ink-soft); }
+.tpl-pager a:hover .tpl-pager-title { color: var(--ink); }
+@media (max-width: 760px) {
+  .tpl-pager-next { margin-left: 0; text-align: left; }
+}

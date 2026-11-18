@@ -59,6 +59,15 @@ SERVED = [
     "architect/index.html",
     "architect.js",
     "architect.css",
+    "architect/templates/index.html",
+    "architect/templates/security-design/index.html",
+    "architect/templates/risk-register/index.html",
+    "architect/templates/threat-model/index.html",
+    "architect/templates/decision-record/index.html",
+    "architect/templates/supplier-assurance/index.html",
+    "architect/templates/ready-for-beta/index.html",
+    "architect-templates.js",
+    "architect-templates.css",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
