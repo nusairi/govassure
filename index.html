@@ -75,7 +75,7 @@
     <section class="band lv-dash lv-top" id="threats" aria-labelledby="threats-title">
       <div class="wrap">
         <h1 id="threats-title" class="section-title lv-dash-h1"><span class="lv-live" aria-hidden="true"></span> UK cyber threat dashboard</h1>
-        <p class="section-intro">A live view of the threat: actively exploited vulnerabilities, recent UK security news, the latest UK advisories, and new IT-related publications from government and Parliament. Updated automatically.</p>
+        <p class="section-intro">A live view of the threat: actively exploited vulnerabilities, new CISA alerts, recent UK security news, the latest UK advisories, and new IT-related publications from government and Parliament. Updated automatically.</p>
         <div id="featured-wrap" class="lv-featured-slot"><div class="lv-featured lv-skel-card"><div class="lv-flabel">Latest exploited vulnerability</div><div class="lv-skel"><div class="lv-bar lv-w55"></div><div class="lv-bar lv-w90"></div><div class="lv-bar lv-w70"></div></div></div></div>
         <div class="lv-dash-grid lv-dash-2 lv-dash-even">
           <div class="lv-panel">
@@ -106,6 +106,13 @@
             </div>
             <div class="lv-panel-body lv-fixed" id="pubs-body" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w70"></div><div class="lv-bar lv-w85"></div><div class="lv-bar lv-w60"></div></div></div>
           </div>
+        </div>
+        <div class="lv-panel lv-cisa-panel">
+          <div class="lv-panel-head">
+            <h2 class="lv-h"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg> CISA alerts and advisories</h2>
+            <span class="lv-src">CISA</span>
+          </div>
+          <div class="lv-panel-body" id="cisa-body" aria-live="polite"><div class="lv-skel"><div class="lv-bar lv-w70"></div><div class="lv-bar lv-w85"></div><div class="lv-bar lv-w55"></div></div></div>
         </div>
         <a class="lv-map-tile" href="/govmap/">
           <span class="lv-map-kicker">UK government map</span>
