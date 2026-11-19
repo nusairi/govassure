@@ -1,30 +1,32 @@
 // Security Architect Corner templates checks: the list page and each template page.
 // B=<site> [SHOTS=dir] node e2e-architect-templates.js
-// axe-core is optional: run `npm i --no-save axe-core` to include the accessibility scan.
+// axe-core is required (see tools/axe.js): run `npm i --no-save axe-core` in tools/ first.
 const { chromium } = require('playwright-core');
 const fs = require('fs'); const path = require('path');
 const B = (process.env.B || 'http://127.0.0.1:8000').replace(/\/$/, '');
 const SHOTS = process.env.SHOTS || path.join(__dirname, 'shots', 'templates'); fs.mkdirSync(SHOTS, { recursive: true });
 const CHROME = process.env.CHROME || '/usr/bin/google-chrome';
 const LOCAL = /127\.0\.0\.1|localhost/.test(B);
-let axeSrc = null; try { axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8'); } catch (e) { console.log('SKIP axe-core not installed'); }
+const axe = require('./axe'); axe.load();
 // [localStorage key, slug, title, text to type into the first field, export needle]
 const T = [
-  ['design', 'security-design', 'One-page security design', 'Book a meeting room (test edit)'],
+  ['data', 'data-and-sensitivity-summary', 'Data and sensitivity summary', 'Book a meeting room (test edit)'],
   ['risks', 'risk-register', 'Risk register starter', 'Book a meeting room (test edit)'],
+  ['raci', 'risk-owners-and-sign-off', 'Risk owners and sign-off', 'Book a meeting room (test edit)'],
   ['threats', 'threat-model', 'Threat model worksheet (STRIDE)', 'Admin functions (test edit)'],
+  ['design', 'security-design', 'One-page security design', 'Book a meeting room (test edit)'],
   ['adr', 'decision-record', 'Architecture decision record', 'Use the key vault (test edit)'],
   ['supplier', 'supplier-assurance', 'Supplier assurance questionnaire', 'Example Devices Ltd (test edit)'],
   ['beta', 'ready-for-beta', 'Ready for beta checklist', 'Book a meeting room (test edit)'],
+  ['live', 'live-security-plan', 'Live security plan', 'Book a meeting room (test edit)'],
+  ['decom', 'decommission-and-disposal-plan', 'Decommission and disposal plan', 'Book a meeting room (test edit)'],
 ];
+const NEW = ['data', 'raci', 'live', 'decom'];
+const DOCSHOTS = process.env.DOCSHOTS || '';
 const TPL = B + '/architect/templates/';
 let fail = 0; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) fail++; };
 
-async function axeRun(p) {
-  await p.addScriptTag({ content: axeSrc });
-  return p.evaluate(async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] } });
-    return r.violations.map(v => v.id + ' (' + v.impact + ') x' + v.nodes.length + ': ' + v.nodes.slice(0, 2).map(n => n.target.join(' ')).join(' | ')); });
-}
+const axeRun = p => axe.scan(p);
 async function common(p, tag, errs) {
   const sw = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); ok(sw <= 0, `${tag}: no horizontal scroll (${sw})`);
   const links = await p.$$eval('a[href]:not([href^="blob:"])', as => as.map(a => ({ h: a.href, t: a.target, r: a.rel })));
@@ -50,7 +52,8 @@ async function common(p, tag, errs) {
     ok(r.status() === 200, `${size} index: 200`);
     if (!LOCAL) ok((r.headers()['content-security-policy'] || '').includes("script-src 'self'"), `${size} index: CSP header present`);
     const cards = await p.$$eval('.tpl-card h2 a', x => x.map(a => [a.getAttribute('href'), a.textContent.trim(), a.target]));
-    ok(cards.length === 6 && cards.every((c, i) => c[0] === `/architect/templates/${T[i][1]}/` && c[1] === T[i][2] && !c[2]), `${size} index: 6 cards linking in the same tab`);
+    ok(cards.length === 10 && cards.every((c, i) => c[0] === `/architect/templates/${T[i][1]}/` && c[1] === T[i][2] && !c[2]), `${size} index: 10 cards in lifecycle order linking in the same tab`);
+    ok(await p.$('.tpl-trail-note a[href="/architect/document-trail/"]') !== null && (await p.textContent('.lede')).startsWith('Ten fill-in templates'), `${size} index: links to the document trail and says ten`);
     ok(await p.$$eval('.tpl-card .description', x => x.every(e => e.textContent.trim().length > 10)), `${size} index: each card has a purpose line`);
     ok((await p.textContent('.lede')).includes('Especially useful if you are starting out in the role'), `${size} index: starting-out line`);
     ok(JSON.stringify(await p.$$eval('.arch-crumbs li', x => x.map(e => e.textContent.trim()))) === JSON.stringify(['Home', 'Security Architect Corner', 'Templates']), `${size} index: breadcrumb`);
@@ -76,9 +79,13 @@ async function common(p, tag, errs) {
       const n = await p.$$eval('[data-key]', x => x.filter(e => e.value).length); ok(n >= 5, `${tag}: worked example filled (${n} fields)`);
       if (key === 'risks') ok(/Score 6 out of 25: Medium/.test(await p.textContent('.tpl-row')), `${tag}: risk score calculated`);
       await p.screenshot({ path: `${SHOTS}/${size}-${slug}-filled.png`, fullPage: true });
+      if (DOCSHOTS && NEW.includes(key)) await p.screenshot({ path: `${DOCSHOTS}/${size}-template-${slug}-filled.png`, fullPage: true });
+      if (key === 'raci') ok(await p.$$eval('.tpl-row', x => x.length) === 4 && await p.inputValue('[data-key="outcome"]') === 'Approved with conditions', `${tag}: four RACI rows and the sign-off record filled`);
+      if (NEW.includes(key)) { const roles = await p.$$eval('[data-key]', x => x.map(e => e.value).join(' ')); ok(roles.includes('Book a meeting room') && !/\b(Mr|Mrs|Ms|Dr)\.? [A-Z]/.test(roles), `${tag}: worked example uses the meeting-room service and roles, not names`); }
       const first = await p.$eval('[data-key]', e => e.id);
       await p.fill('#' + first, edit);
       if (key === 'risks') { await p.selectOption('.tpl-row >> nth=0 >> select[data-key="impact"]', '5 Severe'); await p.click('.tpl-add'); }
+      if (key === 'raci') { await p.click('.tpl-add'); await p.fill('.tpl-row:nth-child(5) [data-key="activity"]', 'Approve a supplier (test row)'); }
       await p.waitForTimeout(600);
       ok((await p.textContent('.tpl-status')).includes('Saved in this browser'), `${tag}: save status shown`);
       ok(await p.evaluate(k => !!localStorage.getItem('ga-arch-tpl-v1-' + k), key), `${tag}: saved under existing key ga-arch-tpl-v1-${key}`);
@@ -88,10 +95,12 @@ async function common(p, tag, errs) {
         ok(await p.$$eval('.tpl-row', x => x.length) === 3 && /Score 10 out of 25: High/.test(await p.textContent('.tpl-row')), `${tag}: rows and edited score restored`);
         await p.click('.tpl-row:nth-child(3) .tpl-remove'); ok(await p.$$eval('.tpl-row', x => x.length) === 2, `${tag}: remove row`);
       }
+      if (key === 'raci') ok(await p.$$eval('.tpl-row', x => x.length) === 5 && await p.inputValue('.tpl-row:nth-child(5) [data-key="activity"]') === 'Approve a supplier (test row)', `${tag}: added RACI row restored after reload`);
       // print
       const before = await p.evaluate(() => window.__printed);
       await p.click('.tpl-print');
       ok(await p.evaluate(() => window.__printed) === before + 1 && (await p.textContent('#tpl-print-view')).includes(edit), `${tag}: print view built with answers`);
+      if (key === 'raci') ok(/Sign-off record[\s\S]*Approved with conditions/.test(await p.textContent('#tpl-print-view')) && (await p.textContent('#tpl-print-view')).indexOf('Decision 1') < (await p.textContent('#tpl-print-view')).indexOf('Sign-off record'), `${tag}: print shows the RACI rows then the sign-off record`);
       await p.emulateMedia({ media: 'print' });
       ok(await p.evaluate(() => !document.querySelector('.site-header').checkVisibility() && !document.querySelector('.tpl-pager').checkVisibility() && !document.querySelector('.tpl-form').checkVisibility() && document.getElementById('tpl-print-view').checkVisibility()), `${tag}: print stylesheet shows only the template`);
       if (size === 'desktop') { await p.pdf({ path: `${SHOTS}/print-${slug}.pdf`, format: 'A4' }); ok(fs.statSync(`${SHOTS}/print-${slug}.pdf`).size > 5000, `${tag}: PDF rendered`); }
@@ -116,7 +125,7 @@ async function common(p, tag, errs) {
     ok(await p.inputValue('#tpl-adr-title') === '' && await p.evaluate(() => !localStorage.getItem('ga-arch-tpl-v1-adr') && !!localStorage.getItem('ga-arch-tpl-v1-design')), `${size}: clear via keyboard removes only that template`);
     await ctx.close();
 
-    if (axeSrc) {
+    if (axe.enabled()) {
       const actx = await b.newContext({ viewport: vp, bypassCSP: true }); const ap = await actx.newPage(); ap.on('dialog', d => d.accept());
       await ap.goto(TPL, { waitUntil: 'networkidle' }); let ax = (await axeRun(ap)).map(x => 'index: ' + x);
       for (const [, slug] of T) {
@@ -126,7 +135,7 @@ async function common(p, tag, errs) {
         ax = ax.concat((await axeRun(ap)).map(x => slug + ' filled: ' + x));
       }
       await actx.close();
-      ok(ax.length === 0, `${size}: axe ${ax.length ? JSON.stringify(ax) : '0 violations (index + 6 pages, empty and filled)'}`);
+      ok(ax.length === 0, `${size}: axe ${ax.length ? JSON.stringify(ax) : '0 violations (index + 10 pages, empty and filled)'}`);
     }
   }
   { const ctx = await b.newContext(); const p = await ctx.newPage(); await p.goto(B + '/architect/', { waitUntil: 'networkidle' });
@@ -135,7 +144,8 @@ async function common(p, tag, errs) {
     ok((await p.textContent('#templates-title')).trim() === 'Templates for security architects', 'architect page: section heading');
     ok((await p.textContent('#templates')).includes('Especially useful if you are starting out in the role'), 'architect page: starting-out line');
     ok(!(await p.textContent('.arch-next')).includes('templates'), 'architect page: coming next no longer mentions templates');
-    if (!LOCAL) { const sm = await (await p.goto(B + '/sitemap.xml')).text(); ok(['', ...T.map(t => t[1] + '/')].every(s => sm.includes('/architect/templates/' + s + '<')), 'sitemap has the list and all 6 template pages'); }
+    if (!LOCAL) { const sm = await (await p.goto(B + '/sitemap.xml')).text(); ok(['', ...T.map(t => t[1] + '/')].every(s => sm.includes('/architect/templates/' + s + '<')), 'sitemap has the list and all 10 template pages'); }
     await ctx.close(); }
+  axe.report(ok);
   await b.close(); console.log(fail ? `${fail} FAILED` : 'ALL PASS'); process.exit(fail ? 1 : 0);
 })();

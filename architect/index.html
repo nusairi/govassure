@@ -26,7 +26,7 @@
   <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
-  <link rel="stylesheet" href="/architect.css?v=6c92765ce4">
+  <link rel="stylesheet" href="/architect.css?v=a4c5dbd2e5">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -70,6 +70,7 @@
           <ol>
             <li><a href="#start">Start here</a></li>
             <li><a href="#lifecycle">Lifecycle map</a></li>
+            <li><a href="#document-trail">Document trail</a></li>
             <li><a href="#standards">Standards cheat-sheet</a></li>
             <li><a href="#templates">Templates for security architects</a></li>
             <li><a href="#patterns">Patterns library</a></li>
@@ -98,7 +99,7 @@
     <section class="band arch-section" id="lifecycle" aria-labelledby="lifecycle-title">
       <div class="wrap">
         <h2 id="lifecycle-title" class="section-title">Lifecycle map</h2>
-        <p class="section-intro">GOV.UK services move through five phases. Open a phase to see what the architect does, what you produce and the questions to answer before moving on.</p>
+        <p class="section-intro">GOV.UK services move through five phases. Open a phase to see what the architect does, what you produce, the documents for that phase and the questions to answer before moving on.</p>
         <ol class="arch-phases" aria-label="Service phases">
           <li><a href="#stage-discovery">Discovery</a></li>
           <li><a href="#stage-alpha">Alpha</a></li>
@@ -120,11 +121,25 @@
             </ul>
             <h4>What you produce</h4>
             <ul>
-              <li>A short data and sensitivity summary.</li>
-              <li>An initial list of security risks and assumptions.</li>
-              <li>A view of who owns the risk and who signs off.</li>
+              <li>A short <a href="/architect/templates/data-and-sensitivity-summary/">data and sensitivity summary</a>.</li>
+              <li>An initial <a href="/architect/templates/risk-register/">list of security risks</a> and assumptions.</li>
+              <li>A view of <a href="/architect/templates/risk-owners-and-sign-off/">who owns the risk and who signs off</a>.</li>
               <li>Security input to the go or no-go decision for alpha.</li>
             </ul>
+            <!-- doc-trail:discovery -->
+            <div class="arch-docs">
+              <h4 id="docs-discovery">Documents for this phase</h4>
+              <ul class="arch-docs-list" aria-labelledby="docs-discovery">
+                <li><span class="arch-docs-name"><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-register/">Risk register</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/threat-model/">Threat model</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong> <span class="arch-tag-note">early sketch</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decision-record/">Decision records</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">as needed</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/supplier-assurance/">Supplier assurance</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong> <span class="arch-tag-note">early check</span></span></li>
+              </ul>
+              <p class="arch-docs-more"><a href="/architect/document-trail/">Every document in every phase</a></p>
+            </div>
+            <!-- /doc-trail -->
             <h4>Gate questions</h4>
             <ol class="arch-gates">
               <li>Do we know what data the service will hold and how sensitive it is?</li>
@@ -153,11 +168,27 @@
             </ul>
             <h4>What you produce</h4>
             <ul>
-              <li>A threat model the team understands.</li>
-              <li>Security architecture options with a recommended approach.</li>
-              <li>A supplier and third-party risk view.</li>
-              <li>An updated risk register with owners.</li>
+              <li>A <a href="/architect/templates/threat-model/">threat model</a> the team understands.</li>
+              <li>Security architecture options with a recommended approach, recorded in a <a href="/architect/templates/decision-record/">decision record</a>.</li>
+              <li>A <a href="/architect/templates/supplier-assurance/">supplier and third-party risk view</a>.</li>
+              <li>An updated <a href="/architect/templates/risk-register/">risk register</a> with owners.</li>
             </ul>
+            <!-- doc-trail:alpha -->
+            <div class="arch-docs">
+              <h4 id="docs-alpha">Documents for this phase</h4>
+              <ul class="arch-docs-list" aria-labelledby="docs-alpha">
+                <li><span class="arch-docs-name"><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-register/">Risk register</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/threat-model/">Threat model</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/security-design/">Security design</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decision-record/">Decision records</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">as needed</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/supplier-assurance/">Supplier assurance</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="https://sbd.govassured.com">Secure by Design evidence</a> <span class="arch-trail-kind">(community tool)</span></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+              </ul>
+              <p class="arch-docs-more"><a href="/architect/document-trail/">Every document in every phase</a></p>
+            </div>
+            <!-- /doc-trail -->
             <h4>Gate questions</h4>
             <ol class="arch-gates">
               <li>Have we modelled the main threats and agreed which matter most?</li>
@@ -188,11 +219,30 @@
             </ul>
             <h4>What you produce</h4>
             <ul>
-              <li>A detailed security design and the controls it relies on.</li>
+              <li>A detailed <a href="/architect/templates/security-design/">security design</a> and the controls it relies on.</li>
               <li>A penetration test scope, results and a fix plan.</li>
               <li>Assurance evidence, such as control checks and supplier evidence.</li>
-              <li>A signed-off risk acceptance or sign-off record for go-live.</li>
+              <li>A signed-off risk acceptance or <a href="/architect/templates/risk-owners-and-sign-off/">sign-off record</a> for go-live.</li>
             </ul>
+            <!-- doc-trail:beta -->
+            <div class="arch-docs">
+              <h4 id="docs-beta">Documents for this phase</h4>
+              <ul class="arch-docs-list" aria-labelledby="docs-beta">
+                <li><span class="arch-docs-name"><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--final">Final</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-register/">Risk register</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--final">Final</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/threat-model/">Threat model</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/security-design/">Security design</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decision-record/">Decision records</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">as needed</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/supplier-assurance/">Supplier assurance</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--final">Final</strong></span></li>
+                <li><span class="arch-docs-name"><a href="https://sbd.govassured.com">Secure by Design evidence</a> <span class="arch-trail-kind">(community tool)</span></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--final">Final</strong> <span class="arch-tag-note">complete</span></span></li>
+                <li><span class="arch-docs-name"><a href="https://scope.govassured.com">Penetration test scope and results</a> <span class="arch-trail-kind">(community tool)</span></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/ready-for-beta/">Ready for beta checklist</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/live-security-plan/">Live security plan</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong> <span class="arch-tag-note">draft</span></span></li>
+              </ul>
+              <p class="arch-docs-more"><a href="/architect/document-trail/">Every document in every phase</a></p>
+            </div>
+            <!-- /doc-trail -->
             <h4>Gate questions</h4>
             <ol class="arch-gates">
               <li>Is every control in the design built, tested and owned by someone?</li>
@@ -222,11 +272,30 @@
             </ul>
             <h4>What you produce</h4>
             <ul>
-              <li>Monitoring and alerting that is tested.</li>
-              <li>A patching and vulnerability record.</li>
-              <li>Security reviews for changes.</li>
-              <li>A current risk register and a periodic review record.</li>
+              <li>Monitoring and alerting that is tested, set out in a <a href="/architect/templates/live-security-plan/">live security plan</a>.</li>
+              <li>A patching and vulnerability record (see the <a href="/architect/templates/live-security-plan/">live security plan</a>).</li>
+              <li>Security reviews for changes, with the <a href="/architect/templates/threat-model/">threat model</a> reviewed when the design changes.</li>
+              <li>A current <a href="/architect/templates/risk-register/">risk register</a> and a periodic review record.</li>
             </ul>
+            <!-- doc-trail:live -->
+            <div class="arch-docs">
+              <h4 id="docs-live">Documents for this phase</h4>
+              <ul class="arch-docs-list" aria-labelledby="docs-live">
+                <li><span class="arch-docs-name"><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--review">Review</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-register/">Risk register</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong> <span class="arch-tag-note">ongoing</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--review">Review</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/threat-model/">Threat model</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--review">Review</strong> <span class="arch-tag-note">on change</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/security-design/">Security design</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--final">Final</strong> <span class="arch-tag-note">as built</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decision-record/">Decision records</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">as needed</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/supplier-assurance/">Supplier assurance</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--review">Review</strong> <span class="arch-tag-note">annual</span></span></li>
+                <li><span class="arch-docs-name"><a href="https://sbd.govassured.com">Secure by Design evidence</a> <span class="arch-trail-kind">(community tool)</span></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--update">Update</strong> <span class="arch-tag-note">maintain</span></span></li>
+                <li><span class="arch-docs-name"><a href="https://scope.govassured.com">Penetration test scope and results</a> <span class="arch-trail-kind">(community tool)</span></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--review">Review</strong> <span class="arch-tag-note">re-test</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/live-security-plan/">Live security plan</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decommission-and-disposal-plan/">Decommission and disposal plan</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--new">New</strong> <span class="arch-tag-note">draft</span></span></li>
+              </ul>
+              <p class="arch-docs-more"><a href="/architect/document-trail/">Every document in every phase</a></p>
+            </div>
+            <!-- /doc-trail -->
             <h4>Gate questions</h4>
             <ol class="arch-gates">
               <li>Would we notice an attack, and who would respond?</li>
@@ -255,10 +324,24 @@
             </ul>
             <h4>What you produce</h4>
             <ul>
-              <li>A data disposal plan and evidence of destruction.</li>
-              <li>A decommissioning checklist with sign-off.</li>
+              <li>A <a href="/architect/templates/decommission-and-disposal-plan/">data disposal plan</a> and evidence of destruction.</li>
+              <li>A <a href="/architect/templates/decommission-and-disposal-plan/">decommissioning checklist</a> with <a href="/architect/templates/risk-owners-and-sign-off/">sign-off</a>.</li>
               <li>Closed accounts, keys and supplier access.</li>
             </ul>
+            <!-- doc-trail:retirement -->
+            <div class="arch-docs">
+              <h4 id="docs-retirement">Documents for this phase</h4>
+              <ul class="arch-docs-list" aria-labelledby="docs-retirement">
+                <li><span class="arch-docs-name"><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">for disposal</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-register/">Risk register</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--close">Close</strong></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--close">Close</strong> <span class="arch-tag-note">sign off retirement</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decision-record/">Decision records</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong> <span class="arch-tag-note">as needed</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/supplier-assurance/">Supplier assurance</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--close">Close</strong> <span class="arch-tag-note">exit</span></span></li>
+                <li><span class="arch-docs-name"><a href="/architect/templates/decommission-and-disposal-plan/">Decommission and disposal plan</a></span><span class="visually-hidden">: </span> <span class="arch-docs-status"><strong class="arch-tag arch-tag--use">Use</strong></span></li>
+              </ul>
+              <p class="arch-docs-more"><a href="/architect/document-trail/">Every document in every phase</a></p>
+            </div>
+            <!-- /doc-trail -->
             <h4>Gate questions</h4>
             <ol class="arch-gates">
               <li>Do we know where every copy of the data is, including backups?</li>
@@ -274,6 +357,14 @@
           </div>
         </div>
         </div>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="document-trail" aria-labelledby="document-trail-title">
+      <div class="wrap arch-prose">
+        <h2 id="document-trail-title" class="section-title">Document trail</h2>
+        <p>Most security documents are started early and improved as the service grows, not written once. The document trail shows, for each phase, which documents to start, update, finish, review, use or close, and what you should have by each gate. Every document links to a fill-in template or a community tool.</p>
+        <p><a class="btn btn-primary" href="/architect/document-trail/">See the document trail</a></p>
       </div>
     </section>
 
@@ -339,14 +430,18 @@
     <section class="band arch-section" id="templates" aria-labelledby="templates-title">
       <div class="wrap arch-prose">
         <h2 id="templates-title" class="section-title">Templates for security architects</h2>
-        <p>Fill-in templates for the documents you will be asked for most often. Each one explains what good looks like and has a worked example. They work in your browser with no account, your answers stay on your device, and you can print, save as PDF or download for Word. Especially useful if you are starting out in the role.</p>
+        <p>Ten fill-in templates for the documents you will be asked for at each stage of a service, in the order you usually need them. Each one explains what good looks like and has a worked example. They work in your browser with no account, your answers stay on your device, and you can print, save as PDF or download for Word. Especially useful if you are starting out in the role.</p>
         <ul class="arch-tpl-list">
-          <li><a href="/architect/templates/security-design/">One-page security design</a>: how a service is kept secure, on one page.</li>
+          <li><a href="/architect/templates/data-and-sensitivity-summary/">Data and sensitivity summary</a>: what data the service holds, how sensitive it is and who owns it.</li>
           <li><a href="/architect/templates/risk-register/">Risk register starter</a>: likelihood, impact, owner and treatment.</li>
+          <li><a href="/architect/templates/risk-owners-and-sign-off/">Risk owners and sign-off</a>: who owns each risk decision, and a record of each sign-off.</li>
           <li><a href="/architect/templates/threat-model/">Threat model worksheet (STRIDE)</a>: what could go wrong, and what you will do about it.</li>
+          <li><a href="/architect/templates/security-design/">One-page security design</a>: how a service is kept secure, on one page.</li>
           <li><a href="/architect/templates/decision-record/">Architecture decision record</a>: one important decision, the options and why.</li>
           <li><a href="/architect/templates/supplier-assurance/">Supplier assurance questionnaire</a>: questions for suppliers, including hardware and supply chain.</li>
           <li><a href="/architect/templates/ready-for-beta/">Ready for beta checklist</a>: the Beta gate questions, with evidence and a decision.</li>
+          <li><a href="/architect/templates/live-security-plan/">Live security plan</a>: monitoring, patching, incidents, access reviews, backups and reviews.</li>
+          <li><a href="/architect/templates/decommission-and-disposal-plan/">Decommission and disposal plan</a>: close a service safely, leaving no data or access behind.</li>
         </ul>
         <p><a class="btn btn-primary" href="/architect/templates/">Open the templates</a></p>
       </div>

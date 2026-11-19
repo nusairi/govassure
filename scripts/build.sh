@@ -33,6 +33,7 @@ if [ -f "$here/scripts/version_assets.py" ]; then
   python3 "$here/scripts/version_assets.py" "$out/app"
 fi
 python3 "$here/scripts/check_links.py"
+python3 "$here/scripts/check_architect_pages.py"
 
 # Guard: security.txt must be at the RFC 9116 location in the output.
 if [ ! -f "$out/app/.well-known/security.txt" ]; then

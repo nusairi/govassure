@@ -1,13 +1,13 @@
 // Security Architect Corner patterns library checks: the list page and each pattern page.
 // B=<site> [SHOTS=dir] node e2e-architect-patterns.js
-// axe-core is optional: run `npm i --no-save axe-core` to include the accessibility scan.
+// axe-core is required (see tools/axe.js): run `npm i --no-save axe-core` in tools/ first.
 const { chromium } = require('playwright-core');
 const fs = require('fs'); const path = require('path');
 const B = (process.env.B || 'http://127.0.0.1:8000').replace(/\/$/, '');
 const SHOTS = process.env.SHOTS || path.join(__dirname, 'shots', 'patterns'); fs.mkdirSync(SHOTS, { recursive: true });
 const CHROME = process.env.CHROME || '/usr/bin/google-chrome';
 const LOCAL = /127\.0\.0\.1|localhost/.test(B);
-let axeSrc = null; try { axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8'); } catch (e) { console.log('SKIP axe-core not installed'); }
+const axe = require('./axe'); axe.load();
 const P = [
   ['zero-trust-access', 'Zero trust access'],
   ['secure-cloud-landing-zone', 'Secure cloud landing zone'],
@@ -19,11 +19,7 @@ const SECTIONS = ['when', 'diagram', 'parts', 'risks', 'controls', 'maps', 'rela
 const PAT = B + '/architect/patterns/';
 let fail = 0; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) fail++; };
 
-async function axeRun(p) {
-  await p.addScriptTag({ content: axeSrc });
-  return p.evaluate(async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] } });
-    return r.violations.map(v => v.id + ' (' + v.impact + ') x' + v.nodes.length + ': ' + v.nodes.slice(0, 2).map(n => n.target.join(' ')).join(' | ')); });
-}
+const axeRun = p => axe.scan(p);
 async function common(p, tag, errs) {
   const sw = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); ok(sw <= 0, `${tag}: no horizontal scroll (${sw})`);
   const links = await p.$$eval('a[href]', as => as.map(a => ({ h: a.href, t: a.target, r: a.rel, hidden: !!a.querySelector('.visually-hidden') && a.querySelector('.visually-hidden').textContent.includes('opens in a new tab') })));
@@ -83,7 +79,7 @@ async function common(p, tag, errs) {
       if (prev) { await p.goto(PAT + slug + '/', { waitUntil: 'networkidle' }); await p.click('.tpl-pager [rel=prev]'); await p.waitForLoadState('networkidle'); ok(p.url() === B + prev, `${tag}: previous link navigates`); }
     }
     await ctx.close();
-    if (axeSrc) {
+    if (axe.enabled()) {
       const actx = await b.newContext({ viewport: vp, bypassCSP: true }); const ap = await actx.newPage();
       let ax = []; for (const u of [PAT, ...P.map(x => PAT + x[0] + '/')]) { await ap.goto(u, { waitUntil: 'networkidle' }); ax = ax.concat((await axeRun(ap)).map(x => u.replace(B, '') + ': ' + x)); }
       await actx.close();
@@ -99,5 +95,5 @@ async function common(p, tag, errs) {
     const nx = (await p.textContent('.arch-next')).toLowerCase(); ok(nx.includes('decision helpers') && !nx.includes('pattern') && !nx.includes('template'), 'architect page: Coming next mentions only decision helpers');
     if (!LOCAL) { const sm = await (await p.goto(B + '/sitemap.xml')).text(); ok(['', ...P.map(x => x[0] + '/')].every(s => sm.includes('/architect/patterns/' + s + '<')), 'sitemap has the list and all 5 pattern pages'); }
     await ctx.close(); }
-  await b.close(); console.log(fail ? `${fail} FAILED` : 'ALL PASS'); process.exit(fail ? 1 : 0);
+  axe.report(ok); await b.close(); console.log(fail ? `${fail} FAILED` : 'ALL PASS'); process.exit(fail ? 1 : 0);
 })();

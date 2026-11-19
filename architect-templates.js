@@ -296,6 +296,238 @@
     }}
   };
 
+  var YNS = ["Yes", "No", "Not sure"];
+  function area(id, label, hint) { return { id: id, label: label, type: "area", hint: hint }; }
+  function role(id, label, hint) { return { id: id, label: label, hint: hint || "Use a role, not a person's name." }; }
+
+  T.data = {
+    title: "Data and sensitivity summary",
+    file: "data-and-sensitivity-summary",
+    blocks: [
+      { legend: "About the service", fields: [
+        { id: "service", label: "Service name" },
+        { id: "phase", label: "Current phase", type: "select", options: ["Discovery", "Alpha", "Beta", "Live", "Retirement"] },
+        role("iao", "Who owns the data (role)", "For example 'Information asset owner'. Use a role, not a person's name."),
+        { id: "reviewed", label: "Date last reviewed", type: "date" }
+      ]},
+      { legend: "What data the service holds", fields: [
+        area("types", "Types of data", "List the types, such as names, email addresses or case notes. Do not paste real records."),
+        { id: "personal", label: "Does it include personal data?", type: "select", options: YNS },
+        { id: "special", label: "Does it include special category or criminal offence data?", type: "select", options: YNS },
+        area("volume", "Roughly how much data, and about how many people"),
+        area("flows", "Where the data comes from and where it goes", "Name the other services, suppliers and teams that send or receive it.")
+      ]},
+      { legend: "How sensitive it is", fields: [
+        area("classification", "Which classification applies", "Say which classification applies, at a high level. Keep detailed handling rules in your organisation's own documents."),
+        area("impact", "What would happen if the data were lost, changed or seen by the wrong people"),
+        area("aggregation", "Does combining the data make it more sensitive?", "Lots of low-sensitivity records together, or linked to other data, can need more protection.")
+      ]},
+      { legend: "Duties and handling", fields: [
+        area("legal", "Legal and regulatory duties", "For example data protection law, records management and any sector rules."),
+        area("retention", "How long it is kept, and how it is deleted"),
+        { id: "dpia", label: "Is a data protection impact assessment needed?", type: "select", options: ["Yes", "No", "Already done", "Not sure"] },
+        area("questions", "Open questions and assumptions")
+      ]}
+    ],
+    example: { fields: {
+      service: "Book a meeting room",
+      phase: "Discovery",
+      iao: "Head of facilities (information asset owner)",
+      reviewed: "2026-11-18",
+      types: "Staff work email address and display name; room bookings (date, time, room, meeting title); a list of rooms and their equipment.",
+      personal: "Yes",
+      special: "No",
+      volume: "About 2,000 staff and 40,000 bookings a year.",
+      flows: "Staff identities come from the organisation's identity provider. Bookings are shown on the room panels outside each room. No data is shared outside the organisation.",
+      classification: "Internal data at the organisation's standard classification. Nothing here needs a higher classification.",
+      impact: "Low. Lost bookings would disrupt meetings. Meeting titles could reveal sensitive work if seen by the wrong people.",
+      aggregation: "A year of bookings shows who meets whom and when. Limit who can see other people's bookings.",
+      legal: "Data protection law applies to staff names and email addresses. Bookings are not official records.",
+      retention: "Keep bookings for 12 months, then delete them automatically.",
+      dpia: "Yes",
+      questions: "Confirm whether meeting titles need to be shown on the room panels at all."
+    }}
+  };
+
+  T.raci = {
+    title: "Risk owners and sign-off",
+    file: "risk-owners-and-sign-off",
+    blocks: [
+      { legend: "About the service", fields: [
+        { id: "service", label: "Service name" },
+        { id: "reviewed", label: "Date last reviewed", type: "date" }
+      ]},
+      { legend: "Who owns the risk", fields: [
+        role("sro", "Senior risk owner (role)", "The senior person who accepts the most serious risks. Use a role, not a person's name."),
+        role("owner", "Day-to-day risk owner (role)"),
+        role("iao", "Information asset owner (role)"),
+        area("appetite", "Risk appetite or tolerance agreed for this service", "For example: high and very high risks need the senior risk owner; medium and low can be accepted by the service owner."),
+        area("escalation", "When and how risks are escalated")
+      ]}
+    ],
+    group: {
+      key: "rows", item: "Decision", add: "Add another decision",
+      fields: [
+        { id: "activity", label: "Decision or activity", hint: "For example 'Accept a high risk' or 'Approve the security design'." },
+        role("r", "Responsible: does the work (role)"),
+        role("a", "Accountable: makes the decision, one role only"),
+        role("c", "Consulted: asked before the decision (roles)"),
+        role("i", "Informed: told afterwards (roles)")
+      ]
+    },
+    after: [
+      { legend: "Sign-off record", fields: [
+        area("what", "What is being signed off", "For example 'Security risk acceptance for moving into public beta'."),
+        { id: "outcome", label: "Outcome", type: "select", options: ["Approved", "Approved with conditions", "Not approved"] },
+        area("conditions", "Conditions and accepted risks"),
+        role("by", "Signed off by (role)"),
+        { id: "date", label: "Date signed off", type: "date" }
+      ]}
+    ],
+    example: {
+      fields: {
+        service: "Book a meeting room",
+        reviewed: "2026-11-18",
+        sro: "Director of corporate services (senior risk owner)",
+        owner: "Service owner",
+        iao: "Head of facilities (information asset owner)",
+        appetite: "Low appetite for risks to staff data. High and very high risks need the senior risk owner. Medium and low risks can be accepted by the service owner.",
+        escalation: "Any new high risk is raised with the senior risk owner within five working days, and reviewed at the monthly service board.",
+        what: "Security risk acceptance for moving into private beta.",
+        outcome: "Approved with conditions",
+        conditions: "Fix the medium penetration test finding before public beta. Complete the Secure by Design evidence for the two open controls.",
+        by: "Senior risk owner",
+        date: "2026-11-18"
+      },
+      rows: [
+        { activity: "Accept a high or very high security risk", r: "Security architect", a: "Senior risk owner", c: "Service owner, information asset owner", i: "Delivery team" },
+        { activity: "Accept a medium or low security risk", r: "Security architect", a: "Service owner", c: "Technical architect", i: "Senior risk owner" },
+        { activity: "Approve the security design", r: "Security architect", a: "Technical design authority", c: "Service owner, platform team", i: "Delivery team" },
+        { activity: "Go-live security sign-off", r: "Security architect", a: "Senior risk owner", c: "Service owner, information asset owner", i: "Service desk, delivery team" }
+      ]
+    }
+  };
+
+  T.live = {
+    title: "Live security plan",
+    file: "live-security-plan",
+    blocks: [
+      { legend: "About the service", fields: [
+        { id: "service", label: "Service name" },
+        role("owner", "Who owns this plan (role)"),
+        { id: "reviewed", label: "Date last reviewed", type: "date" }
+      ]},
+      { legend: "Monitoring and alerting", fields: [
+        area("logs", "What is logged, and where the logs go", "Cover sign-in, admin actions, errors and security events."),
+        area("alerts", "Which alerts are set up, and who acts on them and when")
+      ]},
+      { legend: "Patching and vulnerability management", fields: [
+        area("patch", "How quickly you apply security updates", "Start with flaws that are being actively exploited, then critical and high."),
+        area("find", "How you find vulnerabilities", "For example scanning, supplier advisories, the IT health check and reports from the public."),
+        area("track", "Where vulnerabilities are recorded and tracked until fixed")
+      ]},
+      { legend: "Incident response", fields: [
+        area("incident", "What to do in a security incident: who to call and how", "Link to your organisation's incident process rather than repeating it."),
+        area("exercise", "When the plan was last tested, and the next exercise")
+      ]},
+      { legend: "Access reviews", fields: [
+        area("access", "Who reviews user and admin access, and how often"),
+        area("leavers", "How access is removed when people leave or change roles")
+      ]},
+      { legend: "Backups and recovery", fields: [
+        area("backups", "What is backed up, how often and how backups are protected"),
+        area("restore", "How often restores are tested, and how long recovery should take")
+      ]},
+      { legend: "Review cadence", fields: [
+        area("cadence", "What is reviewed and how often", "For example: risk register quarterly, threat model on every significant change, suppliers each year, penetration re-test each year."),
+        { id: "next", label: "Date of the next full review", type: "date" }
+      ]}
+    ],
+    example: { fields: {
+      service: "Book a meeting room",
+      owner: "Service owner",
+      reviewed: "2026-11-18",
+      logs: "Sign-in, admin actions, bulk cancellations and application errors go to the central monitoring service. Logs are kept for 12 months.",
+      alerts: "Alerts on admin sign-in from a new device, more than 20 cancellations in an hour and repeated failed sign-ins. The security operations team responds in working hours; out of hours, critical alerts page the on-call engineer.",
+      patch: "Actively exploited flaws within 48 hours; other critical within 7 days; high within 14 days. Platform updates are applied automatically each week.",
+      find: "Weekly dependency and container scanning in the build pipeline, supplier advisories, the yearly IT health check and the organisation's vulnerability disclosure contact.",
+      track: "Each finding is a ticket in the team backlog with a severity and a due date. Overdue items are reviewed at the monthly service board.",
+      incident: "Follow the organisation's incident process: call the service desk security line, then the on-call engineer. The service owner decides whether to take the service offline.",
+      exercise: "Tabletop exercise in October 2026 (compromised admin account). Next exercise April 2027.",
+      access: "The service owner reviews the admin role list every quarter. Staff access comes from the identity provider and ends automatically when people leave.",
+      leavers: "Leavers lose access when their account is disabled in the identity provider. Admin role changes are checked at the quarterly review.",
+      backups: "Database backed up daily by the platform, kept for 35 days, encrypted and stored in a separate account.",
+      restore: "Restore tested every six months. Target: back online within 4 hours, losing no more than 24 hours of bookings.",
+      cadence: "Risk register every quarter; threat model on every significant change; supplier review every year; penetration re-test every year; this plan every six months.",
+      next: "2027-05-18"
+    }}
+  };
+
+  T.decom = {
+    title: "Decommission and disposal plan",
+    file: "decommission-and-disposal-plan",
+    blocks: [
+      { legend: "About the service", fields: [
+        { id: "service", label: "Service name" },
+        role("owner", "Who owns this plan (role)"),
+        { id: "closing", label: "Planned closing date", type: "date" },
+        area("replacement", "What replaces the service, if anything")
+      ]},
+      { legend: "Data: keep, move or destroy", fields: [
+        area("copies", "Every copy of the data, including backups, logs, exports and test copies"),
+        area("retention", "What will be kept, for how long and under which retention rule"),
+        area("transfer", "What will be moved to another service or archive, and how it is protected on the way"),
+        area("destroy", "What will be destroyed, and how")
+      ]},
+      { legend: "Media sanitisation", fields: [
+        area("media", "Devices and storage to sanitise or destroy, and the method", "Follow the NCSC guidance on secure sanitisation of storage media. For cloud storage, record how the provider deletes data and keys."),
+        area("media_ev", "Evidence of sanitisation or destruction", "For example certificates of destruction with serial numbers.")
+      ]},
+      { legend: "Access removal", fields: [
+        area("accounts", "User, admin and service accounts to remove"),
+        area("integrations", "Connections, API keys, firewall rules and network routes to remove"),
+        area("dns", "Domains, DNS records and public pages to remove or redirect", "Leaving old DNS records pointing at deleted resources can let someone else take them over.")
+      ]},
+      { legend: "Supplier exit", fields: [
+        area("exit", "Contracts to end and the exit steps for each supplier"),
+        area("supplier_ev", "Evidence that suppliers have returned or deleted our data")
+      ]},
+      { legend: "Certificates and keys", fields: [
+        area("certs", "Certificates to revoke"),
+        area("keys", "Encryption keys and secrets to revoke or destroy, and when", "Destroy keys only after confirming that no data you must keep depends on them.")
+      ]},
+      { legend: "Sign-off", fields: [
+        { id: "done", label: "Is every step above done and evidenced?", type: "select", options: ["Yes", "Partly", "No"] },
+        area("residual", "Remaining risks and who accepted them (roles)"),
+        role("by", "Signed off by (role)"),
+        { id: "date", label: "Date signed off", type: "date" }
+      ]}
+    ],
+    example: { fields: {
+      service: "Book a meeting room",
+      owner: "Service owner",
+      closing: "2027-09-30",
+      replacement: "Room booking moves to the organisation's new workplace platform.",
+      copies: "Production database, 35 days of platform backups, 12 months of logs in central monitoring, a CSV export held by the facilities team, and the test environment copy.",
+      retention: "No bookings need to be kept as records. Usage totals by room are kept for 2 years for estates planning.",
+      transfer: "Future bookings (from the closing date onwards) move to the new platform through its import tool over an encrypted connection. The import file is deleted after a successful check.",
+      destroy: "Database, backups, test copy and the facilities CSV export are deleted. Logs age out under the normal 12-month rule.",
+      media: "No physical storage of our own. The 40 room panels are wiped to the NCSC sanitisation guidance before return. Cloud database and storage accounts are deleted, and the provider's deletion process recorded.",
+      media_ev: "Supplier certificate of sanitisation listing each panel serial number; platform deletion records for the database and storage accounts.",
+      accounts: "Remove the facilities admin role, the app's managed identity and the two platform engineer accounts for the service.",
+      integrations: "Remove the identity provider app registration, the panel API keys and the firewall rule allowing panels to reach the service.",
+      dns: "Redirect the booking address to the new platform for 6 months, then remove the DNS record.",
+      exit: "End the panel support contract on the closing date. Follow the exit clause: return or wipe all panels and close remote support access.",
+      supplier_ev: "Written confirmation from the panel supplier that no copies of our data remain, with the sanitisation certificate.",
+      certs: "Revoke the TLS certificate for the booking address after the redirect ends, and the device certificates issued to the panels.",
+      keys: "Delete the application secrets in the key vault. Delete the database encryption key 30 days after the database, once the deletion is confirmed.",
+      done: "Partly",
+      residual: "DNS redirect stays for 6 months; accepted by the service owner.",
+      by: "Senior risk owner",
+      date: "2027-10-15"
+    }}
+  };
+
   function el(tag, attrs, text) {
     var e = document.createElement(tag);
     if (attrs) Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
@@ -360,6 +592,12 @@
       add.addEventListener("click", function () { var r = self.addRow({}); self.save(); r.querySelector("textarea, input, select").focus(); });
       form.appendChild(add);
     }
+    (def.after || []).forEach(function (b) {
+      var fs = el("fieldset", { "class": "tpl-fieldset" });
+      fs.appendChild(el("legend", null, b.legend));
+      b.fields.forEach(function (f) { fs.appendChild(fieldControl("tpl-" + self.key, f)); });
+      form.appendChild(fs);
+    });
     form.addEventListener("input", function (e) { self.onEdit(e); });
     form.addEventListener("change", function (e) { self.onEdit(e); });
     this.form = form;
@@ -498,6 +736,9 @@
         out.push({ h: self.def.group.item + " " + (i + 1), items: items });
       });
     }
+    (this.def.after || []).forEach(function (b) {
+      out.push({ h: b.legend, items: b.fields.map(function (f) { return [f.label, d.fields[f.id] || ""]; }) });
+    });
     return out;
   };
 
