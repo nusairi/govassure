@@ -4,7 +4,8 @@
 mailto links are allowed. The only other web addresses allowed are the GOV
 Assured LinkedIn company page, the company repository
 https://github.com/nusairi/govassure (plus its security advisory form and
-SECURITY.md), the schema.org JSON-LD context, and
+SECURITY.md), the schema.org JSON-LD context, the ISO/IEC 27001 and NIST CSF pages
+cited on the Security Architect Corner, and
 official UK government and Parliament source pages used by the government map
 (gov.uk, parliament.uk, and the named independent bodies).
 """
@@ -55,6 +56,25 @@ SERVED = [
     "govmap/glossary/index.html",
     "govmap/parliament/index.html",
     "govmap/budget/index.html",
+    "architect/index.html",
+    "architect.js",
+    "architect.css",
+    "architect/templates/index.html",
+    "architect/templates/security-design/index.html",
+    "architect/templates/risk-register/index.html",
+    "architect/templates/threat-model/index.html",
+    "architect/templates/decision-record/index.html",
+    "architect/templates/supplier-assurance/index.html",
+    "architect/templates/ready-for-beta/index.html",
+    "architect-templates.js",
+    "architect-templates.css",
+    "architect-patterns.css",
+    "architect/patterns/index.html",
+    "architect/patterns/zero-trust-access/index.html",
+    "architect/patterns/secure-cloud-landing-zone/index.html",
+    "architect/patterns/secrets-and-key-management/index.html",
+    "architect/patterns/logging-to-a-siem/index.html",
+    "architect/patterns/safe-third-party-integration/index.html",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
@@ -63,6 +83,9 @@ ALLOWED_EXACT = {
     "https://github.com/nusairi/govassure/security/advisories/new",
     "https://github.com/nusairi/govassure/blob/main/SECURITY.md",
     "https://schema.org",
+    # Security Architect Corner standards cheat-sheet (official standard pages).
+    "https://www.iso.org/standard/27001",
+    "https://www.nist.gov/cyberframework",
 }
 
 # Official UK government, Parliament and related public-body hosts used as
@@ -169,6 +192,10 @@ def self_test():
         "https://www.linkedin.com/company/102617034?trk=public": "web links must not add a query or fragment",
         "https://schema.org": None,
         "https://schema.org/Person": "host is outside *.govassured.com",
+        "https://www.iso.org/standard/27001": None,
+        "https://www.iso.org/standard/27002": "host is outside *.govassured.com",
+        "https://www.nist.gov/cyberframework": None,
+        "https://www.nist.gov/other": "host is outside *.govassured.com",
         "https://github.com/nusairi/govassure": None,
         "https://github.com/nusairi/govassure/": None,
         "https://github.com/nusairi/govassure/security/advisories/new": None,

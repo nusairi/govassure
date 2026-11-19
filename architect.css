@@ -1,0 +1,264 @@
+/* Security Architect Corner (/architect/) */
+.arch-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.arch-crumbs li + li::before {
+  content: "›";
+  margin-right: 0.5rem;
+  color: var(--gold-deep);
+}
+#main:focus { outline: none; }
+.arch-hero { padding-top: 1.6rem; }
+.arch-toc {
+  margin: 1.6rem 0 0;
+  padding: 1rem 1.15rem;
+  max-width: 42rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+}
+.arch-toc-h {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.arch-toc ol { margin: 0; padding-left: 1.4rem; }
+.arch-toc li { margin: 0.2rem 0; }
+.arch-prose { max-width: 46rem; }
+.arch-prose p, .arch-prose li { color: var(--ink-soft); }
+.arch-prose strong { color: var(--ink); }
+.arch-prose ul { padding-left: 1.3rem; }
+.arch-prose li { margin: 0.35rem 0; }
+.arch-callout {
+  margin: 1.4rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border-left: 5px solid var(--gold);
+  background: var(--raised);
+  border-radius: 0 8px 8px 0;
+}
+.arch-section:nth-of-type(odd) { background: rgba(16, 46, 38, 0.45); }
+
+/* Phase strip */
+.arch-phases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  counter-reset: phase;
+}
+.arch-phases li { counter-increment: phase; }
+.arch-phases a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+.arch-phases a::before {
+  content: counter(phase);
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--field);
+  font-size: 0.8rem;
+}
+.arch-phases a:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Accordion (GOV.UK accordion pattern) */
+.arch-acc-controls { margin: 0 0 0.6rem; }
+.arch-acc { border-top: 1px solid var(--line); }
+.arch-acc-section { border-bottom: 1px solid var(--line); scroll-margin-top: 1rem; }
+.arch-acc-heading { margin: 0; font-size: 1rem; font-weight: 400; }
+.arch-acc-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.arch-stage-num {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--field);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.arch-acc-summary {
+  display: block;
+  margin: 0.25rem 0 0 2.5rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+.arch-acc-heading > .arch-acc-title,
+.arch-acc-heading > .arch-acc-summary { padding-top: 0.9rem; }
+.arch-acc-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 1rem 3rem 1rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.arch-acc-btn:hover .arch-acc-title { color: var(--gold); text-decoration: underline; text-underline-offset: 0.18em; }
+.arch-acc-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.arch-acc-icon {
+  position: absolute;
+  right: 0.4rem;
+  top: 1.25rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+.arch-acc-icon::before,
+.arch-acc-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.8rem;
+  height: 2px;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+}
+.arch-acc-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.arch-acc-btn[aria-expanded="true"] .arch-acc-icon::after { display: none; }
+.arch-acc-content {
+  padding: 0.2rem 0 1.4rem 2.5rem;
+  max-width: 50rem;
+}
+.arch-acc-content h4 {
+  margin: 1.1rem 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.arch-acc-content ul,
+.arch-acc-content ol { margin: 0; padding-left: 1.3rem; color: var(--ink-soft); }
+.arch-acc-content li { margin: 0.3rem 0; }
+.arch-gates li::marker { color: var(--gold); font-weight: 700; }
+.arch-refs a { overflow-wrap: anywhere; }
+
+/* Standards */
+.arch-stds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+.arch-std {
+  padding: 1rem 1.15rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.arch-std dt {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+.arch-std dd { margin: 0.35rem 0 0; color: var(--ink-soft); }
+.arch-std-label { font-weight: 700; color: var(--ink); }
+
+/* Tools */
+.arch-tools { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.arch-tool h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.arch-next {
+  margin: 1.6rem 0 0;
+  padding: 0.9rem 1.1rem;
+  max-width: 46rem;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--ink-soft);
+}
+.arch-next strong { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .arch-acc-content { padding-left: 0; }
+  .arch-acc-summary { margin-left: 0; }
+  .arch-acc-title { font-size: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arch-acc-section { scroll-behavior: auto; }
+}
+
+/* "Try it" links to community tools inside the lifecycle map */
+.arch-try {
+  display: block;
+  margin-top: 0.3rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.arch-try a::after {
+  content: " →";
+  content: " →" / "";
+}
+
+.arch-tpl-list li { margin: 0.45rem 0; }
+.arch-tpl-list a { font-weight: 700; }
+
+/* Previous and next links (GOV.UK pagination pattern), shared by templates and patterns */
+.tpl-pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  max-width: 46rem;
+}
+.tpl-pager a {
+  display: block;
+  min-height: 2.75rem;
+  padding: 0.3rem 0;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.tpl-pager-next { margin-left: auto; text-align: right; }
+.tpl-pager-label { display: block; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; }
+.tpl-pager-prev .tpl-pager-label::before { content: "← "; content: "← " / ""; }
+.tpl-pager-next .tpl-pager-label::after { content: " →"; content: " →" / ""; }
+.tpl-pager-title { display: block; color: var(--ink-soft); }
+.tpl-pager a:hover .tpl-pager-title { color: var(--ink); }
+@media (max-width: 760px) {
+  .tpl-pager-next { margin-left: 0; text-align: left; }
+}
+.tpl-top { margin: 1.2rem 0 0; font-size: 0.95rem; }

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security Architect Corner — GOV Assured</title>
+  <meta name="description" content="A plain-English starting point for security architects working on UK public services: what the role involves, what to do at each stage of a service, the standards to know and free community tools.">
+  <link rel="canonical" href="https://www.govassured.com/architect/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="author" content="GOV Assured">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="Security Architect Corner — GOV Assured">
+  <meta property="og:description" content="A plain-English starting point for security architects working on UK public services: what the role involves, what to do at each stage of a service, the standards to know and free community tools.">
+  <meta property="og:url" content="https://www.govassured.com/architect/">
+  <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security Architect Corner — GOV Assured">
+  <meta name="twitter:description" content="A plain-English starting point for security architects working on UK public services: what the role involves, what to do at each stage of a service, the standards to know and free community tools.">
+  <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
+  <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+  <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
+  <link rel="stylesheet" href="/architect.css?v=6c92765ce4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <nav class="arch-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Security Architect Corner</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="band arch-hero" aria-labelledby="arch-title">
+      <div class="wrap">
+        <p class="eyebrow">Community guide</p>
+        <h1 id="arch-title">Security Architect Corner</h1>
+        <p class="lede">A plain-English starting point for anyone doing security architecture on a UK public service. Built and improved by the GOV Assured community, so we can share what works and solve the same problems once.</p>
+        <nav class="arch-toc" aria-label="On this page">
+          <h2 class="arch-toc-h">On this page</h2>
+          <ol>
+            <li><a href="#start">Start here</a></li>
+            <li><a href="#lifecycle">Lifecycle map</a></li>
+            <li><a href="#standards">Standards cheat-sheet</a></li>
+            <li><a href="#templates">Templates for security architects</a></li>
+            <li><a href="#patterns">Patterns library</a></li>
+            <li><a href="#tools">Community tools for architects</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="start" aria-labelledby="start-title">
+      <div class="wrap arch-prose">
+        <h2 id="start-title" class="section-title">Start here</h2>
+        <p>A security architect makes sure a service is designed so that it is secure enough for the people who use it and the data it holds, without making it hard to use. In UK government you usually work inside a multidisciplinary delivery team, alongside the service owner, technical architects, developers and the people who own the risk.</p>
+        <p>In practice the job comes down to four things:</p>
+        <ul>
+          <li><strong>Understand</strong> what the service does, what data it holds and what could go wrong.</li>
+          <li><strong>Design</strong> security into the service from the start, reusing patterns and platforms that already work.</li>
+          <li><strong>Explain</strong> risks in plain English so the right person can make a clear decision.</li>
+          <li><strong>Keep it secure</strong> as the service changes, and help close it down safely at the end.</li>
+        </ul>
+        <p>You do not need to know everything. You need to ask the right questions at the right time, and know where the guidance is. The lifecycle map below sets out what to do at each stage.</p>
+        <p class="arch-callout">The government&#39;s digital and data capability framework describes the role, its levels and the skills involved: <a href="https://understand-digital-data-roles-skills.service.gov.uk/role/security-architect/" target="_blank" rel="noopener">Security architect role in the Government Digital and Data Profession Capability Framework<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="lifecycle" aria-labelledby="lifecycle-title">
+      <div class="wrap">
+        <h2 id="lifecycle-title" class="section-title">Lifecycle map</h2>
+        <p class="section-intro">GOV.UK services move through five phases. Open a phase to see what the architect does, what you produce and the questions to answer before moving on.</p>
+        <ol class="arch-phases" aria-label="Service phases">
+          <li><a href="#stage-discovery">Discovery</a></li>
+          <li><a href="#stage-alpha">Alpha</a></li>
+          <li><a href="#stage-beta">Beta</a></li>
+          <li><a href="#stage-live">Live</a></li>
+          <li><a href="#stage-retirement">Retirement</a></li>
+        </ol>
+        <div class="arch-acc" id="arch-acc">
+        <div class="arch-acc-section" id="stage-discovery">
+          <h3 class="arch-acc-heading"><span class="arch-acc-title"><span class="arch-stage-num">1</span> Discovery</span><span class="arch-acc-summary">Understand the problem before anyone designs a solution.</span></h3>
+          <div class="arch-acc-content" id="stage-discovery-content">
+            <h4>What the architect does</h4>
+            <ul>
+              <li>Find out what data the service will handle, who owns it and how sensitive it is, at a high level.</li>
+              <li>Work out which classification is likely to apply, using the government policy, without going into detail you do not need yet.</li>
+              <li>Spot the early risks: legal and regulatory duties, third parties, legacy systems and anything that would stop the idea working securely.</li>
+              <li>Meet the people who will own the risk, such as the service owner and the senior risk owner, and agree how decisions will be made.</li>
+              <li>Check what already exists: shared platforms, approved patterns and controls the organisation already runs.</li>
+            </ul>
+            <h4>What you produce</h4>
+            <ul>
+              <li>A short data and sensitivity summary.</li>
+              <li>An initial list of security risks and assumptions.</li>
+              <li>A view of who owns the risk and who signs off.</li>
+              <li>Security input to the go or no-go decision for alpha.</li>
+            </ul>
+            <h4>Gate questions</h4>
+            <ol class="arch-gates">
+              <li>Do we know what data the service will hold and how sensitive it is?</li>
+              <li>Have we named who owns the risk and who will accept it?</li>
+              <li>Are there any security or legal blockers that would stop the service going ahead?</li>
+              <li>Is there an existing platform or pattern we should reuse?</li>
+            </ol>
+            <h4>Guidance</h4>
+            <ul class="arch-refs">
+              <li><a href="https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works" target="_blank" rel="noopener">GOV.UK Service Manual: How the discovery phase works<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/risk-management" target="_blank" rel="noopener">NCSC risk management guidance<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.gov.uk/government/publications/government-security-classifications" target="_blank" rel="noopener">Government Security Classifications<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="arch-acc-section" id="stage-alpha">
+          <h3 class="arch-acc-heading"><span class="arch-acc-title"><span class="arch-stage-num">2</span> Alpha</span><span class="arch-acc-summary">Try out different ways of building the service and pick the safest one that works.</span></h3>
+          <div class="arch-acc-content" id="stage-alpha-content">
+            <h4>What the architect does</h4>
+            <ul>
+              <li>Build a threat model: what could go wrong, who might attack it, and how.</li>
+              <li>Sketch two or three security architecture options and compare their risks, cost and ease of use.</li>
+              <li>Look at suppliers and third parties: what they will host or touch, and what assurance you will need from them.</li>
+              <li>Test the riskiest assumptions in prototypes, for example sign-in, data sharing or admin access.</li>
+              <li>Agree the security principles the design must follow, and start the Secure by Design evidence for the controls in scope. <span class="arch-try"><a href="https://sbd.govassured.com">Try it: Secure by Design Statement of Applicability</a></span></li>
+            </ul>
+            <h4>What you produce</h4>
+            <ul>
+              <li>A threat model the team understands.</li>
+              <li>Security architecture options with a recommended approach.</li>
+              <li>A supplier and third-party risk view.</li>
+              <li>An updated risk register with owners.</li>
+            </ul>
+            <h4>Gate questions</h4>
+            <ol class="arch-gates">
+              <li>Have we modelled the main threats and agreed which matter most?</li>
+              <li>Does the chosen option reduce the top risks to a level the owner can accept?</li>
+              <li>Do we know what each supplier will do with our data, and how we will check it?</li>
+              <li>Are the security principles written down so the beta team can follow them?</li>
+            </ol>
+            <h4>Guidance</h4>
+            <ul class="arch-refs">
+              <li><a href="https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works" target="_blank" rel="noopener">GOV.UK Service Manual: How the alpha phase works<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/risk-management/threat-modelling" target="_blank" rel="noopener">NCSC threat modelling<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/cyber-security-design-principles" target="_blank" rel="noopener">NCSC cyber security design principles<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/supply-chain-security" target="_blank" rel="noopener">NCSC supply chain security guidance<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" target="_blank" rel="noopener">Secure by Design<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="arch-acc-section" id="stage-beta">
+          <h3 class="arch-acc-heading"><span class="arch-acc-title"><span class="arch-stage-num">3</span> Beta</span><span class="arch-acc-summary">Build the real service and prove it is secure enough to go live.</span></h3>
+          <div class="arch-acc-content" id="stage-beta-content">
+            <h4>What the architect does</h4>
+            <ul>
+              <li>Turn the chosen option into a detailed security design: identity and access, network, data protection, logging and keys.</li>
+              <li>Choose controls and map them to the standards you must meet.</li>
+              <li>Scope the penetration test (IT health check) and plan how findings will be fixed. <span class="arch-try"><a href="https://scope.govassured.com">Try it: Penetration Test Scoping Tool</a></span></li>
+              <li>Collect assurance evidence as you go rather than at the end, including the Secure by Design statement of which controls apply. <span class="arch-try"><a href="https://sbd.govassured.com">Try it: Secure by Design Statement of Applicability</a></span></li>
+              <li>Take the remaining risks to the risk owner for a clear, recorded decision before going live.</li>
+            </ul>
+            <h4>What you produce</h4>
+            <ul>
+              <li>A detailed security design and the controls it relies on.</li>
+              <li>A penetration test scope, results and a fix plan.</li>
+              <li>Assurance evidence, such as control checks and supplier evidence.</li>
+              <li>A signed-off risk acceptance or sign-off record for go-live.</li>
+            </ul>
+            <h4>Gate questions</h4>
+            <ol class="arch-gates">
+              <li>Is every control in the design built, tested and owned by someone?</li>
+              <li>Have the penetration test findings been fixed or formally accepted?</li>
+              <li>Is there enough evidence for the risk owner to make a decision?</li>
+              <li>Do we have the logging and alerts we need on day one?</li>
+            </ol>
+            <h4>Guidance</h4>
+            <ul class="arch-refs">
+              <li><a href="https://www.gov.uk/service-manual/agile-delivery/how-the-beta-phase-works" target="_blank" rel="noopener">GOV.UK Service Manual: How the beta phase works<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/guidance/penetration-testing" target="_blank" rel="noopener">NCSC penetration testing guidance<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/developers-collection" target="_blank" rel="noopener">NCSC secure development and deployment<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" target="_blank" rel="noopener">Secure by Design<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="arch-acc-section" id="stage-live">
+          <h3 class="arch-acc-heading"><span class="arch-acc-title"><span class="arch-stage-num">4</span> Live</span><span class="arch-acc-summary">Keep the service secure while it runs and changes.</span></h3>
+          <div class="arch-acc-content" id="stage-live-content">
+            <h4>What the architect does</h4>
+            <ul>
+              <li>Make sure security monitoring works and someone acts on alerts.</li>
+              <li>Run vulnerability management: patch quickly, starting with flaws that are being actively exploited.</li>
+              <li>Review the security impact of every significant change before it is made.</li>
+              <li>Review risks, access and supplier assurance on a regular cycle, for example every year.</li>
+              <li>Practise incident response with the team, so everyone knows what to do.</li>
+            </ul>
+            <h4>What you produce</h4>
+            <ul>
+              <li>Monitoring and alerting that is tested.</li>
+              <li>A patching and vulnerability record.</li>
+              <li>Security reviews for changes.</li>
+              <li>A current risk register and a periodic review record.</li>
+            </ul>
+            <h4>Gate questions</h4>
+            <ol class="arch-gates">
+              <li>Would we notice an attack, and who would respond?</li>
+              <li>Are critical patches applied within the agreed time?</li>
+              <li>Has anything changed that means the risk decision needs to be revisited?</li>
+              <li>When did we last test the incident plan?</li>
+            </ol>
+            <h4>Guidance</h4>
+            <ul class="arch-refs">
+              <li><a href="https://www.gov.uk/service-manual/agile-delivery/how-the-live-phase-works" target="_blank" rel="noopener">GOV.UK Service Manual: How the live phase works<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/10-steps/logging-and-monitoring" target="_blank" rel="noopener">NCSC logging and monitoring<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/collection/vulnerability-management/guidance" target="_blank" rel="noopener">NCSC vulnerability management<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="arch-acc-section" id="stage-retirement">
+          <h3 class="arch-acc-heading"><span class="arch-acc-title"><span class="arch-stage-num">5</span> Retirement</span><span class="arch-acc-summary">Close the service down without leaving data or access behind.</span></h3>
+          <div class="arch-acc-content" id="stage-retirement-content">
+            <h4>What the architect does</h4>
+            <ul>
+              <li>Decide what happens to each set of data: move it, keep it under the retention rules, or destroy it.</li>
+              <li>Make sure storage and devices are wiped or destroyed in line with guidance, including copies held by suppliers.</li>
+              <li>Remove accounts, keys, certificates, firewall rules and DNS records that are no longer needed.</li>
+              <li>Close supplier contracts with evidence that their copies of the data have gone.</li>
+              <li>Record what was retired so nothing is left running and forgotten.</li>
+            </ul>
+            <h4>What you produce</h4>
+            <ul>
+              <li>A data disposal plan and evidence of destruction.</li>
+              <li>A decommissioning checklist with sign-off.</li>
+              <li>Closed accounts, keys and supplier access.</li>
+            </ul>
+            <h4>Gate questions</h4>
+            <ol class="arch-gates">
+              <li>Do we know where every copy of the data is, including backups?</li>
+              <li>Have all accounts, keys and certificates been revoked?</li>
+              <li>Do we have evidence from suppliers that their copies are gone?</li>
+              <li>Is anything still running that should have been switched off?</li>
+            </ol>
+            <h4>Guidance</h4>
+            <ul class="arch-refs">
+              <li><a href="https://www.gov.uk/service-manual/agile-delivery/retiring-your-service" target="_blank" rel="noopener">GOV.UK Service Manual: Retiring your service<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://www.ncsc.gov.uk/guidance/secure-sanitisation-storage-media" target="_blank" rel="noopener">NCSC secure sanitisation of storage media<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="standards" aria-labelledby="standards-title">
+      <div class="wrap">
+        <h2 id="standards-title" class="section-title">Standards cheat-sheet</h2>
+        <p class="section-intro">The standards and guidance you will meet most often, with what each one is and when to reach for it. Links open the official source in a new tab.</p>
+        <dl class="arch-stds">
+          <div class="arch-std">
+            <dt><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework" target="_blank" rel="noopener">NCSC Cyber Assessment Framework (CAF)<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> A set of 14 principles and outcomes for judging how well an organisation manages cyber risk to essential services.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When you need to show an organisation-wide security position, or your service supports something essential.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles" target="_blank" rel="noopener">NCSC Cloud Security Principles<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> 14 principles for judging how secure a cloud service is.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When you choose or assure a cloud platform or software-as-a-service supplier.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" target="_blank" rel="noopener">Secure by Design<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> The government approach for building security into digital services from the start, with principles and activities across the lifecycle.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> On every new government digital service, from discovery onwards.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.gov.uk/government/publications/government-functional-standard-govs-007-security" target="_blank" rel="noopener">GovS 007: Security<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> The government functional standard that sets what departments must do to manage security.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When you need to show how your work fits the department&#39;s wider security duties.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.gov.uk/government/publications/government-security-classifications" target="_blank" rel="noopener">Government Security Classifications<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> The policy for marking and protecting government information by how sensitive it is.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> Early in discovery, to understand how the data must be handled. Keep detail generic in shared documents.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.ncsc.gov.uk/cyberessentials/overview" target="_blank" rel="noopener">Cyber Essentials<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> A certification scheme covering five basic technical controls that stop most common attacks.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> As a baseline for your own organisation and as a minimum ask of suppliers.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.ncsc.gov.uk/collection/developers-collection" target="_blank" rel="noopener">NCSC secure development and deployment<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> Guidance for teams on building and releasing software securely.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When you agree secure ways of working with the development team in alpha and beta.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.ncsc.gov.uk/collection/risk-management/threat-modelling" target="_blank" rel="noopener">NCSC threat modelling<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> Guidance on working out what could go wrong with a system and who might cause it.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> In alpha, and again whenever the design changes a lot.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.iso.org/standard/27001" target="_blank" rel="noopener">ISO/IEC 27001<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> The international standard for an information security management system.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When an organisation or supplier needs a certifiable, organisation-wide security management system.</dd>
+          </div>
+          <div class="arch-std">
+            <dt><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener">NIST Cybersecurity Framework (CSF) 2.0<span class="visually-hidden"> (opens in a new tab)</span></a></dt>
+            <dd><span class="arch-std-label">What it is:</span> A US framework that groups security outcomes into six functions: Govern, Identify, Protect, Detect, Respond and Recover.</dd>
+            <dd><span class="arch-std-label">When to use it:</span> When you work with international suppliers or want a common language to compare security programmes.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="templates" aria-labelledby="templates-title">
+      <div class="wrap arch-prose">
+        <h2 id="templates-title" class="section-title">Templates for security architects</h2>
+        <p>Fill-in templates for the documents you will be asked for most often. Each one explains what good looks like and has a worked example. They work in your browser with no account, your answers stay on your device, and you can print, save as PDF or download for Word. Especially useful if you are starting out in the role.</p>
+        <ul class="arch-tpl-list">
+          <li><a href="/architect/templates/security-design/">One-page security design</a>: how a service is kept secure, on one page.</li>
+          <li><a href="/architect/templates/risk-register/">Risk register starter</a>: likelihood, impact, owner and treatment.</li>
+          <li><a href="/architect/templates/threat-model/">Threat model worksheet (STRIDE)</a>: what could go wrong, and what you will do about it.</li>
+          <li><a href="/architect/templates/decision-record/">Architecture decision record</a>: one important decision, the options and why.</li>
+          <li><a href="/architect/templates/supplier-assurance/">Supplier assurance questionnaire</a>: questions for suppliers, including hardware and supply chain.</li>
+          <li><a href="/architect/templates/ready-for-beta/">Ready for beta checklist</a>: the Beta gate questions, with evidence and a decision.</li>
+        </ul>
+        <p><a class="btn btn-primary" href="/architect/templates/">Open the templates</a></p>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="patterns" aria-labelledby="patterns-title">
+      <div class="wrap arch-prose">
+        <h2 id="patterns-title" class="section-title">Patterns library</h2>
+        <p>Reusable, vendor-neutral security designs for problems that come up again and again. Each pattern has a simple diagram, the main risks, the usual controls, common mistakes and the NCSC guidance it maps to.</p>
+        <ul class="arch-tpl-list">
+          <li><a href="/architect/patterns/zero-trust-access/">Zero trust access</a>: access to each application based on who you are and your device.</li>
+          <li><a href="/architect/patterns/secure-cloud-landing-zone/">Secure cloud landing zone</a>: cloud accounts, guardrails and shared services set up first.</li>
+          <li><a href="/architect/patterns/secrets-and-key-management/">Secrets and key management</a>: passwords, API keys, certificates and keys kept out of code.</li>
+          <li><a href="/architect/patterns/logging-to-a-siem/">Logging to a SIEM</a>: the right security logs in one protected place, with someone acting on alerts.</li>
+          <li><a href="/architect/patterns/safe-third-party-integration/">Safe third-party integration</a>: connecting to a supplier without sharing more than needed.</li>
+        </ul>
+        <p><a class="btn btn-primary" href="/architect/patterns/">Open the patterns library</a></p>
+      </div>
+    </section>
+
+    <section class="band arch-section" id="tools" aria-labelledby="tools-title">
+      <div class="wrap">
+        <h2 id="tools-title" class="section-title">Community tools for architects</h2>
+        <p class="section-intro">Free GOV Assured tools that help with the work above. Each one runs on its own govassured.com address. The full list is in the <a href="/apps">apps directory</a>.</p>
+        <ul class="grid arch-tools">
+          <li class="card arch-tool">
+            <h3><a href="https://osi.govassured.com">OSI Security Rings</a></h3>
+            <p class="description">Walk through each layer of a system, from hardware to people, with the protocols and the prevent, detect and respond controls for each. Useful for checking a design has no gaps.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://assessment.govassured.com">NCSC CAF v4.0 Self-Assessment</a></h3>
+            <p class="description">Assess an organisation against the 14 principles of the Cyber Assessment Framework. Progress stays in your browser.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://kms.govassured.com">Key Management Lifecycle</a></h3>
+            <p class="description">Plan how keys and secrets are created, stored, rotated and destroyed, with checklists mapped to NCSC cryptography guidance.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://ce.govassured.com">Cyber Essentials Readiness</a></h3>
+            <p class="description">Check readiness against the five Cyber Essentials control areas, for your own organisation or as a supplier baseline.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://sbd.govassured.com">Secure by Design Statement of Applicability</a></h3>
+            <p class="description">Walks a delivery team through a Secure by Design Statement of Applicability, narrowing NIST SP 800-53 controls to the data, stakeholders, technologies, and laws in scope. Runs entirely in the browser and can export to Word and CSV.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://scope.govassured.com">Penetration Test Scoping Tool</a></h3>
+            <p class="description">Captures engagement details, in-scope and out-of-scope targets, and rules of engagement for a penetration test, then exports the scoping document. Responses stay in the browser.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="/govmap/">UK government map</a></h3>
+            <p class="description">Find who&#39;s who across departments and arm&#39;s-length bodies, useful when you need to know who owns a risk or a service.</p>
+          </li>
+          <li class="card arch-tool">
+            <h3><a href="https://tabletop.govassured.com">Blast Radius</a></h3>
+            <p class="description">A cooperative tabletop incident-response game to practise how the team responds when a design is attacked.</p>
+          </li>
+        </ul>
+        <p class="arch-next"><strong>Coming next:</strong> small decision helpers. Ideas are welcome through the community.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>GOV Assured</strong> — an open source community for cyber security, resilience and assurance.</p>
+        <p class="footer-note">Not a government website. Not affiliated with or endorsed by NCSC or any UK government department.</p>
+      </div>
+      <div class="social">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.39.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12.02C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/architect.js?v=3753282d93" defer></script>
+</body>
+</html>

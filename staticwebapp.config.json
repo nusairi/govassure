@@ -104,6 +104,188 @@
       }
     },
     {
+      "route": "/architect",
+      "rewrite": "/architect/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates",
+      "rewrite": "/architect/templates/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/security-design",
+      "rewrite": "/architect/templates/security-design/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/security-design/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/risk-register",
+      "rewrite": "/architect/templates/risk-register/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/risk-register/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/threat-model",
+      "rewrite": "/architect/templates/threat-model/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/threat-model/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/decision-record",
+      "rewrite": "/architect/templates/decision-record/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/decision-record/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/supplier-assurance",
+      "rewrite": "/architect/templates/supplier-assurance/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/supplier-assurance/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/ready-for-beta",
+      "rewrite": "/architect/templates/ready-for-beta/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/ready-for-beta/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns",
+      "rewrite": "/architect/patterns/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/zero-trust-access",
+      "rewrite": "/architect/patterns/zero-trust-access/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/zero-trust-access/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/secure-cloud-landing-zone",
+      "rewrite": "/architect/patterns/secure-cloud-landing-zone/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/secure-cloud-landing-zone/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/secrets-and-key-management",
+      "rewrite": "/architect/patterns/secrets-and-key-management/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/secrets-and-key-management/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/logging-to-a-siem",
+      "rewrite": "/architect/patterns/logging-to-a-siem/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/logging-to-a-siem/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/safe-third-party-integration",
+      "rewrite": "/architect/patterns/safe-third-party-integration/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/patterns/safe-third-party-integration/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"

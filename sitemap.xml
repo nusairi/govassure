@@ -24,4 +24,46 @@
   <url>
     <loc>https://www.govassured.com/govmap/glossary/</loc>
   </url>
+  <url>
+    <loc>https://www.govassured.com/architect/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/security-design/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/risk-register/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/threat-model/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/decision-record/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/supplier-assurance/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/templates/ready-for-beta/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/zero-trust-access/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/secure-cloud-landing-zone/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/secrets-and-key-management/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/logging-to-a-siem/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/safe-third-party-integration/</loc>
+  </url>
 </urlset>
