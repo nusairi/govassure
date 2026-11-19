@@ -262,3 +262,119 @@
   .tpl-pager-next { margin-left: 0; text-align: left; }
 }
 .tpl-top { margin: 1.2rem 0 0; font-size: 0.95rem; }
+
+/* Status tags (GOV.UK tag colours) for the document trail */
+.arch-tag {
+  display: inline-block;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border-radius: 3px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.arch-tag--new { color: #0c2d4a; background: #bbd4ea; }
+.arch-tag--update { color: #594d00; background: #fff7bf; }
+.arch-tag--final { color: #005a30; background: #cce2d8; }
+.arch-tag--review { color: #3d2375; background: #dbd5e9; }
+.arch-tag--use { color: #10403c; background: #d4ecea; }
+.arch-tag--close { color: #2a0b06; background: #f4cdc6; }
+.arch-tag-note { color: var(--ink-soft); font-size: 0.92rem; }
+.arch-trail-kind { color: var(--ink-soft); font-size: 0.85rem; font-weight: 400; }
+
+/* "Documents for this phase" box inside each lifecycle phase */
+.arch-docs {
+  margin: 1.1rem 0 0.4rem;
+  padding: 0.85rem 1.05rem 0.6rem;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  background: var(--field);
+}
+.arch-docs h4 { margin-top: 0; }
+.arch-docs-list { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+.arch-docs-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
+  margin: 0;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.arch-docs-list li:last-child { border-bottom: 0; }
+.arch-docs-status { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem; }
+.arch-docs-more { margin: 0.5rem 0 0; font-size: 0.95rem; }
+
+/* Document trail page */
+.arch-key {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.5rem 1.2rem;
+  margin: 0.4rem 0 1.4rem;
+}
+.arch-key-item { display: flex; gap: 0.6rem; align-items: baseline; }
+.arch-key dt { flex: 0 0 4.6rem; margin: 0; }
+.arch-key dd { margin: 0; color: var(--ink-soft); }
+.arch-key-h { margin: 0.2rem 0 0.3rem; font-size: 1.05rem; }
+.arch-table-hint { margin: 0 0 0.5rem; color: var(--ink-soft); font-size: 0.92rem; }
+@media (min-width: 900px) { .arch-table-hint { display: none; } }
+.arch-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--field);
+}
+.arch-table-wrap:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.arch-trail { width: 100%; min-width: 52rem; border-collapse: collapse; font-size: 0.95rem; }
+.arch-trail caption {
+  padding: 0.8rem 1rem 0.5rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.arch-trail th, .arch-trail td {
+  padding: 0.6rem 0.75rem;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.arch-trail thead th { color: var(--gold); font-size: 0.92rem; white-space: nowrap; }
+.arch-trail tbody th { font-weight: 700; min-width: 13rem; }
+.arch-trail th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--raised);
+  box-shadow: 1px 0 0 var(--line);
+}
+.arch-trail td .arch-tag-note { display: block; margin-top: 0.2rem; }
+.arch-trail-none { color: var(--ink-soft); }
+.arch-gate {
+  margin: 1.2rem 0 0;
+  padding: 0.85rem 1.1rem 0.4rem;
+  border-left: 5px solid var(--gold);
+  background: var(--raised);
+  border-radius: 0 8px 8px 0;
+}
+.arch-gate h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+@media (max-width: 640px) {
+  .arch-trail { min-width: 39rem; font-size: 0.9rem; }
+  .arch-trail th, .arch-trail td { padding: 0.5rem 0.55rem; }
+  .arch-trail tbody th { min-width: 0; width: 8.6rem; }
+  .arch-trail-kind { display: block; }
+  .arch-trail caption {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+}
+@media print {
+  .arch-table-wrap { overflow: visible; border: 0; }
+  .arch-trail { min-width: 0; }
+  .arch-trail th:first-child { position: static; box-shadow: none; }
+  .arch-tag { border: 1px solid currentColor; }
+}

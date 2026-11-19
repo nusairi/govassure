@@ -42,6 +42,22 @@ for(const [name,vp] of [['desktop',{width:1440,height:900}],['mobile',{width:390
   ok(!links.some(l=>/\/matrix|\/checklist/.test(l.h)),`${name}: no matrix/checklist links`);
   ok(await p.$$eval('.arch-tool',x=>x.length)===8,`${name}: 8 tool cards`);
   for(const [sec,host] of [['alpha','sbd'],['beta','sbd'],['beta','scope']]){const t=await p.$$eval(`#stage-${sec} .arch-try a[href^="https://${host}.govassured.com"]`,x=>x.map(a=>a.target));ok(t.length>=1&&t.every(x=>x!=='_blank'),`${name}: ${sec} has same-tab Try it link to ${host}`);}
+  // documents for each phase
+  const TAGS=['New','Update','Final','Review','Use','Close'];
+  const EXPECT={discovery:6,alpha:8,beta:11,live:11,retirement:6};
+  for(const [ph,cnt] of Object.entries(EXPECT)){
+    const d=await p.$$eval(`#stage-${ph} .arch-docs`,x=>x.map(e=>({h:e.querySelector('h4').textContent.trim(),items:[...e.querySelectorAll('.arch-docs-list li')].map(li=>({href:li.querySelector('a').getAttribute('href'),t:li.querySelector('a').target,tag:li.querySelector('.arch-tag').textContent.trim()})),more:(e.querySelector('.arch-docs-more a')||{}).getAttribute&&e.querySelector('.arch-docs-more a').getAttribute('href')})));
+    ok(d.length===1&&d[0].h==='Documents for this phase',`${name}: ${ph} has a Documents for this phase box`);
+    ok(d.length===1&&d[0].items.length===cnt,`${name}: ${ph} lists ${cnt} documents (${d[0]&&d[0].items.length})`);
+    ok(d.length===1&&d[0].items.every(i=>TAGS.includes(i.tag)&&!i.t&&(/^\/architect\/templates\/[a-z-]+\/$/.test(i.href)||/^https:\/\/(sbd|scope)\.govassured\.com$/.test(i.href))),`${name}: ${ph} documents have a tag and a same-tab template or tool link`);
+    ok(d.length===1&&d[0].more==='/architect/document-trail/',`${name}: ${ph} links to the document trail`);
+    const prod=await p.$$eval(`#stage-${ph}-content > h4`,hs=>{const h=hs.find(x=>x.textContent.trim()==='What you produce');return h?[...h.nextElementSibling.querySelectorAll('a')].map(a=>a.getAttribute('href')):[]});
+    ok(prod.length>=1&&prod.every(h=>/^\/architect\/templates\/[a-z-]+\/$/.test(h)),`${name}: ${ph} What you produce links to templates (${prod.length})`);
+  }
+  if(name==='desktop'){const hrefs=[...new Set(await p.$$eval('.arch-docs a, #lifecycle .arch-acc-content ul a[href^="/architect/templates/"]',x=>x.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('/'))))];
+    const st=[];for(const h of hrefs){const rr=await ctx.request.get(B+h);st.push(rr.status());}ok(st.every(x=>x===200),`${name}: all ${hrefs.length} phase document links return 200`);}
+  await p.locator('#stage-discovery').screenshot({path:`${SHOTS}/${name}-discovery-documents.png`});
+  ok(await p.$('.arch-toc a[href="#document-trail"]')!==null&&await p.$('#document-trail a[href="/architect/document-trail/"]')!==null,`${name}: On this page entry and Document trail section link`);
   // headings order
   const hs=await p.$$eval('h1,h2,h3,h4,h5,h6',x=>x.map(e=>+e.tagName[1]));let jump=false;for(let i=1;i<hs.length;i++)if(hs[i]>hs[i-1]+1)jump=true;
   ok(hs.filter(h=>h===1).length===1&&!jump,`${name}: heading order ok`);

@@ -208,6 +208,71 @@
       }
     },
     {
+      "route": "/architect/templates/data-and-sensitivity-summary",
+      "rewrite": "/architect/templates/data-and-sensitivity-summary/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/data-and-sensitivity-summary/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/risk-owners-and-sign-off",
+      "rewrite": "/architect/templates/risk-owners-and-sign-off/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/risk-owners-and-sign-off/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/live-security-plan",
+      "rewrite": "/architect/templates/live-security-plan/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/live-security-plan/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/decommission-and-disposal-plan",
+      "rewrite": "/architect/templates/decommission-and-disposal-plan/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/templates/decommission-and-disposal-plan/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/document-trail",
+      "rewrite": "/architect/document-trail/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/document-trail/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/architect/patterns",
       "rewrite": "/architect/patterns/index.html",
       "headers": {
