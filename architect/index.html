@@ -26,7 +26,7 @@
   <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
-  <link rel="stylesheet" href="/architect.css?v=24e30d7338">
+  <link rel="stylesheet" href="/architect.css?v=6c92765ce4">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -72,6 +72,7 @@
             <li><a href="#lifecycle">Lifecycle map</a></li>
             <li><a href="#standards">Standards cheat-sheet</a></li>
             <li><a href="#templates">Templates for security architects</a></li>
+            <li><a href="#patterns">Patterns library</a></li>
             <li><a href="#tools">Community tools for architects</a></li>
           </ol>
         </nav>
@@ -351,6 +352,21 @@
       </div>
     </section>
 
+    <section class="band arch-section" id="patterns" aria-labelledby="patterns-title">
+      <div class="wrap arch-prose">
+        <h2 id="patterns-title" class="section-title">Patterns library</h2>
+        <p>Reusable, vendor-neutral security designs for problems that come up again and again. Each pattern has a simple diagram, the main risks, the usual controls, common mistakes and the NCSC guidance it maps to.</p>
+        <ul class="arch-tpl-list">
+          <li><a href="/architect/patterns/zero-trust-access/">Zero trust access</a>: access to each application based on who you are and your device.</li>
+          <li><a href="/architect/patterns/secure-cloud-landing-zone/">Secure cloud landing zone</a>: cloud accounts, guardrails and shared services set up first.</li>
+          <li><a href="/architect/patterns/secrets-and-key-management/">Secrets and key management</a>: passwords, API keys, certificates and keys kept out of code.</li>
+          <li><a href="/architect/patterns/logging-to-a-siem/">Logging to a SIEM</a>: the right security logs in one protected place, with someone acting on alerts.</li>
+          <li><a href="/architect/patterns/safe-third-party-integration/">Safe third-party integration</a>: connecting to a supplier without sharing more than needed.</li>
+        </ul>
+        <p><a class="btn btn-primary" href="/architect/patterns/">Open the patterns library</a></p>
+      </div>
+    </section>
+
     <section class="band arch-section" id="tools" aria-labelledby="tools-title">
       <div class="wrap">
         <h2 id="tools-title" class="section-title">Community tools for architects</h2>
@@ -389,7 +405,7 @@
             <p class="description">A cooperative tabletop incident-response game to practise how the team responds when a design is attacked.</p>
           </li>
         </ul>
-        <p class="arch-next"><strong>Coming next:</strong> a patterns library and small decision helpers. Ideas are welcome through the community.</p>
+        <p class="arch-next"><strong>Coming next:</strong> small decision helpers. Ideas are welcome through the community.</p>
       </div>
     </section>
   </main>

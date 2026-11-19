@@ -1,0 +1,128 @@
+/* Security Architect Corner patterns library (/architect/patterns/) */
+.pat-card h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.pat-wrap { max-width: 60rem; }
+.pat-wrap > h2 {
+  margin: 2rem 0 0.6rem;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.pat-wrap > h2:first-child { margin-top: 0; }
+.pat-wrap > h3 { margin: 1rem 0 0.4rem; font-size: 1.05rem; font-weight: 700; }
+.pat-wrap > ul,
+.pat-wrap > dl,
+.pat-wrap ul.arch-refs { max-width: 46rem; margin: 0; padding-left: 1.3rem; color: var(--ink-soft); }
+.pat-wrap li { margin: 0.3rem 0; }
+.pat-wrap .arch-refs a { overflow-wrap: anywhere; }
+
+/* Diagram: zones joined by labelled links. A row on wide screens, a column on small ones. */
+.pat-diagram {
+  margin: 0.4rem 0 0;
+  padding: 1.1rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.pat-flow {
+  display: flex;
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pat-zone {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+  background: var(--field);
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+}
+.pat-zone-title {
+  margin: 0 0 0.4rem;
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.pat-zone ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.95rem; }
+.pat-zone li { margin: 0.2rem 0; }
+.pat-link {
+  flex: 0 0 7.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0 0.4rem;
+  text-align: center;
+}
+.pat-arrow {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+}
+.pat-arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  transform: translateY(-50%) rotate(45deg);
+}
+.pat-link-label { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.3; }
+.pat-diagram figcaption {
+  margin: 1rem 0 0;
+  max-width: 46rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.pat-diagram figcaption strong { color: var(--ink); }
+
+@media (max-width: 1000px) {
+  .pat-flow { flex-direction: column; }
+  .pat-zone { flex: none; }
+  .pat-link {
+    flex: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0 0.55rem 1.4rem;
+    text-align: left;
+  }
+  .pat-arrow { width: 2px; height: 1.8rem; flex: none; }
+  .pat-arrow::after {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -1px;
+    transform: translateX(-50%) rotate(135deg);
+  }
+}
+
+.pat-parts { padding-left: 0 !important; }
+.pat-parts div { margin: 0 0 0.6rem; }
+.pat-parts dt { font-weight: 700; color: var(--ink); }
+.pat-parts dd { margin: 0.1rem 0 0; }
+.pat-mistakes li::marker { color: var(--gold); }
+
+@media print {
+  .site-header, .site-footer, .skip-link, .tpl-pager { display: none; }
+  body { background: #fff; color: #000; }
+  .pat-diagram, .pat-zone { background: #fff; border-color: #000; }
+  .pat-zone-title, .pat-wrap, .pat-wrap li, .pat-link-label, .pat-diagram figcaption { color: #000; }
+  .pat-arrow, .pat-arrow::after { background: #000; border-color: #000; }
+}

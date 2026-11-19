@@ -48,4 +48,22 @@
   <url>
     <loc>https://www.govassured.com/architect/templates/ready-for-beta/</loc>
   </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/zero-trust-access/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/secure-cloud-landing-zone/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/secrets-and-key-management/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/logging-to-a-siem/</loc>
+  </url>
+  <url>
+    <loc>https://www.govassured.com/architect/patterns/safe-third-party-integration/</loc>
+  </url>
 </urlset>

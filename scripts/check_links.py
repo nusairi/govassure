@@ -68,6 +68,13 @@ SERVED = [
     "architect/templates/ready-for-beta/index.html",
     "architect-templates.js",
     "architect-templates.css",
+    "architect-patterns.css",
+    "architect/patterns/index.html",
+    "architect/patterns/zero-trust-access/index.html",
+    "architect/patterns/secure-cloud-landing-zone/index.html",
+    "architect/patterns/secrets-and-key-management/index.html",
+    "architect/patterns/logging-to-a-siem/index.html",
+    "architect/patterns/safe-third-party-integration/index.html",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {

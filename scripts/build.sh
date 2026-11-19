@@ -16,7 +16,8 @@ HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.cs
            govmap-parliament.js govmap-parliament.css
            govmap-budget.js govmap-budget.css govmap-budget-share.js
            architect.js architect.css
-           architect-templates.js architect-templates.css)
+           architect-templates.js architect-templates.css
+           architect-patterns.css)
 HUB_DIRS=(data public govmap architect)
 
 rm -rf "$out" && mkdir -p "$out/app"
