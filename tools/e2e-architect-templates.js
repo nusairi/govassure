@@ -1,13 +1,13 @@
 // Security Architect Corner templates checks: the list page and each template page.
 // B=<site> [SHOTS=dir] node e2e-architect-templates.js
-// axe-core is optional: run `npm i --no-save axe-core` to include the accessibility scan.
+// axe-core is required (see tools/axe.js): run `npm i --no-save axe-core` in tools/ first.
 const { chromium } = require('playwright-core');
 const fs = require('fs'); const path = require('path');
 const B = (process.env.B || 'http://127.0.0.1:8000').replace(/\/$/, '');
 const SHOTS = process.env.SHOTS || path.join(__dirname, 'shots', 'templates'); fs.mkdirSync(SHOTS, { recursive: true });
 const CHROME = process.env.CHROME || '/usr/bin/google-chrome';
 const LOCAL = /127\.0\.0\.1|localhost/.test(B);
-let axeSrc = null; try { axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8'); } catch (e) { console.log('SKIP axe-core not installed'); }
+const axe = require('./axe'); axe.load();
 // [localStorage key, slug, title, text to type into the first field, export needle]
 const T = [
   ['design', 'security-design', 'One-page security design', 'Book a meeting room (test edit)'],
@@ -20,11 +20,7 @@ const T = [
 const TPL = B + '/architect/templates/';
 let fail = 0; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) fail++; };
 
-async function axeRun(p) {
-  await p.addScriptTag({ content: axeSrc });
-  return p.evaluate(async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] } });
-    return r.violations.map(v => v.id + ' (' + v.impact + ') x' + v.nodes.length + ': ' + v.nodes.slice(0, 2).map(n => n.target.join(' ')).join(' | ')); });
-}
+const axeRun = p => axe.scan(p);
 async function common(p, tag, errs) {
   const sw = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); ok(sw <= 0, `${tag}: no horizontal scroll (${sw})`);
   const links = await p.$$eval('a[href]:not([href^="blob:"])', as => as.map(a => ({ h: a.href, t: a.target, r: a.rel })));
@@ -116,7 +112,7 @@ async function common(p, tag, errs) {
     ok(await p.inputValue('#tpl-adr-title') === '' && await p.evaluate(() => !localStorage.getItem('ga-arch-tpl-v1-adr') && !!localStorage.getItem('ga-arch-tpl-v1-design')), `${size}: clear via keyboard removes only that template`);
     await ctx.close();
 
-    if (axeSrc) {
+    if (axe.enabled()) {
       const actx = await b.newContext({ viewport: vp, bypassCSP: true }); const ap = await actx.newPage(); ap.on('dialog', d => d.accept());
       await ap.goto(TPL, { waitUntil: 'networkidle' }); let ax = (await axeRun(ap)).map(x => 'index: ' + x);
       for (const [, slug] of T) {
@@ -137,5 +133,6 @@ async function common(p, tag, errs) {
     ok(!(await p.textContent('.arch-next')).includes('templates'), 'architect page: coming next no longer mentions templates');
     if (!LOCAL) { const sm = await (await p.goto(B + '/sitemap.xml')).text(); ok(['', ...T.map(t => t[1] + '/')].every(s => sm.includes('/architect/templates/' + s + '<')), 'sitemap has the list and all 6 template pages'); }
     await ctx.close(); }
+  axe.report(ok);
   await b.close(); console.log(fail ? `${fail} FAILED` : 'ALL PASS'); process.exit(fail ? 1 : 0);
 })();

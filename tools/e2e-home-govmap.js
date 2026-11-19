@@ -24,7 +24,7 @@ function fail(errors, cond, msg) { if (!cond) errors.push(msg); }
     rec.status = r.status();
     rec.csp = (r.headers()["content-security-policy"] || "").slice(0, 90);
     rec.home = await pg.evaluate(() => {
-      const tile = document.querySelector("a.lv-map-tile");
+      const tile = document.querySelector('a.lv-map-tile[href="/govmap/"]');
       const nav = [...document.querySelectorAll(".header-nav a")].find((a) => a.getAttribute("href") === "/govmap/");
       return {
         tileHref: tile ? tile.getAttribute("href") : null,
@@ -48,7 +48,7 @@ function fail(errors, cond, msg) { if (!cond) errors.push(msg); }
     fail(errors, !rec.home.hscroll, "hscroll home");
     fail(errors, rec.home.kev && rec.home.pubs && rec.home.outages && rec.home.cisa, "home sections missing");
 
-    const tile = pg.locator("a.lv-map-tile");
+    const tile = pg.locator('a.lv-map-tile[href="/govmap/"]');
     await tile.scrollIntoViewIfNeeded();
     await pg.waitForTimeout(200);
     if (name === "phone390" || name === "desktop") {
@@ -63,9 +63,9 @@ function fail(errors, cond, msg) { if (!cond) errors.push(msg); }
     fail(errors, rec.sameTab, "tile opened off-site " + pg.url());
 
     await pg.goto(B + "/apps", { waitUntil: "networkidle" });
-    await pg.waitForSelector("#catalog, a.lv-map-tile");
+    await pg.waitForSelector('#catalog, a.lv-map-tile[href="/govmap/"]');
     rec.apps = await pg.evaluate(() => {
-      const tile = document.querySelector("a.lv-map-tile");
+      const tile = document.querySelector('a.lv-map-tile[href="/govmap/"]');
       const nav = [...document.querySelectorAll(".header-nav a")].find((a) => a.getAttribute("href") === "/govmap/");
       const open = [...document.querySelectorAll("#catalog a")].find((a) => /govmap/.test(a.getAttribute("href") || "") || /government map/i.test(a.textContent));
       return {

@@ -1,10 +1,10 @@
 // Security Architect Corner checks: B=<site> [SHOTS=dir] [HOME_TILE=1] node e2e-architect.js
-// axe-core is optional: run `npm i --no-save axe-core` to include the accessibility scan.
+// axe-core is required (see tools/axe.js): run `npm i --no-save axe-core` in tools/ first.
 const {chromium}=require('playwright-core');const fs=require('fs');const path=require('path');
 const B=(process.env.B||'http://127.0.0.1:8000').replace(/\/$/,'');
 const SHOTS=process.env.SHOTS||path.join(__dirname,'shots');fs.mkdirSync(SHOTS,{recursive:true});
 const CHROME=process.env.CHROME||'/usr/bin/google-chrome';
-let axeSrc=null;try{axeSrc=fs.readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');}catch(e){console.log('SKIP axe-core not installed');}
+const axe=require('./axe');axe.load();
 let fail=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fail++;};
 (async()=>{const b=await chromium.launch({executablePath:CHROME,args:['--no-sandbox']});
 for(const [name,vp] of [['desktop',{width:1440,height:900}],['mobile',{width:390,height:844}]]){
@@ -47,9 +47,8 @@ for(const [name,vp] of [['desktop',{width:1440,height:900}],['mobile',{width:390
   ok(hs.filter(h=>h===1).length===1&&!jump,`${name}: heading order ok`);
   ok(errs.length===0,`${name}: no console/CSP errors ${errs.join(' | ')}`);
   // axe in a CSP-bypassed context (injection only), collapsed and expanded states
-  if(axeSrc){const actx=await b.newContext({viewport:vp,bypassCSP:true});const ap=await actx.newPage();await ap.goto(B+'/architect/',{waitUntil:'networkidle'});
-  let ax=[];for(const st of ['collapsed','expanded']){if(st==='expanded')await ap.click('.arch-acc-all');await ap.addScriptTag({content:axeSrc});
-  const v=await ap.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa','best-practice']}});return r.violations.map(v=>v.id+' ('+v.impact+') x'+v.nodes.length+': '+v.nodes.slice(0,2).map(n=>n.target.join(' ')).join(' | '));});ax.push(...v.map(x=>st+': '+x));}
+  if(axe.enabled()){const actx=await b.newContext({viewport:vp,bypassCSP:true});const ap=await actx.newPage();await ap.goto(B+'/architect/',{waitUntil:'networkidle'});
+  let ax=[];for(const st of ['collapsed','expanded']){if(st==='expanded')await ap.click('.arch-acc-all');ax.push(...(await axe.scan(ap)).map(x=>st+': '+x));}
   await actx.close();
   ok(ax.length===0,`${name}: axe ${ax.length?JSON.stringify(ax):'0 violations (collapsed + expanded)'}`);}
   await ctx.close();}
@@ -64,4 +63,5 @@ ok(errs.length===0,'home: no console errors '+errs.join('|'));await ctx.close();
 {const ctx=await b.newContext();const p=await ctx.newPage();
 for(const u of ['/sitemap.xml','/govmap/','/govmap/glossary/','/.well-known/security.txt',...(/127\.0\.0\.1|localhost/.test(B)?[]:['/apps'])]){const r=await p.goto(B+u);ok(r.status()===200,'regression '+u+' 200');}
 const sm=await (await p.goto(B+'/sitemap.xml')).text();ok(sm.includes('/architect/'),'sitemap has /architect/');await ctx.close();}
+axe.report(ok);
 await b.close();console.log(fail?`${fail} FAILED`:'ALL PASS');process.exit(fail?1:0);})();
