@@ -22,6 +22,22 @@ const T = [
   ['decom', 'decommission-and-disposal-plan', 'Decommission and disposal plan', 'Book a meeting room (test edit)'],
 ];
 const NEW = ['data', 'raci', 'live', 'decom'];
+// Templates aligned with an official template (they get an "Official template" inset and an index tag).
+const OFFICIAL = ['data', 'risks', 'threats', 'adr', 'supplier', 'beta', 'live'];
+const OFFSHOTS = process.env.OFFSHOTS || '';
+// Answers saved by the previous layout of each template (version 1, before the official alignment).
+const OLD = {
+  adr: { fields: { title: 'Old ADR subject', number: 'ADR-009', status: 'Accepted', date: '2026-10-01', context: 'Old problem text', options: 'Old options', decision: 'Old decision', consequences: 'Old consequences', security: 'Old security', agreed: 'Design authority' } },
+  threats: { fields: { system: 'Old system', scope: 'Old scope', assets: 'Old assets', s_threat: 'Old spoofing threat', s_mit: 'Old spoofing mitigation', i_threat: 'Old disclosure threat', i_mit: '', e_mit: 'Old privilege mitigation', gaps: 'Old gaps', reviewed: '2026-10-02' } },
+  data: { fields: { service: 'Old data service', phase: 'Alpha', iao: 'Head of records', types: 'Old list of data types', personal: 'Yes', classification: 'Old classification', impact: 'Old impact', retention: 'Old retention' } },
+  risks: { fields: { service: 'Old risk service', owner: 'Service owner' }, rows: [
+    { title: 'Old risk one', likelihood: '4 Likely', impact: '5 Severe', owner: 'IAO', treatment: 'Reduce', actions: 'Old actions', due: '2027-01-01' },
+    { title: 'Old risk two', likelihood: '1 Rare', impact: '1 Minimal', owner: 'IAO', treatment: 'Accept' }] },
+  supplier: { fields: { supplier: 'Old supplier', certs: 'Old certs', certs_view: 'Acceptable', sbom: 'Old SBOM answer', owner: 'Service owner' } },
+  beta: { fields: { service: 'Old beta service', controls: 'Partly', controls_ev: 'Old controls evidence', pentest: 'Yes', outcome: 'Not ready yet' } },
+  live: { fields: { service: 'Old live service', logs: 'Old logs', backups: 'Old backups', next: '2027-02-02' } },
+  decom: { fields: { service: 'Old decom service', copies: 'Old copies', media_ev: 'Old media evidence', residual: 'Old residual' } },
+};
 const DOCSHOTS = process.env.DOCSHOTS || '';
 const TPL = B + '/architect/templates/';
 let fail = 0; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) fail++; };
@@ -55,10 +71,13 @@ async function common(p, tag, errs) {
     ok(cards.length === 10 && cards.every((c, i) => c[0] === `/architect/templates/${T[i][1]}/` && c[1] === T[i][2] && !c[2]), `${size} index: 10 cards in lifecycle order linking in the same tab`);
     ok(await p.$('.tpl-trail-note a[href="/architect/document-trail/"]') !== null && (await p.textContent('.lede')).startsWith('Ten fill-in templates'), `${size} index: links to the document trail and says ten`);
     ok(await p.$$eval('.tpl-card .description', x => x.every(e => e.textContent.trim().length > 10)), `${size} index: each card has a purpose line`);
+    const tags = await p.$$eval('.tpl-card', x => x.map(c => { const t = c.querySelector('.tpl-tag'); return t ? t.textContent.trim() : ''; }));
+    ok(T.every((t, i) => tags[i] === (OFFICIAL.includes(t[0]) ? 'Aligned with official template' : '')), `${size} index: "Aligned with official template" tag on exactly the ${OFFICIAL.length} aligned templates`);
     ok((await p.textContent('.lede')).includes('Especially useful if you are starting out in the role'), `${size} index: starting-out line`);
     ok(JSON.stringify(await p.$$eval('.arch-crumbs li', x => x.map(e => e.textContent.trim()))) === JSON.stringify(['Home', 'Security Architect Corner', 'Templates']), `${size} index: breadcrumb`);
     await common(p, `${size} index`, errs);
     await p.screenshot({ path: `${SHOTS}/${size}-index.png`, fullPage: true });
+    if (OFFSHOTS) { await p.screenshot({ path: `${OFFSHOTS}/${size}-index-tags.png`, fullPage: true }); await (await p.$('.tpl-cards')).screenshot({ path: `${OFFSHOTS}/${size}-index-tags-cards.png` }); }
     await p.click(`.tpl-card a[href="/architect/templates/${T[0][1]}/"]`); await p.waitForLoadState('networkidle');
     ok(p.url() === TPL + T[0][1] + '/', `${size} index: card opens the template page`);
 
@@ -74,17 +93,34 @@ async function common(p, tag, errs) {
       const next = await p.$eval('.tpl-pager', n => { const a = n.querySelector('[rel=next]'); return a ? a.getAttribute('href') : null; });
       ok(prev === (i ? `/architect/templates/${T[i - 1][1]}/` : null) && next === (i < T.length - 1 ? `/architect/templates/${T[i + 1][1]}/` : null), `${tag}: previous/next links`);
       ok(await p.$$eval(`[data-template="${key}"] form`, x => x.length) === 1, `${tag}: form built`);
+      // official template / guidance inset
+      const ins = await p.$eval('.tpl-official', n => ({ h: n.querySelector('h2').textContent.trim(), txt: n.textContent,
+        links: [...n.querySelectorAll('a')].map(a => ({ h: a.getAttribute('href'), t: a.target, r: a.rel, hid: (a.querySelector('.visually-hidden') || {}).textContent || '', txt: a.textContent })) }));
+      const isOff = OFFICIAL.includes(key);
+      ok(ins.h === (isOff ? 'Official template' : 'Guidance this follows'), `${tag}: "${ins.h}" inset`);
+      ok(ins.links.length >= 2 && ins.links.every(l => l.h.startsWith('https://') && l.t === '_blank' && l.r.includes('noopener') && l.hid === ' (opens in a new tab)'), `${tag}: inset links open in a new tab with a hidden label (${ins.links.length})`);
+      ok(ins.links.filter(l => /\.(docx|xlsx|pdf)$/.test(l.h)).every(l => /\((MS Word Document|MS Excel Spreadsheet|PDF), [\d.]+ (KB|MB)(, \d+ pages)?\)/.test(l.txt)), `${tag}: file links show type and size`);
+      if (isOff) ok(/Based on .+, licensed under the Open Government Licence v3\.0/.test(ins.txt.replace(/\s+/g, ' ')) && ins.links.some(l => l.h === 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'), `${tag}: OGL v3 attribution line with licence link`);
+      else ok(!/Based on/.test(ins.txt), `${tag}: guidance inset makes no "based on" claim`);
+      if (key === 'data') ok(ins.links.some(l => l.h.startsWith('https://ico.org.uk/')) && !/Based on[^.]*Information Commissioner/.test(ins.txt), `${tag}: ICO DPIA linked, without an OGL "based on" claim`);
+      if (key === 'decom') ok(['retiring-service-components-securely', 'decommissioning-assets', 'secure-sanitisation-storage-media'].every(x => ins.links.some(l => l.h.includes(x))), `${tag}: SbD retirement, NCSC decommissioning and NCSC sanitisation linked`);
+      if (OFFSHOTS && (key === 'adr' || key === 'supplier')) {
+        await (await p.$('.arch-hero')).screenshot({ path: `${OFFSHOTS}/${size}-${slug}-official-inset.png` });
+        await p.screenshot({ path: `${OFFSHOTS}/${size}-${slug}-page.png`, fullPage: false });
+      }
       reqs.length = 0;
       await p.click('.tpl-example');
       const n = await p.$$eval('[data-key]', x => x.filter(e => e.value).length); ok(n >= 5, `${tag}: worked example filled (${n} fields)`);
-      if (key === 'risks') ok(/Score 6 out of 25: Medium/.test(await p.textContent('.tpl-row')), `${tag}: risk score calculated`);
+      if (key === 'risks') ok(/Risk severity 6 out of 25: Medium/.test(await p.textContent('.tpl-row')), `${tag}: risk severity calculated`);
+      if (key === 'threats') ok(await p.$$eval('.tpl-row', x => x.length) === 6 && JSON.stringify(await p.$$eval('.tpl-row [data-key="stride"]', x => x.map(e => e.value))) === JSON.stringify(['Spoofing', 'Tampering', 'Repudiation', 'Information disclosure', 'Denial of service', 'Elevation of privilege']), `${tag}: six threat rows, one per STRIDE category`);
+      if (key === 'data') ok(await p.$$eval('.tpl-row', x => x.length) === 5 && await p.inputValue('.tpl-row [data-key="c"]') === '2 Minor', `${tag}: five asset rows with CIA impact`);
       await p.screenshot({ path: `${SHOTS}/${size}-${slug}-filled.png`, fullPage: true });
       if (DOCSHOTS && NEW.includes(key)) await p.screenshot({ path: `${DOCSHOTS}/${size}-template-${slug}-filled.png`, fullPage: true });
       if (key === 'raci') ok(await p.$$eval('.tpl-row', x => x.length) === 4 && await p.inputValue('[data-key="outcome"]') === 'Approved with conditions', `${tag}: four RACI rows and the sign-off record filled`);
       if (NEW.includes(key)) { const roles = await p.$$eval('[data-key]', x => x.map(e => e.value).join(' ')); ok(roles.includes('Book a meeting room') && !/\b(Mr|Mrs|Ms|Dr)\.? [A-Z]/.test(roles), `${tag}: worked example uses the meeting-room service and roles, not names`); }
       const first = await p.$eval('[data-key]', e => e.id);
       await p.fill('#' + first, edit);
-      if (key === 'risks') { await p.selectOption('.tpl-row >> nth=0 >> select[data-key="impact"]', '5 Severe'); await p.click('.tpl-add'); }
+      if (key === 'risks') { await p.selectOption('.tpl-row >> nth=0 >> select[data-key="impact"]', '5 Critical'); await p.click('.tpl-add'); }
       if (key === 'raci') { await p.click('.tpl-add'); await p.fill('.tpl-row:nth-child(5) [data-key="activity"]', 'Approve a supplier (test row)'); }
       await p.waitForTimeout(600);
       ok((await p.textContent('.tpl-status')).includes('Saved in this browser'), `${tag}: save status shown`);
@@ -92,7 +128,7 @@ async function common(p, tag, errs) {
       await p.reload({ waitUntil: 'networkidle' });
       ok(await p.inputValue('#' + first) === edit, `${tag}: answer restored after reload`);
       if (key === 'risks') {
-        ok(await p.$$eval('.tpl-row', x => x.length) === 3 && /Score 10 out of 25: High/.test(await p.textContent('.tpl-row')), `${tag}: rows and edited score restored`);
+        ok(await p.$$eval('.tpl-row', x => x.length) === 3 && /Risk severity 10 out of 25: High/.test(await p.textContent('.tpl-row')), `${tag}: rows and edited score restored`);
         await p.click('.tpl-row:nth-child(3) .tpl-remove'); ok(await p.$$eval('.tpl-row', x => x.length) === 2, `${tag}: remove row`);
       }
       if (key === 'raci') ok(await p.$$eval('.tpl-row', x => x.length) === 5 && await p.inputValue('.tpl-row:nth-child(5) [data-key="activity"]') === 'Approve a supplier (test row)', `${tag}: added RACI row restored after reload`);
@@ -110,6 +146,9 @@ async function common(p, tag, errs) {
         const [dl] = await Promise.all([p.waitForEvent('download'), p.click(`.tpl-${kind}`)]);
         const txt = fs.readFileSync(await dl.path(), 'utf8');
         ok(dl.suggestedFilename().endsWith('.' + kind) && txt.includes(edit) && txt.includes(title), `${tag}: .${kind} export (${dl.suggestedFilename()})`);
+        if (OFFICIAL.includes(key)) ok(/based on .*Open Government Licence v3\.0/.test(txt), `${tag}: .${kind} export credits the official template`);
+        const labels = { adr: "What's the problem we are trying to solve?", threats: 'STRIDE category', risks: 'Threat likelihood (1 to 5)', data: 'Confidentiality impact', supplier: 'Offshoring and personal data', beta: 'Privacy (Service Standard point 9)', live: 'Required changes register', decom: 'Retirement risk assessment' };
+        if (labels[key]) ok(txt.includes(labels[key]), `${tag}: .${kind} export uses the new fields ("${labels[key]}")`);
         if (size === 'desktop') fs.copyFileSync(await dl.path(), `${SHOTS}/${dl.suggestedFilename()}`);
       }
       const bad = reqs.filter(x => x.m !== 'GET' || new URL(x.u).origin !== new URL(B).origin);
@@ -124,6 +163,38 @@ async function common(p, tag, errs) {
     await p.focus('.tpl-clear'); await p.keyboard.press('Enter'); await p.waitForTimeout(100);
     ok(await p.inputValue('#tpl-adr-title') === '' && await p.evaluate(() => !localStorage.getItem('ga-arch-tpl-v1-adr') && !!localStorage.getItem('ga-arch-tpl-v1-design')), `${size}: clear via keyboard removes only that template`);
     await ctx.close();
+
+    // migration: answers saved by the previous layout are moved to the new fields, under the same keys
+    { const mctx = await b.newContext({ viewport: vp }); const mp = await mctx.newPage(); const merrs = [];
+      mp.on('console', m => { if (m.type() === 'error') merrs.push(m.text()); }); mp.on('pageerror', e => merrs.push(e.message));
+      await mp.goto(TPL, { waitUntil: 'networkidle' });
+      await mp.evaluate(o => { for (const k in o) localStorage.setItem('ga-arch-tpl-v1-' + k, JSON.stringify(o[k])); }, OLD);
+      const val = (sel) => mp.inputValue(sel);
+      const saved = (k) => mp.evaluate(k => JSON.parse(localStorage.getItem('ga-arch-tpl-v1-' + k)), k);
+      const go = async (slug) => { await mp.goto(TPL + slug + '/', { waitUntil: 'networkidle' }); await mp.waitForTimeout(100); return (await mp.textContent('.tpl-status')).trim(); };
+      let st = await go('decision-record');
+      let sv = await saved('adr');
+      ok(/moved them to this template's updated layout/.test(st) && await val('#tpl-adr-title') === 'Old ADR subject' && await val('#tpl-adr-ratified') === '2026-10-01' && await val('#tpl-adr-context') === 'Old problem text' && await val('#tpl-adr-agreed') === 'Design authority' && sv.v === 2 && !('date' in sv.fields), `${size} migrate adr: old date moved to "Date ratified", other answers kept, saved as v2`);
+      st = await go('threat-model'); sv = await saved('threats');
+      const rows = await mp.$$eval('.tpl-row', x => x.map(r => ['id', 'stride', 'event', 'mitigation'].map(k => r.querySelector(`[data-key="${k}"]`).value)));
+      ok(/updated layout/.test(st) && JSON.stringify(rows) === JSON.stringify([['T1', 'Spoofing', 'Old spoofing threat', 'Old spoofing mitigation'], ['T2', 'Information disclosure', 'Old disclosure threat', ''], ['T3', 'Elevation of privilege', '', 'Old privilege mitigation']]) && await val('#tpl-threats-system') === 'Old system' && await val('#tpl-threats-gaps') === 'Old gaps' && sv.v === 2 && sv.rows.length === 3 && !Object.keys(sv.fields).some(k => /_threat$|_mit$/.test(k)), `${size} migrate threats: STRIDE answers became threat rows`);
+      st = await go('data-and-sensitivity-summary'); sv = await saved('data');
+      ok(/updated layout/.test(st) && await mp.$$eval('.tpl-row', x => x.length) === 1 && await val('.tpl-row [data-key="description"]') === 'Old list of data types' && await val('#tpl-data-classification') === 'Old classification' && await val('#tpl-data-iao') === 'Head of records' && sv.v === 2 && !('types' in sv.fields), `${size} migrate data: data types became the first asset row`);
+      st = await go('risk-register'); sv = await saved('risks');
+      ok(/updated layout/.test(st) && JSON.stringify(await mp.$$eval('.tpl-row', x => x.map(r => [r.querySelector('[data-key="id"]').value, r.querySelector('[data-key="title"]').value, r.querySelector('[data-key="impact"]').value, r.querySelector('[data-key="likelihood"]').value]))) === JSON.stringify([['R1', 'Old risk one', '5 Critical', '4 Likely'], ['R2', 'Old risk two', '1 Negligible', '1 Rare']]) && /Risk severity 20 out of 25: Very high/.test(await mp.textContent('.tpl-row')) && sv.v === 2, `${size} migrate risks: IDs added, impact names mapped, severity kept`);
+      st = await go('supplier-assurance');
+      ok(/^Restored your saved answers from this browser/.test(st) && await val('#tpl-supplier-certs') === 'Old certs' && await val('#tpl-supplier-sbom') === 'Old SBOM answer' && await val('#tpl-supplier-certs_view') === 'Acceptable', `${size} keep supplier: old answers load unchanged in the renamed sections`);
+      st = await go('ready-for-beta');
+      ok(/^Restored/.test(st) && await val('#tpl-beta-controls') === 'Partly' && await val('#tpl-beta-controls_ev') === 'Old controls evidence' && await val('#tpl-beta-outcome') === 'Not ready yet', `${size} keep beta: old answers load`);
+      st = await go('live-security-plan');
+      ok(/^Restored/.test(st) && await val('#tpl-live-logs') === 'Old logs' && await val('#tpl-live-backups') === 'Old backups', `${size} keep live: old answers load`);
+      st = await go('decommission-and-disposal-plan');
+      ok(/^Restored/.test(st) && await val('#tpl-decom-copies') === 'Old copies' && await val('#tpl-decom-media_ev') === 'Old media evidence', `${size} keep decom: old answers load`);
+      // reloading a migrated template does not migrate again
+      st = await go('threat-model');
+      ok(/^Restored your saved answers from this browser/.test(st) && await mp.$$eval('.tpl-row', x => x.length) === 3, `${size} migrate: second load uses the saved v2 data`);
+      ok(merrs.length === 0, `${size} migrate: no console errors ${merrs.join(' | ')}`);
+      await mctx.close(); }
 
     if (axe.enabled()) {
       const actx = await b.newContext({ viewport: vp, bypassCSP: true }); const ap = await actx.newPage(); ap.on('dialog', d => d.accept());
