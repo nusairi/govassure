@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=a4c5dbd2e5">
-  <link rel="stylesheet" href="/architect-templates.css?v=ada85f036d">
+  <link rel="stylesheet" href="/architect-templates.css?v=25e1d097e4">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -68,6 +68,15 @@
         <p class="eyebrow">Templates for security architects</p>
         <h1 id="tpl-title">Decommission and disposal plan</h1>
         <p class="lede">A plan for closing a service without leaving data or access behind: what data is kept, moved or destroyed, how storage media is sanitised, how access and connections are removed, how suppliers exit, which certificates and keys are revoked, and the final sign-off. Draft it in live and use it at retirement.</p>
+        <section class="tpl-official tpl-official--guidance" aria-labelledby="decom-official-h">
+          <h2 id="decom-official-h">Guidance this follows</h2>
+          <p>There is no official decommission plan template. The steps follow this guidance.</p>
+          <ul class="tpl-official-links">
+            <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/retiring-service-components-securely/" target="_blank" rel="noopener">Retiring service components securely<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.ncsc.gov.uk/guidance/decommissioning-assets" target="_blank" rel="noopener">Decommissioning assets (NCSC)<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.ncsc.gov.uk/guidance/secure-sanitisation-storage-media" target="_blank" rel="noopener">Secure sanitisation and disposal of storage media (NCSC)<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+        </section>
         <div class="arch-callout tpl-privacy">
           <p><strong>Your answers stay in this browser.</strong> They save automatically to this device only and are never sent to GOV Assured or anyone else. You do not need an account.</p>
           <p>Do not enter sensitive or classified details here. Download or print a copy and keep it in your organisation&#39;s approved systems.</p>
@@ -80,7 +89,7 @@
         <div class="tpl-guide">
           <h2>What good looks like</h2>
           <ul>
-            <li>It finds every copy of the data, including backups, logs, exports and test copies.</li>
+            <li>It starts from the asset list and finds every copy of the data, including backups, logs, exports and test copies.</li>
             <li>Storage media is sanitised following NCSC guidance, with evidence such as certificates of destruction.</li>
             <li>Accounts, keys, certificates, network routes and DNS records are all removed or revoked.</li>
             <li>Suppliers confirm in writing that their copies are gone, and the closure is signed off by role.</li>
@@ -117,6 +126,6 @@
     </div>
   </footer>
 
-  <script src="/architect-templates.js?v=6c1b6b152e" defer></script>
+  <script src="/architect-templates.js?v=f3fd917f38" defer></script>
 </body>
 </html>

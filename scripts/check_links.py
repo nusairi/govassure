@@ -91,6 +91,9 @@ ALLOWED_EXACT = {
     # Security Architect Corner standards cheat-sheet (official standard pages).
     "https://www.iso.org/standard/27001",
     "https://www.nist.gov/cyberframework",
+    # Architect templates: ICO data protection impact assessment template and guide.
+    "https://ico.org.uk/media2/migrated/2553993/dpia-template.docx",
+    "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia",
 }
 
 # Official UK government, Parliament and related public-body hosts used as
@@ -201,6 +204,13 @@ def self_test():
         "https://www.iso.org/standard/27002": "host is outside *.govassured.com",
         "https://www.nist.gov/cyberframework": None,
         "https://www.nist.gov/other": "host is outside *.govassured.com",
+        "https://ico.org.uk/media2/migrated/2553993/dpia-template.docx": None,
+        "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/": None,
+        "https://ico.org.uk/": "host is outside *.govassured.com",
+        "https://ico.org.uk/media2/migrated/2553993/other.docx": "host is outside *.govassured.com",
+        "https://ico.org.uk.evil.example/media2/migrated/2553993/dpia-template.docx": "host is outside *.govassured.com",
+        "https://www.ncsc.gov.uk/guidance/decommissioning-assets": None,
+        "https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/": None,
         "https://github.com/nusairi/govassure": None,
         "https://github.com/nusairi/govassure/": None,
         "https://github.com/nusairi/govassure/security/advisories/new": None,

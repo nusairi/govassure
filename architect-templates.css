@@ -109,3 +109,26 @@
   font-weight: 500;
   line-height: 1.25;
 }
+
+/* Official template / guidance inset on each template page */
+.tpl-official {
+  max-width: 46rem;
+  margin: 1.25rem 0 1rem;
+  padding: 1rem 1.15rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+}
+.tpl-official h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.tpl-official p { margin: 0.5rem 0 0; color: var(--ink-soft); }
+.tpl-official-links { margin: 0.6rem 0 0; padding-left: 1.3rem; }
+.tpl-official-links li { margin: 0.3rem 0; overflow-wrap: anywhere; }
+.tpl-official .tpl-attrib, .tpl-official .tpl-official-note { font-size: 0.92rem; }
+.tpl-tag-wrap { margin: 0.6rem 0 0; }

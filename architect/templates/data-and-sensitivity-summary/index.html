@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=a4c5dbd2e5">
-  <link rel="stylesheet" href="/architect-templates.css?v=ada85f036d">
+  <link rel="stylesheet" href="/architect-templates.css?v=25e1d097e4">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -68,6 +68,19 @@
         <p class="eyebrow">Templates for security architects</p>
         <h1 id="tpl-title">Data and sensitivity summary</h1>
         <p class="lede">A short summary of the data a service will hold, how sensitive it is, who owns it and the duties that come with it. Start it in discovery, update it in alpha and finalise it in beta. Review it in live, and use it to plan disposal at retirement.</p>
+        <section class="tpl-official tpl-official--official" aria-labelledby="data-official-h">
+          <h2 id="data-official-h">Official template</h2>
+          <p>Our asset fields follow the Secure by Design example service assets list and assets evaluation sheet, including the impact scale from negligible to critical.</p>
+          <ul class="tpl-official-links">
+            <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/documenting-service-assets/" target="_blank" rel="noopener">Documenting service assets<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.security.gov.uk/wp-content/uploads/2025/02/Example-Service-Assets-List-v1.0-October-2025.xlsx" target="_blank" rel="noopener">Example Service Assets List (MS Excel Spreadsheet, 101.0 KB)<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/assessing-the-importance-of-service-assets/" target="_blank" rel="noopener">Assessing the importance of service assets<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.security.gov.uk/wp-content/uploads/2025/11/Example-Assets-Evaluation-Sheet-v1.0-November-2025.xlsx" target="_blank" rel="noopener">Example Assets Evaluation Sheet (MS Excel Spreadsheet, 26.3 KB)<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.gov.uk/government/publications/government-security-classifications" target="_blank" rel="noopener">Government Security Classifications<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+          <p>If the service uses personal data, you may also need a data protection impact assessment (DPIA). The Information Commissioner’s Office publishes <a href="https://ico.org.uk/media2/migrated/2553993/dpia-template.docx" target="_blank" rel="noopener">Sample DPIA template (MS Word Document, 53.3 KB)<span class="visually-hidden"> (opens in a new tab)</span></a> and <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/" target="_blank" rel="noopener">How do we do a DPIA?<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+          <p class="tpl-attrib">Based on <a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/documenting-service-assets/" target="_blank" rel="noopener">Example Service Assets List and Example Assets Evaluation Sheet<span class="visually-hidden"> (opens in a new tab)</span></a>, Government Cyber Unit (security.gov.uk), licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0<span class="visually-hidden"> (opens in a new tab)</span></a>. GOV Assured is not affiliated with or endorsed by the publisher.</p>
+        </section>
         <div class="arch-callout tpl-privacy">
           <p><strong>Your answers stay in this browser.</strong> They save automatically to this device only and are never sent to GOV Assured or anyone else. You do not need an account.</p>
           <p>Do not enter sensitive or classified details here. Download or print a copy and keep it in your organisation&#39;s approved systems.</p>
@@ -80,9 +93,9 @@
         <div class="tpl-guide">
           <h2>What good looks like</h2>
           <ul>
-            <li>It lists types of data, not real records, and says roughly how much there is.</li>
+            <li>It lists the service’s assets (data, software and hardware) by type, not real records, each with an owner by role.</li>
             <li>It says which classification applies at a high level, and why, without detailed handling rules.</li>
-            <li>It explains what would happen if the data were lost, changed or seen by the wrong people, including when records are combined.</li>
+            <li>It rates the impact of losing confidentiality, integrity or availability for each asset, from negligible to critical, including when records are combined.</li>
             <li>The data has an owner by role, and retention and legal duties are written down.</li>
           </ul>
           <p class="tpl-example-text"><strong>Short worked example:</strong> “Staff work email addresses, display names and room bookings for about 2,000 staff. Internal data at the organisation’s standard classification. Meeting titles could reveal sensitive work, so only the person who booked sees them.”</p>
@@ -117,6 +130,6 @@
     </div>
   </footer>
 
-  <script src="/architect-templates.js?v=6c1b6b152e" defer></script>
+  <script src="/architect-templates.js?v=f3fd917f38" defer></script>
 </body>
 </html>
