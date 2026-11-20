@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=a4c5dbd2e5">
-  <link rel="stylesheet" href="/architect-templates.css?v=ada85f036d">
+  <link rel="stylesheet" href="/architect-templates.css?v=25e1d097e4">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -68,6 +68,14 @@
         <p class="eyebrow">Templates for security architects</p>
         <h1 id="tpl-title">Risk register starter</h1>
         <p class="lede">A simple list of security risks, how likely and how serious each one is, who owns it and what you will do about it. Start it in discovery and review it at every phase.</p>
+        <section class="tpl-official tpl-official--official" aria-labelledby="risks-official-h">
+          <h2 id="risks-official-h">Official template</h2>
+          <p>Our fields follow the example risk register entry in the Secure by Design guidance on security risk assessment.</p>
+          <ul class="tpl-official-links">
+            <li><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/performing-a-security-risk-assessment/" target="_blank" rel="noopener">Performing a security risk assessment<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+          <p class="tpl-attrib">Based on <a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/activities/performing-a-security-risk-assessment/" target="_blank" rel="noopener">Performing a security risk assessment<span class="visually-hidden"> (opens in a new tab)</span></a>, Government Cyber Unit (security.gov.uk), licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0<span class="visually-hidden"> (opens in a new tab)</span></a>. GOV Assured is not affiliated with or endorsed by the publisher.</p>
+        </section>
         <div class="arch-callout tpl-privacy">
           <p><strong>Your answers stay in this browser.</strong> They save automatically to this device only and are never sent to GOV Assured or anyone else. You do not need an account.</p>
           <p>Do not enter sensitive or classified details here. Download or print a copy and keep it in your organisation&#39;s approved systems.</p>
@@ -80,12 +88,12 @@
         <div class="tpl-guide">
           <h2>What good looks like</h2>
           <ul>
-            <li>Each risk is written as cause, event and effect, so anyone can see why it matters.</li>
-            <li>Likelihood and impact use the same 1 to 5 scale every time. The score is likelihood × impact.</li>
-            <li>Each risk has an owner by role, a treatment (reduce, accept, transfer or avoid) and a review date.</li>
+            <li>Each risk uses the same statement: there is a risk that a threat actor causes a threat event by exploiting a vulnerability, resulting in consequences.</li>
+            <li>Business impact and threat likelihood use the same 1 to 5 scales every time. Risk severity is impact × likelihood.</li>
+            <li>Each risk has an accountable role, a risk owner by role, a treatment (reduce, accept, transfer or avoid) and a review date.</li>
             <li>Accepted risks are accepted by the right person, and you record that.</li>
           </ul>
-          <p class="tpl-example-text"><strong>Short worked example:</strong> “Because admin accounts can delete any booking, there is a risk that a compromised admin account is used to cancel bookings, which would disrupt meetings.” Likelihood 2, impact 3, score 6 (medium). Treatment: reduce, with MFA and alerts on bulk cancellations.</p>
+          <p class="tpl-example-text"><strong>Short worked example:</strong> R1: “There is a risk that a criminal using a stolen password signs in as a facilities admin by exploiting a reused password, resulting in bookings being cancelled across all offices.” Impact 3, likelihood 2, severity 6 (medium). Treatment: reduce, with MFA and alerts on bulk cancellations.</p>
         </div>
         <h2 class="tpl-fill-h" id="risks-fill">Fill it in</h2>
         <p class="tpl-status" role="status"></p>
@@ -118,6 +126,6 @@
     </div>
   </footer>
 
-  <script src="/architect-templates.js?v=6c1b6b152e" defer></script>
+  <script src="/architect-templates.js?v=f3fd917f38" defer></script>
 </body>
 </html>
