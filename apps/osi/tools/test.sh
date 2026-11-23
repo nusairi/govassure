@@ -147,6 +147,42 @@ if 'app.css?v=hwcard3' not in index or 'tutorial.css?v=hwlife9' not in tutorial 
 else:
     print("OK live cache-bust release tags left in place")
 
+puzzle = (out/"rings-puzzle.html").read_text(encoding="utf-8")
+puzzle_js = (out/"rings-puzzle.js").read_text(encoding="utf-8")
+if "https://osi.govassured.com/rings-puzzle" not in sitemap:
+    print("BAD sitemap.xml missing /rings-puzzle"); ok=False
+else:
+    print("OK sitemap.xml lists /rings-puzzle")
+if "noindex" in puzzle.lower() and 'name="robots"' in puzzle.lower():
+    print("BAD rings-puzzle.html should be indexable (no noindex)"); ok=False
+else:
+    print("OK rings-puzzle.html has no noindex")
+legal = "not a government website" in puzzle or ("not affiliated with or endorsed by NCSC, the Cabinet Office or any UK government department" in puzzle)
+if not legal:
+    print("BAD rings-puzzle.html missing the small footer legal line"); ok=False
+else:
+    print("OK rings-puzzle.html has the footer legal line")
+if 'href="/rings-puzzle"' not in index or 'title="Which Ring? learning game"' not in index or ">Puzzle<" not in index:
+    print("BAD index.html missing the Puzzle header link"); ok=False
+else:
+    print("OK index.html links to /rings-puzzle as Puzzle")
+if 'href="/rings-puzzle"' not in tutorial or "Practice: Which Ring?" not in tutorial:
+    print("BAD tutorial.html missing the Practice: Which Ring? link"); ok=False
+else:
+    print("OK tutorial.html links to /rings-puzzle")
+if "/matrix" in puzzle or "checklist" in puzzle:
+    print("BAD rings-puzzle.html links to matrix or checklist"); ok=False
+else:
+    print("OK rings-puzzle.html does not link to /matrix or /checklist")
+if any(w in puzzle_js for w in ("innerHTML", "eval(", "new Function", "document.write")):
+    print("BAD rings-puzzle.js uses innerHTML/eval/document.write"); ok=False
+else:
+    print("OK rings-puzzle.js writes text only (no innerHTML/eval)")
+if 'hw-cards.js?v=allcards1' not in puzzle or 'hw-cards.js?v=allcards1' not in index:
+    print("BAD hw-cards.js cache-bust is not consistent with index"); ok=False
+else:
+    print("OK hw-cards.js cache-bust matches index")
+
 cfg=json.loads((out/"staticwebapp.config.json").read_text())
 hdrs=cfg.get("globalHeaders",{})
 want_csp="default-src 'none'; script-src 'self'; style-src 'self' 'sha256-vRc79FC9uPLJlMuhzrYFCDJ3KB7kvZCZDT5FD50nWoo='; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; manifest-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
@@ -184,7 +220,7 @@ need={
 if not need <= routes:
     print("BAD missing or wrong clean-URL routes"); ok=False
 else:
-    print("OK /tutorial /checklist /og /matrix /matrix/game /matrix/tools routes")
+    print("OK /tutorial /rings-puzzle /checklist /og /matrix /matrix/game /matrix/tools routes")
 mt=cfg.get("mimeTypes",{})
 if mt.get(".webmanifest")!="application/manifest+json":
     print("BAD webmanifest MIME type"); ok=False
@@ -215,11 +251,11 @@ for pg in PAGES:
     if _re.search(r"\son[a-z]+\s*=", html) or 'style="' in html:
         print(f"BAD {pg} has inline event handlers or style attributes"); ok=False
     print(f"OK {pg}: noindex, links home, no inline script/style/handlers")
-for pg in ["index.html", "tutorial.html", "checklist.html", "404.html"]:
+for pg in ["index.html", "tutorial.html", "checklist.html", "404.html", "rings-puzzle.html"]:
     h = (out/pg).read_text(encoding="utf-8")
     if "/matrix" in h or "game.html" in h or "tools.html" in h:
         print(f"BAD {pg} links to the matrix pages"); ok=False
-print("OK matrix, game and tool list not linked from index/tutorial/checklist/404")
+print("OK matrix, game and tool list not linked from index/tutorial/checklist/404/rings-puzzle")
 alltext = "".join((out/f).read_text(encoding="utf-8") for f in PAGES + JS)
 urls = set(_re.findall(r"https?://[^\s\"'<>)]+", alltext))
 badu = sorted(u for u in urls if not allowed.match(u))

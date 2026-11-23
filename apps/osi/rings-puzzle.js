@@ -14,6 +14,9 @@
   ];
   const clueOverrides = {
     "NIC firmware": "Software built into a network adapter that controls how the hardware operates. It can be updated separately from the operating system.",
+    UEFI: "UEFI is the modern firmware that starts your PC before the operating system loads. Every boot passes through it first.",
+    "TPM 2.0": "A TPM (Trusted Platform Module) 2.0 is a small built-in security chip that holds keys and records what actually booted, so later checks can be trusted.",
+    "SPDX/CycloneDX": "SPDX and CycloneDX are common standard formats for publishing a software bill of materials (SBOM), so tools can read the same parts list from different vendors.",
     QUIC: "QUIC sends several independent streams over one encrypted connection. It runs over UDP and powers HTTP/3."
   };
   const layerGuides = [
@@ -91,6 +94,49 @@
       8: "People and policies decide who may sign in. Focus on how the system remembers a login after it has happened."
     }
   };
+
+  function clueFor(name) {
+    if (clueOverrides[name]) return clueOverrides[name];
+    const packs = window.OSI_LAYER_CARDS || {};
+    const card = (packs.cards && packs.cards[name]) || (packs.cross && packs.cross[name]);
+    return (card && card.what) || "";
+  }
+
+  function applyTheme(t) {
+    if (t !== "dark" && t !== "light" && t !== "auto") t = "dark";
+    try { localStorage.setItem("osi-theme", t); } catch (e) {}
+    const root = document.documentElement;
+    const prefersLight = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches;
+    root.setAttribute("data-theme-pref", t);
+    root.setAttribute("data-theme", t === "auto" ? (prefersLight ? "light" : "dark") : t);
+    const themeSeg = document.getElementById("themeSeg");
+    if (themeSeg) {
+      themeSeg.querySelectorAll("button[data-set]").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.getAttribute("data-set") === t));
+      });
+    }
+  }
+
+  function initTheme() {
+    let pref = "dark";
+    try { pref = localStorage.getItem("osi-theme") || "dark"; } catch (e) {}
+    applyTheme(pref);
+    const themeSeg = document.getElementById("themeSeg");
+    if (themeSeg) {
+      themeSeg.addEventListener("click", event => {
+        const button = event.target.closest("button[data-set]");
+        if (button) applyTheme(button.getAttribute("data-set"));
+      });
+    }
+    if (window.matchMedia) {
+      matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
+        let t = "dark";
+        try { t = localStorage.getItem("osi-theme") || "dark"; } catch (e) {}
+        if (t === "auto") applyTheme("auto");
+      });
+    }
+  }
+
   const svgNS = "http://www.w3.org/2000/svg";
   const card = document.querySelector("#card");
   const title = document.querySelector("#card-title");
@@ -133,36 +179,34 @@
     const [ring, button] = targets.get(missedLayer.n);
     ring.classList.remove("miss");
     button.classList.remove("miss");
-    button.nextElementSibling.textContent = "";
+    button.closest(".layer-lane").querySelector(".lane-hint").textContent = "";
     missedLayer = null;
   }
 
-  function addTargetEvents(element, layer) {
-    element.addEventListener("pointerenter", () => {
+  function addLaneEvents(button, layer) {
+    button.addEventListener("pointerenter", () => {
       if (!dragging && current && !matched) setHighlight(layer);
     });
-    element.addEventListener("pointerleave", () => {
+    button.addEventListener("pointerleave", () => {
       if (!dragging && highlighted === layer) setHighlight(null);
     });
-    if (element.tagName === "BUTTON") {
-      element.addEventListener("focus", () => {
-        if (current && !matched) setHighlight(layer);
-      });
-      element.addEventListener("blur", () => {
-        if (highlighted === layer) setHighlight(null);
-      });
-    }
-    element.addEventListener("click", () => place(layer));
-    element.addEventListener("dragover", event => {
+    button.addEventListener("focus", () => {
+      if (current && !matched) setHighlight(layer);
+    });
+    button.addEventListener("blur", () => {
+      if (highlighted === layer) setHighlight(null);
+    });
+    button.addEventListener("click", () => place(layer));
+    button.addEventListener("dragover", event => {
       if (!dragging || matched) return;
       event.preventDefault();
       event.dataTransfer.dropEffect = "move";
       setHighlight(layer);
     });
-    element.addEventListener("dragleave", event => {
-      if (highlighted === layer && !element.contains(event.relatedTarget)) setHighlight(null);
+    button.addEventListener("dragleave", event => {
+      if (highlighted === layer && !button.contains(event.relatedTarget)) setHighlight(null);
     });
-    element.addEventListener("drop", event => {
+    button.addEventListener("drop", event => {
       if (!dragging) return;
       event.preventDefault();
       dragging = false;
@@ -205,25 +249,25 @@
     number.textContent = layer.n;
     const text = document.createElement("span");
     const name = document.createElement("strong");
-    const guide = document.createElement("span");
     name.textContent = layer.name;
+    text.append(name);
+    button.append(number, text);
+    button.dataset.layer = String(layer.n);
+    const guide = document.createElement("p");
     guide.className = "layer-guide";
     guide.id = `layer-guide-${layer.n}`;
     guide.textContent = layerGuides[layer.n];
     const result = document.createElement("span");
     result.className = "layer-result";
-    text.append(name, guide);
-    button.append(number, text, result);
     button.setAttribute("aria-describedby", guide.id);
-    button.setAttribute("aria-label", `Layer ${layer.n}, ${layer.name}`);
-    lane.append(button, hint);
+    lane.append(button, result, guide, hint);
     layerList.append(lane);
 
+    lane.style.setProperty("--layer-colour", layer.colour);
+    ring.style.setProperty("--layer-colour", layer.colour);
+    button.style.setProperty("--layer-colour", layer.colour);
     targets.set(layer.n, [ring, button, marker]);
-    for (const element of targets.get(layer.n)) {
-      element.style.setProperty("--layer-colour", layer.colour);
-      if (element !== marker) addTargetEvents(element, layer);
-    }
+    addLaneEvents(button, layer);
   }
 
   function place(layer) {
@@ -232,12 +276,16 @@
     if (layer !== current.layer) {
       wrongGuesses++;
       missedLayer = layer;
-      for (const element of targets.get(layer.n)) element.classList.add("miss");
+      const [ring, button] = targets.get(layer.n);
+      ring.classList.add("miss");
+      button.classList.add("miss");
       feedback.dataset.result = "retry";
       const guessContext = `${layer.name} covers ${guessedRoles[layer.n]}.`;
-      const hint = `Hint: ${specificHints[current.name]?.[layer.n] || `${guessContext} ${cardPrompts[current.name]}`}`;
-      targets.get(layer.n)[1].nextElementSibling.textContent = hint;
+      const hint = `Not Layer ${layer.n}. ${specificHints[current.name]?.[layer.n] || `${guessContext} ${cardPrompts[current.name]}`}`;
+      button.closest(".layer-lane").querySelector(".lane-hint").textContent = hint;
       feedback.textContent = hint;
+      const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      button.scrollIntoView({ block: "nearest", inline: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
       return;
     }
 
@@ -251,7 +299,7 @@
     ring.classList.add("matched");
     button.classList.add("matched");
     marker.classList.add("matched");
-    button.querySelector(".layer-result").textContent = current.name;
+    button.closest(".layer-lane").querySelector(".layer-result").textContent = current.name;
     roundProgress.value = position + 1;
     progress.textContent = `${position + 1} of ${round.length} matched`;
     feedback.dataset.result = "correct";
@@ -272,7 +320,7 @@
     feedback.textContent = "";
     progress.textContent = `Card ${position + 1} of ${round.length} · ${position} matched`;
     title.textContent = current.name;
-    clue.textContent = clueOverrides[current.name] || window.HWCards.description(current.name);
+    clue.textContent = clueFor(current.name);
   }
 
   function startRound(firstRound = false) {
@@ -300,7 +348,7 @@
       ring.classList.remove("matched");
       button.classList.remove("matched");
       marker.classList.remove("matched");
-      button.querySelector(".layer-result").textContent = "";
+      button.closest(".layer-lane").querySelector(".layer-result").textContent = "";
     }
     layerList.querySelectorAll("button").forEach(button => { button.disabled = false; });
     review.hidden = true;
@@ -361,5 +409,6 @@
     startRound();
     title.focus();
   });
+  initTheme();
   startRound(true);
 })();

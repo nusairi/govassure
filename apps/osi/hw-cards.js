@@ -1129,7 +1129,6 @@
   window.HWCards = {
     has: function (name, scope) { return !!findCard(name, scope); },
     threat: function (name) { return !!THREATS[name]; },
-    description: function (name) { return CARDS[name] && CARDS[name].what; },
     openCard: openCard,
     openThreat: openThreat,
     close: close,
