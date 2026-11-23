@@ -18,7 +18,7 @@ cp "$(dirname "$0")/swa-config.json" "$OUT/staticwebapp.config.json"
 python3 - "$OUT" <<'PY'
 import sys,re,hashlib,base64,pathlib
 root=pathlib.Path(sys.argv[1]); want="vRc79FC9uPLJlMuhzrYFCDJ3KB7kvZCZDT5FD50nWoo="
-for f in ["index.html","404.html","tutorial.html","checklist.html","matrix.html","game.html","tools.html"]:
+for f in ["index.html","404.html","tutorial.html","checklist.html","matrix.html","game.html","rings-puzzle.html","tools.html"]:
     s=(root/f).read_text(); m=re.search(r'<style id="ga-brand">(.*?)</style>',s,re.S)
     if not m:
         raise SystemExit(f"{f}: missing ga-brand style")

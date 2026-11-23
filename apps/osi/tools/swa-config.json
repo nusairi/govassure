@@ -10,6 +10,15 @@
   },
   "routes": [
     {
+      "route": "/rings-puzzle",
+      "rewrite": "/rings-puzzle.html"
+    },
+    {
+      "route": "/rings-puzzle.html",
+      "redirect": "/rings-puzzle",
+      "statusCode": 301
+    },
+    {
       "route": "/matrix",
       "rewrite": "/matrix.html"
     },

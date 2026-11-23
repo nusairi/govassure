@@ -11,6 +11,7 @@ The page is part of [GOV Assured](https://www.govassured.com). The company repos
 - `checklist.html`, `checklist.js`, `checklist.css`, `checklist-data.js`: the unlisted hardware assurance checklist.
 - `downloads/hardware-assurance-checklist.xlsx`: the offline assessment workbook served from the checklist page.
 - `matrix.html`, `matrix.js`, `matrix.css`, `matrix-data.js`: the unlisted protection matrix workshop page at `/matrix` (one row per ring, L0 to L8, generic examples marked "Example:", saved only in the browser, CSV export/import, presenter mode, landscape print). It reuses layer names, colours and threats from `data.js`.
+- `rings-puzzle.html`, `rings-puzzle.js`, `rings-puzzle.css`: the “Which Ring?” team puzzle at `/rings-puzzle`, linked from the rings page. Each round uses one existing OSI card per layer.
 - `game.html`, `game.js`, `game.css`, `game-data.js`: the unlisted workshop game "Guard the building" at `/matrix/game` (two rounds: which layer, which tool; team scores saved only in the browser).
 - `our-tools.js`: "Our tools", tools the user types in (any vendor), saved only in the browser, with JSON/CSV export and import and quick-add suggestions; used by the matrix picker, the tool list (`tools-page.js`) and the game.
 - `tools.html` and `ms-tools.js`: the unlisted handout "Which tool covers what" at `/matrix/tools` (Microsoft security tools commonly used at each layer, with Microsoft Learn links). `ms-tools.js` is shared by the matrix tool picker and the game.

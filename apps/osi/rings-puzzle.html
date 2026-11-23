@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Which Ring? | OSI Security Rings</title>
+<link rel="icon" href="/favicon.svg">
+<script src="/theme-init.js?v=591d7f7067"></script>
+<link rel="stylesheet" href="/app.css?v=hwcard3">
+<style id="ga-brand">.ga-brandbar{box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto;align-self:stretch;width:100%;height:44px;margin:0;padding:0 16px;background:#0b2318;border-bottom:1px solid rgba(240,201,135,.35);position:relative;z-index:1000;font-size:0;line-height:0}.ga-brandbar a.ga-brandbar__home{display:inline-flex;align-items:center;padding:2px;margin:0;border:0;border-radius:4px;background:none;text-decoration:none;box-shadow:none}.ga-brandbar a.ga-brandbar__home:focus,.ga-brandbar a.ga-brandbar__home:focus-visible{outline:3px solid #f0c987;outline-offset:2px}.ga-brandbar img{display:block;height:30px;width:auto;max-width:none;margin:0;padding:0;border:0}</style>
+<link rel="stylesheet" href="/ga-theme.css?v=d0331a7aa7">
+<link rel="stylesheet" href="/ga-app.css?v=f0dba3f7c8">
+<link rel="stylesheet" href="/rings-puzzle.css?v=7">
+<script src="/data.js?v=d9ee6f274a" defer></script>
+<script src="/layer-cards.js?v=allcards1" defer></script>
+<script src="/hw-cards.js?v=puzzle1" defer></script>
+<script src="/rings-puzzle.js?v=7" defer></script>
+</head>
+<body>
+<div class="ga-brandbar"><a class="ga-brandbar__home" href="https://www.govassured.com/"><img src="/ga-logo.png" width="95" height="30" alt="GOV Assured home"></a></div>
+
+<div class="puzzle">
+  <nav aria-label="OSI navigation"><a href="/">OSI Security Rings</a></nav>
+  <header class="puzzle-intro">
+    <div>
+      <h1>Which Ring?</h1>
+      <p>Read the card together, then find where it belongs.</p>
+    </div>
+    <button class="btn" id="restart" type="button">New round</button>
+  </header>
+
+  <main class="puzzle-grid">
+    <section class="card-column" aria-label="Team card">
+      <div class="scoreboard">
+        <p id="progress"></p>
+        <p class="score-total"><strong id="team-score">0</strong> pts</p>
+      </div>
+      <progress id="round-progress" value="0" max="9" aria-label="Cards matched"></progress>
+      <details class="score-rules">
+        <summary>How scoring works</summary>
+        <p>Earn 100 points on your first try, 75 on your second, or 50 on any later try. Open the explainer whenever you like.</p>
+      </details>
+      <article class="puzzle-card" id="card" draggable="true" aria-labelledby="card-title">
+        <div class="card-top">
+          <span class="card-graphic" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="card-grip" aria-hidden="true"></span>
+        </div>
+        <h2><button class="card-name" id="card-title" type="button" aria-haspopup="dialog"></button></h2>
+        <p id="clue"></p>
+        <p class="read-prompt">Select the card name to read the full explainer.</p>
+      </article>
+      <p id="feedback" role="status" aria-atomic="true"></p>
+      <button class="btn next" id="next" type="button" hidden>Next card</button>
+      <section id="review" hidden aria-labelledby="review-title">
+        <h2 id="review-title" tabindex="-1">Round complete</h2>
+        <p class="round-score" id="round-score"></p>
+        <p>Open any match to review its full explainer and sources.</p>
+        <ul id="matches"></ul>
+      </section>
+      <noscript><p>Enable JavaScript to play the puzzle.</p></noscript>
+    </section>
+    <section class="puzzle-board" aria-labelledby="board-title">
+      <h2 id="board-title">Choose a layer</h2>
+      <p class="board-instructions">Drag the card into a lane, or select a lane to place it.</p>
+      <div id="layers" class="layer-list"></div>
+      <p class="board-note">Layers 0 and 8 extend the standard seven-layer OSI model.</p>
+    </section>
+    <section class="ring-figure" aria-labelledby="ring-map-title">
+      <h2 id="ring-map-title">Ring map</h2>
+      <svg id="rings" viewBox="-10 -10 340 340" aria-hidden="true">
+        <circle class="ring-rim" cx="160" cy="160" r="163"/>
+        <path class="ring-axis" d="M-6 160H326M160 -6V326"/>
+      </svg>
+    </section>
+  </main>
+</div>
+</body>
+</html>

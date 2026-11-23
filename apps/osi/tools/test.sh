@@ -62,6 +62,9 @@ ms-tools.js
 og.html
 og.png
 our-tools.js
+rings-puzzle.css
+rings-puzzle.html
+rings-puzzle.js
 robots.txt
 site.webmanifest
 sitemap.xml
@@ -81,7 +84,7 @@ tutorial.js
 got="$(cd "$OUT" && find . -type f | sed 's|^\./||' | sort)"
 want="$(printf '%s\n' $expected | sed '/^$/d' | sort)"
 if [ "$got" = "$want" ]; then
-  ok "56 published files"
+  ok "published file set"
 else
   bad "file set differs"
   printf '%s\n' "$want" > /tmp/osi-test-want.txt
@@ -163,6 +166,8 @@ for k,v in {
         print(f"BAD header {k}"); ok=False
 routes={(r.get("route"), r.get("rewrite"), r.get("redirect"), r.get("statusCode")) for r in cfg.get("routes",[])}
 need={
+    ("/rings-puzzle", "/rings-puzzle.html", None, None),
+    ("/rings-puzzle.html", None, "/rings-puzzle", 301),
     ("/checklist", "/checklist.html", None, None),
     ("/checklist.html", None, "/checklist", 301),
     ("/tutorial", "/tutorial.html", None, None),
