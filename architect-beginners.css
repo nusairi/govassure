@@ -1,4 +1,4 @@
-/* Beginner path (/architect/beginners/) */
+/* Beginner path (/architect/beginners/ and its step pages) */
 .beg-progress {
   margin: 1.4rem 0 0;
   padding: 0.95rem 1.15rem;
@@ -36,10 +36,7 @@
 }
 
 .beg-toc { max-width: 46rem; }
-.beg-step {
-  scroll-margin-top: 1rem;
-  padding-bottom: 0.4rem;
-}
+.beg-step { scroll-margin-top: 1rem; padding-bottom: 0.4rem; }
 .beg-step-kicker {
   margin: 0 0 0.35rem;
   font-size: 0.9rem;
@@ -48,6 +45,97 @@
   text-transform: uppercase;
   color: var(--gold);
 }
+
+/* Overview step cards */
+.beg-step-cards {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 46rem;
+}
+.beg-step-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.85rem;
+  align-items: center;
+  min-height: 4.5rem;
+  padding: 0.85rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--raised);
+  color: var(--ink);
+  text-decoration: none;
+}
+.beg-step-card:hover { border-color: var(--gold); }
+.beg-step-card.is-done { border-left: 5px solid var(--gold); }
+.beg-step-card-num {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--field);
+  font-weight: 700;
+}
+.beg-step-card-title {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+}
+.beg-step-card-meta {
+  display: block;
+  margin: 0.15rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.beg-step-card-status {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  white-space: nowrap;
+}
+.beg-step-card.is-done .beg-step-card-status { color: var(--gold); }
+
+/* Step rail */
+.beg-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin: 0 0 1.1rem;
+  max-width: 46rem;
+}
+.beg-rail ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.beg-rail a, .beg-rail [aria-current="page"] {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+.beg-rail a:hover { border-color: var(--gold); color: var(--gold); }
+.beg-rail [aria-current="page"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--field);
+}
+
+/* Videos, checks, done — shared with step pages */
 .beg-videos {
   display: grid;
   gap: 0.85rem;
@@ -69,7 +157,7 @@
   font-weight: 700;
   color: var(--gold-deep);
 }
-.beg-video h3 {
+.beg-video h2, .beg-video h3 {
   margin: 0 0 0.4rem;
   font-family: var(--serif);
   font-size: 1.15rem;
@@ -83,6 +171,7 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(16, 46, 38, 0.45);
+  max-width: 46rem;
 }
 .beg-check p { margin: 0 0 0.6rem; }
 .beg-check details { margin: 0; }
@@ -106,6 +195,7 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--raised);
+  max-width: 46rem;
 }
 .beg-done input[type="checkbox"] {
   flex: none;
@@ -114,10 +204,7 @@
   margin: 0.2rem 0 0;
   accent-color: var(--gold);
 }
-.beg-done label {
-  color: var(--ink);
-  font-weight: 700;
-}
+.beg-done label { color: var(--ink); font-weight: 700; }
 
 .beg-phases {
   display: grid;
@@ -132,29 +219,239 @@
   border-radius: 8px;
   background: var(--raised);
 }
-.beg-phase h3 {
+.beg-phase h2, .beg-phase h3 {
   margin: 0 0 0.3rem;
   font-size: 1.1rem;
 }
 .beg-phase p { margin: 0; color: var(--ink-soft); }
 
-.beg-glossary {
-  margin: 0;
-}
-.beg-glossary dt {
-  margin: 1rem 0 0.25rem;
-  color: var(--ink);
-  font-weight: 700;
-}
+.beg-glossary { margin: 0; }
+.beg-glossary dt { margin: 1rem 0 0.25rem; color: var(--ink); font-weight: 700; }
 .beg-glossary dt:first-child { margin-top: 0; }
-.beg-glossary dd {
-  margin: 0;
-  color: var(--ink-soft);
-}
+.beg-glossary dd { margin: 0; color: var(--ink-soft); }
 
 .beg-next-list { padding-left: 1.3rem; }
 .beg-next-list li { margin: 0.4rem 0; color: var(--ink-soft); }
-.beg-credit {
-  margin: 1.4rem 0 0;
+.beg-credit { margin: 1.4rem 0 0; font-size: 0.95rem; }
+
+/* Official guidance box */
+.beg-gov {
+  margin: 1.6rem 0 0;
+  padding: 1.05rem 1.15rem 1.15rem;
+  max-width: 46rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+}
+.beg-gov h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+.beg-gov > p { margin: 0 0 0.8rem; color: var(--ink-soft); }
+.beg-gov ul { margin: 0; padding: 0; list-style: none; }
+.beg-gov li { margin: 0 0 0.85rem; }
+.beg-gov li:last-child { margin-bottom: 0; }
+.beg-gov li a { font-weight: 700; }
+.beg-gov li p { margin: 0.25rem 0 0; color: var(--ink-soft); }
+.beg-gov-note { margin: 0.9rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+/* Explainer animation */
+.beg-anim {
+  margin: 0 0 1.4rem;
+  max-width: 46rem;
+}
+.beg-anim-stage {
+  margin: 0;
+  padding: 0.6rem 0.6rem 0.2rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--ink);
+}
+.beg-anim-stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.beg-anim-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.7rem 1rem;
+  margin: 0.65rem 0 0;
+}
+.beg-anim-toggle {
+  flex: none;
+  min-width: 5.5rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--gold);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.beg-anim-toggle:hover { background: rgba(240, 201, 135, 0.12); }
+.beg-anim figcaption {
+  flex: 1 1 12rem;
+  margin: 0;
+  color: var(--ink-soft);
   font-size: 0.95rem;
+}
+
+/* SVG token colours follow the site theme */
+.beg-fill-gold { fill: var(--gold); }
+.beg-fill-field { fill: var(--field); }
+.beg-fill-raised { fill: var(--raised); }
+.beg-stroke-gold { stroke: var(--gold); }
+.beg-stroke-line { stroke: var(--line); fill: none; }
+.beg-stroke-field { stroke: var(--field); fill: none; }
+.beg-phase-hi-1, .beg-phase-hi-2, .beg-phase-hi-3, .beg-phase-hi-4, .beg-phase-hi-5 {
+  fill: rgba(240, 201, 135, 0.08);
+  stroke: var(--line);
+}
+.beg-ink { fill: var(--ink); }
+.beg-ink-soft { fill: var(--ink-soft); }
+.beg-zone { fill: rgba(240, 201, 135, 0.08); stroke: var(--line); }
+.beg-zone-hot { fill: rgba(240, 201, 135, 0.18); stroke: var(--gold); }
+
+/* Motion: slow, no flicker. Play/pause uses inherited animation-play-state. */
+.beg-anim.is-paused,
+.beg-anim.is-paused * { animation-play-state: paused; }
+.beg-move { animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.beg-token { animation: beg-travel 12s ease-in-out infinite; }
+.beg-fade-a { animation: beg-fade-cycle 12s ease-in-out infinite; }
+.beg-fade-b { animation: beg-fade-cycle 12s ease-in-out infinite; animation-delay: -4s; }
+.beg-fade-c { animation: beg-fade-cycle 12s ease-in-out infinite; animation-delay: -8s; }
+.beg-pulse-live { animation: beg-soft-pulse 4s ease-in-out infinite; }
+.beg-shield { animation: beg-shield-drop 12s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.beg-crack { animation: beg-crack-in 12s ease-in-out infinite; }
+.beg-fill-line { animation: beg-write 12s ease-in-out infinite; }
+.beg-tick { animation: beg-tick-in 12s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.beg-sticky-1 { animation: beg-note 14s ease-in-out infinite; }
+.beg-sticky-2 { animation: beg-note 14s ease-in-out infinite; animation-delay: -4.5s; }
+.beg-sticky-3 { animation: beg-note 14s ease-in-out infinite; animation-delay: -9s; }
+.beg-phase-dot { animation: beg-phase-walk 14s ease-in-out infinite; }
+.beg-phase-hi-1 { animation: beg-phase-hi 14s ease-in-out infinite; }
+.beg-phase-hi-2 { animation: beg-phase-hi 14s ease-in-out infinite; animation-delay: -2.8s; }
+.beg-phase-hi-3 { animation: beg-phase-hi 14s ease-in-out infinite; animation-delay: -5.6s; }
+.beg-phase-hi-4 { animation: beg-phase-hi 14s ease-in-out infinite; animation-delay: -8.4s; }
+.beg-phase-hi-5 { animation: beg-phase-hi 14s ease-in-out infinite; animation-delay: -11.2s; }
+
+@keyframes beg-travel {
+  0%, 8% { transform: translate(0, 0); }
+  22% { transform: translate(130px, 0); }
+  36% { transform: translate(260px, 0); }
+  50% { transform: translate(390px, 0); }
+  64% { transform: translate(520px, 0); }
+  78%, 100% { transform: translate(520px, 0); opacity: 1; }
+}
+@keyframes beg-fade-cycle {
+  0%, 8% { opacity: 0.35; }
+  16%, 28% { opacity: 1; }
+  40%, 100% { opacity: 0.35; }
+}
+@keyframes beg-soft-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes beg-shield-drop {
+  0%, 28% { opacity: 0; transform: translateY(-12px) scale(0.85); }
+  40%, 82% { opacity: 1; transform: translateY(0) scale(1); }
+  96%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+@keyframes beg-crack-in {
+  0%, 18% { opacity: 0; }
+  26%, 70% { opacity: 1; }
+  86%, 100% { opacity: 0; }
+}
+@keyframes beg-write {
+  0%, 12% { opacity: 0; }
+  20%, 82% { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+@keyframes beg-tick-in {
+  0%, 60% { opacity: 0; transform: scale(0.7); }
+  72%, 90% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+@keyframes beg-note {
+  0%, 10% { opacity: 0.25; }
+  20%, 42% { opacity: 1; }
+  55%, 100% { opacity: 0.25; }
+}
+@keyframes beg-phase-walk {
+  0%, 8% { transform: translate(0, 0); }
+  20% { transform: translate(118px, 0); }
+  36% { transform: translate(236px, 0); }
+  52% { transform: translate(354px, 0); }
+  68%, 84% { transform: translate(472px, 0); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes beg-phase-hi {
+  0%, 6% { stroke: var(--line); fill: rgba(240, 201, 135, 0.08); }
+  10%, 18% { stroke: var(--gold); fill: rgba(240, 201, 135, 0.22); }
+  28%, 100% { stroke: var(--line); fill: rgba(240, 201, 135, 0.08); }
+}
+
+/* Login token travels through three gates (step 3 uses a shorter travel). */
+.beg-token-iam { animation: beg-iam 12s ease-in-out infinite; }
+@keyframes beg-iam {
+  0%, 8% { transform: translate(0, 0); }
+  25% { transform: translate(150px, 0); }
+  45% { transform: translate(310px, 0); }
+  65%, 82% { transform: translate(470px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+.beg-token-net { animation: beg-net 13s ease-in-out infinite; }
+@keyframes beg-net {
+  0%, 8% { transform: translate(0, 0); }
+  28% { transform: translate(140px, 0); }
+  48% { transform: translate(290px, 0); }
+  70%, 86% { transform: translate(440px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beg-anim:not(.is-playing) .beg-move,
+  .beg-anim:not(.is-playing) .beg-token,
+  .beg-anim:not(.is-playing) .beg-token-iam,
+  .beg-anim:not(.is-playing) .beg-token-net,
+  .beg-anim:not(.is-playing) .beg-fade-a,
+  .beg-anim:not(.is-playing) .beg-fade-b,
+  .beg-anim:not(.is-playing) .beg-fade-c,
+  .beg-anim:not(.is-playing) .beg-pulse-live,
+  .beg-anim:not(.is-playing) .beg-shield,
+  .beg-anim:not(.is-playing) .beg-crack,
+  .beg-anim:not(.is-playing) .beg-fill-line,
+  .beg-anim:not(.is-playing) .beg-tick,
+  .beg-anim:not(.is-playing) .beg-sticky-1,
+  .beg-anim:not(.is-playing) .beg-sticky-2,
+  .beg-anim:not(.is-playing) .beg-sticky-3,
+  .beg-anim:not(.is-playing) .beg-phase-dot,
+  .beg-anim:not(.is-playing) .beg-phase-hi-1,
+  .beg-anim:not(.is-playing) .beg-phase-hi-2,
+  .beg-anim:not(.is-playing) .beg-phase-hi-3,
+  .beg-anim:not(.is-playing) .beg-phase-hi-4,
+  .beg-anim:not(.is-playing) .beg-phase-hi-5 {
+    animation: none;
+  }
+  /* Static frame: keep labels and mid-story state visible */
+  .beg-anim:not(.is-playing) .beg-shield,
+  .beg-anim:not(.is-playing) .beg-crack,
+  .beg-anim:not(.is-playing) .beg-fill-line,
+  .beg-anim:not(.is-playing) .beg-tick,
+  .beg-anim:not(.is-playing) .beg-sticky-1,
+  .beg-anim:not(.is-playing) .beg-sticky-2,
+  .beg-anim:not(.is-playing) .beg-sticky-3 {
+    opacity: 1;
+    transform: none;
+  }
+  .beg-anim:not(.is-playing) .beg-fade-a,
+  .beg-anim:not(.is-playing) .beg-fade-b,
+  .beg-anim:not(.is-playing) .beg-fade-c {
+    opacity: 1;
+  }
 }

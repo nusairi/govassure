@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Identity and the devices people use (step 3 of 7) — GOV Assured</title>
+  <meta name="description" content="The first building blocks of a secure service: checking who is asking, what they are allowed to do, and whether their device can be trusted.">
+  <link rel="canonical" href="https://www.govassured.com/architect/beginners/3-identity/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="author" content="GOV Assured">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="Identity and the devices people use (step 3 of 7) — GOV Assured">
+  <meta property="og:description" content="The first building blocks of a secure service: checking who is asking, what they are allowed to do, and whether their device can be trusted.">
+  <meta property="og:url" content="https://www.govassured.com/architect/beginners/3-identity/">
+  <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Identity and the devices people use (step 3 of 7) — GOV Assured">
+  <meta name="twitter:description" content="The first building blocks of a secure service: checking who is asking, what they are allowed to do, and whether their device can be trusted.">
+  <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
+  <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+  <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
+  <link rel="stylesheet" href="/architect.css?v=80322216e4">
+  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <nav class="arch-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/architect/">Security Architect Corner</a></li>
+          <li><a href="/architect/beginners/">Beginner path</a></li>
+          <li aria-current="page">Identity and the devices people use</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="band arch-hero" aria-labelledby="beg-title">
+      <div class="wrap">
+                  <nav class="beg-rail" aria-label="Steps">
+            <ol>
+            <li><a href="/architect/beginners/1-role/" aria-label="Step 1 of 7: What a security architect does">1</a></li>
+            <li><a href="/architect/beginners/2-principles/" aria-label="Step 2 of 7: Ideas that turn up everywhere">2</a></li>
+            <li><span aria-current="page" aria-label="Step 3 of 7: Identity and the devices people use">3</span></li>
+            <li><a href="/architect/beginners/4-networks-data/" aria-label="Step 4 of 7: Networks and data">4</a></li>
+            <li><a href="/architect/beginners/5-risk/" aria-label="Step 5 of 7: Thinking about risk and threats">5</a></li>
+            <li><a href="/architect/beginners/6-lifecycle/" aria-label="Step 6 of 7: How this fits the five-phase lifecycle">6</a></li>
+            <li><a href="/architect/beginners/7-first-exercise/" aria-label="Step 7 of 7: Your first exercise, and where to go next">7</a></li>
+            </ol>
+            <p class="beg-step-kicker">Step 3 of 7</p>
+          </nav>
+
+        <p class="eyebrow">Beginner path</p>
+        <h1 id="beg-title">Identity and the devices people use</h1>
+      </div>
+    </section>
+
+    <div class="band arch-section beg-step" id="step-3">
+      <div class="wrap arch-prose">
+
+          <figure class="beg-anim">
+            <div class="beg-anim-stage" aria-hidden="true">
+              <svg viewBox="0 0 640 240" focusable="false">
+                <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">A login moving through identity and device checks</text>
+                <line x1="50" y1="130" x2="590" y2="130" class="beg-stroke-line" stroke-width="2"/>
+                <g font-size="12" text-anchor="middle">
+                  <rect x="40" y="88" width="100" height="84" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="90" y="124" class="beg-ink" font-weight="700">Who are you?</text>
+                  <text x="90" y="146" class="beg-ink-soft">Password + code</text>
+                  <rect x="190" y="88" width="120" height="84" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="250" y="124" class="beg-ink" font-weight="700">Are you allowed?</text>
+                  <text x="250" y="146" class="beg-ink-soft">Only the access needed</text>
+                  <rect x="350" y="88" width="120" height="84" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="410" y="124" class="beg-ink" font-weight="700">Is the device OK?</text>
+                  <text x="410" y="146" class="beg-ink-soft">Known and up to date</text>
+                  <rect x="510" y="88" width="100" height="84" rx="8" class="beg-zone-hot" stroke-width="2"/>
+                  <text x="560" y="124" class="beg-ink" font-weight="700">Access</text>
+                  <text x="560" y="146" class="beg-ink-soft">Granted</text>
+                </g>
+                <circle class="beg-token-iam beg-fill-gold" cx="90" cy="200" r="8"/>
+                <text x="20" y="228" class="beg-ink-soft" font-size="13">Each request is checked in turn. A yes at the first gate is not enough on its own.</text>
+              </svg>
+            </div>
+            <div class="beg-anim-bar">
+              <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+              <figcaption>A login moves through three checks — who are you, are you allowed, and is the device in a trustworthy state — before access is granted. A pass at the first gate is not enough on its own.</figcaption>
+            </div>
+          </figure>
+
+        <p>Two of the first building blocks are <strong>who is asking</strong> and <strong>what they are asking from</strong>.</p>
+        <p><strong>Identity and access</strong> is about four plain questions: how do we set up and change someone's access, how do we check who they are, how do we check they are allowed to do this, and how do we later review that we got those three right? In many modern services, identity is more important than an old “inside the office network” boundary, because people connect from all over the place.</p>
+        <p><strong>Devices</strong> — laptops, phones, servers and other equipment — have to be trustworthy too. A strong login does not help much if it is coming from a computer that is out of date or no longer under the organisation's control.</p>
+        <p class="arch-callout">You do not need to know this yet: the identity video is the longest in the series (just over half an hour). You do not need to remember every tool it mentions. Aim to leave with the four questions above, and the idea that access should be taken away when it is no longer needed.</p>
+        <h2>Videos to watch</h2>
+        <ul class="beg-videos">
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · 31:15</p>
+              <h3><a href="https://www.youtube.com/watch?v=5uNifnVlBy4" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Who Are You? Identity and Access Management<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>Sets out the four questions — set up access, prove who someone is, check what they may do, and review it later. Useful later when you look at the Corner's Zero trust access pattern.</p>
+            </article>
+          </li>
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · 14:22</p>
+              <h3><a href="https://www.youtube.com/watch?v=Njqid_JpqTs" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Endpoints Are the IT Front Door - Guard Them<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>Explains why the device matters as well as the person, and why an organisation needs a clear way to manage laptops, phones and other equipment — including when people use their own devices.</p>
+            </article>
+          </li>
+        </ul>
+          <aside class="beg-gov" aria-labelledby="beg-gov-title">
+            <h2 id="beg-gov-title">What GOV.UK recommends</h2>
+            <p>Official guidance treats identity and the device as two halves of the same problem.</p>
+            <ul>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/collection/10-steps/identity-and-access-management" target="_blank" rel="noopener noreferrer">NCSC 10 Steps: Identity and access management<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>Covers proving who someone is, giving only the access they need, and reviewing that access over time — the same four questions as this step, in official language.</p>
+            </li>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/collection/device-security-guidance" target="_blank" rel="noopener noreferrer">NCSC device security guidance<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>Official advice on keeping laptops, phones and other devices in a known, trustworthy state, including when people use different kinds of equipment.</p>
+            </li>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/collection/zero-trust/architecture-design-principles" target="_blank" rel="noopener noreferrer">NCSC zero trust architecture design principles<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>These principles say you should not trust a request just because it comes from inside the network. You still check the user, the device and the access each time.</p>
+            </li>
+            </ul>
+          </aside>
+
+          <div class="beg-check">
+            <p><strong>Check your understanding.</strong> A service has strong logins, but staff can sign in from any personal laptop, including ones the organisation has never seen. What is missing?</p>
+            <details>
+              <summary>Show a good answer</summary>
+              <p>The team has thought about identity, but not about the device. They need to know which devices will touch the service, and have a way to tell whether those devices are up to date and still under some kind of control.</p>
+            </details>
+          </div>
+          <div class="beg-done">
+            <input type="checkbox" id="beg-done-3" data-beg-step="step-3">
+            <label for="beg-done-3">I have marked step 3 as done</label>
+          </div>
+        <p><a href="/architect/beginners/#glossary">Words you will see</a> are collected on the path overview.</p>
+
+          <nav class="tpl-pager" aria-label="Beginner path">
+            <a class="tpl-pager-prev" href="/architect/beginners/2-principles/" rel="prev"><span class="tpl-pager-label">Previous step</span> <span class="tpl-pager-title">Ideas that turn up everywhere</span></a>
+            <a class="tpl-pager-next" href="/architect/beginners/4-networks-data/" rel="next"><span class="tpl-pager-label">Next step</span> <span class="tpl-pager-title">Networks and data</span></a>
+          </nav>
+          <p class="tpl-top"><a href="/architect/beginners/">All steps</a></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>GOV Assured</strong> — an open source community for cyber security, resilience and assurance.</p>
+        <p class="footer-note">Not a government website. Not affiliated with or endorsed by NCSC or any UK government department.</p>
+      </div>
+      <div class="social">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.39.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12.02C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/architect-beginners.js?v=c3507241ff" defer></script>
+</body>
+</html>

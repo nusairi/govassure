@@ -26,6 +26,7 @@ js = (ROOT / "architect-templates.js").read_text(encoding="utf-8")
 arch = (ROOT / "architect" / "index.html").read_text(encoding="utf-8")
 
 pages = ["architect/templates", "architect/patterns", "architect/document-trail", "architect/beginners"]
+pages += [f"architect/beginners/{d.name}" for d in sorted((ROOT / "architect" / "beginners").iterdir()) if d.is_dir()]
 pages += [f"architect/templates/{t[1]}" for t in TEMPLATES]
 pages += [f"architect/patterns/{d.name}" for d in sorted((ROOT / "architect" / "patterns").iterdir()) if d.is_dir()]
 for p in pages:

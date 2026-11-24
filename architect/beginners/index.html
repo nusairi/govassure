@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New to security architecture? Start here — GOV Assured</title>
-  <meta name="description" content="A plain-English starting path for people new to security architecture: what the role is, a few basic ideas, a first exercise, and where to go next in the Security Architect Corner.">
+  <meta name="description" content="A plain-English starting path for people new to security architecture: seven short steps, official UK guidance, and a first exercise in the Security Architect Corner.">
   <link rel="canonical" href="https://www.govassured.com/architect/beginners/">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <meta name="author" content="GOV Assured">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="GOV Assured">
   <meta property="og:title" content="New to security architecture? Start here — GOV Assured">
-  <meta property="og:description" content="A plain-English starting path for people new to security architecture: what the role is, a few basic ideas, a first exercise, and where to go next in the Security Architect Corner.">
+  <meta property="og:description" content="A plain-English starting path for people new to security architecture: seven short steps, official UK guidance, and a first exercise in the Security Architect Corner.">
   <meta property="og:url" content="https://www.govassured.com/architect/beginners/">
   <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
   <meta property="og:image:width" content="1200">
@@ -20,14 +20,14 @@
   <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="New to security architecture? Start here — GOV Assured">
-  <meta name="twitter:description" content="A plain-English starting path for people new to security architecture: what the role is, a few basic ideas, a first exercise, and where to go next in the Security Architect Corner.">
+  <meta name="twitter:description" content="A plain-English starting path for people new to security architecture: seven short steps, official UK guidance, and a first exercise in the Security Architect Corner.">
   <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
   <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
   <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=c14e04e424">
+  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -51,7 +51,7 @@
     </div>
   </header>
 
-    <main id="main" tabindex="-1">
+  <main id="main" tabindex="-1">
     <div class="wrap">
       <nav class="arch-crumbs" aria-label="Breadcrumb">
         <ol>
@@ -66,7 +66,7 @@
       <div class="wrap">
         <p class="eyebrow">Security Architect Corner</p>
         <h1 id="beg-title">New to security architecture? Start here</h1>
-        <p class="lede">A gentle first path for people with no background in the role. Plain English, short steps, and a first exercise using tools already in this Corner. You do not need to know everything — or to watch every video in one sitting.</p>
+        <p class="lede">A gentle first path for people with no background in the role. Seven short pages, a moving explainer on each one, a look at what official UK guidance says, and a first exercise using tools already in this Corner.</p>
         <div class="beg-progress">
           <p class="beg-progress-label" id="beg-progress-status">0 of 7 steps marked as done</p>
           <progress id="beg-progress-bar" max="7" value="0" aria-labelledby="beg-progress-status">0 of 7 steps marked as done</progress>
@@ -74,295 +74,114 @@
         <nav class="arch-toc beg-toc" aria-label="On this page">
           <h2 class="arch-toc-h">On this page</h2>
           <ol>
-            <li><a href="#step-1">What a security architect does</a></li>
-            <li><a href="#step-2">Ideas that turn up everywhere</a></li>
-            <li><a href="#step-3">Identity and the devices people use</a></li>
-            <li><a href="#step-4">Networks and data</a></li>
-            <li><a href="#step-5">Thinking about risk and threats</a></li>
-            <li><a href="#step-6">How this fits the five-phase lifecycle</a></li>
-            <li><a href="#step-7">Your first exercise, and where to go next</a></li>
+            <li><a href="#beg-learn">What you will learn</a></li>
+            <li><a href="#beg-how">How to use this path</a></li>
+            <li><a href="#beg-steps">The seven steps</a></li>
             <li><a href="#glossary">Words you will see</a></li>
           </ol>
         </nav>
       </div>
     </section>
 
+
+    <section class="band arch-section" aria-labelledby="beg-learn">
+      <div class="wrap arch-prose">
+        <h2 id="beg-learn" class="section-title">What you will learn</h2>
+        <p>By the end of this path you will be able to:</p>
+        <ul>
+          <li>explain what a security architect does, in plain English, and how the role sits with the rest of a delivery team</li>
+          <li>use a few ideas that turn up in every phase, including defence in depth, least privilege, and confidentiality, integrity and availability</li>
+          <li>ask the first questions about identity, devices, networks and data</li>
+          <li>start a first threat-model sketch, and see how official UK guidance talks about the same work</li>
+          <li>place those ideas on the five-phase service lifecycle, including detection and response once a service is live</li>
+          <li>complete a first exercise using templates that already live in this Corner</li>
+        </ul>
+      </div>
+    </section>
     <section class="band arch-section" aria-labelledby="beg-how">
       <div class="wrap arch-prose">
         <h2 id="beg-how" class="section-title">How to use this path</h2>
-        <p>There are seven short steps. Each one has a little reading, one or two videos you can open when you have time, a quick question to check the idea has landed, and a box to tick when the step feels done. Ticks are saved on this device only. Nothing is sent to us.</p>
-        <p>The videos are from a public cybersecurity architecture series on the IBM Technology YouTube channel. They open in a new tab. We have written our own short summaries — you do not need to take notes from the soundtrack. If a video feels technical, skip on and come back later. You will not be behind.</p>
+        <p>Open the steps in order, or jump to the one you need. Each page has a short looping explainer, a little reading, official UK government or NCSC guidance, and one or two videos you can open when you have time. Tick “mark as done” on a step and it will show as done here. Ticks are saved on this device only. Nothing is sent to us.</p>
+        <p>The videos are from a public cybersecurity architecture series on the IBM Technology YouTube channel. They open in a new tab. We have written our own short summaries. If a video or animation feels like too much, use the pause control, or skip on and come back later. You will not be behind.</p>
+        <p>You do not need to know everything. The aim is a confident first pass, not a qualification.</p>
       </div>
     </section>
 
-    <section class="band arch-section beg-step" id="step-1" aria-labelledby="step-1-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 1 of 7</p>
-        <h2 id="step-1-title" class="section-title">What a security architect does</h2>
-        <p>A security architect helps a team design a service so it is safe enough for the people who use it and the information it holds, without making the service hard to use. In UK government you usually sit with the rest of the delivery team, alongside the service owner, technical architects, developers and the people who own the risk.</p>
-        <p>In practice the job comes down to four things, which this Corner already uses as its starting point:</p>
-        <ul>
-          <li><strong>Understand</strong> what the service does, what data it holds and what could go wrong.</li>
-          <li><strong>Design</strong> security into the service from the start, reusing patterns and platforms that already work.</li>
-          <li><strong>Explain</strong> risks in plain English so the right person can make a clear decision.</li>
-          <li><strong>Keep it secure</strong> as the service changes, and help close it down safely at the end.</li>
-        </ul>
-        <p>You do not need to build every control yourself. Specialists will implement firewalls, identity systems or encryption. Your job is to see the whole picture, ask how the design might fail, and make sure the important questions are asked early — not after everything is already built.</p>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 14:07</p>
-              <h3><a href="https://www.youtube.com/watch?v=E9pHJRRfAhw" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Roles and Tools<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>A plain comparison between planning a building and planning a system. The useful takeaway is the habit: understand how the service will work, then ask how it might fail, and get involved from the start rather than being asked to “make it secure” at the end.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> What is the main extra question a security architect asks, compared with someone who is only designing how a service will work?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>They also ask how the service might fail, and what should be in place before that happens. A typical design explains how the parts fit together. A security architect uses that picture to look for weak points, and to help the team fix them early.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-1" data-beg-step="step-1">
-            <label for="beg-done-1">I have marked step 1 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-2" aria-labelledby="step-2-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 2 of 7</p>
-        <h2 id="step-2-title" class="section-title">Ideas that turn up everywhere</h2>
-        <p>A few ideas come up again and again, in every phase of a service. You do not need a long list of jargon. If you can use these in a conversation, you already have a solid start.</p>
-        <ul>
-          <li><strong>Defence in depth</strong> means not relying on a single lock. If one control fails, another should still stand.</li>
-          <li><strong>Least privilege</strong> means giving people and systems only the access they need, only for as long as they need it.</li>
-          <li><strong>Secure by design</strong> means building security in from the first conversation, not bolting it on at the end.</li>
-          <li><strong>Keep it simple</strong> means the safe way should be the easy way. If the official path is too hard, people will go around it.</li>
-          <li><strong>Confidentiality, integrity and availability</strong> are a short checklist: who should see this, how would we know if it was changed, and will it still be there when people need it?</li>
-        </ul>
-        <p>One idea to avoid: hoping a system is safe because nobody knows how it works. Hiding the details is not the same as making something strong.</p>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 17:34</p>
-              <h3><a href="https://www.youtube.com/watch?v=jq_LZ1RFPfU" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Five Principles to Follow (and One to Avoid)<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Walks through the five habits above, and the one to avoid. The examples are everyday — doors, passwords, default settings — so you can follow it without a technical background.</p>
-            </article>
-          </li>
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 12:34</p>
-              <h3><a href="https://www.youtube.com/watch?v=EqNe55IzjAw" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Fundamentals of Confidentiality, Integrity, and Availability<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>A short explanation of the three-part checklist: keep information with the people who should see it, notice if records are changed, and keep the service available for the people who are allowed to use it.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> A team wants to “keep the design secret so attackers cannot work it out”. Which idea from this step should make you pause, and what would you suggest instead?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>That is hoping for safety through hiding how something works. A better approach is to use well-understood controls, give people only the access they need, and not rely on a single lock. The secret, if there is one, should be a key or password — not the design itself.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-2" data-beg-step="step-2">
-            <label for="beg-done-2">I have marked step 2 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-3" aria-labelledby="step-3-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 3 of 7</p>
-        <h2 id="step-3-title" class="section-title">Identity and the devices people use</h2>
-        <p>Two of the first building blocks are <strong>who is asking</strong> and <strong>what they are asking from</strong>.</p>
-        <p><strong>Identity and access</strong> is about four plain questions: how do we set up and change someone’s access, how do we check who they are, how do we check they are allowed to do this, and how do we later review that we got those three right? In many modern services, identity is more important than an old “inside the office network” boundary, because people connect from all over the place.</p>
-        <p><strong>Devices</strong> — laptops, phones, servers and other equipment — have to be trustworthy too. A strong login does not help much if it is coming from a computer that is out of date or no longer under the organisation’s control.</p>
-        <p class="arch-callout">You do not need to know this yet: the identity video is the longest in the series (just over half an hour). You do not need to remember every tool it mentions. Aim to leave with the four questions above, and the idea that access should be taken away when it is no longer needed.</p>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 31:15</p>
-              <h3><a href="https://www.youtube.com/watch?v=5uNifnVlBy4" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Who Are You? Identity and Access Management<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Sets out the four questions — set up access, prove who someone is, check what they may do, and review it later. Useful later when you look at the Corner’s Zero trust access pattern.</p>
-            </article>
-          </li>
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 14:22</p>
-              <h3><a href="https://www.youtube.com/watch?v=Njqid_JpqTs" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Endpoints Are the IT Front Door - Guard Them<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Explains why the device matters as well as the person, and why an organisation needs a clear way to manage laptops, phones and other equipment — including when people use their own devices.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> A service has strong logins, but staff can sign in from any personal laptop, including ones the organisation has never seen. What is missing?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>The team has thought about identity, but not about the device. They need to know which devices will touch the service, and have a way to tell whether those devices are up to date and still under some kind of control.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-3" data-beg-step="step-3">
-            <label for="beg-done-3">I have marked step 3 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-4" aria-labelledby="step-4-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 4 of 7</p>
-        <h2 id="step-4-title" class="section-title">Networks and data</h2>
-        <p>The other two building blocks you will hear about constantly are <strong>networks</strong> and <strong>data</strong>.</p>
-        <p>A network is how users, staff and other systems reach the service. A common approach is to divide it on purpose, so that a problem in one place cannot immediately reach everything else, and to allow only the traffic you mean to allow. The same idea applies when a service runs in the cloud. This series does not have a separate cloud video; when you are ready, use the Corner’s <a href="/architect/patterns/secure-cloud-landing-zone/">Secure cloud landing zone</a> pattern.</p>
-        <p>Data is often the reason the service exists, and the thing you most need to protect. Start by writing down what you hold, why you hold it, and how sensitive it is. Then you can talk about protection, such as limiting who can see it and encrypting it when that is needed, and about how you would recover if it was lost.</p>
-        <p class="arch-callout">You do not need to know this yet: the networks video is long and names a lot of products and patterns. Skip the product names. Keep the picture of dividing the network and only allowing the traffic you intend.</p>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 27:31</p>
-              <h3><a href="https://www.youtube.com/watch?v=sesacY7Xz3c" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Networks<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>A tour of dividing a network into zones, using firewalls, and protecting traffic that has to travel over a less trusted path. Later sections touch on newer “do not assume the inside is safe” ideas.</p>
-            </article>
-          </li>
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 14:48</p>
-              <h3><a href="https://www.youtube.com/watch?v=UpkqXK0B2E0" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Data Security<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Start with a simple plan: decide what is sensitive, find where that data lives, protect it, and know how you would notice and recover if something went wrong. This pairs naturally with the data and sensitivity summary in this Corner.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> A team can describe every server in their design, but nobody can say what personal information the service will hold or where it will be stored. Which building block still needs work, and what would you do first?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>Data. Before arguing about tools, write down what the service will hold, why, how sensitive it is, and where it will live. The Corner’s data and sensitivity summary is a good first template for that.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-4" data-beg-step="step-4">
-            <label for="beg-done-4">I have marked step 4 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-5" aria-labelledby="step-5-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 5 of 7</p>
-        <h2 id="step-5-title" class="section-title">Thinking about risk and threats</h2>
-        <p>Risk, in plain English, is the chance that something bad happens, and how bad it would be. A threat is a way that bad thing could happen — a mistake, a weak design, a supplier problem, or someone trying to break in.</p>
-        <p>You do not need a special personality for this. You need a habit: look at the service, ask “what could go wrong?”, decide which of those things matter most, and write that down so the person who owns the risk can make a decision. That is what the Corner’s <a href="/architect/templates/threat-model/">threat model</a> and <a href="/architect/templates/risk-register/">risk register</a> are for.</p>
-        <p>Software is one common source of problems. Defects are normal. The longer they sit unnoticed, the more they cost to fix, and the more likely they are to become something an attacker can use. It is much cheaper to think about this while the service is being designed than after it is already live.</p>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 16:36</p>
-              <h3><a href="https://www.youtube.com/watch?v=nthEXs12nFE" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Application Security<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Why waiting until the end to think about software security is a poor plan, and how teams can build checks into design, coding and testing instead of throwing work “over the wall”. You do not need the testing acronyms on a first watch.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> When is the most useful time to start asking “what could go wrong?” with a new service, and why?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>As early as you can, while the design is still easy to change. Finding a problem in discovery or alpha is cheaper and safer than finding it after the service is already built or live.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-5" data-beg-step="step-5">
-            <label for="beg-done-5">I have marked step 5 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-6" aria-labelledby="step-6-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 6 of 7</p>
-        <h2 id="step-6-title" class="section-title">How this fits the five-phase lifecycle</h2>
-        <p>UK public services are usually designed in five phases. This Corner already has a <a href="/architect/#lifecycle">lifecycle map</a> for each one, with what the architect does, the documents to start, and the questions to ask before moving on. The ideas from this path sit on that map; they do not replace it.</p>
-        <ul class="beg-phases">
-          <li class="beg-phase">
-            <h3><a href="/architect/#stage-discovery">1 Discovery</a></h3>
-            <p>Understand the problem before anyone designs a solution. This is when you ask what the service does, what data it will hold, and what could go wrong. The confidentiality, integrity and availability checklist from step 2 is especially useful here.</p>
-          </li>
-          <li class="beg-phase">
-            <h3><a href="/architect/#stage-alpha">2 Alpha</a></h3>
-            <p>Try different ways of building the service and pick the safest one that works. This is where identity, devices, networks and the “design it in from the start” habit earn their keep.</p>
-          </li>
-          <li class="beg-phase">
-            <h3><a href="/architect/#stage-beta">3 Beta</a></h3>
-            <p>Build the real service and prove it is secure enough to go live. Threat modelling, security testing and a clear design all belong here.</p>
-          </li>
-          <li class="beg-phase">
-            <h3><a href="/architect/#stage-live">4 Live</a></h3>
-            <p>Keep the service secure while it runs and changes. Prevention is not enough: you also need to notice problems and respond to them. The two videos below are for this phase. You can leave them until you are comfortable with the earlier steps.</p>
-          </li>
-          <li class="beg-phase">
-            <h3><a href="/architect/#stage-retirement">5 Retirement</a></h3>
-            <p>Close the service down without leaving data or access behind. The data questions from step 4 come back here: what do we still hold, and how will we dispose of it safely?</p>
-          </li>
-        </ul>
-        <ul class="beg-videos">
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 17:10</p>
-              <h3><a href="https://www.youtube.com/watch?v=VEu326IZpsc" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Detection<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Security is prevention plus detection plus response. This video is about bringing signals together so someone can actually see when something is wrong. It pairs with the Corner’s Logging to a SIEM pattern. You do not need to choose a product.</p>
-            </article>
-          </li>
-          <li>
-            <article class="beg-video">
-              <p class="beg-video-meta">YouTube · 16:57</p>
-              <h3><a href="https://www.youtube.com/watch?v=Jk79QJCxPkM" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Response<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
-              <p>Once you have noticed a problem, someone has to contain it and get the service back to a safe state. The video covers roles, practised plans, and the fact that some steps can be prepared in advance while others still need a person’s judgement.</p>
-            </article>
-          </li>
-        </ul>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> A team has locked down logins and encrypted their data, but nobody looks at logs and there is no plan for what to do if something gets through. Which lifecycle phase is under-prepared, and what is missing?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>Live. They have put effort into prevention, but not into detection or response. They still need to decide what will be logged, who will look at it, and how the team will react if something goes wrong.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-6" data-beg-step="step-6">
-            <label for="beg-done-6">I have marked step 6 as done</label>
-          </div>
-      </div>
-    </section>
-
-    <section class="band arch-section beg-step" id="step-7" aria-labelledby="step-7-title">
-      <div class="wrap arch-prose">
-        <p class="beg-step-kicker">Step 7 of 7</p>
-        <h2 id="step-7-title" class="section-title">Your first exercise, and where to go next</h2>
-        <p>Pick a service you know, even a very small or imagined one — a form that collects an email address, a booking page, a staff dashboard. Then fill in the Corner’s <a href="/architect/templates/data-and-sensitivity-summary/">data and sensitivity summary</a> for it. Write down what data it holds, why, how sensitive it is, and where it lives. Keep classification wording plain. You are practising the habit, not writing a formal assessment.</p>
-        <p>If that feels comfortable, add a first sketch in the <a href="/architect/templates/threat-model/">threat model</a>: three or four things that could go wrong, and what you would do about the most important ones. You can save your answers in the browser and come back to them. Nothing is uploaded.</p>
-        <p>After that, the rest of this Corner is the natural next step:</p>
-        <ul class="beg-next-list">
-          <li>The <a href="/architect/#lifecycle">lifecycle map</a>, including the gate questions for each phase, and the <a href="/architect/document-trail/">document trail</a>.</li>
-          <li>All the <a href="/architect/templates/">templates</a>, including a security design, a risk register and a live security plan, when you need them.</li>
-          <li>The <a href="/architect/patterns/">patterns library</a> — start with <a href="/architect/patterns/zero-trust-access/">Zero trust access</a> after the identity video, <a href="/architect/patterns/secure-cloud-landing-zone/">Secure cloud landing zone</a> after the networks video, and <a href="/architect/patterns/logging-to-a-siem/">Logging to a SIEM</a> after the detection video.</li>
-          <li>The <a href="/architect/#tools">community tools</a> on this site, when you want something more hands-on.</li>
-          <li>The government’s description of the role: <a href="https://understand-digital-data-roles-skills.service.gov.uk/role/security-architect/" target="_blank" rel="noopener noreferrer">Security architect in the Government Digital and Data Profession Capability Framework<span class="visually-hidden"> (opens in a new tab)</span></a>.</li>
-        </ul>
-        <p class="beg-credit arch-callout">The videos in this path come from the public Cybersecurity Architecture series on the IBM Technology YouTube channel. You can also open the <a href="https://www.youtube.com/playlist?list=PLOspHqNVtKADkWLFt9OcziQF7EatuANSY" target="_blank" rel="noopener noreferrer">full playlist<span class="visually-hidden"> (opens in a new tab)</span></a>. The summaries on this page are ours.</p>
-          <div class="beg-check">
-            <p><strong>Check your understanding.</strong> You have finished the path and have half an hour. What is a useful first exercise, and why start there rather than with a full live security plan?</p>
-            <details>
-              <summary>Show a good answer</summary>
-              <p>Fill in a data and sensitivity summary for a small or imagined service. It is short, it uses what you learned about data, and it gives you a foundation before you try longer templates such as a threat model or a live plan.</p>
-            </details>
-          </div>
-          <div class="beg-done">
-            <input type="checkbox" id="beg-done-7" data-beg-step="step-7">
-            <label for="beg-done-7">I have marked step 7 as done</label>
-          </div>
+    <section class="band arch-section" aria-labelledby="beg-steps">
+      <div class="wrap">
+        <h2 id="beg-steps" class="section-title">The seven steps</h2>
+        <ol class="beg-step-cards">
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/1-role/" data-beg-card="step-1">
+                <span class="beg-step-card-num">1</span>
+                <span>
+                  <span class="beg-step-card-title">What a security architect does</span>
+                  <span class="beg-step-card-meta">1 video · 14:07</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/2-principles/" data-beg-card="step-2">
+                <span class="beg-step-card-num">2</span>
+                <span>
+                  <span class="beg-step-card-title">Ideas that turn up everywhere</span>
+                  <span class="beg-step-card-meta">2 videos · about 30 minutes</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/3-identity/" data-beg-card="step-3">
+                <span class="beg-step-card-num">3</span>
+                <span>
+                  <span class="beg-step-card-title">Identity and the devices people use</span>
+                  <span class="beg-step-card-meta">2 videos · about 45 minutes</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/4-networks-data/" data-beg-card="step-4">
+                <span class="beg-step-card-num">4</span>
+                <span>
+                  <span class="beg-step-card-title">Networks and data</span>
+                  <span class="beg-step-card-meta">2 videos · about 42 minutes</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/5-risk/" data-beg-card="step-5">
+                <span class="beg-step-card-num">5</span>
+                <span>
+                  <span class="beg-step-card-title">Thinking about risk and threats</span>
+                  <span class="beg-step-card-meta">1 video · 16:36</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/6-lifecycle/" data-beg-card="step-6">
+                <span class="beg-step-card-num">6</span>
+                <span>
+                  <span class="beg-step-card-title">How this fits the five-phase lifecycle</span>
+                  <span class="beg-step-card-meta">2 videos · about 34 minutes</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+            <li>
+              <a class="beg-step-card" href="/architect/beginners/7-first-exercise/" data-beg-card="step-7">
+                <span class="beg-step-card-num">7</span>
+                <span>
+                  <span class="beg-step-card-title">Your first exercise, and where to go next</span>
+                  <span class="beg-step-card-meta">A short exercise using existing templates</span>
+                </span>
+                <span class="beg-step-card-status">Not started</span>
+              </a>
+            </li>
+        </ol>
       </div>
     </section>
 
@@ -402,9 +221,10 @@
           <dt>Zero trust</dt>
           <dd>An approach that does not assume someone is safe just because they are “inside” the network. You still check who they are, what they can do, and the state of their device.</dd>
         </dl>
-        <p class="arch-callout">When you are ready, go back to the <a href="/architect/">Security Architect Corner</a>. The beginner path will still be here.</p>
+        <p class="beg-credit arch-callout">The videos in this path come from the public Cybersecurity Architecture series on the IBM Technology YouTube channel. You can also open the <a href="https://www.youtube.com/playlist?list=PLOspHqNVtKADkWLFt9OcziQF7EatuANSY" target="_blank" rel="noopener noreferrer">full playlist<span class="visually-hidden"> (opens in a new tab)</span></a>. The summaries on these pages are ours. When you are ready, go back to the <a href="/architect/">Security Architect Corner</a>.</p>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
@@ -424,6 +244,6 @@
     </div>
   </footer>
 
-  <script src="/architect-beginners.js?v=f17a0b8769" defer></script>
+  <script src="/architect-beginners.js?v=c3507241ff" defer></script>
 </body>
 </html>
