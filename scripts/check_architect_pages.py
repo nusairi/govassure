@@ -60,6 +60,36 @@ for name, href, kind, _cells in DOCS:
     if kind == "template" and href.split("/")[3] not in slugs:
         problems.append(f"document trail links a missing template: {name} {href}")
 
+# Every /architect link on the beginner path must resolve to a built page or a
+# slashless rewrite in staticwebapp.config.json.
+def architect_target_exists(href):
+    path = href.split("#", 1)[0].split("?", 1)[0]
+    if path == "/architect":
+        path = "/architect/"
+    if not path.startswith("/architect"):
+        return True
+    rel = path.lstrip("/")
+    if (ROOT / rel).is_file():
+        return True
+    if path.endswith("/"):
+        if (ROOT / rel / "index.html").is_file():
+            return True
+    elif (ROOT / rel / "index.html").is_file() or (ROOT / (rel + ".html")).is_file():
+        return True
+    route = routes.get(path) or routes.get(path.rstrip("/"))
+    if route and route.get("rewrite") and (ROOT / route["rewrite"].lstrip("/")).is_file():
+        return True
+    return False
+
+beg_pages = [ROOT / "architect" / "beginners" / "index.html"]
+beg_pages += sorted((ROOT / "architect" / "beginners").glob("*/index.html"))
+for page in beg_pages:
+    for href in re.findall(r'href="([^"]+)"', page.read_text(encoding="utf-8")):
+        if not href.startswith("/architect"):
+            continue
+        if not architect_target_exists(href):
+            problems.append(f"{page.relative_to(ROOT)} links to missing {href}")
+
 if problems:
     print("\n".join("FAIL " + p for p in problems))
     sys.exit(1)

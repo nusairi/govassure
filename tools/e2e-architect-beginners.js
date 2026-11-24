@@ -42,7 +42,8 @@ async function linkAudit(p, name, {requirePlaylist = false, requireVideos = []} 
   ok(!links.some(l => /\/matrix|\/checklist/.test(l.h)), `${name}: no matrix/checklist links`);
   const bad = links.filter(l => {
     const u = new URL(l.h);
-    const internal = u.hostname.endsWith('govassured.com') || u.hostname === new URL(B).hostname;
+    const host = u.hostname;
+    const internal = host === 'govassured.com' || host.endsWith('.govassured.com') || host === new URL(B).hostname;
     if (internal) return l.t === '_blank';
     const company = /linkedin\.com\/company\/102617034|github\.com\/nusairi\/govassure/.test(l.h);
     return l.t !== '_blank' || !l.r.includes('noopener') || (!company && !l.hidden);
@@ -263,27 +264,56 @@ async function animInfo(p) {
     const views = [
       ['desktop', {width: 1440, height: 900}, {}],
       ['mobile', {width: 390, height: 844}, {isMobile: true, hasTouch: true}],
+      ['light', {width: 1440, height: 900}, {colorScheme: 'light'}, ['/architect/beginners/', '/architect/beginners/2-principles/']],
     ];
-    for (const [name, vp, extra] of views) {
-      for (const pathUrl of targets) {
-        const actx = await b.newContext({viewport: vp, bypassCSP: true, ...extra});
-        const ap = await actx.newPage();
-        await ap.goto(B + pathUrl, {waitUntil: 'networkidle'});
+    for (const [name, vp, extra, only] of views) {
+      const actx = await b.newContext({viewport: vp, bypassCSP: true, ...extra});
+      const ap = await actx.newPage();
+      for (const pathUrl of (only || targets)) {
+        let last;
+        for (let i = 0; i < 3; i++) {
+          try {
+            await ap.goto(B + pathUrl, {waitUntil: 'load', timeout: 60000});
+            last = null;
+            break;
+          } catch (err) {
+            last = err;
+            await new Promise(r => setTimeout(r, 1500));
+          }
+        }
+        if (last) { await actx.close(); throw last; }
         const ax = await axe.scan(ap);
         const short = pathUrl.replace('/architect/beginners/', 'beginners/').replace(/\/$/, '') || 'beginners';
         ok(ax.length === 0, `${name} ${short}: axe ${ax.length ? JSON.stringify(ax) : '0 violations'}`);
-        await actx.close();
       }
-    }
-    for (const pathUrl of ['/architect/beginners/', '/architect/beginners/2-principles/']) {
-      const actx = await b.newContext({viewport: {width: 1440, height: 900}, bypassCSP: true, colorScheme: 'light'});
-      const ap = await actx.newPage();
-      await ap.goto(B + pathUrl, {waitUntil: 'networkidle'});
-      const ax = await axe.scan(ap);
-      const short = pathUrl.replace('/architect/beginners/', 'beginners/').replace(/\/$/, '') || 'beginners';
-      ok(ax.length === 0, `light ${short}: axe ${ax.length ? JSON.stringify(ax) : '0 violations'}`);
       await actx.close();
     }
+  }
+
+  // Every internal /architect link on the beginner pages must resolve.
+  {
+    const ctx = await b.newContext({viewport: {width: 1440, height: 900}});
+    const p = await ctx.newPage();
+    const paths = new Set();
+    const toScan = ['/architect/beginners/', ...STEPS.map(s => `/architect/beginners/${s.slug}/`)];
+    for (const url of toScan) {
+      const r = await p.goto(B + url, {waitUntil: 'domcontentloaded'});
+      ok(r.status() === 200, `link-scan: ${url} 200`);
+      const hrefs = await p.$$eval('a[href]', as => as.map(a => a.getAttribute('href')));
+      for (const h of hrefs) {
+        if (!h || !h.startsWith('/architect')) continue;
+        let path = h.split('#')[0].split('?')[0];
+        if (path === '/architect') path = '/architect/';
+        if (path) paths.add(path);
+      }
+    }
+    const missing = [];
+    for (const path of [...paths].sort()) {
+      const r = await p.goto(B + path, {waitUntil: 'domcontentloaded'});
+      if (!r || r.status() !== 200) missing.push(`${path} (${r && r.status()})`);
+    }
+    ok(paths.size > 0 && missing.length === 0, `every /architect link on beginner pages resolves (${paths.size} URLs)${missing.length ? ': ' + missing.join(', ') : ''}`);
+    await ctx.close();
   }
 
   {
