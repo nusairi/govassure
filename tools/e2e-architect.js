@@ -58,6 +58,8 @@ for(const [name,vp] of [['desktop',{width:1440,height:900}],['mobile',{width:390
     const st=[];for(const h of hrefs){const rr=await ctx.request.get(B+h);st.push(rr.status());}ok(st.every(x=>x===200),`${name}: all ${hrefs.length} phase document links return 200`);}
   await p.locator('#stage-discovery').screenshot({path:`${SHOTS}/${name}-discovery-documents.png`});
   ok(await p.$('.arch-toc a[href="#document-trail"]')!==null&&await p.$('#document-trail a[href="/architect/document-trail/"]')!==null,`${name}: On this page entry and Document trail section link`);
+  ok(await p.$('.arch-start-card a[href="/architect/beginners/"]')!==null,`${name}: Start here card links the beginner path`);
+  ok(await p.$$eval('.arch-beginner-vid',x=>x.length)===5,`${name}: 5 phase beginner-video notes`);
   // headings order
   const hs=await p.$$eval('h1,h2,h3,h4,h5,h6',x=>x.map(e=>+e.tagName[1]));let jump=false;for(let i=1;i<hs.length;i++)if(hs[i]>hs[i-1]+1)jump=true;
   ok(hs.filter(h=>h===1).length===1&&!jump,`${name}: heading order ok`);
@@ -78,6 +80,6 @@ await p.click('a.lv-map-tile[href="/architect/"]');await p.waitForLoadState();ok
 ok(errs.length===0,'home: no console errors '+errs.join('|'));await ctx.close();}
 {const ctx=await b.newContext();const p=await ctx.newPage();
 for(const u of ['/sitemap.xml','/govmap/','/govmap/glossary/','/.well-known/security.txt',...(/127\.0\.0\.1|localhost/.test(B)?[]:['/apps'])]){const r=await p.goto(B+u);ok(r.status()===200,'regression '+u+' 200');}
-const sm=await (await p.goto(B+'/sitemap.xml')).text();ok(sm.includes('/architect/'),'sitemap has /architect/');await ctx.close();}
+const sm=await (await p.goto(B+'/sitemap.xml')).text();ok(sm.includes('/architect/')&&sm.includes('/architect/beginners/'),'sitemap has /architect/ and /architect/beginners/');await ctx.close();}
 axe.report(ok);
 await b.close();console.log(fail?`${fail} FAILED`:'ALL PASS');process.exit(fail?1:0);})();

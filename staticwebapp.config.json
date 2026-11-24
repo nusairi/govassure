@@ -351,6 +351,19 @@
       }
     },
     {
+      "route": "/architect/beginners",
+      "rewrite": "/architect/beginners/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/architect/beginners/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"

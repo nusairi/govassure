@@ -25,7 +25,7 @@ served = (ROOT / "scripts" / "check_links.py").read_text(encoding="utf-8")
 js = (ROOT / "architect-templates.js").read_text(encoding="utf-8")
 arch = (ROOT / "architect" / "index.html").read_text(encoding="utf-8")
 
-pages = ["architect/templates", "architect/patterns", "architect/document-trail"]
+pages = ["architect/templates", "architect/patterns", "architect/document-trail", "architect/beginners"]
 pages += [f"architect/templates/{t[1]}" for t in TEMPLATES]
 pages += [f"architect/patterns/{d.name}" for d in sorted((ROOT / "architect" / "patterns").iterdir()) if d.is_dir()]
 for p in pages:
@@ -50,6 +50,9 @@ for key, slug, title, *_ in TEMPLATES:
 for key, *_ in PHASES:
     if f"<!-- doc-trail:{key} -->" not in arch or f'id="docs-{key}"' not in arch:
         problems.append(f"/architect/ phase {key} has no Documents for this phase box")
+
+if 'href="/architect/beginners/"' not in arch or "New to security architecture?" not in arch:
+    problems.append("/architect/ Start here has no beginner path card")
 
 slugs = {t[1] for t in TEMPLATES}
 for name, href, kind, _cells in DOCS:

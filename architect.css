@@ -378,3 +378,27 @@
   .arch-trail th:first-child { position: static; box-shadow: none; }
   .arch-tag { border: 1px solid currentColor; }
 }
+
+/* Beginner path entry on /architect/ */
+.arch-start-card {
+  margin: 1.5rem 0 0;
+  padding: 1.05rem 1.2rem 1.15rem;
+  max-width: 42rem;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+}
+.arch-start-card-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.arch-start-card p { margin: 0 0 0.85rem; color: var(--ink-soft); }
+.arch-start-card p:last-child { margin-bottom: 0; }
+.arch-beginner-vid {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
