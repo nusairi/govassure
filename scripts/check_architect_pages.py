@@ -25,7 +25,8 @@ served = (ROOT / "scripts" / "check_links.py").read_text(encoding="utf-8")
 js = (ROOT / "architect-templates.js").read_text(encoding="utf-8")
 arch = (ROOT / "architect" / "index.html").read_text(encoding="utf-8")
 
-pages = ["architect/templates", "architect/patterns", "architect/document-trail"]
+pages = ["architect/templates", "architect/patterns", "architect/document-trail", "architect/beginners"]
+pages += [f"architect/beginners/{d.name}" for d in sorted((ROOT / "architect" / "beginners").iterdir()) if d.is_dir()]
 pages += [f"architect/templates/{t[1]}" for t in TEMPLATES]
 pages += [f"architect/patterns/{d.name}" for d in sorted((ROOT / "architect" / "patterns").iterdir()) if d.is_dir()]
 for p in pages:
@@ -51,10 +52,43 @@ for key, *_ in PHASES:
     if f"<!-- doc-trail:{key} -->" not in arch or f'id="docs-{key}"' not in arch:
         problems.append(f"/architect/ phase {key} has no Documents for this phase box")
 
+if 'href="/architect/beginners/"' not in arch or "New to security architecture?" not in arch:
+    problems.append("/architect/ Start here has no beginner path card")
+
 slugs = {t[1] for t in TEMPLATES}
 for name, href, kind, _cells in DOCS:
     if kind == "template" and href.split("/")[3] not in slugs:
         problems.append(f"document trail links a missing template: {name} {href}")
+
+# Every /architect link on the beginner path must resolve to a built page or a
+# slashless rewrite in staticwebapp.config.json.
+def architect_target_exists(href):
+    path = href.split("#", 1)[0].split("?", 1)[0]
+    if path == "/architect":
+        path = "/architect/"
+    if not path.startswith("/architect"):
+        return True
+    rel = path.lstrip("/")
+    if (ROOT / rel).is_file():
+        return True
+    if path.endswith("/"):
+        if (ROOT / rel / "index.html").is_file():
+            return True
+    elif (ROOT / rel / "index.html").is_file() or (ROOT / (rel + ".html")).is_file():
+        return True
+    route = routes.get(path) or routes.get(path.rstrip("/"))
+    if route and route.get("rewrite") and (ROOT / route["rewrite"].lstrip("/")).is_file():
+        return True
+    return False
+
+beg_pages = [ROOT / "architect" / "beginners" / "index.html"]
+beg_pages += sorted((ROOT / "architect" / "beginners").glob("*/index.html"))
+for page in beg_pages:
+    for href in re.findall(r'href="([^"]+)"', page.read_text(encoding="utf-8")):
+        if not href.startswith("/architect"):
+            continue
+        if not architect_target_exists(href):
+            problems.append(f"{page.relative_to(ROOT)} links to missing {href}")
 
 if problems:
     print("\n".join("FAIL " + p for p in problems))

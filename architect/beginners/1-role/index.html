@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What a security architect does (step 1 of 7) — GOV Assured</title>
+  <meta name="description" content="A plain-English first step: what a security architect does, how the job is different from building the service, and what official UK guidance says about the role.">
+  <link rel="canonical" href="https://www.govassured.com/architect/beginners/1-role/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="author" content="GOV Assured">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="What a security architect does (step 1 of 7) — GOV Assured">
+  <meta property="og:description" content="A plain-English first step: what a security architect does, how the job is different from building the service, and what official UK guidance says about the role.">
+  <meta property="og:url" content="https://www.govassured.com/architect/beginners/1-role/">
+  <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What a security architect does (step 1 of 7) — GOV Assured">
+  <meta name="twitter:description" content="A plain-English first step: what a security architect does, how the job is different from building the service, and what official UK guidance says about the role.">
+  <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
+  <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+  <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
+  <link rel="stylesheet" href="/architect.css?v=80322216e4">
+  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <nav class="arch-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/architect/">Security Architect Corner</a></li>
+          <li><a href="/architect/beginners/">Beginner path</a></li>
+          <li aria-current="page">What a security architect does</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="band arch-hero" aria-labelledby="beg-title">
+      <div class="wrap">
+                  <nav class="beg-rail" aria-label="Steps">
+            <ol>
+            <li><span aria-current="page" aria-label="Step 1 of 7: What a security architect does">1</span></li>
+            <li><a href="/architect/beginners/2-principles/" aria-label="Step 2 of 7: Ideas that turn up everywhere">2</a></li>
+            <li><a href="/architect/beginners/3-identity/" aria-label="Step 3 of 7: Identity and the devices people use">3</a></li>
+            <li><a href="/architect/beginners/4-networks-data/" aria-label="Step 4 of 7: Networks and data">4</a></li>
+            <li><a href="/architect/beginners/5-risk/" aria-label="Step 5 of 7: Thinking about risk and threats">5</a></li>
+            <li><a href="/architect/beginners/6-lifecycle/" aria-label="Step 6 of 7: How this fits the five-phase lifecycle">6</a></li>
+            <li><a href="/architect/beginners/7-first-exercise/" aria-label="Step 7 of 7: Your first exercise, and where to go next">7</a></li>
+            </ol>
+            <p class="beg-step-kicker">Step 1 of 7</p>
+          </nav>
+
+        <p class="eyebrow">Beginner path</p>
+        <h1 id="beg-title">What a security architect does</h1>
+      </div>
+    </section>
+
+    <div class="band arch-section beg-step" id="step-1">
+      <div class="wrap arch-prose">
+
+          <figure class="beg-anim">
+            <div class="beg-anim-stage" aria-hidden="true">
+              <svg viewBox="0 0 640 240" focusable="false">
+                <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">How the service works, and how it might fail</text>
+                <line x1="70" y1="120" x2="570" y2="120" class="beg-stroke-line" stroke-width="2"/>
+                <g font-size="12" text-anchor="middle">
+                  <circle cx="70" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                  <text x="70" y="124" class="beg-ink">User</text>
+                  <circle cx="200" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                  <text x="200" y="124" class="beg-ink">Device</text>
+                  <circle cx="330" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                  <text x="330" y="124" class="beg-ink">Network</text>
+                  <circle cx="460" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                  <text x="460" y="124" class="beg-ink">App</text>
+                  <circle cx="570" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                  <text x="570" y="124" class="beg-ink">Data</text>
+                </g>
+                <circle class="beg-token beg-fill-gold" cx="70" cy="120" r="7"/>
+                <path class="beg-crack beg-stroke-gold" d="M190 96 l8 10 -6 8 10 10" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <g class="beg-shield">
+                  <path class="beg-fill-gold" d="M200 64 l16 6 v14 c0 10 -7 16 -16 20 c-9 -4 -16 -10 -16 -20 V70 z"/>
+                  <text x="200" y="86" text-anchor="middle" font-size="9" class="beg-fill-field" font-weight="700">OK</text>
+                </g>
+                <text x="20" y="220" class="beg-ink-soft" font-size="13">A control is added on the hop that failed, so the path can be trusted again.</text>
+              </svg>
+            </div>
+            <div class="beg-anim-bar">
+              <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+              <figcaption>A simple path from a user, through a device, network and application, to data. A token travels along it. A problem appears on the device, then a control is added so the path can be trusted again.</figcaption>
+            </div>
+          </figure>
+
+        <p>A security architect helps a team design a service so it is safe enough for the people who use it and the information it holds, without making the service hard to use. In UK government you usually sit with the rest of the delivery team, alongside the service owner, technical architects, developers and the people who own the risk.</p>
+        <p>In practice the job comes down to four things, which this Corner already uses as its starting point:</p>
+        <ul>
+          <li><strong>Understand</strong> what the service does, what data it holds and what could go wrong.</li>
+          <li><strong>Design</strong> security into the service from the start, reusing patterns and platforms that already work.</li>
+          <li><strong>Explain</strong> risks in plain English so the right person can make a clear decision.</li>
+          <li><strong>Keep it secure</strong> as the service changes, and help close it down safely at the end.</li>
+        </ul>
+        <p>You do not need to build every control yourself. Specialists will implement firewalls, identity systems or encryption. Your job is to see the whole picture, ask how the design might fail, and make sure the important questions are asked early — not after everything is already built.</p>
+        <h2>A video to watch</h2>
+        <ul class="beg-videos">
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · 14:07</p>
+              <h3><a href="https://www.youtube.com/watch?v=E9pHJRRfAhw" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Roles and Tools<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>A plain comparison between planning a building and planning a system. The useful takeaway is the habit: understand how the service will work, then ask how it might fail, and get involved from the start rather than being asked to make it secure at the end.</p>
+            </article>
+          </li>
+        </ul>
+          <aside class="beg-gov" aria-labelledby="beg-gov-title">
+            <h2 id="beg-gov-title">What GOV.UK recommends</h2>
+            <p>These official pages describe the role, and the standard a public service is expected to meet.</p>
+            <ul>
+            <li>
+              <p><a href="https://understand-digital-data-roles-skills.service.gov.uk/role/security-architect/" target="_blank" rel="noopener noreferrer">Security architect in the Government Digital and Data Profession Capability Framework<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>The official description of the role in government, including what people at each level are expected to do. Useful so you can see the job in government language, not just ours.</p>
+            </li>
+            <li>
+              <p><a href="https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service" target="_blank" rel="noopener noreferrer">Service Standard point 9: Create a secure service which protects users' privacy<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>The Service Standard says a public service must be designed so it is secure and protects users' privacy, and that this is considered throughout delivery, not only at the end.</p>
+            </li>
+            <li>
+              <p><a href="https://www.gov.uk/government/publications/government-functional-standard-govs-007-security" target="_blank" rel="noopener noreferrer">Government Functional Standard GovS 007: Security<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>The government's security functional standard sets out what good security looks like across government organisations. You do not need to learn it by heart; it is the backdrop that departmental security policies sit under.</p>
+            </li>
+            </ul>
+          </aside>
+
+          <div class="beg-check">
+            <p><strong>Check your understanding.</strong> What is the main extra question a security architect asks, compared with someone who is only designing how a service will work?</p>
+            <details>
+              <summary>Show a good answer</summary>
+              <p>They also ask how the service might fail, and what should be in place before that happens. A typical design explains how the parts fit together. A security architect uses that picture to look for weak points, and to help the team fix them early.</p>
+            </details>
+          </div>
+          <div class="beg-done">
+            <input type="checkbox" id="beg-done-1" data-beg-step="step-1">
+            <label for="beg-done-1">I have marked step 1 as done</label>
+          </div>
+        <p><a href="/architect/beginners/#glossary">Words you will see</a> are collected on the path overview.</p>
+
+          <nav class="tpl-pager" aria-label="Beginner path">
+            <a class="tpl-pager-next" href="/architect/beginners/2-principles/" rel="next"><span class="tpl-pager-label">Next step</span> <span class="tpl-pager-title">Ideas that turn up everywhere</span></a>
+          </nav>
+          <p class="tpl-top"><a href="/architect/beginners/">All steps</a></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>GOV Assured</strong> — an open source community for cyber security, resilience and assurance.</p>
+        <p class="footer-note">Not a government website. Not affiliated with or endorsed by NCSC or any UK government department.</p>
+      </div>
+      <div class="social">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.39.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12.02C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/architect-beginners.js?v=c3507241ff" defer></script>
+</body>
+</html>

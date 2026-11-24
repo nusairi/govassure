@@ -7,7 +7,8 @@ https://github.com/nusairi/govassure (plus its security advisory form and
 SECURITY.md), the schema.org JSON-LD context, the ISO/IEC 27001 and NIST CSF pages
 cited on the Security Architect Corner, and
 official UK government and Parliament source pages used by the government map
-(gov.uk, parliament.uk, and the named independent bodies).
+(gov.uk, parliament.uk, and the named independent bodies), and the exact
+YouTube videos (and playlist) cited on the Security Architect Corner beginner path.
 """
 
 import json
@@ -57,8 +58,18 @@ SERVED = [
     "govmap/parliament/index.html",
     "govmap/budget/index.html",
     "architect/index.html",
+    "architect/beginners/index.html",
+    "architect/beginners/1-role/index.html",
+    "architect/beginners/2-principles/index.html",
+    "architect/beginners/3-identity/index.html",
+    "architect/beginners/4-networks-data/index.html",
+    "architect/beginners/5-risk/index.html",
+    "architect/beginners/6-lifecycle/index.html",
+    "architect/beginners/7-first-exercise/index.html",
     "architect.js",
     "architect.css",
+    "architect-beginners.js",
+    "architect-beginners.css",
     "architect/templates/index.html",
     "architect/templates/security-design/index.html",
     "architect/templates/risk-register/index.html",
@@ -94,6 +105,18 @@ ALLOWED_EXACT = {
     # Architect templates: ICO data protection impact assessment template and guide.
     "https://ico.org.uk/media2/migrated/2553993/dpia-template.docx",
     "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia",
+    # Beginner path: exact Cybersecurity Architecture series videos and the playlist.
+    "https://www.youtube.com/watch?v=jq_LZ1RFPfU",
+    "https://www.youtube.com/watch?v=EqNe55IzjAw",
+    "https://www.youtube.com/watch?v=E9pHJRRfAhw",
+    "https://www.youtube.com/watch?v=5uNifnVlBy4",
+    "https://www.youtube.com/watch?v=Njqid_JpqTs",
+    "https://www.youtube.com/watch?v=sesacY7Xz3c",
+    "https://www.youtube.com/watch?v=nthEXs12nFE",
+    "https://www.youtube.com/watch?v=UpkqXK0B2E0",
+    "https://www.youtube.com/watch?v=VEu326IZpsc",
+    "https://www.youtube.com/watch?v=Jk79QJCxPkM",
+    "https://www.youtube.com/playlist?list=PLOspHqNVtKADkWLFt9OcziQF7EatuANSY",
 }
 
 # Official UK government, Parliament and related public-body hosts used as
@@ -160,15 +183,21 @@ def problem(url):
         return "protocol-relative URL"
     if lower.startswith(("http://", "https://")):
         parsed = urlparse(raw)
-        if parsed.query or parsed.fragment:
-            return "web links must not add a query or fragment"
         host = (parsed.hostname or "").lower()
         path = parsed.path.rstrip("/")
         identity = f"{parsed.scheme.lower()}://{host}{path}"
+        identity_full = f"{identity}?{parsed.query}" if parsed.query else identity
         if lower.startswith("http://"):
             return "web links must use https"
-        if identity in ALLOWED_EXACT:
+        # Exact allowlist may include a specific query (YouTube watch/playlist URLs).
+        # A match on the path alone must not let a different query through.
+        if not parsed.fragment and (
+            (parsed.query and identity_full in ALLOWED_EXACT)
+            or (not parsed.query and identity in ALLOWED_EXACT)
+        ):
             return None
+        if parsed.query or parsed.fragment:
+            return "web links must not add a query or fragment"
         if host == "govassured.com" or host.endswith(".govassured.com"):
             return None
         if is_official_source_host(host):
@@ -228,6 +257,12 @@ def self_test():
         "https://parliament.uk.evil.example/": "host is outside *.govassured.com",
         "https://www.gov.uk/search?q=1": "web links must not add a query or fragment",
         "http://www.gov.uk/government/organisations": "web links must use https",
+        "https://www.youtube.com/watch?v=jq_LZ1RFPfU": None,
+        "https://www.youtube.com/playlist?list=PLOspHqNVtKADkWLFt9OcziQF7EatuANSY": None,
+        "https://www.youtube.com/watch?v=jq_LZ1RFPfU#t=1m": "web links must not add a query or fragment",
+        "https://www.youtube.com/watch?v=not-on-the-allowlist": "web links must not add a query or fragment",
+        "https://www.youtube.com/": "host is outside *.govassured.com",
+        "https://youtu.be/jq_LZ1RFPfU": "host is outside *.govassured.com",
     }
     failed = False
     for url, expected in cases.items():

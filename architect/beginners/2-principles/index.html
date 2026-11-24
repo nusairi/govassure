@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ideas that turn up everywhere (step 2 of 7) — GOV Assured</title>
+  <meta name="description" content="A few ideas that come up in every phase of a service: defence in depth, least privilege, secure by design, and confidentiality, integrity and availability.">
+  <link rel="canonical" href="https://www.govassured.com/architect/beginners/2-principles/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="author" content="GOV Assured">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="Ideas that turn up everywhere (step 2 of 7) — GOV Assured">
+  <meta property="og:description" content="A few ideas that come up in every phase of a service: defence in depth, least privilege, secure by design, and confidentiality, integrity and availability.">
+  <meta property="og:url" content="https://www.govassured.com/architect/beginners/2-principles/">
+  <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ideas that turn up everywhere (step 2 of 7) — GOV Assured">
+  <meta name="twitter:description" content="A few ideas that come up in every phase of a service: defence in depth, least privilege, secure by design, and confidentiality, integrity and availability.">
+  <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
+  <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+  <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
+  <link rel="stylesheet" href="/architect.css?v=80322216e4">
+  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <nav class="arch-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/architect/">Security Architect Corner</a></li>
+          <li><a href="/architect/beginners/">Beginner path</a></li>
+          <li aria-current="page">Ideas that turn up everywhere</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="band arch-hero" aria-labelledby="beg-title">
+      <div class="wrap">
+                  <nav class="beg-rail" aria-label="Steps">
+            <ol>
+            <li><a href="/architect/beginners/1-role/" aria-label="Step 1 of 7: What a security architect does">1</a></li>
+            <li><span aria-current="page" aria-label="Step 2 of 7: Ideas that turn up everywhere">2</span></li>
+            <li><a href="/architect/beginners/3-identity/" aria-label="Step 3 of 7: Identity and the devices people use">3</a></li>
+            <li><a href="/architect/beginners/4-networks-data/" aria-label="Step 4 of 7: Networks and data">4</a></li>
+            <li><a href="/architect/beginners/5-risk/" aria-label="Step 5 of 7: Thinking about risk and threats">5</a></li>
+            <li><a href="/architect/beginners/6-lifecycle/" aria-label="Step 6 of 7: How this fits the five-phase lifecycle">6</a></li>
+            <li><a href="/architect/beginners/7-first-exercise/" aria-label="Step 7 of 7: Your first exercise, and where to go next">7</a></li>
+            </ol>
+            <p class="beg-step-kicker">Step 2 of 7</p>
+          </nav>
+
+        <p class="eyebrow">Beginner path</p>
+        <h1 id="beg-title">Ideas that turn up everywhere</h1>
+      </div>
+    </section>
+
+    <div class="band arch-section beg-step" id="step-2">
+      <div class="wrap arch-prose">
+
+          <figure class="beg-anim">
+            <div class="beg-anim-stage" aria-hidden="true">
+              <svg viewBox="0 0 640 240" focusable="false">
+                <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">Confidentiality, integrity and availability</text>
+                <g class="beg-fade-a">
+                  <rect x="24" y="52" width="184" height="150" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="116" y="84" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Confidentiality</text>
+                  <text x="116" y="130" text-anchor="middle" class="beg-ink" font-size="13">Who should see this?</text>
+                  <text x="116" y="154" text-anchor="middle" class="beg-ink-soft" font-size="12">Keep it with the</text>
+                  <text x="116" y="172" text-anchor="middle" class="beg-ink-soft" font-size="12">people who need it.</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="228" y="52" width="184" height="150" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="320" y="84" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Integrity</text>
+                  <text x="320" y="130" text-anchor="middle" class="beg-ink" font-size="13">Was this changed?</text>
+                  <text x="320" y="154" text-anchor="middle" class="beg-ink-soft" font-size="12">Spot and trust the</text>
+                  <text x="320" y="172" text-anchor="middle" class="beg-ink-soft" font-size="12">record as it stands.</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="432" y="52" width="184" height="150" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="524" y="84" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Availability</text>
+                  <text x="524" y="130" text-anchor="middle" class="beg-ink" font-size="13">Is it there when needed?</text>
+                  <text x="524" y="154" text-anchor="middle" class="beg-ink-soft" font-size="12">The right people can</text>
+                  <text x="524" y="172" text-anchor="middle" class="beg-ink-soft" font-size="12">still use the service.</text>
+                </g>
+              </svg>
+            </div>
+            <div class="beg-anim-bar">
+              <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+              <figcaption>Three cards stand for confidentiality, integrity and availability. They highlight in turn, each with a plain question: who should see this, was it changed, and is the service there when people need it?</figcaption>
+            </div>
+          </figure>
+
+        <p>A few ideas come up again and again, in every phase of a service. You do not need a long list of jargon. If you can use these in a conversation, you already have a solid start.</p>
+        <ul>
+          <li><strong>Defence in depth</strong> means not relying on a single lock. If one control fails, another should still stand.</li>
+          <li><strong>Least privilege</strong> means giving people and systems only the access they need, only for as long as they need it.</li>
+          <li><strong>Secure by design</strong> means building security in from the first conversation, not bolting it on at the end.</li>
+          <li><strong>Keep it simple</strong> means the safe way should be the easy way. If the official path is too hard, people will go around it.</li>
+          <li><strong>Confidentiality, integrity and availability</strong> are a short checklist: who should see this, how would we know if it was changed, and will it still be there when people need it?</li>
+        </ul>
+        <p>One idea to avoid: hoping a system is safe because nobody knows how it works. Hiding the details is not the same as making something strong.</p>
+        <h2>Videos to watch</h2>
+        <ul class="beg-videos">
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · 17:34</p>
+              <h3><a href="https://www.youtube.com/watch?v=jq_LZ1RFPfU" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Five Principles to Follow (and One to Avoid)<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>Walks through the five habits above, and the one to avoid. The examples are everyday — doors, passwords, default settings — so you can follow it without a technical background.</p>
+            </article>
+          </li>
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · 12:34</p>
+              <h3><a href="https://www.youtube.com/watch?v=EqNe55IzjAw" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Fundamentals of Confidentiality, Integrity, and Availability<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>A short explanation of the three-part checklist: keep information with the people who should see it, notice if records are changed, and keep the service available for the people who are allowed to use it.</p>
+            </article>
+          </li>
+        </ul>
+          <aside class="beg-gov" aria-labelledby="beg-gov-title">
+            <h2 id="beg-gov-title">What GOV.UK recommends</h2>
+            <p>Official design guidance puts the same ideas in government language.</p>
+            <ul>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/collection/cyber-security-design-principles/cyber-security-design-principles" target="_blank" rel="noopener noreferrer">NCSC secure design principles<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>NCSC's short official list of how to design security in from the start, including making compromise and disruption difficult, and making it easy to detect problems. They sit well beside the habits in the videos.</p>
+            </li>
+            <li>
+              <p><a href="https://www.gov.uk/guidance/the-technology-code-of-practice" target="_blank" rel="noopener noreferrer">The Technology Code of Practice<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>The standard for technology in government service design. One of its points is to make things secure: follow NCSC guidance, use well-understood approaches, and fix problems promptly. This is the landing page for the whole code.</p>
+            </li>
+            <li>
+              <p><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" target="_blank" rel="noopener noreferrer">Secure by Design on security.gov.uk<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>The government's Secure by Design programme expects teams to build security into a service from the start, with a set of activities and evidence, rather than treating it as a late review.</p>
+            </li>
+            </ul>
+          </aside>
+
+          <div class="beg-check">
+            <p><strong>Check your understanding.</strong> A team wants to keep the design secret so attackers cannot work it out. Which idea from this step should make you pause, and what would you suggest instead?</p>
+            <details>
+              <summary>Show a good answer</summary>
+              <p>That is hoping for safety through hiding how something works. A better approach is to use well-understood controls, give people only the access they need, and not rely on a single lock. The secret, if there is one, should be a key or password — not the design itself.</p>
+            </details>
+          </div>
+          <div class="beg-done">
+            <input type="checkbox" id="beg-done-2" data-beg-step="step-2">
+            <label for="beg-done-2">I have marked step 2 as done</label>
+          </div>
+        <p><a href="/architect/beginners/#glossary">Words you will see</a> are collected on the path overview.</p>
+
+          <nav class="tpl-pager" aria-label="Beginner path">
+            <a class="tpl-pager-prev" href="/architect/beginners/1-role/" rel="prev"><span class="tpl-pager-label">Previous step</span> <span class="tpl-pager-title">What a security architect does</span></a>
+            <a class="tpl-pager-next" href="/architect/beginners/3-identity/" rel="next"><span class="tpl-pager-label">Next step</span> <span class="tpl-pager-title">Identity and the devices people use</span></a>
+          </nav>
+          <p class="tpl-top"><a href="/architect/beginners/">All steps</a></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>GOV Assured</strong> — an open source community for cyber security, resilience and assurance.</p>
+        <p class="footer-note">Not a government website. Not affiliated with or endorsed by NCSC or any UK government department.</p>
+      </div>
+      <div class="social">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.39.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12.02C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/architect-beginners.js?v=c3507241ff" defer></script>
+</body>
+</html>
