@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,7 +86,7 @@
     <div class="band arch-section beg-step" id="step-5">
       <div class="wrap arch-prose">
 
-          <figure class="beg-anim">
+          <figure class="beg-anim beg-step-anim">
             <div class="beg-anim-stage" aria-hidden="true">
               <svg viewBox="0 0 640 260" focusable="false">
                 <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">A first threat-model sketch</text>
@@ -128,6 +128,46 @@
               <p class="beg-video-meta">YouTube · 16:36</p>
               <h3><a href="https://www.youtube.com/watch?v=nthEXs12nFE" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Application Security<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Why waiting until the end to think about software security is a poor plan, and how teams can build checks into design, coding and testing instead of throwing work over the wall. You do not need the testing acronyms on a first watch.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Software defects are normal. The longer they sit unnoticed, the more they cost to fix, and the more likely they are to become something an attacker can use.</li>
+                <li>The older “throw it over the wall” way of working — build first, add security at the end — is contrasted with a more joined-up approach that puts security in from design and coding onwards, often described as shifting left.</li>
+                <li>Secure coding habits are introduced in plain terms, starting with checking inputs rather than trusting them.</li>
+                <li>Testing is split into looking at the source (static testing) and exercising the running application (dynamic testing). Both have a place.</li>
+                <li>For a beginner architect, the habit is: think about what could go wrong in the software itself, ask for issues to be found early, and do not treat security testing as a last-minute gate only.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-appsec-title beg-vid-appsec-desc" focusable="false">
+                <title id="beg-vid-appsec-title">Find software problems early, not at the end</title>
+                <desc id="beg-vid-appsec-desc">A timeline from design to coding to testing, labelled as shifting security left, contrasted with a faded late check at the end.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">The later a defect sits, the more it costs and the more it can be used</text>
+                <g class="beg-fade-a">
+                  <rect x="24" y="56" width="170" height="110" rx="10" class="beg-zone-hot" stroke-width="2"/>
+                  <text x="109" y="92" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Design</text>
+                  <text x="109" y="122" text-anchor="middle" class="beg-ink" font-size="13">Ask what could</text>
+                  <text x="109" y="140" text-anchor="middle" class="beg-ink" font-size="13">go wrong now</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="214" y="56" width="170" height="110" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="299" y="92" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Code</text>
+                  <text x="299" y="122" text-anchor="middle" class="beg-ink" font-size="13">Check inputs.</text>
+                  <text x="299" y="140" text-anchor="middle" class="beg-ink" font-size="13">Do not just trust them.</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="404" y="56" width="212" height="110" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="510" y="92" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Test</text>
+                  <text x="510" y="122" text-anchor="middle" class="beg-ink" font-size="13">Look at the source, and</text>
+                  <text x="510" y="140" text-anchor="middle" class="beg-ink" font-size="13">exercise the running service</text>
+                </g>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Build checks in from the start. Security testing should not be only a last-minute gate.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Find problems in design, coding and testing, rather than only at the end. The later a defect sits, the more it can cost and the more it can be used.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>

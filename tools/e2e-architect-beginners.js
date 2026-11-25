@@ -72,7 +72,7 @@ async function headingOk(p, name) {
 
 async function animInfo(p) {
   return p.evaluate(() => {
-    const root = document.querySelector('.beg-anim');
+    const root = document.querySelector('.beg-step-anim') || document.querySelector('.beg-anim');
     if (!root) return null;
     for (const n of root.querySelectorAll('*')) {
       const s = getComputedStyle(n);
@@ -157,15 +157,15 @@ async function animInfo(p) {
       const crumbs = await p.$$eval('.arch-crumbs a', as => as.map(a => a.getAttribute('href')));
       ok(crumbs.includes('/architect/') && crumbs.includes('/architect/beginners/'), `step ${s.n}: breadcrumb back to Corner and overview`);
       ok(await p.$('.beg-gov') !== null && ((await p.textContent('.beg-gov h2')) || '').includes('What GOV.UK recommends'), `step ${s.n}: GOV.UK recommendations box`);
-      ok(await p.$('.beg-anim') !== null, `step ${s.n}: explainer animation present`);
-      ok(((await p.$eval('.beg-anim figcaption', e => e.textContent.trim())).length) > 40, `step ${s.n}: animation has a text alternative`);
-      ok(await p.$('[data-beg-anim-toggle]') !== null, `step ${s.n}: pause/play control present`);
+      ok(await p.$('.beg-step-anim') !== null, `step ${s.n}: explainer animation present`);
+      ok(((await p.$eval('.beg-step-anim figcaption', e => e.textContent.trim())).length) > 40, `step ${s.n}: animation has a text alternative`);
+      ok(await p.$('.beg-step-anim [data-beg-anim-toggle]') !== null, `step ${s.n}: pause/play control present`);
       const info = await animInfo(p);
       ok(info && info.name !== 'none' && info.play === 'running' && info.playing, `step ${s.n}: animation is playing by default (${JSON.stringify(info)})`);
-      await p.locator('[data-beg-anim-toggle]').click();
+      await p.locator('.beg-step-anim [data-beg-anim-toggle]').click();
       const paused = await animInfo(p);
-      ok(paused && paused.play === 'paused' && paused.paused && (await p.locator('[data-beg-anim-toggle]').textContent()) === 'Play', `step ${s.n}: pause stops the animation (${JSON.stringify(paused)})`);
-      await p.locator('[data-beg-anim-toggle]').click();
+      ok(paused && paused.play === 'paused' && paused.paused && (await p.locator('.beg-step-anim [data-beg-anim-toggle]').textContent()) === 'Play', `step ${s.n}: pause stops the animation (${JSON.stringify(paused)})`);
+      await p.locator('.beg-step-anim [data-beg-anim-toggle]').click();
       const resumed = await animInfo(p);
       ok(resumed && resumed.play === 'running' && resumed.playing, `step ${s.n}: play resumes the animation`);
       if (s.n > 1) {
@@ -187,6 +187,39 @@ async function animInfo(p) {
       await headingOk(p, `step ${s.n}`);
       const links = await linkAudit(p, `step ${s.n}`, {requireVideos: s.videos});
       links.filter(l => /youtube\.com\/watch/.test(l.h)).forEach(l => collectedVideos.add(l.h.replace(/\/$/, '')));
+      const videoCards = await p.$$eval('article.beg-video', cards => cards.map(c => {
+        const heading = (c.querySelector('.beg-video-covers') || {}).textContent || '';
+        const points = [...c.querySelectorAll('.beg-video-points li')].map(li => li.textContent.trim());
+        const svg = c.querySelector('svg[role="img"]');
+        const title = svg && (svg.querySelector('title') || {}).textContent || '';
+        const desc = svg && (svg.querySelector('desc') || {}).textContent || '';
+        const fig = c.querySelector('figure.beg-video-info');
+        const cap = fig && (fig.querySelector('figcaption') || {}).textContent || '';
+        const toggle = fig && fig.querySelector('[data-beg-anim-toggle]');
+        const href = (c.querySelector('h3 a') || {}).href || '';
+        return {heading, points: points.length, minPoint: points.length ? Math.min(...points.map(x => x.length)) : 0, title: title.trim().length, desc: title.trim() && desc.trim().length, cap: (cap || '').trim().length, toggle: !!toggle, href};
+      }));
+      if (s.videos.length) {
+        ok(videoCards.length === s.videos.length, `step ${s.n}: ${s.videos.length} video explainers (have ${videoCards.length})`);
+        videoCards.forEach((c, i) => {
+          ok(c.heading.includes('What this video covers'), `step ${s.n} video ${i + 1}: covers heading`);
+          ok(c.points >= 3 && c.points <= 6, `step ${s.n} video ${i + 1}: 3-6 bullets (have ${c.points})`);
+          ok(c.minPoint >= 40, `step ${s.n} video ${i + 1}: bullets are substantial`);
+          ok(c.title >= 20 && c.desc >= 40, `step ${s.n} video ${i + 1}: SVG has title and desc`);
+          ok(c.cap > 40, `step ${s.n} video ${i + 1}: infographic has a text alternative`);
+          ok(c.toggle, `step ${s.n} video ${i + 1}: infographic has a pause control`);
+        });
+        // Pause on the first video infographic works independently of the step explainer
+        const vToggle = p.locator('article.beg-video .beg-video-info [data-beg-anim-toggle]').first();
+        const before = await vToggle.textContent();
+        await vToggle.click();
+        const after = await vToggle.textContent();
+        ok((before === 'Pause' && after === 'Play') || (before === 'Play' && after === 'Pause'), `step ${s.n}: video infographic pause/play toggles (${before} -> ${after})`);
+        await vToggle.click();
+      } else {
+        ok(videoCards.length === 0, `step ${s.n}: no video explainers (expected none)`);
+      }
+
       ok(await p.$('.footer-note') !== null && (await p.textContent('.footer-note')).includes('Not a government website'), `step ${s.n}: footer disclaimer present`);
       await p.screenshot({path: `${SHOTS}/step-${s.n}.png`, fullPage: true});
     }
@@ -224,6 +257,18 @@ async function animInfo(p) {
   }
 
   ok(ALL_VIDEOS.every(v => collectedVideos.has(v)), `all 10 videos are linked across the step pages (have ${collectedVideos.size})`);
+  {
+    const ctx = await b.newContext({viewport: {width: 1440, height: 900}});
+    const p = await ctx.newPage();
+    let total = 0;
+    for (const s of STEPS) {
+      await p.goto(B + `/architect/beginners/${s.slug}/`, {waitUntil: 'load'});
+      total += await p.$$eval('article.beg-video', cs => cs.length);
+    }
+    ok(total === 10, `exactly 10 video explainers across the path (have ${total})`);
+    await ctx.close();
+  }
+
 
   // prefers-reduced-motion: start from a static frame; Play opts in
   {
@@ -231,7 +276,7 @@ async function animInfo(p) {
     const p = await ctx.newPage();
     const errs = track(p);
     await p.goto(B + '/architect/beginners/2-principles/', {waitUntil: 'networkidle'});
-    const btn = p.locator('[data-beg-anim-toggle]');
+    const btn = p.locator('.beg-step-anim [data-beg-anim-toggle]');
     ok((await btn.textContent()) === 'Play', 'reduced-motion: control starts as Play');
     const still = await animInfo(p);
     ok(still && still.name === 'none' && still.paused && !still.playing, `reduced-motion: animation is a static frame (${JSON.stringify(still)})`);

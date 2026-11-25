@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,7 +86,7 @@
     <div class="band arch-section beg-step" id="step-6">
       <div class="wrap arch-prose">
 
-          <figure class="beg-anim">
+          <figure class="beg-anim beg-step-anim">
             <div class="beg-anim-stage" aria-hidden="true">
               <svg viewBox="0 0 640 240" focusable="false">
                 <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">The five-phase lifecycle, in order</text>
@@ -150,6 +150,50 @@
               <p class="beg-video-meta">YouTube · 17:10</p>
               <h3><a href="https://www.youtube.com/watch?v=VEu326IZpsc" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Detection<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Security is prevention plus detection plus response. This video is about bringing signals together so someone can actually see when something is wrong. It pairs with the Corner's Logging to a SIEM pattern. You do not need to choose a product.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>The series treats security as prevention plus detection plus response. Prevention alone is not enough, because some attacks will get through.</li>
+                <li>A SIEM (security information and event management) system is explained as a way to bring security signals from many places into one view, instead of leaving each tool with its own console.</li>
+                <li>XDR (extended detection and response) is compared with SIEM. The video’s point is that they are complementary, not an either/or choice.</li>
+                <li>Threat hunting is introduced as looking proactively for problems, not only waiting for an alert. This work is described as sitting with a security operations function.</li>
+                <li>Beginners do not need to choose products. The idea to keep is: decide what you will log, where those logs will go, and who will actually look at them.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-detect-title beg-vid-detect-desc" focusable="false">
+                <title id="beg-vid-detect-title">Bring security signals into one view</title>
+                <desc id="beg-vid-detect-desc">Several small signal sources on the left feeding into a single box labelled one view, standing for bringing logs together so someone can actually look at them.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Prevention alone is not enough. Some attacks will get through.</text>
+                <g class="beg-fade-a">
+                  <rect x="24" y="56" width="130" height="44" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="89" y="84" text-anchor="middle" class="beg-ink" font-size="13">Identity</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="24" y="110" width="130" height="44" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="89" y="138" text-anchor="middle" class="beg-ink" font-size="13">Devices</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="24" y="164" width="130" height="36" rx="8" class="beg-zone" stroke-width="2"/>
+                  <text x="89" y="188" text-anchor="middle" class="beg-ink" font-size="13">Network and apps</text>
+                </g>
+                <line x1="154" y1="78" x2="260" y2="128" class="beg-stroke-gold" stroke-width="2"/>
+                <line x1="154" y1="132" x2="260" y2="132" class="beg-stroke-gold" stroke-width="2"/>
+                <line x1="154" y1="182" x2="260" y2="136" class="beg-stroke-gold" stroke-width="2"/>
+                <rect x="260" y="72" width="200" height="120" rx="10" class="beg-zone-hot" stroke-width="2"/>
+                <text x="360" y="118" text-anchor="middle" class="beg-fill-gold" font-size="16" font-weight="700">One view</text>
+                <text x="360" y="146" text-anchor="middle" class="beg-ink" font-size="13">Signals in one place,</text>
+                <text x="360" y="164" text-anchor="middle" class="beg-ink" font-size="13">so someone can look</text>
+                <rect x="484" y="88" width="132" height="88" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="550" y="124" text-anchor="middle" class="beg-ink" font-size="13">Who looks?</text>
+                <text x="550" y="148" text-anchor="middle" class="beg-ink-soft" font-size="12">A practised team</text>
+                <text x="20" y="226" class="beg-ink-soft" font-size="13">Decide what you will log, where those logs will go, and who will actually look at them.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Signals from identity, devices, the network and applications feed into one view, so a practised team can actually look at them.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
@@ -157,6 +201,46 @@
               <p class="beg-video-meta">YouTube · 16:57</p>
               <h3><a href="https://www.youtube.com/watch?v=Jk79QJCxPkM" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Response<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Once you have noticed a problem, someone has to contain it and get the service back to a safe state. The video covers roles, practised plans, and the fact that some steps can be prepared in advance while others still need a person's judgement.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Once something is detected, the next problem is how quickly you can contain it and get back to a safe service. The video uses published breach research to show that this is often the weak part.</li>
+                <li>Roles matter: someone has to be responsible, and the team needs a practised way of working rather than inventing a plan in the moment.</li>
+                <li>A modern approach, often called SOAR (security orchestration, automation and response), is introduced as a way to automate repeatable steps and to coordinate tools and people, including more flexible, branching playbooks.</li>
+                <li>Not everything can or should be automated. Judgement, communication and decisions about what was affected still need people.</li>
+                <li>Breach notification is discussed at a high level: you need to know what kind of data was involved and where the affected people were, because the rules on who must be told depend on that.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-response-title beg-vid-response-desc" focusable="false">
+                <title id="beg-vid-response-title">Contain a problem and get back to a safe service</title>
+                <desc id="beg-vid-response-desc">Three steps after something is noticed: detect, contain, and recover, with a note that people and a practised plan still matter.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Once something is noticed, how quickly can you get back to a safe service?</text>
+                <g class="beg-fade-a">
+                  <rect x="24" y="56" width="170" height="110" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="109" y="96" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Detect</text>
+                  <text x="109" y="126" text-anchor="middle" class="beg-ink" font-size="13">Notice there is</text>
+                  <text x="109" y="144" text-anchor="middle" class="beg-ink" font-size="13">a problem</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="214" y="56" width="170" height="110" rx="10" class="beg-zone-hot" stroke-width="2"/>
+                  <text x="299" y="96" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Contain</text>
+                  <text x="299" y="126" text-anchor="middle" class="beg-ink" font-size="13">Stop it spreading,</text>
+                  <text x="299" y="144" text-anchor="middle" class="beg-ink" font-size="13">using a practised plan</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="404" y="56" width="212" height="110" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="510" y="96" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Recover</text>
+                  <text x="510" y="126" text-anchor="middle" class="beg-ink" font-size="13">Get back to a safe state.</text>
+                  <text x="510" y="144" text-anchor="middle" class="beg-ink" font-size="13">Some steps need judgement.</text>
+                </g>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Prepare repeatable steps in advance. Communication and decisions about what was affected still need people.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>After a problem is detected: contain it with a practised plan, then recover to a safe state. Some steps can be prepared in advance; some still need a person's judgement.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>

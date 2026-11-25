@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,7 +86,7 @@
     <div class="band arch-section beg-step" id="step-2">
       <div class="wrap arch-prose">
 
-          <figure class="beg-anim">
+          <figure class="beg-anim beg-step-anim">
             <div class="beg-anim-stage" aria-hidden="true">
               <svg viewBox="0 0 640 240" focusable="false">
                 <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">Confidentiality, integrity and availability</text>
@@ -135,6 +135,57 @@
               <p class="beg-video-meta">YouTube · 17:34</p>
               <h3><a href="https://www.youtube.com/watch?v=jq_LZ1RFPfU" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Five Principles to Follow (and One to Avoid)<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Walks through the five habits above, and the one to avoid. The examples are everyday — doors, passwords, default settings — so you can follow it without a technical background.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Defence in depth means not relying on one control. The video uses a castle-and-moat picture, then a modern path from a user and device, across a network, to an application and a database, with a different control at each hop so that one failure does not open the whole system.</li>
+                <li>Least privilege means giving people and systems only the access they need, only for as long as they need it, and taking unused services and default accounts off a system. “Just in case” access is the opposite of this.</li>
+                <li>Separation of duties means no one person can both request and approve a sensitive action, so a single person cannot create a compromise on their own.</li>
+                <li>Secure by design means building security in from the start, not bolting it on afterwards. Keep it simple: if the secure way is harder than the insecure way, people will go around the control.</li>
+                <li>The principle to avoid is security by obscurity: hiding how a control works is not the same as making it strong. A control should still be safe even when how it works is known, with only the secret itself kept secret.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-principles-title beg-vid-principles-desc" focusable="false">
+                <title id="beg-vid-principles-title">Five principles to follow, and one to avoid</title>
+                <desc id="beg-vid-principles-desc">Five labelled boxes for defence in depth, least privilege, separation of duties, secure by design, and keep it simple, with a sixth box for security by obscurity marked as the principle to avoid.</desc>
+                <g class="beg-fade-a">
+                  <rect x="16" y="48" width="114" height="130" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="73" y="88" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">Defence</text>
+                  <text x="73" y="106" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">in depth</text>
+                  <text x="73" y="140" text-anchor="middle" class="beg-ink-soft" font-size="11">More than</text>
+                  <text x="73" y="156" text-anchor="middle" class="beg-ink-soft" font-size="11">one control</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="140" y="48" width="114" height="130" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="197" y="88" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">Least</text>
+                  <text x="197" y="106" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">privilege</text>
+                  <text x="197" y="140" text-anchor="middle" class="beg-ink-soft" font-size="11">Only what is</text>
+                  <text x="197" y="156" text-anchor="middle" class="beg-ink-soft" font-size="11">needed, for now</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="264" y="48" width="114" height="130" rx="10" class="beg-zone" stroke-width="2"/>
+                  <text x="321" y="88" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">Separation</text>
+                  <text x="321" y="106" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">of duties</text>
+                  <text x="321" y="140" text-anchor="middle" class="beg-ink-soft" font-size="11">No one person</text>
+                  <text x="321" y="156" text-anchor="middle" class="beg-ink-soft" font-size="11">does it all</text>
+                </g>
+                <rect x="388" y="48" width="114" height="130" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="445" y="80" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">Secure by</text>
+                <text x="445" y="98" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">design</text>
+                <text x="445" y="128" text-anchor="middle" class="beg-ink-soft" font-size="11">Build it in</text>
+                <text x="445" y="148" text-anchor="middle" class="beg-ink-soft" font-size="11">Keep it simple</text>
+                <rect x="512" y="48" width="114" height="130" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="569" y="88" text-anchor="middle" class="beg-ink" font-size="12" font-weight="700">Obscurity</text>
+                <line x1="530" y1="70" x2="608" y2="156" class="beg-stroke-gold" stroke-width="3"/>
+                <text x="569" y="168" text-anchor="middle" class="beg-fill-gold" font-size="11" font-weight="700">Avoid this</text>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Five habits to follow. Hiding how a control works is not the same as making it strong.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Five habits to follow — defence in depth, least privilege, separation of duties, secure by design and keeping it simple — and security by obscurity as the one to avoid.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
@@ -142,6 +193,52 @@
               <p class="beg-video-meta">YouTube · 12:34</p>
               <h3><a href="https://www.youtube.com/watch?v=EqNe55IzjAw" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Fundamentals of Confidentiality, Integrity, and Availability<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>A short explanation of the three-part checklist: keep information with the people who should see it, notice if records are changed, and keep the service available for the people who are allowed to use it.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>The video offers confidentiality, integrity and availability as a simple checklist, often called the CIA triad.</li>
+                <li>Confidentiality is keeping information with the people who should see it. That includes proving who someone is, checking what they are allowed to do, and protecting a message so an observer cannot read it in transit.</li>
+                <li>Integrity is being able to tell if a record or message has been changed, including when someone tampers with logs, and using checks so changes can be spotted.</li>
+                <li>Availability is making sure authorised people can still use the service when they need it. A denial-of-service flood is the main counter-example.</li>
+                <li>You do not need every technical example on a first watch. The useful habit is to ask, for any design: who should see this, how would we know if it was changed, and will it still be there when people need it?</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-cia-title beg-vid-cia-desc" focusable="false">
+                <title id="beg-vid-cia-title">The confidentiality, integrity and availability checklist</title>
+                <desc id="beg-vid-cia-desc">Three checklist items: who should see this, how would we know if it was changed, and will it still be there when people need it.</desc>
+                <text x="20" y="36" class="beg-ink" font-size="15" font-weight="700">A simple checklist for any design</text>
+                <g class="beg-fade-a">
+                  <rect x="24" y="56" width="592" height="44" rx="8" class="beg-zone" stroke-width="2"/>
+                  <circle cx="52" cy="78" r="10" class="beg-fill-gold"/>
+                  <path class="beg-stroke-field" d="M47 78 l4 4 8 -9" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <text x="76" y="74" class="beg-fill-gold" font-size="13" font-weight="700">Confidentiality</text>
+                  <text x="200" y="74" class="beg-ink" font-size="13">Who should see this?</text>
+                  <text x="76" y="90" class="beg-ink-soft" font-size="12">Keep it with the people who need it, including when it is in transit.</text>
+                </g>
+                <g class="beg-fade-b">
+                  <rect x="24" y="108" width="592" height="44" rx="8" class="beg-zone" stroke-width="2"/>
+                  <circle cx="52" cy="130" r="10" class="beg-fill-gold"/>
+                  <path class="beg-stroke-field" d="M47 130 l4 4 8 -9" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <text x="76" y="126" class="beg-fill-gold" font-size="13" font-weight="700">Integrity</text>
+                  <text x="200" y="126" class="beg-ink" font-size="13">How would we know if this was changed?</text>
+                  <text x="76" y="142" class="beg-ink-soft" font-size="12">Spot tampering, including with logs and messages.</text>
+                </g>
+                <g class="beg-fade-c">
+                  <rect x="24" y="160" width="592" height="44" rx="8" class="beg-zone" stroke-width="2"/>
+                  <circle cx="52" cy="182" r="10" class="beg-fill-gold"/>
+                  <path class="beg-stroke-field" d="M47 182 l4 4 8 -9" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <text x="76" y="178" class="beg-fill-gold" font-size="13" font-weight="700">Availability</text>
+                  <text x="200" y="178" class="beg-ink" font-size="13">Will it still be there when people need it?</text>
+                  <text x="76" y="194" class="beg-ink-soft" font-size="12">Authorised people can still use the service.</text>
+                </g>
+                <text x="20" y="226" class="beg-ink-soft" font-size="13">You do not need every technical example on a first watch. Keep these three questions.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Three questions that work as a checklist: who should see this, how would we know if it was changed, and will it still be there when people need it?</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>
