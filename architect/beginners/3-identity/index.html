@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,7 +86,7 @@
     <div class="band arch-section beg-step" id="step-3">
       <div class="wrap arch-prose">
 
-          <figure class="beg-anim">
+          <figure class="beg-anim beg-step-anim">
             <div class="beg-anim-stage" aria-hidden="true">
               <svg viewBox="0 0 640 240" focusable="false">
                 <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">A login moving through identity and device checks</text>
@@ -126,6 +126,45 @@
               <p class="beg-video-meta">YouTube · 31:15</p>
               <h3><a href="https://www.youtube.com/watch?v=5uNifnVlBy4" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Who Are You? Identity and Access Management<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Sets out the four questions — set up access, prove who someone is, check what they may do, and review it later. Useful later when you look at the Corner's Zero trust access pattern.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Identity is treated as a new kind of perimeter: you cannot rely on the old idea of a safe inside and a dangerous outside, so you need to know who is asking and what they are allowed to do.</li>
+                <li>A simple four-part model is used: administration (setting up and changing access), authentication (who are you?), authorisation (are you allowed to do this?), and audit (checking that the first three were done correctly).</li>
+                <li>Identities live in directories. Different groups of people — staff, suppliers, the public — often need different access, and those records have to be kept in step across systems.</li>
+                <li>Later sections cover how people prove who they are, including multi-factor checks and single sign-on, and how access is reviewed over time, including privileged accounts.</li>
+                <li>Beginners do not need to memorise product names. The ideas to keep are: know the types of user, give only the access that is justified, prove who someone is with more than a password where it matters, and remove access when it is no longer needed.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-iam-title beg-vid-iam-desc" focusable="false">
+                <title id="beg-vid-iam-title">The four parts of identity and access</title>
+                <desc id="beg-vid-iam-desc">Four stages in a row: administration, authentication, authorisation and audit, described as a model for knowing who is asking and what they are allowed to do.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Identity as a new kind of perimeter</text>
+                <rect x="20" y="52" width="140" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="90" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">1 Admin</text>
+                <text x="90" y="120" text-anchor="middle" class="beg-ink" font-size="12">Set up and</text>
+                <text x="90" y="138" text-anchor="middle" class="beg-ink" font-size="12">change access</text>
+                <rect x="174" y="52" width="140" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="244" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">2 Authenticate</text>
+                <text x="244" y="120" text-anchor="middle" class="beg-ink" font-size="12">Who are you?</text>
+                <text x="244" y="138" text-anchor="middle" class="beg-ink-soft" font-size="12">More than a password</text>
+                <rect x="328" y="52" width="140" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="398" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">3 Authorise</text>
+                <text x="398" y="120" text-anchor="middle" class="beg-ink" font-size="12">Are you allowed</text>
+                <text x="398" y="138" text-anchor="middle" class="beg-ink" font-size="12">to do this?</text>
+                <rect x="482" y="52" width="140" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="552" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">4 Audit</text>
+                <text x="552" y="120" text-anchor="middle" class="beg-ink" font-size="12">Check that the</text>
+                <text x="552" y="138" text-anchor="middle" class="beg-ink" font-size="12">first three were done</text>
+                <circle class="beg-token-iam beg-fill-gold" cx="90" cy="166" r="6"/>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Know the types of user, give only the access that is justified, and remove it when it is no longer needed.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Four parts of identity and access: set up access, prove who someone is, check what they are allowed to do, and audit that this was done correctly.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
@@ -133,6 +172,43 @@
               <p class="beg-video-meta">YouTube · 14:22</p>
               <h3><a href="https://www.youtube.com/watch?v=Njqid_JpqTs" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Endpoints Are the IT Front Door - Guard Them<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Explains why the device matters as well as the person, and why an organisation needs a clear way to manage laptops, phones and other equipment — including when people use their own devices.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Strong identity checks are not enough if the device they come from cannot be trusted. An endpoint is any device at the edge of the system: laptops, phones, servers, and other connected equipment.</li>
+                <li>Typical practice often uses different management tools for servers, desktops and phones, and sometimes leaves smaller devices unmanaged. Better practice is to know what you have and manage it consistently.</li>
+                <li>Endpoint management is used to apply policy: patches, a reasonable password or lock, and software that looks for malware or suspicious behaviour on the device.</li>
+                <li>People sometimes bring their own devices, and also their own tools or cloud services. An organisation needs a clear approach, not an accidental one.</li>
+                <li>For a first watch, the question to take away is: do we know which devices will touch this service, and can we tell if one of them is out of date or no longer under our control?</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-endpoints-title beg-vid-endpoints-desc" focusable="false">
+                <title id="beg-vid-endpoints-title">Devices are the front door</title>
+                <desc id="beg-vid-endpoints-desc">A row of devices — a laptop, a phone and a server — behind a front-door frame, with a policy badge for patches, a lock and looking after the device.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Strong identity is not enough if the device cannot be trusted</text>
+                <rect x="40" y="52" width="360" height="148" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="220" y="78" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">The front door</text>
+                <rect x="70" y="100" width="80" height="54" rx="6" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="110" y="132" text-anchor="middle" class="beg-ink" font-size="12">Laptop</text>
+                <rect x="170" y="108" width="44" height="70" rx="8" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="192" y="148" text-anchor="middle" class="beg-ink" font-size="11">Phone</text>
+                <rect x="240" y="96" width="70" height="66" rx="6" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="275" y="134" text-anchor="middle" class="beg-ink" font-size="12">Server</text>
+                <text x="220" y="184" text-anchor="middle" class="beg-ink-soft" font-size="12">Know what you have, and manage it.</text>
+                <g class="beg-shield">
+                  <rect x="430" y="72" width="180" height="108" rx="10" class="beg-zone-hot" stroke-width="2"/>
+                  <text x="520" y="104" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Policy</text>
+                  <text x="520" y="130" text-anchor="middle" class="beg-ink" font-size="13">Patches, a lock,</text>
+                  <text x="520" y="148" text-anchor="middle" class="beg-ink" font-size="13">and looking after it</text>
+                </g>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Which devices will touch this service, and can we tell if one is out of date?</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Laptops, phones and servers sit at the front door of a service. Identity checks are not enough if those devices cannot be trusted or kept up to date.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>

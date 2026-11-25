@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
   <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
   <link rel="stylesheet" href="/architect.css?v=80322216e4">
-  <link rel="stylesheet" href="/architect-beginners.css?v=733333d3cb">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -86,7 +86,7 @@
     <div class="band arch-section beg-step" id="step-4">
       <div class="wrap arch-prose">
 
-          <figure class="beg-anim">
+          <figure class="beg-anim beg-step-anim">
             <div class="beg-anim-stage" aria-hidden="true">
               <svg viewBox="0 0 640 240" focusable="false">
                 <text x="20" y="28" class="beg-ink" font-size="16" font-weight="700">Data moving across network zones</text>
@@ -131,6 +131,41 @@
               <p class="beg-video-meta">YouTube · 27:31</p>
               <h3><a href="https://www.youtube.com/watch?v=sesacY7Xz3c" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Networks<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>A tour of dividing a network into zones, using firewalls, and protecting traffic that has to travel over a less trusted path. Later sections touch on newer “do not assume the inside is safe” ideas.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Networks are how a service reaches the outside world, so they are a core part of a security architecture, not an afterthought.</li>
+                <li>Firewalls and segmentation are used to split a network into zones with different levels of trust, so that a problem in one place cannot immediately reach everything else. This is defence in depth applied to the network, including older patterns such as a buffer zone between the outside and the service.</li>
+                <li>Virtual private networks are explained as a way to protect traffic that has to travel over a less trusted network.</li>
+                <li>Later in the video there is a discussion of newer approaches, including zero trust, where the idea of a naturally “safe” internal network is treated with more scepticism.</li>
+                <li>Beginners should not worry about remembering every product category. The useful picture is: divide the network on purpose, only allow the traffic you mean to allow, and protect data as it travels. The same ideas still apply when systems run in the cloud.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-networks-title beg-vid-networks-desc" focusable="false">
+                <title id="beg-vid-networks-title">A network divided into zones on purpose</title>
+                <desc id="beg-vid-networks-desc">Four network zones labelled people, a buffer zone, the application and the data, with only intended traffic allowed between them.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Divide the network, and only allow the traffic you mean to allow</text>
+                <rect x="20" y="56" width="130" height="120" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="85" y="100" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">People</text>
+                <text x="85" y="124" text-anchor="middle" class="beg-ink-soft" font-size="12">The outside</text>
+                <rect x="176" y="56" width="130" height="120" rx="10" class="beg-zone-hot" stroke-width="2"/>
+                <text x="241" y="100" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">Buffer zone</text>
+                <text x="241" y="124" text-anchor="middle" class="beg-ink-soft" font-size="12">A controlled hop</text>
+                <rect x="332" y="56" width="130" height="120" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="397" y="100" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">Application</text>
+                <text x="397" y="124" text-anchor="middle" class="beg-ink-soft" font-size="12">The service itself</text>
+                <rect x="488" y="56" width="132" height="120" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="554" y="100" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">Data</text>
+                <text x="554" y="124" text-anchor="middle" class="beg-ink-soft" font-size="12">The records you hold</text>
+                <circle class="beg-token-net beg-fill-gold" cx="85" cy="150" r="6"/>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">Protect data as it travels. The same ideas still apply when systems run in the cloud.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>A network divided into zones — people, a buffer, the application and the data — so only the traffic you mean to allow can move between them.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
@@ -138,6 +173,48 @@
               <p class="beg-video-meta">YouTube · 14:48</p>
               <h3><a href="https://www.youtube.com/watch?v=UpkqXK0B2E0" target="_blank" rel="noopener noreferrer">Cybersecurity Architecture: Data Security<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
               <p>Start with a simple plan: decide what is sensitive, find where that data lives, protect it, and know how you would notice and recover if something went wrong. This pairs naturally with the data and sensitivity summary in this Corner.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Data is treated as one of the most valuable things a service holds, which is why a breach is so serious.</li>
+                <li>The video walks through a simple set of activities: govern (a policy that says what is sensitive and what protection that needs), discover (know where the data is and keep that catalogue up to date), protect, then detect and respond, including being able to recover if data is lost.</li>
+                <li>Classification is discussed in general terms: spell out levels of sensitivity and the protections that go with them, so people are not left guessing.</li>
+                <li>Protection includes technical controls such as encryption, and watching for data leaving in ways it should not. Governance also includes a plan for recovering data.</li>
+                <li>A first exercise that matches this video is to write down, for a simple service, what data it holds, why, and how sensitive it is.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="beg-vid-data-title beg-vid-data-desc" focusable="false">
+                <title id="beg-vid-data-title">Govern, discover, protect and recover data</title>
+                <desc id="beg-vid-data-desc">Four stages for looking after data: set a policy, find where the data is, protect it, and be able to recover it if it is lost.</desc>
+                <text x="20" y="32" class="beg-ink" font-size="15" font-weight="700">Data is one of the most valuable things a service holds</text>
+                <rect x="16" y="52" width="145" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="88" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Govern</text>
+                <text x="88" y="120" text-anchor="middle" class="beg-ink" font-size="12">What is sensitive,</text>
+                <text x="88" y="138" text-anchor="middle" class="beg-ink" font-size="12">and what protection</text>
+                <text x="88" y="156" text-anchor="middle" class="beg-ink" font-size="12">does that need?</text>
+                <rect x="171" y="52" width="145" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="243" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Discover</text>
+                <text x="243" y="120" text-anchor="middle" class="beg-ink" font-size="12">Know where the</text>
+                <text x="243" y="138" text-anchor="middle" class="beg-ink" font-size="12">data is, and keep</text>
+                <text x="243" y="156" text-anchor="middle" class="beg-ink" font-size="12">that list up to date</text>
+                <rect x="326" y="52" width="145" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="398" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Protect</text>
+                <text x="398" y="120" text-anchor="middle" class="beg-ink" font-size="12">Encryption, and</text>
+                <text x="398" y="138" text-anchor="middle" class="beg-ink" font-size="12">watching for data</text>
+                <text x="398" y="156" text-anchor="middle" class="beg-ink" font-size="12">leaving as it should not</text>
+                <rect x="481" y="52" width="145" height="128" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="553" y="88" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Recover</text>
+                <text x="553" y="120" text-anchor="middle" class="beg-ink" font-size="12">If data is lost,</text>
+                <text x="553" y="138" text-anchor="middle" class="beg-ink" font-size="12">can you get it</text>
+                <text x="553" y="156" text-anchor="middle" class="beg-ink" font-size="12">back safely?</text>
+                <text x="20" y="224" class="beg-ink-soft" font-size="13">A first pass is to write down what you hold, why, and how sensitive it is.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Four activities for looking after data: set a policy, find where the data is, protect it, and be able to recover it if it is lost.</figcaption>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>

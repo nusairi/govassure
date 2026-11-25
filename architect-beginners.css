@@ -163,7 +163,7 @@
   font-size: 1.15rem;
   font-weight: 500;
 }
-.beg-video p { margin: 0; color: var(--ink-soft); }
+.beg-video > p { margin: 0; color: var(--ink-soft); }
 
 .beg-check {
   margin: 1.2rem 0 0;
@@ -455,3 +455,23 @@
     opacity: 1;
   }
 }
+
+/* "What this video covers" explainers under each video link */
+.beg-video-covers {
+  margin: 0.9rem 0 0.35rem;
+  font-family: var(--sans, inherit);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.beg-video-points {
+  margin: 0 0 0.85rem;
+  padding-left: 1.25rem;
+  color: var(--ink-soft);
+}
+.beg-video-points li { margin: 0.35rem 0; }
+.beg-video .beg-anim {
+  margin: 0.2rem 0 0;
+  max-width: none;
+}
+.beg-video .beg-anim-stage { padding-bottom: 0.45rem; }
