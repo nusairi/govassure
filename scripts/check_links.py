@@ -8,12 +8,14 @@ SECURITY.md), the schema.org JSON-LD context, the ISO/IEC 27001 and NIST CSF pag
 cited on the Security Architect Corner, and
 official UK government and Parliament source pages used by the government map
 (gov.uk, parliament.uk, and the named independent bodies), and the exact
-YouTube videos (and playlist) cited on the Security Architect Corner beginner path.
+YouTube videos (and playlists) cited on the Security Architect Corner beginner path and on the
+Start your security journey path (each clip at its exact start time).
 """
 
 import json
 import re
 import sys
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -70,6 +72,17 @@ SERVED = [
     "architect.css",
     "architect-beginners.js",
     "architect-beginners.css",
+    "start/index.html",
+    "start/1-what-is-cyber-security/index.html",
+    "start/2-threats-and-attackers/index.html",
+    "start/3-passwords-and-accounts/index.html",
+    "start/4-devices-and-updates/index.html",
+    "start/5-phishing-and-scams/index.html",
+    "start/6-networks-and-internet/index.html",
+    "start/7-data-and-privacy/index.html",
+    "start/8-careers-and-next-steps/index.html",
+    "start-journey.js",
+    "start-journey.css",
     "architect/templates/index.html",
     "architect/templates/security-design/index.html",
     "architect/templates/risk-register/index.html",
@@ -117,6 +130,22 @@ ALLOWED_EXACT = {
     "https://www.youtube.com/watch?v=VEu326IZpsc",
     "https://www.youtube.com/watch?v=Jk79QJCxPkM",
     "https://www.youtube.com/playlist?list=PLOspHqNVtKADkWLFt9OcziQF7EatuANSY",
+    # Start your security journey: Google Cybersecurity Certificate playlist and the exact clip start points used.
+    "https://www.youtube.com/playlist?list=PL590L5WQmH8d68VyR6RjhgldHMxMJ5B5z",
+    "https://www.youtube.com/watch?v=_DVVNOGYtmU&t=616s",
+    "https://www.youtube.com/watch?v=34BtwcL7Mkg&t=2139s",
+    "https://www.youtube.com/watch?v=_DVVNOGYtmU&t=1574s",
+    "https://www.youtube.com/watch?v=34BtwcL7Mkg&t=835s",
+    "https://www.youtube.com/watch?v=Rgl7C0P6NsE&t=2678s",
+    "https://www.youtube.com/watch?v=NIRXtMg-0z8&t=3352s",
+    "https://www.youtube.com/watch?v=Rgl7C0P6NsE&t=5790s",
+    "https://www.youtube.com/watch?v=Rgl7C0P6NsE&t=5163s",
+    "https://www.youtube.com/watch?v=NIRXtMg-0z8&t=499s",
+    "https://www.youtube.com/watch?v=NIRXtMg-0z8&t=2242s",
+    "https://www.youtube.com/watch?v=Rgl7C0P6NsE&t=1925s",
+    "https://www.youtube.com/watch?v=3EgYr7jR4NI&t=386s",
+    "https://www.youtube.com/watch?v=_DVVNOGYtmU&t=2200s",
+    "https://www.youtube.com/watch?v=3EgYr7jR4NI&t=3323s",
 }
 
 # Official UK government, Parliament and related public-body hosts used as
@@ -262,6 +291,13 @@ def self_test():
         "https://www.youtube.com/watch?v=jq_LZ1RFPfU#t=1m": "web links must not add a query or fragment",
         "https://www.youtube.com/watch?v=not-on-the-allowlist": "web links must not add a query or fragment",
         "https://www.youtube.com/": "host is outside *.govassured.com",
+        "https://www.youtube.com/watch?v=_DVVNOGYtmU&t=616s": None,
+        "https://www.youtube.com/watch?v=_DVVNOGYtmU&t=617s": "web links must not add a query or fragment",
+        "https://www.youtube.com/watch?v=_DVVNOGYtmU": "web links must not add a query or fragment",
+        "https://www.youtube.com/playlist?list=PL590L5WQmH8d68VyR6RjhgldHMxMJ5B5z": None,
+        "https://www.youtube.com/playlist?list=PL590L5WQmH8d68VyR6RjhgldHMxMJ5B5z&x=1": "web links must not add a query or fragment",
+        "https://nationalcareers.service.gov.uk/job-profiles/cyber-intelligence-officer": None,
+        "https://www.nicybersecuritycentre.gov.uk/securing-your-home-network-and-wi-fi": None,
         "https://youtu.be/jq_LZ1RFPfU": "host is outside *.govassured.com",
     }
     failed = False
@@ -299,7 +335,7 @@ def collect():
             for loc in re.findall(r"<loc>\s*([^<]+)\s*</loc>", text):
                 found.append((rel, "loc", loc.strip(), problem(loc.strip())))
         elif rel != "sitemap.xml":
-            for match in URL_RE.findall(text):
+            for match in URL_RE.findall(unescape(text) if rel.endswith(".html") else text):
                 found.append((rel, "url", match, problem(match)))
         if rel == "data/apps.json":
             for app in json.loads(text)["apps"]:

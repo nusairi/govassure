@@ -455,6 +455,123 @@
       }
     },
     {
+      "route": "/start",
+      "rewrite": "/start/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/1-what-is-cyber-security",
+      "rewrite": "/start/1-what-is-cyber-security/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/1-what-is-cyber-security/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/2-threats-and-attackers",
+      "rewrite": "/start/2-threats-and-attackers/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/2-threats-and-attackers/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/3-passwords-and-accounts",
+      "rewrite": "/start/3-passwords-and-accounts/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/3-passwords-and-accounts/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/4-devices-and-updates",
+      "rewrite": "/start/4-devices-and-updates/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/4-devices-and-updates/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/5-phishing-and-scams",
+      "rewrite": "/start/5-phishing-and-scams/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/5-phishing-and-scams/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/6-networks-and-internet",
+      "rewrite": "/start/6-networks-and-internet/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/6-networks-and-internet/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/7-data-and-privacy",
+      "rewrite": "/start/7-data-and-privacy/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/7-data-and-privacy/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/8-careers-and-next-steps",
+      "rewrite": "/start/8-careers-and-next-steps/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/start/8-careers-and-next-steps/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"
