@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Networks and the internet (step 6 of 8) — GOV Assured</title>
+  <meta name="description" content="How information travels across the internet in packets, what addresses and ports do, and the common ways networks are attacked and protected.">
+  <link rel="canonical" href="https://www.govassured.com/start/6-networks-and-internet/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="author" content="GOV Assured">
+  <meta name="theme-color" content="#021c17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOV Assured">
+  <meta property="og:title" content="Networks and the internet (step 6 of 8) — GOV Assured">
+  <meta property="og:description" content="How information travels across the internet in packets, what addresses and ports do, and the common ways networks are attacked and protected.">
+  <meta property="og:url" content="https://www.govassured.com/start/6-networks-and-internet/">
+  <meta property="og:image" content="https://www.govassured.com/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GOV Assured. A gold crown above a gold serif wordmark on a dark green field.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Networks and the internet (step 6 of 8) — GOV Assured">
+  <meta name="twitter:description" content="How information travels across the internet in packets, what addresses and ports do, and the common ways networks are attacked and protected.">
+  <meta name="twitter:image" content="https://www.govassured.com/public/og.jpg">
+  <link rel="icon" href="/favicon.ico?v=08e5767b65" sizes="48x48">
+  <link rel="icon" href="/favicon.svg?v=2b46852867" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=eea7edda9b">
+  <link rel="stylesheet" href="/styles.css?v=bf1a20c09f">
+  <link rel="stylesheet" href="/architect.css?v=80322216e4">
+  <link rel="stylesheet" href="/architect-beginners.css?v=72fedf04fe">
+  <link rel="stylesheet" href="/start-journey.css?v=99509c16e9">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="https://www.govassured.com/">
+        <img class="brand-mark" src="/public/wordmark.png" width="782" height="694" alt="GOV Assured home">
+      </a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/#threats">Live threats</a>
+        <a href="/#tools">Featured tools</a>
+        <a href="/apps" class="nav-apps">All apps</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <nav class="arch-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/start/">Start your security journey</a></li>
+          <li aria-current="page">Networks and the internet</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="band arch-hero" aria-labelledby="beg-title">
+      <div class="wrap">
+                  <nav class="beg-rail" aria-label="Steps">
+            <ol>
+            <li><a href="/start/1-what-is-cyber-security/" aria-label="Step 1 of 8: What cyber security is">1</a></li>
+            <li><a href="/start/2-threats-and-attackers/" aria-label="Step 2 of 8: Threats, attackers and risk">2</a></li>
+            <li><a href="/start/3-passwords-and-accounts/" aria-label="Step 3 of 8: Passwords, 2-step checks and accounts">3</a></li>
+            <li><a href="/start/4-devices-and-updates/" aria-label="Step 4 of 8: Devices, updates and malware">4</a></li>
+            <li><a href="/start/5-phishing-and-scams/" aria-label="Step 5 of 8: Phishing and social engineering">5</a></li>
+            <li><span aria-current="page" aria-label="Step 6 of 8: Networks and the internet">6</span></li>
+            <li><a href="/start/7-data-and-privacy/" aria-label="Step 7 of 8: Data, encryption and privacy">7</a></li>
+            <li><a href="/start/8-careers-and-next-steps/" aria-label="Step 8 of 8: Careers and where to go next">8</a></li>
+            </ol>
+            <p class="beg-step-kicker">Step 6 of 8</p>
+          </nav>
+
+        <p class="eyebrow">Start your security journey</p>
+        <h1 id="beg-title">Networks and the internet</h1>
+      </div>
+    </section>
+
+    <div class="band arch-section beg-step" id="step-6">
+      <div class="wrap arch-prose">
+
+          <figure class="beg-anim beg-step-anim">
+            <div class="beg-anim-stage" aria-hidden="true">
+              <svg viewBox="0 0 640 240" focusable="false">
+                <text x="20" y="28" text-anchor="start" class="beg-ink" font-size="16" font-weight="700">How a web page request travels</text>
+                <line x1="70" y1="120" x2="590" y2="120" class="beg-stroke-line" stroke-width="2"/>
+                <circle cx="70" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="70" y="124" text-anchor="middle" class="beg-ink" font-size="10">Phone</text>
+                <circle cx="200" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="200" y="124" text-anchor="middle" class="beg-ink" font-size="10">Router</text>
+                <circle cx="330" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="330" y="124" text-anchor="middle" class="beg-ink" font-size="10">Provider</text>
+                <circle cx="460" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="460" y="124" text-anchor="middle" class="beg-ink" font-size="10">Internet</text>
+                <circle cx="590" cy="120" r="22" class="beg-fill-raised beg-stroke-gold" stroke-width="2"/>
+                <text x="590" y="124" text-anchor="middle" class="beg-ink" font-size="10">Website</text>
+                <line x1="70" y1="194" x2="590" y2="194" class="beg-stroke-line" stroke-width="2"/>
+                <circle class="beg-token beg-fill-gold" cx="70" cy="194" r="7"/>
+                <text x="200" y="170" text-anchor="middle" class="beg-ink-soft" font-size="11">Your router</text>
+                <text x="330" y="170" text-anchor="middle" class="beg-ink-soft" font-size="11">Shares one public</text>
+                <text x="330" y="186" text-anchor="middle" class="beg-ink-soft" font-size="11">address for the home</text>
+                <text x="460" y="170" text-anchor="middle" class="beg-ink-soft" font-size="11">Hop by hop,</text>
+                <text x="460" y="186" text-anchor="middle" class="beg-ink-soft" font-size="11">in small packets</text>
+                <text x="20" y="220" text-anchor="start" class="beg-ink-soft" font-size="13">Anyone along the way could look, so use https and treat public Wi-Fi with care.</text>
+              </svg>
+            </div>
+            <div class="beg-anim-bar">
+              <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+              <figcaption>A marker stands for a packet of data. It moves from a phone through the home router, the internet provider and the wider internet to a website. A note says that anyone along the way could look, so encryption matters.</figcaption>
+            </div>
+          </figure>
+
+        <p>The internet is a network of networks. When you open a web page, your device breaks the request into small packets. They travel through your router, your internet provider and the wider internet to the website, and the reply comes back the same way. Every device has an address, and a port number says which service on it should receive each packet.</p>
+        <p>Two practical ideas protect most people. First, <strong>encrypt what travels</strong>: look for https in web addresses, and think twice before using public Wi-Fi for anything sensitive. Second, <strong>keep things apart</strong>: for example, put smart gadgets on a guest network so a problem there does not reach your laptop.</p>
+        <p>At home, your router is the front door to your network. Change its default admin password, make sure Wi-Fi uses WPA2 or WPA3, keep its software up to date, and use a strong Wi-Fi password.</p>
+          <aside class="start-try" aria-labelledby="start-try-title">
+            <h2 id="start-try-title">Try it for yourself</h2>
+            <ul>
+            <li>Look at your home Wi-Fi settings. What is the network called? Is it using WPA2 or WPA3? Is there a guest network you could use for smart devices and visitors? Your provider&#39;s help pages explain how to find these.</li>
+            </ul>
+          </aside>
+
+        <h2>Videos to watch</h2>
+        <p>These are clips from longer free videos. Each link starts at the right moment, and you are welcome to watch only that part.</p>
+        <ul class="beg-videos">
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · starts at 8:19 · about 9 minutes · part of a video that runs 1 hour 9 minutes</p>
+              <h3><a href="https://www.youtube.com/watch?v=NIRXtMg-0z8&amp;t=499s" target="_blank" rel="noopener noreferrer">Internet Networks & Network Security: Network communication<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>How information moves between devices, using letters and street addresses as the comparison. Some of the layer names are technical, so feel free to skim those.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Information travels in small units called packets. Like a letter, each one has a destination address, a return address and the message itself.</li>
+                <li>Devices follow agreed sets of rules, called protocols. The main set splits the job into four layers, from the physical connection up to everyday services such as email and file transfer.</li>
+                <li>Ports work like flat numbers in a building: they tell the receiving device which service should get the data, for example email or secure web browsing.</li>
+                <li>An IP address says where a device is on the internet. A public address is assigned by your provider and shared by every device in one home or office; private addresses are only visible inside the local network. A device&#39;s MAC address identifies the hardware itself and helps a switch deliver packets.</li>
+                <li>Security staff watch how fast and how much data flows, because odd patterns can be a sign of an attack.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="start-vid-packet-title start-vid-packet-desc" focusable="false">
+                <title id="start-vid-packet-title">A data packet is like a letter with two addresses and a port</title>
+                <desc id="start-vid-packet-desc">An envelope shows a to address, a from address and a port number that says which service should receive it. Inside is the message. A short note says packets travel by agreed rules, and unusual traffic can be a sign of an attack.</desc>
+                <rect x="60" y="36" width="340" height="150" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="80" y="66" text-anchor="start" class="beg-ink" font-size="12" font-weight="700">To: 203.0.113.7  (where it is going)</text>
+                <text x="80" y="90" text-anchor="start" class="beg-ink" font-size="12">From: 198.51.100.4  (where it came from)</text>
+                <text x="80" y="114" text-anchor="start" class="beg-ink" font-size="12">Port: 443  (which service should get it)</text>
+                <rect x="80" y="130" width="300" height="38" rx="6" class="beg-fill-raised beg-stroke-gold" stroke-width="1.5"/>
+                <text x="230" y="154" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">The message itself</text>
+                <g class="beg-fade-a">
+                <text x="500" y="80" text-anchor="middle" class="beg-fill-gold" font-size="14" font-weight="700">Agreed rules</text>
+                <text x="500" y="100" text-anchor="middle" class="beg-ink-soft" font-size="12">(protocols) tell devices</text>
+                <text x="500" y="118" text-anchor="middle" class="beg-ink-soft" font-size="12">how to send and receive</text>
+                </g>
+                <g class="beg-fade-b">
+                <text x="500" y="150" text-anchor="middle" class="beg-fill-gold" font-size="13" font-weight="700">Odd volume or speed</text>
+                <text x="500" y="170" text-anchor="middle" class="beg-ink-soft" font-size="12">can signal an attack</text>
+                </g>
+                <text x="20" y="224" text-anchor="start" class="beg-ink-soft" font-size="12">Example addresses are reserved for documentation, not real devices.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>A packet drawn as a letter: where it is going, where it came from, a port number for the right service, and the message inside.</figcaption>
+                </div>
+              </figure>
+            </article>
+          </li>
+          <li>
+            <article class="beg-video">
+              <p class="beg-video-meta">YouTube · starts at 37:22 · about 14 minutes · part of a video that runs 1 hour 9 minutes</p>
+              <h3><a href="https://www.youtube.com/watch?v=NIRXtMg-0z8&amp;t=2242s" target="_blank" rel="noopener noreferrer">Internet Networks & Network Security: Network attack tactics<span class="visually-hidden"> (opens in a new tab)</span></a></h3>
+              <p>Why networks are attacked and the three main families of attack. The technical names (SYN, ICMP) are fine to skip: the ideas are flooding, eavesdropping and impersonating.</p>
+              <h4 class="beg-video-covers">What this video covers</h4>
+              <ul class="beg-video-points">
+                <li>Attacks can leak information, disrupt services, damage reputation and cost time and money. A 2014 breach at a US retail chain exposed card details of tens of millions of customers.</li>
+                <li>A denial-of-service attack floods a network or server so real users cannot get through. A distributed version uses many devices at once, and variants overwhelm a server with half-open connections, status requests or one oversized request.</li>
+                <li>Packet sniffing is watching data as it passes, like someone reading your post. An active version also changes the data, such as swapping a bank account number.</li>
+                <li>Protections against sniffing include a VPN, checking that sites start with https, and avoiding unprotected public Wi-Fi such as in cafés and airports.</li>
+                <li>Spoofing means faking where data comes from to get past checks. It includes sitting in the middle of a connection, replaying a captured message later, and floods that use a stolen address. Encryption is the main defence.</li>
+              </ul>
+              <figure class="beg-anim beg-video-info">
+                <div class="beg-anim-stage">
+              <svg viewBox="0 0 640 240" role="img" aria-labelledby="start-vid-netattack-title start-vid-netattack-desc" focusable="false">
+                <title id="start-vid-netattack-title">Three common network attacks: flood, eavesdrop, impersonate</title>
+                <desc id="start-vid-netattack-desc">Three cards. Flood: many requests overwhelm a server so real users cannot get through. Eavesdrop: someone watches or alters data as it passes. Impersonate: faking where data comes from to get past checks. A VPN, secure web addresses and encryption help.</desc>
+                <g class="beg-fade-a">
+                <rect x="20" y="40" width="190" height="138" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="115" y="68" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Flood</text>
+                <text x="115" y="100" text-anchor="middle" class="beg-ink" font-size="12">Too many requests</text>
+                <text x="115" y="118" text-anchor="middle" class="beg-ink" font-size="12">overwhelm a server</text>
+                <text x="115" y="150" text-anchor="middle" class="beg-ink-soft" font-size="11">Real users get locked out</text>
+                </g>
+                <g class="beg-fade-b">
+                <rect x="225" y="40" width="190" height="138" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="320" y="68" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Eavesdrop</text>
+                <text x="320" y="100" text-anchor="middle" class="beg-ink" font-size="12">Watching or changing</text>
+                <text x="320" y="118" text-anchor="middle" class="beg-ink" font-size="12">data as it passes</text>
+                <text x="320" y="150" text-anchor="middle" class="beg-ink-soft" font-size="11">Like reading your post</text>
+                </g>
+                <g class="beg-fade-c">
+                <rect x="430" y="40" width="190" height="138" rx="10" class="beg-zone" stroke-width="2"/>
+                <text x="525" y="68" text-anchor="middle" class="beg-fill-gold" font-size="15" font-weight="700">Impersonate</text>
+                <text x="525" y="100" text-anchor="middle" class="beg-ink" font-size="12">Faking who a message</text>
+                <text x="525" y="118" text-anchor="middle" class="beg-ink" font-size="12">is really from</text>
+                <text x="525" y="150" text-anchor="middle" class="beg-ink-soft" font-size="11">Gets past simple checks</text>
+                </g>
+                <text x="320" y="206" text-anchor="middle" class="beg-ink" font-size="13" font-weight="700">Defences: encrypt traffic, look for https, use a VPN on public Wi-Fi.</text>
+                <text x="320" y="228" text-anchor="middle" class="beg-ink-soft" font-size="12">Avoid unprotected public Wi-Fi where you can.</text>
+              </svg>
+                </div>
+                <div class="beg-anim-bar">
+                  <button type="button" class="beg-anim-toggle" data-beg-anim-toggle aria-pressed="true" aria-label="Pause animation">Pause</button>
+                  <figcaption>Three cards in turn: flood, eavesdrop and impersonate, with the main defences underneath: encrypt traffic, look for https and use a VPN on public Wi-Fi.</figcaption>
+                </div>
+              </figure>
+            </article>
+          </li>
+        </ul>
+          <aside class="beg-gov" aria-labelledby="beg-gov-title">
+            <h2 id="beg-gov-title">What GOV.UK recommends</h2>
+            <p>Official UK advice covers both the home network and the bigger networks organisations run.</p>
+            <ul>
+            <li>
+              <p><a href="https://www.nicybersecuritycentre.gov.uk/securing-your-home-network-and-wi-fi" target="_blank" rel="noopener noreferrer">NI Cyber Security Centre: Securing your home network and Wi-Fi<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>A clear guide for people at home: secure your router, choose strong Wi-Fi encryption, keep smart devices on a separate network, and use public Wi-Fi with care. From the Northern Ireland Cyber Security Centre.</p>
+            </li>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/guidance/smart-devices-in-the-home" target="_blank" rel="noopener noreferrer">NCSC: Smart devices in the home<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>How to set up and keep connected household items safe, including changing default settings and keeping them updated.</p>
+            </li>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/guidance/network-security-fundamentals" target="_blank" rel="noopener noreferrer">NCSC: Network security fundamentals<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>An introduction, written for organisations, to designing and maintaining secure networks: know what is on the network, restrict access, protect data in transit and keep watch.</p>
+            </li>
+            <li>
+              <p><a href="https://www.ncsc.gov.uk/section/advice-guidance/all-topics/remote-working" target="_blank" rel="noopener noreferrer">NCSC: Remote working<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+              <p>A topic page that gathers guidance on working away from your usual office.</p>
+            </li>
+            </ul>
+          </aside>
+
+          <div class="beg-check">
+            <p><strong>Check your understanding.</strong> You are in a café and need to check your bank balance. What is the safer choice, and why?</p>
+            <details>
+              <summary>Show a good answer</summary>
+              <p>Use your phone&#39;s mobile data rather than the café&#39;s Wi-Fi. Anyone can set up a hotspot, and on an unprotected network someone could watch your traffic. If you must use public Wi-Fi, use a reputable VPN and look for https.</p>
+            </details>
+          </div>
+          <div class="beg-done">
+            <input type="checkbox" id="beg-done-6" data-beg-step="step-6">
+            <label for="beg-done-6">I have marked step 6 as done</label>
+          </div>
+
+        <p><a href="/start/#glossary">Words you will see</a> are collected on the path overview.</p>
+
+          <nav class="tpl-pager" aria-label="Start your security journey">
+            <a class="tpl-pager-prev" href="/start/5-phishing-and-scams/" rel="prev"><span class="tpl-pager-label">Previous step</span> <span class="tpl-pager-title">Phishing and social engineering</span></a>
+            <a class="tpl-pager-next" href="/start/7-data-and-privacy/" rel="next"><span class="tpl-pager-label">Next step</span> <span class="tpl-pager-title">Data, encryption and privacy</span></a>
+          </nav>
+          <p class="tpl-top"><a href="/start/">All steps</a></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>GOV Assured</strong> — an open source community for cyber security, resilience and assurance.</p>
+        <p class="footer-note">Not a government website. Not affiliated with or endorsed by NCSC or any UK government department.</p>
+      </div>
+      <div class="social">
+        <a class="linkedin" href="https://www.linkedin.com/company/102617034/" target="_blank" rel="noopener" aria-label="GOV Assured on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.84v2.12h.05c.53-1.01 1.84-2.12 3.79-2.12 4.06 0 4.81 2.67 4.81 6.14V24h-4v-7.73c0-1.84-.03-4.21-2.56-4.21-2.57 0-2.96 2-2.96 4.07V24h-4V8.5z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/nusairi/govassure" target="_blank" rel="noopener" aria-label="GOV Assured on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.39.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12.02C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/start-journey.js?v=3c69793f51" defer></script>
+</body>
+</html>

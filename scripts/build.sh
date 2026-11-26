@@ -18,8 +18,9 @@ HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.cs
            architect.js architect.css
            architect-templates.js architect-templates.css
            architect-patterns.css
-           architect-beginners.css architect-beginners.js)
-HUB_DIRS=(data public govmap architect)
+           architect-beginners.css architect-beginners.js
+           start-journey.css start-journey.js)
+HUB_DIRS=(data public govmap architect start)
 
 rm -rf "$out" && mkdir -p "$out/app"
 for f in "${HUB_FILES[@]}"; do
@@ -35,6 +36,7 @@ if [ -f "$here/scripts/version_assets.py" ]; then
 fi
 python3 "$here/scripts/check_links.py"
 python3 "$here/scripts/check_architect_pages.py"
+python3 "$here/scripts/check_start_pages.py"
 
 # Guard: security.txt must be at the RFC 9116 location in the output.
 if [ ! -f "$out/app/.well-known/security.txt" ]; then
