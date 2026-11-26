@@ -157,7 +157,13 @@ S[1] = {
     "intro": [
         "Cyber security is the practice of protecting the devices, accounts, networks and information we all rely on, from people who should not have access to them and from honest accidents too. The UK&#39;s National Cyber Security Centre (NCSC) describes its core job as helping people and organisations reduce the risk and impact of cyber attacks.",
         "You do not need to be technical to start. Nearly everything in security comes back to four questions: what are we protecting, who might want to get at it, how could they, and what is the simplest thing that would stop them? The rest of this path builds those questions up one step at a time.",
-        "Three ideas turn up everywhere. <strong>Confidentiality</strong> means only the right people can see something. <strong>Integrity</strong> means it is correct and has not been quietly changed. <strong>Availability</strong> means the right people can get to it when they need it. If you remember nothing else from this step, remember those three words.",
+        "Three ideas turn up everywhere: <strong>Confidentiality</strong>, <strong>Integrity</strong> and <strong>Availability</strong>.",
+        [
+            "<strong>Confidentiality</strong> means only the right people can see something. <em>Only you can see your bank balance.</em>",
+            "<strong>Integrity</strong> means it is correct and has not been quietly changed. <em>Your balance shows what you really have.</em>",
+            "<strong>Availability</strong> means the right people can get to it when they need it. <em>You can log in when you need to pay a bill.</em>",
+        ],
+        "People often call these three &ldquo;the CIA triad&rdquo;. If you remember nothing else from this step, remember those three words.",
     ],
     "try": ["Think of one account you use every day, such as email. Who should be able to see it? How would you notice if something had been changed? What would happen if you could not get in for a week? Those are the three ideas, applied to your own life."],
     "clips": ["_DVVNOGYtmU@616", "34BtwcL7Mkg@2139"],

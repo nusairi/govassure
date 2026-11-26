@@ -243,9 +243,21 @@ def next_card():
 """
 
 
+def render_intro(parts):
+    """Each intro part is a paragraph string, or a list of strings rendered as a <ul>."""
+    out = []
+    for part in parts:
+        if isinstance(part, (list, tuple)):
+            items = "\n".join(f"          <li>{item}</li>" for item in part)
+            out.append(f"        <ul>\n{items}\n        </ul>")
+        else:
+            out.append(f"        <p>{part}</p>")
+    return "\n".join(out)
+
+
 def step_page(s):
     d = S[s["n"]]
-    intro = "\n".join(f"        <p>{p}</p>" for p in d["intro"])
+    intro = render_intro(d["intro"])
     videos = "\n".join(vid_item(k) for k in d["clips"])
     inner = f"""
 {anim(CAP[s["n"]], ANIM[s["n"]])}
