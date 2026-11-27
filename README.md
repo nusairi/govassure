@@ -93,6 +93,7 @@ node api/shared/_outages.test.js
 node api/shared/_outagenews.test.js
 node api/shared/_govpubs.test.js
 node api/shared/_cisa-alerts.test.js
+node api/shared/_news.test.js
 ```
 
 Browser checks live in `tools/e2e-*.js`. They use Playwright and a static server for the hub files:
