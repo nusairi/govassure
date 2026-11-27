@@ -16,7 +16,7 @@ const panelInfo = () => {
   };
   const cols = getComputedStyle(document.querySelector(".lv-out-panels")).gridTemplateColumns.split(" ").length;
   return {
-    problems: p("out-problems"), news: p("out-news"), cols,
+    problems: p("out-problems"), gov: document.getElementById("out-gov") ? p("out-gov") : null, news: p("out-news"), cols,
     panels: document.querySelectorAll("#outages .lv-panel").length,
     panelHeights: [...document.querySelectorAll("#outages .lv-panel")].map((e) => Math.round(e.getBoundingClientRect().height)),
     servicesGone: !document.getElementById("services") && !document.getElementById("out-services") && !document.querySelector(".service-grid") && !/The work follows the tools/.test(document.body.textContent),
@@ -41,7 +41,7 @@ const panelInfo = () => {
     pg.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); });
     pg.on("pageerror", (e) => errs.push("pageerror " + e.message));
     const r = await pg.goto(U, { waitUntil: "networkidle" });
-    for (const id of ["out-problems", "out-news", "news-body", "adv-body"]) await pg.waitForSelector(`#${id} .lv-row, #${id} .lv-note`, { timeout: 25000 });
+    for (const id of ["out-problems", "out-news", "out-gov", "news-body", "adv-body"]) await pg.waitForSelector(`#${id} .lv-row, #${id} .lv-note`, { timeout: 25000 });
     const info = await pg.evaluate(panelInfo);
     info.status = r.status(); info.csp = r.headers()["content-security-policy"]; info.errors = errs;
     if (await pg.$("#out-news .lv-more summary")) {

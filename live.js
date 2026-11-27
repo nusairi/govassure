@@ -133,19 +133,30 @@
   setInterval(loadNews, 2 * 60 * 1000);
 
   // What's down in the UK (our own /api/outages, data from StatusPages + outage headlines): three panels in the advisories style.
-  var OUT_RANK = { outage: 0, spike: 1, degraded: 2, maintenance: 3 };
+  var OUT_RANK = { outage: 0, spike: 1, degraded: 2, unclear: 3, maintenance: 4, ok: 5 };
   var OUT_PILL = {
     outage: ["Outage", "lv-pill-crit"],
     spike: ["Spike", "lv-pill-ransom"],
     degraded: ["Degraded", "lv-pill-ransom"],
-    maintenance: ["Maintenance", "lv-pill-news"]
+    unclear: ["Unclear", "lv-pill-ransom"],
+    maintenance: ["Maintenance", "lv-pill-news"],
+    ok: ["Operational", "lv-pill-ok"]
   };
   function outState(p) {
     if (p.status === "major_outage" || p.status === "partial_outage") return "outage";
     if (p.reportLevel === "spike" || p.reportLevel === "elevated") return "spike";
     if (p.status === "degraded") return "degraded";
+    if (p.status === "unknown") return "unclear";
     if (p.status === "maintenance") return "maintenance";
     return "";
+  }
+  function govState(s) {
+    if (s.status === "major_outage" || s.status === "partial_outage") return "outage";
+    if (s.reportLevel === "spike" || s.reportLevel === "elevated") return "spike";
+    if (s.status === "degraded") return "degraded";
+    if (s.status === "unknown") return "unclear";
+    if (s.status === "maintenance") return "maintenance";
+    return "ok";
   }
   function hhmm(d) {
     var t = new Date(d);
@@ -180,14 +191,38 @@
       else pel.innerHTML = list(probs.map(function (x) {
         var pill = OUT_PILL[x.st];
         var rep = x.p.reportLevel === "spike" ? "spike in user reports" : x.p.reportLevel === "elevated" ? "more user reports than usual" : (x.p.source ? "from " + x.p.source : "");
-        return item("div", "lv-row", x.p.link,
+        return item("div", "lv-row", x.p.official || x.p.link,
           '<div class="lv-r-top"><span class="lv-r-title">' + esc(x.p.name) + "</span>" +
           '<span class="lv-pill ' + pill[1] + '">' + esc(pill[0]) + "</span></div>" +
           '<div class="lv-r-meta">' + esc(x.c.label) + (rep ? " · " + esc(rep) : "") + (when ? " · checked " + esc(when) : "") + "</div>" +
           (x.p.summary ? '<div class="lv-r-desc">' + esc(x.p.summary) + "</div>" : ""));
       }), "problems");
 
-      // 2. Outage news
+      // 2. Official GOV.UK service status (current state plus incidents in the last 48 hours)
+      var gov = (data && data.govServices) || [];
+      var gel = byId("out-gov");
+      if (gel) {
+        if (!gov.length) empty(gel, "Official GOV.UK status unavailable.");
+        else gel.innerHTML = list(gov.map(function (s) {
+          var st = govState(s);
+          var pill = OUT_PILL[st];
+          var bits = [];
+          if (s.source) bits.push(s.source);
+          if (when) bits.push("checked " + when);
+          var inc = (s.incidents || []).map(function (n) {
+            var label = n.resolved ? "Resolved " + ago(n.resolved) : (n.started ? "Started " + ago(n.started) : "");
+            return esc(n.name) + (label ? " · " + esc(label) : "");
+          }).join("; ");
+          return item("div", "lv-row", s.url,
+            '<div class="lv-r-top"><span class="lv-r-title">' + esc(s.name) + "</span>" +
+            (pill ? '<span class="lv-pill ' + pill[1] + '">' + esc(pill[0]) + "</span>" : "") + "</div>" +
+            (bits.length ? '<div class="lv-r-meta">' + esc(bits.join(" · ")) + "</div>" : "") +
+            (s.description ? '<div class="lv-r-desc">' + esc(s.description) + "</div>" : "") +
+            (inc ? '<div class="lv-r-desc">' + inc + "</div>" : ""));
+        }), "GOV.UK services");
+      }
+
+      // 3. Outage news
       var news = (data && data.news) || [];
       var nel = byId("out-news");
       if (!news.length) empty(nel, data && (ok || data.news) ? "No outage news in the last 48 hours." : "Status unavailable.");
@@ -200,10 +235,11 @@
 
       if (ok && when) byId("out-updated").textContent = "StatusPages · " + when;
       var src = (data && data.source) || {};
-      if (safe(src.url)) byId("out-credit").innerHTML = '<a class="lv-out-credit" href="' + esc(src.url) + '" target="_blank" rel="noopener noreferrer">Data: StatusPages (user reports are unverified)</a>';
+      if (safe(src.url)) byId("out-credit").innerHTML = '<a class="lv-out-credit" href="' + esc(src.url) + '" target="_blank" rel="noopener noreferrer">Data: official GOV.UK status pages and StatusPages (user reports are unverified)</a>';
     }).catch(function () {
       empty(byId("out-problems"), "Status unavailable.");
       empty(byId("out-news"), "Status unavailable.");
+      if (byId("out-gov")) empty(byId("out-gov"), "Status unavailable.");
     });
   }
   if (byId("out-problems")) {

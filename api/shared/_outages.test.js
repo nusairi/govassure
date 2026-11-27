@@ -108,6 +108,25 @@ ok("upstream down: JSON-serialisable", typeof JSON.stringify(out) === "string");
   await outages({}, res);
   ok("handler: good upstream -> 5 min cache", res.o.available === true && res.h["Cache-Control"].startsWith("s-maxage=300"));
   global.fetch = realFetch;
-  if (failed) { console.error(failed + " failed"); process.exit(1); }
+  
+const { isUnreachable } = require("./outages");
+const uc = { status: "unknown", summary: "No unusual user reports; our own check could not reach the site" };
+ok("unreachable: UC probe wording counts", isUnreachable(uc));
+ok("unreachable: plain unknown does not", !isUnreachable({ status: "unknown", summary: "No data" }));
+ok("unreachable: operational does not", !isUnreachable({ status: "ok", summary: "could not reach" }));
+
+const govIdx = CATEGORIES.findIndex((c) => c.id === "government");
+const govBoard = CATEGORIES.map((c, i) => i === govIdx ? { providers: [
+  { id: "govuk", displayName: "GOV.UK", indicator: "operational", summary: "All Systems Operational", sourceUrl: "https://status.publishing.service.gov.uk", via: "statuspage", userReports: "none", activeIncidents: [] },
+  { id: "universal-credit", displayName: "Universal Credit", indicator: "unknown", summary: "No unusual user reports; our own check could not reach the site", sourceUrl: "https://www.universal-credit.service.gov.uk", via: "crowd", userReports: "none", activeIncidents: [] },
+] } : { providers: [] });
+const govOut = normalise(govBoard, [], []);
+const govCat = govOut.categories.find((c) => c.id === "government");
+ok("UC unreachable appears in government problems", govCat.problems.some((p) => p.name === "Universal Credit" && p.status === "unknown"));
+ok("UC is not left in the unknown count once surfaced", govCat.unknown === 0 && govCat.problems.length === 1);
+ok("operational GOV.UK is not a problem", !govCat.problems.some((p) => p.name === "GOV.UK") && govCat.ok === 1);
+ok("govServices defaults to an array", Array.isArray(govOut.govServices) && govOut.govServices.length === 0);
+
+if (failed) { console.error(failed + " failed"); process.exit(1); }
   console.log("ALL-TESTS-PASSED");
 })();
