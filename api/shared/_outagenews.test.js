@@ -26,6 +26,7 @@ const yes = [
   "Microsoft says services fully restored after day-long global outage",
   "Department for Work and Pensions takes some services offline after 'cyber incident'",
   "Temporary disruption to some DWP online services",
+  "Emergency numbers are down after nationwide network outage",
 ];
 const no = [
   "Police arrest 354 suspects in dark web cybercrime crackdown",

@@ -58,8 +58,10 @@ const NEGATIVE = [
   /\bdown\s+from\s+(?:£|\$|€|\d)/i,
   /\b(?:price|prices|deal|deals|discount|sale|cheapest|lowest)\b(?!.*\boutage\b)/i,
   // Figures and commentary: "immigration stats are down", "unemployment figures are down".
-  /\b(?:stats?|statistics|figures?|numbers?|polls?|polling|immigration|unemployment|inflation|migration)\b.*\bdown\b/i,
-  /\bdown\b.*\b(?:stats?|statistics|figures?|numbers?|polls?|polling)\b/i,
+  // Do not use a bare "numbers ... down" rule: that would drop genuine outage headlines
+  // such as "Emergency numbers are down after nationwide network outage".
+  /\b(?:stats?|statistics|figures?|polls?|polling|immigration|unemployment|inflation|migration)\b.*\bdown\b(?!.*\b(?:outages?|offline|disruption)\b)/i,
+  /\bdown\b.*\b(?:stats?|statistics|figures?|polls?|polling)\b(?!.*\b(?:outages?|offline|disruption)\b)/i,
 ];
 
 function clean(s, max) {
