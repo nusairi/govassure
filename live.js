@@ -130,7 +130,7 @@
     });
   }
   loadNews();
-  setInterval(loadNews, 5 * 60 * 1000);
+  setInterval(loadNews, 2 * 60 * 1000);
 
   // What's down in the UK (our own /api/outages, data from StatusPages + outage headlines): three panels in the advisories style.
   var OUT_RANK = { outage: 0, spike: 1, degraded: 2, maintenance: 3 };
@@ -267,7 +267,7 @@
   }).catch(function () { var el = byId("cisa-body"); if (el) empty(el, "CISA alerts unavailable."); });
 
   byId("threats-foot").textContent =
-    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), CISA alerts and advisories, UK security press, NCSC, Action Fraud, GOV.UK and UK Parliament. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
+    "Sources: CISA KEV (linked to NVD; required action text is quoted from CISA), CISA alerts and advisories, UK security press, BBC, The Guardian, NCSC, Action Fraud, GOV.UK and UK Parliament. Items open the source in a new tab. Feeds are cached and refreshed automatically. Not exhaustive; for guidance only.";
 
   // Ransomware tracker
   get("/api/ransomware").then(function (data) {

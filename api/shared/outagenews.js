@@ -8,6 +8,7 @@ const safeUrl = require("./_url");
 const FEEDS = [
   { url: "https://feeds.bbci.co.uk/news/technology/rss.xml", source: "BBC" },
   { url: "https://feeds.bbci.co.uk/news/uk/rss.xml", source: "BBC" },
+  { url: "https://feeds.bbci.co.uk/news/politics/rss.xml", source: "BBC" },
   { url: "https://feeds.bbci.co.uk/news/business/rss.xml", source: "BBC" },
   { url: "https://www.ispreview.co.uk/index.php/feed", source: "ISPreview" },
   { url: "https://www.theregister.com/headlines.atom", source: "The Register" },
