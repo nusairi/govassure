@@ -175,7 +175,7 @@ const handler = async (req, res) => {
       fetchGovStatus(fetchJson, null).catch(() => []),
     ]);
     const govBoard = results[CATEGORIES.findIndex((c) => c.id === "government")];
-    const govServices = mergeServices(official, extrasFromStatusPages(govBoard));
+    const govServices = mergeServices(official, extrasFromStatusPages(govBoard, official));
     const out = normalise(results, news, govServices);
     if (!out.available) res.setHeader("Cache-Control", "s-maxage=60");
     res.status(200).json(out);

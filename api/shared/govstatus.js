@@ -91,14 +91,29 @@ function fromOfficial(page, summary, incidents, now = Date.now()) {
   };
 }
 
-// StatusPages government board rows that are not already covered by an official page.
-const OFFICIAL_IDS = new Set(["govuk", "govuk-one-login", "govuk-notify"]);
+// StatusPages government board ids that correspond to an official Statuspage.io row.
+const OFFICIAL_BOARD_IDS = {
+  publishing: "govuk",
+  "one-login": "govuk-one-login",
+  notify: "govuk-notify",
+};
 
-function extrasFromStatusPages(govCategory, now = Date.now()) {
+// Keep a board row when the matching official fetch did not return a service, so a
+// failed official request does not hide a StatusPages outage for the same service.
+function coveredBoardIds(official) {
+  const ids = new Set();
+  for (const s of official || []) {
+    if (s && OFFICIAL_BOARD_IDS[s.id]) ids.add(OFFICIAL_BOARD_IDS[s.id]);
+  }
+  return ids;
+}
+
+function extrasFromStatusPages(govCategory, official = [], now = Date.now()) {
   const providers = govCategory && Array.isArray(govCategory.providers) ? govCategory.providers : [];
+  const covered = coveredBoardIds(official);
   const out = [];
   for (const p of providers) {
-    if (!p || typeof p !== "object" || OFFICIAL_IDS.has(p.id)) continue;
+    if (!p || typeof p !== "object" || covered.has(p.id)) continue;
     const name = text(p.displayName || p.id, 60);
     const official = safeUrl(p.sourceUrl);
     const link = official || (p.id ? safeUrl("https://status-pages.com/government/" + p.id) : null);
@@ -142,7 +157,8 @@ async function fetchGovStatus(fetchJson, govBoard, now = Date.now()) {
       return null;
     }
   }));
-  return mergeServices(official.filter(Boolean), extrasFromStatusPages(govBoard, now));
+  const officialRows = official.filter(Boolean);
+  return mergeServices(officialRows, extrasFromStatusPages(govBoard, officialRows, now));
 }
 
 module.exports = {

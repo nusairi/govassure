@@ -33,15 +33,23 @@ ok("hostile incident text is stripped", fromOfficial(payPage, paySummary, { inci
 ok("empty summary with no incidents is dropped", fromOfficial(payPage, null, null, now) === null);
 ok("summary missing but a recent incident is kept", fromOfficial(payPage, null, payIncidents, now) && fromOfficial(payPage, null, payIncidents, now).incidents.length === 1);
 
-const extras = extrasFromStatusPages({ providers: [
-  { id: "govuk", displayName: "GOV.UK", indicator: "operational", summary: "All Systems Operational", sourceUrl: "https://status.publishing.service.gov.uk", via: "statuspage" },
+const board = { providers: [
+  { id: "govuk", displayName: "GOV.UK", indicator: "major_outage", summary: "Major outage", sourceUrl: "https://status.publishing.service.gov.uk", via: "statuspage" },
   { id: "universal-credit", displayName: "Universal Credit", indicator: "unknown", summary: "No unusual user reports; our own check could not reach the site", sourceUrl: "https://www.universal-credit.service.gov.uk", via: "crowd", userReports: "none" },
   { id: "hmrc", displayName: "HMRC online services", indicator: "operational", summary: "HMRC reports no unplanned downtime", sourceUrl: "https://www.gov.uk/guidance/find-out-which-hmrc-services-are-experiencing-issues", via: "statuspage" },
   { id: "bad", displayName: "<b>Evil</b>", indicator: "operational", sourceUrl: "javascript:alert(1)" },
-] }, now);
+] };
+const extras = extrasFromStatusPages(board, [{ id: "publishing", name: "GOV.UK website" }], now);
 ok("official StatusPages rows already covered are not duplicated", !extras.some((e) => e.id === "govuk" || /GOV\.UK$/.test(e.name)));
-ok("Universal Credit is kept as unknown/unreachable", extras.some((e) => e.name === "Universal Credit" && e.status === "unknown" && /could not reach/.test(e.description) && e.url.includes("universal-credit")));
-ok("HMRC official guidance URL is kept", extras.some((e) => e.name === "HMRC online services" && e.url.includes("gov.uk")));
+ok("Universal Credit is kept as unknown/unreachable", extras.some((e) => {
+  let host = "";
+  try { host = new URL(e.url).hostname; } catch {}
+  return e.name === "Universal Credit" && e.status === "unknown" && /could not reach/.test(e.description) && host === "www.universal-credit.service.gov.uk";
+}));
+ok("HMRC official guidance URL is kept", extras.some((e) => e.name === "HMRC online services" && e.url === "https://www.gov.uk/guidance/find-out-which-hmrc-services-are-experiencing-issues"));
+const fallback = extrasFromStatusPages(board, [], now);
+ok("board fallback kept when official fetch is missing", fallback.some((e) => e.id === "govuk" && e.status === "major_outage" && e.name === "GOV.UK"));
+ok("board fallback is not used when official publishing was returned", !extras.some((e) => e.id === "govuk"));
 ok("javascript official URLs are never used", !JSON.stringify(extras).includes("javascript:"));
 ok("HTML in StatusPages names is stripped", extras.every((e) => e.name === e.name.replace(/[<>]/g, "")));
 
