@@ -52,8 +52,8 @@ const CYBER = [
   /\bhackers?\b/i,
   /\bhacked\b/i,
   /\bhacking\b/i,
-  /\bdata\s+breaches?\b/i,
-  /\bsecurity\s+breaches?\b/i,
+  /\bdata\s+breach(?:es)?\b/i,
+  /\bsecurity\s+breach(?:es)?\b/i,
   /\bdata\s+(?:leak|leaked|stolen|exfiltrated|accessed)\b/i,
   /\b(?:stolen|leaked)\s+(?:data|records|information)\b/i,
   /\bzero[\s-]?days?\b/i,
@@ -93,7 +93,7 @@ const SERVICE_INCIDENT = [
   /\bunavailable\b/i,
   /\boutages?\b/i,
   /\bincidents?\b/i,
-  /\bbreaches?\b/i,
+  /\bbreach(?:es)?\b/i,
   /\bcompromise[ds]?\b/i,
 ];
 

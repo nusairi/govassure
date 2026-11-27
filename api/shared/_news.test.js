@@ -22,6 +22,8 @@ const yes = [
   { title: "UK pensions department hit by a cyber incident" },
   { title: "NCSC warns of ransomware attacks on UK organisations" },
   { title: "Hackers steal customer records in travel firm data breach" },
+  { title: "Customer records exposed in data breach at UK retailer" },
+  { title: "Customer records exposed in security breach at UK retailer" },
   { title: "GCHQ and NCSC issue advice after a phishing campaign" },
   { title: "Switzerland confirms AI-assisted cyberattacks breached operators" },
 ];
