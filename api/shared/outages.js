@@ -8,6 +8,7 @@
 
 const safeUrl = require("./_url");
 const { fetchOutageNews } = require("./outagenews");
+const { fetchGovStatus, extrasFromStatusPages, mergeServices } = require("./govstatus");
 
 const BASE = "https://status-pages.com";
 const UA = "www.govassured.com-dashboard/1.0";
@@ -78,12 +79,18 @@ function normaliseProvider(p, cat) {
   };
 }
 
+// Official status unknown is usually "no data". A StatusPages probe that could not
+// reach a government service is worth surfacing, even when user reports are quiet.
+function isUnreachable(p) {
+  return !!(p && p.status === "unknown" && /could not reach|couldn['’]t reach|unreachable|not responding|timed out/i.test(p.summary || ""));
+}
+
 function normaliseCategory(data, cat) {
   const providers = data && Array.isArray(data.providers) ? data.providers : null;
   if (!providers) return { id: cat.id, label: cat.label, available: false, link: `${BASE}/${cat.id}`, total: 0, ok: 0, unknown: 0, problems: [] };
   const all = providers.slice(0, 200).map((p) => normaliseProvider(p, cat)).filter(Boolean);
-  const problems = all.filter((p) => p.problem || p.status === "maintenance");
-  const rank = { major_outage: 0, partial_outage: 1, degraded: 2, maintenance: 4 };
+  const problems = all.filter((p) => p.problem || p.status === "maintenance" || isUnreachable(p));
+  const rank = { major_outage: 0, partial_outage: 1, degraded: 2, unknown: 3, maintenance: 4 };
   problems.sort((a, b) => (rank[a.status] ?? 3) - (rank[b.status] ?? 3) || (b.reportLevel === "spike") - (a.reportLevel === "spike"));
   return {
     id: cat.id,
@@ -92,7 +99,7 @@ function normaliseCategory(data, cat) {
     link: `${BASE}/${cat.id}`,
     total: all.length,
     ok: all.filter((p) => p.status === "ok" && !p.problem).length,
-    unknown: all.filter((p) => p.status === "unknown" && !p.problem).length,
+    unknown: all.filter((p) => p.status === "unknown" && !p.problem && !isUnreachable(p)).length,
     okNames: all.filter((p) => p.status === "ok" && !p.problem).map((p) => p.name),
     problems: problems.map(({ problem, id, ...rest }) => rest),
   };
@@ -124,7 +131,7 @@ function buildTicker(results) {
   return items.map(({ order, ...rest }) => rest);
 }
 
-function normalise(results, news) {
+function normalise(results, news, govServices) {
   const categories = CATEGORIES.map((cat, i) => (cat.tickerOnly ? null : normaliseCategory(results[i], cat))).filter(Boolean);
   const ticker = buildTicker(results);
   const available = categories.some((c) => c.available) || ticker.length > 0;
@@ -132,9 +139,10 @@ function normalise(results, news) {
     updated: new Date().toISOString(),
     available,
     ...(available ? {} : { error: "Status unavailable" }),
-    source: { name: "StatusPages", url: BASE, note: "User reports are unverified" },
+    source: { name: "StatusPages", url: BASE, note: "User reports are unverified. Official GOV.UK status pages are listed separately." },
     ticker,
     news: Array.isArray(news) ? news : [],
+    govServices: Array.isArray(govServices) ? govServices : [],
     categories,
   };
 }
@@ -161,16 +169,19 @@ const handler = async (req, res) => {
   res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=600");
   try {
     // Status boards and outage headlines are fetched in parallel; a news failure just means no headlines.
-    const [results, news] = await Promise.all([
+    const [results, news, official] = await Promise.all([
       Promise.all(CATEGORIES.map((c) => fetchJson(`${BASE}/${c.id}/data.json`))),
       fetchOutageNews().catch(() => []),
+      fetchGovStatus(fetchJson, null).catch(() => []),
     ]);
-    const out = normalise(results, news);
+    const govBoard = results[CATEGORIES.findIndex((c) => c.id === "government")];
+    const govServices = mergeServices(official, extrasFromStatusPages(govBoard));
+    const out = normalise(results, news, govServices);
     if (!out.available) res.setHeader("Cache-Control", "s-maxage=60");
     res.status(200).json(out);
   } catch (e) {
     res.setHeader("Cache-Control", "s-maxage=60");
-    res.status(200).json({ updated: new Date().toISOString(), available: false, error: "Status unavailable", ticker: [], news: [], categories: [] });
+    res.status(200).json({ updated: new Date().toISOString(), available: false, error: "Status unavailable", ticker: [], news: [], govServices: [], categories: [] });
   }
 };
 
@@ -181,3 +192,4 @@ module.exports.CATEGORIES = CATEGORIES;
 module.exports.TICKER = TICKER;
 module.exports.tickerState = tickerState;
 module.exports.fetchJson = fetchJson;
+module.exports.isUnreachable = isUnreachable;

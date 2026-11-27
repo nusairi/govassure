@@ -24,6 +24,8 @@ const yes = [
   "Power cut leaves 20,000 homes without electricity",
   "EE network goes offline across London",
   "Microsoft says services fully restored after day-long global outage",
+  "Department for Work and Pensions takes some services offline after 'cyber incident'",
+  "Temporary disruption to some DWP online services",
 ];
 const no = [
   "Police arrest 354 suspects in dark web cybercrime crackdown",
@@ -44,6 +46,8 @@ const no = [
   "Pixel 10 is down to £499 in early Black Friday deal",
   "Shares are down 12% after profit warning",
   "AirPods are down from £179 today",
+  "Chris Mason: Immigration stats are down but will that be the end of the issue?",
+  "Unemployment figures are down this quarter",
   "",
 ];
 yes.forEach((t) => ok("match: " + t, isOutageTitle(t)));

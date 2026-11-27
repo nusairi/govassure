@@ -91,6 +91,7 @@ python3 scripts/test_glossary_terms.py
 node api/shared/_rss.test.js
 node api/shared/_outages.test.js
 node api/shared/_outagenews.test.js
+node api/shared/_govstatus.test.js
 node api/shared/_govpubs.test.js
 node api/shared/_cisa-alerts.test.js
 node api/shared/_news.test.js

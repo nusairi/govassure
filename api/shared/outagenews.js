@@ -10,6 +10,8 @@ const FEEDS = [
   { url: "https://feeds.bbci.co.uk/news/uk/rss.xml", source: "BBC" },
   { url: "https://feeds.bbci.co.uk/news/politics/rss.xml", source: "BBC" },
   { url: "https://feeds.bbci.co.uk/news/business/rss.xml", source: "BBC" },
+  { url: "https://www.gov.uk/search/news-and-communications.atom", source: "GOV.UK" },
+  { url: "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml", source: "NCSC" },
   { url: "https://www.ispreview.co.uk/index.php/feed", source: "ISPreview" },
   { url: "https://www.theregister.com/headlines.atom", source: "The Register" },
   { url: "https://www.bleepingcomputer.com/feed/", source: "BleepingComputer" },
@@ -55,6 +57,9 @@ const NEGATIVE = [
   /\bdown\s+(?:by\s+)?(?:£|\$|€)?\d/i,
   /\bdown\s+from\s+(?:£|\$|€|\d)/i,
   /\b(?:price|prices|deal|deals|discount|sale|cheapest|lowest)\b(?!.*\boutage\b)/i,
+  // Figures and commentary: "immigration stats are down", "unemployment figures are down".
+  /\b(?:stats?|statistics|figures?|numbers?|polls?|polling|immigration|unemployment|inflation|migration)\b.*\bdown\b/i,
+  /\bdown\b.*\b(?:stats?|statistics|figures?|numbers?|polls?|polling)\b/i,
 ];
 
 function clean(s, max) {
