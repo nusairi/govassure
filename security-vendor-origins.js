@@ -679,12 +679,49 @@
     next[field] = S[field] === name ? "" : name;
     apply(next);
   }
-  function countBucket(n) {
-    if (!n) return "";
-    if (n >= 21) return " is-4";
-    if (n >= 9) return " is-3";
-    if (n >= 3) return " is-2";
+  function shadeCuts(max) {
+    if (!max || max < 2) return { low: 2, mid: 3 };
+    var upper = max - 1;
+    var low = Math.max(2, Math.round(Math.exp(Math.log(upper) / 3)));
+    var mid = Math.max(low + 1, Math.round(Math.exp(Math.log(upper) * 2 / 3)));
+    if (mid >= max) mid = max - 1;
+    if (low >= mid) low = Math.max(2, mid - 1);
+    return { low: low, mid: mid };
+  }
+  function countBucket(n, max) {
+    if (!n || !max) return "";
+    if (n >= max) return " is-4";
+    var cuts = shadeCuts(max);
+    if (n >= cuts.mid) return " is-3";
+    if (n >= cuts.low) return " is-2";
     return " is-1";
+  }
+  function rangeLabel(lo, hi) {
+    if (hi < lo) return "";
+    return lo === hi ? String(lo) : lo + "–" + hi;
+  }
+  function paintScale(max) {
+    var list = $("mapScale");
+    if (!list) return;
+    list.textContent = "";
+    var cuts = shadeCuts(max || 0);
+    var rows = [
+      { cls: "", text: "0" },
+      { cls: " is-1", text: max ? rangeLabel(1, Math.min(max, cuts.low) - 1) : "" },
+      { cls: " is-2", text: max ? rangeLabel(cuts.low, cuts.mid - 1) : "" },
+      { cls: " is-3", text: max > 1 ? rangeLabel(cuts.mid, max - 1) : "" },
+      { cls: " is-4", text: max ? String(max) : "" }
+    ];
+    rows.forEach(function (row) {
+      if (!row.text) return;
+      var li = document.createElement("li");
+      var swatch = document.createElement("span");
+      swatch.className = "svo-map__swatch" + row.cls;
+      swatch.setAttribute("aria-hidden", "true");
+      li.appendChild(swatch);
+      li.appendChild(document.createTextNode(row.text + (row.text === "1" ? " vendor" : " vendors")));
+      list.appendChild(li);
+    });
   }
   function buildMap() {
     if (!MAPGEO || !$("svoMap")) return;
@@ -729,11 +766,14 @@
       counts[name] = (counts[name] || 0) + 1;
     });
     var active = mapMode === "owner" ? S.owner : S.origin;
+    var maxCount = 0;
+    Object.keys(counts).forEach(function (name) { if (counts[name] > maxCount) maxCount = counts[name]; });
+    paintScale(maxCount);
     $("svoMap").querySelectorAll(".svo-map__land").forEach(function (el) {
       var name = el.getAttribute("data-name");
       var n = counts[name] || 0;
       el.setAttribute("data-count", String(n));
-      el.setAttribute("class", "svo-map__land" + countBucket(n) + (name === active ? " is-selected" : ""));
+      el.setAttribute("class", "svo-map__land" + countBucket(n, maxCount) + (name === active ? " is-selected" : ""));
       el.setAttribute("aria-label", name + ", " + n + (n === 1 ? " vendor" : " vendors"));
     });
     var list = $("mapList");

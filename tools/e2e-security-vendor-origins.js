@@ -247,10 +247,16 @@ async function openPage(browser, viewport) {
   const {ctx: ctxS, page: sug, bag: bagS} = await openPage(browser, {width: 1280, height: 900});
   await sug.goto(B + '/security-vendor-origins/', {waitUntil: 'networkidle'});
   await sug.waitForSelector('.svo-map__land', {timeout: 8000});
-  await sug.locator('#map').scrollIntoViewIfNeeded();
-  await sug.screenshot({path: path.join(SHOTS, 'www-map-desktop.png')});
+  await sug.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-desktop.png')});
   const lands = await sug.locator('.svo-map__land').count();
   ok(lands > 100, 'map draws countries (' + lands + ')');
+  const shade = await sug.evaluate(() => ({
+    us: document.querySelector('.svo-map__land[data-name="United States"]').getAttribute('class'),
+    cn: document.querySelector('.svo-map__land[data-name="China"]').getAttribute('class'),
+    il: document.querySelector('.svo-map__land[data-name="Israel"]').getAttribute('class'),
+    legend: document.getElementById('mapScale').innerText.replace(/\s+/g, ' '),
+  }));
+  ok(/is-4/.test(shade.us) && !/is-4/.test(shade.cn) && /is-[123]/.test(shade.cn) && /is-[123]/.test(shade.il) && /0 vendors/.test(shade.legend) && /52 vendors/.test(shade.legend), 'log shading keeps the maximum distinct ' + JSON.stringify(shade));
   await sug.locator('#q').scrollIntoViewIfNeeded();
   await sug.fill('#q', 'check');
   await sug.waitForTimeout(250);
@@ -314,6 +320,7 @@ async function openPage(browser, viewport) {
     home: !!document.querySelector('.svo-map__land.is-home'),
   }));
   ok(links.n >= 1 && links.home && /United States/.test(links.panel) && /Israel/.test(links.panel) && /Headquarters/.test(links.panel), 'CyberArk link lines ' + JSON.stringify(links));
+  await sug.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-links-desktop.png')});
   await sug.click('#clearAll');
   await sug.waitForTimeout(100);
   await sug.fill('#q', 'Switzerland');
@@ -343,7 +350,6 @@ async function openPage(browser, viewport) {
     }), 200));
   });
   ok(raced.value === '' && raced.search === '' && /Showing 130 of 130/.test(raced.count) && raced.hidden, 'clear cancels a pending search ' + JSON.stringify(raced));
-  await sug.screenshot({path: path.join(SHOTS, 'www-map-links-desktop.png')});
   const cspS = await sug.evaluate(() => window.__csp || []);
   ok(bagS.errs.length === 0 && cspS.length === 0, 'suggestions and map have no console or CSP errors ' + bagS.errs.concat(cspS).join(' | '));
   await ctxS.close();
@@ -351,8 +357,7 @@ async function openPage(browser, viewport) {
   const {ctx: ctxSM, page: sm, bag: bagSM} = await openPage(browser, {width: 390, height: 844});
   await sm.goto(B + '/security-vendor-origins/', {waitUntil: 'networkidle'});
   await sm.waitForSelector('.svo-map__land');
-  await sm.locator('#map').scrollIntoViewIfNeeded();
-  await sm.screenshot({path: path.join(SHOTS, 'www-map-mobile.png')});
+  await sm.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-mobile.png')});
   await sm.locator('#q').scrollIntoViewIfNeeded();
   await sm.fill('#q', 'check');
   await sm.waitForTimeout(250);
@@ -371,7 +376,7 @@ async function openPage(browser, viewport) {
   const mobLinks = await sm.evaluate(() => document.querySelectorAll('.svo-map__link').length);
   const mobOverflow = await sm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   ok(mobLinks >= 1 && mobOverflow <= 1, 'mobile map links (' + mobLinks + ', overflow ' + mobOverflow + ')');
-  await sm.screenshot({path: path.join(SHOTS, 'www-map-links-mobile.png')});
+  await sm.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-links-mobile.png')});
   const cspSM = await sm.evaluate(() => window.__csp || []);
   ok(bagSM.errs.length === 0 && cspSM.length === 0, 'mobile suggestions and map have no console or CSP errors ' + bagSM.errs.concat(cspSM).join(' | '));
   await ctxSM.close();

@@ -442,28 +442,71 @@ button.svo-card:hover {
 }
 
 .svo-map__land {
-  fill: #0c2a22;
-  stroke: rgba(240, 201, 135, 0.35);
-  stroke-width: 0.6;
+  fill: #16382e;
+  stroke: rgba(246, 240, 228, 0.45);
+  stroke-width: 0.7;
   cursor: pointer;
 }
 
-.svo-map__land.is-1 { fill: #1c4a38; }
-.svo-map__land.is-2 { fill: #3d6a48; }
-.svo-map__land.is-3 { fill: #8d7344; }
-.svo-map__land.is-4 { fill: #c9a15d; }
+.svo-map__land.is-1 { fill: #4f9d4a; }
+.svo-map__land.is-2 { fill: #e0a020; }
+.svo-map__land.is-3 { fill: #f6c453; }
+.svo-map__land.is-4 { fill: #fff3c4; }
 
 .svo-map__land.is-selected,
 .svo-map__land.is-home {
-  stroke: #f6f0e4;
-  stroke-width: 2;
+  stroke: #fff8e8;
+  stroke-width: 2.2;
+}
+
+.svo-map__land.is-3.is-selected,
+.svo-map__land.is-4.is-selected,
+.svo-map__land.is-3.is-home,
+.svo-map__land.is-4.is-home {
+  stroke: #021c17;
 }
 
 .svo-map__land:focus {
   outline: none;
-  stroke: var(--gold);
-  stroke-width: 2.4;
+  stroke: #fff8e8;
+  stroke-width: 2.6;
 }
+
+.svo-map__land.is-3:focus,
+.svo-map__land.is-4:focus {
+  stroke: #021c17;
+}
+
+.svo-map__scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.svo-map__scale li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2rem;
+}
+
+.svo-map__swatch {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 1px solid rgba(246, 240, 228, 0.55);
+  border-radius: 3px;
+  background: #16382e;
+}
+
+.svo-map__swatch.is-1 { background: #4f9d4a; }
+.svo-map__swatch.is-2 { background: #e0a020; }
+.svo-map__swatch.is-3 { background: #f6c453; }
+.svo-map__swatch.is-4 { background: #fff3c4; }
 
 .svo-map__link {
   fill: none;
