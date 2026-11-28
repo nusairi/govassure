@@ -244,6 +244,143 @@ async function openPage(browser, viewport) {
   ok(bagM.errs.length === 0 && cspM.length === 0, 'mobile no console or CSP errors ' + bagM.errs.concat(cspM).join(' | '));
   await ctxM.close();
 
+  const {ctx: ctxS, page: sug, bag: bagS} = await openPage(browser, {width: 1280, height: 900});
+  await sug.goto(B + '/security-vendor-origins/', {waitUntil: 'networkidle'});
+  await sug.waitForSelector('.svo-map__land', {timeout: 8000});
+  await sug.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-desktop.png')});
+  const lands = await sug.locator('.svo-map__land').count();
+  ok(lands > 100, 'map draws countries (' + lands + ')');
+  const shade = await sug.evaluate(() => ({
+    us: document.querySelector('.svo-map__land[data-name="United States"]').getAttribute('class'),
+    cn: document.querySelector('.svo-map__land[data-name="China"]').getAttribute('class'),
+    il: document.querySelector('.svo-map__land[data-name="Israel"]').getAttribute('class'),
+    legend: document.getElementById('mapScale').innerText.replace(/\s+/g, ' '),
+  }));
+  ok(/is-4/.test(shade.us) && !/is-4/.test(shade.cn) && /is-[123]/.test(shade.cn) && /is-[123]/.test(shade.il) && /0 vendors/.test(shade.legend) && /52 vendors/.test(shade.legend), 'log shading keeps the maximum distinct ' + JSON.stringify(shade));
+  await sug.locator('#q').scrollIntoViewIfNeeded();
+  await sug.fill('#q', 'check');
+  await sug.waitForTimeout(250);
+  const combo = await sug.evaluate(() => {
+    const input = document.getElementById('q');
+    const list = document.getElementById('svoSuggest');
+    return {
+      role: input.getAttribute('role'),
+      expanded: input.getAttribute('aria-expanded'),
+      controls: input.getAttribute('aria-controls'),
+      hidden: list.hidden,
+      options: [...list.querySelectorAll('[role=option]')].map(o => o.textContent.replace(/\s+/g, ' ').trim()),
+    };
+  });
+  ok(combo.role === 'combobox' && combo.expanded === 'true' && combo.controls === 'svoSuggest' && !combo.hidden, 'combobox open');
+  ok(combo.options.some(t => /Checkmarx/.test(t)) && combo.options.some(t => /Check Point/.test(t)), 'check suggestions ' + combo.options.join(' | '));
+  await sug.screenshot({path: path.join(SHOTS, 'www-suggest-check-desktop.png')});
+  await sug.keyboard.press('Escape');
+  const afterEsc = await sug.evaluate(() => ({hidden: document.getElementById('svoSuggest').hidden, value: document.getElementById('q').value}));
+  ok(afterEsc.hidden && afterEsc.value === 'check', 'Escape closes suggestions and keeps the text');
+  await sug.click('#qSearch');
+  const searched = await sug.evaluate(() => ({
+    hidden: document.getElementById('svoSuggest').hidden,
+    search: location.search,
+    count: document.getElementById('count').textContent,
+  }));
+  ok(searched.hidden && /q=check/.test(searched.search) && /Showing (?!130 )\d+ of 130/.test(searched.count), 'Search button applies the query ' + JSON.stringify(searched));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  await sug.fill('#q', 'check');
+  await sug.waitForTimeout(250);
+  await sug.keyboard.press('ArrowDown');
+  await sug.keyboard.press('Enter');
+  await sug.waitForTimeout(300);
+  const picked = await sug.evaluate(() => ({
+    name: (document.querySelector('.svo-row.is-open .svo-name') || {}).textContent || '',
+    expanded: document.querySelector('.svo-exp[aria-expanded="true"]') !== null,
+    hidden: document.getElementById('svoSuggest').hidden,
+  }));
+  ok(/Check/.test(picked.name) && picked.expanded && picked.hidden, 'keyboard selection opens the vendor ' + JSON.stringify(picked));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(150);
+  await sug.locator('.svo-map__land[data-name="United States"]').click();
+  await sug.waitForTimeout(200);
+  const mapped = await sug.evaluate(() => ({
+    origin: document.getElementById('fOrigin').value,
+    count: document.getElementById('count').textContent,
+    pressed: document.querySelector('#mapList button[aria-pressed="true"]') ? document.querySelector('#mapList button[aria-pressed="true"]').textContent : '',
+  }));
+  ok(mapped.origin === 'United States' && /Showing 52 of 130/.test(mapped.count), 'map click filters origin ' + JSON.stringify(mapped));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  await sug.fill('#q', 'CyberArk');
+  await sug.waitForTimeout(250);
+  await sug.locator('#svoSuggest [role=option]').filter({hasText: 'CyberArk'}).first().click();
+  await sug.waitForTimeout(300);
+  await sug.locator('#map').scrollIntoViewIfNeeded();
+  const links = await sug.evaluate(() => ({
+    n: document.querySelectorAll('.svo-map__link').length,
+    panel: document.getElementById('mapLinks').innerText,
+    home: !!document.querySelector('.svo-map__land.is-home'),
+  }));
+  ok(links.n >= 1 && links.home && /United States/.test(links.panel) && /Israel/.test(links.panel) && /Headquarters/.test(links.panel), 'CyberArk link lines ' + JSON.stringify(links));
+  await sug.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-links-desktop.png')});
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  await sug.fill('#q', 'Switzerland');
+  await sug.waitForTimeout(250);
+  await sug.locator('#svoSuggest [role=option]').filter({hasText: 'Switzerland'}).first().click();
+  await sug.waitForTimeout(200);
+  const swiss = await sug.evaluate(() => ({
+    count: document.getElementById('count').textContent,
+    search: location.search,
+    origin: document.getElementById('fOrigin').value,
+    owner: document.getElementById('fOwner').value,
+    names: [...document.querySelectorAll('.svo-name')].map(n => n.textContent),
+  }));
+  ok(/Showing (?!130 )\d+ of 130/.test(swiss.count) && /Switzerland/.test(swiss.search) && swiss.origin === '' && swiss.owner === '' && swiss.names.indexOf('Acronis') >= 0, 'headquarters-only country stays a search ' + JSON.stringify(swiss));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  const raced = await sug.evaluate(() => {
+    const input = document.getElementById('q');
+    input.value = 'zzzz-none';
+    input.dispatchEvent(new Event('input', {bubbles: true}));
+    document.getElementById('qClear').click();
+    return new Promise(resolve => setTimeout(() => resolve({
+      value: input.value,
+      search: location.search,
+      count: document.getElementById('count').textContent,
+      hidden: document.getElementById('qClear').hidden,
+    }), 200));
+  });
+  ok(raced.value === '' && raced.search === '' && /Showing 130 of 130/.test(raced.count) && raced.hidden, 'clear cancels a pending search ' + JSON.stringify(raced));
+  const cspS = await sug.evaluate(() => window.__csp || []);
+  ok(bagS.errs.length === 0 && cspS.length === 0, 'suggestions and map have no console or CSP errors ' + bagS.errs.concat(cspS).join(' | '));
+  await ctxS.close();
+
+  const {ctx: ctxSM, page: sm, bag: bagSM} = await openPage(browser, {width: 390, height: 844});
+  await sm.goto(B + '/security-vendor-origins/', {waitUntil: 'networkidle'});
+  await sm.waitForSelector('.svo-map__land');
+  await sm.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-mobile.png')});
+  await sm.locator('#q').scrollIntoViewIfNeeded();
+  await sm.fill('#q', 'check');
+  await sm.waitForTimeout(250);
+  const tap = await sm.locator('#svoSuggest [role=option]').first().boundingBox();
+  const mobSuggest = await sm.evaluate(() => ({
+    overflow: document.documentElement.scrollWidth - window.innerWidth,
+    options: [...document.querySelectorAll('#svoSuggest [role=option]')].map(o => o.textContent),
+  }));
+  ok(tap && tap.height >= 44 && mobSuggest.overflow <= 1 && mobSuggest.options.some(t => /Checkmarx/.test(t)) && mobSuggest.options.some(t => /Check Point/.test(t)), 'mobile suggestions ' + JSON.stringify({h: tap && tap.height, overflow: mobSuggest.overflow, options: mobSuggest.options}));
+  await sm.screenshot({path: path.join(SHOTS, 'www-suggest-check-mobile.png')});
+  await sm.fill('#q', 'CyberArk');
+  await sm.waitForTimeout(250);
+  await sm.locator('#svoSuggest [role=option]').filter({hasText: 'CyberArk'}).first().click();
+  await sm.waitForTimeout(300);
+  await sm.locator('#map').scrollIntoViewIfNeeded();
+  const mobLinks = await sm.evaluate(() => document.querySelectorAll('.svo-map__link').length);
+  const mobOverflow = await sm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  ok(mobLinks >= 1 && mobOverflow <= 1, 'mobile map links (' + mobLinks + ', overflow ' + mobOverflow + ')');
+  await sm.locator('section[aria-labelledby="map"]').screenshot({path: path.join(SHOTS, 'www-map-links-mobile.png')});
+  const cspSM = await sm.evaluate(() => window.__csp || []);
+  ok(bagSM.errs.length === 0 && cspSM.length === 0, 'mobile suggestions and map have no console or CSP errors ' + bagSM.errs.concat(cspSM).join(' | '));
+  await ctxSM.close();
+
   await browser.close();
   if (fail) {
     console.log(fail + ' failed');

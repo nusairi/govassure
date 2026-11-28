@@ -72,6 +72,7 @@
             <ol>
               <li><a href="#method">How to read this page</a></li>
               <li><a href="#summary">Summary</a></li>
+              <li><a href="#map">Map</a></li>
               <li><a href="#recent">Recent ownership changes</a></li>
               <li><a href="#listH">All vendors</a></li>
               <li><a href="#caveats">Caveats</a></li>
@@ -117,6 +118,45 @@
         </div>
       </section>
 
+      <section class="band" aria-labelledby="map">
+        <div class="wrap">
+          <h2 id="map" class="section-title">Map</h2>
+          <p class="svo-cap">Shading shows how many vendors match the other filters. Choose a country to filter the list. Selecting a vendor draws lines from its origin country to the other countries it is connected to.</p>
+          <div class="svo-mapbar">
+            <div class="svo-map__modes" role="group" aria-label="Shade the map by">
+              <button type="button" class="svo-btn svo-btn--ghost" id="mapOrigin" aria-pressed="true">Country of origin</button>
+              <button type="button" class="svo-btn svo-btn--ghost" id="mapOwner" aria-pressed="false">Ultimate owner</button>
+            </div>
+            <div class="svo-map__zoom">
+              <button type="button" class="svo-btn svo-btn--ghost" id="mapZoomIn" aria-label="Zoom in">+</button>
+              <button type="button" class="svo-btn svo-btn--ghost" id="mapZoomOut" aria-label="Zoom out">−</button>
+              <button type="button" class="svo-btn svo-btn--ghost" id="mapZoomReset">Reset</button>
+            </div>
+          </div>
+          <p class="svo-map__status" id="mapStatus" aria-live="polite">Loading map…</p>
+          <div class="svo-map__frame">
+            <svg id="svoMap" class="svo-map" role="img" aria-labelledby="map"></svg>
+          </div>
+          <ul class="svo-map__scale" id="mapScale" aria-label="Vendor count"></ul>
+          <ul class="svo-map__legend" aria-label="Line styles">
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--hq" x1="1" y1="5" x2="47" y2="5"/></svg> Headquarters</li>
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--owner" x1="1" y1="5" x2="47" y2="5"/></svg> Ultimate owner</li>
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--parent" x1="1" y1="5" x2="47" y2="5"/></svg> Parent</li>
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--rd" x1="1" y1="5" x2="47" y2="5"/></svg> Research and development</li>
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--state" x1="1" y1="5" x2="47" y2="5"/></svg> State-linked investor</li>
+            <li><svg viewBox="0 0 48 10" aria-hidden="true"><line class="svo-map__link svo-map__link--share" x1="1" y1="5" x2="47" y2="5"/></svg> Shareholder over 10%</li>
+          </ul>
+          <div class="svo-map__panel" id="mapPanel" hidden>
+            <h3 id="mapPanelH">Linked countries</h3>
+            <ul id="mapLinks"></ul>
+          </div>
+          <details class="svo-map__list">
+            <summary>Countries as a list</summary>
+            <ul id="mapList"></ul>
+          </details>
+        </div>
+      </section>
+
       <section class="band" aria-labelledby="recent">
         <div class="wrap">
           <h2 id="recent" class="section-title">Recent ownership changes</h2>
@@ -128,11 +168,17 @@
         <div class="wrap">
           <h2 id="listH" class="section-title">All vendors</h2>
           <div class="svo-tools" role="search">
-            <label class="svo-search" for="q">
-              <span class="visually-hidden">Search vendors</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <input id="q" type="search" placeholder="Search vendor, owner or country" autocomplete="off" spellcheck="false">
-            </label>
+            <div class="svo-searchrow">
+              <div class="svo-search">
+                <label class="visually-hidden" for="q">Search vendors</label>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <input id="q" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="svoSuggest" aria-activedescendant="" aria-describedby="qHint" placeholder="Search vendor, owner, category or country" autocomplete="off" spellcheck="false">
+                <button type="button" class="svo-search__clear" id="qClear" hidden aria-label="Clear search">×</button>
+              </div>
+              <button type="button" class="svo-btn" id="qSearch">Search</button>
+              <p id="qHint" class="visually-hidden">Suggestions appear as you type. Use the up and down arrows, then Enter. Escape closes the list.</p>
+              <ul id="svoSuggest" class="svo-suggest" role="listbox" hidden></ul>
+            </div>
             <div class="svo-filters">
               <label class="svo-f">Category<select id="fCat"><option value="">All categories</option></select></label>
               <label class="svo-f">Origin<select id="fOrigin"><option value="">Any origin</option></select></label>
@@ -215,7 +261,7 @@
       <section class="band" aria-labelledby="sourcesH">
         <div class="wrap">
           <h2 id="sourcesH" class="section-title">Sources</h2>
-          <p class="svo-prose" id="sources">Reference codes stand for non-government sources. Each line is the code and a host and path. It is not a link. Official government sources are linked from the vendor entries above.</p>
+          <p class="svo-prose" id="sources">Reference codes stand for non-government sources. Each line is the code and a host and path. It is not a link. Official government sources are linked from the vendor entries above. Country shapes: Natural Earth, public domain, simplified for this page.</p>
           <ul class="svo-sources" id="sourcesList"></ul>
         </div>
       </section>

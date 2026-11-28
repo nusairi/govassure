@@ -280,9 +280,11 @@
       ms.value = mv;
     }
     writeURL();
+    refreshMap();
   }
   function syncControls() {
     $("q").value = S.q;
+    if ($("qClear")) $("qClear").hidden = !S.q;
     Object.keys(F).forEach(function (k) {
       $(F[k]).value = S[k];
       if ($(F[k]).value !== S[k]) S[k] = "";
@@ -340,16 +342,553 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
 
+  var MAPGEO = null;
+  var mapByName = {};
+  var mapMode = "origin";
+  var mapZoom = 1;
+  var suggestItems = [];
+  var suggestActive = -1;
+  var suggestTimer = 0;
+  var EXAMPLES = [
+    { kind: "vendor", label: "CrowdStrike", value: "CrowdStrike" },
+    { kind: "vendor", label: "Splunk", value: "Splunk" },
+    { kind: "vendor", label: "Checkmarx", value: "Checkmarx" }
+  ];
+  var GROUP_LABEL = { vendor: "Vendor", owner: "Owner", category: "Category", country: "Country", example: "Examples" };
+  var LINK_LABEL = {
+    hq: "Headquarters",
+    owner: "Ultimate owner",
+    parent: "Parent",
+    rd: "Research and development",
+    state: "State-linked investor",
+    share: "Shareholder over 10%"
+  };
+  var PLACE_WORDS = [
+    ["united states of america", "United States"],
+    ["united states", "United States"],
+    ["united kingdom", "United Kingdom"],
+    ["united arab emirates", "United Arab Emirates"],
+    ["czech republic", "Czech Republic"],
+    ["south korea", "South Korea"],
+    ["abu dhabi", "United Arab Emirates"],
+    ["netherlands", "Netherlands"],
+    ["beijing", "China"],
+    ["singapore", "Singapore"],
+    ["french", "France"],
+    ["german", "Germany"],
+    ["russian", "Russia"],
+    ["chinese", "China"],
+    ["israel", "Israel"],
+    ["china", "China"],
+    ["russia", "Russia"],
+    ["germany", "Germany"],
+    ["france", "France"],
+    ["finland", "Finland"],
+    ["india", "India"],
+    ["canada", "Canada"],
+    ["slovakia", "Slovakia"],
+    ["romania", "Romania"],
+    ["denmark", "Denmark"],
+    ["turkey", "Turkey"],
+    ["sweden", "Sweden"],
+    ["italy", "Italy"],
+    ["japan", "Japan"],
+    ["luxembourg", "Luxembourg"],
+    ["taiwan", "Taiwan"],
+    ["philippines", "Philippines"],
+    ["spain", "Spain"],
+    ["korea", "South Korea"]
+  ];
+
+  function levenshtein(a, b) {
+    if (a === b) return 0;
+    var prev = [];
+    var i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      var cur = [i];
+      for (j = 1; j <= b.length; j++) {
+        var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+        cur[j] = Math.min(cur[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+      }
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  function scoreText(query, text) {
+    var q = String(query || "").toLowerCase();
+    var t = String(text || "").toLowerCase();
+    if (q.length < 2 || !t) return 0;
+    var at = t.indexOf(q);
+    if (at === 0) return 100;
+    if (at > 0) return 70;
+    if (q.length < 4) return 0;
+    var words = t.split(/[^a-z0-9]+/);
+    var best = 0;
+    words.forEach(function (word) {
+      if (!word || Math.abs(word.length - q.length) > 2) return;
+      var dist = levenshtein(q, word);
+      var allow = q.length >= 8 ? 2 : 1;
+      if (dist <= allow) best = Math.max(best, 40 - dist);
+    });
+    return best;
+  }
+  function usefulOwner(name) {
+    if (!name || name === "unverified") return false;
+    var lower = name.toLowerCase();
+    if (lower.indexOf("no controlling") >= 0 || lower.indexOf("not disclosed") >= 0 || lower.indexOf("not checked") >= 0) return false;
+    if (lower.indexOf("public company") === 0 || lower.indexOf("private (") === 0) return false;
+    return true;
+  }
+  function countriesInText(text) {
+    var found = [];
+    var lower = String(text || "").toLowerCase();
+    var used = [];
+    PLACE_WORDS.forEach(function (pair) {
+      var word = pair[0];
+      var idx = lower.indexOf(word);
+      if (idx < 0) return;
+      var before = idx === 0 || !/[a-z0-9]/.test(lower.charAt(idx - 1));
+      var after = idx + word.length >= lower.length || !/[a-z0-9]/.test(lower.charAt(idx + word.length));
+      if (!before || !after) return;
+      var inside = used.some(function (span) { return idx >= span[0] && idx < span[1]; });
+      if (inside) return;
+      used.push([idx, idx + word.length]);
+      if (found.indexOf(pair[1]) < 0) found.push(pair[1]);
+    });
+    return found;
+  }
+  function knownCountry(name) {
+    if (!name) return "";
+    var clean = String(name).replace(/\s*\(.*$/, "").trim();
+    if (!clean || clean.toLowerCase() === "unverified") return "";
+    if (mapByName[clean]) return clean;
+    var hits = countriesInText(clean);
+    return hits.length ? hits[0] : "";
+  }
+  function splitCountries(value) {
+    if (!value || value === "unverified") return [];
+    var out = [];
+    String(value).split(/\s*\/\s*/).forEach(function (part) {
+      var name = knownCountry(part);
+      if (name && out.indexOf(name) < 0) out.push(name);
+    });
+    return out;
+  }
+  function fillMatch(el, text, query) {
+    var q = String(query || "");
+    var at = q ? text.toLowerCase().indexOf(q.toLowerCase()) : -1;
+    el.textContent = "";
+    if (at < 0) {
+      el.textContent = text;
+      return;
+    }
+    el.appendChild(document.createTextNode(text.slice(0, at)));
+    var mark = document.createElement("mark");
+    mark.className = "svo-hit";
+    mark.textContent = text.slice(at, at + q.length);
+    el.appendChild(mark);
+    el.appendChild(document.createTextNode(text.slice(at + q.length)));
+  }
+  function hideSuggest() {
+    var list = $("svoSuggest");
+    if (!list) return;
+    list.hidden = true;
+    list.textContent = "";
+    suggestItems = [];
+    suggestActive = -1;
+    $("q").setAttribute("aria-expanded", "false");
+    $("q").setAttribute("aria-activedescendant", "");
+  }
+  function paintSuggest(items, query, emptyText) {
+    var list = $("svoSuggest");
+    list.textContent = "";
+    suggestItems = items;
+    suggestActive = -1;
+    if (!items.length) {
+      var empty = document.createElement("li");
+      empty.className = "svo-suggest__empty";
+      empty.setAttribute("role", "presentation");
+      empty.textContent = emptyText || "No matches — try CrowdStrike, Splunk or Checkmarx";
+      list.appendChild(empty);
+    } else {
+      var last = "";
+      items.forEach(function (item, index) {
+        if (item.kind !== last) {
+          var head = document.createElement("li");
+          head.className = "svo-suggest__group";
+          head.setAttribute("role", "presentation");
+          head.textContent = GROUP_LABEL[item.kind] || item.kind;
+          list.appendChild(head);
+          last = item.kind;
+        }
+        var opt = document.createElement("li");
+        opt.className = "svo-suggest__opt";
+        opt.id = "svo-opt-" + index;
+        opt.setAttribute("role", "option");
+        opt.setAttribute("aria-selected", "false");
+        var hidden = document.createElement("span");
+        hidden.className = "visually-hidden";
+        hidden.textContent = (GROUP_LABEL[item.kind] || "") + " ";
+        opt.appendChild(hidden);
+        var label = document.createElement("span");
+        fillMatch(label, item.label, query);
+        opt.appendChild(label);
+        list.appendChild(opt);
+      });
+    }
+    list.hidden = false;
+    $("q").setAttribute("aria-expanded", "true");
+  }
+  function showSuggest(query) {
+    var q = String(query || "").trim();
+    if (q.length < 2) {
+      paintSuggest(EXAMPLES.map(function (item) { return { kind: "example", label: item.label, value: item.value, pick: "vendor" }; }), "", "");
+      return;
+    }
+    var groups = { vendor: [], owner: [], category: [], country: [] };
+    var seen = {};
+    function push(kind, label, value) {
+      var key = kind + "\0" + value;
+      if (seen[key]) return;
+      var rank = scoreText(q, label);
+      if (!rank) return;
+      seen[key] = true;
+      groups[kind].push({ kind: kind, label: label, value: value, score: rank, pick: kind });
+    }
+    DATA.forEach(function (v) {
+      push("vendor", v.n, v.n);
+      if (usefulOwner(v.uo)) push("owner", v.uo, v.uo);
+      v.chain.forEach(function (c) { if (usefulOwner(c.e)) push("owner", c.e, c.e); });
+      v.b.forEach(function (b) { push("category", b, b); });
+      [v.po, v.hq, v.puoc].forEach(function (c) {
+        var name = knownCountry(c);
+        if (name) push("country", name, name);
+      });
+    });
+    function byRank(a, b) { return b.score - a.score || a.label.localeCompare(b.label); }
+    var picked = groups.vendor.sort(byRank).slice(0, 4);
+    var others = groups.owner.concat(groups.category, groups.country).sort(byRank);
+    others.slice(0, 8 - picked.length).forEach(function (item) { picked.push(item); });
+    if (picked.length < 8) groups.vendor.sort(byRank).slice(4, 4 + (8 - picked.length)).forEach(function (item) { picked.push(item); });
+    var order = { vendor: 0, owner: 1, category: 2, country: 3 };
+    picked.sort(function (a, b) { return order[a.kind] - order[b.kind] || b.score - a.score || a.label.localeCompare(b.label); });
+    paintSuggest(picked, q);
+  }
+  function moveSuggest(step) {
+    if (!$("svoSuggest") || $("svoSuggest").hidden) showSuggest($("q").value.trim());
+    if (!suggestItems.length) return;
+    suggestActive = (suggestActive + step + suggestItems.length) % suggestItems.length;
+    suggestItems.forEach(function (item, index) {
+      var opt = $("svo-opt-" + index);
+      if (!opt) return;
+      var on = index === suggestActive;
+      opt.setAttribute("aria-selected", on ? "true" : "false");
+      if (on) {
+        $("q").setAttribute("aria-activedescendant", opt.id);
+        opt.scrollIntoView({ block: "nearest" });
+      }
+    });
+  }
+  function cancelSuggestTimer() {
+    clearTimeout(suggestTimer);
+    suggestTimer = 0;
+  }
+  function chooseSuggest(item) {
+    cancelSuggestTimer();
+    hideSuggest();
+    var kind = item.pick || item.kind;
+    if (kind === "vendor") {
+      apply({ q: item.value, cat: "", origin: "", owner: "", sl: "", gov: "", open: item.value });
+      var row = root.querySelector(".svo-row.is-open");
+      if (row) row.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      return;
+    }
+    if (kind === "category") {
+      apply({ q: "", cat: item.value, origin: "", owner: "", sl: "", gov: "", open: "" });
+      return;
+    }
+    if (kind === "country") {
+      var origins = DATA.filter(function (v) { return v.po === item.value; }).length;
+      var owners = DATA.filter(function (v) { return v.puoc === item.value; }).length;
+      if (origins) {
+        apply({ q: "", cat: "", origin: item.value, owner: "", sl: "", gov: "", open: "" });
+        return;
+      }
+      if (owners) {
+        apply({ q: "", cat: "", origin: "", owner: item.value, sl: "", gov: "", open: "" });
+        return;
+      }
+      apply({ q: item.value, cat: "", origin: "", owner: "", sl: "", gov: "", open: "" });
+      return;
+    }
+    apply({ q: item.value, cat: "", origin: "", owner: "", sl: "", gov: "", open: "" });
+  }
+  function submitSearch() {
+    cancelSuggestTimer();
+    S.q = $("q").value.trim();
+    hideSuggest();
+    render();
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $("listH").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  function clearQuery() {
+    cancelSuggestTimer();
+    $("q").value = "";
+    S.q = "";
+    $("qClear").hidden = true;
+    hideSuggest();
+    render();
+    $("q").focus();
+  }
+  function vendorPlaces(v) {
+    var origin = knownCountry(v.po) || knownCountry(v.o);
+    var links = [];
+    function add(country, type) {
+      if (!country || country === origin) return;
+      links.push({ country: country, type: type });
+    }
+    splitCountries(v.hq).forEach(function (c) { add(c, "hq"); });
+    add(knownCountry(v.puoc), "owner");
+    v.chain.forEach(function (c) { add(knownCountry(c.c), "parent"); });
+    (v.rd || []).forEach(function (c) { add(knownCountry(c), "rd"); });
+    if (v.sl && v.sl.v === "yes") countriesInText(v.sl.n).forEach(function (c) { add(c, "state"); });
+    countriesInText(v.sh).forEach(function (c) { add(c, "share"); });
+    return { origin: origin, links: links };
+  }
+  function curve(a, b, offset) {
+    var mx = (a.x + b.x) / 2;
+    var my = (a.y + b.y) / 2;
+    var dx = b.x - a.x;
+    var dy = b.y - a.y;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    return "M" + a.x + " " + a.y + " Q" + (mx + (-dy / len) * offset) + " " + (my + (dx / len) * offset) + " " + b.x + " " + b.y;
+  }
+  function setMapZoom(next) {
+    if (!MAPGEO) return;
+    mapZoom = Math.max(1, Math.min(4, next));
+    var vw = MAPGEO.view[0] / mapZoom;
+    var vh = MAPGEO.view[1] / mapZoom;
+    var x = (MAPGEO.view[0] - vw) / 2;
+    var y = (MAPGEO.view[1] - vh) / 2;
+    $("svoMap").setAttribute("viewBox", x + " " + y + " " + vw + " " + vh);
+  }
+  function selectCountry(name) {
+    var field = mapMode === "owner" ? "owner" : "origin";
+    var next = {};
+    next[field] = S[field] === name ? "" : name;
+    apply(next);
+  }
+  function shadeCuts(max) {
+    if (!max || max < 2) return { low: 2, mid: 3 };
+    var upper = max - 1;
+    var low = Math.max(2, Math.round(Math.exp(Math.log(upper) / 3)));
+    var mid = Math.max(low + 1, Math.round(Math.exp(Math.log(upper) * 2 / 3)));
+    if (mid >= max) mid = max - 1;
+    if (low >= mid) low = Math.max(2, mid - 1);
+    return { low: low, mid: mid };
+  }
+  function countBucket(n, max) {
+    if (!n || !max) return "";
+    if (n >= max) return " is-4";
+    var cuts = shadeCuts(max);
+    if (n >= cuts.mid) return " is-3";
+    if (n >= cuts.low) return " is-2";
+    return " is-1";
+  }
+  function rangeLabel(lo, hi) {
+    if (hi < lo) return "";
+    return lo === hi ? String(lo) : lo + "–" + hi;
+  }
+  function paintScale(max) {
+    var list = $("mapScale");
+    if (!list) return;
+    list.textContent = "";
+    var cuts = shadeCuts(max || 0);
+    var rows = [
+      { cls: "", text: "0" },
+      { cls: " is-1", text: max ? rangeLabel(1, Math.min(max, cuts.low) - 1) : "" },
+      { cls: " is-2", text: max ? rangeLabel(cuts.low, cuts.mid - 1) : "" },
+      { cls: " is-3", text: max > 1 ? rangeLabel(cuts.mid, max - 1) : "" },
+      { cls: " is-4", text: max ? String(max) : "" }
+    ];
+    rows.forEach(function (row) {
+      if (!row.text) return;
+      var li = document.createElement("li");
+      var swatch = document.createElement("span");
+      swatch.className = "svo-map__swatch" + row.cls;
+      swatch.setAttribute("aria-hidden", "true");
+      li.appendChild(swatch);
+      li.appendChild(document.createTextNode(row.text + (row.text === "1" ? " vendor" : " vendors")));
+      list.appendChild(li);
+    });
+  }
+  function buildMap() {
+    if (!MAPGEO || !$("svoMap")) return;
+    mapByName = {};
+    var svg = $("svoMap");
+    svg.setAttribute("viewBox", "0 0 " + MAPGEO.view[0] + " " + MAPGEO.view[1]);
+    var markup = MAPGEO.countries.map(function (c) {
+      mapByName[c.name] = c;
+      if (c.point) {
+        return '<circle class="svo-map__land" data-name="' + esc(c.name) + '" cx="' + c.x + '" cy="' + c.y + '" r="6" tabindex="0" role="button"></circle>';
+      }
+      return '<path class="svo-map__land" data-name="' + esc(c.name) + '" d="' + c.d + '" tabindex="0" role="button"></path>';
+    }).join("") + '<g id="svoMapLinks"></g>';
+    svg.innerHTML = markup;
+    svg.querySelectorAll(".svo-map__land").forEach(function (el) {
+      var name = el.getAttribute("data-name");
+      el.addEventListener("click", function () { selectCountry(name); });
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectCountry(name); }
+      });
+      function status() {
+        var count = el.getAttribute("data-count") || "0";
+        $("mapStatus").textContent = name + " — " + count + (count === "1" ? " vendor" : " vendors");
+      }
+      el.addEventListener("pointerover", status);
+      el.addEventListener("focus", status);
+    });
+    if (MAPGEO.note) {
+      var note = document.getElementById("mapNote");
+      if (note) note.textContent = MAPGEO.note;
+    }
+  }
+  function refreshMap() {
+    if (!MAPGEO || !$("svoMap") || !$("svoMap").querySelector(".svo-map__land")) return;
+    var field = mapMode === "owner" ? "puoc" : "po";
+    var except = mapMode === "owner" ? "owner" : "origin";
+    var counts = {};
+    DATA.forEach(function (v) {
+      if (!match(v, except)) return;
+      var name = knownCountry(v[field]);
+      if (!name) return;
+      counts[name] = (counts[name] || 0) + 1;
+    });
+    var active = mapMode === "owner" ? S.owner : S.origin;
+    var maxCount = 0;
+    Object.keys(counts).forEach(function (name) { if (counts[name] > maxCount) maxCount = counts[name]; });
+    paintScale(maxCount);
+    $("svoMap").querySelectorAll(".svo-map__land").forEach(function (el) {
+      var name = el.getAttribute("data-name");
+      var n = counts[name] || 0;
+      el.setAttribute("data-count", String(n));
+      el.setAttribute("class", "svo-map__land" + countBucket(n, maxCount) + (name === active ? " is-selected" : ""));
+      el.setAttribute("aria-label", name + ", " + n + (n === 1 ? " vendor" : " vendors"));
+    });
+    var list = $("mapList");
+    if (list) {
+      var names = Object.keys(mapByName).filter(function (name) { return counts[name]; }).sort(function (a, b) {
+        return counts[b] - counts[a] || a.localeCompare(b);
+      });
+      list.textContent = "";
+      names.forEach(function (name) {
+        var li = document.createElement("li");
+        var button = document.createElement("button");
+        button.type = "button";
+        button.textContent = name + " (" + counts[name] + ")";
+        button.setAttribute("aria-pressed", name === active ? "true" : "false");
+        button.addEventListener("click", function () { selectCountry(name); });
+        li.appendChild(button);
+        list.appendChild(li);
+      });
+    }
+    var vendor = DATA.filter(function (v) { return v.n === S.open; })[0];
+    var panel = $("mapPanel");
+    var linkList = $("mapLinks");
+    var lines = $("svoMapLinks");
+    if (lines) lines.textContent = "";
+    if (!vendor) {
+      if (panel) panel.hidden = true;
+      $("mapOrigin").setAttribute("aria-pressed", mapMode === "origin" ? "true" : "false");
+      $("mapOwner").setAttribute("aria-pressed", mapMode === "owner" ? "true" : "false");
+      return;
+    }
+    var info = vendorPlaces(vendor);
+    if (info.origin && mapByName[info.origin]) {
+      var home = $("svoMap").querySelector('.svo-map__land[data-name="' + info.origin.replace(/"/g, "") + '"]');
+      if (home && home.getAttribute("class").indexOf("is-home") < 0) home.setAttribute("class", home.getAttribute("class") + " is-home");
+    }
+    var grouped = {};
+    info.links.forEach(function (link) {
+      if (!grouped[link.country]) grouped[link.country] = [];
+      if (grouped[link.country].indexOf(link.type) < 0) grouped[link.country].push(link.type);
+    });
+    var offsets = { hq: 16, owner: -16, parent: 30, rd: -30, state: 44, share: -44 };
+    if (lines && info.origin && mapByName[info.origin]) {
+      var from = mapByName[info.origin];
+      var markup = [];
+      info.links.forEach(function (link) {
+        var to = mapByName[link.country];
+        if (!to) return;
+        markup.push('<path class="svo-map__link svo-map__link--' + link.type + '" d="' + curve(from, to, offsets[link.type] || 18) + '"></path>');
+      });
+      lines.innerHTML = markup.join("");
+    }
+    panel.hidden = false;
+    $("mapPanelH").textContent = vendor.n;
+    linkList.textContent = "";
+    var rows = [];
+    if (info.origin) rows.push("Origin: " + info.origin);
+    var countries = Object.keys(grouped).sort();
+    if (!countries.length) rows.push("No links to other countries.");
+    countries.forEach(function (country) {
+      rows.push(country + " — " + grouped[country].map(function (type) { return LINK_LABEL[type] || type; }).join(", "));
+    });
+    rows.forEach(function (text) {
+      var li = document.createElement("li");
+      li.textContent = text;
+      linkList.appendChild(li);
+    });
+    $("mapOrigin").setAttribute("aria-pressed", mapMode === "origin" ? "true" : "false");
+    $("mapOwner").setAttribute("aria-pressed", mapMode === "owner" ? "true" : "false");
+  }
+
   function bind() {
-    var timer = 0;
     $("q").addEventListener("input", function () {
-      clearTimeout(timer);
+      cancelSuggestTimer();
       var val = this.value;
-      timer = setTimeout(function () { S.q = val.trim(); render(); }, 80);
+      $("qClear").hidden = !val;
+      suggestTimer = setTimeout(function () {
+        suggestTimer = 0;
+        S.q = val.trim();
+        render();
+        showSuggest(val.trim());
+      }, 80);
     });
+    $("q").addEventListener("focus", function () { showSuggest(this.value.trim()); });
     $("q").addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && this.value) { this.value = ""; S.q = ""; render(); }
+      if (e.key === "ArrowDown") { e.preventDefault(); moveSuggest(1); return; }
+      if (e.key === "ArrowUp") { e.preventDefault(); moveSuggest(-1); return; }
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (suggestActive >= 0 && suggestItems[suggestActive]) chooseSuggest(suggestItems[suggestActive]);
+        else submitSearch();
+        return;
+      }
+      if (e.key === "Escape") {
+        if ($("svoSuggest") && !$("svoSuggest").hidden) { e.preventDefault(); hideSuggest(); return; }
+        if (this.value) { cancelSuggestTimer(); this.value = ""; S.q = ""; $("qClear").hidden = true; render(); }
+      }
     });
+    $("svoSuggest").addEventListener("mousedown", function (e) { e.preventDefault(); });
+    $("svoSuggest").addEventListener("click", function (e) {
+      var opt = e.target.closest("[role=option]");
+      if (!opt) return;
+      var index = +opt.id.replace("svo-opt-", "");
+      if (suggestItems[index]) chooseSuggest(suggestItems[index]);
+    });
+    $("qClear").addEventListener("click", clearQuery);
+    $("qSearch").addEventListener("click", submitSearch);
+    document.addEventListener("click", function (e) {
+      if (e.target.closest(".svo-searchrow")) return;
+      hideSuggest();
+    });
+    $("mapOrigin").addEventListener("click", function () { mapMode = "origin"; refreshMap(); });
+    $("mapOwner").addEventListener("click", function () { mapMode = "owner"; refreshMap(); });
+    $("mapZoomIn").addEventListener("click", function () { setMapZoom(mapZoom * 1.4); });
+    $("mapZoomOut").addEventListener("click", function () { setMapZoom(mapZoom / 1.4); });
+    $("mapZoomReset").addEventListener("click", function () { setMapZoom(1); });
     Object.keys(F).forEach(function (k) {
       $(F[k]).addEventListener("change", function () { S[k] = this.value; render(); });
     });
@@ -414,6 +953,7 @@
         b.closest("tr").classList.toggle("is-open", open);
         S.open = open ? name : (S.open === name ? "" : S.open);
         writeURL();
+        refreshMap();
       }
     });
   }
@@ -443,6 +983,17 @@
     syncControls();
     bind();
     render();
+    fetch("/data/world-countries.json", { credentials: "same-origin" }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (geo) {
+      MAPGEO = geo;
+      buildMap();
+      refreshMap();
+      $("mapStatus").textContent = "Hover or focus a country, or open the country list.";
+    }).catch(function () {
+      $("mapStatus").textContent = "The map could not be loaded.";
+    });
     if (S.open) {
       var opened = root.querySelector('.svo-exp[aria-expanded="true"]');
       if (opened) opened.closest("tr").scrollIntoView({ block: "center" });
