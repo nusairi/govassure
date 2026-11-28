@@ -110,6 +110,7 @@ SERVED = [
     "security-vendor-origins.js",
     "security-vendor-origins.css",
     "data/security-vendors.json",
+    "data/world-countries.json",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
