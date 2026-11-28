@@ -348,6 +348,7 @@
   var mapZoom = 1;
   var suggestItems = [];
   var suggestActive = -1;
+  var suggestTimer = 0;
   var EXAMPLES = [
     { kind: "vendor", label: "CrowdStrike", value: "CrowdStrike" },
     { kind: "vendor", label: "Splunk", value: "Splunk" },
@@ -589,7 +590,12 @@
       }
     });
   }
+  function cancelSuggestTimer() {
+    clearTimeout(suggestTimer);
+    suggestTimer = 0;
+  }
   function chooseSuggest(item) {
+    cancelSuggestTimer();
     hideSuggest();
     var kind = item.pick || item.kind;
     if (kind === "vendor") {
@@ -604,14 +610,22 @@
     }
     if (kind === "country") {
       var origins = DATA.filter(function (v) { return v.po === item.value; }).length;
-      var patch = { q: "", cat: "", origin: "", owner: "", sl: "", gov: "", open: "" };
-      patch[origins ? "origin" : "owner"] = item.value;
-      apply(patch);
+      var owners = DATA.filter(function (v) { return v.puoc === item.value; }).length;
+      if (origins) {
+        apply({ q: "", cat: "", origin: item.value, owner: "", sl: "", gov: "", open: "" });
+        return;
+      }
+      if (owners) {
+        apply({ q: "", cat: "", origin: "", owner: item.value, sl: "", gov: "", open: "" });
+        return;
+      }
+      apply({ q: item.value, cat: "", origin: "", owner: "", sl: "", gov: "", open: "" });
       return;
     }
     apply({ q: item.value, cat: "", origin: "", owner: "", sl: "", gov: "", open: "" });
   }
   function submitSearch() {
+    cancelSuggestTimer();
     S.q = $("q").value.trim();
     hideSuggest();
     render();
@@ -619,6 +633,7 @@
     $("listH").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   }
   function clearQuery() {
+    cancelSuggestTimer();
     $("q").value = "";
     S.q = "";
     $("qClear").hidden = true;
@@ -790,12 +805,12 @@
   }
 
   function bind() {
-    var timer = 0;
     $("q").addEventListener("input", function () {
-      clearTimeout(timer);
+      cancelSuggestTimer();
       var val = this.value;
       $("qClear").hidden = !val;
-      timer = setTimeout(function () {
+      suggestTimer = setTimeout(function () {
+        suggestTimer = 0;
         S.q = val.trim();
         render();
         showSuggest(val.trim());
@@ -813,7 +828,7 @@
       }
       if (e.key === "Escape") {
         if ($("svoSuggest") && !$("svoSuggest").hidden) { e.preventDefault(); hideSuggest(); return; }
-        if (this.value) { this.value = ""; S.q = ""; $("qClear").hidden = true; render(); }
+        if (this.value) { cancelSuggestTimer(); this.value = ""; S.q = ""; $("qClear").hidden = true; render(); }
       }
     });
     $("svoSuggest").addEventListener("mousedown", function (e) { e.preventDefault(); });

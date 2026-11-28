@@ -314,6 +314,35 @@ async function openPage(browser, viewport) {
     home: !!document.querySelector('.svo-map__land.is-home'),
   }));
   ok(links.n >= 1 && links.home && /United States/.test(links.panel) && /Israel/.test(links.panel) && /Headquarters/.test(links.panel), 'CyberArk link lines ' + JSON.stringify(links));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  await sug.fill('#q', 'Switzerland');
+  await sug.waitForTimeout(250);
+  await sug.locator('#svoSuggest [role=option]').filter({hasText: 'Switzerland'}).first().click();
+  await sug.waitForTimeout(200);
+  const swiss = await sug.evaluate(() => ({
+    count: document.getElementById('count').textContent,
+    search: location.search,
+    origin: document.getElementById('fOrigin').value,
+    owner: document.getElementById('fOwner').value,
+    names: [...document.querySelectorAll('.svo-name')].map(n => n.textContent),
+  }));
+  ok(/Showing (?!130 )\d+ of 130/.test(swiss.count) && /Switzerland/.test(swiss.search) && swiss.origin === '' && swiss.owner === '' && swiss.names.indexOf('Acronis') >= 0, 'headquarters-only country stays a search ' + JSON.stringify(swiss));
+  await sug.click('#clearAll');
+  await sug.waitForTimeout(100);
+  const raced = await sug.evaluate(() => {
+    const input = document.getElementById('q');
+    input.value = 'zzzz-none';
+    input.dispatchEvent(new Event('input', {bubbles: true}));
+    document.getElementById('qClear').click();
+    return new Promise(resolve => setTimeout(() => resolve({
+      value: input.value,
+      search: location.search,
+      count: document.getElementById('count').textContent,
+      hidden: document.getElementById('qClear').hidden,
+    }), 200));
+  });
+  ok(raced.value === '' && raced.search === '' && /Showing 130 of 130/.test(raced.count) && raced.hidden, 'clear cancels a pending search ' + JSON.stringify(raced));
   await sug.screenshot({path: path.join(SHOTS, 'www-map-links-desktop.png')});
   const cspS = await sug.evaluate(() => window.__csp || []);
   ok(bagS.errs.length === 0 && cspS.length === 0, 'suggestions and map have no console or CSP errors ' + bagS.errs.concat(cspS).join(' | '));
