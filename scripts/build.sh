@@ -19,8 +19,9 @@ HUB_FILES=(index.html 404.html apps/index.html app.js styles.css live.js live.cs
            architect-templates.js architect-templates.css
            architect-patterns.css
            architect-beginners.css architect-beginners.js
-           start-journey.css start-journey.js)
-HUB_DIRS=(data public govmap architect start)
+           start-journey.css start-journey.js
+           security-vendor-origins.css security-vendor-origins.js)
+HUB_DIRS=(data public govmap architect security-vendor-origins start)
 
 rm -rf "$out" && mkdir -p "$out/app"
 for f in "${HUB_FILES[@]}"; do
@@ -41,6 +42,12 @@ python3 "$here/scripts/check_start_pages.py"
 # Guard: security.txt must be at the RFC 9116 location in the output.
 if [ ! -f "$out/app/.well-known/security.txt" ]; then
   echo "build.sh: missing $out/app/.well-known/security.txt" >&2; exit 1
+fi
+
+# Guard: the vendor research file holds non-government URLs and must not be published.
+if find "$out/app" -name 'security-vendors-research.json' | grep -q .; then
+  echo "build.sh: research JSON must not be published" >&2
+  exit 1
 fi
 
 # Guard: apps/ in the output may hold only the hub's directory page.

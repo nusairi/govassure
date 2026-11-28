@@ -572,6 +572,19 @@
       }
     },
     {
+      "route": "/security-vendor-origins",
+      "rewrite": "/security-vendor-origins/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "/security-vendor-origins/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "route": "/public/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"

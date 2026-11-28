@@ -28,7 +28,9 @@ Fetching `data/apps.json` needs HTTP. Opening `index.html` directly from the fil
 python3 scripts/check_links.py
 ```
 
-The script fails if a served page, stylesheet, script, or data file points outside `*.govassured.com`. `mailto:` links are allowed. The other allowed web addresses are the company LinkedIn page `https://www.linkedin.com/company/102617034`, the company repository `https://github.com/nusairi/govassure`, the JSON-LD context `https://schema.org`, and official UK government and Parliament source pages used by the government map (`gov.uk`, `parliament.uk`, and a short list of named independent bodies such as the National Audit Office). Any other GitHub address fails the check. It also fails if those files contain a personal name or `vercel.app`, or if a tool still has a `source` field. The publisher named on the site is GOV Assured.
+The script fails if a served page, stylesheet, script, or data file points outside `*.govassured.com`. `mailto:` links are allowed. The other allowed web addresses are the company LinkedIn page `https://www.linkedin.com/company/102617034`, the company repository `https://github.com/nusairi/govassure`, the JSON-LD context `https://schema.org`, official UK government and Parliament source pages used by the government map (`gov.uk`, `parliament.uk`, and a short list of named independent bodies such as the National Audit Office), and US federal hosts whose name is `gov` or ends with `.gov`. A host such as `example.gov.evil.com` is not a `.gov` host. Query strings and fragments are still rejected on those official links. Any other GitHub address fails the check. It also fails if those files contain a personal name or `vercel.app`, or if a tool still has a `source` field. The publisher named on the site is GOV Assured.
+
+`/security-vendor-origins/` is a noindex preview of where 130 cybersecurity vendors were founded, who owns them, and which government actions name them. It is not in the nav, the home page, `/apps`, or `sitemap.xml`. Official government sources on that page are live links. Every other source is a reference code (R1, R2, …) plus a host and path label in the Sources note, never a URL. Rebuild the page data with `python3 scripts/build_security_vendors.py`. The research file stays under `scripts/` and is not copied by `scripts/build.sh`.
 
 ## Add a tool
 
@@ -110,6 +112,7 @@ Set `B` to the URL under test. Screenshots are written to `SHOTS` and are not co
 ## Refresh the government map data
 
 ```bash
+python3 scripts/build_security_vendors.py       # preview data for /security-vendor-origins/
 python3 scripts/build_govmap.py                  # from the GOV.UK APIs (OGL v3.0)
 python3 scripts/build_budget.py                  # from scripts/vendor/PESA_2026_CP_Chapter_1_tables.xlsx
 python3 scripts/build_glossary.py                # rebuilds the glossary page from the term list
@@ -138,7 +141,11 @@ data/govmap-glossary.json, data/govmap-terms.json
 favicon.ico, favicon.svg   crown favicons (site root)
 apple-touch-icon.png       crown touch icon (site root)
 scripts/build.sh           builds the deploy folder from an allowlist
-scripts/check_links.py     rejects links off *.govassured.com (with official source exceptions)
+scripts/check_links.py     rejects links off *.govassured.com (UK official hosts and US federal .gov)
+scripts/build_security_vendors.py  page data for the origins preview
+security-vendor-origins/       noindex preview of vendor origin and ownership
+security-vendor-origins.js     filters, table and reference codes
+security-vendor-origins.css    page styles, scoped off the shared chrome
 scripts/build_govmap.py    refresh data/govmap.json from GOV.UK
 scripts/build_budget.py    refresh data/budget.json from the PESA workbook
 scripts/build_glossary.py  rebuild the glossary page

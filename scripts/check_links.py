@@ -7,9 +7,11 @@ https://github.com/nusairi/govassure (plus its security advisory form and
 SECURITY.md), the schema.org JSON-LD context, the ISO/IEC 27001 and NIST CSF pages
 cited on the Security Architect Corner, and
 official UK government and Parliament source pages used by the government map
-(gov.uk, parliament.uk, and the named independent bodies), and the exact
-YouTube videos (and playlists) cited on the Security Architect Corner beginner path and on the
-Start your security journey path (each clip at its exact start time).
+(gov.uk, parliament.uk, and the named independent bodies), US federal hosts
+whose name is gov or ends with .gov (used by the security vendor origins
+preview), and the exact YouTube videos (and playlists) cited on the Security
+Architect Corner beginner path and on the Start your security journey path
+(each clip at its exact start time).
 """
 
 import json
@@ -104,6 +106,10 @@ SERVED = [
     "architect/patterns/secrets-and-key-management/index.html",
     "architect/patterns/logging-to-a-siem/index.html",
     "architect/patterns/safe-third-party-integration/index.html",
+    "security-vendor-origins/index.html",
+    "security-vendor-origins.js",
+    "security-vendor-origins.css",
+    "data/security-vendors.json",
 ]
 BANNED = ("jontever", "nusairi", "silvester", "jonathan", "github.com", "vercel.app")
 ALLOWED_EXACT = {
@@ -166,12 +172,14 @@ ALLOWED_SOURCE_SUFFIXES = (
     ".gov.uk",
     ".parliament.uk",
     ".parliament.scot",
+    # US federal. "www.example.gov" matches; "example.gov.evil.com" does not.
+    ".gov",
 )
 
 
 def is_official_source_host(host):
-    name = (host or "").lower()
-    if name in ALLOWED_SOURCE_HOSTS:
+    name = (host or "").lower().rstrip(".")
+    if name in ALLOWED_SOURCE_HOSTS or name == "gov":
         return True
     return any(name.endswith(suffix) for suffix in ALLOWED_SOURCE_SUFFIXES)
 
@@ -261,7 +269,15 @@ def self_test():
         "https://www.iso.org/standard/27001": None,
         "https://www.iso.org/standard/27002": "host is outside *.govassured.com",
         "https://www.nist.gov/cyberframework": None,
-        "https://www.nist.gov/other": "host is outside *.govassured.com",
+        # Any https URL on a US federal .gov host is official, not only the CSF page.
+        "https://www.nist.gov/other": None,
+        "https://www.nist.gov/other?x=1": "web links must not add a query or fragment",
+        "https://home.treasury.gov/news/press-releases/jy0127": None,
+        "https://www.federalregister.gov/documents/2019/05/21/2019-10616/addition-of-entities-to-the-entity-list": None,
+        "https://www.cisa.gov/news-events/directives/bod-17-01-removal-kaspersky-branded-products": None,
+        "https://www.cisa.gov/news-events/directives/bod-17-01-removal-kaspersky-branded-products?x=1": "web links must not add a query or fragment",
+        "http://www.cisa.gov/news-events/directives/bod-17-01-removal-kaspersky-branded-products": "web links must use https",
+        "https://example.gov.evil.com/path": "host is outside *.govassured.com",
         "https://ico.org.uk/media2/migrated/2553993/dpia-template.docx": None,
         "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/": None,
         "https://ico.org.uk/": "host is outside *.govassured.com",
